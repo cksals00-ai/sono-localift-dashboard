@@ -4,66 +4,113 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>소노 로컬리프트 · 데이터랩 대시보드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root{
-    --navy:#1F3A5F; --blue:#2E75B6; --sky:#5B9BD5; --ltblue:#D9E2EC;
-    --bg:#F4F6FA; --card:#FFFFFF; --ink:#1b2733; --gray:#64748b; --line:#e5eaf1;
-    --good:#1e9e6a; --warn:#e2b93b; --accent:#0ea5e9;
+    --bg:#080B12; --bg2:#0B0F1A; --panel:#111725; --panel2:#0E1420;
+    --line:#1E2738; --ink:#EAEEF7; --sub:#9AA4B8; --dim:#697086;
+    --gold:#C9A96A; --gold2:#E7CE96; --goldsoft:#3A331F;
+    --blue:#6FA8DC; --teal:#57C4B4; --good:#5BC98E; --warn:#E0B15A;
+    --grid:rgba(255,255,255,.06);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Malgun Gothic','맑은 고딕',-apple-system,'Apple SD Gothic Neo',sans-serif;
-    background:var(--bg);color:var(--ink);line-height:1.5}
-  .wrap{max-width:1240px;margin:0 auto;padding:22px 20px 60px}
-  header.top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;
-    padding:22px 26px;border-radius:16px;color:#fff;
-    background:linear-gradient(120deg,var(--navy),var(--blue))}
-  header.top h1{font-size:22px;font-weight:800;letter-spacing:-.3px}
-  header.top .sub{font-size:13px;opacity:.9;margin-top:4px}
-  .meta-r{text-align:right;font-size:12px;opacity:.95}
-  .badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);
-    padding:3px 9px;border-radius:999px;font-size:11px;margin-top:6px}
-  .section-t{font-size:14px;font-weight:800;color:var(--navy);margin:26px 4px 12px;
-    display:flex;align-items:center;gap:8px}
-  .section-t::before{content:"";width:4px;height:15px;background:var(--blue);border-radius:2px}
-  .grid{display:grid;gap:14px}
+  body{
+    font-family:'Inter','Malgun Gothic','맑은 고딕',-apple-system,'Apple SD Gothic Neo',sans-serif;
+    color:var(--ink); line-height:1.5;
+    background:
+      radial-gradient(1100px 500px at 80% -10%, rgba(201,169,106,.10), transparent 60%),
+      radial-gradient(900px 500px at 0% 0%, rgba(111,168,220,.07), transparent 55%),
+      var(--bg);
+    min-height:100vh;
+  }
+  .wrap{max-width:1260px;margin:0 auto;padding:24px 22px 70px}
+
+  /* header */
+  header.top{
+    position:relative;overflow:hidden;border-radius:20px;padding:26px 30px;
+    background:linear-gradient(135deg,#0E1422 0%,#141C2E 55%,#0F1626 100%);
+    border:1px solid var(--line);
+    box-shadow:0 20px 50px -20px rgba(0,0,0,.7);
+    display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;
+  }
+  header.top::before{content:"";position:absolute;left:0;top:0;height:100%;width:3px;
+    background:linear-gradient(180deg,var(--gold2),var(--gold),transparent)}
+  header.top::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;
+    background:radial-gradient(circle,rgba(201,169,106,.16),transparent 65%)}
+  .brand{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600}
+  header.top h1{font-size:23px;font-weight:800;letter-spacing:-.4px;margin-top:5px}
+  header.top h1 b{color:var(--gold2);font-weight:800}
+  .sub{font-size:12.5px;color:var(--sub);margin-top:7px}
+  .sub b{color:var(--ink);font-weight:600}
+  .metar{text-align:right;font-size:11.5px;color:var(--sub);position:relative;z-index:1}
+  .badge{display:inline-block;margin-top:8px;padding:4px 11px;border-radius:999px;font-size:10.5px;
+    border:1px solid rgba(201,169,106,.35);background:rgba(201,169,106,.08);color:var(--gold2);letter-spacing:.3px}
+  .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--good);
+    box-shadow:0 0 8px var(--good);margin-right:5px;vertical-align:middle}
+
+  .sec{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);margin:30px 4px 13px;display:flex;align-items:center;gap:10px}
+  .sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+  .grid{display:grid;gap:16px}
   .kpis{grid-template-columns:repeat(5,1fr)}
-  .cards2{grid-template-columns:1.4fr 1fr}
-  .cards2b{grid-template-columns:1fr 1fr}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;
-    box-shadow:0 1px 3px rgba(20,40,80,.04)}
-  .kpi .lab{font-size:12px;color:var(--gray);font-weight:600}
-  .kpi .val{font-size:24px;font-weight:800;color:var(--navy);margin-top:6px;letter-spacing:-.5px}
-  .kpi .delta{font-size:12px;font-weight:700;margin-top:2px}
-  .up{color:var(--good)} .flat{color:var(--gray)}
+  .c2{grid-template-columns:1.45fr 1fr}
+  .c2b{grid-template-columns:1fr 1fr}
+
+  .card{
+    background:linear-gradient(180deg,var(--panel) 0%,var(--panel2) 100%);
+    border:1px solid var(--line);border-radius:16px;padding:18px 20px;
+    box-shadow:0 12px 30px -18px rgba(0,0,0,.65);position:relative;
+  }
+  .kpi{overflow:hidden}
+  .kpi::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:2px;border-radius:2px;
+    background:linear-gradient(180deg,var(--gold2),var(--gold))}
+  .kpi .lab{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--dim);font-weight:600;padding-left:6px}
+  .kpi .val{font-size:25px;font-weight:800;margin-top:8px;letter-spacing:-.6px;padding-left:6px;
+    background:linear-gradient(120deg,#fff,var(--gold2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .kpi .val.plain{-webkit-text-fill-color:var(--ink);background:none}
+  .kpi .delta{font-size:11.5px;font-weight:600;margin-top:4px;padding-left:6px;color:var(--sub)}
+  .kpi .delta.up{color:var(--good)}
+
+  h3.ct{font-size:14px;font-weight:700;letter-spacing:-.2px}
+  p.cd{font-size:11px;color:var(--dim);margin:3px 0 14px}
   .chart-box{position:relative;height:300px}
-  .chart-box.sm{height:270px}
-  h3.ct{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:2px}
-  p.cd{font-size:11.5px;color:var(--gray);margin-bottom:12px}
+  .chart-box.sm{height:272px}
+
   table{width:100%;border-collapse:collapse;font-size:12.5px}
-  th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left}
-  th{background:var(--navy);color:#fff;font-weight:700;font-size:12px}
-  tr:nth-child(even) td{background:#f7f9fc}
-  .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700}
-  .pill.y{background:#e4f6ec;color:var(--good)} .pill.wait{background:#fdf3d9;color:#a8791a}
-  .pill.opt{background:#e0f2fe;color:#0369a1}
-  a{color:var(--blue);text-decoration:none} a:hover{text-decoration:underline}
-  footer{margin-top:28px;font-size:11.5px;color:var(--gray);text-align:center;line-height:1.7}
-  .note{background:#fff8e6;border:1px solid #f0dca0;border-radius:10px;padding:10px 14px;
-    font-size:12px;color:#7a5c12;margin-top:14px}
-  @media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.cards2,.cards2b{grid-template-columns:1fr}}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  thead th{font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);
+    font-weight:600;border-bottom:1px solid var(--line)}
+  tbody tr:hover td{background:rgba(255,255,255,.02)}
+  td{color:var(--sub)} td b,td strong{color:var(--ink)}
+  .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:10.5px;font-weight:600;letter-spacing:.2px}
+  .pill.opt{background:rgba(201,169,106,.14);color:var(--gold2);border:1px solid rgba(201,169,106,.3)}
+  .pill.cand{background:rgba(111,168,220,.12);color:var(--blue);border:1px solid rgba(111,168,220,.28)}
+  .pill.y{background:rgba(91,201,142,.12);color:var(--good);border:1px solid rgba(91,201,142,.28)}
+  .pill.wait{background:rgba(224,177,90,.10);color:var(--warn);border:1px solid rgba(224,177,90,.28)}
+  a{color:var(--blue);text-decoration:none}a:hover{color:var(--gold2)}
+
+  .note{background:rgba(224,177,90,.06);border:1px solid rgba(224,177,90,.22);border-radius:12px;
+    padding:11px 15px;font-size:12px;color:#E8CE97;margin-top:16px}
+  footer{margin-top:30px;font-size:11px;color:var(--dim);text-align:center;line-height:1.9;
+    border-top:1px solid var(--line);padding-top:18px}
+  footer code{color:var(--sub)}
+  @media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.c2,.c2b{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
     <div>
-      <h1>소노 로컬리프트 · 데이터랩 대시보드</h1>
-      <div class="sub">2026 한국관광 데이터랩 활용 경진대회 · 지역경제 기여 트랙 · 앵커: <b id="anchor">—</b></div>
+      <div class="brand">SONO · LOCAL LIFT</div>
+      <h1>데이터랩 <b>지역경제 기여</b> 대시보드</h1>
+      <div class="sub">2026 한국관광 데이터랩 활용 경진대회 · 앵커 지역: <b id="anchor">—</b></div>
       <span class="badge" id="srcbadge">데이터 로딩 중…</span>
     </div>
-    <div class="meta-r">
-      자동 갱신 · 매일 06:00 (KST)<br>
+    <div class="metar">
+      <span class="dot"></span>자동 갱신 · 매일 06:00 (KST)<br>
       GitHub Actions → 공공데이터포털 API<br>
       <span id="updated">최종 갱신: —</span>
     </div>
@@ -71,25 +118,25 @@
 
   <div id="samplebar"></div>
 
-  <div class="section-t">핵심 지표 (앵커 지역)</div>
+  <div class="sec">핵심 지표</div>
   <div class="grid kpis" id="kpicards"></div>
 
-  <div class="section-t">지역 방문 수요 추이</div>
-  <div class="grid cards2">
+  <div class="sec">지역 방문 수요</div>
+  <div class="grid c2">
     <div class="card">
       <h3 class="ct">월별 지역 방문자수 추이</h3>
-      <p class="cd">출처: 공공데이터포털 이동통신 방문자수(KT 내국인·SKT 외국인) · 최근 24개월</p>
+      <p class="cd">공공데이터포털 이동통신 방문자수(KT 내국인·SKT 외국인) · 최근 24개월</p>
       <div class="chart-box"><canvas id="visChart"></canvas></div>
     </div>
     <div class="card">
       <h3 class="ct">타깃 지역 스코어링</h3>
-      <p class="cd">소노 소재 인구감소지역 · 5개 기준 가중점수(5점 만점)</p>
+      <p class="cd">소노 소재 인구감소지역 · 5개 기준 가중점수(5점)</p>
       <div class="chart-box"><canvas id="scoreChart"></canvas></div>
     </div>
   </div>
 
-  <div class="section-t">타깃·시기 최적화</div>
-  <div class="grid cards2b">
+  <div class="sec">타깃 · 시기 최적화</div>
+  <div class="grid c2b">
     <div class="card">
       <h3 class="ct">지역 저수요 × 소노 여유 (월별)</h3>
       <p class="cd">관광수요지수와 소노 점유율이 동시에 낮은 달 = 반값 프로모션 최적기</p>
@@ -98,26 +145,26 @@
     <div class="card">
       <h3 class="ct">캠페인 적합도 판정</h3>
       <p class="cd">◎ 최적 = 지역·소노 동시 비수기 / ○ 후보 = 한쪽만</p>
-      <div style="max-height:270px;overflow:auto"><table id="timeTable"></table></div>
+      <div style="max-height:272px;overflow:auto"><table id="timeTable"></table></div>
     </div>
   </div>
 
-  <div class="section-t">성과 측정 프레임 (KPI)</div>
+  <div class="sec">성과 측정 프레임</div>
   <div class="card">
     <p class="cd">강진군(2025 대상) 벤치마크 대비 목표 · 전후 + 대조지역 비교로 효과만 분리</p>
     <table id="kpiTable"></table>
   </div>
 
-  <div class="section-t">데이터 소스 · API 연동 상태</div>
+  <div class="sec">데이터 소스 · API 연동</div>
   <div class="card">
     <table id="srcTable">
       <thead><tr><th>데이터</th><th>공공데이터포털 API</th><th>용도</th><th>연동</th></tr></thead>
       <tbody>
-        <tr><td>지역별 방문자수</td><td>한국관광공사_빅데이터_지역별 방문자수 (15101972)</td><td>월별 방문·계절성</td><td><span class="pill wait">키 대기</span></td></tr>
-        <tr><td>관광수요 강도</td><td>한국관광공사_지역별 관광 수요 강도 (15151868)</td><td>비수기 판별</td><td><span class="pill wait">키 대기</span></td></tr>
-        <tr><td>방문자 추이 예측</td><td>한국관광공사_관광지 집중률 방문자 추이 예측 (15128555)</td><td>5주 예측</td><td><span class="pill wait">키 대기</span></td></tr>
-        <tr><td>신용카드 지출액</td><td>데이터랩 화면/다운로드 (API 확인 필요)</td><td>지역 소비 유도액</td><td><span class="pill wait">확인중</span></td></tr>
-        <tr><td>소노 점유율·ADR</td><td>소노 GS팀 대시보드 (내부)</td><td>공급측 실적</td><td><span class="pill y">내부연동</span></td></tr>
+        <tr><td><b>지역별 방문자수</b></td><td>한국관광공사_빅데이터_지역별 방문자수 (15101972)</td><td>월별 방문·계절성</td><td><span class="pill wait">키 대기</span></td></tr>
+        <tr><td><b>관광수요 강도</b></td><td>한국관광공사_지역별 관광 수요 강도 (15151868)</td><td>비수기 판별</td><td><span class="pill wait">키 대기</span></td></tr>
+        <tr><td><b>방문자 추이 예측</b></td><td>한국관광공사_관광지 집중률 방문자 추이 예측 (15128555)</td><td>5주 예측</td><td><span class="pill wait">키 대기</span></td></tr>
+        <tr><td><b>신용카드 지출액</b></td><td>데이터랩 화면/다운로드 (API 확인 필요)</td><td>지역 소비 유도액</td><td><span class="pill wait">확인중</span></td></tr>
+        <tr><td><b>소노 점유율·ADR</b></td><td>소노 GS팀 대시보드 (내부)</td><td>공급측 실적</td><td><span class="pill y">내부연동</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -125,7 +172,7 @@
   <div class="note" id="samplenote"></div>
 
   <footer>
-    소노 로컬리프트 파일럿 대시보드 · 데이터 출처: 공공데이터포털(한국관광공사 빅데이터) · 인구감소지역 지정: 행정안전부<br>
+    SONO LOCAL LIFT · 데이터 출처: 공공데이터포털(한국관광공사 빅데이터) · 인구감소지역 지정: 행정안전부<br>
     자동 갱신: GitHub Actions cron(매일 06:00 KST) → <code>data/dashboard_data.json</code> → GitHub Pages
   </footer>
 </div>
@@ -133,84 +180,86 @@
 <script>
 const FALLBACK = {"meta":{"updated":"2026-07-06T06:00:00+09:00","anchor":"강원 홍천군 (소노벨·소노문 비발디파크 / 오션월드)","anchorType":"인구감소지역 · 우대지원","source":"공공데이터포털 · 한국관광공사 빅데이터 (샘플)","isSample":true,"note":"현재 값은 데모용 샘플입니다. 서비스키 등록 후 매일 06:00(KST) 실데이터로 갱신됩니다."},"visitors":{"labels":["2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"],"values":[820000,910000,560000,640000,520000,780000,760000,690000,480000,520000,610000,540000,850000,940000,590000,670000,540000,810000,790000,720000,500000,540000,630000,560000]},"timing":{"months":["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],"demandIndex":[88,80,58,62,72,66,95,100,70,78,64,90],"sonoOccupancy":[72,68,55,58,63,60,85,90,64,70,58,80]},"scoring":{"labels":["홍천(비발디)","고성(델피노)","청송","영덕","단양","부안(변산)"],"values":[4.45,4.35,4.30,4.30,4.00,3.95]},"kpi":[{"name":"지역 방문자 증가","unit":"%","bench":"+18%","target":"+15%","source":"이동통신 방문자수"},{"name":"지역 관광 소비 유도액","unit":"억원","bench":"69억","target":"30억","source":"신용카드 지출액"},{"name":"지역화폐/쿠폰 사용률","unit":"%","bench":"+71%","target":"+50%","source":"지자체+소노 발권"},{"name":"비수기 가동률 개선","unit":"%p","bench":"-","target":"+8%p","source":"소노 대시보드"},{"name":"생산유발효과","unit":"억원","bench":"240억","target":"100억","source":"산업연관표 추정"}]};
 
-const fmt = n => n.toLocaleString('ko-KR');
-const NAVY="#1F3A5F",BLUE="#2E75B6",SKY="#5B9BD5",WARN="#e2b93b",GOOD="#1e9e6a";
+const GOLD="#C9A96A",GOLD2="#E7CE96",BLUE="#6FA8DC",TEAL="#57C4B4",INK="#EAEEF7",SUB="#9AA4B8";
+const SLATE2="#39445B";
+const fmt=n=>Number(n).toLocaleString('ko-KR');
+const avg=a=>a.reduce((x,y)=>x+y,0)/a.length;
 
-function avg(a){return a.reduce((x,y)=>x+y,0)/a.length}
-
-function render(D){
-  document.getElementById('anchor').textContent = D.meta.anchor;
-  document.getElementById('updated').textContent = "최종 갱신: " + new Date(D.meta.updated).toLocaleString('ko-KR');
-  document.getElementById('srcbadge').textContent = D.meta.source;
-
-  if(D.meta.isSample){
-    document.getElementById('samplebar').innerHTML =
-      '<div class="note" style="margin:14px 0 0">⚠ 현재 <b>데모 샘플 데이터</b>로 표시 중입니다. 공공데이터포털 서비스키를 GitHub 시크릿(<code>DATA_GO_KR_KEY</code>)에 등록하면 매일 06:00(KST) 실데이터로 자동 갱신됩니다.</div>';
-    document.getElementById('samplenote').textContent = D.meta.note || '';
-  }
-
-  // KPI cards
-  const v = D.visitors.values, L = D.visitors.labels;
-  const last = v[v.length-1], lastLabel = L[L.length-1];
-  const yoyIdx = v.length-13;
-  const yoy = yoyIdx>=0 ? ((last - v[yoyIdx])/v[yoyIdx]*100) : null;
-  const dI = D.timing.demandIndex, occ = D.timing.sonoOccupancy;
-  const dAvg=avg(dI), oAvg=avg(occ);
-  let optMonths=[];
-  D.timing.months.forEach((m,i)=>{ if(dI[i]<dAvg && occ[i]<oAvg) optMonths.push(m); });
-  const topRegion = D.scoring.labels[0], topScore = D.scoring.values[0];
-
-  const cards = [
-    {lab:`방문자수 (${lastLabel})`, val:fmt(last), delta: yoy==null?'':`전년동월 ${yoy>=0?'▲':'▼'} ${Math.abs(yoy).toFixed(1)}%`, cls: yoy>=0?'up':'flat'},
-    {lab:'1순위 앵커', val:topRegion, delta:`가중점수 ${topScore.toFixed(2)} / 5`, cls:'flat'},
-    {lab:'평균 관광수요지수', val:dAvg.toFixed(0), delta:'12개월 평균', cls:'flat'},
-    {lab:'평균 소노 점유율', val:oAvg.toFixed(0)+'%', delta:'12개월 평균', cls:'flat'},
-    {lab:'최적 캠페인 시기', val:(optMonths.slice(0,3).join(', ')||'—'), delta:'지역·소노 동시 비수기', cls:'up'},
-  ];
-  document.getElementById('kpicards').innerHTML = cards.map(c=>
-    `<div class="card kpi"><div class="lab">${c.lab}</div><div class="val">${c.val}</div><div class="delta ${c.cls}">${c.delta}</div></div>`
-  ).join('');
-
-  // visitors line
-  new Chart(document.getElementById('visChart'),{type:'line',
-    data:{labels:L,datasets:[{label:'월 방문자수',data:v,borderColor:BLUE,backgroundColor:'rgba(46,117,182,.12)',
-      fill:true,tension:.35,pointRadius:2,borderWidth:2}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{y:{ticks:{callback:x=>(x/10000)+'만'}},x:{ticks:{maxTicksLimit:12,font:{size:10}}}}}});
-
-  // scoring bar
-  new Chart(document.getElementById('scoreChart'),{type:'bar',
-    data:{labels:D.scoring.labels,datasets:[{data:D.scoring.values,
-      backgroundColor:D.scoring.values.map((_,i)=>i===0?NAVY:SKY),borderRadius:6}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{x:{min:3.5,max:4.6}}}});
-
-  // timing dual line
-  new Chart(document.getElementById('timeChart'),{type:'line',
-    data:{labels:D.timing.months,datasets:[
-      {label:'지역 관광수요지수',data:dI,borderColor:BLUE,tension:.3,borderWidth:2,pointRadius:2},
-      {label:'소노 점유율(%)',data:occ,borderColor:WARN,tension:.3,borderWidth:2,pointRadius:2}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:11}}}}}});
-
-  // timing table
-  let rows='<thead><tr><th>월</th><th>수요지수</th><th>소노 점유율</th><th>판정</th></tr></thead><tbody>';
-  D.timing.months.forEach((m,i)=>{
-    const lowD=dI[i]<dAvg, lowO=occ[i]<oAvg;
-    const verdict = (lowD&&lowO)?'<span class="pill opt">◎ 최적</span>':((lowD||lowO)?'<span class="pill wait">○ 후보</span>':'—');
-    rows+=`<tr><td>${m}</td><td>${dI[i]}</td><td>${occ[i]}%</td><td>${verdict}</td></tr>`;
-  });
-  document.getElementById('timeTable').innerHTML = rows+'</tbody>';
-
-  // kpi table
-  let k='<thead><tr><th>KPI</th><th>강진 벤치</th><th>목표</th><th>데이터 출처</th></tr></thead><tbody>';
-  D.kpi.forEach(r=>{ k+=`<tr><td>${r.name}</td><td>${r.bench}</td><td><b style="color:${BLUE}">${r.target}</b></td><td>${r.source}</td></tr>`; });
-  document.getElementById('kpiTable').innerHTML = k+'</tbody>';
+if(window.Chart){
+  Chart.defaults.color=SUB;
+  Chart.defaults.font.family="Inter, 'Malgun Gothic', sans-serif";
+  Chart.defaults.font.size=11;
+}
+function goldGrad(ctx,area){
+  const g=ctx.createLinearGradient(0,area.top,0,area.bottom);
+  g.addColorStop(0,'rgba(201,169,106,.32)');g.addColorStop(1,'rgba(201,169,106,0)');return g;
 }
 
-fetch('data/dashboard_data.json',{cache:'no-store'})
-  .then(r=>{if(!r.ok)throw 0;return r.json()})
-  .then(render)
-  .catch(()=>render(FALLBACK));
+function render(D){
+  document.getElementById('anchor').textContent=D.meta.anchor;
+  document.getElementById('updated').textContent="최종 갱신: "+new Date(D.meta.updated).toLocaleString('ko-KR');
+  document.getElementById('srcbadge').textContent=D.meta.source;
+
+  if(D.meta.isSample){
+    document.getElementById('samplebar').innerHTML=
+      '<div class="note" style="margin:16px 0 0">⚠ 현재 <b>데모 샘플 데이터</b>로 표시 중입니다. 공공데이터포털 서비스키를 GitHub 시크릿(<code>DATA_GO_KR_KEY</code>)에 등록하면 매일 06:00(KST) 실데이터로 자동 갱신됩니다.</div>';
+    document.getElementById('samplenote').textContent=D.meta.note||'';
+  }
+
+  const v=D.visitors.values,L=D.visitors.labels;
+  const last=v[v.length-1],lastLabel=L[L.length-1];
+  const yi=v.length-13,yoy=yi>=0?((last-v[yi])/v[yi]*100):null;
+  const dI=D.timing.demandIndex,occ=D.timing.sonoOccupancy,dA=avg(dI),oA=avg(occ);
+  let opt=[];D.timing.months.forEach((m,i)=>{if(dI[i]<dA&&occ[i]<oA)opt.push(m)});
+  const topR=D.scoring.labels[0],topS=D.scoring.values[0];
+
+  const cards=[
+    {lab:`방문자수 · ${lastLabel}`,val:fmt(last),delta:yoy==null?'':`전년동월 ${yoy>=0?'▲':'▼'} ${Math.abs(yoy).toFixed(1)}%`,cls:yoy>=0?'up':''},
+    {lab:'1순위 앵커',val:topR,plain:true,delta:`가중점수 ${topS.toFixed(2)} / 5`},
+    {lab:'평균 관광수요지수',val:dA.toFixed(0),delta:'12개월 평균'},
+    {lab:'평균 소노 점유율',val:oA.toFixed(0)+'%',delta:'12개월 평균'},
+    {lab:'최적 캠페인 시기',val:(opt.slice(0,3).join(' · ')||'—'),plain:true,delta:'지역·소노 동시 비수기',cls:'up'},
+  ];
+  document.getElementById('kpicards').innerHTML=cards.map(c=>
+    `<div class="card kpi"><div class="lab">${c.lab}</div><div class="val ${c.plain?'plain':''}">${c.val}</div><div class="delta ${c.cls||''}">${c.delta}</div></div>`).join('');
+
+  new Chart(document.getElementById('visChart'),{type:'line',
+    data:{labels:L,datasets:[{label:'월 방문자수',data:v,borderColor:GOLD,borderWidth:2,tension:.38,
+      pointRadius:0,pointHoverRadius:4,pointHoverBackgroundColor:GOLD2,fill:true,
+      backgroundColor:(c)=>{const{ctx,chartArea}=c.chart;return chartArea?goldGrad(ctx,chartArea):'transparent'}}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{callback:x=>(x/10000)+'만'}},
+              x:{grid:{display:false},ticks:{maxTicksLimit:12,font:{size:10}}}}}});
+
+  new Chart(document.getElementById('scoreChart'),{type:'bar',
+    data:{labels:D.scoring.labels,datasets:[{data:D.scoring.values,borderRadius:7,
+      backgroundColor:D.scoring.values.map((_,i)=>i===0?GOLD:SLATE2),
+      hoverBackgroundColor:D.scoring.values.map((_,i)=>i===0?GOLD2:BLUE)}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{x:{min:3.5,max:4.6,grid:{color:'rgba(255,255,255,.05)'}},y:{grid:{display:false}}}}});
+
+  new Chart(document.getElementById('timeChart'),{type:'line',
+    data:{labels:D.timing.months,datasets:[
+      {label:'지역 관광수요지수',data:dI,borderColor:GOLD,borderWidth:2,tension:.35,pointRadius:0,pointHoverRadius:4},
+      {label:'소노 점유율(%)',data:occ,borderColor:BLUE,borderWidth:2,tension:.35,pointRadius:0,pointHoverRadius:4,borderDash:[4,3]}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom',labels:{boxWidth:12,boxHeight:2,font:{size:11},padding:14}}},
+      scales:{y:{grid:{color:'rgba(255,255,255,.05)'}},x:{grid:{display:false}}}}});
+
+  let rows='<thead><tr><th>월</th><th>수요지수</th><th>소노 점유율</th><th>판정</th></tr></thead><tbody>';
+  D.timing.months.forEach((m,i)=>{
+    const lowD=dI[i]<dA,lowO=occ[i]<oA;
+    const vd=(lowD&&lowO)?'<span class="pill opt">◎ 최적</span>':((lowD||lowO)?'<span class="pill cand">○ 후보</span>':'—');
+    rows+=`<tr><td><b>${m}</b></td><td>${dI[i]}</td><td>${occ[i]}%</td><td>${vd}</td></tr>`;
+  });
+  document.getElementById('timeTable').innerHTML=rows+'</tbody>';
+
+  let k='<thead><tr><th>KPI</th><th>강진 벤치</th><th>목표</th><th>데이터 출처</th></tr></thead><tbody>';
+  D.kpi.forEach(r=>{k+=`<tr><td><b>${r.name}</b></td><td>${r.bench}</td><td><b style="color:${GOLD2}">${r.target}</b></td><td>${r.source}</td></tr>`});
+  document.getElementById('kpiTable').innerHTML=k+'</tbody>';
+}
+
+fetch('data/dashboard_data.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(render).catch(()=>render(FALLBACK));
 </script>
 </body>
 </html>
