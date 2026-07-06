@@ -92,8 +92,9 @@ def fetch_visitors(months):
     last = dt.date.today().replace(day=1) - dt.timedelta(days=1)   # 지난달 말일
     end = last.strftime("%Y%m%d")
 
-    agg = defaultdict(float)          # 'YYYY-MM' -> 방문객 합
-    by_region = defaultdict(lambda: defaultdict(float))  # region -> month -> 합
+    agg = defaultdict(float)          # 'YYYY-MM' -> 외지인+외국인 합
+    by_region = defaultdict(lambda: defaultdict(float))  # region -> month -> 외지인+외국인
+    mix = {"1": defaultdict(float), "2": defaultdict(float), "3": defaultdict(float)}  # touDiv -> month -> 합
     matched_codes = {}
 
     page, rows_per = 1, 10000
@@ -110,17 +111,18 @@ def fetch_visitors(months):
             nm = it.get("signguNm", ""); code = it.get("signguCode", "")
             if not is_target(nm, code):
                 continue
-            div = str(it.get("touDivCd", ""))
-            if div not in ("2", "3"):        # 외지인+외국인만(관광 유입)
-                continue
+            div = str(it.get("touDivCd", ""))     # 1=현지인 2=외지인 3=외국인
             ymd = str(it.get("baseYmd", ""))
             key = f"{ymd[:4]}-{ymd[4:6]}" if len(ymd) >= 6 else None
             if not key:
                 continue
             val = float(it.get("touNum") or 0)
-            agg[key] += val
-            by_region[nm][key] += val
-            matched_codes[nm] = code
+            if div in mix:
+                mix[div][key] += val
+            if div in ("2", "3"):                 # 외지인+외국인 = 관광 유입
+                agg[key] += val
+                by_region[nm][key] += val
+                matched_codes[nm] = code
         got += len(items)
         if got >= total or len(items) < rows_per:
             break
@@ -131,7 +133,10 @@ def fetch_visitors(months):
     values = [round(agg.get(m, 0)) for m in months]
     regions = {nm: [round(by_region[nm].get(m, 0)) for m in months]
                for nm in sorted(by_region)}
-    return values, regions, matched_codes
+    mixout = {"local":   [round(mix["1"].get(m, 0)) for m in months],
+              "outside": [round(mix["2"].get(m, 0)) for m in months],
+              "foreign": [round(mix["3"].get(m, 0)) for m in months]}
+    return values, regions, mixout, matched_codes
 
 
 def load_existing():
@@ -157,14 +162,14 @@ def main():
         return 0
 
     try:
-        values, regions, codes = fetch_visitors(months)
+        values, regions, mixout, codes = fetch_visitors(months)
         if sum(values) == 0:
             raise ValueError("타깃 시군구 매칭 0건 — signguNm 매칭 규칙 확인 필요")
         base = existing or {}
         base.setdefault("timing", FALLBACK_TIMING)
         base.setdefault("scoring", FALLBACK_SCORING)
         base.setdefault("kpi", FALLBACK_KPI)
-        base["visitors"] = {"labels": months, "values": values, "byRegion": regions}
+        base["visitors"] = {"labels": months, "values": values, "byRegion": regions, "mix": mixout}
         base["meta"] = {
             "updated": now,
             "anchor": "소노 소재 인구감소 시군구 9곳(홍천·부안·고성·청송·남해·삼척·단양·진도·양양)",
