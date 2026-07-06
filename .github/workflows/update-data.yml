@@ -1,0 +1,34 @@
+name: Update dashboard data
+
+on:
+  schedule:
+    - cron: "0 21 * * *"   # 21:00 UTC = 06:00 KST (매일)
+  workflow_dispatch: {}     # 수동 실행 버튼
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Fetch latest data from data.go.kr
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+          ANCHOR_AREA_CD: ${{ vars.ANCHOR_AREA_CD }}
+          ANCHOR_SIGNGU_CD: ${{ vars.ANCHOR_SIGNGU_CD }}
+        run: python scripts/fetch_data.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/dashboard_data.json
+          git diff --staged --quiet || git commit -m "chore: auto-update dashboard data ($(date -u +%Y-%m-%d))"
+          git push
