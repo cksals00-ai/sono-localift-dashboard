@@ -132,7 +132,12 @@ Promise.all([
 ]).then(([S,V])=>render(S,V));
 
 function render(S,V){
-  document.getElementById('updated').textContent='기준: '+S.meta.updated;
+  (function(){
+    var vu=(V.meta&&V.meta.updated)||'';
+    var vus=vu?vu.slice(0,16).replace('T',' ')+' KST':'—';
+    document.getElementById('updated').innerHTML=
+      '실적 기준: '+S.meta.updated+' &nbsp;|&nbsp; 방문자데이터 자동갱신: '+vus+' <span style="opacity:.7">(매일 06:00 KST)</span>';
+  })();
   const g=S.grand;
 
   // ACT 1 — 인사이트

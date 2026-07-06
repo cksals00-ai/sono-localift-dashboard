@@ -146,11 +146,13 @@ def main():
     months = month_labels(MONTHS)
 
     if not KEY:
-        print("[warn] DATA_GO_KR_KEY 미설정 → 기존 데이터 유지, 샘플 표기")
+        # 키가 없어도 마지막 실데이터를 절대 훼손하지 않는다(isSample 강제 변경 금지).
+        # 단, 실데이터가 한 번도 없었던 초기 상태(isSample 부재)면 샘플로 표기.
+        print("[warn] DATA_GO_KR_KEY 미설정 → 기존 데이터 보존(실데이터면 그대로 유지)")
         if existing:
             existing.setdefault("meta", {})
             existing["meta"]["updated"] = now
-            existing["meta"]["isSample"] = True
+            existing["meta"].setdefault("isSample", True)
             OUT.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
         return 0
 
