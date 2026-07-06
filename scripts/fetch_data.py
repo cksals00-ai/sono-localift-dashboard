@@ -55,7 +55,28 @@ def api_get(op, params):
     url = f"{BASE}/{op}?{q}"
     req = Request(url, headers={"User-Agent": "SonoLift/1.0"})
     with urlopen(req, timeout=30) as r:
-        return json.loads(r.read().decode("utf-8"))
+        raw = r.read().decode("utf-8", errors="replace")
+
+    # ── 진단: 응답이 JSON이 아니거나(에러 봉투 XML), 예상 구조가 아니면 원문을 로그로 노출 ──
+    body_preview = raw[:600].replace("\n", " ")
+    if not raw.lstrip().startswith("{"):
+        # data.go.kr 게이트웨이 인증/경로 오류는 _type=json이어도 XML로 옴
+        raise ValueError(f"JSON 아님(게이트웨이 오류 추정) ← 원문: {body_preview}")
+    try:
+        data = json.loads(raw)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"JSON 파싱 실패({e}) ← 원문: {body_preview}")
+
+    # 정상 봉투 확인 + resultCode 체크
+    resp = data.get("response")
+    if resp is None:
+        raise ValueError(f"'response' 키 없음 ← 원문: {body_preview}")
+    hdr = (resp.get("header") or {})
+    code = str(hdr.get("resultCode", ""))
+    msg = hdr.get("resultMsg", "")
+    if code not in ("0000", "00", ""):
+        raise ValueError(f"API 오류 resultCode={code} resultMsg={msg} ← 원문: {body_preview}")
+    return data
 
 
 def fetch_visitors():
@@ -68,8 +89,15 @@ def fetch_visitors():
         "startYmd": start, "endYmd": end,
         "areaCd": ANCHOR["areaCd"], "signguCd": ANCHOR["signguCd"],
     })
-    items = data["response"]["body"]["items"]["item"]
+    body = data["response"].get("body") or {}
+    total = body.get("totalCount", "?")
+    items_wrap = body.get("items")
+    # 결과 0건이면 items가 "" 로 오는 케이스 방어
+    items = (items_wrap or {}).get("item", []) if isinstance(items_wrap, dict) else []
     if isinstance(items, dict): items = [items]
+    print(f"[info] {OP_VISITORS} totalCount={total}, item {len(items)}건 수신")
+    if not items:
+        raise ValueError(f"결과 0건(totalCount={total}) — signguCd/날짜/승인 상태 확인 필요")
     agg = {m: 0 for m in months}
     for it in items:
         ymd = str(it.get("baseYmd") or it.get("basYmd") or "")
