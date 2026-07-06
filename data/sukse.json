@@ -1,9 +1,8 @@
 {
   "meta": {
     "updated": "2026-07-06",
-    "period": "2026 상반기 (숙세페 6월 캠페인)",
-    "source": "소노 온라인영업팀 예약자료(27+43) · 회원번호(패키지코드) 매핑 · 취소 제외",
-    "note": "객실매출=1박객실료×객실수/1.1, 총매출=PKG총금액/1.1 (기존 트렌드리포트 로직 차용)"
+    "period": "2026 상반기 · 숙세페 6월 캠페인",
+    "source": "소노 온라인영업팀 예약자료(27+43) · 회원번호(패키지코드) 매핑 · 취소 제외 (트렌드리포트 로직 차용)"
   },
   "grand": {
     "rn": 1158,
@@ -11,12 +10,13 @@
     "total_rev_m": 450.2,
     "adr_k": 195,
     "props": 14,
-    "dep_ratio": 100
+    "dep_ratio": 100,
+    "pkgs": 54
   },
   "macro": {
     "spend_eok": 862,
     "visitors_man": 48,
-    "label": "숙세페 거시효과(데이터랩·ONDA)"
+    "src": "데이터랩·ONDA 숙세페 효과"
   },
   "by_prop": [
     {
@@ -25,8 +25,7 @@
       "rn": 252,
       "room_rev_m": 46.3,
       "total_rev_m": 92.5,
-      "adr_k": 184,
-      "dep": true
+      "adr_k": 184
     },
     {
       "prop": "소노 남해",
@@ -34,8 +33,7 @@
       "rn": 130,
       "room_rev_m": 43.3,
       "total_rev_m": 86.6,
-      "adr_k": 333,
-      "dep": true
+      "adr_k": 333
     },
     {
       "prop": "소노캄 진도",
@@ -43,8 +41,7 @@
       "rn": 122,
       "room_rev_m": 23.9,
       "total_rev_m": 47.9,
-      "adr_k": 196,
-      "dep": true
+      "adr_k": 196
     },
     {
       "prop": "소노벨 변산",
@@ -52,8 +49,7 @@
       "rn": 146,
       "room_rev_m": 21.1,
       "total_rev_m": 42.2,
-      "adr_k": 144,
-      "dep": true
+      "adr_k": 144
     },
     {
       "prop": "소노펠리체",
@@ -61,8 +57,7 @@
       "rn": 76,
       "room_rev_m": 19.2,
       "total_rev_m": 38.4,
-      "adr_k": 253,
-      "dep": true
+      "adr_k": 253
     },
     {
       "prop": "소노 단양",
@@ -70,8 +65,7 @@
       "rn": 130,
       "room_rev_m": 17.2,
       "total_rev_m": 34.3,
-      "adr_k": 132,
-      "dep": true
+      "adr_k": 132
     },
     {
       "prop": "소노벨 비발디",
@@ -79,8 +73,7 @@
       "rn": 96,
       "room_rev_m": 14.9,
       "total_rev_m": 29.7,
-      "adr_k": 155,
-      "dep": true
+      "adr_k": 155
     },
     {
       "prop": "소노문 델피노",
@@ -88,8 +81,7 @@
       "rn": 70,
       "room_rev_m": 12.2,
       "total_rev_m": 23.6,
-      "adr_k": 174,
-      "dep": true
+      "adr_k": 174
     },
     {
       "prop": "쏠비치 양양",
@@ -97,8 +89,7 @@
       "rn": 36,
       "room_rev_m": 6.7,
       "total_rev_m": 13.4,
-      "adr_k": 186,
-      "dep": true
+      "adr_k": 186
     },
     {
       "prop": "소노벨 청송",
@@ -106,8 +97,7 @@
       "rn": 42,
       "room_rev_m": 6.5,
       "total_rev_m": 12.9,
-      "adr_k": 154,
-      "dep": true
+      "adr_k": 154
     },
     {
       "prop": "소노문(르네)",
@@ -115,8 +105,7 @@
       "rn": 28,
       "room_rev_m": 5.2,
       "total_rev_m": 10.3,
-      "adr_k": 184,
-      "dep": true
+      "adr_k": 184
     },
     {
       "prop": "소노캄 비발디",
@@ -124,8 +113,7 @@
       "rn": 12,
       "room_rev_m": 3.6,
       "total_rev_m": 7.2,
-      "adr_k": 301,
-      "dep": true
+      "adr_k": 301
     },
     {
       "prop": "소노펫클럽",
@@ -133,8 +121,7 @@
       "rn": 10,
       "room_rev_m": 3.0,
       "total_rev_m": 6.0,
-      "adr_k": 299,
-      "dep": true
+      "adr_k": 299
     },
     {
       "prop": "오션월드 빌리지",
@@ -142,8 +129,7 @@
       "rn": 8,
       "room_rev_m": 2.6,
       "total_rev_m": 5.1,
-      "adr_k": 321,
-      "dep": true
+      "adr_k": 321
     }
   ],
   "by_chan": [
@@ -213,6 +199,18 @@
       "loc": "경북 청송",
       "rn": 42,
       "total_rev_m": 12.9
+    }
+  ],
+  "by_month": [
+    {
+      "m": "202606",
+      "rn": 1110,
+      "total_rev_m": 432.9
+    },
+    {
+      "m": "202607",
+      "rn": 48,
+      "total_rev_m": 17.4
     }
   ]
 }

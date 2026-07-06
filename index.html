@@ -3,64 +3,51 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>소노 숙세페 실적 · 데이터랩 대시보드</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>소노 로컬리프트 · 데이터랩 인사이트 → 숙세페 실적</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-  :root{
-    --bg:#080B12; --panel:#111725; --panel2:#0E1420; --line:#1E2738;
-    --ink:#EAEEF7; --sub:#9AA4B8; --dim:#697086;
-    --gold:#C9A96A; --gold2:#E7CE96; --blue:#6FA8DC; --teal:#57C4B4; --good:#5BC98E; --warn:#E0B15A;
-    --slate:#39445B;
-  }
+  :root{--bg:#080B12;--panel:#111725;--panel2:#0E1420;--line:#1E2738;--ink:#EAEEF7;--sub:#9AA4B8;--dim:#697086;
+    --gold:#C9A96A;--gold2:#E7CE96;--blue:#6FA8DC;--teal:#57C4B4;--good:#5BC98E;--warn:#E0B15A;--slate:#39445B;}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Inter','Malgun Gothic','맑은 고딕',-apple-system,'Apple SD Gothic Neo',sans-serif;
-    color:var(--ink);line-height:1.5;min-height:100vh;
-    background:radial-gradient(1100px 500px at 80% -10%,rgba(201,169,106,.10),transparent 60%),
-      radial-gradient(900px 500px at 0% 0%,rgba(111,168,220,.07),transparent 55%),var(--bg);}
+  body{font-family:'Inter','Malgun Gothic','맑은 고딕',-apple-system,'Apple SD Gothic Neo',sans-serif;color:var(--ink);line-height:1.5;min-height:100vh;
+    background:radial-gradient(1100px 500px at 80% -10%,rgba(201,169,106,.10),transparent 60%),radial-gradient(900px 500px at 0% 0%,rgba(111,168,220,.07),transparent 55%),var(--bg);}
   .wrap{max-width:1260px;margin:0 auto;padding:24px 22px 70px}
-  header.top{position:relative;overflow:hidden;border-radius:20px;padding:26px 30px;
-    background:linear-gradient(135deg,#0E1422 0%,#141C2E 55%,#0F1626 100%);border:1px solid var(--line);
-    box-shadow:0 20px 50px -20px rgba(0,0,0,.7);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px}
+  header.top{position:relative;overflow:hidden;border-radius:20px;padding:26px 30px;background:linear-gradient(135deg,#0E1422,#141C2E 55%,#0F1626);border:1px solid var(--line);box-shadow:0 20px 50px -20px rgba(0,0,0,.7);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px}
   header.top::before{content:"";position:absolute;left:0;top:0;height:100%;width:3px;background:linear-gradient(180deg,var(--gold2),var(--gold),transparent)}
   .brand{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:500}
-  header.top h1{font-size:23px;font-weight:600;letter-spacing:-.4px;margin-top:5px}
+  header.top h1{font-size:22px;font-weight:600;letter-spacing:-.4px;margin-top:5px}
   header.top h1 b{color:var(--gold2);font-weight:700}
-  .sub{font-size:12.5px;color:var(--sub);margin-top:7px}
+  .flow{font-size:12.5px;color:var(--sub);margin-top:8px}
+  .flow span{color:var(--gold2);font-weight:600}
   .metar{text-align:right;font-size:11.5px;color:var(--sub)}
-  .sec{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);
-    margin:30px 4px 13px;display:flex;align-items:center;gap:10px}
-  .sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+  .act{margin:30px 4px 13px;display:flex;align-items:center;gap:10px}
+  .act .n{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#141C2E;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .act .t{font-size:14px;font-weight:700;letter-spacing:.3px}
+  .act .t small{display:block;font-size:11px;font-weight:500;color:var(--dim);letter-spacing:0;text-transform:none;margin-top:1px}
+  .act::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
   .grid{display:grid;gap:16px}
-  .kpis{grid-template-columns:repeat(6,1fr)}
-  .c2{grid-template-columns:1.5fr 1fr}
-  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);
-    border-radius:16px;padding:18px 20px;box-shadow:0 12px 30px -18px rgba(0,0,0,.65);position:relative}
-  .kpi{overflow:hidden}
-  .kpi::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:2px;border-radius:2px;background:linear-gradient(180deg,var(--gold2),var(--gold))}
+  .k4{grid-template-columns:repeat(4,1fr)} .k3{grid-template-columns:repeat(3,1fr)}
+  .c2{grid-template-columns:1.4fr 1fr} .c2b{grid-template-columns:1fr 1.4fr}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 12px 30px -18px rgba(0,0,0,.65);position:relative}
+  .kpi{overflow:hidden}.kpi::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:2px;border-radius:2px;background:linear-gradient(180deg,var(--gold2),var(--gold))}
   .kpi .lab{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--dim);font-weight:600;padding-left:6px}
-  .kpi .val{font-size:22px;font-weight:700;margin-top:7px;letter-spacing:-.5px;padding-left:6px;
-    background:linear-gradient(120deg,#fff,var(--gold2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .kpi .val{font-size:22px;font-weight:700;margin-top:6px;padding-left:6px;background:linear-gradient(120deg,#fff,var(--gold2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .kpi .val.plain{-webkit-text-fill-color:var(--ink);background:none}
-  .kpi .delta{font-size:11px;font-weight:600;margin-top:3px;padding-left:6px;color:var(--sub)}
-  .kpi .delta.up{color:var(--good)}
-  h3.ct{font-size:14px;font-weight:600}
-  p.cd{font-size:11px;color:var(--dim);margin:3px 0 14px}
-  .chart-box{position:relative;height:320px}
-  .chart-box.sm{height:260px}
+  .kpi .delta{font-size:11px;font-weight:600;margin-top:3px;padding-left:6px;color:var(--sub)}.kpi .delta.up{color:var(--good)}
+  h3.ct{font-size:14px;font-weight:600}p.cd{font-size:11px;color:var(--dim);margin:3px 0 12px}
+  .chart-box{position:relative;height:300px}.chart-box.sm{height:250px}
+  .lead{font-size:13px;color:var(--ink);line-height:1.75}.lead b{color:var(--gold2)}
   table{width:100%;border-collapse:collapse;font-size:12.5px}
   th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
   thead th{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);font-weight:600}
-  td{color:var(--sub)} td b{color:var(--ink)}
-  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  td{color:var(--sub)}td b{color:var(--ink)}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
   tbody tr:hover td{background:rgba(255,255,255,.02)}
   .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600}
   .pill.dep{background:rgba(201,169,106,.14);color:var(--gold2);border:1px solid rgba(201,169,106,.3)}
-  .tiein{background:linear-gradient(120deg,rgba(201,169,106,.10),rgba(111,168,220,.06));border:1px solid rgba(201,169,106,.28)}
-  .tiein .big{font-size:20px;font-weight:700;color:var(--gold2)}
+  .badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:10.5px;border:1px solid rgba(224,177,90,.3);background:rgba(224,177,90,.08);color:#E8CE97}
   footer{margin-top:30px;font-size:11px;color:var(--dim);text-align:center;line-height:1.9;border-top:1px solid var(--line);padding-top:18px}
-  @media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.c2{grid-template-columns:1fr}}
+  @media(max-width:900px){.k4,.k3{grid-template-columns:repeat(2,1fr)}.c2,.c2b{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -68,121 +55,137 @@
   <header class="top">
     <div>
       <div class="brand">SONO · LOCAL LIFT</div>
-      <h1>숙박세일페스타 <b>실적</b> 대시보드</h1>
-      <div class="sub">2026 한국관광 데이터랩 활용 경진대회 · 지역경제 기여 트랙 · <b id="period">—</b></div>
+      <h1>데이터랩 <b>인사이트</b> → 숙세페 연계 → <b>실적</b></h1>
+      <div class="flow">2026 한국관광 데이터랩 활용 경진대회 · 지역경제 기여 트랙 &nbsp;|&nbsp; <span>데이터로 진단</span> → <span>비수기 캠페인 실행</span> → <span>지역 실적 창출</span></div>
     </div>
-    <div class="metar">
-      데이터 출처: 소노 온라인영업팀 예약자료(27+43)<br>
-      회원번호(패키지코드) 매핑 · 취소 제외<br>
-      <span id="updated">—</span>
-    </div>
+    <div class="metar">데이터 출처: 한국관광 데이터랩·ONDA · 행정안전부<br>소노 온라인영업팀 예약자료(실적)<br><span id="updated">—</span></div>
   </header>
 
-  <div class="sec">숙세페 실적 요약 (소노 전사)</div>
-  <div class="grid kpis" id="kpis"></div>
-
-  <div class="card tiein" style="margin-top:16px">
-    <p class="cd" style="margin-bottom:8px">데이터랩·ONDA가 집계한 숙세페 거시효과 ↔ 소노 실제 실적</p>
-    <div id="tiein"></div>
+  <!-- ACT 1 -->
+  <div class="act"><div class="n">1</div><div class="t">인사이트 <small>관광공사 데이터가 가리키는 문제</small></div></div>
+  <div class="grid k4" id="act1kpi"></div>
+  <div class="grid c2" style="margin-top:16px">
+    <div class="card">
+      <h3 class="ct">데이터랩 지역 방문 수요 — 비수기 진단 <span id="visbadge"></span></h3>
+      <p class="cd" id="viscap">이동통신 방문자수(데이터랩) · 앵커 지역</p>
+      <div class="chart-box"><canvas id="visChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h3 class="ct">진단 요약</h3>
+      <p class="cd">데이터가 말하는 것</p>
+      <div class="lead" id="diag"></div>
+    </div>
   </div>
 
-  <div class="sec">사업장별 실적</div>
-  <div class="grid c2">
+  <!-- ACT 2 -->
+  <div class="act"><div class="n">2</div><div class="t">실행 <small>인사이트에 따른 숙세페 연계</small></div></div>
+  <div class="grid c2b">
+    <div class="card">
+      <h3 class="ct">채널별 집행</h3>
+      <p class="cd">숙세페 프로모션 54개 · 채널 구성 (매출 백만원)</p>
+      <div class="chart-box sm"><canvas id="chanChart"></canvas></div>
+    </div>
+    <div class="card">
+      <h3 class="ct">집행 개요</h3>
+      <p class="cd">비수기(6월) 타이밍 · 인구감소지역 집중</p>
+      <div class="lead" id="exec"></div>
+    </div>
+  </div>
+
+  <!-- ACT 3 -->
+  <div class="act"><div class="n">3</div><div class="t">성과 <small>실데이터로 증명한 지역 실적</small></div></div>
+  <div class="grid k4" id="act3kpi"></div>
+  <div class="grid c2" style="margin-top:16px">
     <div class="card">
       <h3 class="ct">사업장별 총매출</h3>
-      <p class="cd">전 사업장 인구감소지역 소재 · 단위 백만원</p>
+      <p class="cd">전 사업장 인구감소지역 소재 · 백만원</p>
       <div class="chart-box"><canvas id="propChart"></canvas></div>
     </div>
     <div class="card">
-      <h3 class="ct">채널별 매출</h3>
-      <p class="cd">OTA·GOTA 채널 구성</p>
-      <div class="chart-box sm"><canvas id="chanChart"></canvas></div>
+      <h3 class="ct">사업장 상세</h3>
+      <div style="max-height:300px;overflow:auto"><table id="propTable"></table></div>
     </div>
   </div>
 
-  <div class="sec">사업장 상세</div>
-  <div class="card">
-    <table id="propTable"></table>
-  </div>
-
   <footer>
-    SONO LOCAL LIFT · 숙세페 실적 = 소노 온라인영업팀 예약자료 기반(트렌드리포트 로직 차용) · 인구감소지역 지정: 행정안전부<br>
-    객실매출 = 1박객실료×객실수/1.1 · 총매출 = PKG총금액/1.1 · 취소자료(28/44) 제외
+    데이터랩 인사이트(비수기·인구감소지역 진단) → 숙세페 연계 실행 → 실적 창출 · 실적=소노 예약자료 기반(트렌드리포트 로직 차용, 취소 제외)<br>
+    객실매출=1박객실료×객실수/1.1 · 총매출=PKG총금액/1.1 · 인구감소지역 지정: 행정안전부
   </footer>
 </div>
 
 <script>
-const FB={"meta":{"updated":"2026-07-06","period":"2026 상반기 (숙세페 6월 캠페인)"},
- "grand":{"rn":1158,"room_rev_m":225.5,"total_rev_m":450.2,"adr_k":195,"props":14,"dep_ratio":100},
+const SUKSE_FB={"meta":{"updated":"2026-07-06","period":"2026 상반기 · 숙세페 6월 캠페인"},
+ "grand":{"rn":1158,"room_rev_m":225.5,"total_rev_m":450.2,"adr_k":195,"props":14,"dep_ratio":100,"pkgs":54},
  "macro":{"spend_eok":862,"visitors_man":48},
- "by_prop":[{"prop":"소노 삼척","loc":"강원 삼척","rn":252,"room_rev_m":46.3,"total_rev_m":92.5,"adr_k":184},
- {"prop":"소노 남해","loc":"경남 남해","rn":130,"room_rev_m":43.3,"total_rev_m":86.6,"adr_k":333},
- {"prop":"소노캄 진도","loc":"전남 진도","rn":122,"room_rev_m":23.9,"total_rev_m":47.9,"adr_k":196},
- {"prop":"소노벨 변산","loc":"전북 부안","rn":146,"room_rev_m":21.1,"total_rev_m":42.2,"adr_k":144},
- {"prop":"소노펠리체","loc":"강원 홍천","rn":76,"room_rev_m":19.2,"total_rev_m":38.4,"adr_k":253},
- {"prop":"소노 단양","loc":"충북 단양","rn":130,"room_rev_m":17.2,"total_rev_m":34.3,"adr_k":132},
- {"prop":"소노벨 비발디","loc":"강원 홍천","rn":96,"room_rev_m":14.9,"total_rev_m":29.7,"adr_k":155},
- {"prop":"소노문 델피노","loc":"강원 고성","rn":70,"room_rev_m":12.2,"total_rev_m":23.6,"adr_k":174},
- {"prop":"쏠비치 양양","loc":"강원 양양","rn":36,"room_rev_m":6.7,"total_rev_m":13.4,"adr_k":186},
- {"prop":"소노벨 청송","loc":"경북 청송","rn":42,"room_rev_m":6.5,"total_rev_m":12.9,"adr_k":154},
- {"prop":"소노문(르네)","loc":"강원 홍천","rn":28,"room_rev_m":5.2,"total_rev_m":10.3,"adr_k":184},
- {"prop":"소노캄 비발디","loc":"강원 홍천","rn":12,"room_rev_m":3.6,"total_rev_m":7.2,"adr_k":301},
- {"prop":"소노펫클럽","loc":"강원 홍천","rn":10,"room_rev_m":3.0,"total_rev_m":6.0,"adr_k":299},
- {"prop":"오션월드 빌리지","loc":"강원 홍천","rn":8,"room_rev_m":2.6,"total_rev_m":5.1,"adr_k":321}],
- "by_chan":[{"chan":"OTA","rn":776,"total_rev_m":292.0},{"chan":"GOTA15%","rn":308,"total_rev_m":131.0},
- {"chan":"GOTA13%","rn":52,"total_rev_m":17.6},{"chan":"GOTA12%","rn":22,"total_rev_m":9.6}]};
+ "by_prop":[{"prop":"소노 삼척","loc":"강원 삼척","rn":252,"room_rev_m":46.3,"total_rev_m":92.5,"adr_k":184},{"prop":"소노 남해","loc":"경남 남해","rn":130,"room_rev_m":43.3,"total_rev_m":86.6,"adr_k":333},{"prop":"소노캄 진도","loc":"전남 진도","rn":122,"room_rev_m":23.9,"total_rev_m":47.9,"adr_k":196},{"prop":"소노벨 변산","loc":"전북 부안","rn":146,"room_rev_m":21.1,"total_rev_m":42.2,"adr_k":144},{"prop":"소노펠리체","loc":"강원 홍천","rn":76,"room_rev_m":19.2,"total_rev_m":38.4,"adr_k":253},{"prop":"소노 단양","loc":"충북 단양","rn":130,"room_rev_m":17.2,"total_rev_m":34.3,"adr_k":132},{"prop":"소노벨 비발디","loc":"강원 홍천","rn":96,"room_rev_m":14.9,"total_rev_m":29.7,"adr_k":155},{"prop":"소노문 델피노","loc":"강원 고성","rn":70,"room_rev_m":12.2,"total_rev_m":23.6,"adr_k":174},{"prop":"쏠비치 양양","loc":"강원 양양","rn":36,"room_rev_m":6.7,"total_rev_m":13.4,"adr_k":186},{"prop":"소노벨 청송","loc":"경북 청송","rn":42,"room_rev_m":6.5,"total_rev_m":12.9,"adr_k":154},{"prop":"소노문(르네)","loc":"강원 홍천","rn":28,"room_rev_m":5.2,"total_rev_m":10.3,"adr_k":184},{"prop":"소노캄 비발디","loc":"강원 홍천","rn":12,"room_rev_m":3.6,"total_rev_m":7.2,"adr_k":301},{"prop":"소노펫클럽","loc":"강원 홍천","rn":10,"room_rev_m":3.0,"total_rev_m":6.0,"adr_k":299},{"prop":"오션월드 빌리지","loc":"강원 홍천","rn":8,"room_rev_m":2.6,"total_rev_m":5.1,"adr_k":321}],
+ "by_chan":[{"chan":"OTA","rn":776,"total_rev_m":292.0},{"chan":"GOTA15%","rn":308,"total_rev_m":131.0},{"chan":"GOTA13%","rn":52,"total_rev_m":17.6},{"chan":"GOTA12%","rn":22,"total_rev_m":9.6}],
+ "by_month":[{"m":"202606","rn":1110,"total_rev_m":432.9},{"m":"202607","rn":48,"total_rev_m":17.4}]};
+const VIS_FB={"meta":{"isSample":true,"anchor":"강원 홍천군(앵커)"},"visitors":{"labels":["2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"],"values":[850000,940000,590000,670000,540000,810000,790000,720000,500000,540000,630000,560000]}};
 
-const GOLD="#C9A96A",GOLD2="#E7CE96",BLUE="#6FA8DC",SLATE="#39445B",SUB="#9AA4B8";
+const GOLD="#C9A96A",GOLD2="#E7CE96",BLUE="#6FA8DC",SLATE="#39445B",SUB="#9AA4B8",GOOD="#5BC98E";
 if(window.Chart){Chart.defaults.color=SUB;Chart.defaults.font.family="Inter,'Malgun Gothic',sans-serif";Chart.defaults.font.size=11;}
-const won=m=>m>=100?(m/100).toFixed(2)+'억':m.toFixed(1)+'백만';
+const eok=m=>(m/100).toFixed(2)+'억';
 
-function render(D){
-  document.getElementById('period').textContent=D.meta.period;
-  document.getElementById('updated').textContent='기준: '+D.meta.updated;
-  const g=D.grand;
-  const otaShare=Math.round(D.by_chan.filter(c=>c.chan.startsWith('OTA')||c.chan.startsWith('GOTA')).reduce((s,c)=>s+c.total_rev_m,0)/g.total_rev_m*100);
-  const cards=[
-    {lab:'참여 사업장',val:g.props+'곳',delta:'전국 리조트',cls:''},
+Promise.all([
+  fetch('data/sukse.json',{cache:'no-store'}).then(r=>r.ok?r.json():SUKSE_FB).catch(()=>SUKSE_FB),
+  fetch('data/dashboard_data.json',{cache:'no-store'}).then(r=>r.ok?r.json():VIS_FB).catch(()=>VIS_FB),
+]).then(([S,V])=>render(S,V));
+
+function render(S,V){
+  document.getElementById('updated').textContent='기준: '+S.meta.updated;
+  const g=S.grand;
+
+  // ACT 1 — 인사이트
+  document.getElementById('act1kpi').innerHTML=[
+    {lab:'소노 숙세페 사업장',val:g.props+'곳',delta:'전국 리조트',plain:true},
     {lab:'인구감소지역 비중',val:g.dep_ratio+'%',delta:'전 사업장 소재',cls:'up'},
-    {lab:'숙세페 총매출',val:(g.total_rev_m/100).toFixed(2)+'억',delta:g.total_rev_m.toFixed(1)+'백만원',cls:''},
-    {lab:'객실 매출',val:g.room_rev_m.toFixed(1)+'백만',delta:'VAT 제외',cls:''},
-    {lab:'객실 판매(RN)',val:g.rn.toLocaleString()+'박',delta:'순객실박수',cls:''},
-    {lab:'평균 ADR',val:g.adr_k+'천원',delta:'객실 단가',cls:''},
-  ];
-  document.getElementById('kpis').innerHTML=cards.map(c=>
-    `<div class="card kpi"><div class="lab">${c.lab}</div><div class="val ${['참여 사업장'].includes(c.lab)?'plain':''}">${c.val}</div><div class="delta ${c.cls}">${c.delta}</div></div>`).join('');
+    {lab:'숙세페 여행지출 유발',val:S.macro.spend_eok+'억',delta:'데이터랩·ONDA 집계'},
+    {lab:'숙세페 지역관광객 유발',val:S.macro.visitors_man+'만명',delta:'비수기 수요 진작'},
+  ].map(c=>`<div class="card kpi"><div class="lab">${c.lab}</div><div class="val ${c.plain?'plain':''}">${c.val}</div><div class="delta ${c.cls||''}">${c.delta}</div></div>`).join('');
 
-  document.getElementById('tiein').innerHTML=
-    `<div style="display:flex;flex-wrap:wrap;gap:26px;align-items:center">
-      <div><div class="big">${D.macro.spend_eok}억원</div><div class="cd" style="margin:2px 0 0">숙세페 여행 지출 유발</div></div>
-      <div><div class="big">${D.macro.visitors_man}만명</div><div class="cd" style="margin:2px 0 0">지역 관광객 유발</div></div>
-      <div style="color:var(--dim);font-size:18px">→</div>
-      <div><div class="big" style="color:#fff">${(g.total_rev_m/100).toFixed(2)}억 · ${g.props}곳</div><div class="cd" style="margin:2px 0 0">소노 실적 · <b style="color:var(--gold2)">100% 인구감소지역</b></div></div>
-    </div>`;
+  const vv=V.visitors?V.visitors.values:VIS_FB.visitors.values, vl=V.visitors?V.visitors.labels:VIS_FB.visitors.labels;
+  const isSample=!V.meta||V.meta.isSample;
+  document.getElementById('visbadge').innerHTML=isSample?'<span class="badge">API 연동 대기 · 데모</span>':'';
+  document.getElementById('viscap').textContent='이동통신 방문자수(데이터랩) · '+((V.meta&&V.meta.anchor)||'홍천 앵커');
+  const avg=vv.reduce((a,b)=>a+b,0)/vv.length;
+  new Chart(document.getElementById('visChart'),{type:'line',
+    data:{labels:vl,datasets:[{label:'월 방문자수',data:vv,borderColor:BLUE,borderWidth:2,tension:.35,pointRadius:2,fill:true,
+      backgroundColor:c=>{const a=c.chart.chartArea;if(!a)return'transparent';const gr=c.chart.ctx.createLinearGradient(0,a.top,0,a.bottom);gr.addColorStop(0,'rgba(111,168,220,.22)');gr.addColorStop(1,'rgba(111,168,220,0)');return gr;}}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{callback:x=>(x/10000)+'만'}},x:{grid:{display:false},ticks:{maxTicksLimit:12,font:{size:10}}}}}});
 
-  const P=D.by_prop;
-  new Chart(document.getElementById('propChart'),{type:'bar',
-    data:{labels:P.map(p=>p.prop),datasets:[{data:P.map(p=>p.total_rev_m),borderRadius:6,
-      backgroundColor:P.map((_,i)=>i===0?GOLD:SLATE),hoverBackgroundColor:P.map((_,i)=>i===0?GOLD2:BLUE)}]},
-    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{x:{grid:{color:'rgba(255,255,255,.05)'},title:{display:true,text:'백만원',color:SUB,font:{size:10}}},y:{grid:{display:false},ticks:{font:{size:10.5}}}}}});
+  document.getElementById('diag').innerHTML=
+    `데이터랩·ONDA는 정부 <b>숙박세일페스타(숙세페)</b>가 비수기에 <b>여행지출 ${S.macro.spend_eok}억·지역관광객 ${S.macro.visitors_man}만명</b>을 유발했다고 집계한다. `+
+    `소노가 참여하는 <b>${g.props}개 사업장은 100%가 인구감소지역</b>(행안부 지정)이며, 이동통신 방문자수는 <b>봄·초여름 평일 저수요</b>를 보인다. `+
+    `→ 데이터의 결론: <b>비수기 · 인구감소지역에 관광수요를 넣어야 한다.</b>`;
 
+  // ACT 2 — 실행
   new Chart(document.getElementById('chanChart'),{type:'doughnut',
-    data:{labels:D.by_chan.map(c=>c.chan),datasets:[{data:D.by_chan.map(c=>c.total_rev_m),
-      backgroundColor:[GOLD,BLUE,'#7C6A45','#4B5A78'],borderColor:'#0E1420',borderWidth:2}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
-      plugins:{legend:{position:'bottom',labels:{boxWidth:11,font:{size:11},padding:12}}}}});
+    data:{labels:S.by_chan.map(c=>c.chan),datasets:[{data:S.by_chan.map(c=>c.total_rev_m),backgroundColor:[GOLD,BLUE,'#7C6A45','#4B5A78'],borderColor:'#0E1420',borderWidth:2}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{position:'bottom',labels:{boxWidth:11,font:{size:11},padding:10}}}}});
+  const juneShare=Math.round((S.by_month.find(x=>x.m==='202606')||{total_rev_m:0}).total_rev_m/g.total_rev_m*100);
+  document.getElementById('exec').innerHTML=
+    `진단에 따라 소노는 <b>인구감소지역 ${g.props}곳</b>에서 숙세페 프로모션 <b>${g.pkgs}개</b>를 <b>비수기 6월</b>에 집중 집행했다(매출의 <b>${juneShare}%</b>가 6월). `+
+    `채널은 OTA·GOTA·네이버로 다변화해 신규·외부 수요를 지역으로 유입시켰다. 데이터랩이 '비수기 지역수요 진작'을 가리켰고, 소노는 그 시점·지역에 실제로 상품을 걸었다.`;
 
-  let t='<thead><tr><th>사업장</th><th>소재지</th><th></th><th class="num">RN(박)</th><th class="num">객실매출</th><th class="num">총매출(백만)</th><th class="num">ADR(천)</th></tr></thead><tbody>';
-  P.forEach(p=>{t+=`<tr><td><b>${p.prop}</b></td><td>${p.loc}</td><td><span class="pill dep">인구감소</span></td>`+
-    `<td class="num">${p.rn.toLocaleString()}</td><td class="num">${p.room_rev_m.toFixed(1)}</td>`+
-    `<td class="num"><b style="color:${GOLD2}">${p.total_rev_m.toFixed(1)}</b></td><td class="num">${p.adr_k}</td></tr>`;});
-  t+=`<tr style="border-top:2px solid var(--line)"><td><b>합계</b></td><td>14곳 · 100% 인구감소</td><td></td>`+
-     `<td class="num"><b>${g.rn.toLocaleString()}</b></td><td class="num"><b>${g.room_rev_m.toFixed(1)}</b></td>`+
-     `<td class="num"><b style="color:${GOLD2}">${g.total_rev_m.toFixed(1)}</b></td><td class="num"><b>${g.adr_k}</b></td></tr>`;
+  // ACT 3 — 성과
+  document.getElementById('act3kpi').innerHTML=[
+    {lab:'숙세페 총매출',val:eok(g.total_rev_m),delta:g.total_rev_m.toFixed(1)+'백만원'},
+    {lab:'객실 판매(RN)',val:g.rn.toLocaleString()+'박',delta:'순객실박수'},
+    {lab:'평균 ADR',val:g.adr_k+'천원',delta:'객실 단가'},
+    {lab:'인구감소지역 기여',val:'100%',delta:eok(g.total_rev_m)+' 전액'},
+  ].map(c=>`<div class="card kpi"><div class="lab">${c.lab}</div><div class="val">${c.val}</div><div class="delta">${c.delta}</div></div>`).join('');
+
+  const P=S.by_prop;
+  new Chart(document.getElementById('propChart'),{type:'bar',
+    data:{labels:P.map(p=>p.prop),datasets:[{data:P.map(p=>p.total_rev_m),borderRadius:6,backgroundColor:P.map((_,i)=>i===0?GOLD:SLATE),hoverBackgroundColor:P.map((_,i)=>i===0?GOLD2:BLUE)}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,.05)'}},y:{grid:{display:false},ticks:{font:{size:10}}}}}});
+
+  let t='<thead><tr><th>사업장</th><th>소재지</th><th class="num">RN</th><th class="num">총매출</th><th class="num">ADR</th></tr></thead><tbody>';
+  P.forEach(p=>{t+=`<tr><td><b>${p.prop}</b> <span class="pill dep">인구감소</span></td><td>${p.loc}</td><td class="num">${p.rn}</td><td class="num"><b style="color:${GOLD2}">${p.total_rev_m.toFixed(1)}</b></td><td class="num">${p.adr_k}</td></tr>`;});
+  t+=`<tr style="border-top:2px solid var(--line)"><td><b>합계 · 100% 인구감소</b></td><td>14곳</td><td class="num"><b>${g.rn.toLocaleString()}</b></td><td class="num"><b style="color:${GOLD2}">${g.total_rev_m.toFixed(1)}</b></td><td class="num"><b>${g.adr_k}</b></td></tr>`;
   document.getElementById('propTable').innerHTML=t+'</tbody>';
 }
-fetch('data/sukse.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(render).catch(()=>render(FB));
 </script>
 </body>
 </html>
