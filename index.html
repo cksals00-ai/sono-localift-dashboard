@@ -3,101 +3,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>소노 로컬리프트 · 데이터랩 대시보드</title>
+<title>소노 숙세페 실적 · 데이터랩 대시보드</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   :root{
-    --bg:#080B12; --bg2:#0B0F1A; --panel:#111725; --panel2:#0E1420;
-    --line:#1E2738; --ink:#EAEEF7; --sub:#9AA4B8; --dim:#697086;
-    --gold:#C9A96A; --gold2:#E7CE96; --goldsoft:#3A331F;
-    --blue:#6FA8DC; --teal:#57C4B4; --good:#5BC98E; --warn:#E0B15A;
-    --grid:rgba(255,255,255,.06);
+    --bg:#080B12; --panel:#111725; --panel2:#0E1420; --line:#1E2738;
+    --ink:#EAEEF7; --sub:#9AA4B8; --dim:#697086;
+    --gold:#C9A96A; --gold2:#E7CE96; --blue:#6FA8DC; --teal:#57C4B4; --good:#5BC98E; --warn:#E0B15A;
+    --slate:#39445B;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{
-    font-family:'Inter','Malgun Gothic','맑은 고딕',-apple-system,'Apple SD Gothic Neo',sans-serif;
-    color:var(--ink); line-height:1.5;
-    background:
-      radial-gradient(1100px 500px at 80% -10%, rgba(201,169,106,.10), transparent 60%),
-      radial-gradient(900px 500px at 0% 0%, rgba(111,168,220,.07), transparent 55%),
-      var(--bg);
-    min-height:100vh;
-  }
+  body{font-family:'Inter','Malgun Gothic','맑은 고딕',-apple-system,'Apple SD Gothic Neo',sans-serif;
+    color:var(--ink);line-height:1.5;min-height:100vh;
+    background:radial-gradient(1100px 500px at 80% -10%,rgba(201,169,106,.10),transparent 60%),
+      radial-gradient(900px 500px at 0% 0%,rgba(111,168,220,.07),transparent 55%),var(--bg);}
   .wrap{max-width:1260px;margin:0 auto;padding:24px 22px 70px}
-
-  /* header */
-  header.top{
-    position:relative;overflow:hidden;border-radius:20px;padding:26px 30px;
-    background:linear-gradient(135deg,#0E1422 0%,#141C2E 55%,#0F1626 100%);
-    border:1px solid var(--line);
-    box-shadow:0 20px 50px -20px rgba(0,0,0,.7);
-    display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px;
-  }
-  header.top::before{content:"";position:absolute;left:0;top:0;height:100%;width:3px;
-    background:linear-gradient(180deg,var(--gold2),var(--gold),transparent)}
-  header.top::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;
-    background:radial-gradient(circle,rgba(201,169,106,.16),transparent 65%)}
-  .brand{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600}
-  header.top h1{font-size:23px;font-weight:800;letter-spacing:-.4px;margin-top:5px}
-  header.top h1 b{color:var(--gold2);font-weight:800}
+  header.top{position:relative;overflow:hidden;border-radius:20px;padding:26px 30px;
+    background:linear-gradient(135deg,#0E1422 0%,#141C2E 55%,#0F1626 100%);border:1px solid var(--line);
+    box-shadow:0 20px 50px -20px rgba(0,0,0,.7);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:14px}
+  header.top::before{content:"";position:absolute;left:0;top:0;height:100%;width:3px;background:linear-gradient(180deg,var(--gold2),var(--gold),transparent)}
+  .brand{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:500}
+  header.top h1{font-size:23px;font-weight:600;letter-spacing:-.4px;margin-top:5px}
+  header.top h1 b{color:var(--gold2);font-weight:700}
   .sub{font-size:12.5px;color:var(--sub);margin-top:7px}
-  .sub b{color:var(--ink);font-weight:600}
-  .metar{text-align:right;font-size:11.5px;color:var(--sub);position:relative;z-index:1}
-  .badge{display:inline-block;margin-top:8px;padding:4px 11px;border-radius:999px;font-size:10.5px;
-    border:1px solid rgba(201,169,106,.35);background:rgba(201,169,106,.08);color:var(--gold2);letter-spacing:.3px}
-  .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--good);
-    box-shadow:0 0 8px var(--good);margin-right:5px;vertical-align:middle}
-
-  .sec{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
-    color:var(--gold);margin:30px 4px 13px;display:flex;align-items:center;gap:10px}
+  .metar{text-align:right;font-size:11.5px;color:var(--sub)}
+  .sec{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);
+    margin:30px 4px 13px;display:flex;align-items:center;gap:10px}
   .sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
-
   .grid{display:grid;gap:16px}
-  .kpis{grid-template-columns:repeat(5,1fr)}
-  .c2{grid-template-columns:1.45fr 1fr}
-  .c2b{grid-template-columns:1fr 1fr}
-
-  .card{
-    background:linear-gradient(180deg,var(--panel) 0%,var(--panel2) 100%);
-    border:1px solid var(--line);border-radius:16px;padding:18px 20px;
-    box-shadow:0 12px 30px -18px rgba(0,0,0,.65);position:relative;
-  }
+  .kpis{grid-template-columns:repeat(6,1fr)}
+  .c2{grid-template-columns:1.5fr 1fr}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);
+    border-radius:16px;padding:18px 20px;box-shadow:0 12px 30px -18px rgba(0,0,0,.65);position:relative}
   .kpi{overflow:hidden}
-  .kpi::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:2px;border-radius:2px;
-    background:linear-gradient(180deg,var(--gold2),var(--gold))}
-  .kpi .lab{font-size:10.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--dim);font-weight:600;padding-left:6px}
-  .kpi .val{font-size:25px;font-weight:800;margin-top:8px;letter-spacing:-.6px;padding-left:6px;
+  .kpi::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:2px;border-radius:2px;background:linear-gradient(180deg,var(--gold2),var(--gold))}
+  .kpi .lab{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--dim);font-weight:600;padding-left:6px}
+  .kpi .val{font-size:22px;font-weight:700;margin-top:7px;letter-spacing:-.5px;padding-left:6px;
     background:linear-gradient(120deg,#fff,var(--gold2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .kpi .val.plain{-webkit-text-fill-color:var(--ink);background:none}
-  .kpi .delta{font-size:11.5px;font-weight:600;margin-top:4px;padding-left:6px;color:var(--sub)}
+  .kpi .delta{font-size:11px;font-weight:600;margin-top:3px;padding-left:6px;color:var(--sub)}
   .kpi .delta.up{color:var(--good)}
-
-  h3.ct{font-size:14px;font-weight:700;letter-spacing:-.2px}
+  h3.ct{font-size:14px;font-weight:600}
   p.cd{font-size:11px;color:var(--dim);margin:3px 0 14px}
-  .chart-box{position:relative;height:300px}
-  .chart-box.sm{height:272px}
-
+  .chart-box{position:relative;height:320px}
+  .chart-box.sm{height:260px}
   table{width:100%;border-collapse:collapse;font-size:12.5px}
-  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line)}
-  thead th{font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);
-    font-weight:600;border-bottom:1px solid var(--line)}
+  th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  thead th{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);font-weight:600}
+  td{color:var(--sub)} td b{color:var(--ink)}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
   tbody tr:hover td{background:rgba(255,255,255,.02)}
-  td{color:var(--sub)} td b,td strong{color:var(--ink)}
-  .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:10.5px;font-weight:600;letter-spacing:.2px}
-  .pill.opt{background:rgba(201,169,106,.14);color:var(--gold2);border:1px solid rgba(201,169,106,.3)}
-  .pill.cand{background:rgba(111,168,220,.12);color:var(--blue);border:1px solid rgba(111,168,220,.28)}
-  .pill.y{background:rgba(91,201,142,.12);color:var(--good);border:1px solid rgba(91,201,142,.28)}
-  .pill.wait{background:rgba(224,177,90,.10);color:var(--warn);border:1px solid rgba(224,177,90,.28)}
-  a{color:var(--blue);text-decoration:none}a:hover{color:var(--gold2)}
-
-  .note{background:rgba(224,177,90,.06);border:1px solid rgba(224,177,90,.22);border-radius:12px;
-    padding:11px 15px;font-size:12px;color:#E8CE97;margin-top:16px}
-  footer{margin-top:30px;font-size:11px;color:var(--dim);text-align:center;line-height:1.9;
-    border-top:1px solid var(--line);padding-top:18px}
-  footer code{color:var(--sub)}
-  @media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.c2,.c2b{grid-template-columns:1fr}}
+  .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600}
+  .pill.dep{background:rgba(201,169,106,.14);color:var(--gold2);border:1px solid rgba(201,169,106,.3)}
+  .tiein{background:linear-gradient(120deg,rgba(201,169,106,.10),rgba(111,168,220,.06));border:1px solid rgba(201,169,106,.28)}
+  .tiein .big{font-size:20px;font-weight:700;color:var(--gold2)}
+  footer{margin-top:30px;font-size:11px;color:var(--dim);text-align:center;line-height:1.9;border-top:1px solid var(--line);padding-top:18px}
+  @media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.c2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -105,161 +68,121 @@
   <header class="top">
     <div>
       <div class="brand">SONO · LOCAL LIFT</div>
-      <h1>데이터랩 <b>지역경제 기여</b> 대시보드</h1>
-      <div class="sub">2026 한국관광 데이터랩 활용 경진대회 · 앵커 지역: <b id="anchor">—</b></div>
-      <span class="badge" id="srcbadge">데이터 로딩 중…</span>
+      <h1>숙박세일페스타 <b>실적</b> 대시보드</h1>
+      <div class="sub">2026 한국관광 데이터랩 활용 경진대회 · 지역경제 기여 트랙 · <b id="period">—</b></div>
     </div>
     <div class="metar">
-      <span class="dot"></span>자동 갱신 · 매일 06:00 (KST)<br>
-      GitHub Actions → 공공데이터포털 API<br>
-      <span id="updated">최종 갱신: —</span>
+      데이터 출처: 소노 온라인영업팀 예약자료(27+43)<br>
+      회원번호(패키지코드) 매핑 · 취소 제외<br>
+      <span id="updated">—</span>
     </div>
   </header>
 
-  <div id="samplebar"></div>
+  <div class="sec">숙세페 실적 요약 (소노 전사)</div>
+  <div class="grid kpis" id="kpis"></div>
 
-  <div class="sec">핵심 지표</div>
-  <div class="grid kpis" id="kpicards"></div>
+  <div class="card tiein" style="margin-top:16px">
+    <p class="cd" style="margin-bottom:8px">데이터랩·ONDA가 집계한 숙세페 거시효과 ↔ 소노 실제 실적</p>
+    <div id="tiein"></div>
+  </div>
 
-  <div class="sec">지역 방문 수요</div>
+  <div class="sec">사업장별 실적</div>
   <div class="grid c2">
     <div class="card">
-      <h3 class="ct">월별 지역 방문자수 추이</h3>
-      <p class="cd">공공데이터포털 이동통신 방문자수(KT 내국인·SKT 외국인) · 최근 24개월</p>
-      <div class="chart-box"><canvas id="visChart"></canvas></div>
+      <h3 class="ct">사업장별 총매출</h3>
+      <p class="cd">전 사업장 인구감소지역 소재 · 단위 백만원</p>
+      <div class="chart-box"><canvas id="propChart"></canvas></div>
     </div>
     <div class="card">
-      <h3 class="ct">타깃 지역 스코어링</h3>
-      <p class="cd">소노 소재 인구감소지역 · 5개 기준 가중점수(5점)</p>
-      <div class="chart-box"><canvas id="scoreChart"></canvas></div>
+      <h3 class="ct">채널별 매출</h3>
+      <p class="cd">OTA·GOTA 채널 구성</p>
+      <div class="chart-box sm"><canvas id="chanChart"></canvas></div>
     </div>
   </div>
 
-  <div class="sec">타깃 · 시기 최적화</div>
-  <div class="grid c2b">
-    <div class="card">
-      <h3 class="ct">지역 저수요 × 소노 여유 (월별)</h3>
-      <p class="cd">관광수요지수와 소노 점유율이 동시에 낮은 달 = 반값 프로모션 최적기</p>
-      <div class="chart-box sm"><canvas id="timeChart"></canvas></div>
-    </div>
-    <div class="card">
-      <h3 class="ct">캠페인 적합도 판정</h3>
-      <p class="cd">◎ 최적 = 지역·소노 동시 비수기 / ○ 후보 = 한쪽만</p>
-      <div style="max-height:272px;overflow:auto"><table id="timeTable"></table></div>
-    </div>
-  </div>
-
-  <div class="sec">성과 측정 프레임</div>
+  <div class="sec">사업장 상세</div>
   <div class="card">
-    <p class="cd">강진군(2025 대상) 벤치마크 대비 목표 · 전후 + 대조지역 비교로 효과만 분리</p>
-    <table id="kpiTable"></table>
+    <table id="propTable"></table>
   </div>
-
-  <div class="sec">데이터 소스 · API 연동</div>
-  <div class="card">
-    <table id="srcTable">
-      <thead><tr><th>데이터</th><th>공공데이터포털 API</th><th>용도</th><th>연동</th></tr></thead>
-      <tbody>
-        <tr><td><b>지역별 방문자수</b></td><td>한국관광공사_빅데이터_지역별 방문자수 (15101972)</td><td>월별 방문·계절성</td><td><span class="pill wait">키 대기</span></td></tr>
-        <tr><td><b>관광수요 강도</b></td><td>한국관광공사_지역별 관광 수요 강도 (15151868)</td><td>비수기 판별</td><td><span class="pill wait">키 대기</span></td></tr>
-        <tr><td><b>방문자 추이 예측</b></td><td>한국관광공사_관광지 집중률 방문자 추이 예측 (15128555)</td><td>5주 예측</td><td><span class="pill wait">키 대기</span></td></tr>
-        <tr><td><b>신용카드 지출액</b></td><td>데이터랩 화면/다운로드 (API 확인 필요)</td><td>지역 소비 유도액</td><td><span class="pill wait">확인중</span></td></tr>
-        <tr><td><b>소노 점유율·ADR</b></td><td>소노 GS팀 대시보드 (내부)</td><td>공급측 실적</td><td><span class="pill y">내부연동</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="note" id="samplenote"></div>
 
   <footer>
-    SONO LOCAL LIFT · 데이터 출처: 공공데이터포털(한국관광공사 빅데이터) · 인구감소지역 지정: 행정안전부<br>
-    자동 갱신: GitHub Actions cron(매일 06:00 KST) → <code>data/dashboard_data.json</code> → GitHub Pages
+    SONO LOCAL LIFT · 숙세페 실적 = 소노 온라인영업팀 예약자료 기반(트렌드리포트 로직 차용) · 인구감소지역 지정: 행정안전부<br>
+    객실매출 = 1박객실료×객실수/1.1 · 총매출 = PKG총금액/1.1 · 취소자료(28/44) 제외
   </footer>
 </div>
 
 <script>
-const FALLBACK = {"meta":{"updated":"2026-07-06T06:00:00+09:00","anchor":"강원 홍천군 (소노벨·소노문 비발디파크 / 오션월드)","anchorType":"인구감소지역 · 우대지원","source":"공공데이터포털 · 한국관광공사 빅데이터 (샘플)","isSample":true,"note":"현재 값은 데모용 샘플입니다. 서비스키 등록 후 매일 06:00(KST) 실데이터로 갱신됩니다."},"visitors":{"labels":["2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"],"values":[820000,910000,560000,640000,520000,780000,760000,690000,480000,520000,610000,540000,850000,940000,590000,670000,540000,810000,790000,720000,500000,540000,630000,560000]},"timing":{"months":["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],"demandIndex":[88,80,58,62,72,66,95,100,70,78,64,90],"sonoOccupancy":[72,68,55,58,63,60,85,90,64,70,58,80]},"scoring":{"labels":["홍천(비발디)","고성(델피노)","청송","영덕","단양","부안(변산)"],"values":[4.45,4.35,4.30,4.30,4.00,3.95]},"kpi":[{"name":"지역 방문자 증가","unit":"%","bench":"+18%","target":"+15%","source":"이동통신 방문자수"},{"name":"지역 관광 소비 유도액","unit":"억원","bench":"69억","target":"30억","source":"신용카드 지출액"},{"name":"지역화폐/쿠폰 사용률","unit":"%","bench":"+71%","target":"+50%","source":"지자체+소노 발권"},{"name":"비수기 가동률 개선","unit":"%p","bench":"-","target":"+8%p","source":"소노 대시보드"},{"name":"생산유발효과","unit":"억원","bench":"240억","target":"100억","source":"산업연관표 추정"}]};
+const FB={"meta":{"updated":"2026-07-06","period":"2026 상반기 (숙세페 6월 캠페인)"},
+ "grand":{"rn":1158,"room_rev_m":225.5,"total_rev_m":450.2,"adr_k":195,"props":14,"dep_ratio":100},
+ "macro":{"spend_eok":862,"visitors_man":48},
+ "by_prop":[{"prop":"소노 삼척","loc":"강원 삼척","rn":252,"room_rev_m":46.3,"total_rev_m":92.5,"adr_k":184},
+ {"prop":"소노 남해","loc":"경남 남해","rn":130,"room_rev_m":43.3,"total_rev_m":86.6,"adr_k":333},
+ {"prop":"소노캄 진도","loc":"전남 진도","rn":122,"room_rev_m":23.9,"total_rev_m":47.9,"adr_k":196},
+ {"prop":"소노벨 변산","loc":"전북 부안","rn":146,"room_rev_m":21.1,"total_rev_m":42.2,"adr_k":144},
+ {"prop":"소노펠리체","loc":"강원 홍천","rn":76,"room_rev_m":19.2,"total_rev_m":38.4,"adr_k":253},
+ {"prop":"소노 단양","loc":"충북 단양","rn":130,"room_rev_m":17.2,"total_rev_m":34.3,"adr_k":132},
+ {"prop":"소노벨 비발디","loc":"강원 홍천","rn":96,"room_rev_m":14.9,"total_rev_m":29.7,"adr_k":155},
+ {"prop":"소노문 델피노","loc":"강원 고성","rn":70,"room_rev_m":12.2,"total_rev_m":23.6,"adr_k":174},
+ {"prop":"쏠비치 양양","loc":"강원 양양","rn":36,"room_rev_m":6.7,"total_rev_m":13.4,"adr_k":186},
+ {"prop":"소노벨 청송","loc":"경북 청송","rn":42,"room_rev_m":6.5,"total_rev_m":12.9,"adr_k":154},
+ {"prop":"소노문(르네)","loc":"강원 홍천","rn":28,"room_rev_m":5.2,"total_rev_m":10.3,"adr_k":184},
+ {"prop":"소노캄 비발디","loc":"강원 홍천","rn":12,"room_rev_m":3.6,"total_rev_m":7.2,"adr_k":301},
+ {"prop":"소노펫클럽","loc":"강원 홍천","rn":10,"room_rev_m":3.0,"total_rev_m":6.0,"adr_k":299},
+ {"prop":"오션월드 빌리지","loc":"강원 홍천","rn":8,"room_rev_m":2.6,"total_rev_m":5.1,"adr_k":321}],
+ "by_chan":[{"chan":"OTA","rn":776,"total_rev_m":292.0},{"chan":"GOTA15%","rn":308,"total_rev_m":131.0},
+ {"chan":"GOTA13%","rn":52,"total_rev_m":17.6},{"chan":"GOTA12%","rn":22,"total_rev_m":9.6}]};
 
-const GOLD="#C9A96A",GOLD2="#E7CE96",BLUE="#6FA8DC",TEAL="#57C4B4",INK="#EAEEF7",SUB="#9AA4B8";
-const SLATE2="#39445B";
-const fmt=n=>Number(n).toLocaleString('ko-KR');
-const avg=a=>a.reduce((x,y)=>x+y,0)/a.length;
-
-if(window.Chart){
-  Chart.defaults.color=SUB;
-  Chart.defaults.font.family="Inter, 'Malgun Gothic', sans-serif";
-  Chart.defaults.font.size=11;
-}
-function goldGrad(ctx,area){
-  const g=ctx.createLinearGradient(0,area.top,0,area.bottom);
-  g.addColorStop(0,'rgba(201,169,106,.32)');g.addColorStop(1,'rgba(201,169,106,0)');return g;
-}
+const GOLD="#C9A96A",GOLD2="#E7CE96",BLUE="#6FA8DC",SLATE="#39445B",SUB="#9AA4B8";
+if(window.Chart){Chart.defaults.color=SUB;Chart.defaults.font.family="Inter,'Malgun Gothic',sans-serif";Chart.defaults.font.size=11;}
+const won=m=>m>=100?(m/100).toFixed(2)+'억':m.toFixed(1)+'백만';
 
 function render(D){
-  document.getElementById('anchor').textContent=D.meta.anchor;
-  document.getElementById('updated').textContent="최종 갱신: "+new Date(D.meta.updated).toLocaleString('ko-KR');
-  document.getElementById('srcbadge').textContent=D.meta.source;
-
-  if(D.meta.isSample){
-    document.getElementById('samplebar').innerHTML=
-      '<div class="note" style="margin:16px 0 0">⚠ 현재 <b>데모 샘플 데이터</b>로 표시 중입니다. 공공데이터포털 서비스키를 GitHub 시크릿(<code>DATA_GO_KR_KEY</code>)에 등록하면 매일 06:00(KST) 실데이터로 자동 갱신됩니다.</div>';
-    document.getElementById('samplenote').textContent=D.meta.note||'';
-  }
-
-  const v=D.visitors.values,L=D.visitors.labels;
-  const last=v[v.length-1],lastLabel=L[L.length-1];
-  const yi=v.length-13,yoy=yi>=0?((last-v[yi])/v[yi]*100):null;
-  const dI=D.timing.demandIndex,occ=D.timing.sonoOccupancy,dA=avg(dI),oA=avg(occ);
-  let opt=[];D.timing.months.forEach((m,i)=>{if(dI[i]<dA&&occ[i]<oA)opt.push(m)});
-  const topR=D.scoring.labels[0],topS=D.scoring.values[0];
-
+  document.getElementById('period').textContent=D.meta.period;
+  document.getElementById('updated').textContent='기준: '+D.meta.updated;
+  const g=D.grand;
+  const otaShare=Math.round(D.by_chan.filter(c=>c.chan.startsWith('OTA')||c.chan.startsWith('GOTA')).reduce((s,c)=>s+c.total_rev_m,0)/g.total_rev_m*100);
   const cards=[
-    {lab:`방문자수 · ${lastLabel}`,val:fmt(last),delta:yoy==null?'':`전년동월 ${yoy>=0?'▲':'▼'} ${Math.abs(yoy).toFixed(1)}%`,cls:yoy>=0?'up':''},
-    {lab:'1순위 앵커',val:topR,plain:true,delta:`가중점수 ${topS.toFixed(2)} / 5`},
-    {lab:'평균 관광수요지수',val:dA.toFixed(0),delta:'12개월 평균'},
-    {lab:'평균 소노 점유율',val:oA.toFixed(0)+'%',delta:'12개월 평균'},
-    {lab:'최적 캠페인 시기',val:(opt.slice(0,3).join(' · ')||'—'),plain:true,delta:'지역·소노 동시 비수기',cls:'up'},
+    {lab:'참여 사업장',val:g.props+'곳',delta:'전국 리조트',cls:''},
+    {lab:'인구감소지역 비중',val:g.dep_ratio+'%',delta:'전 사업장 소재',cls:'up'},
+    {lab:'숙세페 총매출',val:(g.total_rev_m/100).toFixed(2)+'억',delta:g.total_rev_m.toFixed(1)+'백만원',cls:''},
+    {lab:'객실 매출',val:g.room_rev_m.toFixed(1)+'백만',delta:'VAT 제외',cls:''},
+    {lab:'객실 판매(RN)',val:g.rn.toLocaleString()+'박',delta:'순객실박수',cls:''},
+    {lab:'평균 ADR',val:g.adr_k+'천원',delta:'객실 단가',cls:''},
   ];
-  document.getElementById('kpicards').innerHTML=cards.map(c=>
-    `<div class="card kpi"><div class="lab">${c.lab}</div><div class="val ${c.plain?'plain':''}">${c.val}</div><div class="delta ${c.cls||''}">${c.delta}</div></div>`).join('');
+  document.getElementById('kpis').innerHTML=cards.map(c=>
+    `<div class="card kpi"><div class="lab">${c.lab}</div><div class="val ${['참여 사업장'].includes(c.lab)?'plain':''}">${c.val}</div><div class="delta ${c.cls}">${c.delta}</div></div>`).join('');
 
-  new Chart(document.getElementById('visChart'),{type:'line',
-    data:{labels:L,datasets:[{label:'월 방문자수',data:v,borderColor:GOLD,borderWidth:2,tension:.38,
-      pointRadius:0,pointHoverRadius:4,pointHoverBackgroundColor:GOLD2,fill:true,
-      backgroundColor:(c)=>{const{ctx,chartArea}=c.chart;return chartArea?goldGrad(ctx,chartArea):'transparent'}}]},
-    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{callback:x=>(x/10000)+'만'}},
-              x:{grid:{display:false},ticks:{maxTicksLimit:12,font:{size:10}}}}}});
+  document.getElementById('tiein').innerHTML=
+    `<div style="display:flex;flex-wrap:wrap;gap:26px;align-items:center">
+      <div><div class="big">${D.macro.spend_eok}억원</div><div class="cd" style="margin:2px 0 0">숙세페 여행 지출 유발</div></div>
+      <div><div class="big">${D.macro.visitors_man}만명</div><div class="cd" style="margin:2px 0 0">지역 관광객 유발</div></div>
+      <div style="color:var(--dim);font-size:18px">→</div>
+      <div><div class="big" style="color:#fff">${(g.total_rev_m/100).toFixed(2)}억 · ${g.props}곳</div><div class="cd" style="margin:2px 0 0">소노 실적 · <b style="color:var(--gold2)">100% 인구감소지역</b></div></div>
+    </div>`;
 
-  new Chart(document.getElementById('scoreChart'),{type:'bar',
-    data:{labels:D.scoring.labels,datasets:[{data:D.scoring.values,borderRadius:7,
-      backgroundColor:D.scoring.values.map((_,i)=>i===0?GOLD:SLATE2),
-      hoverBackgroundColor:D.scoring.values.map((_,i)=>i===0?GOLD2:BLUE)}]},
+  const P=D.by_prop;
+  new Chart(document.getElementById('propChart'),{type:'bar',
+    data:{labels:P.map(p=>p.prop),datasets:[{data:P.map(p=>p.total_rev_m),borderRadius:6,
+      backgroundColor:P.map((_,i)=>i===0?GOLD:SLATE),hoverBackgroundColor:P.map((_,i)=>i===0?GOLD2:BLUE)}]},
     options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
-      scales:{x:{min:3.5,max:4.6,grid:{color:'rgba(255,255,255,.05)'}},y:{grid:{display:false}}}}});
+      scales:{x:{grid:{color:'rgba(255,255,255,.05)'},title:{display:true,text:'백만원',color:SUB,font:{size:10}}},y:{grid:{display:false},ticks:{font:{size:10.5}}}}}});
 
-  new Chart(document.getElementById('timeChart'),{type:'line',
-    data:{labels:D.timing.months,datasets:[
-      {label:'지역 관광수요지수',data:dI,borderColor:GOLD,borderWidth:2,tension:.35,pointRadius:0,pointHoverRadius:4},
-      {label:'소노 점유율(%)',data:occ,borderColor:BLUE,borderWidth:2,tension:.35,pointRadius:0,pointHoverRadius:4,borderDash:[4,3]}]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'bottom',labels:{boxWidth:12,boxHeight:2,font:{size:11},padding:14}}},
-      scales:{y:{grid:{color:'rgba(255,255,255,.05)'}},x:{grid:{display:false}}}}});
+  new Chart(document.getElementById('chanChart'),{type:'doughnut',
+    data:{labels:D.by_chan.map(c=>c.chan),datasets:[{data:D.by_chan.map(c=>c.total_rev_m),
+      backgroundColor:[GOLD,BLUE,'#7C6A45','#4B5A78'],borderColor:'#0E1420',borderWidth:2}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
+      plugins:{legend:{position:'bottom',labels:{boxWidth:11,font:{size:11},padding:12}}}}});
 
-  let rows='<thead><tr><th>월</th><th>수요지수</th><th>소노 점유율</th><th>판정</th></tr></thead><tbody>';
-  D.timing.months.forEach((m,i)=>{
-    const lowD=dI[i]<dA,lowO=occ[i]<oA;
-    const vd=(lowD&&lowO)?'<span class="pill opt">◎ 최적</span>':((lowD||lowO)?'<span class="pill cand">○ 후보</span>':'—');
-    rows+=`<tr><td><b>${m}</b></td><td>${dI[i]}</td><td>${occ[i]}%</td><td>${vd}</td></tr>`;
-  });
-  document.getElementById('timeTable').innerHTML=rows+'</tbody>';
-
-  let k='<thead><tr><th>KPI</th><th>강진 벤치</th><th>목표</th><th>데이터 출처</th></tr></thead><tbody>';
-  D.kpi.forEach(r=>{k+=`<tr><td><b>${r.name}</b></td><td>${r.bench}</td><td><b style="color:${GOLD2}">${r.target}</b></td><td>${r.source}</td></tr>`});
-  document.getElementById('kpiTable').innerHTML=k+'</tbody>';
+  let t='<thead><tr><th>사업장</th><th>소재지</th><th></th><th class="num">RN(박)</th><th class="num">객실매출</th><th class="num">총매출(백만)</th><th class="num">ADR(천)</th></tr></thead><tbody>';
+  P.forEach(p=>{t+=`<tr><td><b>${p.prop}</b></td><td>${p.loc}</td><td><span class="pill dep">인구감소</span></td>`+
+    `<td class="num">${p.rn.toLocaleString()}</td><td class="num">${p.room_rev_m.toFixed(1)}</td>`+
+    `<td class="num"><b style="color:${GOLD2}">${p.total_rev_m.toFixed(1)}</b></td><td class="num">${p.adr_k}</td></tr>`;});
+  t+=`<tr style="border-top:2px solid var(--line)"><td><b>합계</b></td><td>14곳 · 100% 인구감소</td><td></td>`+
+     `<td class="num"><b>${g.rn.toLocaleString()}</b></td><td class="num"><b>${g.room_rev_m.toFixed(1)}</b></td>`+
+     `<td class="num"><b style="color:${GOLD2}">${g.total_rev_m.toFixed(1)}</b></td><td class="num"><b>${g.adr_k}</b></td></tr>`;
+  document.getElementById('propTable').innerHTML=t+'</tbody>';
 }
-
-fetch('data/dashboard_data.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(render).catch(()=>render(FALLBACK));
+fetch('data/sukse.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(render).catch(()=>render(FB));
 </script>
 </body>
 </html>
