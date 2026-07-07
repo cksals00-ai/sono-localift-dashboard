@@ -102,16 +102,12 @@
     <div class="scrollhint">↓ SCROLL</div>
   </section>
 
-  <!-- CLOSED LOOP FLOW -->
-  <section class="reveal">
-    <div class="flowline">
-      <div class="step"><div class="sn">01 · DATA</div><div class="st">데이터랩 진단</div><div class="sd">이동통신 방문자수(공공)</div><div class="arw">→</div></div>
-      <div class="step"><div class="sn">02 · INSIGHT</div><div class="st">6월 최저 수요</div><div class="sd">9개 지역 공통 저수요</div><div class="arw">→</div></div>
-      <div class="step"><div class="sn">03 · ACTION</div><div class="st">숙세페 연계</div><div class="sd">국가 캠페인 6–7월 집중</div><div class="arw">→</div></div>
-      <div class="step"><div class="sn">04 · IMPACT</div><div class="st">지역 소비 확산</div><div class="sd">풍선효과 · 부대시설 매출</div><div class="arw">→</div></div>
-      <div class="step"><div class="sn">05 · VALIDATE</div><div class="st">데이터랩 재검증</div><div class="sd">방문·소비 추세 모니터링</div></div>
-    </div>
-    <div class="src" style="text-align:center">데이터랩은 <b style="color:var(--sub)">진단</b>과 <b style="color:var(--sub)">검증</b>, 양 끝단에 놓인다. 그 사이의 실행과 성과가 소노의 몫이다.</div>
+  <!-- DATA-DRIVEN CAUSAL PROCESS -->
+  <section class="sec reveal" style="margin-top:44px">
+    <div class="actno" style="text-align:center">DATA-DRIVEN PROCESS · 관광 데이터 활용의 인과 구조</div>
+    <div class="big" style="text-align:center;margin-top:8px">관광 데이터로 <b>진단</b>하고, 관광 데이터로 <b>검증</b>한다.</div>
+    <div id="causalChain" style="margin-top:26px"></div>
+    <div id="causalNote" style="text-align:center;font-size:12px;color:var(--sub);margin-top:16px"></div>
   </section>
 
   <!-- ACT 1 -->
@@ -488,6 +484,24 @@ function render(S,V,C){
     document.getElementById('consumeTable').innerHTML='<tbody><tr><td>데이터랩 소비지수 로딩 대기 — scripts/fetch_consume.py 실행 후 표시됩니다.</td></tr></tbody>';
     document.getElementById('consumeSrc').innerHTML='데이터랩 지역별 관광 자원 수요 API(15152138) 연동 · 활용신청(무료) 승인 완료.';
   }
+
+  // ── 데이터 기반 인과 체인 ──
+  const DL='<span style="display:inline-block;margin-top:7px;padding:2px 8px;border-radius:999px;font-size:9px;font-weight:800;letter-spacing:.4px;border:1px solid rgba(91,201,142,.4);background:rgba(91,201,142,.1);color:#8ee0b1">KTO DataLab</span>';
+  const CC=[
+    {tag:'원인 · CAUSE',c:'#E0896A',dl:true,lab:'데이터랩 진단',big:'▼'+dropPeak+'%',desc:'9개 지역 전부 6월 최저<br>이동통신 방문자수'},
+    {tag:'행동 · ACTION',c:'#6FA8DC',dl:false,lab:'숙세페 집중 실행',big:g.pkgs+'개',desc:'데이터가 지목한 시점·지역<br>국가 숙세페 6–7월 패키지'},
+    {tag:'결과 · RESULT',c:'#E7CE96',dl:false,lab:'지역경제 기여',big:eok(g.total_rev_m),desc:'100% 인구감소지역<br>'+g.rn.toLocaleString()+'박 창출'},
+    {tag:'검증 · FEEDBACK',c:'#8ee0b1',dl:true,lab:'데이터랩 지속 검증',big:(yoy!=null?(yoy>=0?'+':'')+yoy+'%':'추적中'),desc:'캠페인 지역 방문 추세(YoY)<br>소비 효과는 데이터랩 발표 후'},
+  ];
+  const ARW=['그래서','그 결과','데이터로 재검증'];
+  let cc='<div style="display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;gap:6px">';
+  CC.forEach((s,i)=>{
+    cc+=`<div style="flex:1;min-width:150px;max-width:245px;text-align:center;padding:18px 14px;border-radius:16px;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid ${s.dl?'rgba(91,201,142,.3)':'var(--line)'}"><div style="font-size:10px;letter-spacing:1.2px;color:${s.c};font-weight:800">${s.tag}</div>${s.dl?DL:''}<div style="font-size:12px;color:var(--ink);margin-top:7px;font-weight:700">${s.lab}</div><div style="font-size:30px;font-weight:900;letter-spacing:-1px;margin-top:6px;color:${s.c}">${s.big}</div><div style="font-size:10px;color:var(--dim);margin-top:5px;line-height:1.5">${s.desc}</div></div>`;
+    if(i<CC.length-1)cc+=`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:56px"><div style="font-size:22px;color:var(--gold)">→</div><div style="font-size:9px;color:var(--sub);font-weight:700;margin-top:2px;text-align:center">${ARW[i]}</div></div>`;
+  });
+  cc+='</div>';
+  document.getElementById('causalChain').innerHTML=cc;
+  document.getElementById('causalNote').innerHTML='↺ 관광공사 <b style="color:#8ee0b1">데이터랩</b>이 <b style="color:var(--ink)">진단(입구)</b>과 <b style="color:var(--ink)">검증(출구)</b> 양 끝을 잡는다 — 데이터로 시작해 데이터로 닫는 <b style="color:var(--gold2)">선순환 구조</b>.';
 
   // ── MARKETING PLAYBOOK ──
   const outTxt=avgOutR!=null?`${avgOutR}%`:'80%+';
