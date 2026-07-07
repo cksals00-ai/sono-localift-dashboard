@@ -506,16 +506,17 @@ function render(S,V,C){
   // ── 데이터 기반 인과 체인 ──
   const DL='<span style="display:inline-block;margin-top:7px;padding:2px 8px;border-radius:999px;font-size:9px;font-weight:800;letter-spacing:.4px;border:1px solid rgba(91,201,142,.4);background:rgba(91,201,142,.1);color:#8ee0b1">KTO DataLab</span>';
   const CC=[
-    {tag:'원인 · CAUSE',c:'#E0896A',dl:true,lab:'데이터랩 진단',big:'▼'+dropPeak+'%',desc:'성수기 대비 겨울 비수기 낙폭<br>인구감소 100% · 관광의존'},
-    {tag:'행동 · ACTION',c:'#6FA8DC',dl:false,lab:'숙세페 집중 실행',big:g.pkgs+'개',desc:'데이터가 지목한 시점·지역<br>국가 숙세페 6–7월 패키지'},
+    {tag:'원인 · PROBLEM',c:'#E0896A',dl:false,lab:'인구감소지역 비수기',big:'▼'+dropPeak+'%',desc:'성수기 대비 심각한 비수기<br>관광의존·인구감소 지역'},
+    {tag:'분석 · ANALYSIS',c:'#8ee0b1',dl:true,lab:'데이터랩 정밀 진단',big:'9곳',desc:'이동통신 방문·소비로<br>관광 취약 지역 선별'},
+    {tag:'행동 · ACTION',c:'#6FA8DC',dl:false,lab:'숙세페 상품 집행',big:g.pkgs+'개',desc:'11~15% 할인 패키지<br>국가 숙세페 6–7월'},
     {tag:'결과 · RESULT',c:'#E7CE96',dl:false,lab:'지역경제 기여',big:eok(g.total_rev_m),desc:'100% 인구감소지역<br>'+g.rn.toLocaleString()+'박 창출'},
-    {tag:'검증 · FEEDBACK',c:'#8ee0b1',dl:true,lab:'데이터랩 지속 검증',big:(yoy!=null?(yoy>=0?'+':'')+yoy+'%':'추적中'),desc:'캠페인 지역 방문 추세(YoY)<br>소비 효과는 데이터랩 발표 후'},
+    {tag:'검증 · VALIDATE',c:'#8ee0b1',dl:true,lab:'데이터랩 재검증',big:(yoy!=null?(yoy>=0?'+':'')+yoy+'%':'추적'),desc:'방문 추세(YoY) 관측<br>소비 효과는 발표 후'},
   ];
-  const ARW=['그래서','그 결과','데이터로 재검증'];
+  const ARW=['데이터로 분석','그래서 실행','그 결과','데이터로 검증'];
   let cc='<div style="display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;gap:6px">';
   CC.forEach((s,i)=>{
-    cc+=`<div style="flex:1;min-width:150px;max-width:245px;text-align:center;padding:18px 14px;border-radius:16px;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid ${s.dl?'rgba(91,201,142,.3)':'var(--line)'}"><div style="font-size:10px;letter-spacing:1.2px;color:${s.c};font-weight:800">${s.tag}</div>${s.dl?DL:''}<div style="font-size:12px;color:var(--ink);margin-top:7px;font-weight:700">${s.lab}</div><div style="font-size:30px;font-weight:900;letter-spacing:-1px;margin-top:6px;color:${s.c}">${s.big}</div><div style="font-size:10px;color:var(--dim);margin-top:5px;line-height:1.5">${s.desc}</div></div>`;
-    if(i<CC.length-1)cc+=`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:56px"><div style="font-size:22px;color:var(--gold)">→</div><div style="font-size:9px;color:var(--sub);font-weight:700;margin-top:2px;text-align:center">${ARW[i]}</div></div>`;
+    cc+=`<div style="flex:1;min-width:132px;max-width:200px;text-align:center;padding:16px 11px;border-radius:16px;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid ${s.dl?'rgba(91,201,142,.35)':'var(--line)'}"><div style="font-size:9.5px;letter-spacing:1px;color:${s.c};font-weight:800">${s.tag}</div>${s.dl?DL:''}<div style="font-size:11.5px;color:var(--ink);margin-top:6px;font-weight:700">${s.lab}</div><div style="font-size:26px;font-weight:900;letter-spacing:-1px;margin-top:5px;color:${s.c}">${s.big}</div><div style="font-size:9.5px;color:var(--dim);margin-top:5px;line-height:1.5">${s.desc}</div></div>`;
+    if(i<CC.length-1)cc+=`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:46px"><div style="font-size:20px;color:var(--gold)">→</div><div style="font-size:8.5px;color:var(--sub);font-weight:700;margin-top:2px;text-align:center;line-height:1.2">${ARW[i]}</div></div>`;
   });
   cc+='</div>';
   document.getElementById('causalChain').innerHTML=cc;
