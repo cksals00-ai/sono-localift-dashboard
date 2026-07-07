@@ -134,24 +134,49 @@
   ],
   "by_chan": [
     {
-      "chan": "OTA",
-      "rn": 2614,
-      "total_rev_m": 1298.0
+      "chan": "야놀자",
+      "rn": 758,
+      "total_rev_m": 378.8
     },
     {
-      "chan": "GOTA15%",
-      "rn": 587,
-      "total_rev_m": 358.9
+      "chan": "여기어때",
+      "rn": 762,
+      "total_rev_m": 371.8
     },
     {
-      "chan": "GOTA13%",
-      "rn": 122,
-      "total_rev_m": 67.0
+      "chan": "아고다",
+      "rn": 644,
+      "total_rev_m": 369.2
     },
     {
-      "chan": "GOTA12%",
-      "rn": 85,
-      "total_rev_m": 47.5
+      "chan": "트립비토즈",
+      "rn": 297,
+      "total_rev_m": 155.5
+    },
+    {
+      "chan": "트립닷컴",
+      "rn": 225,
+      "total_rev_m": 131.4
+    },
+    {
+      "chan": "트립토파즈",
+      "rn": 252,
+      "total_rev_m": 131.2
+    },
+    {
+      "chan": "마이리얼트립",
+      "rn": 188,
+      "total_rev_m": 95.4
+    },
+    {
+      "chan": "타이드스퀘어",
+      "rn": 180,
+      "total_rev_m": 85.0
+    },
+    {
+      "chan": "기타 OTA",
+      "rn": 102,
+      "total_rev_m": 53.2
     }
   ],
   "by_loc": [

@@ -334,18 +334,22 @@ function render(S,V,C){
   } else document.getElementById('regTable1').innerHTML='<tbody><tr><td>지역별 데이터 로딩 대기 — API 갱신 후 표시됩니다.</td></tr></tbody>';
 
   // ACT2
+  const CHANPAL=['#C9A96A','#6FA8DC','#57C4B4','#E0B15A','#8E7CC3','#7C6A45','#5BC98E','#4B6A8F','#39445B'];
   new Chart(document.getElementById('chanChart'),{type:'doughnut',
-    data:{labels:S.by_chan.map(c=>c.chan),datasets:[{data:S.by_chan.map(c=>c.total_rev_m),backgroundColor:[GOLD,BLUE,'#7C6A45','#4B5A78'],borderColor:'#0D131F',borderWidth:2}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'bottom',labels:{boxWidth:11,font:{size:11},padding:9}}}}});
+    data:{labels:S.by_chan.map(c=>c.chan),datasets:[{data:S.by_chan.map(c=>c.total_rev_m),backgroundColor:S.by_chan.map((_,i)=>CHANPAL[i%CHANPAL.length]),borderColor:'#0D131F',borderWidth:2}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:10},padding:7}},tooltip:{callbacks:{label:c=>c.label+' '+c.parsed+'백만'}}}}});
   const juneShare=Math.round((S.by_month.find(x=>x.m==='202606')||{total_rev_m:0}).total_rev_m/g.total_rev_m*100);
-  const otaRev=S.by_chan.filter(c=>c.chan==='OTA').reduce((a,c)=>a+c.total_rev_m,0);
-  const otaPct=Math.round(otaRev/g.total_rev_m*100);
+  const nChan=S.by_chan.length;
+  const totRev=S.by_chan.reduce((a,c)=>a+c.total_rev_m,0)||1;
+  const chSorted=[...S.by_chan].sort((a,b)=>b.total_rev_m-a.total_rev_m);
+  const top3=Math.round(chSorted.slice(0,3).reduce((a,c)=>a+c.total_rev_m,0)/totRev*100);
+  const topCh=chSorted.slice(0,3).map(c=>c.chan).join('·');
   const spill=+(g.total_rev_m-g.room_rev_m).toFixed(1);const spillPct=Math.round((g.total_rev_m-g.room_rev_m)/g.total_rev_m*100);
   document.getElementById('kwSpill').textContent=spillPct+'%';
 
   document.getElementById('mktChips').innerHTML=[
     {lab:'숙세페 투숙',val:g.rn.toLocaleString()+'박',delta:'6–7월 인구감소지역'},
-    {lab:'채널 믹스 · OTA',val:otaPct+'%',delta:'자체 GOTA '+(100-otaPct)+'% 병행'},
+    {lab:'채널 다변화',val:nChan+'개 OTA',delta:'상위 3사 '+top3+'% · 다각 유입'},
     {lab:'평균 ADR (실적)',val:g.adr_k+'천원',delta:'비수기 캠페인 객단가'},
     {lab:'지역 소비 확산',val:spillPct+'%',delta:'객실 외 부대소비 '+spill.toFixed(1)+'백만'},
   ].map(c=>`<div class="card kpi"><div class="lab">${c.lab}</div><div class="val">${c.val}</div><div class="delta">${c.delta}</div></div>`).join('');
@@ -353,7 +357,7 @@ function render(S,V,C){
   document.getElementById('exec').innerHTML=
     `데이터랩이 지목한 <b>저수요 인구감소지역</b>에, 소노는 <b>${g.props}곳·프로모션 ${g.pkgs}개</b>를 국가 숙세페 기간(6–7월)에 집중했다.`+
     `<br>· <b>비수기 정조준</b> — 방문이 바닥인 달에 상품을 걸어 빈 객실을 매출로.`+
-    `<br>· <b>채널 다변화</b> — OTA ${otaPct}%로 외부·신규 수요 유입, 자체 GOTA ${100-otaPct}%로 마진 방어.`+
+    `<br>· <b>채널 다변화</b> — ${topCh} 등 <b>${nChan}개 OTA</b>로 외부·신규 관광객을 지역에 유입(특정 채널 의존 없음).`+
     `<br>· <b>인구감소 100% 타깃</b> — 낙폭 큰 지역일수록 상품을 두껍게.`;
 
   if(R.length){
@@ -440,8 +444,8 @@ function render(S,V,C){
      note:'비발디파크·오션월드 집객을 <b>지역 숙박·소비</b>로 전환.'},
     {ic:ICON.ppp, metric:`${S.macro.spend_eok}억`, ml:'숙세페 전국 유발', t:'민관 협력 캠페인', en:'Public-private',
      note:'국가 숙세페(정부)를 <b>민간이 현장 집행·증명</b>. 정책 ROI 가시화.'},
-    {ic:ICON.channel, metric:`${otaPct}%`, ml:'OTA 외부 유입', t:'채널 다변화 유입', en:'Channel mix',
-     note:'OTA 등 다채널로 <b>외부·신규 관광객</b>을 인구감소지역으로 유입.'},
+    {ic:ICON.channel, metric:`${nChan}개`, ml:'OTA 채널', t:'채널 다변화 유입', en:'Channel mix',
+     note:`${topCh} 등 외부 OTA로 <b>인구감소지역에 신규 관광객</b> 유입.`},
     {ic:ICON.target, metric:'100%', ml:'인구감소지역', t:'지방소멸 대응 타깃팅', en:'Geo-targeting',
      note:'취약지(<b>청송 -62%</b>) 우선 — 지방소멸 위기지역에 수요 집중.'},
     {ic:ICON.ripple, metric:outTxt, ml:'외지인 소비비중', t:'풍선효과·외부수요', en:'Spillover',
