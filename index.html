@@ -438,9 +438,11 @@ function render(S,V,C){
     tag.style.cssText='border-color:rgba(91,201,142,.35);background:rgba(91,201,142,.08);color:#8ee0b1';
     const bym=C.meta&&C.meta.baseYm;
     document.getElementById('consumeCap').textContent='데이터랩 관광소비 지수(0~100) · 기준월 '+(bym?bym.slice(0,4)+'-'+bym.slice(4,6):'—')+' · 소노 9개 인구감소지역';
-    const t=C.lodgeTrend||{labels:[],values:[]};
+    let tL=((C.lodgeTrend&&C.lodgeTrend.labels)||[]).slice(), tV=((C.lodgeTrend&&C.lodgeTrend.values)||[]).slice();
+    let te=tV.length; while(te>0 && tV[te-1]==null) te--;   // 꼬리 null 제거(수집 중 일시오류 방어)
+    tL=tL.slice(0,te); tV=tV.slice(0,te);
     new Chart(document.getElementById('consumeChart'),{type:'line',
-      data:{labels:t.labels,datasets:[{data:t.values,borderColor:GOLD2,borderWidth:2,tension:.35,pointRadius:0,fill:true,
+      data:{labels:tL,datasets:[{data:tV,spanGaps:true,borderColor:GOLD2,borderWidth:2,tension:.35,pointRadius:0,fill:true,
         backgroundColor:c=>{const a=c.chart.chartArea;if(!a)return'transparent';const gr=c.chart.ctx.createLinearGradient(0,a.top,0,a.bottom);gr.addColorStop(0,'rgba(201,169,106,.22)');gr.addColorStop(1,'rgba(201,169,106,0)');return gr;}}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'숙박 소비지수 '+c.parsed.y}}},
         scales:{y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{font:{size:9}}},x:{grid:{display:false},ticks:{maxTicksLimit:6,font:{size:9}}}}}});

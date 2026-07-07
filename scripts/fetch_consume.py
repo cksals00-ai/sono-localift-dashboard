@@ -51,8 +51,17 @@ def api(base, op, params):
     q = urlencode({**params, "serviceKey": KEY, "MobileOS": "ETC",
                    "MobileApp": "SonoLift", "_type": "json"}, safe="%")
     req = Request(f"{base}/{op}?{q}", headers={"User-Agent": "SonoLift/1.0"})
-    with urlopen(req, timeout=60) as r:
-        raw = r.read().decode("utf-8", errors="replace")
+    last = None
+    for attempt in range(3):                    # 502 등 일시오류 재시도
+        try:
+            with urlopen(req, timeout=60) as r:
+                raw = r.read().decode("utf-8", errors="replace")
+            break
+        except (HTTPError, URLError) as e:
+            last = e
+            time.sleep(0.6 * (attempt + 1))
+    else:
+        raise last
     if not raw.lstrip().startswith("{"):
         raise ValueError(f"JSON 아님 ← {raw[:200]}")
     data = json.loads(raw)
