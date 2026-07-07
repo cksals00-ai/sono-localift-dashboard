@@ -1,14 +1,14 @@
 {
   "meta": {
-    "updated": "2026-07-06",
-    "period": "2026 상반기 · 숙세페 6월 캠페인",
-    "source": "소노 온라인영업팀 예약자료(27+43) · 회원번호(패키지코드) 매핑 · 취소 제외 (트렌드리포트 로직 차용)"
+    "updated": "2026-07-07",
+    "period": "2026 숙박세일페스타 6–7월 · 투숙(입실) 기준",
+    "source": "소노 온라인영업팀 예약자료(27번 DB) · 숙세페 패키지코드 매칭 · 예약번호(KEY_RSV_NO) 최신본 dedup · 노쇼 제외"
   },
   "grand": {
-    "rn": 1158,
-    "room_rev_m": 225.5,
-    "total_rev_m": 450.2,
-    "adr_k": 195,
+    "rn": 3408,
+    "room_rev_m": 901.8,
+    "total_rev_m": 1771.3,
+    "adr_k": 265,
     "props": 14,
     "dep_ratio": 100,
     "pkgs": 54
@@ -20,197 +20,197 @@
   },
   "by_prop": [
     {
-      "prop": "소노 삼척",
-      "loc": "강원 삼척",
-      "rn": 252,
-      "room_rev_m": 46.3,
-      "total_rev_m": 92.5,
-      "adr_k": 184
-    },
-    {
-      "prop": "소노 남해",
-      "loc": "경남 남해",
-      "rn": 130,
-      "room_rev_m": 43.3,
-      "total_rev_m": 86.6,
-      "adr_k": 333
-    },
-    {
-      "prop": "소노캄 진도",
-      "loc": "전남 진도",
-      "rn": 122,
-      "room_rev_m": 23.9,
-      "total_rev_m": 47.9,
-      "adr_k": 196
-    },
-    {
-      "prop": "소노벨 변산",
-      "loc": "전북 부안",
-      "rn": 146,
-      "room_rev_m": 21.1,
-      "total_rev_m": 42.2,
-      "adr_k": 144
-    },
-    {
-      "prop": "소노펠리체",
-      "loc": "강원 홍천",
-      "rn": 76,
-      "room_rev_m": 19.2,
-      "total_rev_m": 38.4,
-      "adr_k": 253
-    },
-    {
-      "prop": "소노 단양",
-      "loc": "충북 단양",
-      "rn": 130,
-      "room_rev_m": 17.2,
-      "total_rev_m": 34.3,
-      "adr_k": 132
-    },
-    {
       "prop": "소노벨 비발디",
       "loc": "강원 홍천",
-      "rn": 96,
-      "room_rev_m": 14.9,
-      "total_rev_m": 29.7,
-      "adr_k": 155
+      "rn": 693,
+      "room_rev_m": 162.1,
+      "total_rev_m": 319.6,
+      "adr_k": 234
     },
     {
       "prop": "소노문 델피노",
       "loc": "강원 고성",
-      "rn": 70,
-      "room_rev_m": 12.2,
-      "total_rev_m": 23.6,
-      "adr_k": 174
+      "rn": 385,
+      "room_rev_m": 112.7,
+      "total_rev_m": 220.0,
+      "adr_k": 293
     },
     {
-      "prop": "쏠비치 양양",
-      "loc": "강원 양양",
-      "rn": 36,
-      "room_rev_m": 6.7,
-      "total_rev_m": 13.4,
-      "adr_k": 186
+      "prop": "소노캄 진도",
+      "loc": "전남 진도",
+      "rn": 392,
+      "room_rev_m": 101.4,
+      "total_rev_m": 197.3,
+      "adr_k": 259
     },
     {
-      "prop": "소노벨 청송",
-      "loc": "경북 청송",
-      "rn": 42,
-      "room_rev_m": 6.5,
-      "total_rev_m": 12.9,
-      "adr_k": 154
-    },
-    {
-      "prop": "소노문(르네)",
+      "prop": "소노펠리체",
       "loc": "강원 홍천",
-      "rn": 28,
-      "room_rev_m": 5.2,
-      "total_rev_m": 10.3,
-      "adr_k": 184
+      "rn": 245,
+      "room_rev_m": 86.6,
+      "total_rev_m": 170.0,
+      "adr_k": 353
+    },
+    {
+      "prop": "소노벨 변산",
+      "loc": "전북 부안",
+      "rn": 357,
+      "room_rev_m": 71.4,
+      "total_rev_m": 139.5,
+      "adr_k": 200
+    },
+    {
+      "prop": "소노 삼척",
+      "loc": "강원 삼척",
+      "rn": 300,
+      "room_rev_m": 67.9,
+      "total_rev_m": 135.2,
+      "adr_k": 226
+    },
+    {
+      "prop": "소노 단양",
+      "loc": "충북 단양",
+      "rn": 301,
+      "room_rev_m": 68.8,
+      "total_rev_m": 134.9,
+      "adr_k": 229
+    },
+    {
+      "prop": "소노 남해",
+      "loc": "경남 남해",
+      "rn": 159,
+      "room_rev_m": 61.1,
+      "total_rev_m": 119.0,
+      "adr_k": 385
     },
     {
       "prop": "소노캄 비발디",
       "loc": "강원 홍천",
-      "rn": 12,
-      "room_rev_m": 3.6,
-      "total_rev_m": 7.2,
-      "adr_k": 301
+      "rn": 117,
+      "room_rev_m": 41.3,
+      "total_rev_m": 82.4,
+      "adr_k": 353
+    },
+    {
+      "prop": "쏠비치 양양",
+      "loc": "강원 양양",
+      "rn": 121,
+      "room_rev_m": 30.9,
+      "total_rev_m": 61.6,
+      "adr_k": 255
     },
     {
       "prop": "소노펫클럽",
       "loc": "강원 홍천",
-      "rn": 10,
-      "room_rev_m": 3.0,
-      "total_rev_m": 6.0,
-      "adr_k": 299
+      "rn": 81,
+      "room_rev_m": 26.6,
+      "total_rev_m": 52.4,
+      "adr_k": 328
     },
     {
       "prop": "오션월드 빌리지",
       "loc": "강원 홍천",
-      "rn": 8,
-      "room_rev_m": 2.6,
-      "total_rev_m": 5.1,
-      "adr_k": 321
+      "rn": 61,
+      "room_rev_m": 26.3,
+      "total_rev_m": 51.3,
+      "adr_k": 432
+    },
+    {
+      "prop": "소노문(르네)",
+      "loc": "강원 홍천",
+      "rn": 79,
+      "room_rev_m": 23.7,
+      "total_rev_m": 47.0,
+      "adr_k": 299
+    },
+    {
+      "prop": "소노벨 청송",
+      "loc": "경북 청송",
+      "rn": 117,
+      "room_rev_m": 21.0,
+      "total_rev_m": 41.0,
+      "adr_k": 180
     }
   ],
   "by_chan": [
     {
       "chan": "OTA",
-      "rn": 776,
-      "total_rev_m": 292.0
+      "rn": 2614,
+      "total_rev_m": 1298.0
     },
     {
       "chan": "GOTA15%",
-      "rn": 308,
-      "total_rev_m": 131.0
+      "rn": 587,
+      "total_rev_m": 358.9
     },
     {
       "chan": "GOTA13%",
-      "rn": 52,
-      "total_rev_m": 17.6
+      "rn": 122,
+      "total_rev_m": 67.0
     },
     {
       "chan": "GOTA12%",
-      "rn": 22,
-      "total_rev_m": 9.6
+      "rn": 85,
+      "total_rev_m": 47.5
     }
   ],
   "by_loc": [
     {
       "loc": "강원 홍천",
-      "rn": 230,
-      "total_rev_m": 96.8
-    },
-    {
-      "loc": "강원 삼척",
-      "rn": 252,
-      "total_rev_m": 92.5
-    },
-    {
-      "loc": "경남 남해",
-      "rn": 130,
-      "total_rev_m": 86.6
-    },
-    {
-      "loc": "전남 진도",
-      "rn": 122,
-      "total_rev_m": 47.9
-    },
-    {
-      "loc": "전북 부안",
-      "rn": 146,
-      "total_rev_m": 42.2
-    },
-    {
-      "loc": "충북 단양",
-      "rn": 130,
-      "total_rev_m": 34.3
+      "rn": 1276,
+      "total_rev_m": 722.7
     },
     {
       "loc": "강원 고성",
-      "rn": 70,
-      "total_rev_m": 23.6
+      "rn": 385,
+      "total_rev_m": 220.0
+    },
+    {
+      "loc": "전남 진도",
+      "rn": 392,
+      "total_rev_m": 197.3
+    },
+    {
+      "loc": "전북 부안",
+      "rn": 357,
+      "total_rev_m": 139.5
+    },
+    {
+      "loc": "강원 삼척",
+      "rn": 300,
+      "total_rev_m": 135.2
+    },
+    {
+      "loc": "충북 단양",
+      "rn": 301,
+      "total_rev_m": 134.9
+    },
+    {
+      "loc": "경남 남해",
+      "rn": 159,
+      "total_rev_m": 119.0
     },
     {
       "loc": "강원 양양",
-      "rn": 36,
-      "total_rev_m": 13.4
+      "rn": 121,
+      "total_rev_m": 61.6
     },
     {
       "loc": "경북 청송",
-      "rn": 42,
-      "total_rev_m": 12.9
+      "rn": 117,
+      "total_rev_m": 41.0
     }
   ],
   "by_month": [
     {
       "m": "202606",
-      "rn": 1110,
-      "total_rev_m": 432.9
+      "rn": 572,
+      "total_rev_m": 222.6
     },
     {
       "m": "202607",
-      "rn": 48,
-      "total_rev_m": 17.4
+      "rn": 2836,
+      "total_rev_m": 1548.7
     }
   ]
 }

@@ -11,7 +11,7 @@
     --gold:#C9A96A;--gold2:#E7CE96;--blue:#6FA8DC;--teal:#57C4B4;--good:#5BC98E;--down:#E0896A;--slate:#39445B;}
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:'Inter','Malgun Gothic','맑은 고딕',-apple-system,'Apple SD Gothic Neo',sans-serif;color:var(--ink);line-height:1.5;min-height:100vh;
+  body{font-family:'Inter','Malgun Gothic','맑은 고딕',-apple-system,'Apple SD Gothic Neo',sans-serif;color:var(--ink);line-height:1.5;min-height:100vh;word-break:keep-all;overflow-wrap:break-word;
     background:radial-gradient(1200px 620px at 78% -8%,rgba(201,169,106,.13),transparent 60%),radial-gradient(1000px 560px at -5% 2%,rgba(111,168,220,.08),transparent 55%),var(--bg);}
   .wrap{max-width:1180px;margin:0 auto;padding:0 22px 80px}
   a{color:inherit}
@@ -107,11 +107,11 @@
     <div class="flowline">
       <div class="step"><div class="sn">01 · DATA</div><div class="st">데이터랩 진단</div><div class="sd">이동통신 방문자수(공공)</div><div class="arw">→</div></div>
       <div class="step"><div class="sn">02 · INSIGHT</div><div class="st">6월 최저 수요</div><div class="sd">9개 지역 공통 저수요</div><div class="arw">→</div></div>
-      <div class="step"><div class="sn">03 · ACTION</div><div class="st">숙세페 연계</div><div class="sd">국가 캠페인 6월 집중</div><div class="arw">→</div></div>
+      <div class="step"><div class="sn">03 · ACTION</div><div class="st">숙세페 연계</div><div class="sd">국가 캠페인 6–7월 집중</div><div class="arw">→</div></div>
       <div class="step"><div class="sn">04 · IMPACT</div><div class="st">지역 소비 확산</div><div class="sd">풍선효과 · 부대소비</div><div class="arw">→</div></div>
       <div class="step"><div class="sn">05 · VALIDATE</div><div class="st">데이터랩 재검증</div><div class="sd">방문·소비 추세 모니터링</div></div>
     </div>
-    <div class="src" style="text-align:center">Closed-loop: 데이터랩은 <b style="color:var(--sub)">진단(01)</b>과 <b style="color:var(--sub)">검증(05)</b>에 모두 쓰인다 — 자사 실적은 그 사이 실행·성과 단계.</div>
+    <div class="src" style="text-align:center">데이터랩은 <b style="color:var(--sub)">진단</b>과 <b style="color:var(--sub)">검증</b>, 양 끝단에 놓인다. 그 사이의 실행과 성과가 소노의 몫이다.</div>
   </section>
 
   <!-- ACT 1 -->
@@ -147,8 +147,8 @@
   <!-- ACT 2 -->
   <section class="sec reveal">
     <div class="actno">ACT 02 · ACTION — 실행</div>
-    <div class="big">국가 캠페인에 맞춘 <b>역계절 실행</b>.</div>
-    <div class="kw"><span>숙세페(정부 주도) 연계</span><span>Counter-seasonal 6월 집중</span><span>Channel mix</span><span>인구감소 <b>100%</b> 타깃</span></div>
+    <div class="big">저수요 인구감소지역에, <b>숙세페로 집중</b>.</div>
+    <div class="kw"><span>숙세페(정부 주도) 연계</span><span>저수요 지역 집중</span><span>채널 다변화</span><span>인구감소 <b>100%</b> 타깃</span></div>
 
     <div class="grid k4" id="mktChips"></div>
 
@@ -176,7 +176,7 @@
   <section class="sec reveal">
     <div class="actno">ACT 03 · IMPACT — 성과 & 검증</div>
     <div class="big">숙박을 넘어, <b>지역 소비</b>로.</div>
-    <div class="kw"><span>지역경제 기여 <b id="kwRev">4.50억</b></span><span>지역 소비 확산 <b id="kwSpill">50%</b></span><span>비수기 <b>1,158박</b> 창출</span><span>인구감소 100%</span></div>
+    <div class="kw"><span>지역경제 기여 <b id="kwRev">4.50억</b></span><span>지역 소비 확산 <b id="kwSpill">50%</b></span><span>숙세페 <b id="kwRn">—</b> 투숙</span><span>인구감소 100%</span></div>
 
     <div class="grid k4" id="act3kpi"></div>
     <div class="grid c2">
@@ -263,10 +263,11 @@ function render(S,V){
   document.getElementById('heroStats').innerHTML=[
     {v:eok(g.total_rev_m),l:'인구감소지역 경제 기여액'},
     {v:'100%',l:'인구감소지역 집중 ('+g.props+'곳)'},
-    {v:g.rn.toLocaleString()+'박',l:'비수기 6월 수요 창출'},
+    {v:g.rn.toLocaleString()+'박',l:'숙세페 6–7월 수요 창출'},
     {v:Math.round((g.total_rev_m-g.room_rev_m)/g.total_rev_m*100)+'%',l:'지역 소비 확산(객실 외)'},
   ].map(p=>`<div class="p"><div class="pv">${p.v}</div><div class="pl">${p.l}</div></div>`).join('');
   document.getElementById('kwRev').textContent=eok(g.total_rev_m);
+  document.getElementById('kwRn').textContent=g.rn.toLocaleString()+'박';
 
   const cmAll=calAvg(vv,vl);
   let pk=1,lo=1;for(let k=2;k<=12;k++){if(cmAll[k]>cmAll[pk])pk=k;if(cmAll[k]<cmAll[lo])lo=k;}
@@ -336,16 +337,16 @@ function render(S,V){
   document.getElementById('kwSpill').textContent=spillPct+'%';
 
   document.getElementById('mktChips').innerHTML=[
-    {lab:'6월 집중도',val:juneShare+'%',delta:'전체 매출 중 6월'},
+    {lab:'숙세페 투숙',val:g.rn.toLocaleString()+'박',delta:'6–7월 인구감소지역'},
     {lab:'채널 믹스 · OTA',val:otaPct+'%',delta:'자체 GOTA '+(100-otaPct)+'% 병행'},
     {lab:'평균 ADR (실적)',val:g.adr_k+'천원',delta:'비수기 캠페인 객단가'},
     {lab:'지역 소비 확산',val:spillPct+'%',delta:'객실 외 부대소비 '+spill.toFixed(1)+'백만'},
   ].map(c=>`<div class="card kpi"><div class="lab">${c.lab}</div><div class="val">${c.val}</div><div class="delta">${c.delta}</div></div>`).join('');
 
   document.getElementById('exec').innerHTML=
-    `데이터랩이 가리킨 <b>6월 최저점</b>에 대응해, 소노는 <b>${g.props}곳·프로모션 ${g.pkgs}개</b>를 6월에 집중했다(매출 <b>${juneShare}%</b>).`+
-    `<br>· <b>Counter-seasonal</b> — 방문 바닥인 달에 상품을 걸어 공실을 매출로.`+
-    `<br>· <b>Channel mix</b> — OTA ${otaPct}%로 외부·신규 유입, 자체 GOTA ${100-otaPct}%로 마진 방어.`+
+    `데이터랩이 지목한 <b>저수요 인구감소지역</b>에, 소노는 <b>${g.props}곳·프로모션 ${g.pkgs}개</b>를 국가 숙세페 기간(6–7월)에 집중했다.`+
+    `<br>· <b>비수기 정조준</b> — 방문이 바닥인 달에 상품을 걸어 빈 객실을 매출로.`+
+    `<br>· <b>채널 다변화</b> — OTA ${otaPct}%로 외부·신규 수요 유입, 자체 GOTA ${100-otaPct}%로 마진 방어.`+
     `<br>· <b>인구감소 100% 타깃</b> — 낙폭 큰 지역일수록 상품을 두껍게.`;
 
   if(R.length){
@@ -363,7 +364,7 @@ function render(S,V){
   // ACT3
   document.getElementById('act3kpi').innerHTML=[
     {lab:'지역경제 기여액',val:eok(g.total_rev_m),delta:g.total_rev_m.toFixed(1)+'백만원 · 인구감소지역'},
-    {lab:'비수기 객실 창출',val:g.rn.toLocaleString()+'박',delta:'6월 저수요 구간'},
+    {lab:'숙세페 객실 창출',val:g.rn.toLocaleString()+'박',delta:'6–7월 · 저수요 인구감소지역'},
     {lab:'평균 ADR (실적)',val:g.adr_k+'천원',delta:'비수기 캠페인 객단가'},
     {lab:'인구감소지역 기여',val:'100%',delta:eok(g.total_rev_m)+' 전액'},
   ].map(c=>`<div class="card kpi"><div class="lab">${c.lab}</div><div class="val">${c.val}</div><div class="delta">${c.delta}</div></div>`).join('');
@@ -378,13 +379,13 @@ function render(S,V){
   document.getElementById('propTable').innerHTML=tt+'</tbody>';
 
   document.getElementById('effChips').innerHTML=[
-    {lab:'① 비수기 갭 필링',val:eok(g.total_rev_m),delta:'6월 최저 수요에 '+g.rn.toLocaleString()+'박'},
+    {lab:'① 저수요 갭 필링',val:eok(g.total_rev_m),delta:'저수요 인구감소지역에 '+g.rn.toLocaleString()+'박'},
     {lab:'② 풍선효과·지역소비',val:spillPct+'%',delta:'객실 외 부대소비 '+spill.toFixed(1)+'백만'},
     {lab:'③ 평균 ADR',val:g.adr_k+'천원',delta:'비수기 캠페인 객단가'},
     {lab:'④ 거시 유발(전국)',val:S.macro.spend_eok+'억',delta:'지역관광객 '+S.macro.visitors_man+'만명'},
   ].map(c=>`<div class="card kpi"><div class="lab">${c.lab}</div><div class="val">${c.val}</div><div class="delta">${c.delta}</div></div>`).join('');
   document.getElementById('effect').innerHTML=
-    `데이터랩이 지목한 <b>6월 최저 수요</b>에 상품을 걸어 <b>${g.rn.toLocaleString()}박·${eok(g.total_rev_m)}</b>의 지역경제 기여를 만들었다. `+
+    `데이터랩이 지목한 <b>저수요 인구감소지역</b>에 국가 숙세페(6–7월)로 상품을 걸어 <b>${g.rn.toLocaleString()}박·${eok(g.total_rev_m)}</b>의 지역경제 기여를 만들었다. `+
     `이 중 객실료를 뺀 <b>${spill.toFixed(1)}백만(${spillPct}%)</b>이 워터파크·F&B·부대시설 등 <b>객실 외 지역 내 소비</b>로 확산됐다(풍선효과, 자사 데이터 기준).`;
   document.getElementById('effSrc').innerHTML=`출처 · ①②③ 소노 예약자료(취소 제외) · ④ 862억·48만명 = 데이터랩·ONDA 숙세페 거시효과 집계(전국 기준, 소노 실적은 그 일부). 풍선효과의 지역 소비 확산은 <b>데이터랩 업종별 관광소비액 API(15152138)</b>로 교차검증 예정.`;
 
