@@ -161,7 +161,14 @@
       <div class="card">
         <h3 class="ct">수요 전환 시나리오 <span class="q">— Data → Product</span></h3>
         <div class="lead" id="exec" style="margin-top:8px"></div>
+        <div id="funnel" style="margin-top:20px"></div>
       </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="ct">지도로 본 지역경제 기여 <span class="q">— 소노 9개 인구감소지역</span></h3>
+      <p class="cd">버블 크기 = 지역 기여액 · 색 = 데이터랩 6월 저수요 낙폭 · 위치 = 실제 소재지</p>
+      <div id="mapWrap"></div>
     </div>
 
     <div class="card" style="margin-top:16px">
@@ -362,6 +369,16 @@ function render(S,V,C){
     `<br>· <b>채널 다변화</b> — ${topCh} 등 <b>${nChan}개 OTA</b>로 외부·신규 관광객을 지역에 유입(특정 채널 의존 없음).`+
     `<br>· <b>인구감소 100% 타깃</b> — 낙폭 큰 지역일수록 상품을 두껍게.`;
 
+  // 전환 퍼널
+  const FUN=[
+    {t:'데이터랩 방문 수요 진단',s:'9개 인구감소지역',w:100},
+    {t:'저수요 구간 특정',s:`6월 최저 -${dropPeak}%`,w:84},
+    {t:'숙세페 상품 집행',s:`${g.props}사업장·${g.pkgs}패키지`,w:68},
+    {t:'숙세페 투숙 전환',s:`${g.rn.toLocaleString()}박`,w:52},
+    {t:'지역경제 기여',s:eok(g.total_rev_m),w:38},
+  ];
+  document.getElementById('funnel').innerHTML='<div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:11px">Conversion Funnel · 수요 → 실적</div>'+FUN.map((f,i)=>`<div style="margin:0 auto 7px;width:${f.w}%;background:linear-gradient(90deg,rgba(201,169,106,${(0.95-i*0.14).toFixed(2)}),rgba(231,206,150,${(0.78-i*0.11).toFixed(2)}));border-radius:8px;padding:9px 15px;display:flex;justify-content:space-between;align-items:center;gap:8px;color:#141C2E"><span style="font-size:11px;font-weight:700">${f.t}</span><span style="font-size:12px;font-weight:800;white-space:nowrap">${f.s}</span></div>`).join('');
+
   if(R.length){
     const byPerf=[...R].sort((a,b)=>b.perf.total_rev_m-a.perf.total_rev_m);
     let t='<thead><tr><th>시군구</th><th>소노 사업장</th><th class="num">DataLab 6월 낙폭</th><th class="num">RN</th><th class="num">지역 기여액</th><th class="num">전환효율</th></tr></thead><tbody>';
@@ -372,6 +389,17 @@ function render(S,V,C){
     document.getElementById('regTable2').innerHTML=t+'</tbody>';
     const gap=[...R].filter(r=>r.perf.total_rev_m<20).sort((a,b)=>b.yavg-a.yavg)[0];
     document.getElementById('reg2note').innerHTML=`※ <b>지역 기여액</b>=해당 시군구 숙세페 총매출(백만) · <b>전환효율</b>=기여액÷데이터랩 월평균 방문(만). `+(gap?`<b>다음 확장 전략</b> — <b>${gap.key}</b>은 방문 ${man(gap.yavg)} 대비 기여 ${gap.perf.total_rev_m.toFixed(1)}로 전환효율이 낮아, 데이터가 짚은 <span class="tag">차기 공략 지역</span>(상품·객실 보강 대상).`:``);
+
+    // 지도 버블맵 (실제 소재지 좌표)
+    const GEO={'홍천군':[157,92],'삼척시':[253,113],'고성군':[200,35],'양양군':[212,60],'부안군':[70,256],'단양군':[193,152],'남해군':[157,330],'진도군':[35,359],'청송군':[245,198]};
+    const maxRev=Math.max(...R.map(r=>r.perf.total_rev_m));
+    const KOREA=`<path d="M205,32 C245,70 255,120 256,175 C256,225 252,270 245,300 C230,318 205,325 175,332 C145,340 110,342 78,348 C55,352 42,356 36,360 C40,320 50,290 52,255 C55,215 48,190 55,160 C58,130 55,108 62,95 C80,82 105,75 135,68 C165,58 190,45 205,32 Z" fill="rgba(201,169,106,0.045)" stroke="rgba(201,169,106,0.22)" stroke-width="1"/>`;
+    const bub=R.map(r=>{const c=GEO[r.key];if(!c)return'';const rev=r.perf.total_rev_m;const rad=8+Math.sqrt(rev)/Math.sqrt(maxRev)*22;const fill=r.drop>=57?'#D98C63':'#C9A96A';const right=c[0]>195;const lx=right?c[0]-rad-5:c[0]+rad+5;const anc=right?'end':'start';const nm=r.key.replace(/(군|시)$/,'');
+      return `<circle cx="${c[0]}" cy="${c[1]}" r="${rad.toFixed(1)}" fill="${fill}" fill-opacity="0.85" stroke="#0D131F" stroke-width="1.2"/>`+
+        `<text x="${lx.toFixed(0)}" y="${c[1]-1}" text-anchor="${anc}" font-size="10" font-weight="800" fill="#F2F5FB">${nm}</text>`+
+        `<text x="${lx.toFixed(0)}" y="${c[1]+10}" text-anchor="${anc}" font-size="9" fill="#E7CE96">${rev.toFixed(0)}<tspan fill="#697086"> · </tspan><tspan fill="#E0896A">-${r.drop}%</tspan></text>`;}).join('');
+    document.getElementById('mapWrap').innerHTML=`<svg viewBox="0 0 300 375" style="width:100%;max-width:440px;height:auto;display:block;margin:4px auto 0">${KOREA}${bub}</svg>`+
+      `<div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:6px;font-size:10.5px;color:var(--sub)"><span>◍ 버블 크기 = 지역 기여액(백만)</span><span><span style="color:#D98C63">●</span> 진한 색 = 6월 저수요 낙폭 큼(≥57%)</span></div>`;
   } else document.getElementById('regTable2').innerHTML='<tbody><tr><td>지역별 데이터 로딩 대기.</td></tr></tbody>';
 
   // ACT3
