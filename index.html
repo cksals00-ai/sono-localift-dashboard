@@ -165,10 +165,17 @@
       </div>
     </div>
 
-    <div class="card" style="margin-top:16px">
-      <h3 class="ct">지도로 본 지역경제 기여 <span class="q">— 소노 9개 인구감소지역</span></h3>
-      <p class="cd">버블 크기 = 지역 기여액 · 색 = 데이터랩 6월 저수요 낙폭 · 위치 = 실제 소재지</p>
-      <div id="mapWrap"></div>
+    <div class="grid c2" style="margin-top:16px">
+      <div class="card">
+        <h3 class="ct">지도로 본 지역경제 기여 <span class="q">— 소노 9개 인구감소지역</span></h3>
+        <p class="cd">버블 = 지역 기여액 · 색 = 6월 저수요 낙폭 · 위치 = 실제 소재지</p>
+        <div id="mapWrap"></div>
+      </div>
+      <div class="card">
+        <h3 class="ct">데이터로 본 9개 지역 <span class="q">— API 지표 요약</span></h3>
+        <p class="cd">데이터랩 방문·소비 + 숙세페 실적</p>
+        <div id="mapInsight"></div>
+      </div>
     </div>
 
     <div class="card" style="margin-top:16px">
@@ -390,17 +397,39 @@ function render(S,V,C){
     const lowEff=[...R].map(r=>({k:r.key,eff:r.yavg?r.perf.total_rev_m/(r.yavg/10000):999})).sort((a,b)=>a.eff-b.eff).slice(0,2);
     document.getElementById('reg2note').innerHTML=`※ <b>지역 기여액</b>=해당 시군구 숙세페 총매출(백만) · <b>전환효율</b>=기여액÷데이터랩 월평균 방문(만). `+(lowEff.length?`<b>다음 확장 전략</b> — 전환효율 최저 <b>${lowEff.map(x=>x.k.replace(/(군|시)$/,'')+'('+x.eff.toFixed(2)+')').join('·')}</b>: 방문 대비 실적이 낮아 <span class="tag">차기 공략 지역</span>(상품·객실 보강 대상). 데이터가 다음 성장 지점을 지목한다.`:``);
 
-    // 지도 버블맵 (실제 소재지 좌표)
-    const GEO={'홍천군':[157,92],'삼척시':[253,113],'고성군':[200,35],'양양군':[212,60],'부안군':[70,256],'단양군':[193,152],'남해군':[157,330],'진도군':[35,359],'청송군':[245,198]};
+    // ── 지도 버블맵 (실제 소재지 좌표) ──
+    const GEO={'고성군':[204,50],'양양군':[214,84],'홍천군':[164,112],'삼척시':[222,142],'단양군':[138,156],'청송군':[214,202],'부안군':[80,244],'남해군':[172,288],'진도군':[74,332]};
     const maxRev=Math.max(...R.map(r=>r.perf.total_rev_m));
-    const KOREA=`<path d="M205,32 C245,70 255,120 256,175 C256,225 252,270 245,300 C230,318 205,325 175,332 C145,340 110,342 78,348 C55,352 42,356 36,360 C40,320 50,290 52,255 C55,215 48,190 55,160 C58,130 55,108 62,95 C80,82 105,75 135,68 C165,58 190,45 205,32 Z" fill="rgba(201,169,106,0.045)" stroke="rgba(201,169,106,0.22)" stroke-width="1"/>`;
-    const bub=R.map(r=>{const c=GEO[r.key];if(!c)return'';const rev=r.perf.total_rev_m;const rad=8+Math.sqrt(rev)/Math.sqrt(maxRev)*22;const fill=r.drop>=57?'#D98C63':'#C9A96A';const right=c[0]>195;const lx=right?c[0]-rad-5:c[0]+rad+5;const anc=right?'end':'start';const nm=r.key.replace(/(군|시)$/,'');
-      return `<circle cx="${c[0]}" cy="${c[1]}" r="${rad.toFixed(1)}" fill="${fill}" fill-opacity="0.85" stroke="#0D131F" stroke-width="1.2"/>`+
-        `<text x="${lx.toFixed(0)}" y="${c[1]-1}" text-anchor="${anc}" font-size="10" font-weight="800" fill="#F2F5FB">${nm}</text>`+
-        `<text x="${lx.toFixed(0)}" y="${c[1]+10}" text-anchor="${anc}" font-size="9" fill="#E7CE96">${rev.toFixed(0)}<tspan fill="#697086"> · </tspan><tspan fill="#E0896A">-${r.drop}%</tspan></text>`;}).join('');
-    document.getElementById('mapWrap').innerHTML=`<svg viewBox="0 0 300 375" style="width:100%;max-width:440px;height:auto;display:block;margin:4px auto 0">${KOREA}${bub}</svg>`+
-      `<div style="display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:6px;font-size:10.5px;color:var(--sub)"><span>◍ 버블 크기 = 지역 기여액(백만)</span><span><span style="color:#D98C63">●</span> 진한 색 = 6월 저수요 낙폭 큼(≥57%)</span></div>`;
-  } else document.getElementById('regTable2').innerHTML='<tbody><tr><td>지역별 데이터 로딩 대기.</td></tr></tbody>';
+    const cByK={}; if(C&&C.byRegion)C.byRegion.forEach(x=>cByK[x.key]=x);
+    // 더 지도다운 대한민국 외곽선(해안 굴곡·태안반도·남해안)
+    const KOREA='<path d="M204,46 L212,64 L221,96 L228,130 L235,160 L243,193 L247,222 L244,248 L235,266 L210,278 L182,288 L156,294 L138,306 L108,320 L84,334 L66,340 L79,316 L73,286 L77,258 L70,232 L75,206 L57,182 L80,166 L70,146 L75,124 L66,108 L90,96 L124,86 L160,78 L192,64 L205,48 Z" fill="rgba(201,169,106,0.05)" stroke="rgba(201,169,106,0.28)" stroke-width="1.1" stroke-linejoin="round"/>';
+    const bub=R.map(r=>{const c=GEO[r.key];if(!c)return'';const rev=r.perf.total_rev_m;const rad=6+Math.sqrt(rev)/Math.sqrt(maxRev)*15;const deep=r.drop>=57;const fill=deep?'#D98C63':'#C9A96A';const right=c[0]>185;const lx=right?c[0]-rad-5:c[0]+rad+5;const anc=right?'end':'start';const nm=r.key.replace(/(군|시)$/,'');const ci=cByK[r.key];const outv=ci&&ci.out_ratio!=null?ci.out_ratio:null;
+      return `<circle cx="${c[0]}" cy="${c[1]}" r="${(rad+2.5).toFixed(1)}" fill="none" stroke="${fill}" stroke-opacity="0.25" stroke-width="1"/>`+
+        `<circle cx="${c[0]}" cy="${c[1]}" r="${rad.toFixed(1)}" fill="${fill}" fill-opacity="0.9" stroke="#0D131F" stroke-width="1.2"/>`+
+        `<text x="${lx.toFixed(0)}" y="${(c[1]-2).toFixed(0)}" text-anchor="${anc}" font-size="10" font-weight="800" fill="#F2F5FB">${nm}</text>`+
+        `<text x="${lx.toFixed(0)}" y="${(c[1]+8).toFixed(0)}" text-anchor="${anc}" font-size="8.6" fill="#E7CE96">${rev.toFixed(0)}<tspan fill="#697086"> · </tspan><tspan fill="#E0896A">▼${r.drop}%</tspan></text>`+
+        (outv!=null?`<text x="${lx.toFixed(0)}" y="${(c[1]+17).toFixed(0)}" text-anchor="${anc}" font-size="8.2" fill="#8ee0b1">외지인 ${outv}%</text>`:'');}).join('');
+    document.getElementById('mapWrap').innerHTML=`<svg viewBox="0 0 300 360" style="width:100%;max-width:400px;height:auto;display:block;margin:2px auto 0">${KOREA}${bub}</svg>`+
+      `<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:4px;font-size:10px;color:var(--sub)"><span>◍ 크기=기여액(백만)</span><span><span style="color:#D98C63">●</span> 진함=저수요 낙폭 큼</span><span><span style="color:#8ee0b1">외지인%</span>=관광소비 의존</span></div>`;
+
+    // ── 오른쪽 지표 카드 (API 지표 종합) ──
+    const byRevR=[...R].sort((a,b)=>b.perf.total_rev_m-a.perf.total_rev_m);
+    const deepest=[...R].sort((a,b)=>b.drop-a.drop)[0];
+    let topOut=null; if(C&&C.byRegion){const oo=C.byRegion.filter(x=>x.out_ratio!=null); if(oo.length)topOut=oo.sort((a,b)=>b.out_ratio-a.out_ratio)[0];}
+    const short=s=>s.replace(/(군|시)$/,'');
+    const HL=[
+      {v:byRevR[0].perf.total_rev_m.toFixed(0),s:'백만',l:'최대 기여',r:short(byRevR[0].key),c:'#E7CE96'},
+      {v:'▼'+deepest.drop+'%',s:'6월',l:'최심 저수요',r:short(deepest.key),c:'#E0896A'},
+      {v:topOut?topOut.out_ratio+'%':'—',s:'',l:'외지인 소비의존 최고',r:topOut?short(topOut.key):'',c:'#8ee0b1'},
+      {v:lowEff[0]?lowEff[0].eff.toFixed(2):'—',s:'',l:'확장 여지(저전환)',r:lowEff[0]?short(lowEff[0].k):'',c:'#6FA8DC'},
+    ];
+    let ins='<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">'+HL.map(h=>`<div style="background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:11px;padding:11px 13px"><div style="font-size:9.5px;color:var(--dim);font-weight:600">${h.l}</div><div style="font-size:19px;font-weight:800;letter-spacing:-.4px;color:${h.c};margin-top:3px">${h.v}<span style="font-size:10px;color:var(--dim);font-weight:600"> ${h.s}</span></div><div style="font-size:10.5px;color:var(--sub);font-weight:700;margin-top:1px">${h.r}</div></div>`).join('')+'</div>';
+    ins+='<table class="rt" style="margin-top:12px"><thead><tr><th>시군구</th><th class="num">월평균 방문</th><th class="num">외지인비중</th><th class="num">전환효율</th></tr></thead><tbody>';
+    byRevR.forEach(r=>{const ci=cByK[r.key];const outv=ci&&ci.out_ratio!=null?ci.out_ratio+'%':'—';const eff=r.yavg?(r.perf.total_rev_m/(r.yavg/10000)).toFixed(2):'—';
+      ins+=`<tr><td><b>${r.key}</b></td><td class="num">${man(r.yavg)}</td><td class="num"><b style="color:#8ee0b1">${outv}</b></td><td class="num">${eff}</td></tr>`;});
+    ins+='</tbody></table><div class="src" style="margin-top:8px">지표 출처 · 방문=데이터랩 이동통신 · 외지인비중=데이터랩 관광소비(구조) · 전환효율=기여액÷방문(만)</div>';
+    document.getElementById('mapInsight').innerHTML=ins;
+  } else { document.getElementById('regTable2').innerHTML='<tbody><tr><td>지역별 데이터 로딩 대기.</td></tr></tbody>'; }
 
   // ACT3
   document.getElementById('act3kpi').innerHTML=[
