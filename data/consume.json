@@ -1,15 +1,18 @@
 {
   "meta": {
-    "updated": "2026-07-07T11:24:09+09:00",
+    "updated": "2026-07-07T13:36:02+09:00",
     "baseYm": "202605",
-    "source": "공공데이터포털 · 한국관광공사 지역별 관광 자원 수요(15152138) · AreaTarResDemService/areaTarSvcDemList",
-    "note": "값=관광수요지수 구성 소비액 지표(상대지수 0~100, 원화 아님) · 월 1회(16일) 갱신"
+    "source": "데이터랩 지역별 관광 자원 수요(15152138)·수요강도(15151868) · AreaTarResDemService/AreaTarDemDsService",
+    "note": "값=관광수요지수 구성 지표(상대지수 0~100, 원화 아님) · 월 1회(16일) 갱신 · 외지인소비비중=관광객이 지역 소비에서 차지하는 비중"
   },
   "ixName": {
-    "lodge": "숙박업",
-    "food": "식음료",
-    "shop": "쇼핑업",
-    "leisure": "여가서비스업"
+    "lodge": "숙박업 소비액",
+    "food": "식음료 소비액",
+    "shop": "쇼핑업 소비액",
+    "leisure": "여가서비스업 소비액",
+    "out_spend": "외지인 소비액",
+    "out_ratio": "외지인 소비비중",
+    "spend_per_visit": "방문량 대비 소비액"
   },
   "byRegion": [
     {
@@ -19,7 +22,10 @@
       "lodge": 70.69,
       "food": 61.92,
       "shop": 59.89,
-      "leisure": 62.78
+      "leisure": 62.78,
+      "out_spend": 71.28,
+      "out_ratio": 80.71,
+      "spend_per_visit": 87.19
     },
     {
       "key": "삼척시",
@@ -28,7 +34,10 @@
       "lodge": 67.34,
       "food": 61.9,
       "shop": 59.84,
-      "leisure": 61.09
+      "leisure": 61.09,
+      "out_spend": 65.43,
+      "out_ratio": 73.5,
+      "spend_per_visit": 65.52
     },
     {
       "key": "고성군",
@@ -37,7 +46,10 @@
       "lodge": 69.72,
       "food": 61.89,
       "shop": 59.84,
-      "leisure": 61.3
+      "leisure": 61.3,
+      "out_spend": 65.98,
+      "out_ratio": 81.64,
+      "spend_per_visit": 75.56
     },
     {
       "key": "양양군",
@@ -46,7 +58,10 @@
       "lodge": 67.63,
       "food": 61.92,
       "shop": 59.85,
-      "leisure": 61.59
+      "leisure": 61.59,
+      "out_spend": 67.35,
+      "out_ratio": 82.05,
+      "spend_per_visit": 78.84
     },
     {
       "key": "부안군",
@@ -55,7 +70,10 @@
       "lodge": 66.83,
       "food": 61.88,
       "shop": 59.85,
-      "leisure": 60.81
+      "leisure": 60.81,
+      "out_spend": 65.62,
+      "out_ratio": 84.0,
+      "spend_per_visit": 70.37
     },
     {
       "key": "단양군",
@@ -64,7 +82,10 @@
       "lodge": 66.78,
       "food": 61.89,
       "shop": 59.83,
-      "leisure": 61.06
+      "leisure": 61.06,
+      "out_spend": 65.52,
+      "out_ratio": 83.38,
+      "spend_per_visit": 79.34
     },
     {
       "key": "남해군",
@@ -73,7 +94,10 @@
       "lodge": 68.28,
       "food": 61.89,
       "shop": 59.83,
-      "leisure": 61.02
+      "leisure": 61.02,
+      "out_spend": 64.85,
+      "out_ratio": 83.25,
+      "spend_per_visit": 69.79
     },
     {
       "key": "진도군",
@@ -82,7 +106,10 @@
       "lodge": 66.94,
       "food": 61.85,
       "shop": 59.82,
-      "leisure": 60.79
+      "leisure": 60.79,
+      "out_spend": 62.91,
+      "out_ratio": 82.69,
+      "spend_per_visit": 58.57
     },
     {
       "key": "청송군",
@@ -91,7 +118,10 @@
       "lodge": 66.58,
       "food": 61.86,
       "shop": 59.82,
-      "leisure": 60.79
+      "leisure": 60.79,
+      "out_spend": 63.1,
+      "out_ratio": 83.47,
+      "spend_per_visit": 63.75
     }
   ],
   "lodgeTrend": {
@@ -110,7 +140,7 @@
       "2026-05"
     ],
     "values": [
-      70.44,
+      70.75,
       72.77,
       74.98,
       70.08,
