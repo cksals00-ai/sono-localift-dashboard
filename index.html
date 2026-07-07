@@ -208,6 +208,14 @@
     </div>
   </section>
 
+  <!-- MARKETING PLAYBOOK -->
+  <section class="sec reveal">
+    <div class="actno">MARKETING PLAYBOOK — 적용한 마케팅 기법</div>
+    <div class="big">데이터를 <b>실행 전략</b>으로.</div>
+    <div class="kw"><span>8개 마케팅 기법</span><span>모두 데이터 근거</span><span>진단 → 실행 → 검증</span></div>
+    <div class="grid k4" style="margin-top:22px" id="playbook"></div>
+  </section>
+
   <footer>
     <b style="color:var(--sub)">데이터 출처</b> · 방문 수요 = <a href="https://www.data.go.kr/data/15101972/openapi.do" target="_blank" rel="noopener">한국관광공사 관광빅데이터 지역별 방문자수 OpenAPI(15101972)</a> · 실적 = 소노 온라인영업팀 예약자료(취소 제외) · 인구감소지역 = 행정안전부 지정<br>
     <b style="color:var(--sub)">검증</b> · <a href="https://github.com/cksals00-ai/sono-localift-dashboard/actions" target="_blank" rel="noopener">자동갱신 실행 이력(GitHub Actions)</a> · <a href="data/dashboard_data.json" target="_blank" rel="noopener">원본 데이터(JSON)</a> · 매일 06:00 KST 자동갱신<br>
@@ -401,15 +409,31 @@ function render(S,V,C){
         backgroundColor:c=>{const a=c.chart.chartArea;if(!a)return'transparent';const gr=c.chart.ctx.createLinearGradient(0,a.top,0,a.bottom);gr.addColorStop(0,'rgba(201,169,106,.22)');gr.addColorStop(1,'rgba(201,169,106,0)');return gr;}}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'숙박 소비지수 '+c.parsed.y}}},
         scales:{y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{font:{size:9}}},x:{grid:{display:false},ticks:{maxTicksLimit:6,font:{size:9}}}}}});
-    const rows=[...C.byRegion].sort((a,b)=>(b.lodge||0)-(a.lodge||0));
-    let ct='<thead><tr><th>시군구</th><th class="num">숙박</th><th class="num">식음료</th><th class="num">쇼핑</th><th class="num">여가</th></tr></thead><tbody>';
-    rows.forEach(r=>{ct+=`<tr><td><b>${r.key}</b></td><td class="num"><b style="color:${GOLD2}">${r.lodge??'—'}</b></td><td class="num">${r.food??'—'}</td><td class="num">${r.shop??'—'}</td><td class="num">${r.leisure??'—'}</td></tr>`;});
+    const rows=[...C.byRegion].sort((a,b)=>(b.out_ratio||0)-(a.out_ratio||0));
+    const ors=rows.map(r=>r.out_ratio).filter(v=>v!=null);
+    const avgOut=ors.length?Math.round(ors.reduce((a,b)=>a+b,0)/ors.length):null;
+    let ct='<thead><tr><th>시군구</th><th class="num">숙박소비</th><th class="num">외지인소비</th><th class="num">외지인비중</th></tr></thead><tbody>';
+    rows.forEach(r=>{ct+=`<tr><td><b>${r.key}</b></td><td class="num">${r.lodge??'—'}</td><td class="num">${r.out_spend??'—'}</td><td class="num"><b style="color:${GOLD2}">${r.out_ratio!=null?r.out_ratio+'%':'—'}</b></td></tr>`;});
     document.getElementById('consumeTable').innerHTML=ct+'</tbody>';
-    document.getElementById('consumeSrc').innerHTML='출처 · 데이터랩 <b>지역별 관광 자원 수요</b> API(15152138) · 값=관광수요지수 구성 소비액 지표(상대지수 0~100, 원화 아님). 소노 숙박 유치가 지역 <b>숙박·식음료·쇼핑 소비</b>로 확산됨을 공공데이터로 교차확인.';
+    document.getElementById('consumeSrc').innerHTML=(avgOut!=null?`<b style="color:var(--sub)">핵심</b> · 9개 지역 <b>외지인 소비비중 평균 ${avgOut}%</b> — 지역 소비의 대부분을 <b>외부 관광객</b>이 만든다. 소노가 유입시킨 관광객이 곧 지역 소비다(풍선효과 정량 증거).<br>`:'')+'출처 · 데이터랩 <b>지역별 관광 자원 수요(15152138)·수요강도(15151868)</b> · 상대지수 0~100. 숙박소비=업종 소비액 지수, 외지인비중=전체 소비 중 외지인 비율.';
   } else {
     document.getElementById('consumeTable').innerHTML='<tbody><tr><td>데이터랩 소비지수 로딩 대기 — scripts/fetch_consume.py 실행 후 표시됩니다.</td></tr></tbody>';
     document.getElementById('consumeSrc').innerHTML='데이터랩 지역별 관광 자원 수요 API(15152138) 연동 · 활용신청(무료) 승인 완료.';
   }
+
+  // ── MARKETING PLAYBOOK ──
+  const avgOutR=(C&&C.byRegion)?(()=>{const v=C.byRegion.map(r=>r.out_ratio).filter(x=>x!=null);return v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length):null;})():null;
+  const PLAY=[
+    {n:'01 · COUNTER-SEASONAL',t:'역계절 수요 평준화',d:`방문 최저 <b>6월(-${dropPeak}%)</b> 저수요 구간에 숙세페 집중 — 빈 객실을 매출로 전환.`},
+    {n:'02 · ANCHOR-HUB',t:'앵커 허브 집객 전환',d:`홍천 <b>비발디파크·오션월드</b>(최대 집객)를 앵커로, 지역 숙박소비지수 1위·외지인 소비 견인.`},
+    {n:'03 · CO-MARKETING',t:'국가 캠페인 레버리지',d:`정부 <b>숙세페</b>에 상품을 얹어 인지도·마케팅비 레버리지(비수기 ${S.macro.spend_eok}억 유발 캠페인 편승).`},
+    {n:'04 · CHANNEL MIX',t:'채널 다변화',d:`<b>OTA ${otaPct}%</b>로 신규·외부 수요 유입, 자체 <b>GOTA ${100-otaPct}%</b>로 마진 방어.`},
+    {n:'05 · GEO-TARGETING',t:'지오·세그먼트 타깃팅',d:`<b>인구감소지역 100%</b>, 데이터랩 낙폭 큰 지역일수록 상품을 두껍게 배치.`},
+    {n:'06 · SPILLOVER',t:'풍선효과 · 지역 낙수',d:`객실 외 부대소비 <b>${spillPct}%</b>${avgOutR!=null?` + 외지인 소비비중 <b>${avgOutR}%</b>`:''} — 숙박이 지역 상권 소비로 확산.`},
+    {n:'07 · YIELD MGMT',t:'객단가(ADR) 방어',d:`비수기 할인에도 평균 <b>ADR ${g.adr_k}천원</b> 유지 — 수익성 훼손 최소화.`},
+    {n:'08 · DATA CLOSED-LOOP',t:'데이터 폐순환 검증',d:`데이터랩으로 <b>진단→실행→성과→검증</b>을 같은 공공지표로 순환(YoY·소비지수 라이브).`},
+  ];
+  document.getElementById('playbook').innerHTML=PLAY.map(p=>`<div class="card"><div style="font-size:10px;letter-spacing:1.2px;color:var(--gold);font-weight:700">${p.n}</div><div style="font-size:14px;font-weight:800;margin-top:6px;letter-spacing:-.2px">${p.t}</div><div style="font-size:11.5px;color:var(--sub);margin-top:7px;line-height:1.55">${p.d}</div></div>`).join('');
 
   const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));

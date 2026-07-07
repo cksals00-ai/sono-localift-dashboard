@@ -21,9 +21,13 @@ from urllib.error import URLError, HTTPError
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "consume.json"
-BASE = "https://apis.data.go.kr/B551011/AreaTarResDemService"
+BASE = "https://apis.data.go.kr/B551011/AreaTarResDemService"   # 자원수요(15152138): 업종별 소비액·SNS
 OP = "areaTarSvcDemList"
+DS_BASE = "https://apis.data.go.kr/B551011/AreaTarDemDsService"  # 수요강도(15151868): 외지인 소비 강도
+DS_OP = "areaTarExpDsList"
 KEY = os.getenv("DATA_GO_KR_KEY", "").strip()
+# 소비강도 지표: 2201 외지인 소비액, 2202 전체 대비 외지인소비액 비중, 2203 방문량 대비 소비액
+DS_IX = {"2201": "out_spend", "2202": "out_ratio", "2203": "spend_per_visit"}
 
 # 소노 소재 9개 인구감소 시군구 (법정동 areaCd/signguCd · 고성=강원 51820)
 REGIONS = [
@@ -39,20 +43,20 @@ REGIONS = [
 ]
 # 소비액 지표 (풍선효과=객실 외 지역 소비)
 IX = {"1107": "lodge", "1106": "food", "1105": "shop", "1108": "leisure"}
-IX_NM = {"lodge": "숙박업", "food": "식음료", "shop": "쇼핑업", "leisure": "여가서비스업"}
+IX_NM = {"lodge": "숙박업 소비액", "food": "식음료 소비액", "shop": "쇼핑업 소비액", "leisure": "여가서비스업 소비액",
+         "out_spend": "외지인 소비액", "out_ratio": "외지인 소비비중", "spend_per_visit": "방문량 대비 소비액"}
 
 
-def api(params):
+def api(base, op, params):
     q = urlencode({**params, "serviceKey": KEY, "MobileOS": "ETC",
                    "MobileApp": "SonoLift", "_type": "json"}, safe="%")
-    req = Request(f"{BASE}/{OP}?{q}", headers={"User-Agent": "SonoLift/1.0"})
+    req = Request(f"{base}/{op}?{q}", headers={"User-Agent": "SonoLift/1.0"})
     with urlopen(req, timeout=60) as r:
         raw = r.read().decode("utf-8", errors="replace")
     if not raw.lstrip().startswith("{"):
         raise ValueError(f"JSON 아님 ← {raw[:200]}")
     data = json.loads(raw)
-    resp = data.get("response") or {}
-    body = resp.get("body") or {}
+    body = (data.get("response") or {}).get("body") or {}
     wrap = body.get("items")
     items = (wrap or {}).get("item", []) if isinstance(wrap, dict) else []
     if isinstance(items, dict):
@@ -61,11 +65,24 @@ def api(params):
 
 
 def get_val(area, signgu, ym, ixcd):
+    """자원수요: 업종별 소비액 지수 (tarSvcDemIxVal)."""
     try:
-        items = api({"numOfRows": 10, "pageNo": 1, "baseYm": ym,
-                     "areaCd": area, "signguCd": signgu, "tarSvcDemIxCd": ixcd})
-        for it in items:
+        for it in api(BASE, OP, {"numOfRows": 10, "pageNo": 1, "baseYm": ym,
+                                 "areaCd": area, "signguCd": signgu, "tarSvcDemIxCd": ixcd}):
             v = it.get("tarSvcDemIxVal")
+            if v not in (None, ""):
+                return round(float(v), 2)
+    except (HTTPError, URLError, ValueError, KeyError):
+        pass
+    return None
+
+
+def get_ds(area, signgu, ym, ixcd):
+    """수요강도: 외지인 소비 강도 지수 (tarExpDsIxVal)."""
+    try:
+        for it in api(DS_BASE, DS_OP, {"numOfRows": 10, "pageNo": 1, "baseYm": ym,
+                                       "areaCd": area, "signguCd": signgu, "tarExpDsIxCd": ixcd}):
+            v = it.get("tarExpDsIxVal")
             if v not in (None, ""):
                 return round(float(v), 2)
     except (HTTPError, URLError, ValueError, KeyError):
@@ -112,11 +129,14 @@ def main():
     by_region = []
     for r in REGIONS:
         row = {"key": r["key"], "loc": r["loc"], "hero": r["hero"]}
-        for ixcd, name in IX.items():
+        for ixcd, name in IX.items():          # 자원수요: 업종별 소비액
             row[name] = get_val(r["area"], r["signgu"], ym, ixcd)
             time.sleep(0.05)
+        for ixcd, name in DS_IX.items():        # 수요강도: 외지인 소비 강도
+            row[name] = get_ds(r["area"], r["signgu"], ym, ixcd)
+            time.sleep(0.05)
         by_region.append(row)
-        print(f"  {r['key']}: 숙박={row['lodge']} 식음료={row['food']} 쇼핑={row['shop']} 여가={row['leisure']}")
+        print(f"  {r['key']}: 숙박={row['lodge']} 여가={row['leisure']} | 외지인소비비중={row['out_ratio']} 외지인소비액={row['out_spend']}")
 
     # 2) 숙박업 소비액(1107) 12개월 추이 — 9개 지역 평균
     months = month_seq(ym, 12)
@@ -130,8 +150,8 @@ def main():
     out = {
         "meta": {
             "updated": now, "baseYm": ym,
-            "source": "공공데이터포털 · 한국관광공사 지역별 관광 자원 수요(15152138) · AreaTarResDemService/areaTarSvcDemList",
-            "note": "값=관광수요지수 구성 소비액 지표(상대지수 0~100, 원화 아님) · 월 1회(16일) 갱신",
+            "source": "데이터랩 지역별 관광 자원 수요(15152138)·수요강도(15151868) · AreaTarResDemService/AreaTarDemDsService",
+            "note": "값=관광수요지수 구성 지표(상대지수 0~100, 원화 아님) · 월 1회(16일) 갱신 · 외지인소비비중=관광객이 지역 소비에서 차지하는 비중",
         },
         "ixName": IX_NM,
         "byRegion": by_region,
