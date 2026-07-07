@@ -212,8 +212,8 @@
   <section class="sec reveal">
     <div class="actno">MARKETING PLAYBOOK — 적용한 마케팅 기법</div>
     <div class="big">데이터를 <b>실행 전략</b>으로.</div>
-    <div class="kw"><span>6개 핵심 마케팅 기법</span><span>개념·적용·데이터·지역편익</span><span>모두 공공데이터 근거</span></div>
-    <div class="grid cc" style="margin-top:22px" id="playbook"></div>
+    <div class="kw"><span>6개 핵심 마케팅 기법</span><span>지표 · 개념 시각화</span><span>모두 공공데이터 근거</span></div>
+    <div class="grid k3" style="margin-top:22px" id="playbook"></div>
   </section>
 
   <footer>
@@ -424,41 +424,36 @@ function render(S,V,C){
   // ── MARKETING PLAYBOOK ──
   const avgOutR=(C&&C.byRegion)?(()=>{const v=C.byRegion.map(r=>r.out_ratio).filter(x=>x!=null);return v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length):null;})():null;
   const outTxt=avgOutR!=null?`${avgOutR}%`:'80%+';
+  const SV='width="42" height="42" viewBox="0 0 40 40" fill="none" stroke="#C9A96A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"';
+  const ICON={
+    smooth:`<svg ${SV}><rect x="5" y="15" width="6" height="17" rx="1"/><rect x="17" y="24" width="6" height="8" rx="1"/><rect x="29" y="11" width="6" height="21" rx="1"/><path d="M20 21 V10 M16 14 L20 10 L24 14" stroke="#8ee0b1"/></svg>`,
+    anchor:`<svg ${SV}><circle cx="20" cy="20" r="5"/><circle cx="7" cy="9" r="2.6"/><circle cx="33" cy="9" r="2.6"/><circle cx="7" cy="31" r="2.6"/><circle cx="33" cy="31" r="2.6"/><path d="M16.5 17 L9 11 M23.5 17 L31 11 M16.5 23 L9 29 M23.5 23 L31 29"/></svg>`,
+    ppp:`<svg ${SV}><circle cx="15" cy="20" r="9.5"/><circle cx="25" cy="20" r="9.5"/></svg>`,
+    channel:`<svg ${SV}><circle cx="20" cy="29" r="4"/><path d="M9 8 L18 26 M31 8 L22 26 M20 6 V25"/></svg>`,
+    target:`<svg ${SV}><circle cx="20" cy="20" r="12.5"/><circle cx="20" cy="20" r="6.5"/><circle cx="20" cy="20" r="1.6" fill="#C9A96A"/></svg>`,
+    ripple:`<svg ${SV}><circle cx="20" cy="20" r="2.6" fill="#C9A96A"/><circle cx="20" cy="20" r="8"/><circle cx="20" cy="20" r="13.5" stroke="#8ee0b1"/></svg>`,
+  };
   const PLAY=[
-    {n:'01',en:'Off-season Demand Smoothing',t:'비수기 수요 평준화',
-     concept:'— 관광 수요의 계절 편중은 비수기 시설·고용·상권을 유휴화시킨다. 저수요 시기에 수요를 창출해 연중 부하를 고르게 만드는 수요관리 기법.',
-     apply:`— 데이터랩 이동통신 방문자수로 소노 9개 지역의 <b>공통 최저월(6월)</b>을 특정하고, 국가 숙세페를 정확히 그 구간에 집중 집행.`,
-     data:`— 6월 방문은 성수기 대비 <b>-${dropPeak}%</b>(지역별 -49~-62%). 이 저수요 구간에 <b>${g.rn.toLocaleString()}박</b>을 창출.`,
-     benefit:'— 비수기 지역 관광 공백을 메워 지역 숙박·상권의 <b>연중 가동률과 고용을 안정</b>. 지방관광의 계절 리스크 완화.'},
-    {n:'02',en:'Anchor-Hub Conversion',t:'앵커 허브 집객 전환',
-     concept:'— 대형 집객시설(앵커)이 모은 방문객을 인근 지역 소비·체류로 흘려보내는 허브 전략. 앵커가 지역 전체의 관문이 된다.',
-     apply:'— 홍천 <b>비발디파크·오션월드</b>(연 수백만 집객)를 앵커로, 숙세페 상품으로 체류를 유도해 지역 숙박·부대 소비로 전환.',
-     data:`— 홍천 데이터랩 <b>숙박소비지수 70.69(9곳 1위)</b>·방문자수 1위(월평균 183만). 소노 홍천 지역기여 7.2억.`,
-     benefit:'— 민간 대형시설의 집객을 <b>지역 소비로 전환</b>해 파급을 극대화. 관문형 지역관광 모델을 실증.'},
-    {n:'03',en:'Public-Private Co-Marketing',t:'민관 협력 캠페인',
-     concept:'— 정부·공사의 국가 캠페인과 민간의 실행력을 결합해 정책 효과를 실물 성과로 구현하는 협력 마케팅.',
-     apply:'— 문체부·관광공사 <b>숙박세일페스타</b> 기간에 소노 14개 사업장·54개 패키지를 정렬해 집행.',
-     data:`— 숙세페 전국 유발 <b>${S.macro.spend_eok}억·관광객 ${S.macro.visitors_man}만명</b>(데이터랩·ONDA). 소노는 그 실행 채널로 인구감소지역 <b>${eok(g.total_rev_m)}</b> 기여.`,
-     benefit:'— 국가 정책(비수기·지방관광 진작)을 민간이 현장에서 <b>집행·증명</b> → 정책 ROI 가시화. 지자체가 못 하는 실행 인프라를 민간이 보완.'},
-    {n:'04',en:'Channel Diversification',t:'채널 다변화 외부 유입',
-     concept:'— 단일 채널 의존을 줄이고 OTA·자체·제휴 채널을 병행해 신규·외부 고객 접점을 넓히는 유통 전략.',
-     apply:`— <b>OTA(대외 노출)</b>로 외지 신규 관광객을 유입하고, 자체 채널을 병행해 지역 예약 접근성을 확대.`,
-     data:`— OTA <b>${otaPct}%</b>(외부·신규 유입) + 자체 GOTA ${100-otaPct}%. 데이터랩 외지인 소비비중 <b>${outTxt}</b>로 순 외부 유입 확인.`,
-     benefit:'— 인지도 낮은 인구감소지역에 <b>외부 관광객을 대량 유입</b> — 지역 밖 신규 수요를 지역으로 연결.'},
-    {n:'05',en:'Geo-Targeting for Revitalization',t:'지방소멸 대응 지오타깃팅',
-     concept:'— 데이터로 우선순위 지역을 선별해 한정된 자원을 가장 필요한 곳에 집중 배치하는 지역 타깃팅.',
-     apply:'— 소노 소재지 중 행안부 <b>인구감소지역만 100%</b> 선별, 데이터랩 저수요 낙폭이 큰 지역일수록 상품 비중을 상향.',
-     data:'— 14개 사업장 전량 인구감소지역(9개 시군구). 낙폭 <b>청송 -62%·양양 -59%</b> 등 취약지 우선.',
-     benefit:'— 지방소멸 위기 지역에 관광 수요를 <b>집중 주입</b> — 정부 지방소멸대응 아젠다와 정합, 취약지 우선 배분.'},
-    {n:'06',en:'Spillover & Net-New Demand',t:'풍선효과 · 외부수요 창출',
-     concept:'— 숙박 유치가 객실을 넘어 F&B·부대·지역 상권 소비로 번지고(풍선효과), 그 수요가 외부 순유입일 때 지역경제 순증이 발생.',
-     apply:'— 워터파크·F&B·부대시설을 결합한 패키지로 체류 중 <b>지역 소비</b>를 유도.',
-     data:`— 총매출의 <b>${spillPct}%(${spill.toFixed(1)}백만)</b>가 객실 외 부대소비. 데이터랩 외지인 소비비중 <b>${outTxt}</b> = 외부에서 유입된 순 신규 소비.`,
-     benefit:'— 지역 상권(식당·상점·레저)에 낙수하고, <b>지역 내수를 잠식하지 않는 순수 외부 관광 소비</b>를 유입 = 지역경제 실질 순증.'},
+    {ic:ICON.smooth, metric:`-${dropPeak}%`, ml:'6월 방문 낙폭', t:'비수기 수요 평준화', en:'Off-season smoothing',
+     note:`저수요 6월에 숙세페 <b>${g.rn.toLocaleString()}박</b> 집중 → 지역 연중 가동률·고용 안정.`},
+    {ic:ICON.anchor, metric:'70.69', ml:'홍천 숙박소비 1위', t:'앵커 허브 집객 전환', en:'Anchor-hub',
+     note:'비발디파크·오션월드 집객을 <b>지역 숙박·소비</b>로 전환.'},
+    {ic:ICON.ppp, metric:`${S.macro.spend_eok}억`, ml:'숙세페 전국 유발', t:'민관 협력 캠페인', en:'Public-private',
+     note:'국가 숙세페(정부)를 <b>민간이 현장 집행·증명</b>. 정책 ROI 가시화.'},
+    {ic:ICON.channel, metric:`${otaPct}%`, ml:'OTA 외부 유입', t:'채널 다변화 유입', en:'Channel mix',
+     note:'OTA 등 다채널로 <b>외부·신규 관광객</b>을 인구감소지역으로 유입.'},
+    {ic:ICON.target, metric:'100%', ml:'인구감소지역', t:'지방소멸 대응 타깃팅', en:'Geo-targeting',
+     note:'취약지(<b>청송 -62%</b>) 우선 — 지방소멸 위기지역에 수요 집중.'},
+    {ic:ICON.ripple, metric:outTxt, ml:'외지인 소비비중', t:'풍선효과·외부수요', en:'Spillover',
+     note:`부대소비 <b>${spillPct}%</b> + 외부 순유입 = 지역경제 <b>실질 순증</b>.`},
   ];
   document.getElementById('playbook').innerHTML=PLAY.map(p=>`<div class="card">`+
-    `<div style="display:flex;gap:9px;align-items:baseline;flex-wrap:wrap"><span style="font-size:11px;color:var(--gold);font-weight:800;letter-spacing:1px">${p.n}</span><span style="font-size:15px;font-weight:800;letter-spacing:-.3px">${p.t}</span><span style="font-size:10px;color:var(--dim);font-weight:500;text-transform:uppercase;letter-spacing:.5px">${p.en}</span></div>`+
-    `<div style="font-size:12px;color:var(--sub);margin-top:10px;line-height:1.72"><b style="color:var(--gold2)">개념</b> ${p.concept}<br><b style="color:var(--gold2)">적용</b> ${p.apply}<br><b style="color:var(--gold2)">데이터</b> ${p.data}<br><b style="color:var(--good)">지역·국가 편익</b> ${p.benefit}</div>`+
+    `<div style="display:flex;justify-content:space-between;align-items:center">${p.ic}`+
+    `<div style="text-align:right"><div style="font-size:25px;font-weight:800;letter-spacing:-.6px;background:linear-gradient(120deg,#fff,var(--gold2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">${p.metric}</div>`+
+    `<div style="font-size:9.5px;color:var(--dim);margin-top:1px">${p.ml}</div></div></div>`+
+    `<div style="font-size:14.5px;font-weight:800;margin-top:14px;letter-spacing:-.2px">${p.t}</div>`+
+    `<div style="font-size:9.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.7px;margin-top:2px">${p.en}</div>`+
+    `<div style="font-size:11.5px;color:var(--sub);margin-top:9px;line-height:1.55">${p.note}</div>`+
     `</div>`).join('');
 
   const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
