@@ -277,10 +277,10 @@ function render(S,V,C){
   document.getElementById('footStamp').textContent='실적 기준 '+S.meta.updated+' · 방문데이터 자동갱신 '+stamp;
 
   document.getElementById('heroStats').innerHTML=[
-    {v:eok(g.total_rev_m),l:'인구감소지역 경제 기여액'},
-    {v:'100%',l:'인구감소지역 집중 ('+g.props+'곳)'},
-    {v:g.rn.toLocaleString()+'박',l:'숙세페 6–7월 수요 창출'},
-    {v:Math.round((g.total_rev_m-g.room_rev_m)/g.total_rev_m*100)+'%',l:'전체 매출 中 부대시설 매출 비중'},
+    {v:eok(g.total_rev_m),l:'인구감소지역에 창출한 경제 기여액'},
+    {v:'100%',l:'사업장 전부('+g.props+'곳)가 인구감소지역 소재'},
+    {v:g.rn.toLocaleString()+'박',l:'숙세페(6–7월) 판매한 객실'},
+    {v:Math.round((g.total_rev_m-g.room_rev_m)/g.total_rev_m*100)+'%',l:'총매출의 약 절반이 객실 外 부대매출'},
   ].map(p=>`<div class="p"><div class="pv">${p.v}</div><div class="pl">${p.l}</div></div>`).join('');
   document.getElementById('kwRev').textContent=eok(g.total_rev_m);
   document.getElementById('kwRn').textContent=g.rn.toLocaleString()+'박';
