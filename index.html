@@ -412,22 +412,22 @@ function render(S,V,C){
     document.getElementById('mapWrap').innerHTML=`<svg viewBox="0 0 300 360" style="width:100%;max-width:400px;height:auto;display:block;margin:2px auto 0">${KOREA}${bub}</svg>`+
       `<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:4px;font-size:10px;color:var(--sub)"><span>◍ 크기=기여액(백만)</span><span><span style="color:#D98C63">●</span> 진함=저수요 낙폭 큼</span><span><span style="color:#8ee0b1">외지인%</span>=관광소비 의존</span></div>`;
 
-    // ── 오른쪽 지표 카드 (API 지표 종합) ──
-    const byRevR=[...R].sort((a,b)=>b.perf.total_rev_m-a.perf.total_rev_m);
+    // ── 오른쪽 지표 카드 (데이터랩 수요·소비 지표 · 아래 실행표와 비중복) ──
+    const byVol=[...R].sort((a,b)=>b.yavg-a.yavg);
     const deepest=[...R].sort((a,b)=>b.drop-a.drop)[0];
-    let topOut=null; if(C&&C.byRegion){const oo=C.byRegion.filter(x=>x.out_ratio!=null); if(oo.length)topOut=oo.sort((a,b)=>b.out_ratio-a.out_ratio)[0];}
+    let topOut=null,topLodge=null; if(C&&C.byRegion){const oo=C.byRegion.filter(x=>x.out_ratio!=null); if(oo.length)topOut=oo.sort((a,b)=>b.out_ratio-a.out_ratio)[0]; const ll=C.byRegion.filter(x=>x.lodge!=null); if(ll.length)topLodge=ll.sort((a,b)=>b.lodge-a.lodge)[0];}
     const short=s=>s.replace(/(군|시)$/,'');
     const HL=[
-      {v:byRevR[0].perf.total_rev_m.toFixed(0),s:'백만',l:'최대 기여',r:short(byRevR[0].key),c:'#E7CE96'},
-      {v:'▼'+deepest.drop+'%',s:'6월',l:'최심 저수요',r:short(deepest.key),c:'#E0896A'},
+      {v:Math.round(byVol[0].yavg/10000).toLocaleString(),s:'만',l:'최대 방문 수요',r:short(byVol[0].key),c:'#8fc0ea'},
       {v:topOut?topOut.out_ratio+'%':'—',s:'',l:'외지인 소비의존 최고',r:topOut?short(topOut.key):'',c:'#8ee0b1'},
-      {v:lowEff[0]?lowEff[0].eff.toFixed(2):'—',s:'',l:'확장 여지(저전환)',r:lowEff[0]?short(lowEff[0].k):'',c:'#6FA8DC'},
+      {v:'▼'+deepest.drop+'%',s:'6월',l:'최심 저수요(진단)',r:short(deepest.key),c:'#E0896A'},
+      {v:topLodge?topLodge.lodge:'—',s:'',l:'숙박소비 지수 최고',r:topLodge?short(topLodge.key):'',c:'#E7CE96'},
     ];
     let ins='<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">'+HL.map(h=>`<div style="background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:11px;padding:11px 13px"><div style="font-size:9.5px;color:var(--dim);font-weight:600">${h.l}</div><div style="font-size:19px;font-weight:800;letter-spacing:-.4px;color:${h.c};margin-top:3px">${h.v}<span style="font-size:10px;color:var(--dim);font-weight:600"> ${h.s}</span></div><div style="font-size:10.5px;color:var(--sub);font-weight:700;margin-top:1px">${h.r}</div></div>`).join('')+'</div>';
-    ins+='<table class="rt" style="margin-top:12px"><thead><tr><th>시군구</th><th class="num">월평균 방문</th><th class="num">외지인비중</th><th class="num">전환효율</th></tr></thead><tbody>';
-    byRevR.forEach(r=>{const ci=cByK[r.key];const outv=ci&&ci.out_ratio!=null?ci.out_ratio+'%':'—';const eff=r.yavg?(r.perf.total_rev_m/(r.yavg/10000)).toFixed(2):'—';
-      ins+=`<tr><td><b>${r.key}</b></td><td class="num">${man(r.yavg)}</td><td class="num"><b style="color:#8ee0b1">${outv}</b></td><td class="num">${eff}</td></tr>`;});
-    ins+='</tbody></table><div class="src" style="margin-top:8px">지표 출처 · 방문=데이터랩 이동통신 · 외지인비중=데이터랩 관광소비(구조) · 전환효율=기여액÷방문(만)</div>';
+    ins+='<table class="rt" style="margin-top:12px"><thead><tr><th>시군구</th><th class="num">월평균 방문</th><th class="num">외지인비중</th><th class="num">숙박소비지수</th></tr></thead><tbody>';
+    byVol.forEach(r=>{const ci=cByK[r.key];const outv=ci&&ci.out_ratio!=null?ci.out_ratio+'%':'—';const lod=ci&&ci.lodge!=null?ci.lodge:'—';
+      ins+=`<tr><td><b>${r.key}</b></td><td class="num"><b>${man(r.yavg)}</b></td><td class="num"><b style="color:#8ee0b1">${outv}</b></td><td class="num">${lod}</td></tr>`;});
+    ins+='</tbody></table><div class="src" style="margin-top:8px"><b style="color:var(--sub)">데이터랩 수요·소비 지표</b> — 방문=이동통신, 외지인비중·숙박소비지수=관광소비 API. 숙세페 <b>실행 성과</b>(낙폭·RN·기여액·전환효율)는 아래 표.</div>';
     document.getElementById('mapInsight').innerHTML=ins;
   } else { document.getElementById('regTable2').innerHTML='<tbody><tr><td>지역별 데이터 로딩 대기.</td></tr></tbody>'; }
 
