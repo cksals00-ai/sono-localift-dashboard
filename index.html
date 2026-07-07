@@ -144,6 +144,10 @@
     <div class="actno">ACT 02 · ACTION — 실행</div>
     <div class="big">인구감소지역에, <b>국가 숙세페로 집중</b>.</div>
     <div class="kw"><span>숙세페(정부 주도) 연계</span><span>국가 캠페인 6–7월</span><span>채널 다변화</span><span>인구감소 <b>100%</b> 타깃</span></div>
+    <div style="margin-top:18px;padding:15px 19px;border-radius:14px;background:linear-gradient(90deg,rgba(201,169,106,.12),rgba(111,168,220,.06));border:1px solid rgba(201,169,106,.32)">
+      <span style="font-size:10.5px;color:var(--gold);font-weight:800;letter-spacing:1.2px">무엇을 걸었나 · WHAT WE DID</span>
+      <div style="font-size:13.5px;color:var(--ink);margin-top:7px;line-height:1.65;font-weight:600">14개 사업장 × 채널별 <b style="color:var(--gold2)">11~15% 할인 상품 54개</b> 출시 — <b>객실 + 워터파크·부대시설</b>(일부 굿즈) 결합 패키지를 <b>OTA·GOTA·네이버</b>에 게시해 외부 관광객을 인구감소지역으로 유입.</div>
+    </div>
 
     <div class="grid k4" id="mktChips"></div>
 
@@ -339,18 +343,21 @@ function render(S,V,C){
 
   if(R.length){
     const byVol=[...R].sort((a,b)=>b.yavg-a.yavg);
+    const GL='border-left:1px solid var(--line)';                 // 그룹 구분선
+    const PKBG='background:rgba(91,201,142,.06)';                   // 성수기 틴트
+    const LOBG='background:rgba(224,137,106,.06)';                  // 비수기 틴트
     let t='<thead>'+
       '<tr><th rowspan="2">시군구</th><th rowspan="2">대표 시설</th><th class="num" rowspan="2">월평균<br>방문</th>'+
-      '<th colspan="3" style="text-align:center;color:#8ee0b1;border-bottom:1px solid var(--line)">최고 · 성수기</th>'+
-      '<th colspan="3" style="text-align:center;color:var(--down);border-bottom:1px solid var(--line)">최저 · 비수기</th></tr>'+
-      '<tr><th class="num">월</th><th class="num">방문</th><th class="num">월평균比</th>'+
-      '<th class="num">월</th><th class="num">방문</th><th class="num">월평균比</th></tr>'+
+      `<th colspan="3" style="text-align:center;color:#8ee0b1;border-bottom:1px solid var(--line);${GL};${PKBG}">▲ 최고 · 성수기</th>`+
+      `<th colspan="3" style="text-align:center;color:var(--down);border-bottom:1px solid var(--line);${GL};${LOBG}">▼ 최저 · 비수기</th></tr>`+
+      `<tr><th class="num" style="${GL};${PKBG}">월</th><th class="num" style="${PKBG}">방문</th><th class="num" style="${PKBG}">월평균比</th>`+
+      `<th class="num" style="${GL};${LOBG}">월</th><th class="num" style="${LOBG}">방문</th><th class="num" style="${LOBG}">월평균比</th></tr>`+
       '</thead><tbody>';
     byVol.forEach(r=>{const pk=Math.round((r.peakV/r.yavg-1)*100);const lo=Math.round((r.lowV/r.yavg-1)*100);
       t+=`<tr><td><b>${r.key}</b> <span class="pill dep">인구감소</span></td><td>${r.hero}</td>`+
         `<td class="num"><b>${man(r.yavg)}</b></td>`+
-        `<td class="num">${r.peakM}월</td><td class="num">${man(r.peakV)}</td><td class="num"><span class="up">+${pk}%</span></td>`+
-        `<td class="num"><b>${r.lowM}월</b></td><td class="num"><span class="dn">${man(r.lowV)}</span></td><td class="num"><span class="dn">${lo}%</span></td></tr>`;});
+        `<td class="num" style="${GL};${PKBG}"><b>${r.peakM}월</b></td><td class="num" style="${PKBG}">${man(r.peakV)}</td><td class="num" style="${PKBG}"><span class="up">+${pk}%</span></td>`+
+        `<td class="num" style="${GL};${LOBG}"><b>${r.lowM}월</b></td><td class="num" style="${LOBG}"><span class="dn">${man(r.lowV)}</span></td><td class="num" style="${LOBG}"><span class="dn">${lo}%</span></td></tr>`;});
     document.getElementById('regTable1').innerHTML=t+'</tbody>';
     const ds=R.map(r=>r.drop);
     document.getElementById('reg1note').innerHTML=`※ KTO DataLab <b>외지인+외국인 월평균 방문객</b>(최근 24개월 · 집계 미완성 최근월 제외). <b>성수기는 8월</b>, <b>비수기는 대부분 겨울(2월)</b>이며 성수기 대비 <b>-${Math.min(...ds)}%~-${Math.max(...ds)}%</b>의 계절 편중. 이 취약 구조(인구감소+계절편중)가 국가 숙세페로 진작할 대상이다.`;
