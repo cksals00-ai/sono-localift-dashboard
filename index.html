@@ -108,7 +108,7 @@
       <div class="step"><div class="sn">01 · DATA</div><div class="st">데이터랩 진단</div><div class="sd">이동통신 방문자수(공공)</div><div class="arw">→</div></div>
       <div class="step"><div class="sn">02 · INSIGHT</div><div class="st">6월 최저 수요</div><div class="sd">9개 지역 공통 저수요</div><div class="arw">→</div></div>
       <div class="step"><div class="sn">03 · ACTION</div><div class="st">숙세페 연계</div><div class="sd">국가 캠페인 6–7월 집중</div><div class="arw">→</div></div>
-      <div class="step"><div class="sn">04 · IMPACT</div><div class="st">지역 소비 확산</div><div class="sd">풍선효과 · 부대소비</div><div class="arw">→</div></div>
+      <div class="step"><div class="sn">04 · IMPACT</div><div class="st">지역 소비 확산</div><div class="sd">풍선효과 · 부대시설 매출</div><div class="arw">→</div></div>
       <div class="step"><div class="sn">05 · VALIDATE</div><div class="st">데이터랩 재검증</div><div class="sd">방문·소비 추세 모니터링</div></div>
     </div>
     <div class="src" style="text-align:center">데이터랩은 <b style="color:var(--sub)">진단</b>과 <b style="color:var(--sub)">검증</b>, 양 끝단에 놓인다. 그 사이의 실행과 성과가 소노의 몫이다.</div>
@@ -183,7 +183,7 @@
   <section class="sec reveal">
     <div class="actno">ACT 03 · IMPACT — 성과 & 검증</div>
     <div class="big">숙박을 넘어, <b>지역 소비</b>로.</div>
-    <div class="kw"><span>지역경제 기여 <b id="kwRev">4.50억</b></span><span>부대소비 <b id="kwSpill">50%</b></span><span>숙세페 <b id="kwRn">—</b> 투숙</span><span>인구감소 100%</span></div>
+    <div class="kw"><span>지역경제 기여 <b id="kwRev">4.50억</b></span><span>부대시설 매출 <b id="kwSpill">50%</b></span><span>숙세페 <b id="kwRn">—</b> 투숙</span><span>인구감소 100%</span></div>
 
     <div class="grid k4" id="act3kpi"></div>
     <div class="grid c2">
@@ -206,8 +206,8 @@
         <div class="src" id="effSrc"></div>
       </div>
       <div class="card" id="consumeCard">
-        <h3 class="ct">지역 소비 외부검증 <span id="consumeTag" class="tag plan">연동 예정</span> <span class="q">— DataLab 관광소비 지수</span></h3>
-        <p class="cd" id="consumeCap">풍선효과를 데이터랩 공공지표로 교차검증 · 관광 소비액 지수(0~100)</p>
+        <h3 class="ct">지역 관광소비 구조 <span id="consumeTag" class="tag plan">연동 예정</span> <span class="q">— DataLab 지수 · 구조 지표</span></h3>
+        <p class="cd" id="consumeCap">지역의 관광소비 의존도를 데이터랩 공공지표로 · 관광 소비액 지수(0~100)</p>
         <div class="chart-box" style="height:150px"><canvas id="consumeChart"></canvas></div>
         <div style="overflow:auto;margin-top:10px"><table class="rt" id="consumeTable"></table></div>
         <div class="src" id="consumeSrc"></div>
@@ -280,7 +280,7 @@ function render(S,V,C){
     {v:eok(g.total_rev_m),l:'인구감소지역 경제 기여액'},
     {v:'100%',l:'인구감소지역 집중 ('+g.props+'곳)'},
     {v:g.rn.toLocaleString()+'박',l:'숙세페 6–7월 수요 창출'},
-    {v:Math.round((g.total_rev_m-g.room_rev_m)/g.total_rev_m*100)+'%',l:'사업장 부대소비(객실 외)'},
+    {v:Math.round((g.total_rev_m-g.room_rev_m)/g.total_rev_m*100)+'%',l:'전체 매출 中 부대시설 매출 비중'},
   ].map(p=>`<div class="p"><div class="pv">${p.v}</div><div class="pl">${p.l}</div></div>`).join('');
   document.getElementById('kwRev').textContent=eok(g.total_rev_m);
   document.getElementById('kwRn').textContent=g.rn.toLocaleString()+'박';
@@ -360,7 +360,7 @@ function render(S,V,C){
     {lab:'숙세페 투숙',val:g.rn.toLocaleString()+'박',delta:'6–7월 인구감소지역'},
     {lab:'채널 다변화',val:nChan+'개 OTA',delta:'상위 3사 '+top3+'% · 다각 유입'},
     {lab:'평균 ADR (실적)',val:g.adr_k+'천원',delta:'비수기 캠페인 객단가'},
-    {lab:'지역 소비 확산',val:spillPct+'%',delta:'객실 외 부대소비 '+spill.toFixed(1)+'백만'},
+    {lab:'지역 소비 확산',val:spillPct+'%',delta:'객실 외 부대시설 매출 '+spill.toFixed(1)+'백만'},
   ].map(c=>`<div class="card kpi"><div class="lab">${c.lab}</div><div class="val">${c.val}</div><div class="delta">${c.delta}</div></div>`).join('');
 
   document.getElementById('exec').innerHTML=
@@ -387,8 +387,8 @@ function render(S,V,C){
       t+=`<tr><td><b>${r.key}</b></td><td>${disp}</td><td class="num"><span class="dn">-${r.drop}%</span></td><td class="num">${r.perf.rn.toLocaleString()}박</td><td class="num"><b style="color:${GOLD2}">${r.perf.total_rev_m.toFixed(1)}</b></td><td class="num">${eff}</td></tr>`;});
     t+=`<tr style="border-top:2px solid var(--line)"><td><b>합계</b></td><td>${g.props}개 · 54패키지</td><td class="num"><span class="dn">전 지역 6월 최저</span></td><td class="num"><b>${g.rn.toLocaleString()}박</b></td><td class="num"><b style="color:${GOLD2}">${g.total_rev_m.toFixed(1)}</b></td><td class="num">—</td></tr>`;
     document.getElementById('regTable2').innerHTML=t+'</tbody>';
-    const gap=[...R].filter(r=>r.perf.total_rev_m<20).sort((a,b)=>b.yavg-a.yavg)[0];
-    document.getElementById('reg2note').innerHTML=`※ <b>지역 기여액</b>=해당 시군구 숙세페 총매출(백만) · <b>전환효율</b>=기여액÷데이터랩 월평균 방문(만). `+(gap?`<b>다음 확장 전략</b> — <b>${gap.key}</b>은 방문 ${man(gap.yavg)} 대비 기여 ${gap.perf.total_rev_m.toFixed(1)}로 전환효율이 낮아, 데이터가 짚은 <span class="tag">차기 공략 지역</span>(상품·객실 보강 대상).`:``);
+    const lowEff=[...R].map(r=>({k:r.key,eff:r.yavg?r.perf.total_rev_m/(r.yavg/10000):999})).sort((a,b)=>a.eff-b.eff).slice(0,2);
+    document.getElementById('reg2note').innerHTML=`※ <b>지역 기여액</b>=해당 시군구 숙세페 총매출(백만) · <b>전환효율</b>=기여액÷데이터랩 월평균 방문(만). `+(lowEff.length?`<b>다음 확장 전략</b> — 전환효율 최저 <b>${lowEff.map(x=>x.k.replace(/(군|시)$/,'')+'('+x.eff.toFixed(2)+')').join('·')}</b>: 방문 대비 실적이 낮아 <span class="tag">차기 공략 지역</span>(상품·객실 보강 대상). 데이터가 다음 성장 지점을 지목한다.`:``);
 
     // 지도 버블맵 (실제 소재지 좌표)
     const GEO={'홍천군':[157,92],'삼척시':[253,113],'고성군':[200,35],'양양군':[212,60],'부안군':[70,256],'단양군':[193,152],'남해군':[157,330],'진도군':[35,359],'청송군':[245,198]};
@@ -421,15 +421,17 @@ function render(S,V,C){
 
   document.getElementById('effChips').innerHTML=[
     {lab:'① 저수요 갭 필링',val:eok(g.total_rev_m),delta:'저수요 인구감소지역에 '+g.rn.toLocaleString()+'박'},
-    {lab:'② 사업장 부대소비',val:spillPct+'%',delta:'F&B·워터파크 등 객실 외 '+spill.toFixed(1)+'백만(자사)'},
-    {lab:'③ 지역 소비 외부검증',val:(avgOutR2!=null?avgOutR2+'%':'—'),delta:'외지인 소비비중(데이터랩) → 지역 상권 확산'},
+    {lab:'② 사업장 부대시설 매출',val:spillPct+'%',delta:'F&B·워터파크 등 객실 외 '+spill.toFixed(1)+'백만(자사)'},
+    {lab:'③ 지역 관광소비 의존도',val:(avgOutR2!=null?avgOutR2+'%':'—'),delta:'외지인 소비비중(데이터랩) · 구조 지표'},
     {lab:'④ 거시 유발(전국·공식)',val:S.macro.spend_eok+'억',delta:'데이터랩·ONDA 산출 '+S.macro.visitors_man+'만명'},
   ].map(c=>`<div class="card kpi"><div class="lab">${c.lab}</div><div class="val">${c.val}</div><div class="delta">${c.delta}</div></div>`).join('');
+  const m6=(S.by_month.find(x=>x.m==='202606')||{}).total_rev_m||0;
+  const m7=(S.by_month.find(x=>x.m==='202607')||{}).total_rev_m||0;
   document.getElementById('effect').innerHTML=
-    `데이터랩이 지목한 <b>저수요 인구감소지역</b>에 국가 숙세페(6–7월)로 상품을 걸어 <b>${g.rn.toLocaleString()}박·${eok(g.total_rev_m)}</b>의 지역경제 기여를 만들었다. `+
-    `객실료 외 <b>${spill.toFixed(1)}백만(${spillPct}%)</b>은 워터파크·F&B 등 <b>사업장 내 부대소비</b>(자사 데이터). `+
-    `이 관광객이 소노 밖 <b>지역 상권</b>으로 번지는 풍선효과는 데이터랩 <b>외지인 소비비중${avgOutR!=null?` ${avgOutR}%`:''}</b>(오른쪽 패널)으로 <b>외부검증</b> — 지역 소비의 다수를 외지 관광객이 차지한다.`;
-  document.getElementById('effSrc').innerHTML=`출처 · ①② 소노 예약자료(취소 제외, 자사 부대소비) · ③ <b>데이터랩 외지인 소비비중</b>(15152138·15151868) · ④ <b>862억·48만명 = 데이터랩·ONDA 공식 산출</b>(전국 숙세페 거시효과, 소노 실적은 그 일부 · 자체 추정 아님). 데이터랩은 진단(Act1)과 <b>성과 검증</b>(방문 추세·외지인 소비)에 함께 사용된다.`;
+    `국가 숙세페 기간 <b>6–7월 통합</b>(6월 ${eok(m6)} + 7월 ${eok(m7)})으로 저수요 인구감소지역에 상품을 걸어 <b>${g.rn.toLocaleString()}박·${eok(g.total_rev_m)}</b>의 지역경제 기여를 만들었다. `+
+    `객실료 외 <b>${spill.toFixed(1)}백만(${spillPct}%)</b>은 워터파크·F&B 등 <b>사업장 내 부대시설 매출</b>(자사 데이터). `+
+    `이 지역들은 데이터랩상 <b>외지인 소비비중${avgOutR!=null?` ${avgOutR}%`:''}</b>(구조 지표)로 관광이 지역경제의 핵심 — 소노 숙박 유치의 <b>지역 파급 개연성</b>이 크다. <span style="color:var(--dim)">캠페인 기간(6–7월) 소비 변화는 데이터랩 발표(월 16일) 후 전년 동기 대비로 검증 반영.</span>`;
+  document.getElementById('effSrc').innerHTML=`출처 · ①② 소노 예약자료(취소 제외, 자사 부대시설 매출) · ③ <b>데이터랩 외지인 소비비중</b>(15152138·15151868, 구조 지표) · ④ <b>862억·48만명 = 데이터랩·ONDA 공식 산출</b>(전국 숙세페 거시효과, 소노 실적은 그 일부 · 자체 추정 아님). 실적은 <b>숙세페 6–7월 통합 투숙</b> 기준(6월 단독 아님).`;
 
   // ── 지역 소비 외부검증 (데이터랩 관광소비 지수) ──
   if(C && C.byRegion && C.byRegion.length){
@@ -437,7 +439,7 @@ function render(S,V,C){
     tag.textContent='데이터랩 실연동'; tag.className='badge';
     tag.style.cssText='border-color:rgba(91,201,142,.35);background:rgba(91,201,142,.08);color:#8ee0b1';
     const bym=C.meta&&C.meta.baseYm;
-    document.getElementById('consumeCap').textContent='데이터랩 관광소비 지수(0~100) · 기준월 '+(bym?bym.slice(0,4)+'-'+bym.slice(4,6):'—')+' · 소노 9개 인구감소지역';
+    document.getElementById('consumeCap').textContent='데이터랩 관광소비 지수(0~100) · 기준월 '+(bym?bym.slice(0,4)+'-'+bym.slice(4,6):'—')+' (캠페인 이전·구조 지표) · 소노 9개 인구감소지역';
     let tL=((C.lodgeTrend&&C.lodgeTrend.labels)||[]).slice(), tV=((C.lodgeTrend&&C.lodgeTrend.values)||[]).slice();
     let te=tV.length; while(te>0 && tV[te-1]==null) te--;   // 꼬리 null 제거(수집 중 일시오류 방어)
     tL=tL.slice(0,te); tV=tV.slice(0,te);
@@ -452,7 +454,7 @@ function render(S,V,C){
     let ct='<thead><tr><th>시군구</th><th class="num">숙박소비</th><th class="num">외지인소비</th><th class="num">외지인비중</th></tr></thead><tbody>';
     rows.forEach(r=>{ct+=`<tr><td><b>${r.key}</b></td><td class="num">${r.lodge??'—'}</td><td class="num">${r.out_spend??'—'}</td><td class="num"><b style="color:${GOLD2}">${r.out_ratio!=null?r.out_ratio+'%':'—'}</b></td></tr>`;});
     document.getElementById('consumeTable').innerHTML=ct+'</tbody>';
-    document.getElementById('consumeSrc').innerHTML=(avgOut!=null?`<b style="color:var(--sub)">핵심</b> · 9개 지역 <b>외지인 소비비중 평균 ${avgOut}%</b> — 지역 소비의 대부분을 <b>외부 관광객</b>이 만든다. 소노가 유입시킨 관광객이 곧 지역 소비다(풍선효과 정량 증거).<br>`:'')+'출처 · 데이터랩 <b>지역별 관광 자원 수요(15152138)·수요강도(15151868)</b> · 상대지수 0~100. 숙박소비=업종 소비액 지수, 외지인비중=전체 소비 중 외지인 비율.';
+    document.getElementById('consumeSrc').innerHTML=(avgOut!=null?`<b style="color:var(--sub)">구조 지표</b> · 9개 지역 <b>외지인 소비비중 평균 ${avgOut}%</b> — 이 지역들은 <b>관광(외지인) 소비 의존도가 구조적으로 높다</b>. 관광이 지역경제의 핵심이라, 소노 숙박 유치의 <b>지역 파급 개연성</b>이 크다.<br><span style="color:var(--dim)">※ 기준월은 캠페인 이전(배경)입니다. 캠페인 기간(6–7월) 소비지수·전년 동기 대비 변화는 데이터랩 발표(매월 16일) 후 반영해 <b>효과 검증</b>으로 확장할 계획.</span><br>`:'')+'출처 · 데이터랩 <b>지역별 관광 자원 수요(15152138)·수요강도(15151868)</b> · 상대지수 0~100. 외지인비중=전체 소비 중 외지인 비율.';
   } else {
     document.getElementById('consumeTable').innerHTML='<tbody><tr><td>데이터랩 소비지수 로딩 대기 — scripts/fetch_consume.py 실행 후 표시됩니다.</td></tr></tbody>';
     document.getElementById('consumeSrc').innerHTML='데이터랩 지역별 관광 자원 수요 API(15152138) 연동 · 활용신청(무료) 승인 완료.';
@@ -481,7 +483,7 @@ function render(S,V,C){
     {ic:ICON.target, metric:'100%', ml:'인구감소지역', t:'지방소멸 대응 타깃팅', en:'Geo-targeting',
      note:'취약지(<b>청송 -62%</b>) 우선 — 지방소멸 위기지역에 수요 집중.'},
     {ic:ICON.ripple, metric:outTxt, ml:'외지인 소비비중', t:'풍선효과·외부수요', en:'Spillover',
-     note:`자사 부대소비 <b>${spillPct}%</b> + 데이터랩 <b>외지인 소비비중</b>(외부검증) → 지역 상권 순유입.`},
+     note:`자사 부대시설 매출 <b>${spillPct}%</b> + 데이터랩 <b>외지인 소비비중</b>(구조 지표) — 관광이 지역경제 핵심.`},
   ];
   document.getElementById('playbook').innerHTML=PLAY.map(p=>`<div class="card">`+
     `<div style="display:flex;justify-content:space-between;align-items:center">${p.ic}`+
