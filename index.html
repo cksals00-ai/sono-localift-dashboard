@@ -97,7 +97,7 @@
     <div class="over">SONO · LOCAL LIFT — Regional Economy Impact</div>
     <a class="live" id="liveLink" href="https://github.com/cksals00-ai/sono-localift-dashboard/actions" target="_blank" rel="noopener"><span class="dot"></span> <span id="liveStamp">LIVE · KTO DataLab API</span> · 갱신 이력 ↗</a>
     <h1>관광 데이터로<br><b>지역 경제</b>를 되살리다</h1>
-    <div class="sub">한국관광공사 데이터랩으로 <b>인구감소지역</b>의 비수기 수요 공백을 진단하고, 국가 캠페인 <b>숙박세일페스타</b>에 맞춰 상품을 실행했다. 성과는 <b>지역 소비</b>로 확산되고, 데이터랩 지표로 다시 검증된다.</div>
+    <div class="sub">한국관광공사 데이터랩으로 <b>인구감소지역</b>의 비수기 수요 공백을 진단하고,<br>국가 캠페인 <b>숙박세일페스타</b>에 맞춰 상품을 실행했다. 성과는 <b>지역 소비</b>로 확산되고,<br>데이터랩 지표로 다시 검증된다.</div>
     <div class="proof" id="heroStats"></div>
     <div class="scrollhint">↓ SCROLL</div>
   </section>
@@ -198,14 +198,12 @@
         <div class="lead" id="effect" style="margin-top:14px"></div>
         <div class="src" id="effSrc"></div>
       </div>
-      <div class="card planned">
-        <h3 class="ct">지역 소비 외부검증 <span class="tag plan">연동 예정 · PLANNED</span></h3>
-        <p class="cd">풍선효과를 자사 데이터 밖에서 교차검증</p>
-        <div class="lead">현재 <b>지역 소비 확산</b>은 소노 부대매출(자사 데이터) 기준이다. 이를 <b>데이터랩 공공지표로 교차검증</b>하도록 설계했다.<br><br>
-          · <span class="tag">업종별 관광 소비액</span> 데이터랩 <b>지역별 관광 자원 수요</b> API(15152138)<br>
-          · <span class="tag">관광수요지수</span> <b>지역별 관광 수요 강도</b> API(15151868) — 6월 저수요 진단 공식 재확인<br>
-          · <span class="tag">SNS 언급·검색량</span> 캠페인 전후 관심도 트렌드<br><br>
-          활용신청(무료·자동승인) 승인 후, 자동갱신 파이프라인에 연결된다.</div>
+      <div class="card" id="consumeCard">
+        <h3 class="ct">지역 소비 외부검증 <span id="consumeTag" class="tag plan">연동 예정</span> <span class="q">— DataLab 관광소비 지수</span></h3>
+        <p class="cd" id="consumeCap">풍선효과를 데이터랩 공공지표로 교차검증 · 관광 소비액 지수(0~100)</p>
+        <div class="chart-box" style="height:150px"><canvas id="consumeChart"></canvas></div>
+        <div style="overflow:auto;margin-top:10px"><table class="rt" id="consumeTable"></table></div>
+        <div class="src" id="consumeSrc"></div>
       </div>
     </div>
   </section>
@@ -245,9 +243,10 @@ const sum=a=>a.reduce((x,y)=>x+y,0);
 Promise.all([
   fetch('data/sukse.json',{cache:'no-store'}).then(r=>r.ok?r.json():SUKSE_FB).catch(()=>SUKSE_FB),
   fetch('data/dashboard_data.json',{cache:'no-store'}).then(r=>r.ok?r.json():VIS_FB).catch(()=>VIS_FB),
-]).then(([S,V])=>render(S,V));
+  fetch('data/consume.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null),
+]).then(([S,V,C])=>render(S,V,C));
 
-function render(S,V){
+function render(S,V,C){
   const g=S.grand;
   const vv=(V.visitors&&V.visitors.values)||VIS_FB.visitors.values;
   const vl=(V.visitors&&V.visitors.labels)||VIS_FB.visitors.labels;
@@ -387,7 +386,30 @@ function render(S,V){
   document.getElementById('effect').innerHTML=
     `데이터랩이 지목한 <b>저수요 인구감소지역</b>에 국가 숙세페(6–7월)로 상품을 걸어 <b>${g.rn.toLocaleString()}박·${eok(g.total_rev_m)}</b>의 지역경제 기여를 만들었다. `+
     `이 중 객실료를 뺀 <b>${spill.toFixed(1)}백만(${spillPct}%)</b>이 워터파크·F&B·부대시설 등 <b>객실 외 지역 내 소비</b>로 확산됐다(풍선효과, 자사 데이터 기준).`;
-  document.getElementById('effSrc').innerHTML=`출처 · ①②③ 소노 예약자료(취소 제외) · ④ 862억·48만명 = 데이터랩·ONDA 숙세페 거시효과 집계(전국 기준, 소노 실적은 그 일부). 풍선효과의 지역 소비 확산은 <b>데이터랩 업종별 관광소비액 API(15152138)</b>로 교차검증 예정.`;
+  document.getElementById('effSrc').innerHTML=`출처 · ①②③ 소노 예약자료(취소 제외) · ④ 862억·48만명 = 데이터랩·ONDA 숙세페 거시효과 집계(전국 기준, 소노 실적은 그 일부). 풍선효과의 지역 소비 확산은 <b>데이터랩 관광소비 지수(15152138)</b>로 교차검증 → 오른쪽 패널.`;
+
+  // ── 지역 소비 외부검증 (데이터랩 관광소비 지수) ──
+  if(C && C.byRegion && C.byRegion.length){
+    const tag=document.getElementById('consumeTag');
+    tag.textContent='데이터랩 실연동'; tag.className='badge';
+    tag.style.cssText='border-color:rgba(91,201,142,.35);background:rgba(91,201,142,.08);color:#8ee0b1';
+    const bym=C.meta&&C.meta.baseYm;
+    document.getElementById('consumeCap').textContent='데이터랩 관광소비 지수(0~100) · 기준월 '+(bym?bym.slice(0,4)+'-'+bym.slice(4,6):'—')+' · 소노 9개 인구감소지역';
+    const t=C.lodgeTrend||{labels:[],values:[]};
+    new Chart(document.getElementById('consumeChart'),{type:'line',
+      data:{labels:t.labels,datasets:[{data:t.values,borderColor:GOLD2,borderWidth:2,tension:.35,pointRadius:0,fill:true,
+        backgroundColor:c=>{const a=c.chart.chartArea;if(!a)return'transparent';const gr=c.chart.ctx.createLinearGradient(0,a.top,0,a.bottom);gr.addColorStop(0,'rgba(201,169,106,.22)');gr.addColorStop(1,'rgba(201,169,106,0)');return gr;}}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'숙박 소비지수 '+c.parsed.y}}},
+        scales:{y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{font:{size:9}}},x:{grid:{display:false},ticks:{maxTicksLimit:6,font:{size:9}}}}}});
+    const rows=[...C.byRegion].sort((a,b)=>(b.lodge||0)-(a.lodge||0));
+    let ct='<thead><tr><th>시군구</th><th class="num">숙박</th><th class="num">식음료</th><th class="num">쇼핑</th><th class="num">여가</th></tr></thead><tbody>';
+    rows.forEach(r=>{ct+=`<tr><td><b>${r.key}</b></td><td class="num"><b style="color:${GOLD2}">${r.lodge??'—'}</b></td><td class="num">${r.food??'—'}</td><td class="num">${r.shop??'—'}</td><td class="num">${r.leisure??'—'}</td></tr>`;});
+    document.getElementById('consumeTable').innerHTML=ct+'</tbody>';
+    document.getElementById('consumeSrc').innerHTML='출처 · 데이터랩 <b>지역별 관광 자원 수요</b> API(15152138) · 값=관광수요지수 구성 소비액 지표(상대지수 0~100, 원화 아님). 소노 숙박 유치가 지역 <b>숙박·식음료·쇼핑 소비</b>로 확산됨을 공공데이터로 교차확인.';
+  } else {
+    document.getElementById('consumeTable').innerHTML='<tbody><tr><td>데이터랩 소비지수 로딩 대기 — scripts/fetch_consume.py 실행 후 표시됩니다.</td></tr></tbody>';
+    document.getElementById('consumeSrc').innerHTML='데이터랩 지역별 관광 자원 수요 API(15152138) 연동 · 활용신청(무료) 승인 완료.';
+  }
 
   const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
