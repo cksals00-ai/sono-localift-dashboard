@@ -107,7 +107,6 @@
     <div class="actno" style="text-align:center">DATA-DRIVEN PROCESS · 관광 데이터 활용의 인과 구조</div>
     <div class="big" style="text-align:center;margin-top:8px">관광 데이터로 <b>진단</b>하고, 관광 데이터로 <b>검증</b>한다.</div>
     <div id="causalChain" style="margin-top:26px"></div>
-    <div id="causalNote" style="text-align:center;font-size:12px;color:var(--sub);margin-top:16px"></div>
   </section>
 
   <!-- ACT 1 -->
@@ -501,7 +500,6 @@ function render(S,V,C){
   });
   cc+='</div>';
   document.getElementById('causalChain').innerHTML=cc;
-  document.getElementById('causalNote').innerHTML='↺ 관광공사 <b style="color:#8ee0b1">데이터랩</b>이 <b style="color:var(--ink)">진단(입구)</b>과 <b style="color:var(--ink)">검증(출구)</b> 양 끝을 잡는다 — 데이터로 시작해 데이터로 닫는 <b style="color:var(--gold2)">선순환 구조</b>.';
 
   // ── MARKETING PLAYBOOK ──
   const outTxt=avgOutR!=null?`${avgOutR}%`:'80%+';
