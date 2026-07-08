@@ -456,12 +456,15 @@ function render(S,V,C){
     const cByK={}; if(C&&C.byRegion)C.byRegion.forEach(x=>cByK[x.key]=x);
     // 더 지도다운 대한민국 외곽선(해안 굴곡·태안반도·남해안)
     const KOREA='<path d="M204,46 L212,64 L221,96 L228,130 L235,160 L243,193 L247,222 L244,248 L235,266 L210,278 L182,288 L156,294 L138,306 L108,320 L84,334 L66,340 L79,316 L73,286 L77,258 L70,232 L75,206 L57,182 L80,166 L70,146 L75,124 L66,108 L90,96 L124,86 L160,78 L192,64 L205,48 Z" fill="rgba(201,169,106,0.05)" stroke="rgba(201,169,106,0.28)" stroke-width="1.1" stroke-linejoin="round"/>';
-    const bub=R.map(r=>{const c=GEO[r.key];if(!c)return'';const rev=r.perf.total_rev_m;const rad=6+Math.sqrt(rev)/Math.sqrt(maxRev)*15;const deep=r.drop>=57;const fill=deep?'#D98C63':'#C9A96A';const right=c[0]>185;const lx=right?c[0]-rad-5:c[0]+rad+5;const anc=right?'end':'start';const nm=r.key.replace(/(군|시)$/,'');const ci=cByK[r.key];const outv=ci&&ci.out_ratio!=null?ci.out_ratio:null;
+    // 라벨 방향: L=버블 왼쪽, R=버블 오른쪽 (중앙 밀집구간 충돌 방지 위해 지역별 지정) · dy=세로 미세조정
+    const LBL={'홍천군':['L',0],'삼척시':['R',2]};
+    const HALO='stroke="#070A10" stroke-width="2.6" stroke-linejoin="round" paint-order="stroke"';
+    const bub=R.map(r=>{const c=GEO[r.key];if(!c)return'';const rev=r.perf.total_rev_m;const rad=6+Math.sqrt(rev)/Math.sqrt(maxRev)*15;const deep=r.drop>=57;const fill=deep?'#D98C63':'#C9A96A';const cfg=LBL[r.key]||[(c[0]>185?'L':'R'),0];const isL=cfg[0]==='L';const lx=isL?c[0]-rad-5:c[0]+rad+5;const anc=isL?'end':'start';const dy=cfg[1];const nm=r.key.replace(/(군|시)$/,'');const ci=cByK[r.key];const outv=ci&&ci.out_ratio!=null?ci.out_ratio:null;
       return `<circle cx="${c[0]}" cy="${c[1]}" r="${(rad+2.5).toFixed(1)}" fill="none" stroke="${fill}" stroke-opacity="0.25" stroke-width="1"/>`+
         `<circle cx="${c[0]}" cy="${c[1]}" r="${rad.toFixed(1)}" fill="${fill}" fill-opacity="0.9" stroke="#0D131F" stroke-width="1.2"/>`+
-        `<text x="${lx.toFixed(0)}" y="${(c[1]-2).toFixed(0)}" text-anchor="${anc}" font-size="10" font-weight="800" fill="#F2F5FB">${nm}</text>`+
-        `<text x="${lx.toFixed(0)}" y="${(c[1]+8).toFixed(0)}" text-anchor="${anc}" font-size="8.6" fill="#E7CE96">${rev.toFixed(0)}<tspan fill="#697086"> · </tspan><tspan fill="#E0896A">▼${r.drop}%</tspan></text>`+
-        (outv!=null?`<text x="${lx.toFixed(0)}" y="${(c[1]+17).toFixed(0)}" text-anchor="${anc}" font-size="8.2" fill="#8ee0b1">외지인 ${outv}%</text>`:'');}).join('');
+        `<text x="${lx.toFixed(0)}" y="${(c[1]-2+dy).toFixed(0)}" text-anchor="${anc}" font-size="10" font-weight="800" fill="#F2F5FB" ${HALO}>${nm}</text>`+
+        `<text x="${lx.toFixed(0)}" y="${(c[1]+8+dy).toFixed(0)}" text-anchor="${anc}" font-size="8.6" fill="#E7CE96" ${HALO}>${rev.toFixed(0)}<tspan fill="#697086"> · </tspan><tspan fill="#E0896A">▼${r.drop}%</tspan></text>`+
+        (outv!=null?`<text x="${lx.toFixed(0)}" y="${(c[1]+17+dy).toFixed(0)}" text-anchor="${anc}" font-size="8.2" fill="#8ee0b1" ${HALO}>외지인 ${outv}%</text>`:'');}).join('');
     document.getElementById('mapWrap').innerHTML=`<svg viewBox="0 0 300 360" style="width:100%;max-width:400px;height:auto;display:block;margin:2px auto 0">${KOREA}${bub}</svg>`+
       `<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:4px;font-size:10px;color:var(--sub)"><span>◍ 크기=매출(백만)</span><span><span style="color:#D98C63">●</span> 진함=계절 낙폭 큼</span><span><span style="color:#8ee0b1">외지인%</span>=관광소비 의존</span></div>`;
 
