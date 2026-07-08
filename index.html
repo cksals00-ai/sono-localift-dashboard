@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SONO Local Lift · 관광 데이터로 되살린 지역 경제</title>
+<title>SONO Local Lift · 관광 데이터로 되살아난 지역 경제</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
@@ -96,7 +96,7 @@
   <section class="hero">
     <div class="over">SONO · LOCAL LIFT — Regional Economy Impact</div>
     <a class="live" id="liveLink" href="https://github.com/cksals00-ai/sono-localift-dashboard/actions" target="_blank" rel="noopener"><span class="dot"></span> <span id="liveStamp">LIVE · KTO DataLab API</span> · 갱신 이력 ↗</a>
-    <h1>관광 데이터로 되살린<br><b>지역 경제</b></h1>
+    <h1>관광 데이터로 되살아난<br><b>지역 경제</b></h1>
     <div class="sub">한국관광공사 데이터랩으로 <b>인구 감소 지역</b> 진단 후,<br>국가 캠페인 <b>‘숙박세일페스타’</b> 상품 주력 판매.<br>지역 관광 매출로 이어진 성과를 데이터랩 지표로 재검증하는 <b>선순환 구조</b>.</div>
     <div class="proof" id="heroStats"></div>
     <div class="scrollhint">↓ SCROLL</div>
@@ -105,7 +105,7 @@
   <!-- DATA-DRIVEN CAUSAL PROCESS -->
   <section class="sec reveal" style="margin-top:44px">
     <div class="actno" style="text-align:center">DATA-DRIVEN PROCESS · 관광 데이터 활용의 인과 구조</div>
-    <div class="big" style="text-align:center;margin-top:8px">관광 데이터로 <b>진단</b>하고, 관광 데이터로 <b>검증</b>한다.</div>
+    <div class="big" style="text-align:center;margin-top:8px"><b>분석</b>과 <b>검증</b>, 모두 관광 데이터로.</div>
     <div id="causalChain" style="margin-top:26px"></div>
   </section>
 
@@ -222,6 +222,13 @@
     </div>
 
     <div class="card" style="margin-top:16px">
+      <h3 class="ct">지역별 비교 · 방문객 전년동월 & 숙세페 성과 <span style="font-size:11px;font-weight:700;color:#5BC98E;border:1px solid rgba(91,201,142,.4);border-radius:20px;padding:2px 9px;vertical-align:middle">● 매일 갱신</span></h3>
+      <p class="cd">데이터랩 방문객(전년 동월 대비)과 소노 숙세페 성과를 지역별로 · 매출 상위순</p>
+      <div style="overflow:auto"><table class="rt" id="cmpTable"></table></div>
+      <div class="src" id="cmpSrc"></div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
       <h3 class="ct">검증 · 소노 실적 ↔ 데이터랩 지역 소비 정합성 <span class="q">— 상관 분석</span></h3>
       <p class="cd">지역별 소노 관광 매출(막대) vs 데이터랩 숙박소비지수(선)</p>
       <div class="chart-box"><canvas id="corrChart"></canvas></div>
@@ -321,6 +328,30 @@ function render(S,V,C){
     const props=S.by_prop.filter(x=>x.loc===r.loc);const perf=(S.by_loc||[]).find(x=>x.loc===r.loc)||{rn:0,total_rev_m:0};
     return {...r,peakM:p,peakV:cm[p],lowM:l,lowV:cm[l],drop,yavg:y,lowM12:lm,props,perf};});}
   if(R.length){const ds=R.map(r=>r.drop);document.getElementById('kwRange').textContent='지역별 -'+Math.min(...ds)+'%~-'+Math.max(...ds)+'%';}
+
+  // 지역별 비교표 — 방문객 전년동월(YoY, 최신 완결월) + 숙세페 성과(소노 실적)
+  if(R.length&&BR&&document.getElementById('cmpTable')){
+    const [yy,mm]=(lastLab||'2026-05').split('-');const py=(+yy-1);
+    const cmp=[...R].sort((a,b)=>((b.perf&&b.perf.total_rev_m)||0)-((a.perf&&a.perf.total_rev_m)||0));
+    const GH1='background:rgba(91,201,142,.07);border-left:1px solid var(--line)';
+    const GH2='background:rgba(224,137,106,.07);border-left:1px solid var(--line)';
+    const rows=cmp.map(r=>{
+      const cur=BR[r.key][cpl-1],prev=(cpl-13>=0)?BR[r.key][cpl-13]:null;
+      const yv=(prev&&prev>0)?Math.round((cur-prev)/prev*100):null;
+      const rev=(r.perf&&r.perf.total_rev_m)||0,rn=(r.perf&&r.perf.rn)||0;
+      const nm=r.key.replace(/(군|시)$/,''),cls=yv==null?'plain':(yv>=0?'up':'dn');
+      return `<tr>
+        <td style="text-align:left"><b>${nm}</b> <span style="color:var(--dim);font-size:11px">${r.hero}</span></td>
+        <td>${prev?Math.round(prev).toLocaleString():'—'}</td>
+        <td>${cur?Math.round(cur).toLocaleString():'—'}</td>
+        <td class="${cls}">${yv==null?'—':sign(yv)+'%'}</td>
+        <td style="${GH2}"><b>${(rev/100).toFixed(2)}</b></td>
+        <td style="${GH2}">${rn.toLocaleString()}</td></tr>`;}).join('');
+    document.getElementById('cmpTable').innerHTML=`<thead>
+      <tr><th rowspan="2" style="text-align:left">지역 · 대표시설</th><th colspan="3" style="${GH1}">데이터랩 방문객 · 전년동월(YoY)</th><th colspan="2" style="${GH2}">소노 숙세페 성과 · 2026.6~7월</th></tr>
+      <tr><th style="${GH1}">前 ${py}.${mm}</th><th>現 ${yy}.${mm}</th><th>증감</th><th style="${GH2}">매출(억)</th><th style="${GH2}">투숙(박)</th></tr></thead><tbody>${rows}</tbody>`;
+    document.getElementById('cmpSrc').innerHTML=`<b>기준(Methodology)</b> — ① <b>방문객</b>: 한국관광공사 데이터랩 이동통신, 외지인+외국인 합, <b>전년 동월 대비</b>. 기준월=API가 제공하는 최신 <b>완결</b> 월(부분 집계월 제외) — 현재 <b>${yy}.${mm}</b>. 발표 시차 약 1개월이며 <b>매일 06:00(KST) 자동 갱신</b>, 6·7월이 완결되면 캠페인월 비교로 자동 전환. ② <b>매출·투숙</b>: 소노 예약DB 실적, 숙박세일페스타 패키지(투숙월 2026.6~7월), 예약번호 최신본 중복제거·노쇼 제외 = 소노 사업장 <b>직접 매출</b>(자사, 지역경제 전체 기여와 구분). ③ 방문(YoY)과 매출은 데이터 출처·기간이 다른 <b>병렬 지표</b>로 직접 인과가 아님.`;
+  }
 
   // ACT1 트렌드(검증) 카드
   const tc=[];
