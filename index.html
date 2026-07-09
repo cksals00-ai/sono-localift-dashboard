@@ -90,6 +90,29 @@
 </style>
 </head>
 <body>
+<!-- ▼▼▼ SONO LocaLift 네비게이터 — index.html 의 <body> 바로 다음 줄에 붙여넣기 ▼▼▼ -->
+<style>
+  .siteNav{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(7,10,16,.82);border-bottom:1px solid #1E2738}
+  .siteNav .nvIn{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
+  .siteNav .nvBrand{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:#C9A96A;text-decoration:none;font-weight:800}
+  .siteNav .nvBrand b{color:#E7CE96}
+  .siteNav .nvTabs{display:flex;gap:8px}
+  .siteNav .nvTabs a{font-size:12.5px;color:#9AA4B8;text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s}
+  .siteNav .nvTabs a:hover{color:#F2F5FB;border-color:#1E2738}
+  .siteNav .nvTabs a.on{color:#070A10;background:#C9A96A;border-color:#C9A96A;font-weight:700}
+</style>
+<nav class="siteNav">
+  <div class="nvIn">
+    <a class="nvBrand" href="index.html">SONO <b>LocaLift</b></a>
+    <div class="nvTabs">
+      <a href="index.html" data-p="index">임팩트</a>
+      <a href="content.html" data-p="content">콘텐츠 엔진</a>
+    </div>
+  </div>
+</nav>
+<script>(function(){var f=(location.pathname.split('/').pop()||'index.html').toLowerCase();if(!f)f='index.html';document.querySelectorAll('.siteNav .nvTabs a').forEach(function(a){var h=a.getAttribute('href').toLowerCase();if(h===f||((f===''||f==='index.html')&&a.dataset.p==='index'))a.classList.add('on');});})();</script>
+<!-- ▲▲▲ 네비게이터 끝 ▲▲▲ -->
+
 <div class="wrap">
 
   <!-- HERO -->
