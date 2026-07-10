@@ -24,12 +24,12 @@
   .nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s}
   .nvTabs a:hover{color:var(--ink);border-color:var(--line)}
   .nvTabs a.on{color:#070A10;background:var(--gold);border-color:var(--gold);font-weight:700}
-  .charRow{display:flex;gap:6px;justify-content:center;align-items:flex-end;margin:36px 0 8px;flex-wrap:wrap}
-  .charFig{position:relative;display:flex;align-items:flex-end;justify-content:center;padding:0 6px}
-  .charFig img{height:310px;width:auto;object-fit:contain;position:relative;z-index:2;filter:drop-shadow(0 28px 36px rgba(0,0,0,.5))}
-  .charFig .cName{position:absolute;z-index:4;bottom:24%;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',Georgia,serif;font-size:44px;font-weight:600;letter-spacing:.14em;color:rgba(247,242,232,.97);text-shadow:0 6px 26px rgba(0,0,0,.8),0 1px 3px rgba(0,0,0,.7);white-space:nowrap;pointer-events:none}
-  .charFig .cRole{position:absolute;z-index:4;bottom:calc(24% - 20px);left:50%;transform:translateX(-50%);font-size:8.5px;letter-spacing:.34em;color:var(--gold2);text-transform:uppercase;text-shadow:0 2px 10px rgba(0,0,0,.9);white-space:nowrap;font-family:ui-monospace,monospace}
-  @media(max-width:520px){.charFig img{height:185px}.charFig .cName{font-size:28px}}
+  .charRow{position:relative;display:flex;gap:0;justify-content:center;align-items:flex-end;margin:30px 0 24px;flex-wrap:nowrap;width:100vw;left:50%;transform:translateX(-50%);padding:0 8px}
+  .charFig{position:relative;display:flex;align-items:flex-end;justify-content:center;padding:0;margin:0 -1.5%;flex:1 1 0;min-width:0}
+  .charFig img{height:clamp(380px,58vh,680px);max-width:100%;width:auto;object-fit:contain;position:relative;z-index:2;filter:drop-shadow(0 34px 46px rgba(0,0,0,.55))}
+  .charFig .cName{position:absolute;z-index:4;bottom:22%;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(56px,7.2vw,128px);font-weight:600;letter-spacing:.1em;line-height:1;color:rgba(247,242,232,.97);text-shadow:0 10px 40px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.8);white-space:nowrap;pointer-events:none}
+  .charFig .cRole{position:absolute;z-index:4;bottom:calc(22% - 30px);left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.42em;color:var(--gold2);text-transform:uppercase;text-shadow:0 2px 12px rgba(0,0,0,.95);white-space:nowrap;font-family:ui-monospace,monospace}
+  @media(max-width:520px){.charFig img{height:clamp(240px,34vh,320px)}.charFig .cName{font-size:clamp(34px,10vw,52px)}.charFig .cRole{font-size:8px;bottom:calc(22% - 18px)}}
   .wrap{max-width:1180px;margin:0 auto;padding:32px 22px 80px}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase}
   .badge{display:inline-block;font-size:11px;color:var(--gold);border:1px solid var(--gold2);border-radius:999px;padding:5px 13px;letter-spacing:.14em}
@@ -122,6 +122,70 @@
     <div class="card kpi"><div class="big">4</div><div class="lab">다국어 동시 산출 (KO·EN·JA·ZH)</div></div>
     <div class="card kpi"><div class="big">-46%</div><div class="lab">대상 지역 평균 비수기 낙폭 (진작 대상)</div></div>
     <div class="card kpi"><div class="big">+33%</div><div class="lab">외국인 유입 추세 · 다국어 레버리지</div></div>
+  </div>
+
+  <!-- EXECUTION ROADMAP -->
+  <div class="sec">
+    <div class="sec-tag mono">EXECUTION · 실행 로드맵 & 업무 관리</div>
+    <h2>구조화 우선 · 단계별 실행</h2>
+    <p class="sub">양양 제작을 서두르지 않음. 구조(채널·자동화·후킹표준·국가별 사양) 확정 후 파일럿. 각 단계는 게이트 통과 시 다음으로.</p>
+
+    <div class="card" style="margin-top:14px;background:linear-gradient(180deg,rgba(198,161,91,.08),transparent);border-color:var(--gold2)">
+      <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">현재 상태 (2026-07-10 · 착수 D+2)</h4>
+      <p class="angle" style="font-size:13px">
+        ● <b>완료</b> — 캐릭터 3종(Taejin·Bumi·Lia) 확정·등록 · 대시보드 구조 · 국가별 제작 사양<br>
+        ◐ <b>진행중</b> — 실행 로드맵·업무 리스트 구조화 (현 단계 P0)<br>
+        ○ <b>다음</b> — 채널 개설·연동 → FEED A/B 자동화 → 후킹 분석 표준화 → 파일럿</p>
+    </div>
+
+    <h3 style="margin-top:22px">단계 로드맵 (4단계)</h3>
+    <div class="card" style="margin-top:12px;overflow-x:auto">
+      <table>
+        <thead><tr><th>단계</th><th>기간</th><th>핵심 목표</th><th>게이트(통과 조건)</th><th>상태</th></tr></thead>
+        <tbody>
+          <tr><td><b>P0 구조화·셋업</b></td><td>7월 (M1)</td><td>캐릭터·대시보드·채널 연동·FEED 자동화·후킹 표준·국가별 사양</td><td>구조 확정 = 파일럿 준비 완료</td><td>◐ 진행중</td></tr>
+          <tr><td><b>P1 파이프라인 검증</b></td><td>8월 (M2)</td><td>양양 파일럿 4개국어 1편 · 배포 반자동 점검 · 훅 A/B 설계</td><td>G1 · 시리즈 1화 4개국어 산출</td><td>○ 대기</td></tr>
+          <tr><td><b>P2 파일럿 운영</b></td><td>9월 (M3)</td><td>지역 3~4개 로테이션 · 공모전 제출 · 지자체 영업리스트</td><td>G2 · 3초 홀드율≥60%·팔로워 3천</td><td>○ 대기</td></tr>
+          <tr><td><b>P3 스케일</b></td><td>10~12월 (M4~6)</td><td>지역 6개 · 월 16릴스 · 첫 B2B 용역 · 협찬 문의</td><td>G3 · 월매출≥400만·팔로워 2만</td><td>○ 대기</td></tr>
+        </tbody></table>
+      <div class="legendnote">게이트 미달 시: 원인 분석 → 지역·훅·수익스트림 재배분. 전체 12개월 계획은 1년_사업계획_v2.md.</div>
+    </div>
+
+    <h3 style="margin-top:22px">P0 구조화 · 4주 상세 스케줄</h3>
+    <div class="card" style="margin-top:12px;overflow-x:auto">
+      <table>
+        <thead><tr><th>주</th><th>기간</th><th>핵심 업무</th><th>산출물</th><th>상태</th></tr></thead>
+        <tbody>
+          <tr><td>W1</td><td>7/8~7/13</td><td>캐릭터 3종 확정·등록 / 대시보드 구조·국가별 제작 사양 / 실행 로드맵</td><td>캐릭터 등록완료 · 대시보드 v2</td><td>◐ 진행중</td></tr>
+          <tr><td>W2</td><td>7/14~7/20</td><td>채널 개설·연동(IG비즈+FB·TikTok·YT·X, 계정·토큰) / FEED A 데이터랩 검증 / FEED B 스크립트·시크릿</td><td>채널·토큰 · Actions cron 가동</td><td>○ 대기</td></tr>
+          <tr><td>W3</td><td>7/21~7/27</td><td>후킹 분석 표준 절차 확정 / 훅 A/B 설계 / 파일럿 스토리보드·국가별 자막안</td><td>후킹 체크리스트 · 스토리보드</td><td>○ 대기</td></tr>
+          <tr><td>W4</td><td>7/28~8/3</td><td>배포 반자동 점검 / <b>양양 파일럿 제작 착수(크레딧 승인 후)</b> → P1 진입</td><td>파일럿 1편(4개국어) 산출 시작</td><td>○ 대기</td></tr>
+        </tbody></table>
+      <div class="legendnote">양양 제작은 W4(구조 확정 후) 착수. 힉스필드 사용 전 크레딧 예상량 승인 필수. 제작 직전 후킹 분석 선행.</div>
+    </div>
+
+    <h3 style="margin-top:22px">P0 업무 체크리스트</h3>
+    <div class="grid k2" style="margin-top:12px;align-items:start">
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">구조·콘텐츠 기반</h4>
+        <p class="angle" style="font-size:13px;line-height:1.9">
+          ☑ 캐릭터 3종 확정·Higgsfield 등록<br>
+          ☑ 대시보드 구조(파이프라인·의사결정·시장·재무)<br>
+          ☑ 국가별 제작 사양(미·일·동남아·한)<br>
+          ☑ 실행 로드맵·업무 리스트<br>
+          ☐ 후킹 분석 표준 절차(제작 전 필수) 고정</p>
+      </div>
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">채널·자동화 인프라</h4>
+        <p class="angle" style="font-size:13px;line-height:1.9">
+          ☐ IG 비즈니스+FB 페이지(Meta 통합)<br>
+          ☐ TikTok · YouTube · X 계정·토큰<br>
+          ☐ FEED A 데이터랩 cron(06:00 KST) 검증<br>
+          ☐ FEED B 인스타 인사이트 시크릿 연결<br>
+          ☐ 배포 반자동(승인 후 게시) 점검</p>
+      </div>
+    </div>
+    <div class="legendnote" style="margin-top:12px">계정·토큰 세팅은 본인 작업 필요. 완료 순서대로 W2에 연동. 업무 상세는 실행계획서.md.</div>
   </div>
 
   <!-- PIPELINE FLOW -->
@@ -234,6 +298,79 @@
       <div class="card kpi"><div class="big" style="color:var(--gold)">전환</div><div class="lab">소노 숙세페 예약·매출과 상관 추적</div></div>
     </div>
     <p class="legendnote" style="margin-top:10px">지표 정의는 병렬(직접 인과 아님) — 인스타 반응↔데이터랩 방문↔예약을 시차 두고 상관으로 검증. 기존 임팩트 대시보드의 검증(r=0.80) 방식과 동일 철학.</p>
+  </div>
+
+  <!-- MARKET -->
+  <div class="sec">
+    <div class="sec-tag mono">MARKET · 시장·채널 전략</div>
+    <h2>타겟 시장 · 채널</h2>
+    <p class="sub">인바운드 데이터 × 채널 특성. 릴스 1콘셉트 → 전 채널 배포 + 시장별 현지화.</p>
+    <div class="card" style="margin-top:14px;overflow-x:auto">
+      <table>
+        <thead><tr><th>시장</th><th>1순위</th><th>2순위</th><th>3순위</th><th>현지화 포인트</th></tr></thead>
+        <tbody>
+          <tr><td>미국</td><td>TikTok</td><td>IG Reels</td><td>YT Shorts</td><td>트렌딩 오디오 · POV · 유머</td></tr>
+          <tr><td>일본</td><td>Instagram</td><td>YouTube</td><td>X / TikTok</td><td>무음+자막 필수 · 현지 밈 · 감성</td></tr>
+          <tr><td>동남아</td><td>TikTok</td><td>Facebook</td><td>Instagram</td><td>인플루언서 · 발견 · 모바일</td></tr>
+          <tr><td>한국</td><td>IG Reels</td><td>YT Shorts</td><td>TikTok</td><td>저장형 정보 · 데이터랩 검증</td></tr>
+        </tbody></table>
+      <div class="legendnote">근거: 일본 IG 10~30대 70%+·무음자막 관습 / 동남아 TikTok 사용시간 세계최고·FB 지배 / 미국 숏폼 3강. Meta(IG+FB) 통합 게시. 상세: 글로벌_시장_채널_전략.md</div>
+    </div>
+
+    <h3 style="margin-top:26px">국가별 제작 사양 (맞춤형)</h3>
+    <p class="sub">1콘셉트 → 국가별 언어·자막·훅·사운드·해시태그·CTA를 아래 사양대로 변형 제작. 제작 전 후킹 분석 선행.</p>
+    <div class="grid k2" style="margin-top:14px;align-items:start">
+
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">🇺🇸 미국 · TikTok 네이티브</h4>
+        <table><tbody>
+          <tr><td>언어·음성</td><td>영어. 구어체 나레이션 or 무나레이션+트렌딩 오디오</td></tr>
+          <tr><td>자막</td><td>영어 캡션(짧게·리듬). 키워드 강조</td></tr>
+          <tr><td>훅(0~3초)</td><td>POV · "wait for it" · 유머 · 기대vs현실</td></tr>
+          <tr><td>포맷·길이</td><td>15~30s. 빠른 컷. 트렌딩 사운드 필수</td></tr>
+          <tr><td>해시태그</td><td>#travelkorea #koreatravel #pov #fyp</td></tr>
+          <tr><td>CTA·채널</td><td>저장·공유 유도. TikTok→Reels→Shorts</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">🇯🇵 일본 · 무음+감성</h4>
+        <table><tbody>
+          <tr><td>언어·음성</td><td>일본어 자막 중심. 나레이션은 보조(무음 시청 관습)</td></tr>
+          <tr><td>자막</td><td><b>번인 자막 필수</b>. 정중·감성 톤. 우리 강점</td></tr>
+          <tr><td>훅(0~3초)</td><td>계절(벚꽃·단풍) · 디테일 리빌 · 감성 스토리</td></tr>
+          <tr><td>포맷·길이</td><td>20~40s. 시각 스토리텔링. 밈·계절 음악</td></tr>
+          <tr><td>해시태그</td><td>#韓国旅行 #韓国 #旅行好きな人と繋がりたい</td></tr>
+          <tr><td>CTA·채널</td><td>Instagram 주력 + X 재확산. YouTube 가이드</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">🌏 동남아 · 발견·인플루언서</h4>
+        <table><tbody>
+          <tr><td>언어·음성</td><td>영어 기본 + 현지어(태국·베트남·인니) 자막 확장</td></tr>
+          <tr><td>자막</td><td>영어+현지어. 모바일 세로 가독</td></tr>
+          <tr><td>훅(0~3초)</td><td>가성비·초보 진입장벽↓ · 라이프스타일 부러움</td></tr>
+          <tr><td>포맷·길이</td><td>15~30s. 저장·발견 최적. 초반 훅 강</td></tr>
+          <tr><td>해시태그</td><td>#koreatrip #koreatravel + 현지어 태그</td></tr>
+          <tr><td>CTA·채널</td><td>TikTok 네이티브 + FB 배포. 현지 크리에이터 시딩</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">🇰🇷 한국 · 저장형·검증</h4>
+        <table><tbody>
+          <tr><td>언어·음성</td><td>한국어. 나레이션+자막</td></tr>
+          <tr><td>자막</td><td>한국어. 정보 저장형 문법</td></tr>
+          <tr><td>훅(0~3초)</td><td>상황극 · AI 반전 · N분할 브이로그</td></tr>
+          <tr><td>포맷·길이</td><td>15~30s. 데이터랩 지역 검증 병행</td></tr>
+          <tr><td>해시태그</td><td>#제주여행 #국내여행 #지역명여행</td></tr>
+          <tr><td>CTA·채널</td><td>IG Reels 주력. B2B 레퍼런스·데이터 검증</td></tr>
+        </tbody></table>
+      </div>
+
+    </div>
+    <div class="legendnote" style="margin-top:12px">공통 원칙: 9:16 마스터 1편 → 국가별 자막·오디오·해시태그만 교체(편집 부하↓). 이기는 훅은 FEED B가 국가별로 분리 측정 → 다음 제작 앵글에 주입.</div>
   </div>
 
   <!-- FINANCE -->
