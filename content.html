@@ -24,16 +24,17 @@
   .nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s}
   .nvTabs a:hover{color:var(--ink);border-color:var(--line)}
   .nvTabs a.on{color:#070A10;background:var(--gold);border-color:var(--gold);font-weight:700}
-  .charRow{position:relative;display:grid;grid-template-columns:repeat(3,1fr);justify-items:center;align-items:end;gap:0;margin:26px 0 22px;width:100%;overflow:hidden;background:radial-gradient(135% 95% at 50% 112%,rgba(232,200,138,.11),rgba(232,200,138,.03) 45%,transparent 66%)}
+  .charRow{position:relative;display:grid;grid-template-columns:repeat(3,1fr);justify-items:center;align-items:end;gap:0;margin:26px 0 22px;padding-bottom:34px;width:100%;overflow:visible;background:radial-gradient(135% 95% at 50% 112%,rgba(232,200,138,.11),rgba(232,200,138,.03) 45%,transparent 66%)}
   .charRow::before{content:"";position:absolute;left:4%;right:4%;bottom:12%;height:2px;background:linear-gradient(90deg,transparent,rgba(232,200,138,.22),transparent);filter:blur(.6px);z-index:0}
   .charFig{position:relative;display:flex;align-items:flex-end;justify-content:center;width:100%;min-width:0}
   .charFig::after{content:"";position:absolute;bottom:10.5%;left:50%;transform:translateX(-50%);width:72%;height:26px;background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.6),transparent 72%);filter:blur(7px);z-index:1;pointer-events:none}
   .charFig img{height:clamp(320px,46vh,560px);max-width:100%;width:auto;object-fit:contain;position:relative;z-index:2;filter:drop-shadow(0 26px 38px rgba(0,0,0,.55))}
   .charFig .cName{position:absolute;z-index:4;bottom:20%;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(42px,5.4vw,94px);font-weight:600;letter-spacing:.06em;line-height:1;color:rgba(247,242,232,.97);text-shadow:0 10px 40px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.8);white-space:nowrap;pointer-events:none;max-width:100%}
   .charFig .cRole{position:absolute;z-index:4;bottom:calc(20% - 24px);left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.42em;color:var(--gold2);text-transform:uppercase;text-shadow:0 2px 12px rgba(0,0,0,.95);white-space:nowrap;font-family:ui-monospace,monospace}
-  .charFig.grp img{height:clamp(280px,41vh,500px);padding:0 6%}
-  .charFig.grp .cName{bottom:2%;font-size:clamp(34px,4.4vw,74px)}
-  .charFig.grp .cRole{bottom:calc(2% - 16px);color:var(--gold)}
+  .charFig.grp img{height:clamp(300px,44vh,540px)}
+  .charFig.grp .cName{bottom:4%;font-size:clamp(26px,3.4vw,56px)}
+  .charFig.grp .cRole{bottom:calc(4% - 16px);color:var(--gold)}
+  .charFig .cRole{display:none}
   @media(max-width:520px){.charFig img{height:clamp(210px,30vh,290px)}.charFig.grp img{height:clamp(185px,27vh,260px)}.charFig .cName{font-size:clamp(30px,9vw,44px)}.charFig.grp .cName{font-size:clamp(26px,8vw,38px);bottom:1%}.charFig .cRole{font-size:8px;bottom:calc(20% - 15px)}}
   .wrap{max-width:1180px;margin:0 auto;padding:32px 22px 80px}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase}
@@ -123,7 +124,7 @@
   <p class="lead">데이터 기반 지역관광 활성화 리서치.</p>
   <div class="charRow">
     <div class="charFig"><span class="cName">Taejin</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_010210_6a8d24e8-9945-4648-b1f8-d5704fb327f1.png" alt="Taejin"><span class="cRole">Lead</span></div>
-    <div class="charFig grp"><span class="cName">Bumi</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_020903_a2204a6b-f089-468a-a8a0-b939d62ca2c9.png" alt="Bumi 4남매"><span class="cRole">Mascots</span></div>
+    <div class="charFig grp"><span class="cName">Bumi Four</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_024621_b5504b80-0b96-4be4-ba4d-388d460a93ed.png" alt="Bumi Four 범이4남매"><span class="cRole">Mascots</span></div>
     <div class="charFig"><span class="cName">Lia</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_010213_4ec8b4a3-6df9-42fd-95f9-4ae6621a6383.png" alt="Lia"><span class="cRole">Lead</span></div>
   </div>
 
