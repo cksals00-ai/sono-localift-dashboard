@@ -31,8 +31,14 @@
   .charFig img{height:clamp(320px,46vh,560px);max-width:100%;width:auto;object-fit:contain;position:relative;z-index:2;filter:drop-shadow(0 26px 38px rgba(0,0,0,.55))}
   .charFig .cName{position:absolute;z-index:4;bottom:20%;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(42px,5.4vw,94px);font-weight:600;letter-spacing:.06em;line-height:1;color:rgba(247,242,232,.97);text-shadow:0 10px 40px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.8);white-space:nowrap;pointer-events:none;max-width:100%}
   .charFig .cRole{position:absolute;z-index:4;bottom:calc(20% - 24px);left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.42em;color:var(--gold2);text-transform:uppercase;text-shadow:0 2px 12px rgba(0,0,0,.95);white-space:nowrap;font-family:ui-monospace,monospace}
-  .charFig.grp img{height:clamp(300px,44vh,540px)}
-  .charFig.grp .cName{bottom:4%;font-size:clamp(26px,3.4vw,56px)}
+  .charFig.grp .swap{position:relative;width:100%;height:clamp(300px,44vh,540px)}
+  .charFig.grp .swap .lyr{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center}
+  .charFig.grp .swap .grpimg{height:100%;width:auto;max-width:100%;object-fit:contain;animation:bumiA 11s ease-in-out infinite}
+  .charFig.grp .swap .quad{display:grid;grid-template-columns:1fr 1fr;align-items:end;justify-items:center;padding:0 3%;gap:0;animation:bumiB 11s ease-in-out infinite}
+  .charFig.grp .swap .quad img{max-height:52%;max-width:92%;height:auto;width:auto;object-fit:contain;filter:drop-shadow(0 16px 22px rgba(0,0,0,.5))}
+  @keyframes bumiA{0%,40%{opacity:1}52%,90%{opacity:0}100%{opacity:1}}
+  @keyframes bumiB{0%,40%{opacity:0}52%,90%{opacity:1}100%{opacity:0}}
+  .charFig.grp .cName{bottom:4%;font-size:clamp(26px,3.4vw,56px);z-index:5}
   .charFig.grp .cRole{bottom:calc(4% - 16px);color:var(--gold)}
   .charFig .cRole{display:none}
   @media(max-width:520px){.charFig img{height:clamp(210px,30vh,290px)}.charFig.grp img{height:clamp(185px,27vh,260px)}.charFig .cName{font-size:clamp(30px,9vw,44px)}.charFig.grp .cName{font-size:clamp(26px,8vw,38px);bottom:1%}.charFig .cRole{font-size:8px;bottom:calc(20% - 15px)}}
@@ -124,7 +130,17 @@
   <p class="lead">데이터 기반 지역관광 활성화 리서치.</p>
   <div class="charRow">
     <div class="charFig"><span class="cName">Taejin</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_010210_6a8d24e8-9945-4648-b1f8-d5704fb327f1.png" alt="Taejin"><span class="cRole">Lead</span></div>
-    <div class="charFig grp"><span class="cName">Bumi Four</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_024621_b5504b80-0b96-4be4-ba4d-388d460a93ed.png" alt="Bumi Four 범이4남매"><span class="cRole">Mascots</span></div>
+    <div class="charFig grp"><span class="cName">Bumi Four</span>
+      <div class="swap">
+        <img class="lyr grpimg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_024621_b5504b80-0b96-4be4-ba4d-388d460a93ed.png" alt="Bumi Four group">
+        <div class="lyr quad">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041250_f9f3ad0a-d83b-434c-9de0-f4acb0b82eb2.png" alt="Daho">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041255_d7177151-2ac7-4a01-859e-f1e96c05af2a.png" alt="Kkobi">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041304_0471ff32-0a80-4bf9-bf94-c33bb17076ad.png" alt="Ari">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041306_f3e00dcf-6c35-41b2-8702-fa3336f6f288.png" alt="Rami">
+        </div>
+      </div>
+    <span class="cRole">Mascots</span></div>
     <div class="charFig"><span class="cName">Lia</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_010213_4ec8b4a3-6df9-42fd-95f9-4ae6621a6383.png" alt="Lia"><span class="cRole">Lead</span></div>
   </div>
 
