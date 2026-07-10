@@ -24,12 +24,12 @@
   .nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s}
   .nvTabs a:hover{color:var(--ink);border-color:var(--line)}
   .nvTabs a.on{color:#070A10;background:var(--gold);border-color:var(--gold);font-weight:700}
-  .charRow{position:relative;display:flex;gap:0;justify-content:center;align-items:flex-end;margin:30px 0 24px;flex-wrap:nowrap;width:100vw;left:50%;transform:translateX(-50%);padding:0 8px}
-  .charFig{position:relative;display:flex;align-items:flex-end;justify-content:center;padding:0;margin:0 -1.5%;flex:1 1 0;min-width:0}
-  .charFig img{height:clamp(380px,58vh,680px);max-width:100%;width:auto;object-fit:contain;position:relative;z-index:2;filter:drop-shadow(0 34px 46px rgba(0,0,0,.55))}
-  .charFig .cName{position:absolute;z-index:4;bottom:22%;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(56px,7.2vw,128px);font-weight:600;letter-spacing:.1em;line-height:1;color:rgba(247,242,232,.97);text-shadow:0 10px 40px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.8);white-space:nowrap;pointer-events:none}
-  .charFig .cRole{position:absolute;z-index:4;bottom:calc(22% - 30px);left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.42em;color:var(--gold2);text-transform:uppercase;text-shadow:0 2px 12px rgba(0,0,0,.95);white-space:nowrap;font-family:ui-monospace,monospace}
-  @media(max-width:520px){.charFig img{height:clamp(240px,34vh,320px)}.charFig .cName{font-size:clamp(34px,10vw,52px)}.charFig .cRole{font-size:8px;bottom:calc(22% - 18px)}}
+  .charRow{position:relative;display:grid;grid-template-columns:repeat(3,1fr);justify-items:center;align-items:end;gap:8px;margin:26px 0 22px;width:100%;overflow:hidden}
+  .charFig{position:relative;display:flex;align-items:flex-end;justify-content:center;width:100%;min-width:0}
+  .charFig img{height:clamp(320px,46vh,560px);max-width:100%;width:auto;object-fit:contain;position:relative;z-index:2;filter:drop-shadow(0 26px 38px rgba(0,0,0,.55))}
+  .charFig .cName{position:absolute;z-index:4;bottom:20%;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(42px,5.4vw,94px);font-weight:600;letter-spacing:.06em;line-height:1;color:rgba(247,242,232,.97);text-shadow:0 10px 40px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.8);white-space:nowrap;pointer-events:none;max-width:100%}
+  .charFig .cRole{position:absolute;z-index:4;bottom:calc(20% - 24px);left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.42em;color:var(--gold2);text-transform:uppercase;text-shadow:0 2px 12px rgba(0,0,0,.95);white-space:nowrap;font-family:ui-monospace,monospace}
+  @media(max-width:520px){.charFig img{height:clamp(210px,30vh,290px)}.charFig .cName{font-size:clamp(30px,9vw,44px)}.charFig .cRole{font-size:8px;bottom:calc(20% - 15px)}}
   .wrap{max-width:1180px;margin:0 auto;padding:32px 22px 80px}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase}
   .badge{display:inline-block;font-size:11px;color:var(--gold);border:1px solid var(--gold2);border-radius:999px;padding:5px 13px;letter-spacing:.14em}
@@ -39,8 +39,13 @@
   h1 .g{color:var(--gold)}
   .lead{color:var(--sub);font-size:15.5px;max-width:760px}
   h2{font-size:23px;font-weight:750;margin:6px 0 4px;letter-spacing:-.3px}
-  .sec{margin-top:56px}
-  .sec-tag{font-size:11px;color:var(--gold2);letter-spacing:.16em;margin-bottom:8px}
+  .sec{margin-top:56px;border-left:3px solid var(--ac,#2a3138);padding-left:20px;border-radius:2px}
+  .sec::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+  .sec-tag{font-size:11px;color:var(--ac,var(--gold2));letter-spacing:.16em;margin-bottom:8px}
+  .sec h2{position:relative}
+  .ac-gold{--ac:#e8c88a} .ac-blue{--ac:#7db4e8} .ac-mint{--ac:#5fd6ac} .ac-purple{--ac:#b79de8}
+  .ac-orange{--ac:#eaa669} .ac-cyan{--ac:#5fcbe0} .ac-pink{--ac:#e89dc0} .ac-green{--ac:#84d68f}
+  .ac-violet{--ac:#9d9deb} .ac-red{--ac:#e89090}
   .sub{color:var(--sub);font-size:13.5px}
   .grid{display:grid;gap:14px}
   .k4{grid-template-columns:repeat(4,1fr)}
@@ -113,7 +118,7 @@
   <p class="lead">데이터 기반 지역관광 활성화 리서치.</p>
   <div class="charRow">
     <div class="charFig"><span class="cName">Taejin</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_010210_6a8d24e8-9945-4648-b1f8-d5704fb327f1.png" alt="Taejin"><span class="cRole">Lead</span></div>
-    <div class="charFig"><span class="cName">Bumi</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_010212_40868e68-dea9-4667-adf8-386f0d913565.png" alt="Bumi"><span class="cRole">Mascot</span></div>
+    <div class="charFig"><span class="cName">Bumi</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_020903_a2204a6b-f089-468a-a8a0-b939d62ca2c9.png" alt="Bumi 4남매"><span class="cRole">Mascots</span></div>
     <div class="charFig"><span class="cName">Lia</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_010213_4ec8b4a3-6df9-42fd-95f9-4ae6621a6383.png" alt="Lia"><span class="cRole">Lead</span></div>
   </div>
 
@@ -125,7 +130,7 @@
   </div>
 
   <!-- EXECUTION ROADMAP -->
-  <div class="sec">
+  <div class="sec ac-gold">
     <div class="sec-tag mono">EXECUTION · 실행 로드맵 & 업무 관리</div>
     <h2>구조화 우선 · 단계별 실행</h2>
     <p class="sub">양양 제작을 서두르지 않음. 구조(채널·자동화·후킹표준·국가별 사양) 확정 후 파일럿. 각 단계는 게이트 통과 시 다음으로.</p>
@@ -189,7 +194,7 @@
   </div>
 
   <!-- PIPELINE FLOW -->
-  <div class="sec">
+  <div class="sec ac-blue">
     <div class="sec-tag mono">PIPELINE · 파이프라인 로직</div>
     <h2>데이터 → 콘텐츠 → 업로드 → 재검증</h2>
     <p class="sub">각 단계의 자동/수동 지점. 업로드만 <span style="color:var(--warn)">사람 승인</span>, 나머지는 자동.</p>
@@ -204,7 +209,7 @@
   </div>
 
   <!-- SCORING -->
-  <div class="sec">
+  <div class="sec ac-mint">
     <div class="sec-tag mono">DECISION · 콘텐츠 우선순위 스코어링</div>
     <h2>지역 우선순위</h2>
     <p class="sub">가중치 조정 → 순위 재계산. 실데이터: KTO 데이터랩 방문·소비 + 소노 숙세페 실적.</p>
@@ -230,7 +235,7 @@
   </div>
 
   <!-- PLAYBOOK -->
-  <div class="sec">
+  <div class="sec ac-purple">
     <div class="sec-tag mono">PLAYBOOK · 지역별 콘텐츠 앵글 & 언어 타깃</div>
     <h2>K-culture 앵글 + 시장별 언어</h2>
     <p class="sub">지역 특색(대표 명소)에 맞는 드라마/장르 패러디 앵글과, 외국인 유입 기반 언어 우선순위.</p>
@@ -238,7 +243,7 @@
   </div>
 
   <!-- PRODUCTION QUEUE -->
-  <div class="sec">
+  <div class="sec ac-orange">
     <div class="sec-tag mono">PRODUCTION · 제작·업로드 큐 (반자동)</div>
     <h2>제작 상태 & 승인 게이트</h2>
     <p class="sub">힉스필드 제작은 자동으로 흐르고, <span style="color:var(--warn)">게시만 승인</span> 후 진행. (샘플 상태 — 실제 연동 시 실시간)</p>
@@ -264,7 +269,7 @@
   </div>
 
   <!-- TREND / SOCIAL FEED -->
-  <div class="sec">
+  <div class="sec ac-cyan">
     <div class="sec-tag mono">TREND FEED · 인스타·트렌드 자동 갱신 <span class="tag2">● LIVE</span></div>
     <h2>훅 성과</h2>
     <p class="sub">게시물 성과와 해시태그·훅 트렌드를 지속 수집 → 다음 제작의 훅 선택에 재투입. (아래는 수집 스키마 + 샘플)</p>
@@ -288,7 +293,7 @@
   </div>
 
   <!-- FEEDBACK LOOP -->
-  <div class="sec">
+  <div class="sec ac-pink">
     <div class="sec-tag mono">FEEDBACK · 성과 선순환</div>
     <h2>게시 → 지역 방문 → 재검증</h2>
     <div class="grid k4" style="margin-top:14px">
@@ -301,7 +306,7 @@
   </div>
 
   <!-- MARKET -->
-  <div class="sec">
+  <div class="sec ac-green">
     <div class="sec-tag mono">MARKET · 시장·채널 전략</div>
     <h2>타겟 시장 · 채널</h2>
     <p class="sub">인바운드 데이터 × 채널 특성. 릴스 1콘셉트 → 전 채널 배포 + 시장별 현지화.</p>
@@ -374,7 +379,7 @@
   </div>
 
   <!-- FINANCE -->
-  <div class="sec">
+  <div class="sec ac-violet">
     <div class="sec-tag mono">FINANCE · 투자 · 손익 · KPI</div>
     <h2>투자 회수 기준</h2>
     <p class="sub">월 고정비 대비 손익분기·회수. 환율 1$=1,504원.</p>
@@ -415,7 +420,7 @@
   </div>
 
   <!-- AUTOMATION LOGIC -->
-  <div class="sec">
+  <div class="sec ac-red">
     <div class="sec-tag mono">AUTOMATION · 데이터 자동 갱신 로직 & API 연동</div>
     <h2>자동 갱신 · API</h2>
     <div class="grid k2" style="margin-top:14px;align-items:start">
