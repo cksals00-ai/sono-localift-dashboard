@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SONO LocaLift · 콘텐츠 엔진 · 데이터 기반 콘텐츠 파이프라인</title>
+<title>Korea Tourism Revitalization Institute · SONO LocaLift</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#070A10; --panel:#111725; --panel2:#0D131F; --line:#1E2738;
@@ -24,15 +24,21 @@
   .nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s}
   .nvTabs a:hover{color:var(--ink);border-color:var(--line)}
   .nvTabs a.on{color:#070A10;background:var(--gold);border-color:var(--gold);font-weight:700}
+  .charRow{display:flex;gap:6px;justify-content:center;align-items:flex-end;margin:36px 0 8px;flex-wrap:wrap}
+  .charFig{position:relative;display:flex;align-items:flex-end;justify-content:center;padding:0 6px}
+  .charFig img{height:310px;width:auto;object-fit:contain;position:relative;z-index:2;filter:drop-shadow(0 28px 36px rgba(0,0,0,.5))}
+  .charFig .cName{position:absolute;z-index:1;bottom:60px;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',Georgia,serif;font-size:54px;font-weight:600;letter-spacing:.06em;color:rgba(255,255,255,.16);white-space:nowrap;pointer-events:none}
+  .charFig .cRole{position:absolute;z-index:3;bottom:18px;left:50%;transform:translateX(-50%);font-size:8.5px;letter-spacing:.34em;color:var(--gold2);text-transform:uppercase;text-shadow:0 2px 10px rgba(0,0,0,.85);white-space:nowrap;font-family:ui-monospace,monospace}
+  @media(max-width:520px){.charFig img{height:185px}.charFig .cName{font-size:32px;bottom:38px}}
   .wrap{max-width:1180px;margin:0 auto;padding:32px 22px 80px}
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase}
   .badge{display:inline-block;font-size:11px;color:var(--gold);border:1px solid var(--gold2);border-radius:999px;padding:5px 13px;letter-spacing:.14em}
   .live{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:var(--mint);border:1px solid #244; background:#0f1a18;border-radius:999px;padding:5px 13px;letter-spacing:.1em}
   .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px var(--mint)}
-  h1{font-size:38px;font-weight:800;line-height:1.15;margin:18px 0 12px;letter-spacing:-.5px}
+  h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:56px;font-weight:600;line-height:1.06;margin:14px 0 10px;letter-spacing:.005em}
   h1 .g{color:var(--gold)}
   .lead{color:var(--sub);font-size:15.5px;max-width:760px}
-  h2{font-size:22px;font-weight:750;margin:6px 0 4px;letter-spacing:-.3px}
+  h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:29px;font-weight:600;margin:6px 0 4px;letter-spacing:.01em}
   .sec{margin-top:56px}
   .sec-tag{font-size:11px;color:var(--gold2);letter-spacing:.16em;margin-bottom:8px}
   .sub{color:var(--sub);font-size:13.5px}
@@ -101,11 +107,15 @@
 <div class="wrap">
 
   <!-- HEADER -->
-  <div class="mono badge">SONO LOCALIFT · CONTENT ENGINE — 별도 카테고리</div>
+  <div class="mono badge">SONO LOCALIFT</div>
   <div style="margin-top:12px"><span class="live"><span class="dot"></span>DUAL FEED · 데이터랩(일 06:00) + 인스타/트렌드(수시) 자동 갱신</span></div>
-  <h1>관광 데이터로 만드는 콘텐츠,<br><span class="g">자동으로 선정하고 검증한다</span></h1>
-  <p class="lead">데이터랩이 <b>어느 지역</b>에 콘텐츠가 필요한지 지목하고, 트렌드 분석이 <b>어떤 훅</b>이 먹히는지 알려준다.
-  힉스필드로 다국어 릴스를 제작해 <b>승인 후 게시</b>하고, 게시 성과(인스타 지표)와 지역 방문(데이터랩 YoY)으로 다시 검증하는 <b>콘텐츠 선순환</b>. 아래 점수·큐·트렌드는 조정 가능한 의사결정 화면이다.</p>
+  <h1>Korea Tourism<br>Revitalization <span class="g">Institute</span></h1>
+  <p class="lead">데이터 기반 지역관광 활성화 리서치.</p>
+  <div class="charRow">
+    <div class="charFig"><span class="cName">Taejin</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_001210_872bf1cc-3420-4357-988d-45cbb8c78a1c.png" alt="Taejin"><span class="cRole">Lead</span></div>
+    <div class="charFig"><span class="cName">Bumi</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260709_235145_fb4f87a5-a5e5-4679-a78b-b8d79bff4f8e.png" alt="Bumi"><span class="cRole">Mascot</span></div>
+    <div class="charFig"><span class="cName">Lia</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_001212_81bfa928-ea73-443c-8e2b-7f0ca302d731.png" alt="Lia"><span class="cRole">Lead</span></div>
+  </div>
 
   <div class="grid k4" style="margin-top:22px">
     <div class="card kpi"><div class="big">9</div><div class="lab">콘텐츠 대상 인구감소 시군구</div></div>
@@ -132,8 +142,8 @@
   <!-- SCORING -->
   <div class="sec">
     <div class="sec-tag mono">DECISION · 콘텐츠 우선순위 스코어링</div>
-    <h2>어느 지역부터 만들까 — 데이터가 정한다</h2>
-    <p class="sub">가중치를 움직이면 순위가 실시간으로 바뀐다. (실데이터: KTO 데이터랩 방문·소비 + 소노 숙세페 실적)</p>
+    <h2>지역 우선순위</h2>
+    <p class="sub">가중치 조정 → 순위 재계산. 실데이터: KTO 데이터랩 방문·소비 + 소노 숙세페 실적.</p>
     <div class="sliders">
       <div class="slider"><label>비수기 진작 필요 <span id="w0v">30%</span></label><input type="range" id="w0" min="0" max="100" value="30"></div>
       <div class="slider"><label>콘텐츠 기회(저전환) <span id="w1v">30%</span></label><input type="range" id="w1" min="0" max="100" value="30"></div>
@@ -192,7 +202,7 @@
   <!-- TREND / SOCIAL FEED -->
   <div class="sec">
     <div class="sec-tag mono">TREND FEED · 인스타·트렌드 자동 갱신 <span class="tag2">● LIVE</span></div>
-    <h2>이기는 훅을 데이터로 축적</h2>
+    <h2>훅 성과</h2>
     <p class="sub">게시물 성과와 해시태그·훅 트렌드를 지속 수집 → 다음 제작의 훅 선택에 재투입. (아래는 수집 스키마 + 샘플)</p>
     <div class="grid k2" style="margin-top:14px;align-items:start">
       <div class="card"><div class="chartbox sm"><canvas id="hookChart"></canvas></div>
@@ -226,10 +236,51 @@
     <p class="legendnote" style="margin-top:10px">지표 정의는 병렬(직접 인과 아님) — 인스타 반응↔데이터랩 방문↔예약을 시차 두고 상관으로 검증. 기존 임팩트 대시보드의 검증(r=0.80) 방식과 동일 철학.</p>
   </div>
 
+  <!-- FINANCE -->
+  <div class="sec">
+    <div class="sec-tag mono">FINANCE · 투자 · 손익 · KPI</div>
+    <h2>투자 회수 기준</h2>
+    <p class="sub">월 고정비 대비 손익분기·회수. 환율 1$=1,504원.</p>
+    <div class="grid k4" style="margin-top:14px">
+      <div class="card kpi"><div class="big">554만</div><div class="lab">월 고정비 (인건비 500 + Max + Ultra)</div></div>
+      <div class="card kpi"><div class="big">554만↑</div><div class="lab">월 손익분기 매출</div></div>
+      <div class="card kpi"><div class="big">Q3</div><div class="lab">월 손익분기 도달 목표</div></div>
+      <div class="card kpi"><div class="big">14~18개월</div><div class="lab">누적 투자 회수 (BEP)</div></div>
+    </div>
+    <div class="grid k2" style="margin-top:14px;align-items:start">
+      <div class="card"><h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">월 고정비 (원)</h4>
+        <table><tbody>
+          <tr><td>인건비(본인)</td><td>5,000,000</td></tr>
+          <tr><td>Claude Max ($200)</td><td>300,800</td></tr>
+          <tr><td>Higgsfield Ultra ($129)</td><td>194,016</td></tr>
+          <tr><td>예비(도구·수수료)</td><td>~45,000</td></tr>
+          <tr><td><b>월 합계</b></td><td><b>≈ 5,540,000</b></td></tr>
+        </tbody></table></div>
+      <div class="card"><h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">수익 스트림</h4>
+        <table><tbody>
+          <tr><td>B2B 콘텐츠 용역 (주력)</td><td>월 300~1,000만</td></tr>
+          <tr><td>공모전·정부 (대상 1,000만)</td><td>1,000~3,000만</td></tr>
+          <tr><td>광고·협찬 (팔로워 기반)</td><td>500~2,000만</td></tr>
+          <tr><td>플랫폼 수익화</td><td>보조</td></tr>
+        </tbody></table></div>
+    </div>
+    <div class="card" style="margin-top:14px;overflow-x:auto">
+      <table>
+        <thead><tr><th>분기</th><th>팔로워(말)</th><th>릴스</th><th>월 매출(목표)</th><th>마일스톤</th></tr></thead>
+        <tbody>
+          <tr><td>Q1</td><td>3천</td><td>30</td><td>~100만</td><td>캐릭터·파이프라인, 공모전 제출</td></tr>
+          <tr><td>Q2</td><td>2만</td><td>48</td><td>~400만</td><td>첫 B2B 용역</td></tr>
+          <tr><td>Q3</td><td>7만</td><td>54</td><td>~700만</td><td>손익분기, 광고 개시</td></tr>
+          <tr><td>Q4</td><td>15만</td><td>54</td><td>~1,200만</td><td>흑자, 제휴 확대</td></tr>
+        </tbody></table>
+      <div class="legendnote">단위 원. 주력=B2B 용역(지자체·기관). 상세: 1년_사업계획_v2.md</div>
+    </div>
+  </div>
+
   <!-- AUTOMATION LOGIC -->
   <div class="sec">
     <div class="sec-tag mono">AUTOMATION · 데이터 자동 갱신 로직 & API 연동</div>
-    <h2>두 개의 피드, 하나의 대시보드</h2>
+    <h2>자동 갱신 · API</h2>
     <div class="grid k2" style="margin-top:14px;align-items:start">
       <div class="card">
         <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">FEED A · 데이터랩 (지역 수요)</h4>
