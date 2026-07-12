@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Korea Tourism Revitalization Institute · A.P LocaLift</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070A10; --panel:#111725; --panel2:#0D131F; --line:#1E2738;
+    --ink:#eef2f6; --sub:#9aa7b4; --dim:#6b7885;
+    --gold:#C9A96A; --gold2:#E7CE96; --mint:#57C4B4; --red:#ff6b6b; --blue:#6FA8DC;
+    --ok:#41d19a; --warn:#f5b752;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter','Malgun Gothic',-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all}
+  /* shared site nav */
+  .siteNav{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(7,10,16,.82);border-bottom:1px solid var(--line)}
+  .nvIn{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
+  .nvBrand{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-weight:800}
+  .nvBrand b{color:var(--gold2)}
+  .nvTabs{display:flex;gap:8px}
+  .nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s}
+  .nvTabs a:hover{color:var(--ink);border-color:var(--line)}
+  .nvTabs a.on{color:#070A10;background:var(--gold);border-color:var(--gold);font-weight:700}
+  .charRow{position:relative;display:grid;grid-template-columns:repeat(3,1fr);justify-items:center;align-items:end;gap:0;margin:26px 0 22px;padding-bottom:44px;width:100%;overflow:visible;background:radial-gradient(135% 95% at 50% 112%,rgba(232,200,138,.11),rgba(232,200,138,.03) 45%,transparent 66%)}
+  .charRow::before{content:"";position:absolute;left:4%;right:4%;bottom:12%;height:2px;background:linear-gradient(90deg,transparent,rgba(232,200,138,.22),transparent);filter:blur(.6px);z-index:0}
+  .charFig{position:relative;display:flex;align-items:flex-end;justify-content:center;width:100%;min-width:0}
+  .charFig::after{content:"";position:absolute;bottom:10.5%;left:50%;transform:translateX(-50%);width:72%;height:26px;background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.6),transparent 72%);filter:blur(7px);z-index:1;pointer-events:none}
+  .charFig img{height:clamp(320px,46vh,560px);max-width:100%;width:auto;object-fit:contain;position:relative;z-index:2;filter:drop-shadow(0 26px 38px rgba(0,0,0,.55))}
+  .charFig:first-child img{height:clamp(365px,53vh,625px)}
+  .charFig:nth-child(3) img{height:clamp(360px,52vh,620px)}
+  .charFig:nth-child(3){transform:translateY(0)}
+  .charFig .cName{position:absolute;z-index:4;bottom:20%;left:50%;transform:translateX(-50%);font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(42px,5.4vw,94px);font-weight:600;letter-spacing:.06em;line-height:1;color:rgba(247,242,232,.97);text-shadow:0 10px 40px rgba(0,0,0,.85),0 2px 6px rgba(0,0,0,.8);white-space:nowrap;pointer-events:none;max-width:100%}
+  .charFig .cRole{position:absolute;z-index:4;bottom:calc(20% - 24px);left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.42em;color:var(--gold2);text-transform:uppercase;text-shadow:0 2px 12px rgba(0,0,0,.95);white-space:nowrap;font-family:ui-monospace,monospace}
+  .charFig.grp .swap{position:relative;width:100%;height:clamp(300px,44vh,540px)}
+  .charFig.grp .swap .lyr{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center}
+  .charFig.grp .swap .grpimg{height:100%;width:auto;max-width:100%;object-fit:contain;animation:bumiA 11s ease-in-out infinite}
+  .charFig.grp .swap .quad{display:flex;align-items:flex-end;justify-content:center;padding:0;gap:0;animation:bumiB 11s ease-in-out infinite}
+  .charFig.grp .swap .quad img{height:64%;width:auto;max-width:none;object-fit:contain;margin:0 -5%;filter:drop-shadow(0 16px 22px rgba(0,0,0,.5))}
+  .charFig.grp .swap .quad img:nth-child(3){height:56%}
+  .charFig.grp .swap .quad img:nth-child(4){height:60%}
+  @keyframes bumiA{0%,40%{opacity:1}52%,90%{opacity:0}100%{opacity:1}}
+  @keyframes bumiB{0%,40%{opacity:0}52%,90%{opacity:1}100%{opacity:0}}
+  .charFig.grp .cName{bottom:4%;font-size:clamp(21px,2.8vw,46px);z-index:5}
+  .charFig.grp .cRole{bottom:calc(4% - 16px);color:var(--gold)}
+  .charFig .cRole{display:none}
+  @media(max-width:520px){.charFig img{height:clamp(210px,30vh,290px)}.charFig.grp img{height:clamp(185px,27vh,260px)}.charFig .cName{font-size:clamp(30px,9vw,44px)}.charFig.grp .cName{font-size:clamp(26px,8vw,38px);bottom:1%}.charFig .cRole{font-size:8px;bottom:calc(20% - 15px)}}
+  .wrap{max-width:1180px;margin:0 auto;padding:32px 22px 80px}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase}
+  .badge{display:inline-block;font-size:11px;color:var(--gold);border:1px solid var(--gold2);border-radius:999px;padding:5px 13px;letter-spacing:.14em}
+  .live{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:var(--mint);border:1px solid #244; background:#0f1a18;border-radius:999px;padding:5px 13px;letter-spacing:.1em}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px var(--mint)}
+  h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:56px;font-weight:600;line-height:1.06;margin:14px 0 10px;letter-spacing:.005em}
+  h1 .g{color:var(--gold)}
+  .lead{color:var(--sub);font-size:15.5px;max-width:760px}
+  h2{font-size:23px;font-weight:750;margin:6px 0 4px;letter-spacing:-.3px}
+  .sec{margin-top:56px;border-left:3px solid var(--ac,#2a3138);padding-left:20px;border-radius:2px}
+  .sec::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}
+  .sec-tag{font-size:11px;color:var(--ac,var(--gold2));letter-spacing:.16em;margin-bottom:8px}
+  .sec h2{position:relative}
+  .ac-gold{--ac:#e8c88a} .ac-blue{--ac:#7db4e8} .ac-mint{--ac:#5fd6ac} .ac-purple{--ac:#b79de8}
+  .ac-orange{--ac:#eaa669} .ac-cyan{--ac:#5fcbe0} .ac-pink{--ac:#e89dc0} .ac-green{--ac:#84d68f}
+  .ac-violet{--ac:#9d9deb} .ac-red{--ac:#e89090}
+  .sub{color:var(--sub);font-size:13.5px}
+  .grid{display:grid;gap:14px}
+  .k4{grid-template-columns:repeat(4,1fr)}
+  .k3{grid-template-columns:repeat(3,1fr)}
+  .k2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.k4,.k3,.k2{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.k4,.k3,.k2{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .kpi .big{font-size:30px;font-weight:800;color:var(--gold)}
+  .kpi .lab{font-size:12.5px;color:var(--sub);margin-top:2px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line)}
+  th:first-child,td:first-child{text-align:left}
+  thead th{color:var(--dim);font-weight:600;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase}
+  tbody tr:hover{background:#171c22}
+  .pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:6px;border:1px solid var(--line);color:var(--sub);margin:1px}
+  .pill.ko{border-color:#3a4a5a;color:#bcd}
+  .pill.en{border-color:#3a5a45;color:#9d9}
+  .pill.ja{border-color:#5a3a4a;color:#e9b}
+  .pill.zh{border-color:#5a523a;color:#eca}
+  .flow{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+  @media(max-width:900px){.flow{grid-template-columns:repeat(2,1fr)}}
+  .step{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:13px 12px;position:relative}
+  .step .n{font-size:10.5px;color:var(--gold2);letter-spacing:.1em}
+  .step .t{font-weight:700;font-size:14px;margin:5px 0 3px}
+  .step .d{font-size:11.5px;color:var(--dim);line-height:1.45}
+  .step .auto{margin-top:7px;font-size:10px;color:var(--mint)}
+  .step .man{color:var(--warn)}
+  .kanban{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+  @media(max-width:900px){.kanban{grid-template-columns:repeat(2,1fr)}}
+  .col{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:11px;min-height:90px}
+  .col h4{font-size:11.5px;color:var(--sub);margin-bottom:9px;letter-spacing:.04em;text-transform:uppercase}
+  .ticket{background:#0f141a;border:1px solid var(--line);border-radius:9px;padding:9px;margin-bottom:8px;font-size:12px}
+  .ticket .r{font-weight:700;color:var(--ink)}
+  .ticket .m{color:var(--dim);font-size:11px;margin-top:2px}
+  .ticket.approve{border-color:var(--gold2);box-shadow:0 0 0 1px rgba(232,200,138,.15)}
+  .btn{display:inline-block;font-size:11px;padding:4px 10px;border-radius:7px;border:1px solid var(--gold2);color:var(--gold);background:#1a1710;margin-top:6px;cursor:pointer}
+  .sliders{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:14px 0 4px}
+  @media(max-width:820px){.sliders{grid-template-columns:repeat(2,1fr)}}
+  .slider label{font-size:12px;color:var(--sub);display:flex;justify-content:space-between}
+  .slider input{width:100%;accent-color:var(--gold)}
+  .angle{font-size:12.5px;color:var(--ink)}
+  .muted{color:var(--dim)}
+  .chartbox{position:relative;height:340px}
+  .chartbox.sm{height:280px}
+  .legendnote{font-size:11.5px;color:var(--dim);margin-top:8px}
+  a{color:var(--gold)}
+  .divider{height:1px;background:var(--line);margin:8px 0}
+  .tag2{font-size:11px;color:var(--mint);border:1px solid #244;border-radius:6px;padding:2px 7px}
+  .warnrow{font-size:12px;color:var(--warn);background:#1c1710;border:1px solid #3a2f18;border-radius:10px;padding:10px 12px;margin-top:12px}
+</style>
+</head>
+<body>
+<nav class="siteNav">
+  <div class="nvIn">
+    <a class="nvBrand" href="index.html">A.P <b>LocaLift</b></a>
+    <div class="nvTabs">
+      <a href="index.html" data-p="index">임팩트</a>
+      <a href="content.html" data-p="content">콘텐츠 엔진</a>
+    </div>
+  </div>
+</nav>
+<script>(function(){var f=(location.pathname.split('/').pop()||'index.html').toLowerCase();if(!f)f='index.html';document.querySelectorAll('.siteNav .nvTabs a').forEach(function(a){var h=a.getAttribute('href').toLowerCase();if(h===f||((f===''||f==='index.html')&&a.dataset.p==='index'))a.classList.add('on');});})();</script>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="mono badge">A.P LOCALIFT</div>
+  <div style="margin-top:12px"><span class="live"><span class="dot"></span>DUAL FEED · 데이터랩(일 06:00) + 인스타/트렌드(수시) 자동 갱신</span></div>
+  <h1>Korea Tourism<br>Revitalization <span class="g">Institute</span></h1>
+  <p class="lead">데이터 기반 지역관광 활성화 리서치.</p>
+  <div class="charRow">
+    <div class="charFig"><span class="cName">Leo</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_010210_6a8d24e8-9945-4648-b1f8-d5704fb327f1.png" alt="Leo"><span class="cRole">Lead</span></div>
+    <div class="charFig grp"><span class="cName">The Bumi Cubs</span>
+      <div class="swap">
+        <img class="lyr grpimg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_024621_b5504b80-0b96-4be4-ba4d-388d460a93ed.png" alt="Bumi Four group">
+        <div class="lyr quad">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041250_f9f3ad0a-d83b-434c-9de0-f4acb0b82eb2.png" alt="Daho">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041255_d7177151-2ac7-4a01-859e-f1e96c05af2a.png" alt="Kkobi">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041304_0471ff32-0a80-4bf9-bf94-c33bb17076ad.png" alt="Ari">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041306_f3e00dcf-6c35-41b2-8702-fa3336f6f288.png" alt="Rami">
+        </div>
+      </div>
+    <span class="cRole">Mascots</span></div>
+    <div class="charFig"><span class="cName">Lia</span><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_080814_0d1542a4-88c3-4d64-b7ec-86df27419d6f.png" alt="Lia"><span class="cRole">Lead</span></div>
+  </div>
+
+  <div class="grid k4" style="margin-top:22px">
+    <div class="card kpi"><div class="big">9</div><div class="lab">콘텐츠 대상 인구감소 시군구</div></div>
+    <div class="card kpi"><div class="big">EN</div><div class="lab">1차 영어 단일 제작 · 다국어는 후속 단계</div></div>
+    <div class="card kpi"><div class="big">-46%</div><div class="lab">대상 지역 평균 비수기 낙폭 (진작 대상)</div></div>
+    <div class="card kpi"><div class="big">+33%</div><div class="lab">외국인 유입 추세 · 다국어 레버리지</div></div>
+  </div>
+
+  <!-- EXECUTION ROADMAP -->
+  <div class="sec ac-gold">
+    <div class="sec-tag mono">EXECUTION · 실행 로드맵 & 업무 관리</div>
+    <h2>구조화 우선 · 단계별 실행</h2>
+    <p class="sub">양양 제작을 서두르지 않음. 구조(채널·자동화·후킹표준·국가별 사양) 확정 후 파일럿. 각 단계는 게이트 통과 시 다음으로.</p>
+
+    <div class="card" style="margin-top:14px;background:linear-gradient(180deg,rgba(198,161,91,.08),transparent);border-color:var(--gold2)">
+      <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">현재 상태 (2026-07-10 · 착수 D+2)</h4>
+      <p class="angle" style="font-size:13px">
+        ● <b>완료</b> — 캐릭터 3종(Leo·The Bumi Cubs·Lia) 확정·등록 · 대시보드 구조 · 국가별 제작 사양<br>
+        ◐ <b>진행중</b> — 실행 로드맵·업무 리스트 구조화 (현 단계 P0)<br>
+        ○ <b>다음</b> — 채널 개설·연동 → FEED A/B 자동화 → 후킹 분석 표준화 → 파일럿</p>
+    </div>
+
+    <h3 style="margin-top:22px">단계 로드맵 (4단계)</h3>
+    <div class="card" style="margin-top:12px;overflow-x:auto">
+      <table>
+        <thead><tr><th>단계</th><th>기간</th><th>핵심 목표</th><th>게이트(통과 조건)</th><th>상태</th></tr></thead>
+        <tbody>
+          <tr><td><b>P0 구조화·셋업</b></td><td>7월 (M1)</td><td>캐릭터·대시보드·채널 연동·FEED 자동화·후킹 표준·국가별 사양</td><td>구조 확정 = 파일럿 준비 완료</td><td>◐ 진행중</td></tr>
+          <tr><td><b>P1 파이프라인 검증</b></td><td>8월 (M2)</td><td>양양 파일럿 4개국어 1편 · 배포 반자동 점검 · 훅 A/B 설계</td><td>G1 · 시리즈 1화 4개국어 산출</td><td>○ 대기</td></tr>
+          <tr><td><b>P2 파일럿 운영</b></td><td>9월 (M3)</td><td>지역 3~4개 로테이션 · 공모전 제출 · 지자체 영업리스트</td><td>G2 · 3초 홀드율≥60%·팔로워 3천</td><td>○ 대기</td></tr>
+          <tr><td><b>P3 스케일</b></td><td>10~12월 (M4~6)</td><td>지역 6개 · 월 16릴스 · 첫 B2B 용역 · 협찬 문의</td><td>G3 · 월매출≥400만·팔로워 2만</td><td>○ 대기</td></tr>
+        </tbody></table>
+      <div class="legendnote">게이트 미달 시: 원인 분석 → 지역·훅·수익스트림 재배분. 전체 12개월 계획은 1년_사업계획_v2.md.</div>
+    </div>
+
+    <h3 style="margin-top:22px">P0 구조화 · 4주 상세 스케줄</h3>
+    <div class="card" style="margin-top:12px;overflow-x:auto">
+      <table>
+        <thead><tr><th>주</th><th>기간</th><th>핵심 업무</th><th>산출물</th><th>상태</th></tr></thead>
+        <tbody>
+          <tr><td>W1</td><td>7/8~7/13</td><td>캐릭터 3종 확정·등록 / 대시보드 구조·국가별 제작 사양 / 실행 로드맵</td><td>캐릭터 등록완료 · 대시보드 v2</td><td>◐ 진행중</td></tr>
+          <tr><td>W2</td><td>7/14~7/20</td><td>채널 개설·연동(IG비즈+FB·TikTok·YT·X, 계정·토큰) / FEED A 데이터랩 검증 / FEED B 스크립트·시크릿</td><td>채널·토큰 · Actions cron 가동</td><td>○ 대기</td></tr>
+          <tr><td>W3</td><td>7/21~7/27</td><td>후킹 분석 표준 절차 확정 / 훅 A/B 설계 / 파일럿 스토리보드·국가별 자막안</td><td>후킹 체크리스트 · 스토리보드</td><td>○ 대기</td></tr>
+          <tr><td>W4</td><td>7/28~8/3</td><td>배포 반자동 점검 / <b>양양 파일럿 제작 착수(크레딧 승인 후)</b> → P1 진입</td><td>파일럿 1편(4개국어) 산출 시작</td><td>○ 대기</td></tr>
+        </tbody></table>
+      <div class="legendnote">양양 제작은 W4(구조 확정 후) 착수. 힉스필드 사용 전 크레딧 예상량 승인 필수. 제작 직전 후킹 분석 선행.</div>
+    </div>
+
+    <h3 style="margin-top:22px">P0 업무 체크리스트</h3>
+    <div class="grid k2" style="margin-top:12px;align-items:start">
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">구조·콘텐츠 기반</h4>
+        <p class="angle" style="font-size:13px;line-height:1.9">
+          ☑ 캐릭터 3종 확정·Higgsfield 등록<br>
+          ☑ 대시보드 구조(파이프라인·의사결정·시장·재무)<br>
+          ☑ 국가별 제작 사양(미·일·동남아·한)<br>
+          ☑ 실행 로드맵·업무 리스트<br>
+          ☐ 후킹 분석 표준 절차(제작 전 필수) 고정</p>
+      </div>
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">채널·자동화 인프라</h4>
+        <p class="angle" style="font-size:13px;line-height:1.9">
+          ☐ IG 비즈니스+FB 페이지(Meta 통합)<br>
+          ☐ TikTok · YouTube · X 계정·토큰<br>
+          ☐ FEED A 데이터랩 cron(06:00 KST) 검증<br>
+          ☐ FEED B 인스타 인사이트 시크릿 연결<br>
+          ☐ 배포 반자동(승인 후 게시) 점검</p>
+      </div>
+    </div>
+    <div class="legendnote" style="margin-top:12px">계정·토큰 세팅은 본인 작업 필요. 완료 순서대로 W2에 연동. 업무 상세는 실행계획서.md.</div>
+  </div>
+
+  <!-- PIPELINE FLOW -->
+  <div class="sec ac-blue">
+    <div class="sec-tag mono">PIPELINE · 파이프라인 로직</div>
+    <h2>데이터 → 콘텐츠 → 업로드 → 재검증</h2>
+    <p class="sub">각 단계의 자동/수동 지점. 업로드만 <span style="color:var(--warn)">사람 승인</span>, 나머지는 자동.</p>
+    <div class="flow" style="margin-top:14px">
+      <div class="step"><div class="n mono">01 · DATA</div><div class="t">데이터랩 수집</div><div class="d">방문·외지인·외국인·소비지수 (OpenAPI 15101972 등)</div><div class="auto">● 자동 · 매일 06:00</div></div>
+      <div class="step"><div class="n mono">02 · SELECT</div><div class="t">지역·시장 선정</div><div class="d">비수기갭·전환효율·도달·글로벌 가중 스코어링</div><div class="auto">● 자동 · 점수화</div></div>
+      <div class="step"><div class="n mono">03 · TREND</div><div class="t">트렌드·앵글</div><div class="d">인스타 훅/해시태그 + 지역별 K-culture 앵글·대본</div><div class="auto">● 자동 · 수시 갱신</div></div>
+      <div class="step"><div class="n mono">04 · PRODUCE</div><div class="t">영상 제작</div><div class="d">힉스필드 이미지→영상→다국어 자막·내레이션</div><div class="auto">● 자동 · 큐 처리</div></div>
+      <div class="step"><div class="n mono">05 · APPROVE</div><div class="t">업로드 승인</div><div class="d">대시보드에서 확인 후 게시 (반자동)</div><div class="auto man">◐ 사람 승인 게이트</div></div>
+      <div class="step"><div class="n mono">06 · VALIDATE</div><div class="t">성과 피드백</div><div class="d">인스타 지표 + 데이터랩 방문 YoY → 재투입</div><div class="auto">● 자동 · 루프</div></div>
+    </div>
+  </div>
+
+  <!-- SCORING -->
+  <div class="sec ac-mint">
+    <div class="sec-tag mono">DECISION · 콘텐츠 우선순위 스코어링</div>
+    <h2>지역 우선순위</h2>
+    <p class="sub">가중치 조정 → 순위 재계산. 실데이터: KTO 데이터랩 방문·소비 + 소노 숙세페 실적.</p>
+    <div class="sliders">
+      <div class="slider"><label>비수기 진작 필요 <span id="w0v">30%</span></label><input type="range" id="w0" min="0" max="100" value="30"></div>
+      <div class="slider"><label>콘텐츠 기회(저전환) <span id="w1v">30%</span></label><input type="range" id="w1" min="0" max="100" value="30"></div>
+      <div class="slider"><label>도달 잠재력(방문규모) <span id="w2v">20%</span></label><input type="range" id="w2" min="0" max="100" value="20"></div>
+      <div class="slider"><label>글로벌 레버리지(외지·외국인) <span id="w3v">20%</span></label><input type="range" id="w3" min="0" max="100" value="20"></div>
+    </div>
+    <div class="grid k2" style="margin-top:14px;align-items:start">
+      <div class="card"><div class="chartbox"><canvas id="rankChart"></canvas></div>
+        <div class="legendnote">막대 = 콘텐츠 우선순위 점수(0~100). 가중합이 높을수록 먼저 제작.</div></div>
+      <div class="card"><div class="chartbox"><canvas id="scatterChart"></canvas></div>
+        <div class="legendnote">X=월평균 방문(만) · Y=전환효율(매출÷방문) · 버블=비수기 낙폭. <b>우하단(방문 많은데 저전환)</b>이 콘텐츠로 끌어올릴 1순위.</div></div>
+    </div>
+    <div class="card" style="margin-top:14px;overflow-x:auto">
+      <table id="scoreTable">
+        <thead><tr><th>순위 · 시군구</th><th>대표 시설</th><th>방문(만)</th><th>비수기낙폭</th><th>전환효율</th><th>외지인%</th><th>방문 YoY</th><th>우선순위점수</th></tr></thead>
+        <tbody></tbody>
+      </table>
+      <div class="legendnote">전환효율 최저 <b>양양(0.47)·청송(0.97)</b> = 방문 대비 실적 저조 → 콘텐츠로 인지도 끌어올릴 최우선. 데이터가 다음 제작 지점을 지목한다.</div>
+    </div>
+  </div>
+
+  <!-- PLAYBOOK -->
+  <div class="sec ac-purple">
+    <div class="sec-tag mono">PLAYBOOK · 지역별 콘텐츠 앵글 & 언어 타깃</div>
+    <h2>K-culture 앵글 + 시장별 언어</h2>
+    <p class="sub">지역 특색(대표 명소)에 맞는 드라마/장르 패러디 앵글과, 외국인 유입 기반 언어 우선순위.</p>
+    <div class="grid k3" id="playbook" style="margin-top:14px"></div>
+  </div>
+
+  <!-- PRODUCTION QUEUE -->
+  <div class="sec ac-orange">
+    <div class="sec-tag mono">PRODUCTION · 제작·업로드 큐 (반자동)</div>
+    <h2>제작 상태 & 승인 게이트</h2>
+    <p class="sub">힉스필드 제작은 자동으로 흐르고, <span style="color:var(--warn)">게시만 승인</span> 후 진행. (샘플 상태 — 실제 연동 시 실시간)</p>
+    <div class="kanban" style="margin-top:14px">
+      <div class="col"><h4>① 대기</h4>
+        <div class="ticket"><div class="r">청송 · 주왕산</div><div class="m">앵글: 안개 사극 · KO/EN/JA/ZH</div></div>
+        <div class="ticket"><div class="r">양양 · 서핑</div><div class="m">앵글: 청춘 로맨스 · KO/EN</div></div>
+      </div>
+      <div class="col"><h4>② 제작중(힉스필드)</h4>
+        <div class="ticket"><div class="r">남해 · 독일마을</div><div class="m">이미지→영상 3/4 · 이국 감성</div></div>
+      </div>
+      <div class="col"><h4>③ 자막·내레이션</h4>
+        <div class="ticket"><div class="r">단양 · 도담삼봉</div><div class="m">4개국어 자막 번인 · TTS 대기</div></div>
+      </div>
+      <div class="col"><h4>④ 승인 대기</h4>
+        <div class="ticket approve"><div class="r">성산일출봉 · 겨울연가</div><div class="m">KO/EN/JA/ZH 완성 · 35초</div><span class="btn">▶ 미리보기·승인</span></div>
+      </div>
+      <div class="col"><h4>⑤ 게시완료</h4>
+        <div class="ticket"><div class="r">홍천 · 오션월드</div><div class="m">7/6 게시 · 4개 계정</div></div>
+      </div>
+    </div>
+    <div class="warnrow">⚠ 완전 무인 자동게시는 인스타 정책상 계정 제재 위험 → <b>반자동(승인 후 게시)</b> 채택. 완전자동이 필요하면 Instagram Graph API(비즈니스/크리에이터 계정 + Meta 앱·토큰)로 예약 게시 연동.</div>
+  </div>
+
+  <!-- TREND / SOCIAL FEED -->
+  <div class="sec ac-cyan">
+    <div class="sec-tag mono">TREND FEED · 인스타·트렌드 자동 갱신 <span class="tag2">● LIVE</span></div>
+    <h2>훅 성과</h2>
+    <p class="sub">게시물 성과와 해시태그·훅 트렌드를 지속 수집 → 다음 제작의 훅 선택에 재투입. (아래는 수집 스키마 + 샘플)</p>
+    <div class="grid k2" style="margin-top:14px;align-items:start">
+      <div class="card"><div class="chartbox sm"><canvas id="hookChart"></canvas></div>
+        <div class="legendnote">훅 유형별 평균 3초 홀드율(%) — 우리 게시물 A/B 누적. <b>콜드오픈·불신질문</b>이 상위. 데이터가 훅을 고른다.</div></div>
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--sub);margin-bottom:8px">해시태그·포맷 트렌드 (수시 갱신)</h4>
+        <table>
+          <thead><tr><th>신호</th><th>내용</th><th>상태</th></tr></thead>
+          <tbody>
+            <tr><td>#제주여행 상위</td><td>저장형 정보(코스·5천원·모음집) 지배</td><td><span class="tag2">강</span></td></tr>
+            <tr><td>2026 포맷</td><td>"렌즈 닦기" 리빌 · 오프액시스 캔디드</td><td><span class="tag2">상승</span></td></tr>
+            <tr><td>훅 문법</td><td>숫자+불신질문+보장어+저장명령</td><td><span class="tag2">지속</span></td></tr>
+            <tr><td>오디오</td><td>비즈계정=오리지널/트렌딩 오디오</td><td class="muted">유의</td></tr>
+          </tbody>
+        </table>
+        <div class="legendnote">수집원: 우리 IG 비즈니스 인사이트(API) + 해시태그·경쟁 스냅샷(브라우저/수시). 자세한 갱신 로직은 아래 ‘자동 갱신’ 참조.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEEDBACK LOOP -->
+  <div class="sec ac-pink">
+    <div class="sec-tag mono">FEEDBACK · 성과 선순환</div>
+    <h2>게시 → 지역 방문 → 재검증</h2>
+    <div class="grid k4" style="margin-top:14px">
+      <div class="card kpi"><div class="big" style="color:var(--mint)">3s 홀드</div><div class="lab">인스타: 홀드·완료·저장·공유 (게시물별)</div></div>
+      <div class="card kpi"><div class="big" style="color:var(--mint)">언어별</div><div class="lab">KO/EN/JA/ZH 시장별 반응 분리 측정</div></div>
+      <div class="card kpi"><div class="big" style="color:var(--gold)">방문 YoY</div><div class="lab">데이터랩: 콘텐츠 집행 지역 방문 추세</div></div>
+      <div class="card kpi"><div class="big" style="color:var(--gold)">전환</div><div class="lab">소노 숙세페 예약·매출과 상관 추적</div></div>
+    </div>
+    <p class="legendnote" style="margin-top:10px">지표 정의는 병렬(직접 인과 아님) — 인스타 반응↔데이터랩 방문↔예약을 시차 두고 상관으로 검증. 기존 임팩트 대시보드의 검증(r=0.80) 방식과 동일 철학.</p>
+  </div>
+
+  <!-- MARKET -->
+  <div class="sec ac-green">
+    <div class="sec-tag mono">MARKET · 시장·채널 전략</div>
+    <h2>타겟 시장 · 채널</h2>
+    <p class="sub">인바운드 데이터 × 채널 특성. 릴스 1콘셉트 → 전 채널 배포 + 시장별 현지화.</p>
+    <div class="card" style="margin-top:14px;overflow-x:auto">
+      <table>
+        <thead><tr><th>시장</th><th>1순위</th><th>2순위</th><th>3순위</th><th>현지화 포인트</th></tr></thead>
+        <tbody>
+          <tr><td>미국</td><td>TikTok</td><td>IG Reels</td><td>YT Shorts</td><td>트렌딩 오디오 · POV · 유머</td></tr>
+          <tr><td>일본</td><td>Instagram</td><td>YouTube</td><td>X / TikTok</td><td>무음+자막 필수 · 현지 밈 · 감성</td></tr>
+          <tr><td>동남아</td><td>TikTok</td><td>Facebook</td><td>Instagram</td><td>인플루언서 · 발견 · 모바일</td></tr>
+          <tr><td>한국</td><td>IG Reels</td><td>YT Shorts</td><td>TikTok</td><td>저장형 정보 · 데이터랩 검증</td></tr>
+        </tbody></table>
+      <div class="legendnote">근거: 일본 IG 10~30대 70%+·무음자막 관습 / 동남아 TikTok 사용시간 세계최고·FB 지배 / 미국 숏폼 3강. Meta(IG+FB) 통합 게시. 상세: 글로벌_시장_채널_전략.md</div>
+      <div class="warnrow" style="color:var(--gold);background:#161310;border-color:var(--gold2)">채널 단계 · <b>1단계(현재): 인스타 + 유튜브</b>만 집중. <b>2단계(+약 1개월): 틱톡 · 페이스북 · X</b> 확장. 언어도 1차 영어 단일 → 다국어는 후속.</div>
+    </div>
+
+    <h3 style="margin-top:26px">국가별 제작 사양 (맞춤형)</h3>
+    <p class="sub">1콘셉트 → 국가별 언어·자막·훅·사운드·해시태그·CTA를 아래 사양대로 변형 제작. 제작 전 후킹 분석 선행.</p>
+    <div class="grid k2" style="margin-top:14px;align-items:start">
+
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">🇺🇸 미국 · TikTok 네이티브</h4>
+        <table><tbody>
+          <tr><td>언어·음성</td><td>영어. 구어체 나레이션 or 무나레이션+트렌딩 오디오</td></tr>
+          <tr><td>자막</td><td>영어 캡션(짧게·리듬). 키워드 강조</td></tr>
+          <tr><td>훅(0~3초)</td><td>POV · "wait for it" · 유머 · 기대vs현실</td></tr>
+          <tr><td>포맷·길이</td><td>15~30s. 빠른 컷. 트렌딩 사운드 필수</td></tr>
+          <tr><td>해시태그</td><td>#travelkorea #koreatravel #pov #fyp</td></tr>
+          <tr><td>CTA·채널</td><td>저장·공유 유도. TikTok→Reels→Shorts</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">🇯🇵 일본 · 무음+감성</h4>
+        <table><tbody>
+          <tr><td>언어·음성</td><td>일본어 자막 중심. 나레이션은 보조(무음 시청 관습)</td></tr>
+          <tr><td>자막</td><td><b>번인 자막 필수</b>. 정중·감성 톤. 우리 강점</td></tr>
+          <tr><td>훅(0~3초)</td><td>계절(벚꽃·단풍) · 디테일 리빌 · 감성 스토리</td></tr>
+          <tr><td>포맷·길이</td><td>20~40s. 시각 스토리텔링. 밈·계절 음악</td></tr>
+          <tr><td>해시태그</td><td>#韓国旅行 #韓国 #旅行好きな人と繋がりたい</td></tr>
+          <tr><td>CTA·채널</td><td>Instagram 주력 + X 재확산. YouTube 가이드</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">🌏 동남아 · 발견·인플루언서</h4>
+        <table><tbody>
+          <tr><td>언어·음성</td><td>영어 기본 + 현지어(태국·베트남·인니) 자막 확장</td></tr>
+          <tr><td>자막</td><td>영어+현지어. 모바일 세로 가독</td></tr>
+          <tr><td>훅(0~3초)</td><td>가성비·초보 진입장벽↓ · 라이프스타일 부러움</td></tr>
+          <tr><td>포맷·길이</td><td>15~30s. 저장·발견 최적. 초반 훅 강</td></tr>
+          <tr><td>해시태그</td><td>#koreatrip #koreatravel + 현지어 태그</td></tr>
+          <tr><td>CTA·채널</td><td>TikTok 네이티브 + FB 배포. 현지 크리에이터 시딩</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">🇰🇷 한국 · 저장형·검증</h4>
+        <table><tbody>
+          <tr><td>언어·음성</td><td>한국어. 나레이션+자막</td></tr>
+          <tr><td>자막</td><td>한국어. 정보 저장형 문법</td></tr>
+          <tr><td>훅(0~3초)</td><td>상황극 · AI 반전 · N분할 브이로그</td></tr>
+          <tr><td>포맷·길이</td><td>15~30s. 데이터랩 지역 검증 병행</td></tr>
+          <tr><td>해시태그</td><td>#제주여행 #국내여행 #지역명여행</td></tr>
+          <tr><td>CTA·채널</td><td>IG Reels 주력. B2B 레퍼런스·데이터 검증</td></tr>
+        </tbody></table>
+      </div>
+
+    </div>
+    <div class="legendnote" style="margin-top:12px">공통 원칙: 9:16 마스터 1편 → 국가별 자막·오디오·해시태그만 교체(편집 부하↓). 이기는 훅은 FEED B가 국가별로 분리 측정 → 다음 제작 앵글에 주입.</div>
+  </div>
+
+  <!-- STRATEGY / BENCHMARK -->
+  <div class="sec" style="--ac:#d98ae0">
+    <div class="sec-tag mono">STRATEGY · 페스티벌 & 해외 벤치마크</div>
+    <h2>콘텐츠 공백 = 기회</h2>
+    <p class="sub">양양 페스티벌은 10년째지만 외국인향 콘텐츠가 없다. 해외 성공 공식으로 선점.</p>
+    <div class="grid k4" style="margin-top:14px">
+      <div class="card kpi"><div class="big">75</div><div class="lab">공식 2025 페스티벌 트레일러 조회수</div></div>
+      <div class="card kpi"><div class="big">9.0만</div><div class="lab">"바가지 고충" 부정 영상 조회</div></div>
+      <div class="card kpi"><div class="big">8.2만</div><div class="lab">"외국인 궁금증" 발견 영상 조회</div></div>
+      <div class="card kpi"><div class="big">0</div><div class="lab">제대로 된 외국인향 애프터무비</div></div>
+    </div>
+    <div class="card" style="margin-top:14px;overflow-x:auto">
+      <table>
+        <thead><tr><th>해외 성공사례</th><th>성과</th><th>양양·A.P 적용</th></tr></thead>
+        <tbody>
+          <tr><td>Kumamon (구마모토)</td><td>경제효과 ¥1,232억 · 오픈IP</td><td>범이 오픈IP 무료개방 → 지역 도배</td></tr>
+          <tr><td>Tomorrowland</td><td>애프터무비 15억뷰 · 200개국</td><td>페스티벌 애프터무비 = 핵심 자산</td></tr>
+          <tr><td>Siargao (필리핀)</td><td>외국인 방문 +512%</td><td>서프 라이프스타일 릴스</td></tr>
+          <tr><td>Iceland UGC</td><td>10주 2,200만 스토리</td><td>범이 포즈·해시태그 챌린지</td></tr>
+          <tr><td>Feel the Rhythm of Korea</td><td>6억뷰 (전통+글로벌 퓨전)</td><td>전통+서프+마스코트 퓨전</td></tr>
+          <tr><td>Hallyu 로케이션</td><td>촬영지 예약 +500%</td><td>드라마·K팝 협업 유치</td></tr>
+        </tbody></table>
+      <div class="legendnote">LocaLift 서사: KBS 다큐 "초고령 마을 + 서퍼 상생" = 우리 정체성. 부정 검색 상위를 밝은 상생·발견 콘텐츠로 덮어쓰기. 상세: 양양_페스티벌_전략.md · 양양_반응분석_리포트.md</div>
+    </div>
+  </div>
+
+  <!-- FINANCE -->
+  <div class="sec ac-violet">
+    <div class="sec-tag mono">FINANCE · 투자 · 손익 · KPI</div>
+    <h2>투자 회수 기준</h2>
+    <p class="sub">월 고정비 대비 손익분기·회수. 환율 1$=1,504원.</p>
+    <div class="grid k4" style="margin-top:14px">
+      <div class="card kpi"><div class="big">554만</div><div class="lab">월 고정비 (인건비 500 + Max + Ultra)</div></div>
+      <div class="card kpi"><div class="big">554만↑</div><div class="lab">월 손익분기 매출</div></div>
+      <div class="card kpi"><div class="big">Q3</div><div class="lab">월 손익분기 도달 목표</div></div>
+      <div class="card kpi"><div class="big">14~18개월</div><div class="lab">누적 투자 회수 (BEP)</div></div>
+    </div>
+    <div class="grid k2" style="margin-top:14px;align-items:start">
+      <div class="card"><h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">월 고정비 (원)</h4>
+        <table><tbody>
+          <tr><td>인건비(본인)</td><td>5,000,000</td></tr>
+          <tr><td>Claude Max ($200)</td><td>300,800</td></tr>
+          <tr><td>Higgsfield Ultra ($129)</td><td>194,016</td></tr>
+          <tr><td>예비(도구·수수료)</td><td>~45,000</td></tr>
+          <tr><td><b>월 합계</b></td><td><b>≈ 5,540,000</b></td></tr>
+        </tbody></table></div>
+      <div class="card"><h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">수익 스트림</h4>
+        <table><tbody>
+          <tr><td>B2B 콘텐츠 용역 (주력)</td><td>월 300~1,000만</td></tr>
+          <tr><td>공모전·정부 (대상 1,000만)</td><td>1,000~3,000만</td></tr>
+          <tr><td>광고·협찬 (팔로워 기반)</td><td>500~2,000만</td></tr>
+          <tr><td>플랫폼 수익화</td><td>보조</td></tr>
+        </tbody></table></div>
+    </div>
+    <div class="card" style="margin-top:14px;overflow-x:auto">
+      <table>
+        <thead><tr><th>분기</th><th>팔로워(말)</th><th>릴스</th><th>월 매출(목표)</th><th>마일스톤</th></tr></thead>
+        <tbody>
+          <tr><td>Q1</td><td>3천</td><td>30</td><td>~100만</td><td>캐릭터·파이프라인, 공모전 제출</td></tr>
+          <tr><td>Q2</td><td>2만</td><td>48</td><td>~400만</td><td>첫 B2B 용역</td></tr>
+          <tr><td>Q3</td><td>7만</td><td>54</td><td>~700만</td><td>손익분기, 광고 개시</td></tr>
+          <tr><td>Q4</td><td>15만</td><td>54</td><td>~1,200만</td><td>흑자, 제휴 확대</td></tr>
+        </tbody></table>
+      <div class="legendnote">단위 원. 주력=B2B 용역(지자체·기관). 상세: 1년_사업계획_v2.md</div>
+    </div>
+  </div>
+
+  <!-- AUTOMATION LOGIC -->
+  <div class="sec ac-red">
+    <div class="sec-tag mono">AUTOMATION · 데이터 자동 갱신 로직 & API 연동</div>
+    <h2>자동 갱신 · API</h2>
+    <div class="grid k2" style="margin-top:14px;align-items:start">
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">FEED A · 데이터랩 (지역 수요)</h4>
+        <p class="angle">기존 <code>fetch_data.py</code> 유지·확장. GitHub Actions cron 매일 06:00 KST.</p>
+        <div class="divider"></div>
+        <p class="angle muted" style="font-size:12px">
+        · 소스: 공공데이터포털 <code>DATA_GO_KR_KEY</code><br>
+        · API: <code>locgoRegnVisitrDDList</code>(방문 15101972), 관광소비(15152138·15151868)<br>
+        · 산출: 지역별 방문·외지인비중·소비지수 → <b>우선순위 스코어</b> 자동 계산<br>
+        · 신규: <code>content_score</code> 블록을 <code>dashboard_data.json</code>에 추가(별도 카테고리)</p>
+      </div>
+      <div class="card">
+        <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">FEED B · 인스타·트렌드 (콘텐츠 성과)</h4>
+        <p class="angle">신규 <code>fetch_social.py</code> — 같은 Actions에 스텝 추가(수시/일 1회).</p>
+        <div class="divider"></div>
+        <p class="angle muted" style="font-size:12px">
+        · 우리 계정: <b>Instagram Graph API</b> media insights(조회·홀드·저장·공유·언어별)<br>
+        · 트렌드: 해시태그·경쟁 스냅샷(브라우저 보조 or 서드파티) 주기 저장<br>
+        · 산출: 훅 유형별 성과 누적 → <b>이기는 훅</b> 랭킹 → 03단계 앵글 선택에 주입<br>
+        · 저장: <code>social_data.json</code> (게시물↔지역↔언어↔훅 키 매핑)</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h4 class="mono" style="font-size:12px;color:var(--gold2);margin-bottom:8px">제작·업로드 연동</h4>
+      <p class="angle muted" style="font-size:12px">
+      · 제작: 힉스필드 MCP(이미지→영상→다국어 자막·TTS) — 큐 상태를 대시보드에 반영<br>
+      · 업로드(반자동): 승인 시 Instagram Graph API <code>media</code>→<code>media_publish</code>로 예약/게시. <b>키·토큰은 GitHub Secrets/서버에만 보관</b>(대시보드·코드에 노출 금지)<br>
+      · 네트워크 주의: 공공데이터·인스타 API는 인터넷 되는 실행부(GitHub Actions/서버)에서 호출. (현재 편집 클라우드·로컬 브리지는 외부 API 차단)</p>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:44px">
+    <p class="legendnote">데이터 출처 · KTO 데이터랩 방문(15101972)·관광소비(15152138·15151868) + 소노 숙세페 실적(자사) · 인스타 성과=Instagram Graph API(연동 예정) · 트렌드=OpusClip/inro/New Engen 등 리서치 + 해시태그 스냅샷.
+    본 화면은 <b>별도 카테고리 프로토타입</b>이며 기존 임팩트 대시보드와 독립. 실데이터 9개 지역 값은 데이터랩·소노 실적 기준.</p>
+  </div>
+
+</div>
+
+<script>
+// ── 실데이터: 소노 9개 인구감소 시군구 (KTO 데이터랩 방문·소비 + 숙세페 실적) ──
+const R = [
+ {nm:'홍천군', site:'비발디파크·오션월드', visit:189, drop:-49, conv:3.82, out:80.71, yoy:0,  angle:'여름 워터파크 액션 블록버스터', langs:['ko','en','ja','zh']},
+ {nm:'양양군', site:'쏠비치 양양(서핑)',   visit:131, drop:-55, conv:0.47, out:82.05, yoy:3,  angle:'서핑 청춘 로맨스 K-드라마', langs:['ko','en']},
+ {nm:'고성군', site:'소노문 델피노',       visit:107, drop:-55, conv:2.05, out:81.64, yoy:8,  angle:'겨울 감성 멜로(겨울연가 계열)', langs:['ko','ja','zh']},
+ {nm:'삼척시', site:'소노 삼척(동해)',     visit:102, drop:-50, conv:1.32, out:73.5,  yoy:-3, angle:'해양 느와르 / 한 폭의 사극', langs:['ko','en','zh']},
+ {nm:'부안군', site:'소노벨 변산(채석강)', visit:93,  drop:-38, conv:1.50, out:84,    yoy:4,  angle:'자연 판타지 사극', langs:['ko','en','zh']},
+ {nm:'단양군', site:'소노 단양(도담삼봉)', visit:80,  drop:-53, conv:1.70, out:83.38, yoy:3,  angle:'수묵화 무협 사극', langs:['ko','zh','ja']},
+ {nm:'남해군', site:'소노 남해(독일마을)', visit:78,  drop:-42, conv:1.53, out:83.25, yoy:7,  angle:'유럽풍 이국 로맨스', langs:['ko','ja','en']},
+ {nm:'진도군', site:'소노캄 진도(바닷길)', visit:52,  drop:-32, conv:3.81, out:82.69, yoy:3,  angle:'전설·미스터리 스릴러', langs:['ko','en','ja']},
+ {nm:'청송군', site:'소노벨 청송(주왕산)', visit:42,  drop:-45, conv:0.97, out:83.47, yoy:6,  angle:'안개 낀 힐링 사극', langs:['ko','en','zh']},
+];
+const GOLD='#e8c88a', MINT='#67e8c3', BLUE='#7db8ff', LINE='#2a313a', SUB='#9aa7b4';
+if(typeof Chart!=='undefined'){ Chart.defaults.color=SUB; Chart.defaults.font.family='ui-monospace,Menlo,monospace'; Chart.defaults.font.size=11; }
+
+function norm(arr){const mn=Math.min(...arr),mx=Math.max(...arr);return arr.map(v=>mx===mn?0.5:(v-mn)/(mx-mn));}
+function scores(w){
+  const gap=norm(R.map(r=>Math.abs(r.drop)));            // 비수기 낙폭 클수록↑
+  const opp=norm(R.map(r=>-r.conv));                     // 전환효율 낮을수록↑ (기회)
+  const reach=norm(R.map(r=>r.visit));                   // 방문 규모↑
+  const glob=norm(R.map(r=>r.out));                      // 외지인·외국인 의존↑
+  const s=w[0]+w[1]+w[2]+w[3]||1;
+  return R.map((r,i)=>({...r, score: Math.round(100*(w[0]*gap[i]+w[1]*opp[i]+w[2]*reach[i]+w[3]*glob[i])/s)}));
+}
+let rankChart=null, scatterChart=null, hookChart=null;
+const hasChart = () => typeof Chart !== 'undefined';
+function getW(){return [ +w0.value, +w1.value, +w2.value, +w3.value ];}
+function dropColor(d){return Math.abs(d)>=50?'#ff8a8a':'#e0a0c0';}
+function convColor(c){return c<1?'#ff8a8a':(c>3?'#88ffee':'#ccd6e0');}
+
+function buildTable(sc){
+  const tb=document.querySelector('#scoreTable tbody'); tb.innerHTML='';
+  sc.forEach((r,i)=>{ const tr=document.createElement('tr');
+    tr.innerHTML='<td><b>'+(i+1)+'</b> · '+r.nm+'</td><td class="muted">'+r.site+'</td><td>'+r.visit+'</td>'+
+      '<td style="color:'+dropColor(r.drop)+'">'+r.drop+'%</td>'+
+      '<td style="color:'+convColor(r.conv)+'">'+r.conv.toFixed(2)+'</td>'+
+      '<td>'+r.out+'%</td>'+
+      '<td style="color:'+(r.yoy<0?'#ff8a8a':'#88ffee')+'">'+(r.yoy>=0?'+':'')+r.yoy+'%</td>'+
+      '<td><b style="color:'+(i===0?GOLD:'#eef2f6')+'">'+r.score+'</b></td>';
+    tb.appendChild(tr); });
+}
+function updateRankChart(sc){
+  if(!hasChart()) return;
+  const labels=sc.map(r=>r.nm.replace('군','').replace('시','')), vals=sc.map(r=>r.score);
+  const colors=vals.map((_,i)=>i===0?GOLD:(i<3?'#c9a25f':'#5a6675'));
+  if(!rankChart){
+    rankChart=new Chart(document.getElementById('rankChart'),{type:'bar',
+      data:{labels,datasets:[{data:vals,backgroundColor:colors,borderRadius:6}]},
+      options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'우선순위 '+c.raw}}},
+        scales:{x:{max:100,grid:{color:LINE}},y:{grid:{display:false}}}}});
+  } else { rankChart.data.labels=labels; rankChart.data.datasets[0].data=vals;
+    rankChart.data.datasets[0].backgroundColor=colors; rankChart.update(); }
+}
+function render(){
+  const w=getW(); w0v.textContent=w[0]+'%'; w1v.textContent=w[1]+'%'; w2v.textContent=w[2]+'%'; w3v.textContent=w[3]+'%';
+  const sc=scores(w).sort((a,b)=>b.score-a.score);
+  buildTable(sc); updateRankChart(sc);
+}
+function buildPlaybook(){
+  const pb=document.getElementById('playbook'); pb.innerHTML='';
+  scores(getW()).sort((a,b)=>b.score-a.score).forEach(r=>{
+    const chips=r.langs.map(l=>'<span class="pill '+l+'">'+l.toUpperCase()+'</span>').join('');
+    const d=document.createElement('div'); d.className='card';
+    d.innerHTML='<div style="display:flex;justify-content:space-between;align-items:baseline">'+
+        '<div style="font-weight:750">'+r.nm+'</div><div class="mono" style="font-size:11px;color:var(--gold2)">SCORE '+r.score+'</div></div>'+
+      '<div class="muted" style="font-size:12px;margin:2px 0 8px">'+r.site+'</div>'+
+      '<div class="angle">🎬 '+r.angle+'</div>'+
+      '<div style="margin-top:8px">'+chips+'</div>'+
+      '<div class="legendnote" style="margin-top:8px">비수기 '+r.drop+'% · 전환 '+r.conv.toFixed(2)+' · 외지인 '+r.out+'%</div>';
+    pb.appendChild(d);
+  });
+}
+function initCharts(){
+  if(!hasChart()) return;
+  try{
+    scatterChart=new Chart(document.getElementById('scatterChart'),{type:'bubble',
+      data:{datasets:[{data:R.map(r=>({x:r.visit,y:r.conv,r:Math.max(6,Math.abs(r.drop)/3.2),nm:r.nm})),
+        backgroundColor:R.map(r=>r.conv<1?'rgba(255,107,107,.75)':'rgba(103,232,195,.6)'),borderColor:'#0b0d10'}]},
+      options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const d=c.raw;return d.nm+': 방문 '+d.x+'만 · 전환 '+d.y+' · 갭 '+(d.r*3.2).toFixed(0)+'%';}}}},
+        scales:{x:{title:{display:true,text:'월평균 방문(만)'},grid:{color:LINE}},
+                y:{title:{display:true,text:'전환효율'},grid:{color:LINE}}}}});
+    hookChart=new Chart(document.getElementById('hookChart'),{type:'bar',
+      data:{labels:['콜드오픈(왜?)','불신질문(숫자)','컨트래리언','POV 공감','예쁜 리빌'],
+        datasets:[{label:'평균 3초 홀드율(%)',data:[71,68,64,61,52],backgroundColor:['#e8c88a','#c9a25f','#67e8c3','#7db8ff','#5a6675'],borderRadius:6}]},
+      options:{plugins:{legend:{display:false}},scales:{y:{max:80,grid:{color:LINE},title:{display:true,text:'3초 홀드율 %'}},x:{grid:{display:false}}}}});
+  }catch(e){ console.warn('chart init failed', e); }
+}
+document.querySelectorAll('.slider input').forEach(el=>el.addEventListener('input',render));
+buildPlaybook();
+render();
+initCharts();
+</script>
+</body>
+</html>
