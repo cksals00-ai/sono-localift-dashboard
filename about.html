@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A.P LocaLift Studio · 범 내려온다 (TIGER DOWN)</title>
+<title>A.P LocaLift Studio · 범 내려온다 (The Nine Lanterns)</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
@@ -120,7 +120,7 @@
       <a href="index.html" data-p="index">임팩트</a>
       <a href="content.html" data-p="content">콘텐츠 엔진</a>
       <a href="about.html" data-p="about">회사 소개</a>
-      <a href="deliverables.html" data-p="deliverables">산출물</a>
+      <a id="navDeliverables" href="deliverables.html" data-p="deliverables" style="display:none">산출물</a>
     </div>
   </div>
 </nav>
@@ -204,7 +204,7 @@
     <div style="text-align:center;margin-bottom:34px" class="reveal">
       <span class="kicker">Now in production · EP1</span>
       <h2 class="display" style="font-size:clamp(30px,5.4vw,70px);margin-top:14px">범 내려온다</h2>
-      <div style="color:var(--gold2);letter-spacing:.2em;font-size:13px;margin-top:6px">TIGER DOWN · 시즌 1 「아홉 개의 등불」</div>
+      <div style="color:var(--gold2);letter-spacing:.2em;font-size:13px;margin-top:6px">The Nine Lanterns · 시즌 1 「아홉 개의 등불」</div>
       <div style="font-family:'Cormorant Garamond',serif;color:#e6ebf1;font-size:clamp(16px,2vw,22px);margin-top:12px;font-style:italic">“500 years for a second look.”</div>
     </div>
     <p class="logline reveal">잊히면 사라지는 산신과, 아무도 보지 않는 크리에이터가 만났다.<br>꺼져버린 <span class="g">아홉 고을의 등불</span>에 다시 불을 밝히는 여정 — 그 아홉 고을은, 데이터랩이 짚은 <span class="g">실제 인구감소 지역</span>이다.</p>
@@ -284,5 +284,6 @@
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 </script>
+<script>/* admin 전용: 로그인한 관리자에게만 "산출물" 탭 노출 */(function(){try{var t=localStorage.getItem("gsn_auth_token");if(!t)return;var seg=t.split(".")[0].replace(/-/g,"+").replace(/_/g,"/");while(seg.length%4)seg+="=";var p=JSON.parse(decodeURIComponent(escape(atob(seg))));if(p&&p.exp&&p.exp>Date.now()&&p.role==="admin"){var el=document.getElementById("navDeliverables");if(el)el.style.display="";}}catch(e){}})();</script>
 </body>
 </html>

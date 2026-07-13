@@ -123,7 +123,7 @@
       <a href="index.html" data-p="index">임팩트</a>
       <a href="content.html" data-p="content">콘텐츠 엔진</a>
       <a href="about.html" data-p="about">회사 소개</a>
-      <a href="deliverables.html" data-p="deliverables">산출물</a>
+      <a id="navDeliverables" href="deliverables.html" data-p="deliverables" style="display:none">산출물</a>
     </div>
   </div>
 </nav>
@@ -610,5 +610,6 @@ buildPlaybook();
 render();
 initCharts();
 </script>
+<script>/* admin 전용: 로그인한 관리자에게만 "산출물" 탭 노출 */(function(){try{var t=localStorage.getItem("gsn_auth_token");if(!t)return;var seg=t.split(".")[0].replace(/-/g,"+").replace(/_/g,"/");while(seg.length%4)seg+="=";var p=JSON.parse(decodeURIComponent(escape(atob(seg))));if(p&&p.exp&&p.exp>Date.now()&&p.role==="admin"){var el=document.getElementById("navDeliverables");if(el)el.style.display="";}}catch(e){}})();</script>
 </body>
 </html>
