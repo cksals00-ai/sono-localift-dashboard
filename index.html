@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SONO Local Lift · 관광 데이터로 되살아난 지역 경제</title>
+<title>A.P Local Lift · 관광 데이터로 되살아난 지역 경제</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
@@ -90,34 +90,32 @@
 </style>
 </head>
 <body>
-<!-- ▼▼▼ SONO LocaLift 네비게이터 — index.html 의 <body> 바로 다음 줄에 붙여넣기 ▼▼▼ -->
 <style>
-  .siteNav{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(7,10,16,.82);border-bottom:1px solid #1E2738}
-  .siteNav .nvIn{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
-  .siteNav .nvBrand{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:#C9A96A;text-decoration:none;font-weight:800}
-  .siteNav .nvBrand b{color:#E7CE96}
-  .siteNav .nvTabs{display:flex;gap:8px}
-  .siteNav .nvTabs a{font-size:12.5px;color:#9AA4B8;text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s}
-  .siteNav .nvTabs a:hover{color:#F2F5FB;border-color:#1E2738}
-  .siteNav .nvTabs a.on{color:#070A10;background:#C9A96A;border-color:#C9A96A;font-weight:700}
+  .siteNav{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(7,10,16,.82);border-bottom:1px solid var(--line)}
+  .nvIn{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
+  .nvBrand{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-weight:800}
+  .nvBrand b{color:var(--gold2)}
+  .nvTabs{display:flex;gap:8px}
+  .nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s}
+  .nvTabs a:hover{color:var(--ink);border-color:var(--line)}
+  .nvTabs a.on{color:#070A10;background:var(--gold);border-color:var(--gold);font-weight:700}
 </style>
 <nav class="siteNav">
   <div class="nvIn">
-    <a class="nvBrand" href="index.html">SONO <b>LocaLift</b></a>
+    <a class="nvBrand" href="index.html">A.P <b>LocaLift</b></a>
     <div class="nvTabs">
       <a href="index.html" data-p="index">임팩트</a>
       <a href="content.html" data-p="content">콘텐츠 엔진</a>
+      <a href="about.html" data-p="about">회사 소개</a>
     </div>
   </div>
 </nav>
 <script>(function(){var f=(location.pathname.split('/').pop()||'index.html').toLowerCase();if(!f)f='index.html';document.querySelectorAll('.siteNav .nvTabs a').forEach(function(a){var h=a.getAttribute('href').toLowerCase();if(h===f||((f===''||f==='index.html')&&a.dataset.p==='index'))a.classList.add('on');});})();</script>
-<!-- ▲▲▲ 네비게이터 끝 ▲▲▲ -->
-
 <div class="wrap">
 
   <!-- HERO -->
   <section class="hero">
-    <div class="over">SONO · LOCAL LIFT — Regional Economy Impact</div>
+    <div class="over">A.P · LOCAL LIFT — Regional Economy Impact</div>
     <a class="live" id="liveLink" href="https://github.com/cksals00-ai/sono-localift-dashboard/actions" target="_blank" rel="noopener"><span class="dot"></span> <span id="liveStamp">LIVE · KTO DataLab API</span> · 갱신 이력 ↗</a>
     <h1>관광 데이터로 되살아난<br><b>지역 경제</b></h1>
     <div class="sub">한국관광공사 데이터랩으로 <b>인구 감소 지역</b> 진단 후,<br>국가 캠페인 <b>‘숙박세일페스타’</b> 상품 주력 판매.<br>지역 관광 매출로 이어진 성과를 데이터랩 지표로 재검증하는 <b>선순환 구조</b>.</div>

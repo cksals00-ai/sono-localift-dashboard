@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.P LocaLift · 드라마로 한국을 여행하게 한다</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070A10; --panel:#111725; --panel2:#0D131F; --line:#1E2738;
+    --ink:#eef2f6; --sub:#9aa7b4; --dim:#6b7885;
+    --gold:#C9A96A; --gold2:#E7CE96; --mint:#57C4B4; --red:#ff6b6b; --blue:#6FA8DC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter','Malgun Gothic',-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  /* shared site nav */
+  .siteNav{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(7,10,16,.82);border-bottom:1px solid var(--line)}
+  .nvIn{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
+  .nvBrand{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-weight:800}
+  .nvBrand b{color:var(--gold2)}
+  .nvTabs{display:flex;gap:8px}
+  .nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s;white-space:nowrap}
+  .nvTabs a:hover{color:var(--ink);border-color:var(--line)}
+  .nvTabs a.on{color:#070A10;background:var(--gold);border-color:var(--gold);font-weight:700}
+  /* layout */
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  .kicker{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.34em;text-transform:uppercase;font-size:11px;color:var(--gold)}
+  .display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.02;letter-spacing:.005em}
+  .lead{color:var(--sub);font-size:clamp(15px,1.9vw,19px);max-width:46ch}
+  .sec{padding:clamp(64px,11vh,140px) 0}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,.8,.3,1),transform .9s cubic-bezier(.16,.8,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  /* hero */
+  .hero{position:relative;min-height:92vh;display:flex;align-items:flex-end;overflow:hidden}
+  .hero .bg{position:absolute;inset:0;background-size:cover;background-position:center 22%;transform:scale(1.04)}
+  .hero .grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,10,16,.55) 0%,rgba(7,10,16,.15) 38%,rgba(7,10,16,.82) 82%,var(--bg) 100%)}
+  .hero .inner{position:relative;z-index:2;padding-bottom:clamp(48px,9vh,110px)}
+  .hero h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;font-size:clamp(44px,8.2vw,116px);line-height:.98;letter-spacing:.01em;margin:16px 0 18px}
+  .hero h1 .g{color:var(--gold2)}
+  .hero .sub{color:#dfe6ee;font-size:clamp(16px,2.1vw,22px);max-width:40ch;text-shadow:0 2px 20px rgba(0,0,0,.6)}
+  .live{display:inline-flex;align-items:center;gap:8px;font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.14em;color:var(--gold2);border:1px solid rgba(201,169,106,.35);border-radius:999px;padding:5px 12px;text-transform:uppercase}
+  .live .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
+  /* mission */
+  .mission h2{font-size:clamp(30px,5vw,64px);max-width:20ch}
+  .mission h2 em{color:var(--gold2);font-style:normal}
+  .missionGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+  .mcard{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:18px;padding:26px}
+  .mcard .n{font-family:'Cormorant Garamond',serif;font-size:40px;color:var(--gold);line-height:1}
+  .mcard h3{font-size:16px;margin:12px 0 6px}
+  .mcard p{color:var(--sub);font-size:13.5px}
+  /* section head */
+  .shead{display:flex;align-items:baseline;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:34px}
+  .shead h2{font-size:clamp(28px,4.6vw,58px)}
+  .shead p{color:var(--sub);font-size:14px;max-width:34ch}
+  /* actors */
+  .actor{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;border:1px solid var(--line);border-radius:22px;overflow:hidden;margin-bottom:22px;background:var(--panel2)}
+  .actor.rev{grid-template-columns:1fr 1fr}
+  .actor .ph{position:relative;min-height:clamp(360px,52vh,560px);background-size:cover;background-position:center 20%}
+  .actor .tx{padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;justify-content:center}
+  .actor .role{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+  .actor .nm{font-family:'Cormorant Garamond',serif;font-size:clamp(46px,6vw,86px);font-weight:600;line-height:1;margin:8px 0 4px}
+  .actor .kr{color:var(--gold2);font-size:15px;letter-spacing:.14em;margin-bottom:16px}
+  .actor .tx p{color:var(--sub);font-size:14.5px;margin-bottom:12px}
+  .actor .tag{display:inline-block;font-size:11px;color:var(--gold2);border:1px solid rgba(201,169,106,.3);border-radius:999px;padding:4px 11px;margin:2px 6px 0 0}
+  @media(max-width:820px){.actor,.actor.rev{grid-template-columns:1fr}.actor .ph{min-height:56vh}.actor.rev .ph{order:-1}}
+  /* cubs */
+  .cubs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .cub{background:radial-gradient(120% 90% at 50% 0%,rgba(232,200,138,.08),transparent 60%),var(--panel2);border:1px solid var(--line);border-radius:20px;padding:16px;text-align:center}
+  .cub .imw{aspect-ratio:1/1;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;filter:drop-shadow(0 18px 24px rgba(0,0,0,.5))}
+  .cub .imw img{height:100%;width:auto;object-fit:contain}
+  .cub .cn{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold2);margin-top:10px;line-height:1}
+  .cub .ck{font-size:11px;color:var(--dim);letter-spacing:.2em;text-transform:uppercase}
+  .cub p{color:var(--sub);font-size:12.5px;margin-top:8px}
+  /* drama gallery */
+  .gal{columns:3;column-gap:14px}
+  .gal figure{break-inside:avoid;margin:0 0 14px;border-radius:16px;overflow:hidden;position:relative;border:1px solid var(--line)}
+  .gal figure img{width:100%;transition:transform .8s cubic-bezier(.16,.8,.3,1)}
+  .gal figure:hover img{transform:scale(1.05)}
+  .gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;font-size:12px;color:#e9edf2;background:linear-gradient(0deg,rgba(7,10,16,.85),transparent);opacity:0;transition:.3s}
+  .gal figure:hover figcaption{opacity:1}
+  .logline{max-width:60ch;margin:0 auto 40px;text-align:center;color:#e6ebf1;font-size:clamp(17px,2.3vw,24px);font-family:'Cormorant Garamond',serif;line-height:1.4}
+  .logline .g{color:var(--gold2)}
+  .drammeta{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;margin-top:8px;color:var(--sub);font-size:13px}
+  .drammeta b{color:var(--ink)}
+  /* bts */
+  .bts{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:14px}
+  .bts figure{border-radius:16px;overflow:hidden;border:1px solid var(--line);margin:0;position:relative}
+  .bts img{width:100%;height:100%;object-fit:cover}
+  .bts figcaption{position:absolute;left:12px;bottom:10px;font-size:12px;color:#eef2f6;text-shadow:0 2px 10px #000}
+  @media(max-width:820px){.bts{grid-template-columns:1fr 1fr}.missionGrid{grid-template-columns:1fr}.cubs{grid-template-columns:1fr 1fr}.gal{columns:2}}
+  /* instagram */
+  .ig{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:24px;padding:clamp(24px,4vw,48px)}
+  .igHead{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:26px}
+  .igAv{width:74px;height:74px;border-radius:50%;background-size:cover;background-position:center 20%;border:2px solid var(--gold);flex:none}
+  .igName{font-size:20px;font-weight:800}
+  .igHandle{color:var(--gold2);font-size:13px}
+  .igStats{display:flex;gap:22px;margin-top:8px;color:var(--sub);font-size:13px}
+  .igStats b{color:var(--ink);font-size:15px}
+  .igFollow{margin-left:auto;background:var(--gold);color:#070A10;font-weight:800;border:none;border-radius:10px;padding:10px 20px;font-size:14px;text-decoration:none}
+  .igGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  .igGrid a{position:relative;aspect-ratio:1/1;overflow:hidden;display:block}
+  .igGrid img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+  .igGrid a:hover img{transform:scale(1.07)}
+  .igGrid .cap{position:absolute;inset:0;display:flex;align-items:flex-end;padding:8px;font-size:11px;color:#fff;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 55%);opacity:0;transition:.25s}
+  .igGrid a:hover .cap{opacity:1}
+  @media(max-width:560px){.igFollow{margin-left:0}}
+  /* footer */
+  footer{border-top:1px solid var(--line);padding:44px 0 60px;color:var(--dim);font-size:12.5px}
+  footer .brand{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold2)}
+  .divlab{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+</style>
+</head>
+<body>
+<nav class="siteNav">
+  <div class="nvIn">
+    <a class="nvBrand" href="index.html">A.P <b>LocaLift</b></a>
+    <div class="nvTabs">
+      <a href="index.html" data-p="index">임팩트</a>
+      <a href="content.html" data-p="content">콘텐츠 엔진</a>
+      <a href="about.html" data-p="about">회사 소개</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="bg" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260713_000827_29563fcc-698c-4660-b38c-043b8f750130.png')"></div>
+  <div class="grad"></div>
+  <div class="wrap inner">
+    <span class="live"><span class="dot"></span>A.P STUDIO · 관광 콘텐츠 IP</span>
+    <h1>드라마로,<br><span class="g">한국을 여행하게</span> 한다.</h1>
+    <p class="sub">데이터로 찾은 잊혀진 고을을, 이야기로 다시 살아나게. 한국 지역관광을 드라마·숏폼·캐릭터 IP로 세계에 알리는 콘텐츠 스튜디오.</p>
+  </div>
+</header>
+
+<!-- MISSION -->
+<section class="sec mission">
+  <div class="wrap reveal">
+    <span class="kicker">Why we exist</span>
+    <h2 class="display" style="margin-top:14px">데이터가 <em>어디</em>를 짚으면,<br>우리는 그곳을 <em>이야기</em>로 만든다.</h2>
+    <p class="lead" style="margin-top:20px">데이터랩으로 진단한 인구감소·관광 취약 지역. 통계로는 사람을 움직일 수 없다. A.P는 그 지역을 무대로 한 드라마와 콘텐츠를 만들어, ‘가 보고 싶은 곳’으로 바꾼다.</p>
+    <div class="missionGrid">
+      <div class="mcard"><div class="n">진단</div><h3>데이터가 고른 무대</h3><p>임팩트 대시보드의 9개 인구감소 시군구를 그대로 이야기의 배경으로.</p></div>
+      <div class="mcard"><div class="n">제작</div><h3>드라마 · 숏폼 · IP</h3><p>배우 2명과 캐릭터 4종을 축으로 K-드라마·릴스·굿즈까지 한 세계관으로.</p></div>
+      <div class="mcard"><div class="n">전환</div><h3>관심 → 방문</h3><p>콘텐츠 반응(조회·저장·언급)을 데이터랩 방문·소비 지표와 시차 상관으로 검증.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTORS -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="shead reveal">
+      <h2 class="display">배우</h2>
+      <p>하나의 세계관을 이끄는 두 주연. 데이터가 고른 지역을, 두 사람의 여정으로.</p>
+    </div>
+
+    <div class="actor reveal">
+      <div class="ph" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_103210_870ab523-1e90-45c6-90bc-501d78faad2c.png')"></div>
+      <div class="tx">
+        <span class="role">Lead · 男 주연</span>
+        <div class="nm">Leo</div>
+        <div class="kr">이레오 · 산신(山神)</div>
+        <p>힘을 잃고 현대 서울에 나타난 오래된 산의 신. 꺼져가는 아홉 고을에 다시 사람의 발길이 모여야 본래의 힘을 되찾는다. 무심하고 서늘하지만, 지역을 향한 애정은 누구보다 깊다.</p>
+        <div><span class="tag">미스터리</span><span class="tag">차분한 카리스마</span><span class="tag">한국 산신 설화</span></div>
+      </div>
+    </div>
+
+    <div class="actor rev reveal">
+      <div class="tx">
+        <span class="role">Lead · 女 주연</span>
+        <div class="nm">Lia</div>
+        <div class="kr">한리아 · 콘텐츠 크리에이터</div>
+        <p>조회수 한 자리의 무명 크리에이터. 아무도 보지 않는 시골 마을을 카메라에 담아 온 그녀가, 산신 레오를 만나 여정을 기록하기 시작한다. “나는 찍는다, 너는 빛난다.” 발랄하고 집요한 이야기꾼.</p>
+        <div><span class="tag">브이로그</span><span class="tag">밝은 에너지</span><span class="tag">로컬 스토리텔러</span></div>
+      </div>
+      <div class="ph" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_235846_6271160d-3af0-4c1d-96f9-59a74b5b3f11.png')"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHARACTERS -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="shead reveal">
+      <h2 class="display">The Bumi Cubs</h2>
+      <p>산신을 지키는 네 마리 아기 호랑이. 세계관의 마스코트이자 굿즈·숏폼의 주인공.</p>
+    </div>
+    <div class="cubs reveal">
+      <div class="cub"><div class="imw"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041250_f9f3ad0a-d83b-434c-9de0-f4acb0b82eb2.png" alt="Daho"></div><div class="cn">Daho</div><div class="ck">다호 · 맏이</div><p>든든한 주황 호랑이. 넷을 이끄는 리더.</p></div>
+      <div class="cub"><div class="imw"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041255_d7177151-2ac7-4a01-859e-f1e96c05af2a.png" alt="Kkobi"></div><div class="cn">Kkobi</div><div class="ck">꼬비 · 먹보</div><p>초록 후드에 김밥을 쥔 통통이. 먹는 게 일.</p></div>
+      <div class="cub"><div class="imw"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041304_0471ff32-0a80-4bf9-bf94-c33bb17076ad.png" alt="Ari"></div><div class="cn">Ari</div><div class="ck">아리 · 호기심</div><p>큰 눈망울의 눈치 빠른 탐험가.</p></div>
+      <div class="cub"><div class="imw"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041306_f3e00dcf-6c35-41b2-8702-fa3336f6f288.png" alt="Rami"></div><div class="cn">Rami</div><div class="ck">라미 · 막내</div><p>제일 작고 껌딱지. 늘 누군가 뒤에 붙어 있다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DRAMA -->
+<section class="sec">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:34px" class="reveal">
+      <span class="kicker">Now in production</span>
+      <h2 class="display" style="font-size:clamp(30px,5.4vw,70px);margin-top:14px">아홉 개의 등불</h2>
+      <div style="color:var(--gold2);letter-spacing:.2em;font-size:13px;margin-top:6px">THE NINE LANTERNS</div>
+    </div>
+    <p class="logline reveal">힘을 잃은 산신과 무명 크리에이터가, 꺼져버린 <span class="g">아홉 고을의 등불</span>에 다시 불을 밝히는 여정.<br>드라마 속 아홉 고을은, 데이터랩이 짚은 <span class="g">실제 인구감소 지역</span>이다.</p>
+    <div class="drammeta reveal" style="margin-bottom:40px">
+      <span><b>장르</b> 판타지 · 힐링 코미디</span>
+      <span><b>포맷</b> 숏폼 시리즈 + 본편</span>
+      <span><b>무대</b> 서울 · 9개 지역</span>
+      <span><b>슬로건</b> I FILM. YOU GLOW.</span>
+    </div>
+    <div class="gal reveal">
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_225416_5ce0d93d-aa19-4194-8c00-ca9fdb8861fe.png" alt="palace wide"><figcaption>거대한 궁 마당, 두 사람과 네 호랑이</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_225139_be3eb2ab-5a06-4131-b02b-086d5a3aaba6.png" alt="nine lanterns map"><figcaption>아홉 개의 등불이 그려진 지도</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_125916_6a7280a3-c655-4b88-89ca-64b9aa41b429.png" alt="white tiger forming"><figcaption>안개에서 형상을 갖추는 백호</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_225950_8f64dfab-3eac-4d02-9f61-421e06278387.png" alt="skyline reaction"><figcaption>천 년 만에 마주한 현대 서울</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_222210_e92d5b9a-f584-4c38-9259-cc5ab32437a4.png" alt="cubs sitting"><figcaption>말 잘 듣는 네 마리 아기 호랑이</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260713_002237_c68d9b1d-9df0-412d-bc6e-68f11013ceca.png" alt="churro comedy"><figcaption>츄러스를 내미는 아이 앞의 산신</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- PRESS / BTS -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="shead reveal">
+      <h2 class="display">제작발표회 · 현장</h2>
+      <p>세계관을 처음 공개한 제작발표회와 촬영 현장의 기록.</p>
+    </div>
+    <div class="bts reveal">
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_204108_957e2b7b-1290-4512-9e90-e953cdc43d0c.png" alt="press two shot"><figcaption>제작발표회 — 두 주연</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_204020_a329ac98-89eb-4167-9a6e-73354bda52db.png" alt="bts makeup"><figcaption>촬영 현장 스케치</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_204042_e134b3ee-6196-4e7b-b785-115bf75ef3a2.png" alt="onset selfie"><figcaption>현장 셀피</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- LIA INSTAGRAM -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap reveal">
+    <div class="ig">
+      <div class="igHead">
+        <div class="igAv" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_113123_d8fde60d-1e99-433e-9891-7daceddeb1e7.png')"></div>
+        <div>
+          <div class="igName">Lia · 한리아</div>
+          <div class="igHandle">@lia.localift</div>
+          <div class="igStats"><span><b>128</b> 게시물</span><span><b>52.4k</b> 팔로워</span><span><b>영어·한국어</b> 콘텐츠</span></div>
+        </div>
+        <a class="igFollow" href="#" onclick="return false">팔로우</a>
+      </div>
+      <div class="igGrid">
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_221856_caf7cae2-ee40-43e1-8883-7e23313469c2.png" alt="jeonju"><span class="cap">전주 한옥마을 골목</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_115941_f1ef09d6-221b-4e0f-bde9-b15c9946cdc8.png" alt="baseball"><span class="cap">야구장 직관 데이</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_135259_a2885f39-b597-48f9-9304-1bfcc08f0418.png" alt="surf"><span class="cap">양양 서핑 첫 도전</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_113139_885d9b13-b92b-4991-b510-7462f3965ee6.png" alt="run"><span class="cap">한강 새벽 러닝</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_221907_f91bbf21-260e-4ad8-b7c0-03c755bc90d9.png" alt="atlanta"><span class="cap">고향 애틀랜타 가을</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_113148_6ad8b902-7c95-47f3-9ff2-725f318f51e4.png" alt="yoga"><span class="cap">아침 홈 요가</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_221852_3e554516-5323-481d-9733-1976b70f01f0.png" alt="study"><span class="cap">카페에서 일본어 공부</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_113144_180f5e03-423b-4555-8baa-ef294948fce7.png" alt="journal"><span class="cap">오늘의 저널링</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_235846_6271160d-3af0-4c1d-96f9-59a74b5b3f11.png" alt="onset"><span class="cap">촬영 현장에서</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="divlab">A.P LocaLift Studio</div>
+    <div class="brand">드라마로, 한국을 여행하게 한다.</div>
+    <p style="margin-top:14px;max-width:52ch">한국관광 데이터랩으로 지역을 진단하고, 이야기로 다시 살린다. 본 페이지의 인물·드라마·이미지는 콘텐츠 IP 프로토타입이며, 임팩트 대시보드의 9개 지역과 연결된다.</p>
+    <p style="margin-top:16px">© 2026 A.P LocaLift · <a href="index.html" style="color:var(--gold2);text-decoration:none">임팩트</a> · <a href="content.html" style="color:var(--gold2);text-decoration:none">콘텐츠 엔진</a></p>
+  </div>
+</footer>
+
+<script>
+  // active nav
+  (function(){var f=(location.pathname.split('/').pop()||'index.html').toLowerCase();if(!f)f='index.html';document.querySelectorAll('.siteNav .nvTabs a').forEach(function(a){var h=a.getAttribute('href').toLowerCase();if(h===f||((f===''||f==='index.html')&&a.dataset.p==='index'))a.classList.add('on');});})();
+  // scroll reveal
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+</script>
+</body>
+</html>
