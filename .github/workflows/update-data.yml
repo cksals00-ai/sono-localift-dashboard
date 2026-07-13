@@ -1,8 +1,8 @@
 name: Update dashboard data
 
 on:
-  schedule:
-    - cron: "0 21 * * *"   # 21:00 UTC = 06:00 KST (매일)
+  # 매일 자동 갱신은 로컬(Mac) 스케줄 작업 'datalab-dashboard-daily-refresh'가 단일 소스로 담당한다.
+  # (schedule 트리거는 은퇴 — 중복 push 충돌 및 실패 알림 방지). 필요 시 아래 버튼으로 수동 실행.
   workflow_dispatch: {}     # 수동 실행 버튼
 
 permissions:
