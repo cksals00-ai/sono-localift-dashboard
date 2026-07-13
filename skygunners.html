@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>소노 스카이거너스 U-9 · 2026 대시보드</title>
+<style>
+  :root{
+    --sky:#5aa6d6; --sky2:#8fcbe8; --navy:#234b6e; --navy2:#1a3a56;
+    --ink:#0f2334; --mut:#5b7488; --line:#dbe8f2; --bg:#eef5fb; --card:#ffffff;
+    --win:#1f9d6b; --loss:#d8534f; --accent:#f2a53a;
+    --shadow:0 6px 22px rgba(35,75,110,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 16px 60px}
+
+  /* ---------- header ---------- */
+  header{
+    background:linear-gradient(135deg,var(--sky) 0%,var(--navy) 100%);
+    color:#fff;padding:34px 20px 30px;border-radius:0 0 26px 26px;
+    position:relative;overflow:hidden;
+  }
+  header::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;
+    background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%);border-radius:50%}
+  .hd-inner{max-width:1080px;margin:0 auto;position:relative;z-index:1}
+  .crest{display:flex;align-items:center;gap:14px}
+  .crest svg{width:56px;height:56px;flex:none;filter:drop-shadow(0 3px 6px rgba(0,0,0,.25))}
+  .crest h1{font-size:26px;font-weight:800;letter-spacing:-.5px;line-height:1.15}
+  .crest .sub{font-size:13px;opacity:.9;font-weight:500;margin-top:2px}
+  .tagline{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+  .pill{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);
+    padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:600}
+
+  /* ---------- season strip ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:-26px;position:relative;z-index:3}
+  .stat{background:var(--card);border-radius:16px;padding:16px 12px;text-align:center;box-shadow:var(--shadow)}
+  .stat .num{font-size:30px;font-weight:800;letter-spacing:-1px;font-style:italic;color:var(--navy)}
+  .stat .num.win{color:var(--win)}
+  .stat .lbl{font-size:12px;color:var(--mut);font-weight:600;margin-top:2px}
+  @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.stat .num{font-size:26px}}
+
+  section{margin-top:34px}
+  .sec-h{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+  .sec-h h2{font-size:19px;font-weight:800;letter-spacing:-.4px}
+  .sec-h .en{font-size:12px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+
+  /* ---------- match cards ---------- */
+  .matches{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:640px){.matches{grid-template-columns:1fr}}
+  .match{background:var(--card);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;border:1px solid var(--line)}
+  .match .top{background:linear-gradient(135deg,var(--sky2),var(--sky));color:#fff;padding:9px 14px;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:700}
+  .match .top .res{background:#fff;color:var(--win);border-radius:6px;padding:1px 9px;font-weight:800;font-size:12px}
+  .match .body{padding:14px 16px 16px}
+  .match .teams{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .match .team{flex:1;text-align:center}
+  .match .team.us .nm{color:var(--navy);font-weight:800}
+  .match .nm{font-size:13.5px;font-weight:600;color:var(--ink)}
+  .match .sc{font-size:34px;font-weight:800;font-style:italic;letter-spacing:-1px;line-height:1}
+  .match .team.us .sc{color:var(--navy)}
+  .match .team.opp .sc{color:#9db4c6}
+  .match .vs{font-size:12px;color:var(--mut);font-weight:700;flex:none;padding:0 2px}
+  .match .meta{margin-top:12px;padding-top:11px;border-top:1px dashed var(--line);font-size:12px;color:var(--mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}
+  .match .margin{font-weight:700;color:var(--win)}
+
+  /* ---------- schedule ---------- */
+  .timeline{background:var(--card);border-radius:16px;box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden}
+  .ev{display:flex;gap:14px;padding:15px 18px;border-bottom:1px solid var(--line);align-items:flex-start}
+  .ev:last-child{border-bottom:0}
+  .ev .date{flex:none;width:78px;text-align:center;background:var(--bg);border-radius:10px;padding:8px 4px}
+  .ev .date .d{font-size:19px;font-weight:800;color:var(--navy);line-height:1}
+  .ev .date .m{font-size:11px;color:var(--mut);font-weight:600;margin-top:2px}
+  .ev.hl .date{background:linear-gradient(135deg,var(--accent),#e8912a);}
+  .ev.hl .date .d,.ev.hl .date .m{color:#fff}
+  .ev .info h3{font-size:15px;font-weight:700}
+  .ev .info p{font-size:12.5px;color:var(--mut);margin-top:3px}
+  .ev .badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;margin-top:6px}
+  .b-cup{background:#fdeccf;color:#b9781a}
+  .b-team{background:#e5f3ec;color:var(--win)}
+  .b-train{background:#e6eff7;color:var(--navy)}
+
+  /* ---------- videos ---------- */
+  .vid-group{margin-bottom:8px}
+  .vid-group h4{font-size:14px;font-weight:700;color:var(--navy);margin:14px 0 8px;display:flex;align-items:center;gap:7px}
+  .vid-group h4 .dot{width:8px;height:8px;border-radius:50%;background:var(--sky);flex:none}
+  .vids{display:flex;flex-wrap:wrap;gap:8px}
+  .vid{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);
+    border-radius:10px;padding:8px 12px;font-size:12.5px;font-weight:600;color:var(--ink);text-decoration:none;
+    box-shadow:0 2px 6px rgba(35,75,110,.06);transition:.15s}
+  .vid:hover{border-color:var(--sky);transform:translateY(-1px)}
+  .vid .yt{width:18px;height:13px;background:#ff0000;border-radius:3px;position:relative;flex:none}
+  .vid .yt::after{content:"";position:absolute;left:6px;top:3px;border-left:7px solid #fff;border-top:3.5px solid transparent;border-bottom:3.5px solid transparent}
+  .vid .cloud{width:18px;height:13px;flex:none;background:#03c75a;border-radius:3px;display:inline-block}
+
+  /* ---------- roster ---------- */
+  .roster{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:640px){.roster{grid-template-columns:repeat(2,1fr)}}
+  .player{background:var(--card);border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--line);
+    padding:16px 10px;text-align:center;position:relative;overflow:hidden}
+  .player::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--sky),var(--navy))}
+  .player .no{font-size:32px;font-weight:800;font-style:italic;color:var(--navy);line-height:1}
+  .player .kr{font-size:15px;font-weight:700;margin-top:6px}
+  .player .en{font-size:11px;color:var(--mut);font-weight:500}
+
+  /* ---------- notices ---------- */
+  .notices{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  @media(max-width:640px){.notices{grid-template-columns:1fr}}
+  .notice{background:var(--card);border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--line);
+    padding:15px 16px;border-left:4px solid var(--sky)}
+  .notice.warn{border-left-color:var(--accent)}
+  .notice h3{font-size:14.5px;font-weight:700;display:flex;align-items:center;gap:7px}
+  .notice p{font-size:12.5px;color:var(--mut);margin-top:5px}
+  .notice .em{font-size:16px}
+
+  /* ---------- news ---------- */
+  .news{display:flex;flex-direction:column;gap:9px}
+  .art{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;padding:13px 15px;text-decoration:none;box-shadow:0 2px 6px rgba(35,75,110,.05);transition:.15s}
+  .art:hover{border-color:var(--sky);transform:translateX(2px)}
+  .art .src{flex:none;width:112px;font-size:11px;font-weight:700;color:var(--sky);line-height:1.3}
+  .art .tt{flex:1;font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.4;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .art .tag{flex:none;font-size:10.5px;font-weight:700;color:var(--navy);background:var(--bg);
+    border-radius:6px;padding:3px 8px}
+  .art .tag.star{color:#b9781a;background:#fdeccf}
+  .art.hidden-art{display:none}
+  .news.expanded .art.hidden-art{display:flex}
+  @media(max-width:640px){
+    .art{flex-wrap:wrap;gap:6px 10px}
+    .art .src{width:auto;order:1}
+    .art .tag{order:2;margin-left:auto}
+    .art .tt{order:3;flex:1 1 100%;-webkit-line-clamp:3}
+  }
+  .more-btn{display:block;width:100%;margin-top:12px;padding:12px;border:1px dashed var(--sky);
+    background:rgba(90,166,214,.07);color:var(--navy);font-size:13.5px;font-weight:700;border-radius:12px;
+    cursor:pointer;font-family:inherit;transition:.15s}
+  .more-btn:hover{background:rgba(90,166,214,.15)}
+
+  footer{margin-top:40px;text-align:center;font-size:12px;color:var(--mut);line-height:1.7}
+  footer .hand{color:var(--sky);font-weight:700}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hd-inner">
+    <div class="crest">
+      <svg viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="32" r="30" fill="#fff" opacity=".14"/>
+        <circle cx="32" cy="32" r="30" stroke="#fff" stroke-width="2"/>
+        <path d="M32 12 L38 26 H26 Z" fill="#fff"/>
+        <rect x="28" y="26" width="8" height="20" fill="#fff"/>
+        <path d="M24 46 h16 l3 6 H21 Z" fill="#fff"/>
+        <circle cx="32" cy="19" r="2.4" fill="#f2a53a"/>
+        <path d="M40 20 l7 -4 M40 24 l8 0 M40 28 l7 4" stroke="#f2a53a" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <h1>소노 스카이거너스 <span style="opacity:.85">U-9</span></h1>
+        <div class="sub">SONO SKYGUNNERS · 2026 시즌 대시보드</div>
+      </div>
+    </div>
+    <div class="tagline">
+      <span class="pill">🏀 KBL 산하 유소년 클럽팀</span>
+      <span class="pill">🏠 홈 · 고양 소노 아레나</span>
+      <span class="pill">👨‍👩‍👧 학부모 7가구 · 선수 8명</span>
+      <span class="pill">📅 업데이트 2026.7.13</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- SEASON STATS -->
+  <div class="stats">
+    <div class="stat"><div class="num win">4승</div><div class="lbl">2026 연습경기</div></div>
+    <div class="stat"><div class="num">0패</div><div class="lbl">무패 행진 🔥</div></div>
+    <div class="stat"><div class="num">+41</div><div class="lbl">누적 득실차</div></div>
+    <div class="stat"><div class="num">34.8</div><div class="lbl">평균 득점</div></div>
+  </div>
+
+  <!-- RESULTS -->
+  <section>
+    <div class="sec-h"><h2>경기 결과</h2><span class="en">Match Results · 2026</span></div>
+    <div class="matches">
+
+      <div class="match">
+        <div class="top"><span>7.12 · 연습경기</span><span class="res">WIN · 4W</span></div>
+        <div class="body">
+          <div class="teams">
+            <div class="team us"><div class="nm">고양 소노</div><div class="sc">30</div></div>
+            <div class="vs">:</div>
+            <div class="team opp"><div class="sc">25</div><div class="nm">은평 삼성</div></div>
+          </div>
+          <div class="meta"><span>고양 소노 아레나</span><span class="margin">+5 · 추격전 승리</span></div>
+        </div>
+      </div>
+
+      <div class="match">
+        <div class="top"><span>7.05 · 연습경기</span><span class="res">WIN · 3W</span></div>
+        <div class="body">
+          <div class="teams">
+            <div class="team us"><div class="nm">고양 소노</div><div class="sc">34</div></div>
+            <div class="vs">:</div>
+            <div class="team opp"><div class="sc">32</div><div class="nm">남양주 소노</div></div>
+          </div>
+          <div class="meta"><span>고양 소노 아레나</span><span class="margin">+2 · 접전 승리</span></div>
+        </div>
+      </div>
+
+      <div class="match">
+        <div class="top"><span>6.07 · 연습경기</span><span class="res">WIN · 2W</span></div>
+        <div class="body">
+          <div class="teams">
+            <div class="team us"><div class="nm">고양 소노</div><div class="sc">46</div></div>
+            <div class="vs">:</div>
+            <div class="team opp"><div class="sc">17</div><div class="nm">은평 삼성</div></div>
+          </div>
+          <div class="meta"><span>고양 소노 아레나</span><span class="margin">+29 · 시즌 최다 점수차</span></div>
+        </div>
+      </div>
+
+      <div class="match">
+        <div class="top"><span>4.25 · 첫 연습경기</span><span class="res">WIN · 1W</span></div>
+        <div class="body">
+          <div class="teams">
+            <div class="team us"><div class="nm">고양 소노</div><div class="sc">29</div></div>
+            <div class="vs">:</div>
+            <div class="team opp"><div class="sc">24</div><div class="nm">상대팀</div></div>
+          </div>
+          <div class="meta"><span>합산 스코어(2게임)</span><span class="margin">+5 · 시즌 개막 승</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section>
+    <div class="sec-h"><h2>다가오는 일정</h2><span class="en">Upcoming</span></div>
+    <div class="timeline">
+      <div class="ev hl">
+        <div class="date"><div class="d">17</div><div class="m">7월 (금)</div></div>
+        <div class="info">
+          <h3>U-9 여름 단합대회 🎉</h3>
+          <p>이야짐 스포츠센터(일산동구 중산로60, 아이파크2차 지하2층) · 오후 1~2시 집결 · 농구·수영·저녁 · 저녁 후 자유투 이벤트(가족팀 대결 / 아빠 vs 선수)</p>
+          <span class="badge b-team">팀 이벤트</span>
+        </div>
+      </div>
+      <div class="ev">
+        <div class="date"><div class="d">1~14</div><div class="m">8월</div></div>
+        <div class="info">
+          <h3>대회 전 개인연습 무료 개방</h3>
+          <p>이야짐 농구장 · 월·화·목 19–21시 / 수·금 20–21시 / 토 14–16시 · 주차 무료</p>
+          <span class="badge b-train">개인 훈련</span>
+        </div>
+      </div>
+      <div class="ev hl">
+        <div class="date"><div class="d">14~17</div><div class="m">8월</div></div>
+        <div class="info">
+          <h3>KBL 제천 유스드림컵 2026 🏆</h3>
+          <p>충북 제천(어울림체육센터 인근) · 3박 4일 · 팀 숙소: <b>소노벨 단양</b>(3.17 투표 확정) · 객실 회신 ~7/20 · KBL 홈피 선수등록 임박</p>
+          <span class="badge b-cup">공식 대회</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section>
+    <div class="sec-h"><h2>영상 라이브러리</h2><span class="en">Video Library</span></div>
+
+    <div class="vid-group">
+      <h4><span class="dot"></span>2026.7.12 은평삼성전 · 쿼터별 복기 <span style="font-weight:500;color:var(--mut);font-size:11px">(촬영: 우찬 아빠)</span></h4>
+      <div class="vids">
+        <a class="vid" href="https://youtu.be/0gwlNCs7w5g" target="_blank"><span class="yt"></span>1쿼터</a>
+        <a class="vid" href="https://youtu.be/wBPlb2X2vuA" target="_blank"><span class="yt"></span>2쿼터</a>
+        <a class="vid" href="https://youtu.be/BOKZtGTuvcM" target="_blank"><span class="yt"></span>3쿼터</a>
+        <a class="vid" href="https://youtu.be/-5ehjYhUnN8" target="_blank"><span class="yt"></span>4쿼터</a>
+        <a class="vid" href="https://youtu.be/wXsq407RXE0" target="_blank"><span class="yt"></span>5쿼터</a>
+        <a class="vid" href="https://naver.me/G4d3eiC8" target="_blank"><span class="cloud"></span>고화질 원본(네이버)</a>
+      </div>
+    </div>
+
+    <div class="vid-group">
+      <h4><span class="dot"></span>2025 KBL 양구대회 · 생중계</h4>
+      <div class="vids">
+        <a class="vid" href="https://m.youtube.com/live/sZAv2A3tRcE?t=9915" target="_blank"><span class="yt"></span>소노 vs 모비스</a>
+        <a class="vid" href="https://www.youtube.com/live/vpLQl5dp9nc?t=31387" target="_blank"><span class="yt"></span>소노 vs KT</a>
+        <a class="vid" href="https://www.youtube.com/live/gsEZ1VUF2Tk?t=9346" target="_blank"><span class="yt"></span>소노 vs DB</a>
+      </div>
+    </div>
+
+    <div class="vid-group">
+      <h4><span class="dot"></span>2025 KBL 제천 유스드림컵 · 생중계</h4>
+      <div class="vids">
+        <a class="vid" href="https://www.youtube.com/live/218xlAuU5vY?t=36307" target="_blank"><span class="yt"></span>소노 vs 현대피버스</a>
+        <a class="vid" href="https://www.youtube.com/live/peYUfwRoJps?t=24751" target="_blank"><span class="yt"></span>소노 vs KCC부산</a>
+        <a class="vid" href="https://www.youtube.com/live/0_k279Zl0AA?t=35277" target="_blank"><span class="yt"></span>소노 vs 강남삼성</a>
+      </div>
+    </div>
+
+    <div class="vid-group">
+      <h4><span class="dot"></span>KBL 유소년 공식 페이지</h4>
+      <div class="vids">
+        <a class="vid" href="https://youth.kbl.or.kr/youth/game/club?type=schedule" target="_blank">📋 클럽대회 일정</a>
+        <a class="vid" href="https://youth.kbl.or.kr/youth/game/club/K1S18G01N44" target="_blank">📊 경기기록지 예시</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROSTER -->
+  <section>
+    <div class="sec-h"><h2>선수 명단</h2><span class="en">Roster · 8</span></div>
+    <div class="roster">
+      <div class="player"><div class="no">4</div><div class="kr">이영재</div><div class="en">Lee Young-jae</div></div>
+      <div class="player"><div class="no">6</div><div class="kr">박성규</div><div class="en">Park Sung-kyu</div></div>
+      <div class="player"><div class="no">11</div><div class="kr">노권오</div><div class="en">Noh Kwon-oh</div></div>
+      <div class="player"><div class="no">13</div><div class="kr">석호원</div><div class="en">Seok Ho-won</div></div>
+      <div class="player"><div class="no">15</div><div class="kr">이영우</div><div class="en">Lee Young-woo</div></div>
+      <div class="player"><div class="no">15</div><div class="kr">조연호</div><div class="en">Jo Yeon-ho</div></div>
+      <div class="player"><div class="no">28</div><div class="kr">노우찬</div><div class="en">Noh Woo-chan</div></div>
+      <div class="player"><div class="no">32</div><div class="kr">박선우</div><div class="en">Park Sun-woo</div></div>
+    </div>
+  </section>
+
+  <!-- NOTICES -->
+  <section>
+    <div class="sec-h"><h2>주요 공지 · 팀 운영</h2><span class="en">Notices</span></div>
+    <div class="notices">
+      <div class="notice warn">
+        <h3><span class="em">🏨</span>대회 숙소 — 소노벨 단양</h3>
+        <p>3.17 투표로 확정. 객실가 조정 후 재공지 예정이며, 사용 객실은 <b>7/20 전</b>까지 회신 필요. (숙소 담당: 성규 아빠·소노 본사)</p>
+      </div>
+      <div class="notice">
+        <h3><span class="em">🍔</span>연습경기 간식 규칙</h3>
+        <p>홈팀이 상대팀 아이들 간식까지 준비 · 공금 조성 후 7가구 정산. (7/12 햄버거 가구당 14,400원 / 커피 6,100원)</p>
+      </div>
+      <div class="notice">
+        <h3><span class="em">📷</span>역할 분담</h3>
+        <p>학부모 대표: 박희진(선우 아빠) · 영상 촬영: 석진호(호원 아빠)·현우(우찬 아빠) · 장소 제공: 노권오 아빠(이야짐)</p>
+      </div>
+      <div class="notice">
+        <h3><span class="em">🎽</span>단체복</h3>
+        <p>선수: 연습경기 시 홈 유니폼 · 학부모: 소노 응원 티셔츠 착용 권장</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section>
+    <div class="sec-h"><h2>농구 소식</h2><span class="en">News · 유소년 · KBL</span></div>
+    <div class="news" id="newsList">
+      <a class="art" href="https://jumpball.co.kr/news/newsview.php?ncode=1065621855615468" target="_blank">
+        <span class="src">점프볼</span>
+        <span class="tt">[26드림캠프] 소노의 시작을 빛냈던 어린이 위너스, 그 응원이 만든 고양의 봄 "꼭 파이널 우승해주세요!"</span>
+        <span class="tag">소노</span>
+      </a>
+      <a class="art" href="https://jumpball.co.kr/news/newsview.php?ncode=1065582179210361" target="_blank">
+        <span class="src">점프볼</span>
+        <span class="tt">[KBL Y리그] 쌍둥이도, 형도 모두 코트 위에…셋이 함께 3x3 우승까지, 농구로 하나 된 삼형제</span>
+        <span class="tag star">성장기</span>
+      </a>
+      <a class="art" href="https://v.daum.net/v/20260625100500153" target="_blank">
+        <span class="src">다음스포츠 · 26.6.25</span>
+        <span class="tt">구리다산 KCC 장우현·이밝음, 미니게임 속에서 농구에 빠지다!</span>
+        <span class="tag star">성장기</span>
+      </a>
+      <a class="art" href="https://www.maxportsnews.com/news/articleView.html?idxno=6198" target="_blank">
+        <span class="src">맥스포츠</span>
+        <span class="tt">KBL, 유소년 육성 프로그램 성료…'발굴–육성–프로 진출' 구조 가시화</span>
+        <span class="tag star">육성</span>
+      </a>
+      <a class="art" href="https://basketkorea.com/news/newsview.php?ncode=1065573464761185" target="_blank">
+        <span class="src">바스켓코리아 · 26.6.17</span>
+        <span class="tt">2026 KBL YOUTH DREAM CAMP, 이전과 차별화되는 건 '다큐 영상'</span>
+        <span class="tag">캠프</span>
+      </a>
+
+      <a class="art hidden-art" href="https://sports.news.nate.com/view/20251229n16311" target="_blank">
+        <span class="src">네이트 스포츠 · 25.12.29</span>
+        <span class="tt">'장신선수 발굴+찾아가는 농구교실' KBL, 유소년 육성 성료…발굴→육성→프로행 선순환</span>
+        <span class="tag star">육성</span>
+      </a>
+      <a class="art hidden-art" href="https://v.daum.net/v/20260227070413970" target="_blank">
+        <span class="src">다음스포츠 · 26.2.27</span>
+        <span class="tt">[KBL 유스 코치아카데미] 최고령 참가자 프로 코치의 솔선수범…"지도자는 보여줘야죠"</span>
+        <span class="tag star">성장기</span>
+      </a>
+      <a class="art hidden-art" href="https://www.newsis.com/view/NISX20260521_0003639861" target="_blank">
+        <span class="src">뉴시스 · 26.5.21</span>
+        <span class="tt">2026 KBL Y리그 개최…6월 27~28일 아산서 플레이오프 예정</span>
+        <span class="tag">Y리그</span>
+      </a>
+      <a class="art hidden-art" href="https://sports.news.nate.com/view/20260617n17337" target="_blank">
+        <span class="src">네이트 스포츠 · 26.6.17</span>
+        <span class="tt">KCC, 제주에서 국제 유소년 클럽 농구 대회 개최…7개국 47개 팀 참가</span>
+        <span class="tag">대회</span>
+      </a>
+      <a class="art hidden-art" href="https://basketkorea.com/news/newsview.php?ncode=1065575365623903" target="_blank">
+        <span class="src">바스켓코리아</span>
+        <span class="tt">부산 KCC, 'KCC이지스와 함께 하는 국제 유소년 클럽 농구 대회' 개최</span>
+        <span class="tag">대회</span>
+      </a>
+      <a class="art hidden-art" href="https://jumpball.co.kr/news/newsview.php?ncode=1065594569338577" target="_blank">
+        <span class="src">점프볼 매거진</span>
+        <span class="tt">유소년 농구의 미래를 지키는 '부상 방지 교육', 그 뜨거운 현장 속으로</span>
+        <span class="tag">교육</span>
+      </a>
+      <a class="art hidden-art" href="https://www.joongboo.com/news/articleView.html?idxno=363731283" target="_blank">
+        <span class="src">중부일보</span>
+        <span class="tt">세계 U13 농구 꿈나무 교류의 장 2026 WYBC, 17일 부천 일원서 개최</span>
+        <span class="tag">국제</span>
+      </a>
+      <a class="art hidden-art" href="http://m.jumpball.co.kr/news/newsList.php?tid=182007183" target="_blank">
+        <span class="src">점프볼</span>
+        <span class="tt">점프볼 유소년 농구 뉴스 모음 (전체 보기)</span>
+        <span class="tag">모음</span>
+      </a>
+      <a class="art hidden-art" href="https://youth.kbl.or.kr/" target="_blank">
+        <span class="src">KBL</span>
+        <span class="tt">KBL 유소년 공식 홈페이지 — 일정·기록·영상</span>
+        <span class="tag">공식</span>
+      </a>
+    </div>
+    <button class="more-btn" id="moreBtn" onclick="toggleNews()">더보기 (+8)</button>
+  </section>
+
+  <!-- YOUTH TOURNAMENT INFO -->
+  <section>
+    <div class="sec-h"><h2>유소년 대회 정보</h2><span class="en">Reference · KBL Youth</span></div>
+    <div class="notices">
+      <div class="notice">
+        <h3><span class="em">🏆</span>KBL 유스드림컵 / 클럽대회</h3>
+        <p>연령별(U-9~U-14) 전국 클럽대회. 예선 리그 → 본선 토너먼트, 3박 4일. 2025년 7월 양구·11월 제천 개최 → <b>2026년 8/14~17 제천</b>. 전 경기 유튜브 생중계, KBL 홈페이지에 기록·사진 게재.</p>
+      </div>
+      <div class="notice">
+        <h3><span class="em">🏀</span>KBL Y리그 2026 (공식 리그)</h3>
+        <p>9개 구단 유스클럽 · 14세 이하(2012.1.1 이후). 예선 라운드로빈 → Y1(1–4위)·Y2(5–8위) 4강 토너먼트. 정규시즌 5/23~6/21(예산·아산), 플레이오프 6/27~28 아산. <b>유소년 최초로 10분 4쿼터·데드볼·비디오판독</b> 도입.</p>
+      </div>
+      <div class="notice">
+        <h3><span class="em">🎥</span>2026 KBL 유스 드림 캠프</h3>
+        <p>5/1~4 안산 신안산대 · 6학년 비엘리트 30명 · 수석코치 신기성. 부상방지·테이핑·도핑·심판규칙 교육. 32분 다큐 2부작(KBL TV 유튜브)로 제작.</p>
+      </div>
+      <div class="notice warn">
+        <h3><span class="em">🔗</span>바로가기</h3>
+        <p><a href="https://youth.kbl.or.kr/" target="_blank" style="color:var(--sky);font-weight:700">KBL 유소년 홈페이지</a> · <a href="https://skygunners.kbl.or.kr/" target="_blank" style="color:var(--sky);font-weight:700">소노 스카이거너스 구단</a> · <a href="https://www.youtube.com/@KBLTV" target="_blank" style="color:var(--sky);font-weight:700">KBL TV(유튜브)</a></p>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--mut);margin-top:10px;line-height:1.6">
+      * 출처: KBL 유소년 홈페이지 · 바스켓코리아(2026.6.17 유스 드림 캠프) · 뉴시스(2026.5.21 Y리그) · KBL TV. Y리그(공식 리그)와 유스드림컵(클럽대회)은 별개 대회이며, 소노 U-9은 8월 제천 클럽대회를 준비 중입니다.
+    </p>
+  </section>
+
+  <footer>
+    소노 스카이거너스 U-9 · 2026 시즌 · 학부모 단톡방 기록 기반 (2026.1.17 ~ 7.13)<br>
+    데이터: 카카오톡 대화 + 경기 결과 카드 · 제작 <span class="hand">@helnoh_khsoul</span>
+  </footer>
+
+</div>
+<script>
+  function toggleNews(){
+    var list=document.getElementById('newsList');
+    var btn=document.getElementById('moreBtn');
+    var open=list.classList.toggle('expanded');
+    btn.textContent=open?'접기':'더보기 (+8)';
+  }
+</script>
+</body>
+</html>
