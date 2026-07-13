@@ -4,129 +4,159 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>소노 스카이거너스 U-9 · 2026 대시보드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --sky:#5aa6d6; --sky2:#8fcbe8; --navy:#234b6e; --navy2:#1a3a56;
-    --ink:#0f2334; --mut:#5b7488; --line:#dbe8f2; --bg:#eef5fb; --card:#ffffff;
-    --win:#1f9d6b; --loss:#d8534f; --accent:#f2a53a;
-    --shadow:0 6px 22px rgba(35,75,110,.10);
+    --sky:#5aa6d6; --sky2:#9cd2ec; --navy:#234b6e; --navy2:#12233a;
+    --ink:#12233a; --mut:#5b7488; --line:#12233a; --bg:#eaf3fb; --card:#ffffff;
+    --win:#1f9d6b; --loss:#d8534f; --accent:#f7b731; --pop:#ff5a4d;
+    --hs:5px 5px 0 var(--navy2);
+    --hs-sm:3px 3px 0 var(--navy2);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{
-    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
-    background:var(--bg);color:var(--ink);line-height:1.55;
-    -webkit-font-smoothing:antialiased;
+    font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;
+    color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(rgba(35,75,110,.07) 1.3px, transparent 1.5px) 0 0/13px 13px,
+      var(--bg);
   }
-  .wrap{max-width:1080px;margin:0 auto;padding:0 16px 60px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 16px 70px}
 
   /* ---------- header ---------- */
   header{
-    background:linear-gradient(135deg,var(--sky) 0%,var(--navy) 100%);
-    color:#fff;padding:34px 20px 30px;border-radius:0 0 26px 26px;
-    position:relative;overflow:hidden;
+    position:relative;overflow:hidden;margin:0 -16px;padding:34px 20px 34px;
+    background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,.10) 0 3px, transparent 3px 26px),
+      radial-gradient(rgba(255,255,255,.16) 1.6px, transparent 1.8px) 0 0/14px 14px,
+      linear-gradient(135deg,var(--sky) 0%,var(--navy) 100%);
+    color:#fff;border-bottom:5px solid var(--navy2);
   }
-  header::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;
-    background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%);border-radius:50%}
-  .hd-inner{max-width:1080px;margin:0 auto;position:relative;z-index:1}
+  .hd-inner{max-width:1080px;margin:0 auto;padding:0 16px;position:relative;z-index:1}
   .crest{display:flex;align-items:center;gap:14px}
-  .crest svg{width:56px;height:56px;flex:none;filter:drop-shadow(0 3px 6px rgba(0,0,0,.25))}
-  .crest h1{font-size:26px;font-weight:800;letter-spacing:-.5px;line-height:1.15}
-  .crest .sub{font-size:13px;opacity:.9;font-weight:500;margin-top:2px}
+  .crest svg{width:58px;height:58px;flex:none;filter:drop-shadow(2px 2px 0 var(--navy2))}
+  .crest h1{font-size:29px;font-weight:900;font-style:italic;letter-spacing:-1px;line-height:1.1;
+    text-shadow:2px 2px 0 var(--navy2)}
+  .crest .sub{font-size:12.5px;opacity:.95;font-weight:700;margin-top:3px;letter-spacing:.5px}
   .tagline{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
-  .pill{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);
-    padding:5px 12px;border-radius:999px;font-size:12.5px;font-weight:600}
+  .pill{background:#fff;color:var(--navy2);border:2px solid var(--navy2);box-shadow:var(--hs-sm);
+    padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800}
 
-  /* ---------- season strip ---------- */
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:-26px;position:relative;z-index:3}
-  .stat{background:var(--card);border-radius:16px;padding:16px 12px;text-align:center;box-shadow:var(--shadow)}
-  .stat .num{font-size:30px;font-weight:800;letter-spacing:-1px;font-style:italic;color:var(--navy)}
+  /* ---------- section headers (manga) ---------- */
+  section{margin-top:38px}
+  .sec-h{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+  .sec-h h2{font-size:23px;font-weight:900;font-style:italic;letter-spacing:-.5px;
+    background:linear-gradient(transparent 58%, var(--sky2) 58% 92%, transparent 92%);
+    padding:0 4px;line-height:1}
+  .sec-h .en{font-size:11px;color:#fff;background:var(--navy2);font-weight:800;
+    padding:3px 8px;border-radius:5px;letter-spacing:1px;text-transform:uppercase}
+
+  /* ---------- season stats ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+  .stat{background:var(--card);border:3px solid var(--navy2);border-radius:12px;padding:16px 10px;
+    text-align:center;box-shadow:var(--hs);position:relative;overflow:hidden}
+  .stat::before{content:"";position:absolute;inset:0;background:radial-gradient(rgba(90,166,214,.18) 1.3px,transparent 1.5px) 0 0/9px 9px;opacity:.6}
+  .stat .num{font-size:32px;font-weight:900;font-style:italic;letter-spacing:-1px;color:var(--navy);position:relative}
   .stat .num.win{color:var(--win)}
-  .stat .lbl{font-size:12px;color:var(--mut);font-weight:600;margin-top:2px}
-  @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.stat .num{font-size:26px}}
-
-  section{margin-top:34px}
-  .sec-h{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
-  .sec-h h2{font-size:19px;font-weight:800;letter-spacing:-.4px}
-  .sec-h .en{font-size:12px;color:var(--mut);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+  .stat .lbl{font-size:12px;color:var(--navy2);font-weight:800;margin-top:2px;position:relative}
+  @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}.stat .num{font-size:28px}}
 
   /* ---------- match cards ---------- */
-  .matches{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .matches{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
   @media(max-width:640px){.matches{grid-template-columns:1fr}}
-  .match{background:var(--card);border-radius:16px;box-shadow:var(--shadow);overflow:hidden;border:1px solid var(--line)}
-  .match .top{background:linear-gradient(135deg,var(--sky2),var(--sky));color:#fff;padding:9px 14px;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:700}
-  .match .top .res{background:#fff;color:var(--win);border-radius:6px;padding:1px 9px;font-weight:800;font-size:12px}
-  .match .body{padding:14px 16px 16px}
+  .match{background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);overflow:hidden}
+  .match .top{background:var(--navy2);color:#fff;padding:9px 14px;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;font-weight:800}
+  .match .top .res{background:var(--accent);color:var(--navy2);border-radius:5px;padding:2px 9px;font-weight:900;font-size:12px;border:2px solid var(--navy2)}
+  .match .body{padding:15px 16px 16px}
   .match .teams{display:flex;align-items:center;justify-content:space-between;gap:8px}
   .match .team{flex:1;text-align:center}
-  .match .team.us .nm{color:var(--navy);font-weight:800}
-  .match .nm{font-size:13.5px;font-weight:600;color:var(--ink)}
-  .match .sc{font-size:34px;font-weight:800;font-style:italic;letter-spacing:-1px;line-height:1}
+  .match .team.us .nm{color:var(--navy);font-weight:900}
+  .match .nm{font-size:13.5px;font-weight:700}
+  .match .sc{font-size:38px;font-weight:900;font-style:italic;letter-spacing:-2px;line-height:1}
   .match .team.us .sc{color:var(--navy)}
-  .match .team.opp .sc{color:#9db4c6}
-  .match .vs{font-size:12px;color:var(--mut);font-weight:700;flex:none;padding:0 2px}
-  .match .meta{margin-top:12px;padding-top:11px;border-top:1px dashed var(--line);font-size:12px;color:var(--mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}
-  .match .margin{font-weight:700;color:var(--win)}
+  .match .team.opp .sc{color:#a9bccb}
+  .match .vs{font-size:13px;color:var(--mut);font-weight:900;flex:none;padding:0 2px}
+  .match .meta{margin-top:12px;padding-top:11px;border-top:2px dashed var(--line);font-size:12px;color:var(--mut);display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px;font-weight:600}
+  .match .margin{font-weight:900;color:var(--win)}
 
   /* ---------- schedule ---------- */
-  .timeline{background:var(--card);border-radius:16px;box-shadow:var(--shadow);border:1px solid var(--line);overflow:hidden}
-  .ev{display:flex;gap:14px;padding:15px 18px;border-bottom:1px solid var(--line);align-items:flex-start}
+  .timeline{background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);overflow:hidden}
+  .ev{display:flex;gap:14px;padding:15px 18px;border-bottom:2px solid var(--line);align-items:flex-start}
   .ev:last-child{border-bottom:0}
-  .ev .date{flex:none;width:78px;text-align:center;background:var(--bg);border-radius:10px;padding:8px 4px}
-  .ev .date .d{font-size:19px;font-weight:800;color:var(--navy);line-height:1}
-  .ev .date .m{font-size:11px;color:var(--mut);font-weight:600;margin-top:2px}
-  .ev.hl .date{background:linear-gradient(135deg,var(--accent),#e8912a);}
-  .ev.hl .date .d,.ev.hl .date .m{color:#fff}
-  .ev .info h3{font-size:15px;font-weight:700}
-  .ev .info p{font-size:12.5px;color:var(--mut);margin-top:3px}
-  .ev .badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;margin-top:6px}
-  .b-cup{background:#fdeccf;color:#b9781a}
-  .b-team{background:#e5f3ec;color:var(--win)}
+  .ev .date{flex:none;width:80px;text-align:center;background:var(--bg);border:2px solid var(--navy2);border-radius:9px;padding:8px 4px}
+  .ev .date .d{font-size:19px;font-weight:900;font-style:italic;color:var(--navy);line-height:1}
+  .ev .date .m{font-size:11px;color:var(--navy2);font-weight:800;margin-top:2px}
+  .ev.hl .date{background:var(--accent)}
+  .ev.hl .date .d,.ev.hl .date .m{color:var(--navy2)}
+  .ev .info h3{font-size:15.5px;font-weight:800}
+  .ev .info p{font-size:12.5px;color:var(--mut);margin-top:3px;font-weight:500}
+  .ev .badge{display:inline-block;font-size:11px;font-weight:800;padding:2px 8px;border-radius:5px;margin-top:6px;border:2px solid var(--navy2)}
+  .b-cup{background:#fdeccf;color:#9a5b00}
+  .b-team{background:#e5f3ec;color:#137a4f}
   .b-train{background:#e6eff7;color:var(--navy)}
 
   /* ---------- videos ---------- */
   .vid-group{margin-bottom:8px}
-  .vid-group h4{font-size:14px;font-weight:700;color:var(--navy);margin:14px 0 8px;display:flex;align-items:center;gap:7px}
-  .vid-group h4 .dot{width:8px;height:8px;border-radius:50%;background:var(--sky);flex:none}
-  .vids{display:flex;flex-wrap:wrap;gap:8px}
-  .vid{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);
-    border-radius:10px;padding:8px 12px;font-size:12.5px;font-weight:600;color:var(--ink);text-decoration:none;
-    box-shadow:0 2px 6px rgba(35,75,110,.06);transition:.15s}
-  .vid:hover{border-color:var(--sky);transform:translateY(-1px)}
-  .vid .yt{width:18px;height:13px;background:#ff0000;border-radius:3px;position:relative;flex:none}
-  .vid .yt::after{content:"";position:absolute;left:6px;top:3px;border-left:7px solid #fff;border-top:3.5px solid transparent;border-bottom:3.5px solid transparent}
-  .vid .cloud{width:18px;height:13px;flex:none;background:#03c75a;border-radius:3px;display:inline-block}
+  .vid-group h4{font-size:14px;font-weight:800;color:var(--navy2);margin:14px 0 9px;display:flex;align-items:center;gap:7px}
+  .vid-group h4 .dot{width:10px;height:10px;border-radius:50%;background:var(--sky);border:2px solid var(--navy2);flex:none}
+  .vids{display:flex;flex-wrap:wrap;gap:9px}
+  .vid{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:2.5px solid var(--navy2);
+    border-radius:9px;padding:8px 12px;font-size:12.5px;font-weight:800;color:var(--ink);text-decoration:none;
+    box-shadow:var(--hs-sm);transition:.12s}
+  .vid:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--navy2)}
+  .vid .yt{width:18px;height:13px;background:#ff0000;border-radius:3px;position:relative;flex:none;border:1px solid var(--navy2)}
+  .vid .yt::after{content:"";position:absolute;left:6px;top:3px;border-left:6px solid #fff;border-top:3px solid transparent;border-bottom:3px solid transparent}
+  .vid .cloud{width:18px;height:13px;flex:none;background:#03c75a;border-radius:3px;border:1px solid var(--navy2)}
 
   /* ---------- roster ---------- */
-  .roster{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .roster{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
   @media(max-width:640px){.roster{grid-template-columns:repeat(2,1fr)}}
-  .player{background:var(--card);border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--line);
+  .player{background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);
     padding:16px 10px;text-align:center;position:relative;overflow:hidden}
-  .player::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--sky),var(--navy))}
-  .player .no{font-size:32px;font-weight:800;font-style:italic;color:var(--navy);line-height:1}
-  .player .kr{font-size:15px;font-weight:700;margin-top:6px}
-  .player .en{font-size:11px;color:var(--mut);font-weight:500}
+  .player::before{content:"";position:absolute;top:0;left:0;right:0;height:34px;
+    background:repeating-linear-gradient(110deg,var(--sky) 0 4px,var(--sky2) 4px 8px)}
+  .player .no{font-size:36px;font-weight:900;font-style:italic;color:#fff;line-height:1;position:relative;
+    text-shadow:2px 2px 0 var(--navy2);margin-top:2px}
+  .player .kr{font-size:15px;font-weight:900;margin-top:10px}
+  .player .en{font-size:11px;color:var(--mut);font-weight:600}
+
+  /* ---------- scouting (강점) ---------- */
+  .scout{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:640px){.scout{grid-template-columns:1fr}}
+  .sc-card{background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);
+    padding:14px 16px;display:flex;gap:13px;align-items:center}
+  .sc-card .no2{flex:none;width:46px;height:46px;border-radius:50%;background:var(--navy);color:#fff;
+    border:3px solid var(--navy2);display:flex;align-items:center;justify-content:center;
+    font-size:19px;font-weight:900;font-style:italic}
+  .sc-card .txt h3{font-size:15px;font-weight:900;margin-bottom:2px}
+  .sc-card .txt h3 .real{font-size:10px;background:var(--accent);color:var(--navy2);border:1.5px solid var(--navy2);border-radius:4px;padding:1px 5px;margin-left:5px;vertical-align:middle;font-weight:800}
+  .sc-card .txt p{font-size:12.5px;color:var(--mut);font-weight:600;line-height:1.45}
+  .scout-note{font-size:11.5px;color:var(--mut);margin-top:11px;font-weight:600;
+    background:#fff;border:2px dashed var(--navy2);border-radius:9px;padding:9px 12px}
 
   /* ---------- notices ---------- */
-  .notices{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .notices{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
   @media(max-width:640px){.notices{grid-template-columns:1fr}}
-  .notice{background:var(--card);border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--line);
-    padding:15px 16px;border-left:4px solid var(--sky)}
+  .notice{background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);
+    padding:15px 16px;border-left:8px solid var(--sky)}
   .notice.warn{border-left-color:var(--accent)}
-  .notice h3{font-size:14.5px;font-weight:700;display:flex;align-items:center;gap:7px}
-  .notice p{font-size:12.5px;color:var(--mut);margin-top:5px}
-  .notice .em{font-size:16px}
+  .notice h3{font-size:14.5px;font-weight:900;display:flex;align-items:center;gap:7px}
+  .notice p{font-size:12.5px;color:var(--mut);margin-top:5px;font-weight:500}
+  .notice .em{font-size:17px}
 
   /* ---------- news ---------- */
-  .news{display:flex;flex-direction:column;gap:9px}
-  .art{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);
-    border-radius:12px;padding:13px 15px;text-decoration:none;box-shadow:0 2px 6px rgba(35,75,110,.05);transition:.15s}
-  .art:hover{border-color:var(--sky);transform:translateX(2px)}
-  .art .src{flex:none;width:112px;font-size:11px;font-weight:700;color:var(--sky);line-height:1.3}
-  .art .tt{flex:1;font-size:13.5px;font-weight:600;color:var(--ink);line-height:1.4;
+  .news{display:flex;flex-direction:column;gap:11px}
+  .art{display:flex;align-items:center;gap:12px;background:var(--card);border:2.5px solid var(--navy2);
+    border-radius:10px;padding:13px 15px;text-decoration:none;box-shadow:var(--hs-sm);transition:.12s}
+  .art:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--navy2)}
+  .art .src{flex:none;width:112px;font-size:11px;font-weight:800;color:var(--sky);line-height:1.3}
+  .art .tt{flex:1;font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.4;
     display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-  .art .tag{flex:none;font-size:10.5px;font-weight:700;color:var(--navy);background:var(--bg);
-    border-radius:6px;padding:3px 8px}
-  .art .tag.star{color:#b9781a;background:#fdeccf}
+  .art .tag{flex:none;font-size:10.5px;font-weight:800;color:#fff;background:var(--navy);
+    border:2px solid var(--navy2);border-radius:5px;padding:2px 8px}
+  .art .tag.star{color:var(--navy2);background:var(--accent)}
   .art.hidden-art{display:none}
   .news.expanded .art.hidden-art{display:flex}
   @media(max-width:640px){
@@ -135,13 +165,14 @@
     .art .tag{order:2;margin-left:auto}
     .art .tt{order:3;flex:1 1 100%;-webkit-line-clamp:3}
   }
-  .more-btn{display:block;width:100%;margin-top:12px;padding:12px;border:1px dashed var(--sky);
-    background:rgba(90,166,214,.07);color:var(--navy);font-size:13.5px;font-weight:700;border-radius:12px;
-    cursor:pointer;font-family:inherit;transition:.15s}
-  .more-btn:hover{background:rgba(90,166,214,.15)}
+  .more-btn{display:block;width:100%;margin-top:13px;padding:12px;border:3px solid var(--navy2);
+    background:var(--accent);color:var(--navy2);font-size:14px;font-weight:900;border-radius:10px;
+    cursor:pointer;font-family:inherit;box-shadow:var(--hs-sm);transition:.12s}
+  .more-btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--navy2)}
 
-  footer{margin-top:40px;text-align:center;font-size:12px;color:var(--mut);line-height:1.7}
-  footer .hand{color:var(--sky);font-weight:700}
+  .refnote{font-size:11px;color:var(--mut);margin-top:11px;line-height:1.6;font-weight:500}
+  footer{margin-top:44px;text-align:center;font-size:12px;color:var(--navy2);line-height:1.7;font-weight:600}
+  footer .hand{color:var(--sky);font-weight:900}
 </style>
 </head>
 <body>
@@ -150,24 +181,24 @@
   <div class="hd-inner">
     <div class="crest">
       <svg viewBox="0 0 64 64" fill="none">
-        <circle cx="32" cy="32" r="30" fill="#fff" opacity=".14"/>
-        <circle cx="32" cy="32" r="30" stroke="#fff" stroke-width="2"/>
+        <circle cx="32" cy="32" r="30" fill="#fff" opacity=".16"/>
+        <circle cx="32" cy="32" r="30" stroke="#fff" stroke-width="2.5"/>
         <path d="M32 12 L38 26 H26 Z" fill="#fff"/>
         <rect x="28" y="26" width="8" height="20" fill="#fff"/>
         <path d="M24 46 h16 l3 6 H21 Z" fill="#fff"/>
-        <circle cx="32" cy="19" r="2.4" fill="#f2a53a"/>
-        <path d="M40 20 l7 -4 M40 24 l8 0 M40 28 l7 4" stroke="#f2a53a" stroke-width="1.6" stroke-linecap="round"/>
+        <circle cx="32" cy="19" r="2.6" fill="#f7b731"/>
+        <path d="M40 20 l7 -4 M40 24 l8 0 M40 28 l7 4" stroke="#f7b731" stroke-width="1.8" stroke-linecap="round"/>
       </svg>
       <div>
-        <h1>소노 스카이거너스 <span style="opacity:.85">U-9</span></h1>
-        <div class="sub">SONO SKYGUNNERS · 2026 시즌 대시보드</div>
+        <h1>소노 스카이거너스 <span>U-9</span></h1>
+        <div class="sub">SONO SKYGUNNERS · 2026 SEASON DASHBOARD</div>
       </div>
     </div>
     <div class="tagline">
       <span class="pill">🏀 KBL 산하 유소년 클럽팀</span>
       <span class="pill">🏠 홈 · 고양 소노 아레나</span>
       <span class="pill">👨‍👩‍👧 학부모 7가구 · 선수 8명</span>
-      <span class="pill">📅 업데이트 2026.7.13</span>
+      <span class="pill">📅 UPDATE 2026.7.13</span>
     </div>
   </div>
 </header>
@@ -184,9 +215,8 @@
 
   <!-- RESULTS -->
   <section>
-    <div class="sec-h"><h2>경기 결과</h2><span class="en">Match Results · 2026</span></div>
+    <div class="sec-h"><h2>경기 결과</h2><span class="en">Match Results</span></div>
     <div class="matches">
-
       <div class="match">
         <div class="top"><span>7.12 · 연습경기</span><span class="res">WIN · 4W</span></div>
         <div class="body">
@@ -198,7 +228,6 @@
           <div class="meta"><span>고양 소노 아레나</span><span class="margin">+5 · 추격전 승리</span></div>
         </div>
       </div>
-
       <div class="match">
         <div class="top"><span>7.05 · 연습경기</span><span class="res">WIN · 3W</span></div>
         <div class="body">
@@ -210,7 +239,6 @@
           <div class="meta"><span>고양 소노 아레나</span><span class="margin">+2 · 접전 승리</span></div>
         </div>
       </div>
-
       <div class="match">
         <div class="top"><span>6.07 · 연습경기</span><span class="res">WIN · 2W</span></div>
         <div class="body">
@@ -222,7 +250,6 @@
           <div class="meta"><span>고양 소노 아레나</span><span class="margin">+29 · 시즌 최다 점수차</span></div>
         </div>
       </div>
-
       <div class="match">
         <div class="top"><span>4.25 · 첫 연습경기</span><span class="res">WIN · 1W</span></div>
         <div class="body">
@@ -234,7 +261,6 @@
           <div class="meta"><span>합산 스코어(2게임)</span><span class="margin">+5 · 시즌 개막 승</span></div>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -243,7 +269,7 @@
     <div class="sec-h"><h2>다가오는 일정</h2><span class="en">Upcoming</span></div>
     <div class="timeline">
       <div class="ev hl">
-        <div class="date"><div class="d">17</div><div class="m">7월 (금)</div></div>
+        <div class="date"><div class="d">17</div><div class="m">7월(금)</div></div>
         <div class="info">
           <h3>U-9 여름 단합대회 🎉</h3>
           <p>이야짐 스포츠센터(일산동구 중산로60, 아이파크2차 지하2층) · 오후 1~2시 집결 · 농구·수영·저녁 · 저녁 후 자유투 이벤트(가족팀 대결 / 아빠 vs 선수)</p>
@@ -272,9 +298,8 @@
   <!-- VIDEOS -->
   <section>
     <div class="sec-h"><h2>영상 라이브러리</h2><span class="en">Video Library</span></div>
-
     <div class="vid-group">
-      <h4><span class="dot"></span>2026.7.12 은평삼성전 · 쿼터별 복기 <span style="font-weight:500;color:var(--mut);font-size:11px">(촬영: 우찬 아빠)</span></h4>
+      <h4><span class="dot"></span>2026.7.12 은평삼성전 · 쿼터별 복기 <span style="font-weight:600;color:var(--mut);font-size:11px">(촬영: 우찬 아빠)</span></h4>
       <div class="vids">
         <a class="vid" href="https://youtu.be/0gwlNCs7w5g" target="_blank"><span class="yt"></span>1쿼터</a>
         <a class="vid" href="https://youtu.be/wBPlb2X2vuA" target="_blank"><span class="yt"></span>2쿼터</a>
@@ -284,7 +309,6 @@
         <a class="vid" href="https://naver.me/G4d3eiC8" target="_blank"><span class="cloud"></span>고화질 원본(네이버)</a>
       </div>
     </div>
-
     <div class="vid-group">
       <h4><span class="dot"></span>2025 KBL 양구대회 · 생중계</h4>
       <div class="vids">
@@ -293,7 +317,6 @@
         <a class="vid" href="https://www.youtube.com/live/gsEZ1VUF2Tk?t=9346" target="_blank"><span class="yt"></span>소노 vs DB</a>
       </div>
     </div>
-
     <div class="vid-group">
       <h4><span class="dot"></span>2025 KBL 제천 유스드림컵 · 생중계</h4>
       <div class="vids">
@@ -302,7 +325,6 @@
         <a class="vid" href="https://www.youtube.com/live/0_k279Zl0AA?t=35277" target="_blank"><span class="yt"></span>소노 vs 강남삼성</a>
       </div>
     </div>
-
     <div class="vid-group">
       <h4><span class="dot"></span>KBL 유소년 공식 페이지</h4>
       <div class="vids">
@@ -352,7 +374,7 @@
 
   <!-- NEWS -->
   <section>
-    <div class="sec-h"><h2>농구 소식</h2><span class="en">News · 유소년 · KBL</span></div>
+    <div class="sec-h"><h2>농구 소식</h2><span class="en">News</span></div>
     <div class="news" id="newsList">
       <a class="art" href="https://jumpball.co.kr/news/newsview.php?ncode=1065621855615468" target="_blank">
         <span class="src">점프볼</span>
@@ -431,7 +453,7 @@
 
   <!-- YOUTH TOURNAMENT INFO -->
   <section>
-    <div class="sec-h"><h2>유소년 대회 정보</h2><span class="en">Reference · KBL Youth</span></div>
+    <div class="sec-h"><h2>유소년 대회 정보</h2><span class="en">Reference</span></div>
     <div class="notices">
       <div class="notice">
         <h3><span class="em">🏆</span>KBL 유스드림컵 / 클럽대회</h3>
@@ -447,17 +469,15 @@
       </div>
       <div class="notice warn">
         <h3><span class="em">🔗</span>바로가기</h3>
-        <p><a href="https://youth.kbl.or.kr/" target="_blank" style="color:var(--sky);font-weight:700">KBL 유소년 홈페이지</a> · <a href="https://skygunners.kbl.or.kr/" target="_blank" style="color:var(--sky);font-weight:700">소노 스카이거너스 구단</a> · <a href="https://www.youtube.com/@KBLTV" target="_blank" style="color:var(--sky);font-weight:700">KBL TV(유튜브)</a></p>
+        <p><a href="https://youth.kbl.or.kr/" target="_blank" style="color:var(--navy);font-weight:800">KBL 유소년 홈페이지</a> · <a href="https://skygunners.kbl.or.kr/" target="_blank" style="color:var(--navy);font-weight:800">소노 스카이거너스 구단</a> · <a href="https://www.youtube.com/@KBLTV" target="_blank" style="color:var(--navy);font-weight:800">KBL TV(유튜브)</a></p>
       </div>
     </div>
-    <p style="font-size:11px;color:var(--mut);margin-top:10px;line-height:1.6">
-      * 출처: KBL 유소년 홈페이지 · 바스켓코리아(2026.6.17 유스 드림 캠프) · 뉴시스(2026.5.21 Y리그) · KBL TV. Y리그(공식 리그)와 유스드림컵(클럽대회)은 별개 대회이며, 소노 U-9은 8월 제천 클럽대회를 준비 중입니다.
-    </p>
+    <p class="refnote">* 출처: KBL 유소년 홈페이지 · 바스켓코리아(2026.6.17 유스 드림 캠프) · 뉴시스(2026.5.21 Y리그) · KBL TV. Y리그(공식 리그)와 유스드림컵(클럽대회)은 별개 대회이며, 소노 U-9은 8월 제천 클럽대회를 준비 중입니다.</p>
   </section>
 
   <footer>
     소노 스카이거너스 U-9 · 2026 시즌 · 학부모 단톡방 기록 기반 (2026.1.17 ~ 7.13)<br>
-    데이터: 카카오톡 대화 + 경기 결과 카드 · 제작 <span class="hand">@helnoh_khsoul</span>
+    데이터: 카카오톡 대화 + 경기 결과 카드 · 제작 <span class="hand">@alfred Park</span>
   </footer>
 
 </div>
