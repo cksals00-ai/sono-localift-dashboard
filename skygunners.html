@@ -239,6 +239,17 @@
   .am-foot button{flex:1;font-family:inherit;font-weight:900;font-size:13px;border:3px solid var(--navy2);border-radius:9px;padding:11px;cursor:pointer;box-shadow:var(--hs-sm)}
   #amAdd{background:#fff;color:var(--navy2)}
   #amSave{background:var(--win);color:#fff}
+
+  /* ---------- tournament fixtures ---------- */
+  .fixtures{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:640px){.fixtures{grid-template-columns:1fr}}
+  .fix{background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);overflow:hidden}
+  .fix .fx-top{background:var(--navy2);color:#fff;padding:8px 13px;font-size:12px;font-weight:800;display:flex;justify-content:space-between;gap:6px}
+  .fix .fx-top .g{color:var(--accent)}
+  .fix .fx-body{padding:14px 15px}
+  .fix .fx-opp{font-size:15px;font-weight:900}
+  .fix .fx-opp b{font-size:23px;font-style:italic;color:var(--navy);letter-spacing:-.5px}
+  .fix .fx-meta{margin-top:10px;padding-top:9px;border-top:2px dashed var(--line);font-size:12px;color:var(--mut);font-weight:600;line-height:1.7}
 </style>
 </head>
 <body>
@@ -324,7 +335,7 @@
           <div class="teams">
             <div class="team us"><div class="nm">고양 소노</div><div class="sc">29</div></div>
             <div class="vs">:</div>
-            <div class="team opp"><div class="sc">24</div><div class="nm">상대팀</div></div>
+            <div class="team opp"><div class="sc">24</div><div class="nm">강남 삼성</div></div>
           </div>
           <div class="meta"><span>합산 스코어(2게임)</span><span class="margin">+5 · 시즌 개막 승</span></div>
         </div>
@@ -361,6 +372,13 @@
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- TOURNAMENT FIXTURES -->
+  <section>
+    <div class="sec-h"><h2>제천 대회 경기 일정</h2><span class="en">Fixtures · U-9</span><button class="manage-btn admin-only" data-sec="fixtures">＋ 관리</button></div>
+    <div class="fixtures" id="fixturesBox"></div>
+    <p class="refnote">* DB손해보험 2026 KBL 유스클럽농구대회 · 소노는 <b>B조(SK·소노·정관장·KT)</b> 풀리그 3경기. 예선 8/15~16, 8/17(월) 본선(준결승·결승)은 예선 통과 시 진행. 시간·장소는 대회 사정에 따라 변동될 수 있어요. 전 경기 유튜브 생중계.</p>
   </section>
 
   <!-- LODGING RESERVATION -->
@@ -690,12 +708,18 @@ var firebaseConfig = {
       {date:'7.12 · 연습경기',result:'WIN · 4W',us:'고양 소노',usScore:'30',opp:'은평 삼성',oppScore:'25',venue:'고양 소노 아레나',margin:'+5 · 추격전 승리'},
       {date:'7.05 · 연습경기',result:'WIN · 3W',us:'고양 소노',usScore:'34',opp:'남양주 소노',oppScore:'32',venue:'고양 소노 아레나',margin:'+2 · 접전 승리'},
       {date:'6.07 · 연습경기',result:'WIN · 2W',us:'고양 소노',usScore:'46',opp:'은평 삼성',oppScore:'17',venue:'고양 소노 아레나',margin:'+29 · 시즌 최다 점수차'},
-      {date:'4.25 · 첫 연습경기',result:'WIN · 1W',us:'고양 소노',usScore:'29',opp:'상대팀',oppScore:'24',venue:'합산 스코어(2게임)',margin:'+5 · 시즌 개막 승'}
+      {date:'4.25 · 첫 연습경기',result:'WIN · 1W',us:'고양 소노',usScore:'29',opp:'강남 삼성',oppScore:'24',venue:'합산 스코어(2게임)',margin:'+5 · 시즌 개막 승'}  /* opp 강남 삼성 */
     ],
     schedule:[
       {d:'17',m:'7월(금)',hl:true,title:'U-9 여름 단합대회 🎉',desc:'이야짐 스포츠센터(일산동구 중산로60, 아이파크2차 지하2층) · 오후 1~2시 집결 · 농구·수영·저녁 · 저녁 후 자유투 이벤트(가족팀 대결 / 아빠 vs 선수)',badge:'팀 이벤트',badgeClass:'b-team'},
+      {d:'특강',m:'7~8월',hl:false,title:'대회반 방학특강 (U-9 단독반)',desc:'7/20(월)~8/13(금) · 화·목 3교시 14:00~15:20 U-9만 · 코치: 월·목·금 함준후 / 화·수 홍경기 · 회당 2만원',badge:'특강',badgeClass:'b-train'},
       {d:'1~14',m:'8월',hl:false,title:'대회 전 개인연습 무료 개방',desc:'이야짐 농구장 · 월·화·목 19–21시 / 수·금 20–21시 / 토 14–16시 · 주차 무료',badge:'개인 훈련',badgeClass:'b-train'},
-      {d:'14~17',m:'8월',hl:true,title:'KBL 제천 유스드림컵 2026 🏆',desc:'충북 제천(어울림체육센터 인근) · 3박 4일 · 팀 숙소: <b>소노벨 단양</b>(3.17 투표 확정) · 객실 회신 ~7/20 · KBL 홈피 선수등록 임박',badge:'공식 대회',badgeClass:'b-cup'}
+      {d:'14~17',m:'8월',hl:true,title:'KBL 제천 유스 클럽대회 2026 🏆',desc:'충북 제천 · B조(SK·소노·정관장·KT) 풀리그 · 예선 8/15~16, 본선 8/17 · 팀 숙소 <b>소노벨 단양</b> · 객실 회신 ~7/20 · 개별 이동·식사',badge:'공식 대회',badgeClass:'b-cup'}
+    ],
+    fixtures:[
+      {game:'예선 1경기',date:'8/15 (토)',time:'16:00',opp:'KT',venue:'어울림체육센터'},
+      {game:'예선 2경기',date:'8/16 (일)',time:'10:45',opp:'정관장',venue:'세명대 체육관'},
+      {game:'예선 3경기',date:'8/16 (일)',time:'16:00',opp:'SK',venue:'어울림체육센터'}
     ],
     videos:[
       {group:'2026.7.12 은평삼성전 · 쿼터별 복기 (촬영: 우찬 아빠)',label:'1쿼터',url:'https://youtu.be/0gwlNCs7w5g',type:'yt'},
@@ -720,7 +744,9 @@ var firebaseConfig = {
       {emoji:'🏨',title:'대회 숙소 — 소노벨 단양',body:'3.17 투표로 확정. 객실가 조정 후 재공지 예정이며, 사용 객실은 <b>7/20 전</b>까지 회신 필요. (숙소 담당: 성규 아빠·소노 본사)',warn:true},
       {emoji:'🍔',title:'연습경기 간식 규칙',body:'홈팀이 상대팀 아이들 간식까지 준비 · 공금 조성 후 7가구 정산. (7/12 햄버거 가구당 14,400원 / 커피 6,100원)',warn:false},
       {emoji:'📷',title:'역할 분담',body:'학부모 대표: 선우 아빠 · 영상 촬영: 호원 아빠·우찬 아빠 · 장소 제공: 권오 아빠(이야짐)',warn:false},
-      {emoji:'🎽',title:'단체복',body:'선수: 연습경기 시 홈 유니폼 · 학부모: 소노 응원 티셔츠 착용 권장',warn:false}
+      {emoji:'🎽',title:'단체복',body:'선수: 연습경기 시 홈 유니폼 · 학부모: 소노 응원 티셔츠 착용 권장',warn:false},
+      {emoji:'🚌',title:'제천 대회 이동·식사',body:'이번 제천 대회부터 <b>개별 이동·개별 식사</b>로 진행됩니다. 대회 유니폼은 홈/어웨이 개인톡 신청.',warn:false},
+      {emoji:'🛏️',title:'세명대 기숙사 (선수 대체 숙박)',body:'소노벨 단양 예약이 어려운 경우 <b>선수만</b> 세명대 기숙사 이용 가능(학부모 제외). 1인 <b>1만~1.5만원</b> 예상 · 인원 확정 후 재안내.',warn:false}
     ],
     news:[
       {src:'점프볼',title:'[26드림캠프] 소노의 시작을 빛냈던 어린이 위너스, 그 응원이 만든 고양의 봄 "꼭 파이널 우승해주세요!"',url:'https://jumpball.co.kr/news/newsview.php?ncode=1065621855615468',tag:'소노',star:false,hidden:false},
@@ -759,6 +785,9 @@ var firebaseConfig = {
     schedule:{ title:'다가오는 일정', box:'scheduleBox',
       fields:[ {k:'d',label:'날짜 숫자',t:'text'}, {k:'m',label:'월/요일',t:'text'}, {k:'title',label:'제목',t:'text'}, {k:'desc',label:'설명 (HTML 가능)',t:'area'}, {k:'badge',label:'뱃지 글자',t:'text'}, {k:'badgeClass',label:'뱃지색 (b-cup/b-team/b-train)',t:'text'}, {k:'hl',label:'노란색 강조',t:'check'} ],
       render:function(x){ return '<div class="ev'+(x.hl?' hl':'')+'"><div class="date"><div class="d">'+esc(x.d)+'</div><div class="m">'+esc(x.m)+'</div></div><div class="info"><h3>'+esc(x.title)+'</h3><p>'+(x.desc||'')+'</p>'+(x.badge?'<span class="badge '+esc(x.badgeClass)+'">'+esc(x.badge)+'</span>':'')+'</div></div>'; } },
+    fixtures:{ title:'제천 대회 경기 일정', box:'fixturesBox',
+      fields:[ {k:'game',label:'경기 구분',t:'text'}, {k:'date',label:'날짜(요일)',t:'text'}, {k:'time',label:'시간',t:'text'}, {k:'opp',label:'상대팀',t:'text'}, {k:'venue',label:'장소',t:'text'} ],
+      render:function(x){ return '<div class="fix"><div class="fx-top"><span class="g">'+esc(x.game)+'</span><span>'+esc(x.date)+'</span></div><div class="fx-body"><div class="fx-opp">소노 <span style="color:var(--mut);font-weight:700">vs</span> <b>'+esc(x.opp)+'</b></div><div class="fx-meta">🕓 '+esc(x.time)+'<br>📍 '+esc(x.venue)+'</div></div></div>'; } },
     videos:{ title:'영상 라이브러리', box:'videosBox',
       fields:[ {k:'group',label:'그룹 제목',t:'text'}, {k:'label',label:'버튼 이름',t:'text'}, {k:'url',label:'링크 URL',t:'text'}, {k:'type',label:'아이콘 (yt / cloud / none)',t:'text'} ],
       renderList:function(items){ var order=[],map={}; items.forEach(function(it){ var g=it.group||''; if(!map[g]){map[g]=[];order.push(g);} map[g].push(it); }); return order.map(function(g){ return '<div class="vid-group"><h4><span class="dot"></span>'+g+'</h4><div class="vids">'+map[g].map(function(it){ var ic=it.type==='yt'?'<span class="yt"></span>':(it.type==='cloud'?'<span class="cloud"></span>':''); return '<a class="vid" href="'+esc(it.url)+'" target="_blank">'+ic+esc(it.label)+'</a>'; }).join('')+'</div></div>'; }).join(''); } },
@@ -815,7 +844,11 @@ var firebaseConfig = {
   });
   function seedIfEmpty(){
     if(!configured) return;
-    db.ref('dashboard').once('value').then(function(s){ if(!s.exists()){ db.ref('dashboard').set(DEFAULTS); } }).catch(function(){});
+    db.ref('dashboard').once('value').then(function(s){
+      var cur=s.val()||{}, updates={};
+      Object.keys(DEFAULTS).forEach(function(k){ if(cur[k]===undefined) updates[k]=DEFAULTS[k]; });
+      if(Object.keys(updates).length) db.ref('dashboard').update(updates);
+    }).catch(function(){});
   }
   function saveSec(sec,val){
     if(configured){ db.ref('dashboard/'+sec).set(val); }
