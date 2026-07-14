@@ -863,10 +863,14 @@ var firebaseConfig = {
   var cfgEl=el('resvCfg'); if(cfgEl) cfgEl.style.display=configured?'none':'block';
   var famSel=el('rfFam'), famCustom=el('rfFamCustom');
   if(famSel) famSel.addEventListener('change',function(){ famCustom.style.display= famSel.value==='__custom'?'block':'none'; });
+  var TWINS=['이영재','이영우'], TWIN_LABEL='이영재·이영우 가정';  // 쌍둥이: 한 가정으로 묶음
   function buildFamilyOptions(){
     if(!famSel) return; var cur=famSel.value; var roster=getSec('roster')||[];
-    var html='<option value="">— 선택 —</option>';
-    roster.forEach(function(p){ html+='<option>'+esc(p.kr)+' 가정</option>'; });
+    var html='<option value="">— 선택 —</option>', twinAdded=false;
+    roster.forEach(function(p){
+      if(TWINS.indexOf(p.kr)>-1){ if(!twinAdded){ html+='<option>'+esc(TWIN_LABEL)+'</option>'; twinAdded=true; } return; }
+      html+='<option>'+esc(p.kr)+' 가정</option>';
+    });
     html+='<option value="__custom">직접 입력…</option>';
     famSel.innerHTML=html; if(cur){ famSel.value=cur; }
   }
