@@ -428,7 +428,12 @@
         </div>
         <div class="fld">
           <label>체크인 날짜 *</label>
-          <input id="rfCheckin" type="date" value="2026-08-14" min="2026-08-13" max="2026-08-17">
+          <select id="rfCheckin">
+            <option value="2026-08-14">8/14 (금)</option>
+            <option value="2026-08-15">8/15 (토)</option>
+            <option value="2026-08-16">8/16 (일)</option>
+            <option value="2026-08-17">8/17 (월)</option>
+          </select>
         </div>
         <div class="fld">
           <label>박 수</label>
@@ -745,8 +750,7 @@ var firebaseConfig = {
       {emoji:'🍔',title:'연습경기 간식 규칙',body:'홈팀이 상대팀 아이들 간식까지 준비 · 공금 조성 후 7가구 정산. (7/12 햄버거 가구당 14,400원 / 커피 6,100원)',warn:false},
       {emoji:'📷',title:'역할 분담',body:'학부모 대표: 선우 아빠 · 영상 촬영: 호원 아빠·우찬 아빠 · 장소 제공: 권오 아빠(이야짐)',warn:false},
       {emoji:'🎽',title:'단체복',body:'선수: 연습경기 시 홈 유니폼 · 학부모: 소노 응원 티셔츠 착용 권장',warn:false},
-      {emoji:'🚌',title:'제천 대회 이동·식사',body:'이번 제천 대회부터 <b>개별 이동·개별 식사</b>로 진행됩니다. 대회 유니폼은 홈/어웨이 개인톡 신청.',warn:false},
-      {emoji:'🛏️',title:'세명대 기숙사 (선수 대체 숙박)',body:'소노벨 단양 예약이 어려운 경우 <b>선수만</b> 세명대 기숙사 이용 가능(학부모 제외). 1인 <b>1만~1.5만원</b> 예상 · 인원 확정 후 재안내.',warn:false}
+      {emoji:'🚌',title:'제천 대회 이동·식사',body:'이번 제천 대회부터 <b>개별 이동·개별 식사</b>로 진행됩니다. 대회 유니폼은 홈/어웨이 개인톡 신청.',warn:false}
     ],
     news:[
       {src:'점프볼',title:'[26드림캠프] 소노의 시작을 빛냈던 어린이 위너스, 그 응원이 만든 고양의 봄 "꼭 파이널 우승해주세요!"',url:'https://jumpball.co.kr/news/newsview.php?ncode=1065621855615468',tag:'소노',star:false,hidden:false},
