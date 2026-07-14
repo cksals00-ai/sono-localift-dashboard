@@ -173,6 +173,72 @@
   .refnote{font-size:11px;color:var(--mut);margin-top:11px;line-height:1.6;font-weight:500}
   footer{margin-top:44px;text-align:center;font-size:12px;color:var(--navy2);line-height:1.7;font-weight:600}
   footer .hand{color:var(--sky);font-weight:900}
+
+  /* ---------- lodging reservation ---------- */
+  .resv-cfg{background:#fff4d6;border:2px dashed #9a5b00;border-radius:9px;padding:10px 13px;font-size:11.5px;font-weight:700;color:#7a4a00;margin-bottom:14px;line-height:1.5}
+  .resv-intro{background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);padding:16px 18px;margin-bottom:16px}
+  .resv-intro h3{font-size:15.5px;font-weight:900;display:flex;align-items:center;gap:8px;margin-bottom:5px}
+  .resv-intro p{font-size:12.5px;color:var(--mut);font-weight:600;line-height:1.55}
+  .resv-intro a{color:var(--navy);font-weight:800}
+  .rooms{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 4px}
+  @media(max-width:640px){.rooms{grid-template-columns:1fr}}
+  .room-card{border:2.5px solid var(--navy2);border-radius:10px;overflow:hidden;background:#fff;box-shadow:var(--hs-sm)}
+  .room-card .rh{background:var(--navy);color:#fff;padding:8px 12px;font-size:12.5px;font-weight:900}
+  .room-card .rb{padding:11px 13px;font-size:11.5px;color:var(--mut);font-weight:600;line-height:1.55}
+  .room-card .rb b{color:var(--ink)}
+  .room-card .tags{margin:8px 0;display:flex;flex-wrap:wrap;gap:5px}
+  .room-card .rt{font-size:10px;font-weight:800;border:2px solid var(--navy2);border-radius:5px;padding:1px 6px;background:var(--bg);color:var(--navy2)}
+  .room-card a.book{display:block;text-align:center;background:var(--accent);color:var(--navy2);border:2px solid var(--navy2);border-radius:7px;padding:6px;font-size:11px;font-weight:900;text-decoration:none}
+  .resv-form{background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);padding:16px 18px}
+  .resv-form .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
+  @media(max-width:640px){.resv-form .grid{grid-template-columns:1fr}}
+  .fld{display:flex;flex-direction:column;gap:4px}
+  .fld label{font-size:11.5px;font-weight:800;color:var(--navy2)}
+  .fld input,.fld select,.fld textarea{font-family:inherit;font-size:13px;font-weight:600;color:var(--ink);
+    border:2px solid var(--navy2);border-radius:8px;padding:9px 10px;background:#fff;width:100%}
+  .fld textarea{resize:vertical;min-height:44px}
+  .resv-form .submit{margin-top:13px;width:100%;padding:13px;border:3px solid var(--navy2);background:var(--sky);
+    color:#fff;font-size:15px;font-weight:900;border-radius:10px;cursor:pointer;font-family:inherit;box-shadow:var(--hs-sm);text-shadow:1px 1px 0 var(--navy2)}
+  .resv-form .submit:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--navy2)}
+  .resv-status{font-size:11.5px;font-weight:800;margin-top:9px;text-align:center;color:var(--mut);min-height:14px}
+  .resv-summary{margin-top:16px;background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);overflow:hidden}
+  .resv-summary .sh{background:var(--navy2);color:#fff;padding:10px 14px;font-size:12.5px;font-weight:800;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+  .resv-summary .sh .cnt{color:var(--accent)}
+  .resv-table{width:100%;border-collapse:collapse;font-size:12px}
+  .resv-table th,.resv-table td{padding:9px 10px;border-bottom:1.5px solid var(--line);text-align:left;vertical-align:top}
+  .resv-table th{background:var(--bg);font-weight:800;color:var(--navy2);font-size:11px}
+  .resv-table td{font-weight:600;color:var(--ink)}
+  .resv-table .fam{font-weight:900;color:var(--navy);white-space:nowrap}
+  .resv-table .del{cursor:pointer;color:var(--loss);font-weight:900;border:none;background:none;font-size:14px;font-family:inherit}
+  .resv-empty{padding:20px;text-align:center;color:var(--mut);font-size:12.5px;font-weight:600}
+
+  /* ---------- admin mode ---------- */
+  .admin-only{display:none!important}
+  body.admin .admin-only{display:inline-flex!important}
+  body.admin .admin-only.block{display:block!important}
+  .manage-btn{margin-left:auto;font-family:inherit;font-size:11px;font-weight:800;color:#fff;background:var(--pop);
+    border:2px solid var(--navy2);border-radius:6px;padding:3px 9px;cursor:pointer;box-shadow:var(--hs-sm)}
+  #adminToggle{position:fixed;right:14px;bottom:14px;z-index:50;font-family:inherit;font-size:12px;font-weight:900;
+    color:#fff;background:var(--navy);border:3px solid var(--navy2);border-radius:999px;padding:9px 15px;cursor:pointer;box-shadow:var(--hs-sm)}
+  body.admin #adminToggle{background:var(--pop)}
+  .admin-ov{display:none;position:fixed;inset:0;background:rgba(18,35,58,.55);z-index:60;align-items:flex-start;justify-content:center;padding:24px 12px;overflow:auto}
+  .admin-ov.on{display:flex}
+  .admin-modal{background:var(--bg);border:3px solid var(--navy2);border-radius:14px;box-shadow:var(--hs);width:100%;max-width:620px;margin:auto}
+  .am-head{background:var(--navy2);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:900;border-radius:10px 10px 0 0;font-size:15px}
+  .am-head button{background:none;border:none;color:#fff;font-size:18px;cursor:pointer;font-family:inherit}
+  .am-body{padding:14px 16px;max-height:58vh;overflow:auto;display:flex;flex-direction:column;gap:12px}
+  .ed-card{background:#fff;border:2.5px solid var(--navy2);border-radius:10px;padding:12px 12px 10px}
+  .ed-card .ed-del{margin-top:2px;background:var(--loss);color:#fff;border:2px solid var(--navy2);border-radius:6px;font-size:11px;font-weight:800;padding:3px 10px;cursor:pointer;font-family:inherit}
+  .ed-row{display:flex;flex-direction:column;gap:3px;margin-bottom:8px}
+  .ed-row label{font-size:11px;font-weight:800;color:var(--navy2)}
+  .ed-row input[type=text],.ed-row textarea{font-family:inherit;font-size:13px;border:2px solid var(--navy2);border-radius:7px;padding:7px 9px;width:100%}
+  .ed-row textarea{resize:vertical;min-height:52px}
+  .ed-row.chk{flex-direction:row;align-items:center;gap:7px;margin-bottom:10px}
+  .ed-row.chk input{width:18px;height:18px}
+  .am-foot{padding:12px 16px;display:flex;gap:10px;border-top:2px solid var(--line)}
+  .am-foot button{flex:1;font-family:inherit;font-weight:900;font-size:13px;border:3px solid var(--navy2);border-radius:9px;padding:11px;cursor:pointer;box-shadow:var(--hs-sm)}
+  #amAdd{background:#fff;color:var(--navy2)}
+  #amSave{background:var(--win);color:#fff}
 </style>
 </head>
 <body>
@@ -197,8 +263,9 @@
     <div class="tagline">
       <span class="pill">🏀 KBL 산하 유소년 클럽팀</span>
       <span class="pill">🏠 홈 · 고양 소노 아레나</span>
-      <span class="pill">👨‍👩‍👧 7가정 · 선수 8명</span>
-      <span class="pill">📅 UPDATE 2026.7.13</span>
+      <span class="pill" id="pillFamilies">👨‍👩‍👧 7가정 · 선수 8명</span>
+      <span class="pill" id="pillUpdate">📅 UPDATE 2026.7.13</span>
+      <button class="manage-btn admin-only" data-sec="meta" style="margin-left:6px">기본정보</button>
     </div>
   </div>
 </header>
@@ -206,7 +273,8 @@
 <div class="wrap">
 
   <!-- SEASON STATS -->
-  <div class="stats">
+  <div class="admin-only block" style="text-align:right;margin:22px 0 -6px"><button class="manage-btn" data-sec="stats">＋ 시즌성적 관리</button></div>
+  <div class="stats" id="statsBox">
     <div class="stat"><div class="num win">4승</div><div class="lbl">2026 연습경기</div></div>
     <div class="stat"><div class="num">0패</div><div class="lbl">무패 행진 🔥</div></div>
     <div class="stat"><div class="num">+41</div><div class="lbl">누적 득실차</div></div>
@@ -215,8 +283,8 @@
 
   <!-- RESULTS -->
   <section>
-    <div class="sec-h"><h2>경기 결과</h2><span class="en">Match Results</span></div>
-    <div class="matches">
+    <div class="sec-h"><h2>경기 결과</h2><span class="en">Match Results</span><button class="manage-btn admin-only" data-sec="matches">＋ 관리</button></div>
+    <div class="matches" id="matchesBox">
       <div class="match">
         <div class="top"><span>7.12 · 연습경기</span><span class="res">WIN · 4W</span></div>
         <div class="body">
@@ -266,8 +334,8 @@
 
   <!-- SCHEDULE -->
   <section>
-    <div class="sec-h"><h2>다가오는 일정</h2><span class="en">Upcoming</span></div>
-    <div class="timeline">
+    <div class="sec-h"><h2>다가오는 일정</h2><span class="en">Upcoming</span><button class="manage-btn admin-only" data-sec="schedule">＋ 관리</button></div>
+    <div class="timeline" id="scheduleBox">
       <div class="ev hl">
         <div class="date"><div class="d">17</div><div class="m">7월(금)</div></div>
         <div class="info">
@@ -295,9 +363,98 @@
     </div>
   </section>
 
+  <!-- LODGING RESERVATION -->
+  <section id="resv">
+    <div class="sec-h"><h2>숙박 예약 취합</h2><span class="en">Lodging · 소노벨 단양</span></div>
+
+    <div class="resv-cfg" id="resvCfg">⚙️ 실시간 연결 설정 대기중 — 관리자가 Firebase 설정값을 넣으면 모든 가정 입력이 <b>즉시 공유</b>됩니다. (지금은 이 브라우저에서만 임시 저장돼요)</div>
+
+    <div class="resv-intro">
+      <h3>🏨 소노벨 단양 · 패밀리 취사형</h3>
+      <p>8/14~17 KBL 제천 유스드림컵 팀 숙소입니다. 제공 객실은 <b>패밀리 취사형 한 종류</b>로, <b>기준 4인·최대 6인</b>, 약 <b>56~63㎡</b>에 침실+거실+주방+화장실이 있어 아이들 식사 챙기기 좋아요. <b>EAST/WEST 동은 미정</b>, 가격은 <b>1박 20~25만원 예정</b>이며 <b>최저가로 협의 중</b>입니다. 아래에서 가정별 희망 <b>일자·객실 수</b>를 입력해 주세요 — 회신 마감 <b>7/20</b>.</p>
+      <div class="rooms" style="grid-template-columns:1fr">
+        <div class="room-card">
+          <div class="rh">패밀리 취사형 · EAST/WEST 미정</div>
+          <div class="rb">기준 4인 / 최대 6인 · 약 56~63㎡ · 주방 완비(취사 가능)<br>가격 <b>1박 20~25만원 예정</b> · <b>최저가 협의 중</b>
+            <div class="tags"><span class="rt">취사형</span><span class="rt">기준4·최대6</span><span class="rt">동 미정</span><span class="rt">20~25만/박</span></div>
+            <a class="book" href="https://www.sonohotelsresorts.com/belle_dy/resort" target="_blank">소노벨 단양 객실 보기 ↗</a>
+          </div>
+        </div>
+      </div>
+      <p>🔗 <a href="https://www.sonohotelsresorts.com/belle_dy/resort" target="_blank">소노벨 단양 전체 객실 보기</a> · 추가 인원 1인당 1박 11,000원(변동 가능)</p>
+    </div>
+
+    <div class="resv-form">
+      <div class="grid">
+        <div class="fld">
+          <label>가정(선수) *</label>
+          <select id="rfFam">
+            <option value="">— 선택 —</option>
+            <option>이영재 가정</option>
+            <option>박성규 가정</option>
+            <option>노권오 가정</option>
+            <option>석호원 가정</option>
+            <option>이영우 가정</option>
+            <option>조연호 가정</option>
+            <option>노우찬 가정</option>
+            <option>박선우 가정</option>
+            <option value="__custom">직접 입력…</option>
+          </select>
+          <input id="rfFamCustom" type="text" placeholder="가정 이름 직접 입력" style="display:none">
+        </div>
+        <div class="fld">
+          <label>객실 타입</label>
+          <select id="rfType">
+            <option>패밀리 취사형</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label>체크인 날짜 *</label>
+          <input id="rfCheckin" type="date" value="2026-08-14" min="2026-08-13" max="2026-08-17">
+        </div>
+        <div class="fld">
+          <label>박 수</label>
+          <select id="rfNights">
+            <option value="3">3박 (8/14~17 전일정)</option>
+            <option value="1">1박</option>
+            <option value="2">2박</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label>객실 수 *</label>
+          <select id="rfRooms">
+            <option value="1">1개</option>
+            <option value="2">2개</option>
+            <option value="3">3개</option>
+          </select>
+        </div>
+        <div class="fld">
+          <label>희망 동 (참고)</label>
+          <select id="rfCook">
+            <option>상관없음</option>
+            <option>EAST 선호</option>
+            <option>WEST 선호</option>
+          </select>
+        </div>
+      </div>
+      <div class="fld" style="margin-top:11px">
+        <label>인원 · 기타 요청사항</label>
+        <textarea id="rfMemo" placeholder="예: 어른 2 · 아이 2 / 8/14 저녁 늦게 도착 / 다른 가정과 인접 객실 희망 / 유아 침구 필요 등 자유롭게"></textarea>
+      </div>
+      <button class="submit" id="rfSubmit">우리 가정 예약 등록 · 수정</button>
+      <div class="resv-status" id="rfStatus"></div>
+    </div>
+
+    <div class="resv-summary">
+      <div class="sh"><span>📋 가정별 예약 현황</span><span>회신 <span class="cnt" id="rsFam">0</span>가정 · 총 <span class="cnt" id="rsRooms">0</span>객실</span></div>
+      <div id="rsBody"><div class="resv-empty">아직 등록된 예약이 없습니다. 위에서 가장 먼저 등록해 보세요!</div></div>
+    </div>
+  </section>
+
   <!-- VIDEOS -->
   <section>
-    <div class="sec-h"><h2>영상 라이브러리</h2><span class="en">Video Library</span></div>
+    <div class="sec-h"><h2>영상 라이브러리</h2><span class="en">Video Library</span><button class="manage-btn admin-only" data-sec="videos">＋ 관리</button></div>
+    <div id="videosBox">
     <div class="vid-group">
       <h4><span class="dot"></span>2026.7.12 은평삼성전 · 쿼터별 복기 <span style="font-weight:600;color:var(--mut);font-size:11px">(촬영: 우찬 아빠)</span></h4>
       <div class="vids">
@@ -332,12 +489,13 @@
         <a class="vid" href="https://youth.kbl.or.kr/youth/game/club/K1S18G01N44" target="_blank">📊 경기기록지 예시</a>
       </div>
     </div>
+    </div>
   </section>
 
   <!-- ROSTER -->
   <section>
-    <div class="sec-h"><h2>선수 명단</h2><span class="en">Roster · 8</span></div>
-    <div class="roster">
+    <div class="sec-h"><h2>선수 명단</h2><span class="en">Roster · 8</span><button class="manage-btn admin-only" data-sec="roster">＋ 관리</button></div>
+    <div class="roster" id="rosterBox">
       <div class="player"><div class="no">4</div><div class="kr">이영재</div><div class="en">Lee Young-jae</div></div>
       <div class="player"><div class="no">6</div><div class="kr">박성규</div><div class="en">Sung-gyu Park</div></div>
       <div class="player"><div class="no">11</div><div class="kr">노권오</div><div class="en">Noh Kwon-oh</div></div>
@@ -351,8 +509,8 @@
 
   <!-- NOTICES -->
   <section>
-    <div class="sec-h"><h2>주요 공지 · 팀 운영</h2><span class="en">Notices</span></div>
-    <div class="notices">
+    <div class="sec-h"><h2>주요 공지 · 팀 운영</h2><span class="en">Notices</span><button class="manage-btn admin-only" data-sec="notices">＋ 관리</button></div>
+    <div class="notices" id="noticesBox">
       <div class="notice warn">
         <h3><span class="em">🏨</span>대회 숙소 — 소노벨 단양</h3>
         <p>3.17 투표로 확정. 객실가 조정 후 재공지 예정이며, 사용 객실은 <b>7/20 전</b>까지 회신 필요. (숙소 담당: 성규 아빠·소노 본사)</p>
@@ -374,7 +532,7 @@
 
   <!-- NEWS -->
   <section>
-    <div class="sec-h"><h2>농구 소식</h2><span class="en">News</span></div>
+    <div class="sec-h"><h2>농구 소식</h2><span class="en">News</span><button class="manage-btn admin-only" data-sec="news">＋ 관리</button></div>
     <div class="news" id="newsList">
       <a class="art" href="https://jumpball.co.kr/news/newsview.php?ncode=1065621855615468" target="_blank">
         <span class="src">점프볼</span>
@@ -453,8 +611,8 @@
 
   <!-- YOUTH TOURNAMENT INFO -->
   <section>
-    <div class="sec-h"><h2>유소년 대회 정보</h2><span class="en">Reference</span></div>
-    <div class="notices">
+    <div class="sec-h"><h2>유소년 대회 정보</h2><span class="en">Reference</span><button class="manage-btn admin-only" data-sec="reference">＋ 관리</button></div>
+    <div class="notices" id="refBox">
       <div class="notice">
         <h3><span class="em">🏆</span>KBL 유스드림컵 / 클럽대회</h3>
         <p>연령별(U-9~U-14) 전국 클럽대회. 예선 리그 → 본선 토너먼트, 3박 4일. 2025년 7월 양구·11월 제천 개최 → <b>2026년 8/14~17 제천</b>. 전 경기 유튜브 생중계, KBL 홈페이지에 기록·사진 게재.</p>
@@ -481,13 +639,271 @@
   </footer>
 
 </div>
+
+<button id="adminToggle">🔒 관리자</button>
+<div class="admin-ov" id="adminOv">
+  <div class="admin-modal">
+    <div class="am-head"><span id="amTitle">편집</span><button id="amClose" title="닫기">✕</button></div>
+    <div class="am-body" id="amBody"></div>
+    <div class="am-foot"><button id="amAdd">＋ 항목 추가</button><button id="amSave">저장 (실시간 반영)</button></div>
+  </div>
+</div>
+
 <script>
   function toggleNews(){
     var list=document.getElementById('newsList');
     var btn=document.getElementById('moreBtn');
     var open=list.classList.toggle('expanded');
-    btn.textContent=open?'접기':'더보기 (+8)';
+    var n=btn.getAttribute('data-n')||'';
+    btn.textContent=open?'접기':'더보기 (+'+n+')';
   }
+</script>
+
+<!-- ===== 숙박 예약 실시간 동기화 (Firebase) ===== -->
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
+<script>
+/* ▼▼▼ 관리자만: 아래 6줄을 본인 Firebase 프로젝트 값으로 교체하세요. 교체 전까진 이 브라우저에서만 임시 저장됩니다. ▼▼▼ */
+var firebaseConfig = {
+  apiKey:      "AIzaSyBoQein6w5455H0O3xLIH4acNmsqUWOXZU",
+  authDomain:  "sono-db.firebaseapp.com",
+  databaseURL: "https://sono-db-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId:   "sono-db",
+  appId:       "1:506090026408:web:4ba69365bd49e191cdd99d"
+};
+/* ▲▲▲ 여기까지만 바꾸면 모든 가정 입력이 실시간 공유됩니다 ▲▲▲ */
+
+(function(){
+  var ADMIN_PASS='sono2026';   // 관리자 비밀번호 (원하면 이 값만 바꾸세요)
+  var db=null, configured = firebaseConfig.apiKey.indexOf('PASTE_')!==0;
+  if(configured){ try{ firebase.initializeApp(firebaseConfig); db=firebase.database(); }catch(e){ configured=false; } }
+
+  function el(id){ return document.getElementById(id); }
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function toArr(v){ if(v==null) return null; if(Array.isArray(v)) return v.filter(function(x){return x!=null;}); if(typeof v==='object'){ return Object.keys(v).map(function(k){return v[k];}).filter(function(x){return x!=null;}); } return null; }
+
+  /* ===== 기본 데이터 (DB 비었을 때 표시 + 최초 저장용) ===== */
+  var DEFAULTS = {
+    meta:{ families:'7가정 · 선수 8명', updated:'2026.7.13' },
+    stats:[ {num:'4승',lbl:'2026 연습경기',win:true},{num:'0패',lbl:'무패 행진 🔥'},{num:'+41',lbl:'누적 득실차'},{num:'34.8',lbl:'평균 득점'} ],
+    matches:[
+      {date:'7.12 · 연습경기',result:'WIN · 4W',us:'고양 소노',usScore:'30',opp:'은평 삼성',oppScore:'25',venue:'고양 소노 아레나',margin:'+5 · 추격전 승리'},
+      {date:'7.05 · 연습경기',result:'WIN · 3W',us:'고양 소노',usScore:'34',opp:'남양주 소노',oppScore:'32',venue:'고양 소노 아레나',margin:'+2 · 접전 승리'},
+      {date:'6.07 · 연습경기',result:'WIN · 2W',us:'고양 소노',usScore:'46',opp:'은평 삼성',oppScore:'17',venue:'고양 소노 아레나',margin:'+29 · 시즌 최다 점수차'},
+      {date:'4.25 · 첫 연습경기',result:'WIN · 1W',us:'고양 소노',usScore:'29',opp:'상대팀',oppScore:'24',venue:'합산 스코어(2게임)',margin:'+5 · 시즌 개막 승'}
+    ],
+    schedule:[
+      {d:'17',m:'7월(금)',hl:true,title:'U-9 여름 단합대회 🎉',desc:'이야짐 스포츠센터(일산동구 중산로60, 아이파크2차 지하2층) · 오후 1~2시 집결 · 농구·수영·저녁 · 저녁 후 자유투 이벤트(가족팀 대결 / 아빠 vs 선수)',badge:'팀 이벤트',badgeClass:'b-team'},
+      {d:'1~14',m:'8월',hl:false,title:'대회 전 개인연습 무료 개방',desc:'이야짐 농구장 · 월·화·목 19–21시 / 수·금 20–21시 / 토 14–16시 · 주차 무료',badge:'개인 훈련',badgeClass:'b-train'},
+      {d:'14~17',m:'8월',hl:true,title:'KBL 제천 유스드림컵 2026 🏆',desc:'충북 제천(어울림체육센터 인근) · 3박 4일 · 팀 숙소: <b>소노벨 단양</b>(3.17 투표 확정) · 객실 회신 ~7/20 · KBL 홈피 선수등록 임박',badge:'공식 대회',badgeClass:'b-cup'}
+    ],
+    videos:[
+      {group:'2026.7.12 은평삼성전 · 쿼터별 복기 (촬영: 우찬 아빠)',label:'1쿼터',url:'https://youtu.be/0gwlNCs7w5g',type:'yt'},
+      {group:'2026.7.12 은평삼성전 · 쿼터별 복기 (촬영: 우찬 아빠)',label:'2쿼터',url:'https://youtu.be/wBPlb2X2vuA',type:'yt'},
+      {group:'2026.7.12 은평삼성전 · 쿼터별 복기 (촬영: 우찬 아빠)',label:'3쿼터',url:'https://youtu.be/BOKZtGTuvcM',type:'yt'},
+      {group:'2026.7.12 은평삼성전 · 쿼터별 복기 (촬영: 우찬 아빠)',label:'4쿼터',url:'https://youtu.be/-5ehjYhUnN8',type:'yt'},
+      {group:'2026.7.12 은평삼성전 · 쿼터별 복기 (촬영: 우찬 아빠)',label:'5쿼터',url:'https://youtu.be/wXsq407RXE0',type:'yt'},
+      {group:'2026.7.12 은평삼성전 · 쿼터별 복기 (촬영: 우찬 아빠)',label:'고화질 원본(네이버)',url:'https://naver.me/G4d3eiC8',type:'cloud'},
+      {group:'2025 KBL 양구대회 · 생중계',label:'소노 vs 모비스',url:'https://m.youtube.com/live/sZAv2A3tRcE?t=9915',type:'yt'},
+      {group:'2025 KBL 양구대회 · 생중계',label:'소노 vs KT',url:'https://www.youtube.com/live/vpLQl5dp9nc?t=31387',type:'yt'},
+      {group:'2025 KBL 양구대회 · 생중계',label:'소노 vs DB',url:'https://www.youtube.com/live/gsEZ1VUF2Tk?t=9346',type:'yt'},
+      {group:'2025 KBL 제천 유스드림컵 · 생중계',label:'소노 vs 현대피버스',url:'https://www.youtube.com/live/218xlAuU5vY?t=36307',type:'yt'},
+      {group:'2025 KBL 제천 유스드림컵 · 생중계',label:'소노 vs KCC부산',url:'https://www.youtube.com/live/peYUfwRoJps?t=24751',type:'yt'},
+      {group:'2025 KBL 제천 유스드림컵 · 생중계',label:'소노 vs 강남삼성',url:'https://www.youtube.com/live/0_k279Zl0AA?t=35277',type:'yt'},
+      {group:'KBL 유소년 공식 페이지',label:'📋 클럽대회 일정',url:'https://youth.kbl.or.kr/youth/game/club?type=schedule',type:'none'},
+      {group:'KBL 유소년 공식 페이지',label:'📊 경기기록지 예시',url:'https://youth.kbl.or.kr/youth/game/club/K1S18G01N44',type:'none'}
+    ],
+    roster:[
+      {no:'4',kr:'이영재',en:'Lee Young-jae'},{no:'6',kr:'박성규',en:'Sung-gyu Park'},{no:'11',kr:'노권오',en:'Noh Kwon-oh'},{no:'13',kr:'석호원',en:'Seok Ho-won'},{no:'15',kr:'이영우',en:'Lee Young-woo'},{no:'15',kr:'조연호',en:'Jo Yeon-ho'},{no:'28',kr:'노우찬',en:'Noh Woo-chan'},{no:'32',kr:'박선우',en:'Park Sun-woo'}
+    ],
+    notices:[
+      {emoji:'🏨',title:'대회 숙소 — 소노벨 단양',body:'3.17 투표로 확정. 객실가 조정 후 재공지 예정이며, 사용 객실은 <b>7/20 전</b>까지 회신 필요. (숙소 담당: 성규 아빠·소노 본사)',warn:true},
+      {emoji:'🍔',title:'연습경기 간식 규칙',body:'홈팀이 상대팀 아이들 간식까지 준비 · 공금 조성 후 7가구 정산. (7/12 햄버거 가구당 14,400원 / 커피 6,100원)',warn:false},
+      {emoji:'📷',title:'역할 분담',body:'학부모 대표: 선우 아빠 · 영상 촬영: 호원 아빠·우찬 아빠 · 장소 제공: 권오 아빠(이야짐)',warn:false},
+      {emoji:'🎽',title:'단체복',body:'선수: 연습경기 시 홈 유니폼 · 학부모: 소노 응원 티셔츠 착용 권장',warn:false}
+    ],
+    news:[
+      {src:'점프볼',title:'[26드림캠프] 소노의 시작을 빛냈던 어린이 위너스, 그 응원이 만든 고양의 봄 "꼭 파이널 우승해주세요!"',url:'https://jumpball.co.kr/news/newsview.php?ncode=1065621855615468',tag:'소노',star:false,hidden:false},
+      {src:'점프볼',title:'[KBL Y리그] 쌍둥이도, 형도 모두 코트 위에…셋이 함께 3x3 우승까지, 농구로 하나 된 삼형제',url:'https://jumpball.co.kr/news/newsview.php?ncode=1065582179210361',tag:'성장기',star:true,hidden:false},
+      {src:'다음스포츠 · 26.6.25',title:'구리다산 KCC 장우현·이밝음, 미니게임 속에서 농구에 빠지다!',url:'https://v.daum.net/v/20260625100500153',tag:'성장기',star:true,hidden:false},
+      {src:'맥스포츠',title:"KBL, 유소년 육성 프로그램 성료…'발굴–육성–프로 진출' 구조 가시화",url:'https://www.maxportsnews.com/news/articleView.html?idxno=6198',tag:'육성',star:true,hidden:false},
+      {src:'바스켓코리아 · 26.6.17',title:"2026 KBL YOUTH DREAM CAMP, 이전과 차별화되는 건 '다큐 영상'",url:'https://basketkorea.com/news/newsview.php?ncode=1065573464761185',tag:'캠프',star:false,hidden:false},
+      {src:'네이트 스포츠 · 25.12.29',title:"'장신선수 발굴+찾아가는 농구교실' KBL, 유소년 육성 성료…발굴→육성→프로행 선순환",url:'https://sports.news.nate.com/view/20251229n16311',tag:'육성',star:true,hidden:true},
+      {src:'다음스포츠 · 26.2.27',title:'[KBL 유스 코치아카데미] 최고령 참가자 프로 코치의 솔선수범…"지도자는 보여줘야죠"',url:'https://v.daum.net/v/20260227070413970',tag:'성장기',star:true,hidden:true},
+      {src:'뉴시스 · 26.5.21',title:'2026 KBL Y리그 개최…6월 27~28일 아산서 플레이오프 예정',url:'https://www.newsis.com/view/NISX20260521_0003639861',tag:'Y리그',star:false,hidden:true},
+      {src:'네이트 스포츠 · 26.6.17',title:'KCC, 제주에서 국제 유소년 클럽 농구 대회 개최…7개국 47개 팀 참가',url:'https://sports.news.nate.com/view/20260617n17337',tag:'대회',star:false,hidden:true},
+      {src:'바스켓코리아',title:"부산 KCC, 'KCC이지스와 함께 하는 국제 유소년 클럽 농구 대회' 개최",url:'https://basketkorea.com/news/newsview.php?ncode=1065575365623903',tag:'대회',star:false,hidden:true},
+      {src:'점프볼 매거진',title:"유소년 농구의 미래를 지키는 '부상 방지 교육', 그 뜨거운 현장 속으로",url:'https://jumpball.co.kr/news/newsview.php?ncode=1065594569338577',tag:'교육',star:false,hidden:true},
+      {src:'중부일보',title:'세계 U13 농구 꿈나무 교류의 장 2026 WYBC, 17일 부천 일원서 개최',url:'https://www.joongboo.com/news/articleView.html?idxno=363731283',tag:'국제',star:false,hidden:true},
+      {src:'점프볼',title:'점프볼 유소년 농구 뉴스 모음 (전체 보기)',url:'http://m.jumpball.co.kr/news/newsList.php?tid=182007183',tag:'모음',star:false,hidden:true},
+      {src:'KBL',title:'KBL 유소년 공식 홈페이지 — 일정·기록·영상',url:'https://youth.kbl.or.kr/',tag:'공식',star:false,hidden:true}
+    ],
+    reference:[
+      {emoji:'🏆',title:'KBL 유스드림컵 / 클럽대회',body:'연령별(U-9~U-14) 전국 클럽대회. 예선 리그 → 본선 토너먼트, 3박 4일. 2025년 7월 양구·11월 제천 개최 → <b>2026년 8/14~17 제천</b>. 전 경기 유튜브 생중계, KBL 홈페이지에 기록·사진 게재.',warn:false},
+      {emoji:'🏀',title:'KBL Y리그 2026 (공식 리그)',body:'9개 구단 유스클럽 · 14세 이하(2012.1.1 이후). 예선 라운드로빈 → Y1(1–4위)·Y2(5–8위) 4강 토너먼트. 정규시즌 5/23~6/21(예산·아산), 플레이오프 6/27~28 아산. <b>유소년 최초로 10분 4쿼터·데드볼·비디오판독</b> 도입.',warn:false},
+      {emoji:'🎥',title:'2026 KBL 유스 드림 캠프',body:'5/1~4 안산 신안산대 · 6학년 비엘리트 30명 · 수석코치 신기성. 부상방지·테이핑·도핑·심판규칙 교육. 32분 다큐 2부작(KBL TV 유튜브)로 제작.',warn:false},
+      {emoji:'🔗',title:'바로가기',body:'<a href="https://youth.kbl.or.kr/" target="_blank" style="color:var(--navy);font-weight:800">KBL 유소년 홈페이지</a> · <a href="https://skygunners.kbl.or.kr/" target="_blank" style="color:var(--navy);font-weight:800">소노 스카이거너스 구단</a> · <a href="https://www.youtube.com/@KBLTV" target="_blank" style="color:var(--navy);font-weight:800">KBL TV(유튜브)</a>',warn:true}
+    ]
+  };
+
+  /* ===== 섹션 정의 (편집 필드 + 렌더) ===== */
+  var SECTIONS = {
+    meta:{ title:'기본 정보', single:true, box:null,
+      fields:[ {k:'families',label:'가정/선수 요약',t:'text'}, {k:'updated',label:'업데이트 날짜',t:'text'} ] },
+    stats:{ title:'시즌 성적', box:'statsBox',
+      fields:[ {k:'num',label:'숫자',t:'text'}, {k:'lbl',label:'라벨',t:'text'}, {k:'win',label:'초록색 강조(승)',t:'check'} ],
+      render:function(x){ return '<div class="stat"><div class="num'+(x.win?' win':'')+'">'+esc(x.num)+'</div><div class="lbl">'+esc(x.lbl)+'</div></div>'; } },
+    matches:{ title:'경기 결과', box:'matchesBox',
+      fields:[ {k:'date',label:'날짜·구분',t:'text'}, {k:'result',label:'결과 뱃지(WIN · 4W)',t:'text'}, {k:'us',label:'우리팀',t:'text'}, {k:'usScore',label:'우리 점수',t:'text'}, {k:'opp',label:'상대팀',t:'text'}, {k:'oppScore',label:'상대 점수',t:'text'}, {k:'venue',label:'장소',t:'text'}, {k:'margin',label:'비고',t:'text'} ],
+      render:function(x){ return '<div class="match"><div class="top"><span>'+esc(x.date)+'</span><span class="res">'+esc(x.result)+'</span></div><div class="body"><div class="teams"><div class="team us"><div class="nm">'+esc(x.us)+'</div><div class="sc">'+esc(x.usScore)+'</div></div><div class="vs">:</div><div class="team opp"><div class="sc">'+esc(x.oppScore)+'</div><div class="nm">'+esc(x.opp)+'</div></div></div><div class="meta"><span>'+esc(x.venue)+'</span><span class="margin">'+esc(x.margin)+'</span></div></div></div>'; } },
+    schedule:{ title:'다가오는 일정', box:'scheduleBox',
+      fields:[ {k:'d',label:'날짜 숫자',t:'text'}, {k:'m',label:'월/요일',t:'text'}, {k:'title',label:'제목',t:'text'}, {k:'desc',label:'설명 (HTML 가능)',t:'area'}, {k:'badge',label:'뱃지 글자',t:'text'}, {k:'badgeClass',label:'뱃지색 (b-cup/b-team/b-train)',t:'text'}, {k:'hl',label:'노란색 강조',t:'check'} ],
+      render:function(x){ return '<div class="ev'+(x.hl?' hl':'')+'"><div class="date"><div class="d">'+esc(x.d)+'</div><div class="m">'+esc(x.m)+'</div></div><div class="info"><h3>'+esc(x.title)+'</h3><p>'+(x.desc||'')+'</p>'+(x.badge?'<span class="badge '+esc(x.badgeClass)+'">'+esc(x.badge)+'</span>':'')+'</div></div>'; } },
+    videos:{ title:'영상 라이브러리', box:'videosBox',
+      fields:[ {k:'group',label:'그룹 제목',t:'text'}, {k:'label',label:'버튼 이름',t:'text'}, {k:'url',label:'링크 URL',t:'text'}, {k:'type',label:'아이콘 (yt / cloud / none)',t:'text'} ],
+      renderList:function(items){ var order=[],map={}; items.forEach(function(it){ var g=it.group||''; if(!map[g]){map[g]=[];order.push(g);} map[g].push(it); }); return order.map(function(g){ return '<div class="vid-group"><h4><span class="dot"></span>'+g+'</h4><div class="vids">'+map[g].map(function(it){ var ic=it.type==='yt'?'<span class="yt"></span>':(it.type==='cloud'?'<span class="cloud"></span>':''); return '<a class="vid" href="'+esc(it.url)+'" target="_blank">'+ic+esc(it.label)+'</a>'; }).join('')+'</div></div>'; }).join(''); } },
+    roster:{ title:'선수 명단', box:'rosterBox',
+      fields:[ {k:'no',label:'등번호',t:'text'}, {k:'kr',label:'이름',t:'text'}, {k:'en',label:'영문',t:'text'} ],
+      render:function(x){ return '<div class="player"><div class="no">'+esc(x.no)+'</div><div class="kr">'+esc(x.kr)+'</div><div class="en">'+esc(x.en)+'</div></div>'; } },
+    notices:{ title:'주요 공지', box:'noticesBox',
+      fields:[ {k:'emoji',label:'이모지',t:'text'}, {k:'title',label:'제목',t:'text'}, {k:'body',label:'내용 (HTML 가능)',t:'area'}, {k:'warn',label:'노란색 강조',t:'check'} ],
+      render:function(x){ return '<div class="notice'+(x.warn?' warn':'')+'"><h3><span class="em">'+esc(x.emoji)+'</span>'+esc(x.title)+'</h3><p>'+(x.body||'')+'</p></div>'; } },
+    news:{ title:'농구 소식', box:'newsList',
+      fields:[ {k:'src',label:'출처',t:'text'}, {k:'title',label:'제목',t:'text'}, {k:'url',label:'링크 URL',t:'text'}, {k:'tag',label:'태그',t:'text'}, {k:'star',label:'노란 태그',t:'check'}, {k:'hidden',label:'더보기 안에 숨김',t:'check'} ],
+      render:function(x){ return '<a class="art'+(x.hidden?' hidden-art':'')+'" href="'+esc(x.url)+'" target="_blank"><span class="src">'+esc(x.src)+'</span><span class="tt">'+esc(x.title)+'</span><span class="tag'+(x.star?' star':'')+'">'+esc(x.tag)+'</span></a>'; },
+      after:function(items){ var n=items.filter(function(i){return i.hidden;}).length; var b=el('moreBtn'); if(!b) return; b.setAttribute('data-n',n); b.style.display=n?'block':'none'; var open=el('newsList').classList.contains('expanded'); b.textContent=open?'접기':'더보기 (+'+n+')'; } },
+    reference:{ title:'유소년 대회 정보', box:'refBox',
+      fields:[ {k:'emoji',label:'이모지',t:'text'}, {k:'title',label:'제목',t:'text'}, {k:'body',label:'내용 (HTML 가능)',t:'area'}, {k:'warn',label:'노란색 강조',t:'check'} ],
+      render:function(x){ return '<div class="notice'+(x.warn?' warn':'')+'"><h3><span class="em">'+esc(x.emoji)+'</span>'+esc(x.title)+'</h3><p>'+(x.body||'')+'</p></div>'; } }
+  };
+
+  /* ===== 상태 ===== */
+  var dbData={}, localData={};
+  try{ localData=JSON.parse(localStorage.getItem('skygunners_dash')||'{}'); }catch(e){ localData={}; }
+
+  function getSec(sec){
+    var src = configured ? dbData : localData;
+    var v = src ? src[sec] : null;
+    if(sec==='meta'){ return (v && typeof v==='object' && !Array.isArray(v)) ? v : DEFAULTS.meta; }
+    var a = toArr(v);
+    return (a && a.length) ? a : DEFAULTS[sec];
+  }
+
+  function renderAll(){
+    var m=getSec('meta');
+    if(el('pillFamilies')) el('pillFamilies').textContent='👨‍👩‍👧 '+(m.families||'');
+    if(el('pillUpdate')) el('pillUpdate').textContent='📅 UPDATE '+(m.updated||'');
+    Object.keys(SECTIONS).forEach(function(sec){
+      var S=SECTIONS[sec]; if(!S.box) return;
+      var box=el(S.box); if(!box) return;
+      var items=getSec(sec)||[];
+      box.innerHTML = S.renderList ? S.renderList(items) : items.map(S.render).join('');
+      if(S.after) S.after(items);
+    });
+    buildFamilyOptions();
+  }
+
+  /* ===== 관리자 모드 ===== */
+  var adminMode=false, curSec=null;
+  function setAdmin(on){ adminMode=on; document.body.classList.toggle('admin',on); var t=el('adminToggle'); if(t) t.textContent=on?'🔓 관리자 (나가기)':'🔒 관리자'; }
+  el('adminToggle').addEventListener('click',function(){
+    if(adminMode){ setAdmin(false); return; }
+    var p=prompt('관리자 비밀번호를 입력하세요');
+    if(p===null) return;
+    if(p===ADMIN_PASS){ setAdmin(true); seedIfEmpty(); }
+    else alert('비밀번호가 올바르지 않습니다.');
+  });
+  function seedIfEmpty(){
+    if(!configured) return;
+    db.ref('dashboard').once('value').then(function(s){ if(!s.exists()){ db.ref('dashboard').set(DEFAULTS); } }).catch(function(){});
+  }
+  function saveSec(sec,val){
+    if(configured){ db.ref('dashboard/'+sec).set(val); }
+    else { localData[sec]=val; try{ localStorage.setItem('skygunners_dash',JSON.stringify(localData)); }catch(e){} renderAll(); }
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.manage-btn'),function(btn){
+    btn.addEventListener('click',function(){ openEditor(btn.getAttribute('data-sec')); });
+  });
+  function cardFor(sec,item){
+    item=item||{}; var S=SECTIONS[sec]; var card=document.createElement('div'); card.className='ed-card';
+    S.fields.forEach(function(f){
+      var row=document.createElement('div'); row.className='ed-row'+(f.t==='check'?' chk':'');
+      var lab=document.createElement('label'); lab.textContent=f.label; var inp;
+      if(f.t==='area'){ inp=document.createElement('textarea'); inp.value=item[f.k]!=null?item[f.k]:''; }
+      else if(f.t==='check'){ inp=document.createElement('input'); inp.type='checkbox'; inp.checked=!!item[f.k]; }
+      else { inp=document.createElement('input'); inp.type='text'; inp.value=item[f.k]!=null?item[f.k]:''; }
+      inp.setAttribute('data-k',f.k);
+      if(f.t==='check'){ row.appendChild(inp); row.appendChild(lab); } else { row.appendChild(lab); row.appendChild(inp); }
+      card.appendChild(row);
+    });
+    if(!S.single){ var del=document.createElement('button'); del.className='ed-del'; del.textContent='이 항목 삭제'; del.addEventListener('click',function(){ card.remove(); }); card.appendChild(del); }
+    return card;
+  }
+  function openEditor(sec){
+    curSec=sec; var S=SECTIONS[sec];
+    el('amTitle').textContent=S.title+' 편집';
+    var body=el('amBody'); body.innerHTML='';
+    if(S.single){ body.appendChild(cardFor(sec,getSec(sec))); el('amAdd').style.display='none'; }
+    else { (getSec(sec)||[]).forEach(function(it){ body.appendChild(cardFor(sec,it)); }); el('amAdd').style.display='block'; }
+    el('adminOv').classList.add('on');
+  }
+  el('amAdd').addEventListener('click',function(){ el('amBody').appendChild(cardFor(curSec,{})); });
+  el('amClose').addEventListener('click',function(){ el('adminOv').classList.remove('on'); });
+  el('adminOv').addEventListener('click',function(e){ if(e.target===el('adminOv')) el('adminOv').classList.remove('on'); });
+  el('amSave').addEventListener('click',function(){
+    var S=SECTIONS[curSec]; var cards=el('amBody').querySelectorAll('.ed-card');
+    function collect(card){ var o={}; Array.prototype.forEach.call(card.querySelectorAll('[data-k]'),function(inp){ o[inp.getAttribute('data-k')]= inp.type==='checkbox'?inp.checked:inp.value; }); return o; }
+    if(S.single){ saveSec('meta',collect(cards[0])); }
+    else { var arr=[]; Array.prototype.forEach.call(cards,function(c){ arr.push(collect(c)); }); saveSec(curSec,arr); }
+    el('adminOv').classList.remove('on');
+  });
+
+  /* ===== 숙박 예약 ===== */
+  var LOCAL_RESV='skygunners_resv';
+  var cfgEl=el('resvCfg'); if(cfgEl) cfgEl.style.display=configured?'none':'block';
+  var famSel=el('rfFam'), famCustom=el('rfFamCustom');
+  if(famSel) famSel.addEventListener('change',function(){ famCustom.style.display= famSel.value==='__custom'?'block':'none'; });
+  function buildFamilyOptions(){
+    if(!famSel) return; var cur=famSel.value; var roster=getSec('roster')||[];
+    var html='<option value="">— 선택 —</option>';
+    roster.forEach(function(p){ html+='<option>'+esc(p.kr)+' 가정</option>'; });
+    html+='<option value="__custom">직접 입력…</option>';
+    famSel.innerHTML=html; if(cur){ famSel.value=cur; }
+  }
+  function famKey(n){ return n.replace(/[.#$\[\]\/\s]/g,'_'); }
+  function readLocalResv(){ try{return JSON.parse(localStorage.getItem(LOCAL_RESV)||'{}');}catch(e){return {};} }
+  function writeLocalResv(o){ localStorage.setItem(LOCAL_RESV,JSON.stringify(o)); renderResv(o); }
+  function saveResv(rec){ var k=famKey(rec.family); if(configured){ db.ref('reservations/'+k).set(rec);} else { var o=readLocalResv(); o[k]=rec; writeLocalResv(o);} }
+  function delResv(key){ if(configured){ db.ref('reservations/'+key).remove(); } else { var o=readLocalResv(); delete o[key]; writeLocalResv(o);} }
+  function setStatus(msg,err){ var s=el('rfStatus'); if(!s) return; s.textContent=msg; s.style.color=err?'var(--loss)':'var(--win)'; }
+  if(el('rfSubmit')) el('rfSubmit').addEventListener('click',function(){
+    var fam= famSel.value==='__custom'? (famCustom.value||'').trim(): famSel.value;
+    if(!fam){ setStatus('가정을 선택하거나 입력해 주세요.',true); return; }
+    var rec={ family:fam, type:el('rfType').value, checkin:el('rfCheckin').value, nights:el('rfNights').value, rooms:el('rfRooms').value, cook:el('rfCook').value, memo:(el('rfMemo').value||'').trim(), ts:new Date().toISOString() };
+    saveResv(rec);
+    setStatus('✓ 「'+fam+'」 예약 등록 완료.'+(configured?' 모든 가정에 실시간 공유됨.':' (임시 저장 · 실시간 설정 대기중)'),false);
+  });
+  function renderResv(data){
+    data=data||{}; var entries=Object.keys(data).map(function(k){return {k:k,v:data[k]};});
+    entries.sort(function(a,b){return (a.v.checkin||'').localeCompare(b.v.checkin||'')||(a.v.family||'').localeCompare(b.v.family||'');});
+    var body=el('rsBody'); if(!body) return;
+    var total=entries.reduce(function(s,e){return s+(parseInt(e.v.rooms,10)||0);},0);
+    el('rsFam').textContent=entries.length; el('rsRooms').textContent=total;
+    if(!entries.length){ body.innerHTML='<div class="resv-empty">아직 등록된 예약이 없습니다. 위에서 가장 먼저 등록해 보세요!</div>'; return; }
+    var rows=entries.map(function(e){ var v=e.v, d=(v.checkin||'').replace(/^2026-/,'').replace('-','/'); var extra=(v.cook&&v.cook!=='상관없음'?v.cook:'')+(v.memo?((v.cook&&v.cook!=='상관없음')?' · ':'')+v.memo:''); return '<tr><td class="fam">'+esc(v.family)+'</td><td>'+esc(d)+' · '+esc(v.nights)+'박</td><td>'+esc(v.rooms)+'개</td><td>'+esc(v.type||'')+'</td><td>'+esc(extra||'-')+'</td><td><button class="del" data-k="'+esc(e.k)+'" title="삭제">✕</button></td></tr>'; }).join('');
+    body.innerHTML='<table class="resv-table"><thead><tr><th>가정</th><th>일자</th><th>객실</th><th>타입</th><th>희망동·메모</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>';
+    Array.prototype.forEach.call(body.querySelectorAll('.del'),function(btn){ btn.addEventListener('click',function(){ if(confirm('이 가정 예약을 삭제할까요?')) delResv(btn.getAttribute('data-k')); }); });
+  }
+
+  /* ===== 실시간 구독 + 최초 렌더 ===== */
+  renderAll();
+  if(configured){
+    db.ref('dashboard').on('value',function(snap){ dbData=snap.val()||{}; renderAll(); });
+    db.ref('reservations').on('value',function(snap){ renderResv(snap.val()||{}); });
+  } else {
+    renderResv(readLocalResv());
+  }
+})();
 </script>
 </body>
 </html>
