@@ -250,6 +250,55 @@
   .fix .fx-opp{font-size:15px;font-weight:900}
   .fix .fx-opp b{font-size:23px;font-style:italic;color:var(--navy);letter-spacing:-.5px}
   .fix .fx-meta{margin-top:10px;padding-top:9px;border-top:2px dashed var(--line);font-size:12px;color:var(--mut);font-weight:600;line-height:1.7}
+
+  /* ---------- timetable ---------- */
+  .ttable{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:640px){.ttable{grid-template-columns:1fr}}
+  .tt-day{background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);overflow:hidden}
+  .tt-day .tt-h{background:var(--sky);color:#fff;padding:9px 14px;font-size:13.5px;font-weight:900;text-shadow:1px 1px 0 var(--navy2)}
+  .tt-row{display:flex;gap:10px;padding:9px 14px;border-bottom:1.5px solid var(--line);align-items:baseline}
+  .tt-row:last-child{border-bottom:0}
+  .tt-row .tm{flex:none;width:46px;font-size:13px;font-weight:900;color:var(--navy);font-style:italic}
+  .tt-row .ti{font-size:12.5px;font-weight:600;color:var(--ink)}
+  .tt-row.game{background:#fff7e6}
+  .tt-row.game .ti{font-weight:800}
+  .tt-row .tg{font-size:10px;font-weight:800;border:1.5px solid var(--navy2);border-radius:4px;padding:0 5px;color:var(--navy2)}
+
+  /* ---------- dinner vote ---------- */
+  .vote-fam{display:flex;gap:9px;align-items:center;flex-wrap:wrap;background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);padding:13px 15px;margin-bottom:14px}
+  .vote-fam label{font-size:12.5px;font-weight:800;color:var(--navy2)}
+  .vote-fam select{font-family:inherit;font-size:13px;font-weight:600;border:2px solid var(--navy2);border-radius:8px;padding:8px 10px;flex:1;min-width:150px}
+  .vcards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:820px){.vcards{grid-template-columns:1fr}}
+  .vcard{background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);overflow:hidden;display:flex;flex-direction:column}
+  .vcard.lead{border-color:var(--win)}
+  .vcard .vc-h{background:var(--navy2);color:#fff;padding:10px 13px}
+  .vcard .vc-h .nm{font-size:14px;font-weight:900}
+  .vcard .vc-h .ty{font-size:11px;opacity:.9;font-weight:600;margin-top:2px}
+  .vcard .vc-b{padding:12px 13px;flex:1;display:flex;flex-direction:column;gap:7px}
+  .vcard .vtags{display:flex;flex-wrap:wrap;gap:5px}
+  .vcard .vt{font-size:10px;font-weight:800;border:2px solid var(--navy2);border-radius:5px;padding:1px 6px;background:var(--bg);color:var(--navy2)}
+  .vcard .pro{font-size:11.5px;color:var(--ink);font-weight:600;line-height:1.5}
+  .vcard .con{font-size:11px;color:var(--mut);font-weight:600;line-height:1.45}
+  .vcard .vlink{font-size:11px;font-weight:800;color:var(--navy)}
+  .vcard .vbar-wrap{margin-top:auto;padding-top:8px}
+  .vcard .vbar{height:12px;background:var(--bg);border:2px solid var(--navy2);border-radius:7px;overflow:hidden}
+  .vcard .vbar span{display:block;height:100%;background:var(--sky)}
+  .vcard.lead .vbar span{background:var(--win)}
+  .vcard .vcount{font-size:11.5px;font-weight:800;color:var(--navy2);margin-top:5px}
+  .vcard .voters{font-size:10.5px;color:var(--mut);font-weight:700;margin-top:3px;line-height:1.5}
+  .vcard .vbtn{margin:0 13px 13px;padding:11px;border:3px solid var(--navy2);background:var(--accent);color:var(--navy2);font-family:inherit;font-size:13px;font-weight:900;border-radius:9px;cursor:pointer;box-shadow:var(--hs-sm)}
+  .vcard.mychoice .vbtn{background:var(--win);color:#fff}
+  .vote-status{font-size:11.5px;font-weight:800;text-align:center;margin-top:11px;min-height:14px;color:var(--mut)}
+
+  /* ---------- local eats ---------- */
+  .eats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+  @media(max-width:640px){.eats{grid-template-columns:1fr}}
+  .eat{background:var(--card);border:2px solid var(--navy2);border-radius:9px;padding:9px 12px;box-shadow:var(--hs-sm)}
+  .eat .en2{font-size:12.5px;font-weight:800;color:var(--ink)}
+  .eat .no2{font-size:11px;color:var(--mut);font-weight:600;margin-top:1px}
+  .eat.hidden-eat{display:none}
+  .eats.expanded .eat.hidden-eat{display:block}
 </style>
 </head>
 <body>
@@ -381,6 +430,13 @@
     <p class="refnote">* DB손해보험 2026 KBL 유스클럽농구대회 · 소노는 <b>B조(SK·소노·정관장·KT)</b> 풀리그 3경기. 예선 8/15~16, 8/17(월) 본선(준결승·결승)은 예선 통과 시 진행. 시간·장소는 대회 사정에 따라 변동될 수 있어요. 전 경기 유튜브 생중계.</p>
   </section>
 
+  <!-- TOURNAMENT TIMETABLE -->
+  <section>
+    <div class="sec-h"><h2>대회 당일 타임테이블</h2><span class="en">Timetable · 8/15~16</span><button class="manage-btn admin-only" data-sec="timetable">＋ 관리</button></div>
+    <div class="ttable" id="timetableBox"></div>
+    <p class="refnote">* 2일차 오전 세명대체육관 집결·2경기 후, 오후 3경기는 제천 어울림체육센터에서 진행 — 체육관 이동에 유의하세요. 시간은 대회 진행에 따라 변동될 수 있어요.</p>
+  </section>
+
   <!-- LODGING RESERVATION -->
   <section id="resv">
     <div class="sec-h"><h2>숙박 예약 취합</h2><span class="en">Lodging · 소노벨 단양</span></div>
@@ -472,6 +528,23 @@
       <div class="sh"><span>📋 가정별 예약 현황</span><span>회신 <span class="cnt" id="rsFam">0</span>가정 · 총 <span class="cnt" id="rsRooms">0</span>객실</span></div>
       <div id="rsBody"><div class="resv-empty">아직 등록된 예약이 없습니다. 위에서 가장 먼저 등록해 보세요!</div></div>
     </div>
+  </section>
+
+  <!-- DINNER VOTE -->
+  <section id="dinner">
+    <div class="sec-h"><h2>1일차 단체 석식 투표</h2><span class="en">Dinner Vote · 8/15</span><button class="manage-btn admin-only" data-sec="dinnerOpts">＋ 관리</button></div>
+    <p class="refnote" style="margin-bottom:12px">8/15(토) 1경기 후 <b>18:30 단체 석식</b>. 기준: 운동한 아이들이 잘 먹고 · 차량 주차 가능 · (가능하면) 단독룸 · 뷔페면 가구별 정산 편리. 가정을 고른 뒤 한 곳에 투표해 주세요 — 실시간 집계됩니다.</p>
+    <div class="vote-fam"><label>가정 선택</label><select id="voteFam"></select><span id="voteMy" style="font-size:11.5px;font-weight:800;color:var(--navy)"></span></div>
+    <div class="vcards" id="dinnerBox"></div>
+    <div class="vote-status" id="voteStatus"></div>
+  </section>
+
+  <!-- LOCAL EATS -->
+  <section>
+    <div class="sec-h"><h2>제천 맛집 리스트</h2><span class="en">Local Eats</span><button class="manage-btn admin-only" data-sec="eats">＋ 관리</button></div>
+    <div class="eats" id="eatsBox"></div>
+    <button class="more-btn" id="eatsMore" onclick="toggleEats()">더보기</button>
+    <p class="refnote">* 현지인·스레드 추천 리스트(미검증). 직접 가보고 좋았던 곳 있으면 공유해 주세요.</p>
   </section>
 
   <!-- VIDEOS -->
@@ -680,6 +753,13 @@
     var n=btn.getAttribute('data-n')||'';
     btn.textContent=open?'접기':'더보기 (+'+n+')';
   }
+  function toggleEats(){
+    var l=document.getElementById('eatsBox');
+    var b=document.getElementById('eatsMore');
+    var open=l.classList.toggle('expanded');
+    var n=b.getAttribute('data-n')||'';
+    b.textContent=open?'접기':'더보기 (+'+n+')';
+  }
 </script>
 
 <!-- ===== 숙박 예약 실시간 동기화 (Firebase) ===== -->
@@ -725,6 +805,53 @@ var firebaseConfig = {
       {game:'예선 1경기',date:'8/15 (토)',time:'16:00',opp:'KT',venue:'어울림체육센터'},
       {game:'예선 2경기',date:'8/16 (일)',time:'10:45',opp:'정관장',venue:'세명대 체육관'},
       {game:'예선 3경기',date:'8/16 (일)',time:'16:00',opp:'SK',venue:'어울림체육센터'}
+    ],
+    timetable:[
+      {day:'DAY 1 · 8/15 (토)',time:'15:00',title:'체육관 집결',tag:'집결',venue:'어울림체육센터'},
+      {day:'DAY 1 · 8/15 (토)',time:'16:00',title:'소노 U-9 1경기 vs KT',tag:'경기',venue:''},
+      {day:'DAY 1 · 8/15 (토)',time:'17:00',title:'1경기 종료',tag:'종료',venue:''},
+      {day:'DAY 1 · 8/15 (토)',time:'18:30',title:'단체 석식 (뷔페식)',tag:'식사',venue:'투표로 결정'},
+      {day:'DAY 1 · 8/15 (토)',time:'20:00',title:'1일차 종료 · 숙소 이동/휴식',tag:'휴식',venue:''},
+      {day:'DAY 2 · 8/16 (일)',time:'10:00',title:'체육관 집결',tag:'집결',venue:'세명대체육관'},
+      {day:'DAY 2 · 8/16 (일)',time:'10:45',title:'소노 U-9 2경기 vs 정관장',tag:'경기',venue:''},
+      {day:'DAY 2 · 8/16 (일)',time:'11:30',title:'2경기 종료 · 개별 가족 시간(점심/관람)',tag:'자유',venue:''},
+      {day:'DAY 2 · 8/16 (일)',time:'15:00',title:'체육관 재집결',tag:'집결',venue:'어울림체육센터'},
+      {day:'DAY 2 · 8/16 (일)',time:'16:00',title:'소노 U-9 3경기 vs SK',tag:'경기',venue:''},
+      {day:'DAY 2 · 8/16 (일)',time:'17:00',title:'3경기 · 예선 일정 종료',tag:'종료',venue:''}
+    ],
+    dinnerOpts:[
+      {id:'myeongryun',name:'명륜진사갈비 제천강제점',type:'한식 고기 무한리필 뷔페',link:'https://naver.me/5YoBlNTX',tags:'아이 선호, 주차, 뷔페 정산',pros:'무한리필 고기라 운동한 아이들이 가장 잘 먹고, 뷔페라 가구별 정산이 깔끔. 대로변이라 주차 여유.',cons:'주말 저녁 대기 가능 · 단독룸은 현장 확인 권장.'},
+      {id:'shabu',name:'샤브올데이 제천영천점',type:'샤브샤브 뷔페',link:'https://naver.me/xAfHReAE',tags:'주차, 뷔페 정산, 채소 다양',pros:'뷔페라 정산 간편하고 채소·죽·후식이 다양해 부모 만족도 높음. 주차 가능 표시.',cons:'샤브는 어린 선수 호불호 · 직접 익혀야 해 시간 소요.'},
+      {id:'cheonmyeong',name:'천명삼겹살타운',type:'삼겹살 전문 (대형)',link:'',tags:'아이 선호, 단체 수용',pros:'삼겹살은 아이 선호도가 높고 대형 매장이라 단체 수용력이 좋음(현지 맛집 리스트 추천).',cons:'뷔페 아님(개별 정산) · 주차·단독룸 현장 확인 필요.'}
+    ],
+    eats:[
+      {name:'명륜진사갈비 제천강제점',note:'★석식 후보 · 고기 무한리필 뷔페'},
+      {name:'샤브올데이 제천영천점',note:'★석식 후보 · 샤브 뷔페'},
+      {name:'천명삼겹살타운',note:'★석식 후보 · 삼겹살 대형'},
+      {name:'뜰이있는집',note:''},
+      {name:'고향이야기',note:''},
+      {name:'연당맛자랑',note:''},
+      {name:'물방아야식',note:'오삼불고기·볶음밥'},
+      {name:'동문식당',note:'청국장·오삼불고기'},
+      {name:'시골순두부(두학)',note:'순두부'},
+      {name:'의림만두국',note:'만두국'},
+      {name:'장군집',note:'고기집이지만 만두전골 유명 · 포장 가능'},
+      {name:'홍반장',note:'중식 · 탕수육/짜장/짬뽕 · 시원한 짬뽕 국물'},
+      {name:'청풍명월',note:'우렁쌈밥 정식 · 쌈 무한리필'},
+      {name:'청원갈비',note:'옛날식 얇은 갈비'},
+      {name:'청원식당',note:'오징어더덕+삼겹살 함께 주문 가능'},
+      {name:'대흥식당',note:'고기만두 · 장칼국수 양 많고 푸짐'},
+      {name:'맛뜨락',note:'쑥면 · 콩국수'},
+      {name:'내토순대',note:'순대국밥'},
+      {name:'장원순대',note:'순대국밥'},
+      {name:'충청도식당',note:'순대국밥'},
+      {name:'새터오리촌',note:'한방오리보쌈'},
+      {name:'오디향',note:'비빔밥 · 반찬 좋음'},
+      {name:'구산복집',note:'복지리'},
+      {name:'비갬',note:''},
+      {name:'소가네곱창',note:'곱창'},
+      {name:'청풍황금떡갈비',note:'떡갈비'},
+      {name:'노송식당',note:''}
     ],
     videos:[
       {group:'2026.7.12 은평삼성전 · 쿼터별 복기 (촬영: 우찬 아빠)',label:'1쿼터',url:'https://youtu.be/0gwlNCs7w5g',type:'yt'},
@@ -792,6 +919,15 @@ var firebaseConfig = {
     fixtures:{ title:'제천 대회 경기 일정', box:'fixturesBox',
       fields:[ {k:'game',label:'경기 구분',t:'text'}, {k:'date',label:'날짜(요일)',t:'text'}, {k:'time',label:'시간',t:'text'}, {k:'opp',label:'상대팀',t:'text'}, {k:'venue',label:'장소',t:'text'} ],
       render:function(x){ return '<div class="fix"><div class="fx-top"><span class="g">'+esc(x.game)+'</span><span>'+esc(x.date)+'</span></div><div class="fx-body"><div class="fx-opp">소노 <span style="color:var(--mut);font-weight:700">vs</span> <b>'+esc(x.opp)+'</b></div><div class="fx-meta">🕓 '+esc(x.time)+'<br>📍 '+esc(x.venue)+'</div></div></div>'; } },
+    timetable:{ title:'대회 타임테이블', box:'timetableBox',
+      fields:[ {k:'day',label:'DAY 구분',t:'text'}, {k:'time',label:'시간',t:'text'}, {k:'title',label:'내용',t:'text'}, {k:'tag',label:'태그(경기/집결/식사 등)',t:'text'}, {k:'venue',label:'장소(선택)',t:'text'} ],
+      renderList:function(items){ var order=[],map={}; items.forEach(function(it){var d=it.day||'';if(!map[d]){map[d]=[];order.push(d);}map[d].push(it);}); return order.map(function(d){ return '<div class="tt-day"><div class="tt-h">'+esc(d)+'</div>'+map[d].map(function(it){ var g=/경기/.test(it.tag||''); return '<div class="tt-row'+(g?' game':'')+'"><span class="tm">'+esc(it.time)+'</span><span class="ti">'+esc(it.title)+(it.venue?' <span class="tg">'+esc(it.venue)+'</span>':'')+'</span></div>'; }).join('')+'</div>'; }).join(''); } },
+    eats:{ title:'제천 맛집 리스트', box:'eatsBox',
+      fields:[ {k:'name',label:'상호',t:'text'}, {k:'note',label:'메모',t:'text'} ],
+      render:function(x,i){ return '<div class="eat'+((i>=8)?' hidden-eat':'')+'"><div class="en2">'+esc(x.name)+'</div>'+(x.note?'<div class="no2">'+esc(x.note)+'</div>':'')+'</div>'; },
+      after:function(items){ var n=items.length-8; var b=el('eatsMore'); if(!b) return; b.style.display=n>0?'block':'none'; b.setAttribute('data-n',n>0?n:0); var open=el('eatsBox').classList.contains('expanded'); b.textContent=open?'접기':'더보기 (+'+(n>0?n:0)+')'; } },
+    dinnerOpts:{ title:'단체 석식 후보', box:null,
+      fields:[ {k:'id',label:'ID(영문 고유값)',t:'text'}, {k:'name',label:'상호',t:'text'}, {k:'type',label:'종류',t:'text'}, {k:'link',label:'지도 링크',t:'text'}, {k:'tags',label:'태그(콤마로 구분)',t:'text'}, {k:'pros',label:'장점',t:'area'}, {k:'cons',label:'단점',t:'area'} ] },
     videos:{ title:'영상 라이브러리', box:'videosBox',
       fields:[ {k:'group',label:'그룹 제목',t:'text'}, {k:'label',label:'버튼 이름',t:'text'}, {k:'url',label:'링크 URL',t:'text'}, {k:'type',label:'아이콘 (yt / cloud / none)',t:'text'} ],
       renderList:function(items){ var order=[],map={}; items.forEach(function(it){ var g=it.group||''; if(!map[g]){map[g]=[];order.push(g);} map[g].push(it); }); return order.map(function(g){ return '<div class="vid-group"><h4><span class="dot"></span>'+g+'</h4><div class="vids">'+map[g].map(function(it){ var ic=it.type==='yt'?'<span class="yt"></span>':(it.type==='cloud'?'<span class="cloud"></span>':''); return '<a class="vid" href="'+esc(it.url)+'" target="_blank">'+ic+esc(it.label)+'</a>'; }).join('')+'</div></div>'; }).join(''); } },
@@ -811,7 +947,7 @@ var firebaseConfig = {
   };
 
   /* ===== 상태 ===== */
-  var dbData={}, localData={};
+  var dbData={}, localData={}, voteData={};
   try{ localData=JSON.parse(localStorage.getItem('skygunners_dash')||'{}'); }catch(e){ localData={}; }
 
   function getSec(sec){
@@ -834,6 +970,7 @@ var firebaseConfig = {
       if(S.after) S.after(items);
     });
     buildFamilyOptions();
+    renderDinner();
   }
 
   /* ===== 관리자 모드 ===== */
@@ -901,15 +1038,18 @@ var firebaseConfig = {
   var famSel=el('rfFam'), famCustom=el('rfFamCustom');
   if(famSel) famSel.addEventListener('change',function(){ famCustom.style.display= famSel.value==='__custom'?'block':'none'; });
   var TWINS=['이영재','이영우'], TWIN_LABEL='이영재·이영우 가정';  // 쌍둥이: 한 가정으로 묶음
-  function buildFamilyOptions(){
-    if(!famSel) return; var cur=famSel.value; var roster=getSec('roster')||[];
-    var html='<option value="">— 선택 —</option>', twinAdded=false;
+  function familyOptionsHtml(withCustom){
+    var roster=getSec('roster')||[]; var html='<option value="">— 선택 —</option>', twinAdded=false;
     roster.forEach(function(p){
       if(TWINS.indexOf(p.kr)>-1){ if(!twinAdded){ html+='<option>'+esc(TWIN_LABEL)+'</option>'; twinAdded=true; } return; }
       html+='<option>'+esc(p.kr)+' 가정</option>';
     });
-    html+='<option value="__custom">직접 입력…</option>';
-    famSel.innerHTML=html; if(cur){ famSel.value=cur; }
+    if(withCustom) html+='<option value="__custom">직접 입력…</option>';
+    return html;
+  }
+  function buildFamilyOptions(){
+    if(famSel){ var c=famSel.value; famSel.innerHTML=familyOptionsHtml(true); if(c) famSel.value=c; }
+    var vf=el('voteFam'); if(vf){ var c2=vf.value; vf.innerHTML=familyOptionsHtml(false); if(c2) vf.value=c2; }
   }
   function famKey(n){ return n.replace(/[.#$\[\]\/\s]/g,'_'); }
   function readLocalResv(){ try{return JSON.parse(localStorage.getItem(LOCAL_RESV)||'{}');}catch(e){return {};} }
@@ -936,11 +1076,50 @@ var firebaseConfig = {
     Array.prototype.forEach.call(body.querySelectorAll('.del'),function(btn){ btn.addEventListener('click',function(){ if(confirm('이 가정 예약을 삭제할까요?')) delResv(btn.getAttribute('data-k')); }); });
   }
 
+  /* ===== 단체 석식 투표 ===== */
+  var voteFamSel=el('voteFam');
+  if(voteFamSel) voteFamSel.addEventListener('change',function(){ renderDinner(); });
+  function setVoteStatus(m,e2){ var s=el('voteStatus'); if(!s) return; s.textContent=m; s.style.color=e2?'var(--loss)':'var(--win)'; }
+  function castVote(id){
+    var fam= voteFamSel? voteFamSel.value : '';
+    if(!fam){ setVoteStatus('먼저 가정을 선택해 주세요.',true); return; }
+    var rec={ family:fam, choice:id, ts:new Date().toISOString() };
+    if(configured){ db.ref('votes/dinner/'+famKey(fam)).set(rec); }
+    else { voteData[famKey(fam)]=rec; renderDinner(); }
+    setVoteStatus('✓ 「'+fam+'」 투표 완료'+(configured?' · 실시간 집계됨':''),false);
+  }
+  function renderDinner(){
+    var box=el('dinnerBox'); if(!box) return;
+    var cands=getSec('dinnerOpts')||[]; var votes=voteData||{};
+    var counts={}, voters={}, total=0;
+    Object.keys(votes).forEach(function(k){ var v=votes[k]; if(!v||!v.choice) return; counts[v.choice]=(counts[v.choice]||0)+1; (voters[v.choice]=voters[v.choice]||[]).push(v.family||''); total++; });
+    var max=0; cands.forEach(function(c){ if((counts[c.id]||0)>max) max=counts[c.id]||0; });
+    var myFam= voteFamSel? voteFamSel.value : ''; var myChoice=null;
+    if(myFam && votes[famKey(myFam)]) myChoice=votes[famKey(myFam)].choice;
+    var my=el('voteMy'); if(my) my.textContent = myFam ? (myChoice? '· 현재 선택 등록됨':'· 아직 미투표') : '';
+    box.innerHTML=cands.map(function(c){
+      var cnt=counts[c.id]||0, pct= total? Math.round(cnt/total*100):0, lead=(cnt>0&&cnt===max);
+      var tags=(c.tags||'').split(',').map(function(t){return t.trim();}).filter(Boolean).map(function(t){return '<span class="vt">'+esc(t)+'</span>';}).join('');
+      var vlist=(voters[c.id]||[]).map(esc).join(', ');
+      return '<div class="vcard'+(lead?' lead':'')+(myChoice===c.id?' mychoice':'')+'">'+
+        '<div class="vc-h"><div class="nm">'+esc(c.name)+'</div><div class="ty">'+esc(c.type||'')+'</div></div>'+
+        '<div class="vc-b"><div class="vtags">'+tags+'</div>'+
+        (c.pros?'<div class="pro">👍 '+esc(c.pros)+'</div>':'')+
+        (c.cons?'<div class="con">⚠️ '+esc(c.cons)+'</div>':'')+
+        (c.link?'<a class="vlink" href="'+esc(c.link)+'" target="_blank">📍 지도 보기</a>':'')+
+        '<div class="vbar-wrap"><div class="vbar"><span style="width:'+pct+'%"></span></div>'+
+        '<div class="vcount">'+cnt+'표 · '+pct+'%</div>'+(vlist?'<div class="voters">'+vlist+'</div>':'')+'</div></div>'+
+        '<button class="vbtn" data-id="'+esc(c.id)+'">'+(myChoice===c.id?'✓ 우리 가정 선택':'👍 이 집으로 투표')+'</button></div>';
+    }).join('');
+    Array.prototype.forEach.call(box.querySelectorAll('.vbtn'),function(btn){ btn.addEventListener('click',function(){ castVote(btn.getAttribute('data-id')); }); });
+  }
+
   /* ===== 실시간 구독 + 최초 렌더 ===== */
   renderAll();
   if(configured){
     db.ref('dashboard').on('value',function(snap){ dbData=snap.val()||{}; renderAll(); });
     db.ref('reservations').on('value',function(snap){ renderResv(snap.val()||{}); });
+    db.ref('votes/dinner').on('value',function(snap){ voteData=snap.val()||{}; renderDinner(); });
   } else {
     renderResv(readLocalResv());
   }
