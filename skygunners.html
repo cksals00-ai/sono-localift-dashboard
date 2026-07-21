@@ -292,6 +292,7 @@
   .vote-status{font-size:11.5px;font-weight:800;text-align:center;margin-top:11px;min-height:14px;color:var(--mut)}
   .vote-callout{background:#fee500;border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs-sm);padding:12px 15px;font-size:13px;font-weight:700;color:#3a2d00;margin-bottom:12px;line-height:1.55;display:flex;gap:8px;align-items:baseline}
   .vote-callout b{color:#12233a}
+  .vote-callout.sky{background:var(--sky2);color:#0c2233}
 
   /* ---------- local eats ---------- */
   .eats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
@@ -461,13 +462,15 @@
 
   <!-- LODGING RESERVATION -->
   <section id="resv">
-    <div class="sec-h"><h2>숙박 예약 취합</h2><span class="en">Lodging · 소노벨 단양</span></div>
+    <div class="sec-h"><h2>숙박 예약 (진행중)</h2><span class="en">Lodging · 소노벨 단양</span></div>
 
     <div class="resv-cfg" id="resvCfg">⚙️ 실시간 연결 설정 대기중 — 관리자가 Firebase 설정값을 넣으면 모든 가정 입력이 <b>즉시 공유</b>됩니다. (지금은 이 브라우저에서만 임시 저장돼요)</div>
 
+    <div class="vote-callout sky"><span>🏨</span><span><b>숙박 예약 진행 중이에요.</b> 소노벨 단양 패밀리 취사형으로 진행되며, 신청은 숙소 담당(성규 아빠)·단톡방을 통해 받고 있어요. 아래 <b>신청 현황</b>을 확인하세요.</span></div>
+
     <div class="resv-intro">
       <h3>🏨 소노벨 단양 · 패밀리 취사형</h3>
-      <p>8/14~17 KBL 제천 유스드림컵 팀 숙소입니다. 제공 객실은 <b>패밀리 취사형 한 종류</b>로, <b>기준 4인·최대 6인</b>, 약 <b>56~63㎡</b>에 침실+거실+주방+화장실이 있어 아이들 식사 챙기기 좋아요. <b>EAST/WEST 동은 미정</b>, 가격은 <b>1박 20~25만원 예정</b>이며 <b>최저가로 협의 중</b>입니다. 아래에서 가정별 희망 <b>일자·객실 수</b>를 입력해 주세요 — 회신 마감 <b>7/20</b>.</p>
+      <p>8/14~17 KBL 제천 유스드림컵 팀 숙소입니다. 제공 객실은 <b>패밀리 취사형 한 종류</b>로, <b>기준 4인·최대 6인</b>, 약 <b>56~63㎡</b>에 침실+거실+주방+화장실이 있어 아이들 식사 챙기기 좋아요. <b>EAST/WEST 동은 미정</b>, 가격은 <b>1박 20~25만원 예정</b>이며 <b>최저가로 협의 중</b>입니다. 신청은 숙소 담당(성규 아빠)·단톡방을 통해 진행 중이며, 아래에서 가정별 <b>신청 현황</b>을 확인할 수 있어요.</p>
       <div class="rooms" style="grid-template-columns:1fr">
         <div class="room-card">
           <div class="rh">패밀리 취사형 · EAST/WEST 미정</div>
@@ -480,7 +483,8 @@
       <p>🔗 <a href="https://www.sonohotelsresorts.com/belle_dy/resort" target="_blank">소노벨 단양 전체 객실 보기</a> · 추가 인원 1인당 1박 11,000원(변동 가능)</p>
     </div>
 
-    <div class="resv-form">
+    <div class="admin-only block" style="font-size:12px;font-weight:800;color:var(--pop);margin:2px 0 6px">🔒 관리자 입력 — 가정 신청 추가·수정</div>
+    <div class="resv-form admin-only block">
       <div class="grid">
         <div class="fld">
           <label>가정(선수) *</label>
@@ -548,7 +552,7 @@
 
     <div class="resv-summary">
       <div class="sh"><span>📋 가정별 예약 현황</span><span>회신 <span class="cnt" id="rsFam">0</span>가정 · 총 <span class="cnt" id="rsRooms">0</span>객실</span></div>
-      <div id="rsBody"><div class="resv-empty">아직 등록된 예약이 없습니다. 위에서 가장 먼저 등록해 보세요!</div></div>
+      <div id="rsBody"><div class="resv-empty">아직 등록된 신청이 없습니다.</div></div>
     </div>
   </section>
 
@@ -1098,7 +1102,7 @@ var firebaseConfig = {
     var body=el('rsBody'); if(!body) return;
     var total=entries.reduce(function(s,e){return s+(parseInt(e.v.rooms,10)||0);},0);
     el('rsFam').textContent=entries.length; el('rsRooms').textContent=total;
-    if(!entries.length){ body.innerHTML='<div class="resv-empty">아직 등록된 예약이 없습니다. 위에서 가장 먼저 등록해 보세요!</div>'; return; }
+    if(!entries.length){ body.innerHTML='<div class="resv-empty">아직 등록된 신청이 없습니다.</div>'; return; }
     var rows=entries.map(function(e){ var v=e.v, d=(v.checkin||'').replace(/^2026-/,'').replace('-','/'); var extra=(v.cook&&v.cook!=='상관없음'?v.cook:'')+(v.memo?((v.cook&&v.cook!=='상관없음')?' · ':'')+v.memo:''); return '<tr><td class="fam">'+esc(v.family)+'</td><td>'+esc(d)+' · '+esc(v.nights)+'박</td><td>'+esc(v.rooms)+'개</td><td>'+esc(v.type||'')+'</td><td>'+esc(extra||'-')+'</td><td><button class="del" data-k="'+esc(e.k)+'" title="삭제">✕</button></td></tr>'; }).join('');
     body.innerHTML='<table class="resv-table"><thead><tr><th>가정</th><th>일자</th><th>객실</th><th>타입</th><th>희망동·메모</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>';
     Array.prototype.forEach.call(body.querySelectorAll('.del'),function(btn){ btn.addEventListener('click',function(){ if(confirm('이 가정 예약을 삭제할까요?')) delResv(btn.getAttribute('data-k')); }); });
