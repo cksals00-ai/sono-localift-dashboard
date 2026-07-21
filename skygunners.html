@@ -294,11 +294,24 @@
   /* ---------- local eats ---------- */
   .eats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
   @media(max-width:640px){.eats{grid-template-columns:1fr}}
-  .eat{background:var(--card);border:2px solid var(--navy2);border-radius:9px;padding:9px 12px;box-shadow:var(--hs-sm)}
+  .eat{display:block;background:var(--card);border:2px solid var(--navy2);border-radius:9px;padding:9px 12px;box-shadow:var(--hs-sm);text-decoration:none;transition:.12s}
+  .eat:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--navy2)}
   .eat .en2{font-size:12.5px;font-weight:800;color:var(--ink)}
   .eat .no2{font-size:11px;color:var(--mut);font-weight:600;margin-top:1px}
   .eat.hidden-eat{display:none}
   .eats.expanded .eat.hidden-eat{display:block}
+
+  /* ---------- routes ---------- */
+  .routes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:720px){.routes{grid-template-columns:1fr}}
+  .route{background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);overflow:hidden}
+  .route .rt-top{background:var(--navy2);color:#fff;padding:9px 13px;font-size:12.5px;font-weight:800}
+  .route .rt-top .ar{color:var(--accent);margin:0 5px}
+  .route .rt-b{padding:12px 14px}
+  .route .rt-time{font-size:24px;font-weight:900;font-style:italic;color:var(--navy);letter-spacing:-.5px}
+  .route .rt-dist{font-size:12px;font-weight:700;color:var(--mut);margin-left:6px}
+  .route .rt-note{font-size:11.5px;color:var(--mut);font-weight:600;margin-top:6px;line-height:1.5}
+  .route .rt-link{display:inline-block;margin-top:9px;font-size:11px;font-weight:800;color:var(--navy);border:2px solid var(--navy2);border-radius:6px;padding:4px 9px;text-decoration:none;background:var(--bg)}
 </style>
 </head>
 <body>
@@ -435,6 +448,13 @@
     <div class="sec-h"><h2>대회 당일 타임테이블</h2><span class="en">Timetable · 8/15~16</span><button class="manage-btn admin-only" data-sec="timetable">＋ 관리</button></div>
     <div class="ttable" id="timetableBox"></div>
     <p class="refnote">* 2일차 오전 세명대체육관 집결·2경기 후, 오후 3경기는 제천 어울림체육센터에서 진행 — 체육관 이동에 유의하세요. 시간은 대회 진행에 따라 변동될 수 있어요.</p>
+  </section>
+
+  <!-- ROUTES -->
+  <section>
+    <div class="sec-h"><h2>숙소 ↔ 경기장 이동</h2><span class="en">Routes</span><button class="manage-btn admin-only" data-sec="routes">＋ 관리</button></div>
+    <div class="routes" id="routesBox"></div>
+    <p class="refnote">* 소노벨 단양(단양읍) ↔ 제천 경기장 승용차 기준 예상치예요. 실제 소요시간은 출발시간·교통상황에 따라 달라지니 도착지 카드의 지도에서 길찾기로 확인하세요. 집결시간 역산해 여유 있게 출발 권장.</p>
   </section>
 
   <!-- LODGING RESERVATION -->
@@ -819,15 +839,19 @@ var firebaseConfig = {
       {day:'DAY 2 · 8/16 (일)',time:'16:00',title:'소노 U-9 3경기 vs SK',tag:'경기',venue:''},
       {day:'DAY 2 · 8/16 (일)',time:'17:00',title:'3경기 · 예선 일정 종료',tag:'종료',venue:''}
     ],
+    routes:[
+      {from:'소노벨 단양',to:'제천 어울림체육센터',dist:'약 33km',time:'약 40분',note:'DAY1 1경기 · DAY2 3경기 (제천 관전로 70, 신백동)',url:'https://map.naver.com/p/search/제천 어울림체육센터'},
+      {from:'소노벨 단양',to:'세명대 체육관',dist:'약 30km',time:'약 35분',note:'DAY2 2경기 (제천 세명로 65, 신월동)',url:'https://map.naver.com/p/search/세명대학교'},
+      {from:'어울림체육센터',to:'세명대 체육관',dist:'약 9km',time:'약 15분',note:'DAY2 오전 세명대 → 오후 어울림 이동 시 참고',url:'https://map.naver.com/p/search/제천 세명대학교'}
+    ],
     dinnerOpts:[
-      {id:'myeongryun',name:'명륜진사갈비 제천강제점',type:'한식 고기 무한리필 뷔페',link:'https://naver.me/5YoBlNTX',tags:'아이 선호, 주차, 뷔페 정산',pros:'무한리필 고기라 운동한 아이들이 가장 잘 먹고, 뷔페라 가구별 정산이 깔끔. 대로변이라 주차 여유.',cons:'주말 저녁 대기 가능 · 단독룸은 현장 확인 권장.'},
-      {id:'shabu',name:'샤브올데이 제천영천점',type:'샤브샤브 뷔페',link:'https://naver.me/xAfHReAE',tags:'주차, 뷔페 정산, 채소 다양',pros:'뷔페라 정산 간편하고 채소·죽·후식이 다양해 부모 만족도 높음. 주차 가능 표시.',cons:'샤브는 어린 선수 호불호 · 직접 익혀야 해 시간 소요.'},
-      {id:'cheonmyeong',name:'천명삼겹살타운',type:'삼겹살 전문 (대형)',link:'',tags:'아이 선호, 단체 수용',pros:'삼겹살은 아이 선호도가 높고 대형 매장이라 단체 수용력이 좋음(현지 맛집 리스트 추천).',cons:'뷔페 아님(개별 정산) · 주차·단독룸 현장 확인 필요.'}
+      {id:'myeongryun',name:'명륜진사갈비 제천강제점',type:'고기 무한리필 · 성인 21,900원',link:'https://naver.me/5YoBlNTX',tags:'제천 확인, 주차 넓음, 아이 선호',pros:'제천시 강저로 197. 무한리필 고기라 운동한 아이들이 가장 잘 먹고 뷔페식이라 정산이 깔끔. 전용 주차장 넓어 단체·차량 다수 OK. 블로그 후기 대체로 좋음.',cons:'주말 저녁 대기 가능 · 브레이크타임 15~17시(저녁 영업 17시부터).'},
+      {id:'shabu',name:'샤브올데이 제천영천점',type:'샤브 뷔페 · 평일 24,900/주말 29,900',link:'https://naver.me/xAfHReAE',tags:'제천 확인, 주차 넓음, 채소 다양',pros:'제천시 청풍호로 68. 고기+채소 무한리필 뷔페, 바로 옆 넓은 전용 주차장. 채소·죽·후식 다양해 부모 만족.',cons:'다이닝코드 평점 보통(2.8) · "리필이 늦을 때 있다"는 후기 · 샤브라 어린 선수 호불호.'}
     ],
     eats:[
       {name:'명륜진사갈비 제천강제점',note:'★석식 후보 · 고기 무한리필 뷔페'},
       {name:'샤브올데이 제천영천점',note:'★석식 후보 · 샤브 뷔페'},
-      {name:'천명삼겹살타운',note:'★석식 후보 · 삼겹살 대형'},
+      {name:'천명삼겹살타운',note:'⚠ 제천 검색 미확인 — 방문 전 확인 필요'},
       {name:'뜰이있는집',note:''},
       {name:'고향이야기',note:''},
       {name:'연당맛자랑',note:''},
@@ -919,12 +943,15 @@ var firebaseConfig = {
     fixtures:{ title:'제천 대회 경기 일정', box:'fixturesBox',
       fields:[ {k:'game',label:'경기 구분',t:'text'}, {k:'date',label:'날짜(요일)',t:'text'}, {k:'time',label:'시간',t:'text'}, {k:'opp',label:'상대팀',t:'text'}, {k:'venue',label:'장소',t:'text'} ],
       render:function(x){ return '<div class="fix"><div class="fx-top"><span class="g">'+esc(x.game)+'</span><span>'+esc(x.date)+'</span></div><div class="fx-body"><div class="fx-opp">소노 <span style="color:var(--mut);font-weight:700">vs</span> <b>'+esc(x.opp)+'</b></div><div class="fx-meta">🕓 '+esc(x.time)+'<br>📍 '+esc(x.venue)+'</div></div></div>'; } },
+    routes:{ title:'숙소 ↔ 경기장 이동', box:'routesBox',
+      fields:[ {k:'from',label:'출발',t:'text'}, {k:'to',label:'도착',t:'text'}, {k:'dist',label:'거리',t:'text'}, {k:'time',label:'소요시간',t:'text'}, {k:'note',label:'메모',t:'text'}, {k:'url',label:'도착지 지도 링크',t:'text'} ],
+      render:function(x){ return '<div class="route"><div class="rt-top">'+esc(x.from)+'<span class="ar">→</span>'+esc(x.to)+'</div><div class="rt-b"><span class="rt-time">'+esc(x.time)+'</span><span class="rt-dist">'+esc(x.dist)+'</span>'+(x.note?'<div class="rt-note">'+esc(x.note)+'</div>':'')+(x.url?'<a class="rt-link" href="'+esc(x.url)+'" target="_blank">🧭 도착지 지도·길찾기</a>':'')+'</div></div>'; } },
     timetable:{ title:'대회 타임테이블', box:'timetableBox',
       fields:[ {k:'day',label:'DAY 구분',t:'text'}, {k:'time',label:'시간',t:'text'}, {k:'title',label:'내용',t:'text'}, {k:'tag',label:'태그(경기/집결/식사 등)',t:'text'}, {k:'venue',label:'장소(선택)',t:'text'} ],
       renderList:function(items){ var order=[],map={}; items.forEach(function(it){var d=it.day||'';if(!map[d]){map[d]=[];order.push(d);}map[d].push(it);}); return order.map(function(d){ return '<div class="tt-day"><div class="tt-h">'+esc(d)+'</div>'+map[d].map(function(it){ var g=/경기/.test(it.tag||''); return '<div class="tt-row'+(g?' game':'')+'"><span class="tm">'+esc(it.time)+'</span><span class="ti">'+esc(it.title)+(it.venue?' <span class="tg">'+esc(it.venue)+'</span>':'')+'</span></div>'; }).join('')+'</div>'; }).join(''); } },
     eats:{ title:'제천 맛집 리스트', box:'eatsBox',
-      fields:[ {k:'name',label:'상호',t:'text'}, {k:'note',label:'메모',t:'text'} ],
-      render:function(x,i){ return '<div class="eat'+((i>=8)?' hidden-eat':'')+'"><div class="en2">'+esc(x.name)+'</div>'+(x.note?'<div class="no2">'+esc(x.note)+'</div>':'')+'</div>'; },
+      fields:[ {k:'name',label:'상호',t:'text'}, {k:'note',label:'메모',t:'text'}, {k:'url',label:'링크(비우면 네이버 지도 검색 자동)',t:'text'} ],
+      render:function(x,i){ var url=x.url||('https://map.naver.com/p/search/'+encodeURIComponent('제천 '+(x.name||''))); return '<a class="eat'+((i>=8)?' hidden-eat':'')+'" href="'+esc(url)+'" target="_blank"><div class="en2">'+esc(x.name)+' <span style="color:var(--sky);font-size:10px">↗</span></div>'+(x.note?'<div class="no2">'+esc(x.note)+'</div>':'')+'</a>'; },
       after:function(items){ var n=items.length-8; var b=el('eatsMore'); if(!b) return; b.style.display=n>0?'block':'none'; b.setAttribute('data-n',n>0?n:0); var open=el('eatsBox').classList.contains('expanded'); b.textContent=open?'접기':'더보기 (+'+(n>0?n:0)+')'; } },
     dinnerOpts:{ title:'단체 석식 후보', box:null,
       fields:[ {k:'id',label:'ID(영문 고유값)',t:'text'}, {k:'name',label:'상호',t:'text'}, {k:'type',label:'종류',t:'text'}, {k:'link',label:'지도 링크',t:'text'}, {k:'tags',label:'태그(콤마로 구분)',t:'text'}, {k:'pros',label:'장점',t:'area'}, {k:'cons',label:'단점',t:'area'} ] },
@@ -1106,7 +1133,7 @@ var firebaseConfig = {
         '<div class="vc-b"><div class="vtags">'+tags+'</div>'+
         (c.pros?'<div class="pro">👍 '+esc(c.pros)+'</div>':'')+
         (c.cons?'<div class="con">⚠️ '+esc(c.cons)+'</div>':'')+
-        (c.link?'<a class="vlink" href="'+esc(c.link)+'" target="_blank">📍 지도 보기</a>':'')+
+        '<a class="vlink" href="'+esc(c.link||('https://map.naver.com/p/search/'+encodeURIComponent(c.name||'')))+'" target="_blank">📍 지도 보기</a>'+
         '<div class="vbar-wrap"><div class="vbar"><span style="width:'+pct+'%"></span></div>'+
         '<div class="vcount">'+cnt+'표 · '+pct+'%</div>'+(vlist?'<div class="voters">'+vlist+'</div>':'')+'</div></div>'+
         '<button class="vbtn" data-id="'+esc(c.id)+'">'+(myChoice===c.id?'✓ 우리 가정 선택':'👍 이 집으로 투표')+'</button></div>';
