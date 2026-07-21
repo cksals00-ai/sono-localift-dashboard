@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updated": "2026-07-07T14:48:17+09:00",
-    "baseYm": "202605",
+    "updated": "2026-07-21T13:38:58+09:00",
+    "baseYm": "202606",
     "source": "데이터랩 지역별 관광 자원 수요(15152138)·수요강도(15151868) · AreaTarResDemService/AreaTarDemDsService",
     "note": "값=관광수요지수 구성 지표(상대지수 0~100, 원화 아님) · 월 1회(16일) 갱신 · 외지인소비비중=관광객이 지역 소비에서 차지하는 비중"
   },
@@ -19,114 +19,113 @@
       "key": "홍천군",
       "loc": "강원 홍천",
       "hero": "비발디파크·오션월드",
-      "lodge": 70.69,
-      "food": 61.92,
-      "shop": 59.89,
-      "leisure": 62.78,
-      "out_spend": 71.28,
-      "out_ratio": 80.71,
-      "spend_per_visit": 87.19
+      "lodge": 70.31,
+      "food": 61.91,
+      "shop": 59.88,
+      "leisure": 62.64,
+      "out_spend": 70.26,
+      "out_ratio": 81.64,
+      "spend_per_visit": 85.59
     },
     {
       "key": "삼척시",
       "loc": "강원 삼척",
       "hero": "소노 삼척",
-      "lodge": 67.34,
-      "food": 61.9,
+      "lodge": 67.53,
+      "food": 61.89,
       "shop": 59.84,
       "leisure": 61.09,
-      "out_spend": 65.43,
-      "out_ratio": 73.5,
-      "spend_per_visit": 65.52
+      "out_spend": 64.99,
+      "out_ratio": 71.14,
+      "spend_per_visit": 64.7
     },
     {
       "key": "고성군",
       "loc": "강원 고성",
       "hero": "소노문 델피노",
-      "lodge": 69.72,
+      "lodge": 69.56,
       "food": 61.89,
       "shop": 59.84,
       "leisure": 61.3,
-      "out_spend": 65.98,
-      "out_ratio": 81.64,
-      "spend_per_visit": 75.56
+      "out_spend": 65.78,
+      "out_ratio": 82.52,
+      "spend_per_visit": 74.67
     },
     {
       "key": "양양군",
       "loc": "강원 양양",
       "hero": "쏠비치 양양",
-      "lodge": 67.63,
-      "food": 61.92,
-      "shop": 59.85,
-      "leisure": 61.59,
-      "out_spend": 67.35,
-      "out_ratio": 82.05,
-      "spend_per_visit": 78.84
+      "lodge": 67.53,
+      "food": 61.91,
+      "shop": 59.84,
+      "leisure": 61.56,
+      "out_spend": 66.78,
+      "out_ratio": 82.59,
+      "spend_per_visit": 77.84
     },
     {
       "key": "부안군",
       "loc": "전북 부안",
       "hero": "소노벨 변산",
-      "lodge": 66.83,
-      "food": 61.88,
-      "shop": 59.85,
+      "lodge": 66.76,
+      "food": 61.87,
+      "shop": 59.84,
       "leisure": 60.81,
-      "out_spend": 65.62,
-      "out_ratio": 84.0,
-      "spend_per_visit": 70.37
+      "out_spend": 64.69,
+      "out_ratio": 84.04,
+      "spend_per_visit": 66.68
     },
     {
       "key": "단양군",
       "loc": "충북 단양",
       "hero": "소노 단양",
-      "lodge": 66.78,
-      "food": 61.89,
-      "shop": 59.83,
-      "leisure": 61.06,
-      "out_spend": 65.52,
-      "out_ratio": 83.38,
-      "spend_per_visit": 79.34
+      "lodge": 66.6,
+      "food": 61.87,
+      "shop": 59.82,
+      "leisure": 61.01,
+      "out_spend": 64.86,
+      "out_ratio": 83.22,
+      "spend_per_visit": 78.33
     },
     {
       "key": "남해군",
       "loc": "경남 남해",
       "hero": "소노 남해",
-      "lodge": 68.28,
-      "food": 61.89,
+      "lodge": 68.08,
+      "food": 61.87,
       "shop": 59.83,
-      "leisure": 61.02,
-      "out_spend": 64.85,
-      "out_ratio": 83.25,
-      "spend_per_visit": 69.79
+      "leisure": 60.93,
+      "out_spend": 64.09,
+      "out_ratio": 81.73,
+      "spend_per_visit": 66.46
     },
     {
       "key": "진도군",
       "loc": "전남 진도",
       "hero": "소노캄 진도",
-      "lodge": 66.94,
+      "lodge": 66.92,
       "food": 61.85,
-      "shop": 59.82,
+      "shop": 59.81,
       "leisure": 60.79,
-      "out_spend": 62.91,
-      "out_ratio": 82.69,
-      "spend_per_visit": 58.57
+      "out_spend": 62.71,
+      "out_ratio": 82.02,
+      "spend_per_visit": 57.25
     },
     {
       "key": "청송군",
       "loc": "경북 청송",
       "hero": "소노벨 청송",
-      "lodge": 66.58,
-      "food": 61.86,
-      "shop": 59.82,
+      "lodge": 66.48,
+      "food": 61.85,
+      "shop": 59.81,
       "leisure": 60.79,
-      "out_spend": 63.1,
-      "out_ratio": 83.47,
-      "spend_per_visit": 63.75
+      "out_spend": 62.95,
+      "out_ratio": 83.54,
+      "spend_per_visit": 62.82
     }
   ],
   "lodgeTrend": {
     "labels": [
-      "2025-06",
       "2025-07",
       "2025-08",
       "2025-09",
@@ -137,10 +136,10 @@
       "2026-02",
       "2026-03",
       "2026-04",
-      "2026-05"
+      "2026-05",
+      "2026-06"
     ],
     "values": [
-      70.75,
       72.77,
       74.98,
       70.08,
@@ -148,10 +147,11 @@
       69.88,
       70.83,
       71.54,
-      71.57,
-      null,
-      null,
-      null
+      71.11,
+      67.04,
+      67.29,
+      67.87,
+      67.75
     ]
   }
 }

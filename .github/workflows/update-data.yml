@@ -1,8 +1,10 @@
 name: Update dashboard data
 
 on:
-  # 매일 자동 갱신은 로컬(Mac) 스케줄 작업 'datalab-dashboard-daily-refresh'가 단일 소스로 담당한다.
-  # (schedule 트리거는 은퇴 — 중복 push 충돌 및 실패 알림 방지). 필요 시 아래 버튼으로 수동 실행.
+  # 매일 06:00 KST(= 전날 21:00 UTC) 자동 갱신 — 방문자 + 소비 데이터 통합.
+  # 로컬(Mac) 스케줄 작업은 은퇴(샌드박스에서 SSH/API 키 접근 불가). 이 워크플로가 단일 소스.
+  schedule:
+    - cron: "0 21 * * *"
   workflow_dispatch: {}     # 수동 실행 버튼
 
 permissions:
@@ -18,17 +20,22 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Fetch latest data from data.go.kr
+      - name: Fetch visitor data from data.go.kr
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
           ANCHOR_AREA_CD: ${{ vars.ANCHOR_AREA_CD }}
           ANCHOR_SIGNGU_CD: ${{ vars.ANCHOR_SIGNGU_CD }}
         run: python scripts/fetch_data.py
 
+      - name: Fetch consume data from data.go.kr
+        env:
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+        run: python scripts/fetch_consume.py
+
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/dashboard_data.json
+          git add data/
           git diff --staged --quiet || git commit -m "chore: auto-update dashboard data ($(date -u +%Y-%m-%d))"
           git push
