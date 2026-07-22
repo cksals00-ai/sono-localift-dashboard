@@ -80,6 +80,15 @@
   .gal figure:hover img{transform:scale(1.05)}
   .gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;font-size:12px;color:#e9edf2;background:linear-gradient(0deg,rgba(7,10,16,.85),transparent);opacity:0;transition:.3s}
   .gal figure:hover figcaption{opacity:1}
+  /* education gallery — 4컷 정렬형(균등 그리드) */
+  .eduGal{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .eduGal figure{position:relative;margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:3/4}
+  .eduGal figure img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,.8,.3,1)}
+  .eduGal figure:hover img{transform:scale(1.05)}
+  .eduGal figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 12px;font-size:12px;color:#e9edf2;background:linear-gradient(0deg,rgba(7,10,16,.9),transparent);opacity:0;transition:.3s}
+  .eduGal figure:hover figcaption{opacity:1}
+  .axisDiv{max-width:170px;margin:6px auto 0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.55}
+  @media(max-width:820px){.eduGal{grid-template-columns:1fr 1fr}}
   .logline{max-width:60ch;margin:0 auto 40px;text-align:center;color:#e6ebf1;font-size:clamp(17px,2.3vw,24px);font-family:'Cormorant Garamond',serif;line-height:1.4}
   .logline .g{color:var(--gold2)}
   .drammeta{display:flex;gap:26px;flex-wrap:wrap;justify-content:center;margin-top:8px;color:var(--sub);font-size:13px}
@@ -225,6 +234,24 @@
   </div>
 </section>
 
+<!-- PRESS / BTS -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="shead reveal">
+      <h2 class="display">제작발표회 · 현장</h2>
+      <p>세계관을 처음 공개한 제작발표회와 촬영 현장의 기록.</p>
+    </div>
+    <div class="bts reveal">
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_204108_957e2b7b-1290-4512-9e90-e953cdc43d0c.png" alt="press two shot"><figcaption>제작발표회 — 두 주연</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_204020_a329ac98-89eb-4167-9a6e-73354bda52db.png" alt="bts makeup"><figcaption>촬영 현장 스케치</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_204042_e134b3ee-6196-4e7b-b785-115bf75ef3a2.png" alt="onset selfie"><figcaption>현장 셀피</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- axis divider -->
+<div class="wrap reveal"><div class="axisDiv"></div></div>
+
 <!-- EDUCATION LINE : HANGEUL CUBS -->
 <section class="sec" style="padding-top:0">
   <div class="wrap">
@@ -241,7 +268,7 @@
       <span><b>언어</b> 영어 내레이션 + 한글 학습</span>
       <span><b>커리큘럼</b> 모음→자음→단어→문장 (5시즌)</span>
     </div>
-    <div class="gal reveal">
+    <div class="eduGal reveal">
       <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260721_233844_8880fc26-ef4c-410a-b17f-2e861c7d2353.png" alt="opening"><figcaption>트리하우스 한글 교실로 뛰어드는 4남매</figcaption></figure>
       <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260721_233848_093ac203-58d8-4983-bb06-7433516189f0.png" alt="letter a"><figcaption>오늘의 글자 ‘ㅏ’ — 살아 움직이는 등불 글자판</figcaption></figure>
       <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260721_233857_5e0ebbe6-8afb-4aae-be77-c28f7d6fc819.png" alt="pronounce"><figcaption>입모양으로 배우는 발음 — “Open wide, ahh!”</figcaption></figure>
@@ -270,20 +297,7 @@
 </section>
 <!-- ============ HANGEUL CUBS 교육 섹션 끝 ============ -->
 
-<!-- PRESS / BTS -->
-<section class="sec" style="padding-top:0">
-  <div class="wrap">
-    <div class="shead reveal">
-      <h2 class="display">제작발표회 · 현장</h2>
-      <p>세계관을 처음 공개한 제작발표회와 촬영 현장의 기록.</p>
-    </div>
-    <div class="bts reveal">
-      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_204108_957e2b7b-1290-4512-9e90-e953cdc43d0c.png" alt="press two shot"><figcaption>제작발표회 — 두 주연</figcaption></figure>
-      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_204020_a329ac98-89eb-4167-9a6e-73354bda52db.png" alt="bts makeup"><figcaption>촬영 현장 스케치</figcaption></figure>
-      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_204042_e134b3ee-6196-4e7b-b785-115bf75ef3a2.png" alt="onset selfie"><figcaption>현장 셀피</figcaption></figure>
-    </div>
-  </div>
-</section>
+
 
 <!-- LIA INSTAGRAM -->
 <section class="sec" style="padding-top:0">
