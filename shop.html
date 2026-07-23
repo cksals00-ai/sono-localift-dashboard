@@ -82,8 +82,7 @@
     <a class="brand" href="index.html">A.P <b>LocaLift</b></a>
     <div class="langs" id="langs">
       <button data-lang="en" class="on">EN</button>
-      <button data-lang="ja">日本語</button>
-      <button data-lang="vi">VI</button>
+      <button data-lang="vi">Tiếng Việt</button>
     </div>
     <a class="back" href="about.html" data-i="back">← Studio</a>
   </div>
@@ -183,7 +182,7 @@
       </div>`).join('');
   }
   function setLang(lang){
-    if(!I18N[lang]) lang='en';
+    if(!['en','vi'].includes(lang)) lang='en';
     document.documentElement.lang=lang;
     document.querySelectorAll('[data-i]').forEach(el=>{
       const k=el.getAttribute('data-i'); if(I18N[lang][k]!=null) el.innerHTML=I18N[lang][k];
