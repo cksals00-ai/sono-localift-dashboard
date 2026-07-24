@@ -59,7 +59,9 @@
       <a href="about.html" data-p="about">회사 소개</a>
       <a href="shop.html" data-p="shop">SHOP</a>
       <a href="market-watch.html" data-p="market">마켓 워치</a>
+      <a href="ir.html" data-p="ir">IR</a>
       <a id="navDeliverables" href="deliverables.html" data-p="deliverables" style="display:none">산출물</a>
+      <a id="navActionBoard" href="action-board.html" data-p="action" style="display:none">액션보드</a>
     </div>
   </div>
 </nav>
@@ -123,6 +125,6 @@
 </footer>
 
 <script>(function(){var f=(location.pathname.split('/').pop()||'index.html').toLowerCase();if(!f)f='index.html';document.querySelectorAll('.siteNav .nvTabs a').forEach(function(a){var h=a.getAttribute('href').toLowerCase();if(h===f||((f===''||f==='index.html')&&a.dataset.p==='index'))a.classList.add('on');});})();</script>
-<script>/* admin 전용: 로그인한 관리자에게만 "산출물" 탭 노출 */(function(){try{var t=localStorage.getItem("gsn_auth_token");if(!t)return;var seg=t.split(".")[0].replace(/-/g,"+").replace(/_/g,"/");while(seg.length%4)seg+="=";var p=JSON.parse(decodeURIComponent(escape(atob(seg))));if(p&&p.exp&&p.exp>Date.now()&&p.role==="admin"){var el=document.getElementById("navDeliverables");if(el)el.style.display="";}}catch(e){}})();</script>
+<script>/* admin 전용: 로그인한 관리자에게만 "산출물" 탭 노출 */(function(){try{var t=localStorage.getItem("gsn_auth_token");if(!t)return;var seg=t.split(".")[0].replace(/-/g,"+").replace(/_/g,"/");while(seg.length%4)seg+="=";var p=JSON.parse(decodeURIComponent(escape(atob(seg))));if(p&&p.exp&&p.exp>Date.now()&&p.role==="admin"){["navDeliverables","navActionBoard"].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display="";});}}catch(e){}})();</script>
 </body>
 </html>

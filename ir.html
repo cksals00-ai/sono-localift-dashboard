@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IR · A.P LocaLift — 전략 · 재무 요약</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070A10; --panel:#111725; --panel2:#0D131F; --line:#1E2738;
+    --ink:#eef2f6; --sub:#9aa7b4; --dim:#6b7885;
+    --gold:#C9A96A; --gold2:#E7CE96; --mint:#57C4B4; --red:#ff6b6b; --blue:#6FA8DC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter','Malgun Gothic',-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-x:hidden}
+  a{color:inherit}
+  .siteNav{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(7,10,16,.82);border-bottom:1px solid var(--line)}
+  .nvIn{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
+  .nvBrand{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-weight:800}
+  .nvBrand b{color:var(--gold2)}
+  .nvTabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s;white-space:nowrap}
+  .nvTabs a:hover{color:var(--ink);border-color:var(--line)}
+  .nvTabs a.on{color:#070A10;background:var(--gold);border-color:var(--gold);font-weight:700}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  .kicker{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.3em;text-transform:uppercase;font-size:11px;color:var(--gold)}
+  .head{padding:clamp(44px,8vh,88px) 0 clamp(20px,3vh,34px)}
+  .head h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(34px,6vw,68px);line-height:1.05;margin:14px 0 14px;max-width:20ch}
+  .head h1 .g{color:var(--gold2)}
+  .head .en{color:var(--sub);font-size:14px;max-width:70ch;margin-top:10px}
+  .disc{display:inline-block;margin-top:18px;font-family:ui-monospace,monospace;font-size:10.5px;letter-spacing:.08em;color:var(--gold2);border:1px solid rgba(201,169,106,.3);border-radius:999px;padding:6px 13px}
+  .blk{padding:clamp(22px,4vh,40px) 0;border-top:1px solid var(--line)}
+  .blk .no{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold)}
+  .blk h2{font-size:clamp(19px,2.6vw,26px);margin:4px 0 14px}
+  .lead{color:var(--sub);font-size:15px;max-width:74ch}
+  .lead b{color:var(--ink)}
+  .quote{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,30px);color:var(--gold2);line-height:1.3;font-style:italic;max-width:26ch}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:6px}
+  @media(max-width:820px){.grid3{grid-template-columns:1fr}}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:20px}
+  .card .t{color:var(--gold2);font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;font-weight:700}
+  .card p{color:var(--sub);font-size:13px;line-height:1.7}
+  ul.pts{list-style:none;margin:8px 0 0;display:flex;flex-direction:column;gap:12px}
+  ul.pts li{position:relative;padding-left:18px;color:var(--sub);font-size:14.5px}
+  ul.pts li:before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+  ul.pts li b{color:var(--ink)}
+  table.fin{width:100%;border-collapse:collapse;margin-top:8px;font-size:13.5px}
+  table.fin th,table.fin td{border:1px solid var(--line);padding:10px 12px;text-align:right}
+  table.fin th{background:var(--panel);color:var(--gold2);font-weight:700}
+  table.fin td:first-child,table.fin th:first-child{text-align:left;color:var(--ink)}
+  table.fin tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+  .neg{color:var(--red)}
+  .foot-note{color:var(--dim);font-size:12px;margin-top:12px}
+  .mile{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+  .mile span{font-size:12.5px;color:var(--sub);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+  .mile span b{color:var(--gold2)}
+  .cta{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .cta a.req{background:var(--gold);color:#070A10;font-weight:800;text-decoration:none;border-radius:10px;padding:11px 20px;font-size:14px}
+  .cta a.mail{color:var(--gold2);text-decoration:none;font-size:13.5px;border:1px solid var(--line);border-radius:10px;padding:11px 18px}
+  footer{border-top:1px solid var(--line);margin-top:clamp(30px,6vh,60px);padding:40px 0 58px;color:var(--dim);font-size:12.5px}
+  footer .brand{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold2)}
+</style>
+</head>
+<body>
+<nav class="siteNav">
+  <div class="nvIn">
+    <a class="nvBrand" href="index.html">A.P <b>LocaLift</b></a>
+    <div class="nvTabs">
+      <a href="index.html" data-p="index">임팩트</a>
+      <a href="content.html" data-p="content">콘텐츠 엔진</a>
+      <a href="about.html" data-p="about">회사 소개</a>
+      <a href="shop.html" data-p="shop">SHOP</a>
+      <a href="market-watch.html" data-p="market">마켓 워치</a>
+      <a href="ir.html" data-p="ir">IR</a>
+      <a id="navDeliverables" href="deliverables.html" data-p="deliverables" style="display:none">산출물</a>
+      <a id="navActionBoard" href="action-board.html" data-p="action" style="display:none">액션보드</a>
+    </div>
+  </div>
+</nav>
+
+<header class="head">
+  <div class="wrap">
+    <span class="kicker">Investor Relations · 전략 · 재무 요약</span>
+    <h1>지역의 매력을 <span class="g">세계에 팝니다</span></h1>
+    <p class="lead">오리지널 캐릭터 IP × 공공데이터 × 생성형 AI. A.P LocaLift는 한국의 콘텐츠와 제품을 해외 팬에게 연결하는 스튜디오형 커머스입니다.</p>
+    <p class="en">A.P LocaLift connects Korea's characters, stories, and products to global fans — combining original character IP, public data, and generative AI into a studio-driven commerce model. Vietnam-first, EN·VI.</p>
+    <span class="disc">본 페이지 수치는 내부 추정이며 실적이 아닙니다 · 투자권유 목적이 아닙니다</span>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="blk">
+    <div class="no">01</div>
+    <h2>한 줄 정의</h2>
+    <p class="quote">"오리지널 캐릭터 IP × 공공데이터 × 생성형 AI로, 지역의 매력을 세계에 팔다."</p>
+  </section>
+
+  <section class="blk">
+    <div class="no">02</div>
+    <h2>3축 사업</h2>
+    <div class="grid3">
+      <div class="card"><div class="t">K뷰티 글로벌 커머스</div><p>가상 크리에이터 <b>리아</b>가 큐레이션하는 K뷰티 셀렉트숍. 현금흐름 엔진.</p></div>
+      <div class="card"><div class="t">교육 애니 · HANGEUL CUBS</div><p>호랑 4남매의 한글 교육 애니메이션. 브랜드·IP 자산.</p></div>
+      <div class="card"><div class="t">K-드라마 · 범 내려온다</div><p>《The Nine Lanterns》 세계관. 라이선싱·글로벌 확장.</p></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="no">03</div>
+    <h2>전략 — Why now / Why us</h2>
+    <ul class="pts">
+      <li><b>가상 인플루언서 = 성과기반 판매채널.</b> 참여율 5.8% vs 인간 2.3%, 콘텐츠 생산력 월 40편 vs 4편 <span style="color:var(--dim)">(업계 조사·추정)</span>.</li>
+      <li><b>베트남 우선.</b> 발견=TikTok → 구매=TikTok Shop·쇼피 이중 동선. 언어 EN·VI.</li>
+      <li><b>소싱 = 한국 K뷰티.</b> 프리미엄 원천. 마진 로드맵: 리테일 → 도매·직거래 → OEM/PB.</li>
+    </ul>
+  </section>
+
+  <section class="blk">
+    <div class="no">04</div>
+    <h2>데이터 엔진 — 차별화 핵심</h2>
+    <p class="lead">관세청 무역통계(국가·품목별 수출) + 통계청 KOSIS(역직구) + 한국관광공사 TourAPI(실장소 콘텐츠)를 결합해, <b>무엇을 · 어디에 · 언제 팔지</b>를 국가 공식 데이터로 판단합니다.</p>
+    <div class="grid3" style="margin-top:16px">
+      <div class="card"><div class="t">관세청 무역통계</div><p>국가·품목별 수출 흐름으로 수요 국가·카테고리 선별.</p></div>
+      <div class="card"><div class="t">통계청 KOSIS</div><p>역직구(온라인 해외판매) 지표로 채널·타이밍 판단.</p></div>
+      <div class="card"><div class="t">한국관광공사 TourAPI</div><p>실장소 레퍼런스로 리아 콘텐츠의 지역성·신뢰도 확보.</p></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="no">05</div>
+    <h2>5개년 재무 하이라이트 <span style="font-size:13px;color:var(--dim)">(추정 · 백만원)</span></h2>
+    <table class="fin">
+      <thead><tr><th>항목</th><th>2026</th><th>2027</th><th>2028</th><th>2029</th><th>2030</th></tr></thead>
+      <tbody>
+        <tr><td>매출액</td><td>48</td><td>212</td><td>566</td><td>1,178</td><td>2,040</td></tr>
+        <tr><td>영업이익</td><td class="neg">(36)</td><td class="neg">(48)</td><td class="neg">(20)</td><td>71</td><td>228</td></tr>
+        <tr><td>기말현금</td><td>12</td><td>110</td><td>332</td><td>382</td><td>867</td></tr>
+      </tbody>
+    </table>
+    <div class="mile" style="margin-top:16px">
+      <span><b>2029</b> 영업 흑자전환</span>
+      <span>라운드 <b>시드 150</b> (2027)</span>
+      <span><b>시리즈A 250</b> (2028)</span>
+      <span><b>후속 300</b> (2030)</span>
+    </div>
+    <p class="foot-note">※ 본 수치는 내부 추정이며 실적이 아닙니다. 목표·가정에 따라 변동될 수 있습니다.</p>
+  </section>
+
+  <section class="blk">
+    <div class="no">06</div>
+    <h2>마일스톤 &amp; 문의</h2>
+    <div class="mile">
+      <span><b>2026</b> 소프트론칭</span>
+      <span><b>2027</b> 베트남 확장 · 시드</span>
+      <span><b>2028</b> 일본 검토 · 시리즈A</span>
+      <span><b>2029</b> 흑자 · OEM/PB</span>
+      <span><b>2030</b> 다국가 확장</span>
+    </div>
+    <div class="cta">
+      <a class="req" href="mailto:cksals00@gmail.com?subject=A.P%20LocaLift%20IR%20Deck%20Request">Request Deck →</a>
+      <a class="mail" href="mailto:cksals00@gmail.com">IR 문의 · cksals00@gmail.com</a>
+    </div>
+    <p class="foot-note">IR 덱은 요청 시 별도 전달드립니다. 본 페이지는 정보 제공 목적이며 투자권유가 아닙니다.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">A.P LocaLift</div>
+    <div style="margin-top:8px">Investor Relations · 캐릭터 IP × 공공데이터 × 생성형 AI · 내부 추정 기준</div>
+  </div>
+</footer>
+
+<script>(function(){var f=(location.pathname.split('/').pop()||'index.html').toLowerCase();if(!f)f='index.html';document.querySelectorAll('.siteNav .nvTabs a').forEach(function(a){var h=a.getAttribute('href').toLowerCase();if(h===f||((f===''||f==='index.html')&&a.dataset.p==='index'))a.classList.add('on');});})();</script>
+<script>/* admin 전용: 로그인한 관리자에게만 내부 탭 노출 */(function(){try{var t=localStorage.getItem("gsn_auth_token");if(!t)return;var seg=t.split(".")[0].replace(/-/g,"+").replace(/_/g,"/");while(seg.length%4)seg+="=";var p=JSON.parse(decodeURIComponent(escape(atob(seg))));if(p&&p.exp&&p.exp>Date.now()&&p.role==="admin"){["navDeliverables","navActionBoard"].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display="";});}}catch(e){}})();</script>
+</body>
+</html>

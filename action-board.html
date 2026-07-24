@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>대표 액션 보드 · A.P LocaLift</title>
+<!-- 접근 제어: admin 역할만 열람. 미로그인/권한없음 → login.html -->
+<meta name="auth-required" content="admin">
+<script src="./js/auth.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070A10; --panel:#111725; --panel2:#0D131F; --line:#1E2738;
+    --ink:#eef2f6; --sub:#9aa7b4; --dim:#6b7885;
+    --gold:#C9A96A; --gold2:#E7CE96; --mint:#57C4B4; --wip:#E0A63C; --red:#ff6b6b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter','Malgun Gothic',-apple-system,"Apple SD Gothic Neo",sans-serif;line-height:1.6;word-break:keep-all}
+  a{color:inherit}
+  .siteNav{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(7,10,16,.82);border-bottom:1px solid var(--line)}
+  .nvIn{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
+  .nvBrand{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-weight:800}
+  .nvBrand b{color:var(--gold2)}
+  .nvTabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s;white-space:nowrap}
+  .nvTabs a:hover{color:var(--ink);border-color:var(--line)}
+  .nvTabs a.on{color:#070A10;background:var(--gold);border-color:var(--gold);font-weight:700}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  .head{padding:clamp(32px,6vh,64px) 0 8px}
+  .head .k{font-family:ui-monospace,monospace;letter-spacing:.3em;text-transform:uppercase;font-size:11px;color:var(--gold)}
+  .head h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(30px,5vw,52px);margin:10px 0 8px}
+  .head p{color:var(--sub);font-size:14px;max-width:64ch}
+  .bar{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin:18px 0 6px}
+  .prog{flex:1;min-width:200px;height:8px;border-radius:999px;background:var(--panel);overflow:hidden;border:1px solid var(--line)}
+  .prog i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));width:0;transition:width .4s}
+  .pct{font-family:ui-monospace,monospace;font-size:12px;color:var(--gold2)}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--dim)}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .dot{width:8px;height:8px;border-radius:50%}
+  .grp{margin:26px 0}
+  .grp h2{font-size:16px;margin-bottom:4px;display:flex;align-items:center;gap:10px}
+  .grp h2 .tag{font-family:ui-monospace,monospace;font-size:11px;color:#070A10;background:var(--gold2);border-radius:6px;padding:2px 8px;font-weight:800}
+  .grp .sub{color:var(--dim);font-size:12.5px;margin-bottom:12px}
+  .grp .sub.deadline{color:var(--red)}
+  .item{display:flex;align-items:flex-start;gap:12px;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin-bottom:9px;transition:.2s}
+  .item.done{opacity:.5}
+  .item .ck{flex:none;width:20px;height:20px;border:1.5px solid var(--dim);border-radius:6px;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#070A10;font-size:13px;font-weight:900;background:transparent;transition:.15s}
+  .item.done .ck{background:var(--mint);border-color:var(--mint)}
+  .item .bd{flex:1}
+  .item .tx{font-size:14px;color:var(--ink)}
+  .item.done .tx{text-decoration:line-through;color:var(--sub)}
+  .item .meta{font-size:12px;color:var(--dim);margin-top:3px}
+  .st{flex:none;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:3px 9px;align-self:flex-start;margin-top:1px}
+  .st.wait{color:var(--dim);border:1px solid var(--line)}
+  .st.wip{color:#070A10;background:var(--wip)}
+  .st.done{color:#070A10;background:var(--mint)}
+  .note{color:var(--dim);font-size:12px;text-align:center;margin:20px 0 0}
+  footer{border-top:1px solid var(--line);margin-top:40px;padding:32px 0 52px;color:var(--dim);font-size:12px;text-align:center}
+</style>
+</head>
+<body>
+<nav class="siteNav">
+  <div class="nvIn">
+    <a class="nvBrand" href="index.html">A.P <b>LocaLift</b></a>
+    <div class="nvTabs">
+      <a href="index.html" data-p="index">임팩트</a>
+      <a href="content.html" data-p="content">콘텐츠 엔진</a>
+      <a href="about.html" data-p="about">회사 소개</a>
+      <a href="shop.html" data-p="shop">SHOP</a>
+      <a href="market-watch.html" data-p="market">마켓 워치</a>
+      <a href="ir.html" data-p="ir">IR</a>
+      <a id="navDeliverables" href="deliverables.html" data-p="deliverables" style="display:none">산출물</a>
+      <a id="navActionBoard" href="action-board.html" data-p="action" style="display:none">액션보드</a>
+    </div>
+  </div>
+</nav>
+
+<header class="head">
+  <div class="wrap">
+    <div class="k">Executive Action Board · 내부용</div>
+    <h1>대표 액션 보드</h1>
+    <p>대표님이 한눈에 챙기는 트랙별 체크리스트. 체크 상태는 이 브라우저에 저장됩니다. 항목·상태는 기획실장이 교신함으로 업데이트합니다.</p>
+    <div class="bar">
+      <div class="prog"><i id="progBar"></i></div>
+      <div class="pct" id="progPct">0%</div>
+      <div class="legend">
+        <span><i class="dot" style="background:var(--dim)"></i>대기</span>
+        <span><i class="dot" style="background:var(--wip)"></i>진행중</span>
+        <span><i class="dot" style="background:var(--mint)"></i>완료</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="board"></main>
+
+<p class="note">완료 항목은 체크 시 회색 처리됩니다 · 상태 변경 요청은 to_기획실장 교신함으로</p>
+
+<footer>A.P LocaLift · 대표 액션 보드 · 내부 관리용 (admin 전용)</footer>
+
+<script>
+  const GROUPS = [
+    {tag:"A", title:"지금 깨우기 (교신)", items:[
+      {tx:"shop 제품컷(테스트) + 리아 숏폼 3편 임베드 반영", meta:"담당: 온라인팀장", st:"wait"},
+      {tx:"소싱 채널 전략 분석 회신", meta:"담당: 소싱팀장", st:"wait"},
+      {tx:"썸네일 · shop 리뷰컷(rimg) 후속 제출", meta:"담당: 리아", st:"wait"}
+    ]},
+    {tag:"B", title:"커머스 실무 (대표님만 가능)", items:[
+      {tx:"쇼피코리아 입점 신청", meta:"사업자 · 통신판매업 · 페이오니아", st:"wait"},
+      {tx:"TikTok Shop 코리아–SEA 크로스보더 입점 신청", meta:"", st:"wait"},
+      {tx:"쿠팡 초도 발주 — 촬영용 각 1개 선출고 포함", meta:"", st:"wait"},
+      {tx:"쿠팡 실매입가 → B1 마진시트 파란셀 입력", meta:"", st:"wait"},
+      {tx:"베트남 현지 법무 의뢰", meta:"질문리스트 지참", st:"wait"}
+    ]},
+    {tag:"C", title:"콘텐츠 · 데이터", items:[
+      {tx:"리아 세션에 TourAPI 키 붙여넣기 → 한강 실경 EP1 배경", meta:"", st:"wait"},
+      {tx:"공공데이터 API 발급(data.go.kr)", meta:"관세청 무역통계 · 통계청 KOSIS serviceKey", st:"wait"},
+      {tx:"태홍 이사 발음검수", meta:"EP1 유튜브 공개 게이트", st:"wait"}
+    ]},
+    {tag:"D", title:"지원사업", sub:"마감 2026.8.14 18:00", deadline:true, items:[
+      {tx:"참여신청서 · 사업계획서 팩트값 기입", meta:"사업자번호 · 주소 · 재무 등", st:"wait"},
+      {tx:"국세 · 지방세 완납증명서 발급", meta:"", st:"wait"},
+      {tx:"사업자등록증 사본(개인사업자 시)", meta:"", st:"wait"},
+      {tx:"이메일 접수 — opendatabiz@kmac.co.kr", meta:"", st:"wait"}
+    ]},
+    {tag:"E", title:"전략 결정", items:[
+      {tx:"재무모델 가정 검토 · 목표치 확정", meta:"첨부 엑셀", st:"wait"},
+      {tx:"OEM/PB 진입 시점 결정", meta:"소싱팀장 분석 후", st:"wait"}
+    ]}
+  ];
+  const KEY="apl_action_board_v1";
+  let state={}; try{state=JSON.parse(localStorage.getItem(KEY)||"{}");}catch(e){state={};}
+  const stLabel={wait:"대기",wip:"진행중",done:"완료"};
+  function id(g,i){return GROUPS[g].tag+"-"+i;}
+  function render(){
+    const b=document.getElementById("board"); let total=0,done=0;
+    b.innerHTML=GROUPS.map((g,gi)=>{
+      const rows=g.items.map((it,ii)=>{
+        total++;
+        const k=id(gi,ii);
+        const checked = state[k]!=null ? state[k] : (it.st==="done");
+        if(checked) done++;
+        const st = checked?"done":it.st;
+        return `<div class="item${checked?' done':''}" data-k="${k}">
+          <div class="ck" onclick="toggle('${k}')">${checked?'✓':''}</div>
+          <div class="bd"><div class="tx">${it.tx}</div>${it.meta?`<div class="meta">${it.meta}</div>`:''}</div>
+          <span class="st ${st}">${stLabel[st]}</span>
+        </div>`;
+      }).join("");
+      return `<section class="grp">
+        <h2><span class="tag">${g.tag}</span>${g.title}</h2>
+        ${g.sub?`<div class="sub${g.deadline?' deadline':''}">${g.sub}</div>`:''}
+        ${rows}
+      </section>`;
+    }).join("");
+    const pct= total?Math.round(done/total*100):0;
+    document.getElementById("progBar").style.width=pct+"%";
+    document.getElementById("progPct").textContent=pct+"% ("+done+"/"+total+")";
+  }
+  function toggle(k){ state[k]=!(state[k]!=null?state[k]:false); try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){} render(); }
+  render();
+</script>
+<script>(function(){var f=(location.pathname.split('/').pop()||'index.html').toLowerCase();if(!f)f='index.html';document.querySelectorAll('.siteNav .nvTabs a').forEach(function(a){var h=a.getAttribute('href').toLowerCase();if(h===f||((f===''||f==='index.html')&&a.dataset.p==='index'))a.classList.add('on');});})();</script>
+<script>/* admin 전용 내부 탭 노출 */(function(){try{var t=localStorage.getItem("gsn_auth_token");if(!t)return;var seg=t.split(".")[0].replace(/-/g,"+").replace(/_/g,"/");while(seg.length%4)seg+="=";var p=JSON.parse(decodeURIComponent(escape(atob(seg))));if(p&&p.exp&&p.exp>Date.now()&&p.role==="admin"){["navDeliverables","navActionBoard"].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display="";});}}catch(e){}})();</script>
+</body>
+</html>
