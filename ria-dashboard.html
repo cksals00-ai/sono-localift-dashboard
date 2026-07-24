@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>리아 성과 대시보드 · A.P LocaLift</title>
+<!-- 접근 제어: admin 역할만 열람. 미로그인/권한없음 → login.html -->
+<meta name="auth-required" content="admin">
+<script src="./js/auth.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070A10; --panel:#111725; --panel2:#0D131F; --line:#1E2738;
+    --ink:#eef2f6; --sub:#9aa7b4; --dim:#6b7885;
+    --gold:#C9A96A; --gold2:#E7CE96; --mint:#57C4B4; --wip:#E0A63C; --red:#ff6b6b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter','Malgun Gothic',-apple-system,"Apple SD Gothic Neo",sans-serif;line-height:1.6;word-break:keep-all}
+  a{color:inherit}
+  .siteNav{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(7,10,16,.82);border-bottom:1px solid var(--line)}
+  .nvIn{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
+  .nvBrand{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-weight:800}
+  .nvBrand b{color:var(--gold2)}
+  .nvTabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s;white-space:nowrap}
+  .nvTabs a:hover{color:var(--ink);border-color:var(--line)}
+  .nvTabs a.on{color:#070A10;background:var(--gold);border-color:var(--gold);font-weight:700}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+  .head{padding:clamp(32px,6vh,64px) 0 8px}
+  .head .k{font-family:ui-monospace,monospace;letter-spacing:.3em;text-transform:uppercase;font-size:11px;color:var(--gold)}
+  .head h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(30px,5vw,52px);margin:10px 0 8px}
+  .head p{color:var(--sub);font-size:14px;max-width:70ch}
+  .meta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:16px 0 6px;font-size:12px;color:var(--dim);font-family:ui-monospace,monospace}
+  .badge{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:10px}
+  .badge.sample{background:var(--wip);color:#070A10}
+  .badge.live{background:var(--mint);color:#070A10}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0}
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card.full{grid-column:1 / -1}
+  .card h2{font-size:15px;display:flex;align-items:center;gap:9px;margin-bottom:4px}
+  .card h2 .tag{font-family:ui-monospace,monospace;font-size:10px;color:#070A10;background:var(--gold2);border-radius:6px;padding:2px 8px;font-weight:800}
+  .card .sub{color:var(--dim);font-size:12px;margin-bottom:14px}
+  /* 전략 */
+  .pill{border:1px dashed var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px}
+  .pill .pt{font-size:13px;color:var(--ink);font-weight:600;display:flex;justify-content:space-between}
+  .pill .pt b{color:var(--gold2);font-family:ui-monospace,monospace}
+  .pill .pd{color:var(--dim);font-size:11.5px;margin-top:3px}
+  .plan{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .plan .pchip{border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:11.5px;min-width:120px}
+  .plan .pchip .d{color:var(--gold2);font-weight:800;font-family:ui-monospace,monospace}
+  .plan .pchip .m{color:var(--sub);margin-top:2px}
+  /* KPI */
+  .kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .kpi{border:1px solid var(--line);border-radius:11px;padding:12px}
+  .kpi .kl{font-size:12px;color:var(--sub)}
+  .kpi .kv{font-size:18px;font-weight:800;margin:5px 0 3px;font-family:ui-monospace,monospace}
+  .kpi .kt{font-size:11px;color:var(--dim)}
+  .kbar{height:6px;border-radius:999px;background:var(--panel);overflow:hidden;border:1px solid var(--line);margin-top:8px}
+  .kbar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+  .kbar i.over{background:linear-gradient(90deg,var(--mint),#8fe3d6)}
+  .seg{display:flex;gap:6px;margin-bottom:12px}
+  .seg button{background:transparent;border:1px solid var(--line);color:var(--sub);font-size:11.5px;padding:5px 12px;border-radius:999px;cursor:pointer;font-family:inherit}
+  .seg button.on{background:var(--gold);border-color:var(--gold);color:#070A10;font-weight:700}
+  /* 콘텐츠 테이블 */
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line)}
+  th{color:var(--dim);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.05em}
+  td.num{text-align:right;font-family:ui-monospace,monospace;color:var(--gold2)}
+  .fmt{font-family:ui-monospace,monospace;font-size:10px;color:var(--sub);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+  /* 진행 */
+  .prog{height:8px;border-radius:999px;background:var(--panel);overflow:hidden;border:1px solid var(--line);margin:6px 0 12px}
+  .prog i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+  .pitem{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin-bottom:7px}
+  .pitem .pi-t{flex:1;font-size:13px}
+  .pitem .pi-d{font-size:11px;color:var(--dim);font-family:ui-monospace,monospace}
+  .st{font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:3px 9px}
+  .st.published{color:#070A10;background:var(--mint)}
+  .st.planned{color:var(--dim);border:1px solid var(--line)}
+  .st.delayed{color:#070A10;background:var(--red)}
+  .err{color:var(--red);font-size:13px;padding:20px;text-align:center}
+  footer{border-top:1px solid var(--line);margin-top:40px;padding:32px 0 52px;color:var(--dim);font-size:12px;text-align:center}
+  /* 블록별 배지 + 전략 라벨 */
+  .card h2 .bdg{margin-left:auto;font-size:10px;padding:3px 9px;border-radius:999px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+  .card h2 .bdg.live{background:var(--mint);color:#070A10}
+  .card h2 .bdg.sample{background:var(--wip);color:#070A10}
+  .slbl{font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;margin:14px 0 7px;font-weight:700}
+  .trow{display:flex;gap:8px;align-items:baseline;border:1px dashed var(--line);border-radius:10px;padding:8px 12px;margin-bottom:6px}
+  .trow .tt{font-family:ui-monospace,monospace;font-size:10px;color:#070A10;background:var(--gold2);border-radius:6px;padding:2px 7px;font-weight:800;flex:none}
+  .trow .tw{font-size:12.5px;color:var(--ink)}
+  .kpi.pend{opacity:.78}
+  .kpi .knote{font-size:10.5px;color:var(--dim);margin-top:6px;line-height:1.45}
+  .kpi .kpend{font-size:10px;color:var(--wip);font-weight:700;font-family:ui-monospace,monospace;margin-top:4px}
+</style>
+</head>
+<body>
+<nav class="siteNav">
+  <div class="nvIn">
+    <a class="nvBrand" href="index.html">A.P <b>LocaLift</b></a>
+    <div class="nvTabs">
+      <a href="index.html" data-p="index">임팩트</a>
+      <a href="content.html" data-p="content">콘텐츠 엔진</a>
+      <a href="about.html" data-p="about">회사 소개</a>
+      <a href="shop.html" data-p="shop">SHOP</a>
+      <a href="ir.html" data-p="ir">IR</a>
+      <a id="navDeliverables" href="deliverables.html" data-p="deliverables" style="display:none">산출물</a>
+      <a id="navRiaDash" href="ria-dashboard.html" data-p="ria" style="display:none">리아 대시보드</a>
+      <a id="navActionBoard" href="action-board.html" data-p="action" style="display:none">액션보드</a>
+    </div>
+  </div>
+</nav>
+
+<header class="head">
+  <div class="wrap">
+    <div class="k">Ria Performance Dashboard · 내부용</div>
+    <h1>리아 성과 대시보드</h1>
+    <p>리아 IG 전략·콘텐츠 방향과 KPI·성과 데이터를 한 화면에서 추적합니다. 데이터는 <code>data/ria_kpi_feed.json</code>(리아 1일 2회 갱신)을 클라이언트에서 불러와 렌더링합니다.</p>
+    <div class="meta-row">
+      <span id="badge" class="badge sample">SAMPLE</span>
+      <span id="updated">업데이트: —</span>
+      <span id="source">—</span>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="board" class="grid"></div>
+  <p class="err" id="err" style="display:none"></p>
+</main>
+
+<footer>A.P LocaLift · 리아 성과 대시보드 · 내부 관리용 (admin 전용) · 데이터 소스 data/ria_kpi_feed.json</footer>
+
+<script>
+(function(){
+  var FEED = './data/ria_kpi_feed.json?ts=' + Date.now();
+  var board = document.getElementById('board');
+  var errEl = document.getElementById('err');
+
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function nf(n){return (typeof n==='number'? n.toLocaleString('ko-KR') : esc(n));}
+  function pct(a,t){ if(!t) return 0; return Math.min(Math.round(a/t*100),200); }
+
+  fetch(FEED,{cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('피드 로드 실패 ('+r.status+')'); return r.json(); })
+    .then(render)
+    .catch(function(e){
+      board.style.display='none';
+      errEl.style.display='';
+      errEl.textContent = 'data/ria_kpi_feed.json 을 불러오지 못했습니다: ' + e.message + ' — 피드 도착 후 자동 표시됩니다.';
+    });
+
+  function render(d){
+    // 메타
+    var m = d.meta||{};
+    var badge = document.getElementById('badge');
+    if(m.sample){ badge.className='badge sample'; badge.textContent='SAMPLE'; }
+    else { badge.className='badge live'; badge.textContent = (d.content_sample||d.progress_sample) ? 'LIVE · 콘텐츠 SAMPLE' : 'LIVE'; }
+    document.getElementById('updated').textContent = '업데이트: ' + esc(m.updated_at||'—');
+    document.getElementById('source').textContent = esc(m.source||'');
+
+    var html = '';
+
+    // ① 전략·콘텐츠 방향
+    var s = d.strategy||{};
+    html += '<section class="card"><h2><span class="tag">①</span>전략 · 콘텐츠 방향'+(s.live?'<span class="bdg live">LIVE</span>':'')+'</h2>';
+    html += '<div class="sub">'+esc(s.positioning||'')+(s.slogan?' · '+esc(s.slogan):'')+'</div>';
+    if((s.targets||[]).length){
+      html += '<div class="slbl">타깃 3층</div>';
+      s.targets.forEach(function(t){
+        html += '<div class="trow"><span class="tt">'+esc(t.tier)+'</span><span class="tw">'+esc(t.who)+'</span></div>';
+      });
+    }
+    if((s.channels||[]).length){
+      html += '<div class="slbl">채널 역할</div>';
+      s.channels.forEach(function(c){
+        html += '<div class="pill"><div class="pt">'+esc(c.ch)+'</div><div class="pd">'+esc(c.role)+'</div></div>';
+      });
+    }
+    if((s.pillars||[]).length){
+      html += '<div class="slbl">콘텐츠 필러 5</div>';
+      s.pillars.forEach(function(p){
+        var rt = (p.tag!=null&&p.tag!=='') ? p.tag : (p.ratio!=null? nf(p.ratio)+'%' : '');
+        html += '<div class="pill"><div class="pt">'+esc(p.name)+(rt?'<b>'+esc(rt)+'</b>':'')+'</div><div class="pd">'+esc(p.desc)+'</div></div>';
+      });
+    }
+    if((s.weekly_plan||[]).length){
+      html += '<div class="slbl">주간 편성 (월~일)</div><div class="plan">';
+      s.weekly_plan.forEach(function(w){
+        html += '<div class="pchip"><div class="d">'+esc(w.day)+(w.slot?' · '+esc(w.slot):'')+'</div><div class="m">'+esc(w.format)+' — '+esc(w.theme)+'</div></div>';
+      });
+      html += '</div>';
+      if(s.plan_note) html += '<div class="pd" style="margin-top:8px">'+esc(s.plan_note)+'</div>';
+    }
+    html += '</section>';
+
+    // ② KPI 보드 (주간/월간 토글)
+    var kp = d.kpi||{};
+    html += '<section class="card"><h2><span class="tag">②</span>KPI 보드'+(kp.live?'<span class="bdg live">LIVE</span>':'')+'</h2>';
+    html += '<div class="sub">4주 로드맵 · 베이스라인 '+esc(kp.baseline_date||'—')+' (막대 = 달성률, 100% 초과 시 민트)</div>';
+    html += '<div class="seg"><button data-kseg="weekly" class="on">주간</button><button data-kseg="monthly">월간</button></div>';
+    html += '<div id="kpiWrap"></div></section>';
+
+    // ③ 콘텐츠 현황
+    var c = d.content||[];
+    html += '<section class="card full"><h2><span class="tag">③</span>콘텐츠 현황'+(d.content_sample?'<span class="bdg sample">SAMPLE</span>':'')+'</h2>';
+    html += '<div class="sub">최근 포스트별 성과 (조회·좋아요·댓글·저장)</div>';
+    html += '<table><thead><tr><th>날짜</th><th>제목</th><th>형식</th><th class="num">조회</th><th class="num">좋아요</th><th class="num">댓글</th><th class="num">저장</th></tr></thead><tbody>';
+    if(!c.length) html += '<tr><td colspan="7" style="color:var(--dim)">데이터 없음</td></tr>';
+    c.forEach(function(row){
+      var t = row.url ? '<a href="'+esc(row.url)+'" target="_blank" rel="noopener" style="color:var(--gold2)">'+esc(row.title)+'</a>' : esc(row.title);
+      html += '<tr><td>'+esc(row.date)+'</td><td>'+t+'</td><td><span class="fmt">'+esc(row.format)+'</span></td>'
+        +'<td class="num">'+nf(row.views)+'</td><td class="num">'+nf(row.likes)+'</td><td class="num">'+nf(row.comments)+'</td><td class="num">'+nf(row.saves)+'</td></tr>';
+    });
+    html += '</tbody></table></section>';
+
+    // ④ 진행 현황
+    var pg = d.progress||{};
+    var pp = pct(pg.published, pg.planned);
+    html += '<section class="card full"><h2><span class="tag">④</span>진행 현황'+(d.progress_sample?'<span class="bdg sample">SAMPLE</span>':'')+'</h2>';
+    html += '<div class="sub">'+esc(pg.week_label||'')+' · 발행 계획 '+nf(pg.planned||0)+'건 중 '+nf(pg.published||0)+'건 완료</div>';
+    html += '<div class="prog"><i style="width:'+Math.min(pp,100)+'%"></i></div>';
+    (pg.items||[]).forEach(function(it){
+      html += '<div class="pitem"><span class="pi-t">'+esc(it.title)+'</span><span class="pi-d">'+esc(it.date)+'</span><span class="st '+esc(it.status)+'">'+esc(it.status)+'</span></div>';
+    });
+    html += '</section>';
+
+    board.innerHTML = html;
+
+    // KPI 렌더 + 토글
+    function renderKpi(seg){
+      var arr = (d.kpi&&d.kpi[seg])||[];
+      var h = '<div class="kpis">';
+      arr.forEach(function(k){
+        if(k.pending || k.actual==null || k.target==null){
+          h += '<div class="kpi pend"><div class="kl">'+esc(k.label)+'</div>'
+            +'<div class="kv" style="font-size:14px">'+(k.actual!=null?nf(k.actual):'—')+' <span style="font-size:12px;color:var(--dim)">/ '+(k.target!=null?nf(k.target)+' '+esc(k.unit||''):'목표 미확정')+'</span></div>'
+            +'<div class="kpend">측정 대기</div>'
+            +(k.note?'<div class="knote">'+esc(k.note)+'</div>':'')+'</div>';
+        } else {
+          var p = pct(k.actual, k.target);
+          h += '<div class="kpi"><div class="kl">'+esc(k.label)+'</div>'
+            +'<div class="kv">'+nf(k.actual)+' <span style="font-size:12px;color:var(--dim)">/ '+nf(k.target)+' '+esc(k.unit||'')+'</span></div>'
+            +'<div class="kt">달성률 '+p+'%</div>'
+            +'<div class="kbar"><i class="'+(p>=100?'over':'')+'" style="width:'+Math.min(p,100)+'%"></i></div>'
+            +(k.note?'<div class="knote">'+esc(k.note)+'</div>':'')+'</div>';
+        }
+      });
+      h += '</div>';
+      document.getElementById('kpiWrap').innerHTML = h;
+    }
+    renderKpi('weekly');
+    board.querySelectorAll('[data-kseg]').forEach(function(b){
+      b.addEventListener('click', function(){
+        board.querySelectorAll('[data-kseg]').forEach(function(x){x.classList.remove('on');});
+        b.classList.add('on');
+        renderKpi(b.getAttribute('data-kseg'));
+      });
+    });
+  }
+})();
+</script>
+<script>(function(){var f=(location.pathname.split('/').pop()||'index.html').toLowerCase();if(!f)f='index.html';document.querySelectorAll('.siteNav .nvTabs a').forEach(function(a){var h=a.getAttribute('href').toLowerCase();if(h===f||((f===''||f==='index.html')&&a.dataset.p==='index'))a.classList.add('on');});})();</script>
+<script>/* admin 전용 내부 탭 노출 */(function(){try{var t=localStorage.getItem("gsn_auth_token");if(!t)return;var seg=t.split(".")[0].replace(/-/g,"+").replace(/_/g,"/");while(seg.length%4)seg+="=";var p=JSON.parse(decodeURIComponent(escape(atob(seg))));if(p&&p.exp&&p.exp>Date.now()&&p.role==="admin"){["navDeliverables","navRiaDash","navActionBoard"].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display="";});}}catch(e){}})();</script>
+</body>
+</html>

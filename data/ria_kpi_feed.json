@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "sample": false,
+    "updated_at": "2026-07-24T23:00:00+09:00",
+    "source": "리아 IG 전략·KPI 실데이터 (통합제출 0724) · 성과 피드(content/progress)는 리아 실피드 도착 전 SAMPLE",
+    "owner": "리아 (@lia_park55)",
+    "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
+    "schema_version": "0.2",
+    "note": "전략·KPI 블록은 리아 확정 실데이터. 콘텐츠 현황·진행 현황 테이블은 리아 실피드 첫 수신(2026-07-25 오전) 전까지 SAMPLE 골격."
+  },
+  "strategy": {
+    "live": true,
+    "positioning": "투명 버추얼(AI 명시) × K뷰티 리뷰어 × 실존 지역 아카이브(#HiddenKorea)",
+    "slogan": "\"내가 찍으면, 당신은 빛난다\"",
+    "targets": [
+      { "tier": "1차", "who": "해외 여성 18–34 · 미주·동남아·일본의 K컬처/K뷰티 관심층" },
+      { "tier": "2차", "who": "베트남 K뷰티 소비자 · 커머스 전환" },
+      { "tier": "3차", "who": "한국 감성 콘텐츠 선호 국내층" }
+    ],
+    "channels": [
+      { "ch": "릴", "role": "발견·도달 — 한국 고전 내레이션이 핵심 엔진" },
+      { "ch": "피드 카드", "role": "서사·신뢰 — 실생활 POV·실사진" },
+      { "ch": "스토리", "role": "리텐션 — 뷰티→건강→지역 로테이션 + 하이라이트 아카이브" }
+    ],
+    "pillars": [
+      { "name": "① 한국 고전 내레이션 릴", "tag": "주 2~3", "desc": "보편 감성 도달의 핵심 엔진" },
+      { "name": "② 실생활 POV 카드", "tag": "주 3", "desc": "실생활 POV·실사진으로 인간화" },
+      { "name": "③ Drama BTS", "tag": "비정기", "desc": "MV·촬영 비하인드로 서사 확장" },
+      { "name": "④ K뷰티 리뷰", "tag": "채널 오픈 후", "desc": "셀렉트숍 전환 퍼널, 오픈 후 확대" },
+      { "name": "⑤ 히든코리아 장소", "tag": "스토리 중심", "desc": "TourAPI 실경 기반 #HiddenKorea" }
+    ],
+    "weekly_plan": [
+      { "day": "월", "format": "카드", "theme": "실생활 POV" },
+      { "day": "화", "format": "릴", "theme": "한국 고전 내레이션" },
+      { "day": "수", "format": "카드·BTS", "theme": "실생활 + Drama BTS" },
+      { "day": "목", "format": "릴", "theme": "한국 고전 내레이션" },
+      { "day": "금", "format": "카드", "theme": "집밥·전주 로컬" },
+      { "day": "토", "format": "카드", "theme": "POV" },
+      { "day": "일", "format": "휴식", "theme": "KPI 보고 (21:00 주간 리포트)" }
+    ],
+    "plan_note": "스토리 매일 1~2 · 피드 하루 1건 엄수 · 엔진 v5.1(매일 09:00, 릴3+카드3+스토리2) 정합"
+  },
+  "kpi": {
+    "live": true,
+    "baseline_date": "2026-07-24",
+    "weekly": [
+      { "label": "팔로워 순증", "target": 3000, "actual": 931, "unit": "명", "note": "베이스라인 931 (7/21 0 시작 · 오가닉 100% · 광고 0원) → 4주 목표 3,000 (주평균 +500)" },
+      { "label": "릴 평균 조회수", "target": null, "actual": null, "unit": "회", "pending": true, "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)" },
+      { "label": "주간 저장수", "target": 100, "actual": null, "unit": "회", "pending": true, "note": "베이스라인 측정 중 → 4주 목표 주 100" },
+      { "label": "주간 댓글수", "target": 50, "actual": 0, "unit": "개", "note": "본인 제외 · 베이스라인 0 → 4주 목표 주 50 (답글 SLA 가동)" },
+      { "label": "링크인바이오 클릭", "target": null, "actual": null, "unit": "회", "pending": true, "note": "스토어 오픈 후 측정 개시 (shop UTM 연동)" }
+    ],
+    "monthly": [
+      { "label": "팔로워 (4주 목표)", "target": 3000, "actual": 931, "unit": "명", "note": "월간 = 4주 로드맵 목표" },
+      { "label": "릴 조회 성장", "target": null, "actual": null, "unit": "%", "pending": true, "note": "베이스라인(7/31) 대비 +100%" },
+      { "label": "저장수 (주)", "target": 100, "actual": null, "unit": "회", "pending": true, "note": "베이스라인 측정 중" },
+      { "label": "shop 유입", "target": null, "actual": null, "unit": "회", "pending": true, "note": "스토어 오픈 후 온라인팀장 대시보드 연동" }
+    ]
+  },
+  "content_sample": true,
+  "content": [
+    { "date": "2026-07-22", "title": "여름 선케어 3STEP 루틴", "format": "Reels", "url": "", "views": 18400, "likes": 1230, "comments": 86, "saves": 210 },
+    { "date": "2026-07-20", "title": "마스크팩 비포애프터", "format": "Reels", "url": "", "views": 12900, "likes": 940, "comments": 54, "saves": 180 },
+    { "date": "2026-07-18", "title": "이번 주 픽 3종 큐레이션", "format": "Carousel", "url": "", "views": 8600, "likes": 620, "comments": 31, "saves": 140 },
+    { "date": "2026-07-16", "title": "베트남 현지 반응 모음", "format": "Reels", "url": "", "views": 9500, "likes": 700, "comments": 42, "saves": 96 }
+  ],
+  "progress_sample": true,
+  "progress": {
+    "week_label": "2026-W30 (7/21~7/27)",
+    "planned": 4,
+    "published": 2,
+    "items": [
+      { "title": "선케어 루틴 Reels", "status": "published", "date": "2026-07-22" },
+      { "title": "마스크 비포애프터 Reels", "status": "published", "date": "2026-07-20" },
+      { "title": "제품 큐레이션 Carousel", "status": "planned", "date": "2026-07-25" },
+      { "title": "Q&A Live", "status": "planned", "date": "2026-07-27" }
+    ]
+  }
+}
