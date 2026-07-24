@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>리아 마켓 워치 · RIA Market Watch — A.P LocaLift</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070A10; --panel:#111725; --panel2:#0D131F; --line:#1E2738;
+    --ink:#eef2f6; --sub:#9aa7b4; --dim:#6b7885;
+    --gold:#C9A96A; --gold2:#E7CE96; --mint:#57C4B4; --blue:#6FA8DC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter','Malgun Gothic',-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard",sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-x:hidden}
+  a{color:inherit}
+  .siteNav{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(7,10,16,.82);border-bottom:1px solid var(--line)}
+  .nvIn{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
+  .nvBrand{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-weight:800}
+  .nvBrand b{color:var(--gold2)}
+  .nvTabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s;white-space:nowrap}
+  .nvTabs a:hover{color:var(--ink);border-color:var(--line)}
+  .nvTabs a.on{color:#070A10;background:var(--gold);border-color:var(--gold);font-weight:700}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+  .kicker{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.32em;text-transform:uppercase;font-size:11px;color:var(--gold)}
+  .display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.02;letter-spacing:.005em}
+  .head{padding:clamp(44px,8vh,88px) 0 clamp(18px,3vh,30px)}
+  .head h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(36px,6vw,72px);line-height:1.02;margin:14px 0 12px}
+  .head h1 .g{color:var(--gold2)}
+  .head p{color:var(--sub);font-size:clamp(14px,2vw,17px);max-width:56ch}
+  .status{display:inline-flex;align-items:center;gap:9px;margin-top:18px;font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.1em;color:var(--gold2);border:1px solid rgba(201,169,106,.35);border-radius:999px;padding:7px 15px;text-transform:uppercase}
+  .status .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
+  .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:clamp(24px,4vh,44px) 0 20px}
+  @media(max-width:860px){.cols{grid-template-columns:1fr}}
+  .col{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:20px;padding:24px 22px;display:flex;flex-direction:column}
+  .col .ic{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold);line-height:1}
+  .col h2{font-size:17px;margin:12px 0 4px}
+  .col .en{font-family:ui-monospace,monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+  .col .lead{color:var(--sub);font-size:13px;margin:12px 0 16px}
+  .rows{display:flex;flex-direction:column;gap:10px;margin-top:auto}
+  .ph{border:1px dashed var(--line);border-radius:12px;padding:13px 14px;background:rgba(255,255,255,.012)}
+  .ph .t{font-size:12.5px;color:var(--ink);font-weight:600}
+  .ph .s{font-size:11.5px;color:var(--dim);margin-top:3px}
+  .soon{margin-top:14px;font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);border:1px solid rgba(201,169,106,.3);border-radius:999px;padding:5px 11px;align-self:flex-start}
+  .note{color:var(--dim);font-size:12.5px;text-align:center;margin:6px 0 0}
+  footer{border-top:1px solid var(--line);margin-top:clamp(36px,7vh,72px);padding:40px 0 58px;color:var(--dim);font-size:12.5px}
+  footer .brand{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold2)}
+</style>
+</head>
+<body>
+<nav class="siteNav">
+  <div class="nvIn">
+    <a class="nvBrand" href="index.html">A.P <b>LocaLift</b></a>
+    <div class="nvTabs">
+      <a href="index.html" data-p="index">임팩트</a>
+      <a href="content.html" data-p="content">콘텐츠 엔진</a>
+      <a href="about.html" data-p="about">회사 소개</a>
+      <a href="shop.html" data-p="shop">SHOP</a>
+      <a href="market-watch.html" data-p="market">마켓 워치</a>
+      <a id="navDeliverables" href="deliverables.html" data-p="deliverables" style="display:none">산출물</a>
+    </div>
+  </div>
+</nav>
+
+<header class="head">
+  <div class="wrap">
+    <span class="kicker">Weekly Intelligence · RIA Market Watch</span>
+    <h1>리아 <span class="g">마켓 워치</span></h1>
+    <p>동남아 K뷰티 커머스의 시장 동향·규제·채널 지표를 주간 단위로 추적하는 인텔리전스 보드. 리아 셀렉트숍(쇼피·베트남 우선) 운영을 위한 의사결정 근거를 축적합니다.</p>
+    <div class="status"><span class="dot"></span><span>주간 업데이트 · 골격 배포</span></div>
+  </div>
+</header>
+
+<section class="wrap">
+  <div class="cols">
+    <div class="col">
+      <div class="ic">01</div>
+      <h2>시장 동향</h2>
+      <div class="en">Market Trends</div>
+      <p class="lead">동남아(베트남·말레이시아) K뷰티 소셜커머스, 쇼피·틱톡샵 흐름, 카테고리별 수요 시그널.</p>
+      <div class="rows">
+        <div class="ph"><div class="t">베트남 소셜커머스 성장</div><div class="s">주간 업데이트 예정</div></div>
+        <div class="ph"><div class="t">쇼피 · 틱톡샵 K뷰티 카테고리</div><div class="s">주간 업데이트 예정</div></div>
+        <div class="ph"><div class="t">선케어 · 마스크 수요 시그널</div><div class="s">주간 업데이트 예정</div></div>
+      </div>
+      <span class="soon">Coming — 주간 갱신</span>
+    </div>
+    <div class="col">
+      <div class="ic">02</div>
+      <h2>규제 업데이트</h2>
+      <div class="en">Regulatory</div>
+      <p class="lead">인플루언서 표시광고, 베트남 전자상거래·광고법, 화장품 수입·표시 규정 변화.</p>
+      <div class="rows">
+        <div class="ph"><div class="t">베트남 광고법 · 표시광고</div><div class="s">주간 업데이트 예정</div></div>
+        <div class="ph"><div class="t">전자상거래 · 크로스보더 규정</div><div class="s">주간 업데이트 예정</div></div>
+        <div class="ph"><div class="t">화장품 수입 · 성분 표시</div><div class="s">주간 업데이트 예정</div></div>
+      </div>
+      <span class="soon">Coming — 주간 갱신</span>
+    </div>
+    <div class="col">
+      <div class="ic">03</div>
+      <h2>채널 지표</h2>
+      <div class="en">Channel Metrics</div>
+      <p class="lead">리아 인스타·숏폼 채널 성장, 링크인바이오 유입, 셀렉트숍 전환 퍼널.</p>
+      <div class="rows">
+        <div class="ph"><div class="t">리아 인스타 · 숏폼 팔로워</div><div class="s">채널 개설 후 연동</div></div>
+        <div class="ph"><div class="t">링크인바이오 → shop 유입</div><div class="s">스토어 오픈 후 집계</div></div>
+        <div class="ph"><div class="t">셀렉트숍 전환 퍼널</div><div class="s">스토어 오픈 후 집계</div></div>
+      </div>
+      <span class="soon">Coming — 채널 개설 후</span>
+    </div>
+  </div>
+  <p class="note">본 보드는 골격입니다. 시장동향·규제·채널 지표는 주간 리서치로 순차 채워집니다.</p>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">A.P LocaLift</div>
+    <div style="margin-top:8px">리아 마켓 워치 · 동남아 K뷰티 커머스 인텔리전스 · 주간 업데이트</div>
+  </div>
+</footer>
+
+<script>(function(){var f=(location.pathname.split('/').pop()||'index.html').toLowerCase();if(!f)f='index.html';document.querySelectorAll('.siteNav .nvTabs a').forEach(function(a){var h=a.getAttribute('href').toLowerCase();if(h===f||((f===''||f==='index.html')&&a.dataset.p==='index'))a.classList.add('on');});})();</script>
+<script>/* admin 전용: 로그인한 관리자에게만 "산출물" 탭 노출 */(function(){try{var t=localStorage.getItem("gsn_auth_token");if(!t)return;var seg=t.split(".")[0].replace(/-/g,"+").replace(/_/g,"/");while(seg.length%4)seg+="=";var p=JSON.parse(decodeURIComponent(escape(atob(seg))));if(p&&p.exp&&p.exp>Date.now()&&p.role==="admin"){var el=document.getElementById("navDeliverables");if(el)el.style.display="";}}catch(e){}})();</script>
+</body>
+</html>
