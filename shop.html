@@ -28,6 +28,7 @@
   .langs button.on{color:#070A10;background:var(--gold);border-color:var(--gold)}
   .back{font-size:11.5px;color:var(--dim);text-decoration:none;white-space:nowrap}
   .back:hover{color:var(--ink)}
+  .tbanner{background:rgba(201,169,106,.1);border-bottom:1px solid rgba(201,169,106,.28);color:var(--gold2);font-size:12px;line-height:1.5;text-align:center;padding:9px 16px}
   /* layout */
   .wrap{max-width:1000px;margin:0 auto;padding:0 18px}
   .kicker{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.3em;text-transform:uppercase;font-size:10.5px;color:var(--gold)}
@@ -61,7 +62,10 @@
   .buy.on{color:#070A10;background:var(--gold);border:1px solid var(--gold);cursor:pointer;text-decoration:none}
   .note{text-align:center;color:var(--dim);font-size:12px;margin-top:20px}
   /* product image / review-cut slots */
-  .thumb .pshot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .thumb.hasimg{background:#eef0f3}
+  .thumb .pshot{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:10px}
+  .thumb .sample{position:absolute;top:10px;right:10px;font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.1em;color:#070A10;background:var(--gold2);border-radius:999px;padding:3px 8px;font-weight:800}
+  .cbody .pbrand{font-family:ui-monospace,monospace;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
   .thumb .soon{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-family:ui-monospace,monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:3px 9px;background:rgba(7,10,16,.55)}
   .rcut{position:absolute;right:9px;bottom:9px;width:44px;height:44px;border-radius:11px;overflow:hidden;border:1px solid var(--gold);box-shadow:0 6px 16px rgba(0,0,0,.5)}
   .rcut img{width:100%;height:100%;object-fit:cover}
@@ -102,6 +106,7 @@
     <a class="back" href="about.html" data-i="back">← Studio</a>
   </div>
 </div>
+<div class="tbanner" data-i="banner">Preview only — product images are placeholders, not final. To be replaced with our own photography at launch.</div>
 
 <section class="hero">
   <div class="wrap">
@@ -167,26 +172,38 @@
 </footer>
 
 <script>
-  // img: 제품 실물컷 경로(예 assets/img/shop/sun.png) · rimg: 리아 리뷰컷(옵션) · href: 쇼피/TikTok Shop 링크. 확보 시 값만 채우면 자동 반영.
+  // 초도 라인업(테스트용 시안). img=제품컷(레포 assets/img/shop) · sample=테스트용 배지 · rimg/href=리뷰컷·구매링크(확보 시 채움).
   const PRODUCTS = [
-    {tag:"Sun Care", img:null, rimg:null, href:null, cat:{en:"Daily Sun<br>Essence",ja:"デイリー<br>サンエッセンス",vi:"Tinh Chất<br>Chống Nắng"},
-      name:{en:"Daily Sun Essence",ja:"デイリー サンエッセンス",vi:"Tinh chất chống nắng hằng ngày"},
-      desc:{en:"Light, no white cast. RIA's everyday base step.",ja:"軽くて白浮きしない、リアの毎日のベース。",vi:"Nhẹ, không vệt trắng — bước nền mỗi ngày của RIA."}},
-    {tag:"Base", img:null, rimg:null, href:null, cat:{en:"Glow<br>Cushion",ja:"グロウ<br>クッション",vi:"Cushion<br>Căng Bóng"},
-      name:{en:"Glow Cushion",ja:"グロウ クッション",vi:"Cushion căng bóng"},
-      desc:{en:"Dewy finish, buildable coverage. A K-beauty staple.",ja:"みずみずしいツヤ、重ねられるカバー力。",vi:"Lớp nền căng bóng, che phủ tùy chỉnh."}},
-    {tag:"Lip", img:null, rimg:null, href:null, cat:{en:"Velvet<br>Lip Tint",ja:"ベルベット<br>リップティント",vi:"Son Tint<br>Nhung"},
-      name:{en:"Velvet Lip Tint",ja:"ベルベット リップティント",vi:"Son tint nhung"},
-      desc:{en:"Soft matte, long wear. RIA's most-asked shade.",ja:"ソフトマット、長持ち。リアへの質問No.1。",vi:"Lì mịn, lâu trôi — màu được hỏi nhiều nhất."}},
-    {tag:"Mask", img:null, rimg:null, href:null, cat:{en:"Barrier<br>Mask Pack",ja:"バリア<br>マスクパック",vi:"Mặt Nạ<br>Phục Hồi"},
-      name:{en:"Barrier Mask Pack",ja:"バリア マスクパック",vi:"Mặt nạ phục hồi hàng rào da"},
-      desc:{en:"Overnight recovery for tired skin. Weekly ritual.",ja:"疲れた肌の夜間ケア。週の習慣に。",vi:"Phục hồi qua đêm cho da mệt mỏi."}},
-    {tag:"Serum", img:null, rimg:null, href:null, cat:{en:"Glass Skin<br>Ampoule",ja:"ガラス肌<br>アンプル",vi:"Tinh Chất<br>Da Căng"},
-      name:{en:"Glass Skin Ampoule",ja:"ガラス肌 アンプル",vi:"Tinh chất da căng mọng"},
-      desc:{en:"Hydration boost for that glass-skin look.",ja:"うるおいチャージでガラス肌へ。",vi:"Cấp ẩm sâu cho làn da căng bóng."}},
-    {tag:"Cleanser", img:null, rimg:null, href:null, cat:{en:"Gentle<br>Cleanser",ja:"ジェントル<br>クレンザー",vi:"Sữa Rửa<br>Dịu Nhẹ"},
-      name:{en:"Gentle Cleanser",ja:"ジェントル クレンザー",vi:"Sữa rửa mặt dịu nhẹ"},
-      desc:{en:"Low-pH daily cleanse, no tightness.",ja:"低pHで毎日やさしく、つっぱらない。",vi:"pH thấp, rửa dịu nhẹ, không khô căng."}}
+    {tag:"Sun Care", brand:"d'Alba", img:"assets/img/shop/shop_01_dalba.jpg", sample:true, rimg:null, href:null, cat:{en:"Sun<br>Cream",vi:"Kem<br>Chống Nắng"},
+      name:{en:"UV Essence Tone-Up Sun Cream",vi:"Kem chống nắng tone-up UV Essence"},
+      desc:{en:"Italian white-truffle tone-up sun essence.",vi:"Tinh chất chống nắng nấm truffle trắng, nâng tông."}},
+    {tag:"Essence", brand:"COSRX", img:"assets/img/shop/shop_02_cosrx.jpg", sample:true, rimg:null, href:null, cat:{en:"Snail<br>Essence",vi:"Tinh Chất<br>Ốc Sên"},
+      name:{en:"Advanced Snail 96 Mucin Power Essence",vi:"Tinh chất ốc sên 96 Mucin"},
+      desc:{en:"96% snail mucin — glow and repair.",vi:"96% chất nhờn ốc sên — phục hồi & sáng da."}},
+    {tag:"Cushion", brand:"TIRTIR", img:"assets/img/shop/shop_03_tirtir.png", sample:true, rimg:null, href:null, cat:{en:"Red<br>Cushion",vi:"Cushion<br>Đỏ"},
+      name:{en:"Mask Fit Red Cushion",vi:"Cushion Mask Fit Red"},
+      desc:{en:"High-coverage, long-wear cushion.",vi:"Cushion che phủ cao, lâu trôi."}},
+    {tag:"Mask", brand:"Biodance", img:"assets/img/shop/shop_04_biodance.jpg", sample:true, rimg:null, href:null, cat:{en:"Collagen<br>Mask",vi:"Mặt Nạ<br>Collagen"},
+      name:{en:"Bio-Collagen Real Deep Mask",vi:"Mặt nạ Bio-Collagen Real Deep"},
+      desc:{en:"Overnight hydrogel collagen mask.",vi:"Mặt nạ hydrogel collagen qua đêm."}},
+    {tag:"Sun Care", brand:"Beauty of Joseon", img:null, sample:true, rimg:null, href:null, cat:{en:"Relief<br>Sun",vi:"Chống Nắng<br>Relief"},
+      name:{en:"Relief Sun Rice + Probiotics",vi:"Kem chống nắng gạo + probiotics"},
+      desc:{en:"Rice + probiotics daily sunscreen.",vi:"Kem chống nắng gạo + probiotics hằng ngày."}},
+    {tag:"Lip", brand:"rom&nd", img:"assets/img/shop/shop_06_romnd.jpg", sample:true, rimg:null, href:null, cat:{en:"Lip<br>Tint",vi:"Son<br>Tint"},
+      name:{en:"Juicy Lasting Tint",vi:"Son tint Juicy Lasting"},
+      desc:{en:"Juicy, long-lasting lip tint.",vi:"Son tint mọng nước, lâu trôi."}},
+    {tag:"Cleanser", brand:"Anua", img:"assets/img/shop/shop_07_anua.jpg", sample:true, rimg:null, href:null, cat:{en:"Cleansing<br>Oil",vi:"Dầu Tẩy<br>Trang"},
+      name:{en:"Heartleaf Pore Control Cleansing Oil",vi:"Dầu tẩy trang Heartleaf"},
+      desc:{en:"Heartleaf cleansing oil, pore care.",vi:"Dầu tẩy trang rau diếp cá, sạch lỗ chân lông."}},
+    {tag:"Sun Care", brand:"SKIN1004", img:"assets/img/shop/shop_08_skin1004.png", sample:true, rimg:null, href:null, cat:{en:"Centella<br>Sun",vi:"Chống Nắng<br>Centella"},
+      name:{en:"Madagascar Centella Air-Fit Sun",vi:"Kem chống nắng Centella Air-Fit"},
+      desc:{en:"Centella light daily sun care.",vi:"Chống nắng Centella nhẹ hằng ngày."}},
+    {tag:"Mask", brand:"Mediheal", img:"assets/img/shop/shop_09_mediheal.jpg", sample:true, rimg:null, href:null, cat:{en:"Sheet<br>Mask",vi:"Mặt Nạ<br>Giấy"},
+      name:{en:"Daily Sheet Mask",vi:"Mặt nạ giấy hằng ngày"},
+      desc:{en:"Daily sheet mask, targeted care.",vi:"Mặt nạ giấy dùng hằng ngày."}},
+    {tag:"Cleanser", brand:"banila co", img:"assets/img/shop/shop_10_banilaco.jpg", sample:true, rimg:null, href:null, cat:{en:"Cleansing<br>Balm",vi:"Sáp Tẩy<br>Trang"},
+      name:{en:"Clean It Zero Cleansing Balm",vi:"Sáp tẩy trang Clean It Zero"},
+      desc:{en:"Melt-away cleansing balm.",vi:"Sáp tẩy trang tan nhanh."}}
   ];
   // video: 리아 리뷰 숏폼 경로(예 assets/video/ria_sun.mp4). 확보 시 값만 채우면 자동재생-음소거로 재생.
   const REVIEWS = [
@@ -195,23 +212,25 @@
     {video:null, lab:{en:"Lip tint review",ja:"リップティントレビュー",vi:"Review son tint"}}
   ];
   const I18N = {
-    en:{back:"← Studio",heroKicker:"RIA Select · A.P LocaLift",heroTitle:'Real K-Beauty,<br><span class="g">curated by RIA</span>',heroSub:"RIA tries it, tests it, and tells the truth. Only verified Korean beauty makes the shelf — with her honest short-form reviews.",badge:"Store opening soon",prodTitle:"RIA's Picks",prodSub:"Korea's most-loved everyday essentials — sun care, cushion, lip, and mask. Buttons go live when the Shopee store opens.",prodNote:"Product names are shown by category. Brand listings appear at store launch.",howKicker:"How it works",howTitle:"From RIA's feed to your cart",s1t:"Discover",s1p:"See RIA use the item in a short video on Instagram.",s2t:"Curated",s2p:"Only items she genuinely recommends reach this shelf.",s3t:"Buy local",s3p:"Checkout on Shopee — delivered in your region. Coming soon.",snsKicker:"Follow RIA",chipStore:"Store (Shopee) — Coming Soon",chipShort:"RIA short-form channel — Coming Soon",chipStudio:"About A.P LocaLift →",foot:"Content studio · Global K-Beauty commerce · Curated by RIA",buy:"Buy — Coming Soon",buyLive:"Buy now →",photoSoon:"Photo soon",revTitle:"RIA Reviews",revSub:"Watch RIA test each pick — sunscreen, mask, lip tint. Videos drop soon.",revSoon:"Video coming soon"},
+    en:{back:"← Studio",heroKicker:"RIA Select · A.P LocaLift",heroTitle:'Real K-Beauty,<br><span class="g">curated by RIA</span>',heroSub:"RIA tries it, tests it, and tells the truth. Only verified Korean beauty makes the shelf — with her honest short-form reviews.",badge:"Store opening soon",prodTitle:"RIA's Picks",prodSub:"Korea's most-loved everyday essentials — sun care, cushion, lip, and mask. Buttons go live when the Shopee store opens.",prodNote:"Product names are shown by category. Brand listings appear at store launch.",howKicker:"How it works",howTitle:"From RIA's feed to your cart",s1t:"Discover",s1p:"See RIA use the item in a short video on Instagram.",s2t:"Curated",s2p:"Only items she genuinely recommends reach this shelf.",s3t:"Buy local",s3p:"Checkout on Shopee — delivered in your region. Coming soon.",snsKicker:"Follow RIA",chipStore:"Store (Shopee) — Coming Soon",chipShort:"RIA short-form channel — Coming Soon",chipStudio:"About A.P LocaLift →",foot:"Content studio · Global K-Beauty commerce · Curated by RIA",buy:"Buy — Coming Soon",buyLive:"Buy now →",photoSoon:"Photo soon",revTitle:"RIA Reviews",revSub:"Watch RIA test each pick — sunscreen, mask, lip tint. Videos drop soon.",revSoon:"Video coming soon",banner:"Preview only — product images are placeholders, not final. To be replaced with our own photography at launch.",sample:"SAMPLE"},
     ja:{back:"← スタジオ",heroKicker:"RIAセレクト · A.P LocaLift",heroTitle:'リアルなK-Beauty、<br><span class="g">リアのキュレーション</span>',heroSub:"リアが試して、検証して、正直にレビュー。認めたアイテムだけを、ショート動画のリアルな使用感とともにお届け。",badge:"ストア オープン間近",prodTitle:"リアのおすすめ",prodSub:"韓国で今いちばん愛される定番 — 日焼け止め・クッション・リップ・マスク。ボタンはShopeeストア開設時に有効化。",prodNote:"商品名はカテゴリー表記です。ブランド出品はストア開設時に公開。",howKicker:"使い方",howTitle:"リアの投稿からあなたのカートへ",s1t:"見つける",s1p:"Instagramのショート動画でリアの使用シーンを。",s2t:"厳選",s2p:"本当におすすめのアイテムだけを棚に。",s3t:"現地で購入",s3p:"Shopeeで決済、お住まいの地域へ配送。まもなく。",snsKicker:"リアをフォロー",chipStore:"ストア(Shopee) — 近日公開",chipShort:"リア ショート動画チャンネル — 近日公開",chipStudio:"A.P LocaLiftについて →",foot:"コンテンツスタジオ · グローバルK-Beautyコマース · キュレーション by リア",buy:"購入 — 近日公開",buyLive:"今すぐ購入 →",photoSoon:"写真準備中",revTitle:"リアのレビュー",revSub:"リアが各アイテムを実際にテスト — 日焼け止め・マスク・リップ。動画は近日公開。",revSoon:"動画 近日公開"},
-    vi:{back:"← Studio",heroKicker:"RIA Select · A.P LocaLift",heroTitle:'K-Beauty thật,<br><span class="g">tuyển chọn bởi RIA</span>',heroSub:"RIA dùng thử, kiểm chứng và đánh giá thật lòng. Chỉ mỹ phẩm Hàn đã kiểm chứng mới lên kệ — kèm video review ngắn của cô ấy.",badge:"Cửa hàng sắp mở",prodTitle:"RIA tuyển chọn",prodSub:"Những món được yêu thích nhất tại Hàn — chống nắng, cushion, son, mặt nạ. Nút mua kích hoạt khi cửa hàng Shopee mở.",prodNote:"Tên sản phẩm hiển thị theo danh mục. Thương hiệu xuất hiện khi cửa hàng ra mắt.",howKicker:"Cách hoạt động",howTitle:"Từ trang của RIA đến giỏ hàng của bạn",s1t:"Khám phá",s1p:"Xem RIA dùng sản phẩm trong video ngắn trên Instagram.",s2t:"Tuyển chọn",s2p:"Chỉ những món cô ấy thật sự khuyên dùng mới lên kệ.",s3t:"Mua tại chỗ",s3p:"Thanh toán trên Shopee — giao tận khu vực của bạn. Sắp có.",snsKicker:"Theo dõi RIA",chipStore:"Cửa hàng (Shopee) — Sắp có",chipShort:"Kênh video ngắn của RIA — Sắp có",chipStudio:"Về A.P LocaLift →",foot:"Studio nội dung · Thương mại K-Beauty toàn cầu · Tuyển chọn bởi RIA",buy:"Mua — Sắp có",buyLive:"Mua ngay →",photoSoon:"Ảnh sắp có",revTitle:"RIA Review",revSub:"Xem RIA thử từng sản phẩm — chống nắng, mặt nạ, son tint. Video sắp ra mắt.",revSoon:"Video sắp có"}
+    vi:{back:"← Studio",heroKicker:"RIA Select · A.P LocaLift",heroTitle:'K-Beauty thật,<br><span class="g">tuyển chọn bởi RIA</span>',heroSub:"RIA dùng thử, kiểm chứng và đánh giá thật lòng. Chỉ mỹ phẩm Hàn đã kiểm chứng mới lên kệ — kèm video review ngắn của cô ấy.",badge:"Cửa hàng sắp mở",prodTitle:"RIA tuyển chọn",prodSub:"Những món được yêu thích nhất tại Hàn — chống nắng, cushion, son, mặt nạ. Nút mua kích hoạt khi cửa hàng Shopee mở.",prodNote:"Tên sản phẩm hiển thị theo danh mục. Thương hiệu xuất hiện khi cửa hàng ra mắt.",howKicker:"Cách hoạt động",howTitle:"Từ trang của RIA đến giỏ hàng của bạn",s1t:"Khám phá",s1p:"Xem RIA dùng sản phẩm trong video ngắn trên Instagram.",s2t:"Tuyển chọn",s2p:"Chỉ những món cô ấy thật sự khuyên dùng mới lên kệ.",s3t:"Mua tại chỗ",s3p:"Thanh toán trên Shopee — giao tận khu vực của bạn. Sắp có.",snsKicker:"Theo dõi RIA",chipStore:"Cửa hàng (Shopee) — Sắp có",chipShort:"Kênh video ngắn của RIA — Sắp có",chipStudio:"Về A.P LocaLift →",foot:"Studio nội dung · Thương mại K-Beauty toàn cầu · Tuyển chọn bởi RIA",buy:"Mua — Sắp có",buyLive:"Mua ngay →",photoSoon:"Ảnh sắp có",revTitle:"RIA Review",revSub:"Xem RIA thử từng sản phẩm — chống nắng, mặt nạ, son tint. Video sắp ra mắt.",revSoon:"Video sắp có",banner:"Chỉ xem thử — hình ảnh sản phẩm là tạm thời, sẽ thay bằng ảnh chụp thực tế khi mở bán.",sample:"THỬ"}
   };
   function renderProducts(lang){
     const g=document.getElementById('grid');
     g.innerHTML=PRODUCTS.map(p=>{
       const shot = p.img
-        ? `<img class="pshot" src="${p.img}" alt="${p.name[lang]}" loading="lazy">`
+        ? `<img class="pshot" src="${p.img}" alt="${p.brand} ${p.name[lang]}" loading="lazy">`
         : `<span class="cat">${p.cat[lang]}</span><span class="soon">${I18N[lang].photoSoon}</span>`;
+      const sample = p.sample ? `<span class="sample">${I18N[lang].sample}</span>` : '';
       const rcut = p.rimg ? `<div class="rcut"><img src="${p.rimg}" alt="RIA review" loading="lazy"></div>` : '';
       const buy = p.href
         ? `<a class="buy on" href="${p.href}" target="_blank" rel="noopener">${I18N[lang].buyLive}</a>`
         : `<button class="buy" disabled>${I18N[lang].buy}</button>`;
+      const brand = p.brand ? `<div class="pbrand">${p.brand}</div>` : '';
       return `<div class="card">
-        <div class="thumb"><span class="tag">${p.tag}</span>${shot}${rcut}</div>
-        <div class="cbody"><h3>${p.name[lang]}</h3><div class="desc">${p.desc[lang]}</div>${buy}</div>
+        <div class="thumb${p.img?' hasimg':''}"><span class="tag">${p.tag}</span>${shot}${sample}${rcut}</div>
+        <div class="cbody">${brand}<h3>${p.name[lang]}</h3><div class="desc">${p.desc[lang]}</div>${buy}</div>
       </div>`;
     }).join('');
   }
