@@ -176,34 +176,34 @@
 <script>
   // 초도 라인업(테스트용 시안). img=제품컷(레포 assets/img/shop) · sample=테스트용 배지 · rimg/href=리뷰컷·구매링크(확보 시 채움).
   const PRODUCTS = [
-    {tag:"Sun Care", brand:"d'Alba", img:"assets/img/shop/shop_01_dalba.jpg", sample:true, rimg:"assets/img/rimg_suncream.png", href:null, cat:{en:"Sun<br>Cream",vi:"Kem<br>Chống Nắng"},
+    {tag:"Sun Care", brand:"d'Alba", img:"assets/img/shop/shop_01_dalba.jpg", sample:true, rimg:"assets/img/rimg_suncream.png", href:null, detail:"products/detail.html#p1", cat:{en:"Sun<br>Cream",vi:"Kem<br>Chống Nắng"},
       name:{en:"UV Essence Tone-Up Sun Cream",vi:"Kem chống nắng tone-up UV Essence"},
       desc:{en:"Italian white-truffle tone-up sun essence.",vi:"Tinh chất chống nắng nấm truffle trắng, nâng tông."}},
-    {tag:"Essence", brand:"COSRX", img:"assets/img/shop/shop_02_cosrx.jpg", sample:true, rimg:"assets/img/rimg_essence.png", href:null, cat:{en:"Snail<br>Essence",vi:"Tinh Chất<br>Ốc Sên"},
+    {tag:"Essence", brand:"COSRX", img:"assets/img/shop/shop_02_cosrx.jpg", sample:true, rimg:"assets/img/rimg_essence.png", href:null, detail:"products/detail.html#p2", cat:{en:"Snail<br>Essence",vi:"Tinh Chất<br>Ốc Sên"},
       name:{en:"Advanced Snail 96 Mucin Power Essence",vi:"Tinh chất ốc sên 96 Mucin"},
       desc:{en:"96% snail mucin — glow and repair.",vi:"96% chất nhờn ốc sên — phục hồi & sáng da."}},
-    {tag:"Cushion", brand:"TIRTIR", img:"assets/img/shop/shop_03_tirtir.png", sample:true, rimg:"assets/img/rimg_cushion.png", href:null, cat:{en:"Red<br>Cushion",vi:"Cushion<br>Đỏ"},
+    {tag:"Cushion", brand:"TIRTIR", img:"assets/img/shop/shop_03_tirtir.png", sample:true, rimg:"assets/img/rimg_cushion.png", href:null, detail:"products/detail.html#p3", cat:{en:"Red<br>Cushion",vi:"Cushion<br>Đỏ"},
       name:{en:"Mask Fit Red Cushion",vi:"Cushion Mask Fit Red"},
       desc:{en:"High-coverage, long-wear cushion.",vi:"Cushion che phủ cao, lâu trôi."}},
-    {tag:"Mask", brand:"Biodance", img:"assets/img/shop/shop_04_biodance.jpg", sample:true, rimg:"assets/img/rimg_mask.png", href:null, cat:{en:"Collagen<br>Mask",vi:"Mặt Nạ<br>Collagen"},
+    {tag:"Mask", brand:"Biodance", img:"assets/img/shop/shop_04_biodance.jpg", sample:true, rimg:"assets/img/rimg_mask.png", href:null, detail:"products/detail.html#p4", cat:{en:"Collagen<br>Mask",vi:"Mặt Nạ<br>Collagen"},
       name:{en:"Bio-Collagen Real Deep Mask",vi:"Mặt nạ Bio-Collagen Real Deep"},
       desc:{en:"Overnight hydrogel collagen mask.",vi:"Mặt nạ hydrogel collagen qua đêm."}},
-    {tag:"Sun Care", brand:"Beauty of Joseon", img:null, sample:true, rimg:null, href:null, cat:{en:"Relief<br>Sun",vi:"Chống Nắng<br>Relief"},
+    {tag:"Sun Care", brand:"Beauty of Joseon", img:null, sample:true, rimg:null, href:null, hidden:true, detail:"products/detail.html#p5", cat:{en:"Relief<br>Sun",vi:"Chống Nắng<br>Relief"},
       name:{en:"Relief Sun Rice + Probiotics",vi:"Kem chống nắng gạo + probiotics"},
       desc:{en:"Rice + probiotics daily sunscreen.",vi:"Kem chống nắng gạo + probiotics hằng ngày."}},
-    {tag:"Lip", brand:"rom&nd", img:"assets/img/shop/shop_06_romnd.jpg", sample:true, rimg:"assets/img/rimg_tint.png", href:null, cat:{en:"Lip<br>Tint",vi:"Son<br>Tint"},
+    {tag:"Lip", brand:"rom&nd", img:"assets/img/shop/shop_06_romnd.jpg", sample:true, rimg:"assets/img/rimg_tint.png", href:null, detail:"products/detail.html#p6", cat:{en:"Lip<br>Tint",vi:"Son<br>Tint"},
       name:{en:"Juicy Lasting Tint",vi:"Son tint Juicy Lasting"},
       desc:{en:"Juicy, long-lasting lip tint.",vi:"Son tint mọng nước, lâu trôi."}},
-    {tag:"Cleanser", brand:"Anua", img:"assets/img/shop/shop_07_anua.jpg", sample:true, rimg:"assets/img/rimg_cleanser.png", href:null, cat:{en:"Cleansing<br>Oil",vi:"Dầu Tẩy<br>Trang"},
+    {tag:"Cleanser", brand:"Anua", img:"assets/img/shop/shop_07_anua.jpg", sample:true, rimg:"assets/img/rimg_cleanser.png", href:null, detail:"products/detail.html#p7", cat:{en:"Cleansing<br>Oil",vi:"Dầu Tẩy<br>Trang"},
       name:{en:"Heartleaf Pore Control Cleansing Oil",vi:"Dầu tẩy trang Heartleaf"},
       desc:{en:"Heartleaf cleansing oil, pore care.",vi:"Dầu tẩy trang rau diếp cá, sạch lỗ chân lông."}},
-    {tag:"Sun Care", brand:"SKIN1004", img:"assets/img/shop/shop_08_skin1004.png", sample:true, rimg:null, href:null, cat:{en:"Centella<br>Sun",vi:"Chống Nắng<br>Centella"},
+    {tag:"Sun Care", brand:"SKIN1004", img:"assets/img/shop/shop_08_skin1004.png", sample:true, rimg:null, href:null, detail:"products/detail.html#p8", cat:{en:"Centella<br>Sun",vi:"Chống Nắng<br>Centella"},
       name:{en:"Madagascar Centella Air-Fit Sun",vi:"Kem chống nắng Centella Air-Fit"},
       desc:{en:"Centella light daily sun care.",vi:"Chống nắng Centella nhẹ hằng ngày."}},
-    {tag:"Mask", brand:"Mediheal", img:"assets/img/shop/shop_09_mediheal.jpg", sample:true, rimg:null, href:null, cat:{en:"Sheet<br>Mask",vi:"Mặt Nạ<br>Giấy"},
+    {tag:"Mask", brand:"Mediheal", img:"assets/img/shop/shop_09_mediheal.jpg", sample:true, rimg:null, href:null, detail:"products/detail.html#p9", cat:{en:"Sheet<br>Mask",vi:"Mặt Nạ<br>Giấy"},
       name:{en:"Daily Sheet Mask",vi:"Mặt nạ giấy hằng ngày"},
       desc:{en:"Daily sheet mask, targeted care.",vi:"Mặt nạ giấy dùng hằng ngày."}},
-    {tag:"Cleanser", brand:"banila co", img:"assets/img/shop/shop_10_banilaco.jpg", sample:true, rimg:null, href:null, cat:{en:"Cleansing<br>Balm",vi:"Sáp Tẩy<br>Trang"},
+    {tag:"Cleanser", brand:"banila co", img:"assets/img/shop/shop_10_banilaco.jpg", sample:true, rimg:null, href:null, detail:"products/detail.html#p10", cat:{en:"Cleansing<br>Balm",vi:"Sáp Tẩy<br>Trang"},
       name:{en:"Clean It Zero Cleansing Balm",vi:"Sáp tẩy trang Clean It Zero"},
       desc:{en:"Melt-away cleansing balm.",vi:"Sáp tẩy trang tan nhanh."}}
   ];
@@ -220,7 +220,8 @@
   };
   function renderProducts(lang){
     const g=document.getElementById('grid');
-    g.innerHTML=PRODUCTS.map(p=>{
+    // 사진 없는 SKU(예: 05 조선미녀 placeholder)·hidden 플래그 카드는 노출 제외. 실물컷 확보 시 img 채우고 hidden 해제하면 자동 재노출.
+    g.innerHTML=PRODUCTS.filter(p=>p.img && !p.hidden).map(p=>{
       const shot = p.img
         ? `<img class="pshot" src="${p.img}" alt="${p.brand} ${p.name[lang]}" loading="lazy">`
         : `<span class="cat">${p.cat[lang]}</span><span class="soon">${I18N[lang].photoSoon}</span>`;
