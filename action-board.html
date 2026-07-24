@@ -55,6 +55,19 @@
   .st.wip{color:#070A10;background:var(--wip)}
   .st.done{color:#070A10;background:var(--mint)}
   .note{color:var(--dim);font-size:12px;text-align:center;margin:20px 0 0}
+  .mw{margin:36px 0 0;border-top:1px solid var(--line);padding-top:30px}
+  .mw .mh{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+  .mw .mh h2{font-size:16px}
+  .mw .mh .tag{font-family:ui-monospace,monospace;font-size:11px;color:#070A10;background:var(--gold2);border-radius:6px;padding:2px 8px;font-weight:800}
+  .mw .sub{color:var(--dim);font-size:12.5px;margin-bottom:14px}
+  .mwcols{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:820px){.mwcols{grid-template-columns:1fr}}
+  .mwcol{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:14px;padding:18px}
+  .mwcol .ct{color:var(--gold2);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+  .mwcol .cl{color:var(--sub);font-size:12.5px;margin:8px 0 12px;line-height:1.6}
+  .mwcol .r{border:1px dashed var(--line);border-radius:10px;padding:9px 11px;margin-bottom:7px}
+  .mwcol .r .rt{font-size:12px;color:var(--ink);font-weight:600}
+  .mwcol .r .s{color:var(--dim);font-size:11px;margin-top:2px}
   footer{border-top:1px solid var(--line);margin-top:40px;padding:32px 0 52px;color:var(--dim);font-size:12px;text-align:center}
 </style>
 </head>
@@ -67,7 +80,6 @@
       <a href="content.html" data-p="content">콘텐츠 엔진</a>
       <a href="about.html" data-p="about">회사 소개</a>
       <a href="shop.html" data-p="shop">SHOP</a>
-      <a href="market-watch.html" data-p="market">마켓 워치</a>
       <a href="ir.html" data-p="ir">IR</a>
       <a id="navDeliverables" href="deliverables.html" data-p="deliverables" style="display:none">산출물</a>
       <a id="navActionBoard" href="action-board.html" data-p="action" style="display:none">액션보드</a>
@@ -95,6 +107,34 @@
 <main class="wrap" id="board"></main>
 
 <p class="note">완료 항목은 체크 시 회색 처리됩니다 · 상태 변경 요청은 to_기획실장 교신함으로</p>
+
+<section class="wrap mw" id="marketwatch">
+  <div class="mh"><span class="tag">MW</span><h2>리아 마켓 워치</h2></div>
+  <div class="sub">동남아 K뷰티 커머스 인텔리전스 · 주간 업데이트 (액션보드 통합)</div>
+  <div class="mwcols">
+    <div class="mwcol">
+      <div class="ct">시장 동향</div>
+      <div class="cl">동남아(베트남·말레이시아) K뷰티 소셜커머스, 쇼피·틱톡샵 흐름, 카테고리별 수요 시그널.</div>
+      <div class="r"><div class="rt">베트남 소셜커머스 성장</div><div class="s">주간 업데이트 예정</div></div>
+      <div class="r"><div class="rt">쇼피 · 틱톡샵 K뷰티 카테고리</div><div class="s">주간 업데이트 예정</div></div>
+      <div class="r"><div class="rt">선케어 · 마스크 수요 시그널</div><div class="s">주간 업데이트 예정</div></div>
+    </div>
+    <div class="mwcol">
+      <div class="ct">규제 업데이트</div>
+      <div class="cl">인플루언서 표시광고, 베트남 전자상거래·광고법, 화장품 수입·표시 규정 변화.</div>
+      <div class="r"><div class="rt">베트남 광고법 · 표시광고</div><div class="s">주간 업데이트 예정</div></div>
+      <div class="r"><div class="rt">전자상거래 · 크로스보더 규정</div><div class="s">주간 업데이트 예정</div></div>
+      <div class="r"><div class="rt">화장품 수입 · 성분 표시</div><div class="s">주간 업데이트 예정</div></div>
+    </div>
+    <div class="mwcol">
+      <div class="ct">채널 지표</div>
+      <div class="cl">리아 인스타·숏폼 채널 성장, 링크인바이오 유입, 셀렉트숍 전환 퍼널.</div>
+      <div class="r"><div class="rt">리아 인스타 · 숏폼 팔로워</div><div class="s">채널 개설 후 연동</div></div>
+      <div class="r"><div class="rt">링크인바이오 → shop 유입</div><div class="s">스토어 오픈 후 집계</div></div>
+      <div class="r"><div class="rt">셀렉트숍 전환 퍼널</div><div class="s">스토어 오픈 후 집계</div></div>
+    </div>
+  </div>
+</section>
 
 <footer>A.P LocaLift · 대표 액션 보드 · 내부 관리용 (admin 전용)</footer>
 
