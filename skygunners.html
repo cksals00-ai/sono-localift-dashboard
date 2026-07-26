@@ -374,11 +374,28 @@
   .icard.tv{border-top-color:#e08a2f}
   .icard.rq{border-top-color:#159e8f}
   .icard.gr{border-top-color:#5b6cc9}
+  .icard.un{border-top-color:#9d3b4d}
   .icard h3{font-size:14.5px;font-weight:900;display:flex;align-items:center;gap:7px;margin-bottom:6px;line-height:1.3}
   .icard h3 .em{font-size:17px;flex:none}
   .icard p{font-size:12.5px;color:var(--mut);font-weight:600;line-height:1.65}
   .icard p b{color:var(--ink)}
   .icard a{display:inline-block;margin-top:9px;font-size:11.5px;font-weight:800;color:var(--navy);border:2px solid var(--navy2);border-radius:6px;padding:4px 10px;text-decoration:none;background:var(--bg)}
+  .icard.tn{border-top-color:#e11d48}
+  .tn .tmeta{display:block;font-size:12px;color:var(--ink);line-height:1.75;font-weight:600;margin-top:1px}
+  .tn .tmeta b{color:#e11d48;font-weight:800}
+  .tn .tmeta .win{color:#159e8f;font-weight:800}
+  .tn .tags{display:block;margin-top:7px}
+  .tn .tags a{display:inline-block;margin:3px 5px 0 0;margin-top:3px;font-size:10.5px;font-weight:800;padding:3px 8px;border:2px solid #f0a3b5;border-radius:6px;color:#b0143a;background:#fff5f8;text-decoration:none}
+  .tcat{grid-column:1/-1;font-size:13.5px;font-weight:900;color:#e11d48;letter-spacing:-.3px;margin:10px 2px -3px;padding-left:2px;border-left:4px solid #e11d48;padding-left:8px}
+  .tcat:first-child{margin-top:2px}
+
+  /* ---------- sticky top nav ---------- */
+  html{scroll-behavior:smooth}
+  [id]{scroll-margin-top:54px}
+  .topnav{position:sticky;top:0;z-index:40;background:var(--navy2);border-bottom:3px solid #0c1a2e;overflow-x:auto;white-space:nowrap;padding:8px 10px;scrollbar-width:none;margin:0 -16px 8px}
+  .topnav::-webkit-scrollbar{display:none}
+  .topnav a{display:inline-block;color:#fff;background:rgba(255,255,255,.10);border:1.5px solid rgba(255,255,255,.28);border-radius:999px;padding:5px 12px;margin-right:6px;font-size:12px;font-weight:800;text-decoration:none}
+  .topnav a:active,.topnav a:hover{background:var(--accent);color:var(--navy2);border-color:var(--navy2)}
 </style>
 </head>
 <body>
@@ -411,6 +428,29 @@
 </header>
 
 <div class="wrap">
+
+  <nav class="topnav" aria-label="섹션 바로가기">
+    <a href="#matchesBox">경기결과</a>
+    <a href="#fixturesBox">대회일정</a>
+    <a href="#oppBox">상대팀</a>
+    <a href="#timetableBox">타임테이블</a>
+    <a href="#routesBox">이동</a>
+    <a href="#resv">숙박</a>
+    <a href="#tshirt">단체티</a>
+    <a href="#uniBox">유니폼규정</a>
+    <a href="#dinner">석식</a>
+    <a href="#eatsBox">맛집</a>
+    <a href="#gearBox">보호장비</a>
+    <a href="#tournBox">대회검색</a>
+    <a href="#kidsBox">성장·훈련</a>
+    <a href="#eliteBox">엘리트</a>
+    <a href="#agBox">아시안게임</a>
+    <a href="#pgBox">학부모</a>
+    <a href="#tripBox">제천나들이</a>
+    <a href="#reqBox">요청</a>
+    <a href="#rosterBox">명단</a>
+    <a href="#newsList">뉴스</a>
+  </nav>
 
   <!-- SEASON STATS -->
   <div class="admin-only block" style="text-align:right;margin:22px 0 -6px"><button class="manage-btn" data-sec="stats">＋ 시즌성적 관리</button></div>
@@ -664,16 +704,23 @@
     </div>
   </section>
 
+  <!-- UNIFORM RULES -->
+  <section>
+    <div class="sec-h"><h2>유니폼 · 이너웨어 규정</h2><span class="en">Uniform Rules</span><button class="manage-btn admin-only" data-sec="uniform">＋ 관리</button></div>
+    <div class="icards" id="uniBox"></div>
+    <p class="refnote">* 우리 팀(TOP농구교실·소노) 복장 규정 + 초등농구연맹 FIBA 룰 기준이에요 — <b>양말=흰색, 이너웨어=블랙 컴프레션, 발목보호대 강력추천</b>. 출처: 호원 아버님 공유 블로그 · 초등농구연맹 유니폼 규정(다음스포츠) · <a href="https://m.sports.naver.com/basketball/article/065/0000280948" target="_blank" style="color:var(--navy);font-weight:800">참고 기사(전국초등농구대회)</a>.</p>
+  </section>
+
   <!-- DINNER OPTIONS -->
   <section id="dinner">
     <div class="sec-h"><h2>1일차 단체 석식 (확정)</h2><span class="en">Dinner · 8/15</span></div>
-    <div class="vote-callout"><span>✅</span><span><b>석식 장소가 「만이갈비」로 확정됐어요.</b> 톡방 재투표 1위 · 전화예약 완료. 운동하는 초등 3학년이라 <b>초등 요금</b>으로 받아주셨어요.</span></div>
+    <div class="vote-callout"><span>✅</span><span><b>석식 장소가 「만이갈비 청전점」으로 확정됐어요.</b> 톡방 재투표 1위 · 전화예약 완료. 운동하는 초등 3학년이라 <b>초등 요금</b>으로 받아주셨어요.</span></div>
     <div class="vcards" style="grid-template-columns:1fr">
       <div class="vcard lead">
-        <div class="vc-h"><div class="nm">만이갈비</div><div class="ty">8/15(토) 1경기 종료 후 · 18:30 단체 석식</div></div>
+        <div class="vc-h"><div class="nm">만이갈비 청전점</div><div class="ty">8/15(토) 1경기 종료 후 · 18:30 단체 석식</div></div>
         <div class="vc-b"><div class="vtags"><span class="vt">예약 확정</span><span class="vt">초등 요금</span><span class="vt">단체석</span></div>
           <div class="pro">👍 톡방 재투표 1위로 확정, 담당 학부모가 전화예약까지 완료했어요. 운동하는 아이 기준 초등 요금 적용.</div>
-          <a class="vlink" href="https://map.naver.com/p/search/제천 만이갈비" target="_blank">📍 지도 보기</a></div>
+          <a class="vlink" href="https://map.naver.com/p/search/제천 만이갈비 청전점" target="_blank">📍 지도 보기</a></div>
       </div>
     </div>
   </section>
@@ -868,6 +915,13 @@
     <p class="refnote">* 출처: KBL 유소년 홈페이지 · 바스켓코리아(2026.6.17 유스 드림 캠프) · 뉴시스(2026.5.21 Y리그) · KBL TV. Y리그(공식 리그)와 유스드림컵(클럽대회)은 별개 대회이며, 소노 U-9은 8월 제천 클럽대회를 준비 중입니다.</p>
   </section>
 
+  <!-- TOURNAMENT CALENDAR -->
+  <section>
+    <div class="sec-h"><h2>유소년 농구대회 캘린더 (U9·U10)</h2><span class="en">Tournaments</span><button class="manage-btn admin-only" data-sec="tourn">＋ 관리</button></div>
+    <div class="icards" id="tournBox"></div>
+    <p class="refnote">* U9·U10이 참가할 만한 <b>주요·대표 대회</b> 중심이에요(전국 모든 지역 소규모 대회를 망라하진 못해요). 신청기간·개최일은 <b>매년·지역마다 달라지니</b> 아래 공식 일정에서 꼭 확인하세요 — <a href="https://www.koreabasketball.or.kr/game/dom_schedule.php" target="_blank" style="color:var(--navy);font-weight:800">농구협회 국내일정</a> · <a href="https://g1.sports.or.kr/schedule/year.do" target="_blank" style="color:var(--navy);font-weight:800">대한체육회 스포츠지원포털</a> · <a href="http://minibasketball.co.kr/" target="_blank" style="color:var(--navy);font-weight:800">한국초등농구연맹</a> · <a href="https://youth.kbl.or.kr/" target="_blank" style="color:var(--navy);font-weight:800">KBL 유소년</a>. 특정 대회의 3개년 신청/개최일 상세가 필요하면 콕 집어 말씀해 주세요.</p>
+  </section>
+
   <!-- PARENT GUIDE -->
   <section>
     <div class="sec-h"><h2>엄마·아빠 가이드</h2><span class="en">Parents</span><button class="manage-btn admin-only" data-sec="parentguide">＋ 관리</button></div>
@@ -995,16 +1049,19 @@ var firebaseConfig = {
     ],
     timetable:[
       {day:'DAY 1 · 8/15 (토)',time:'15:00',title:'체육관 집결',tag:'집결',venue:'어울림체육센터'},
-      {day:'DAY 1 · 8/15 (토)',time:'16:00',title:'소노 U-9 1경기 vs KT',tag:'경기',venue:''},
+      {day:'DAY 1 · 8/15 (토)',time:'16:00',title:'소노 U-9 1경기 vs KT',tag:'경기',venue:'홈 유니폼'},
       {day:'DAY 1 · 8/15 (토)',time:'17:00',title:'1경기 종료',tag:'종료',venue:''},
-      {day:'DAY 1 · 8/15 (토)',time:'18:30',title:'단체 석식 (뷔페식)',tag:'식사',venue:'투표로 결정'},
+      {day:'DAY 1 · 8/15 (토)',time:'18:30',title:'단체 석식 (만이갈비 청전점)',tag:'식사',venue:''},
       {day:'DAY 1 · 8/15 (토)',time:'20:00',title:'1일차 종료 · 숙소 이동/휴식',tag:'휴식',venue:''},
       {day:'DAY 2 · 8/16 (일)',time:'10:00',title:'체육관 집결',tag:'집결',venue:'세명대체육관'},
-      {day:'DAY 2 · 8/16 (일)',time:'10:45',title:'소노 U-9 2경기 vs 정관장',tag:'경기',venue:''},
+      {day:'DAY 2 · 8/16 (일)',time:'10:45',title:'소노 U-9 2경기 vs 정관장',tag:'경기',venue:'홈 유니폼'},
       {day:'DAY 2 · 8/16 (일)',time:'11:30',title:'2경기 종료 · 개별 가족 시간(점심/관람)',tag:'자유',venue:''},
       {day:'DAY 2 · 8/16 (일)',time:'15:00',title:'체육관 재집결',tag:'집결',venue:'어울림체육센터'},
-      {day:'DAY 2 · 8/16 (일)',time:'16:00',title:'소노 U-9 3경기 vs SK',tag:'경기',venue:''},
-      {day:'DAY 2 · 8/16 (일)',time:'17:00',title:'3경기 · 예선 일정 종료',tag:'종료',venue:''}
+      {day:'DAY 2 · 8/16 (일)',time:'16:00',title:'소노 U-9 3경기 vs SK',tag:'경기',venue:'원정 유니폼'},
+      {day:'DAY 2 · 8/16 (일)',time:'17:00',title:'3경기 · 예선 일정 종료',tag:'종료',venue:''},
+      {day:'DAY 3 · 8/17 (월) · 본선(예선 2위 이내 진출 시)',time:'11:30',title:'준결승전 (4강)',tag:'경기',venue:'세명대 or 어울림'},
+      {day:'DAY 3 · 8/17 (월) · 본선(예선 2위 이내 진출 시)',time:'13:10',title:'결승전 (FINAL)',tag:'경기',venue:'어울림체육센터'},
+      {day:'DAY 3 · 8/17 (월) · 본선(예선 2위 이내 진출 시)',time:'15:40',title:'시상식',tag:'시상',venue:'제천체육관'}
     ],
     routes:[
       {from:'소노벨 단양',to:'제천 어울림체육센터',dist:'약 33km',time:'약 40분',note:'DAY1 1경기 · DAY2 3경기 (제천 관전로 70, 신백동)',url:'https://map.naver.com/p/search/제천 어울림체육센터'},
@@ -1072,6 +1129,53 @@ var firebaseConfig = {
       {cls:'gr',icon:'⭐',title:'중급 · 표준 (약 3~7만원) — 맥데이비드(McDavid)',body:'무릎 충격 <b>패드형</b>·발목 서포트의 대중적 표준. 가볍고 활동성이 좋아 유소년에 무난해요. NBA에서 <b>드웨인 웨이드</b>가 착용한 브랜드로 유명.',link:'https://search.shopping.naver.com/search/all?query=맥데이비드 농구 보호대',linkText:'판매처·가격'},
       {cls:'gr',icon:'🦶',title:'프리미엄 · 발목 (약 6~9만원) — 잠스트(ZAMST)',body:'좌우 지지대로 <b>강하게 고정</b>하는 발목 보호대. <b>“NBA 선수들이 신뢰”</b>하는 브랜드로, <b>스테픈 커리·케빈 듀란트</b>처럼 발목 부상 이력이 있는 선수들도 보호대를 착용해요. 접질림이 잦은 아이에게 추천.',link:'https://search.shopping.naver.com/search/all?query=잠스트 발목보호대',linkText:'판매처·가격'},
       {cls:'gr',icon:'🏀',title:'프리미엄 · 무릎 (약 10~15만원) — 바우어파인드(Bauerfeind)',body:'<b>NBA 공식 라이선스</b> 무릎 서포트인 독일 프리미엄 브랜드. <b>더크 노비츠키</b>가 공식 앰버서더예요. 압박+지지가 확실히 필요할 때 최상급 선택.',link:'https://search.shopping.naver.com/search/all?query=바우어파인드 무릎보호대',linkText:'판매처·가격'}
+    ],
+    uniform:[
+      {cls:'un',icon:'👕',title:'이너웨어 = 블랙 (컴프레션)',body:'반팔·긴팔 <b>컴프레션("쫄쫄이")</b> 또는 <b>유니폼만</b> 착용해요. <b>일반 반팔/긴팔 티셔츠·히트텍은 불가</b>. 팀 전원 <b>블랙으로 통일</b>(세탁 편함). 추위·근육부상 예방으로 이너웨어 착용을 권장해요.',link:'https://v.daum.net/v/20250626152941966',linkText:'규정 기사'},
+      {cls:'un',icon:'🛒',title:'추천 이너웨어 — 코어핏 키즈 (호원 아버님 추천)',body:'아동용 스포츠 이너웨어 세트. 가볍고 빨리 마르며 세탁기 OK, 아동 사이즈(4XS~S). 정가 43,000원 → <b>할인가 약 14,900원</b>(시기별 변동). <b>블랙 옵션</b>으로 규정에 맞춰 구매하세요.',link:'https://m.withplayerskids.com/product/코어핏-키즈-이너웨어-세트/5185/category/213/display/1/',linkText:'제품 보기'},
+      {cls:'un',icon:'🧦',title:'양말 = 흰색',body:'우리 팀(TOP농구교실)은 <b>흰색으로 통일</b>해요. TOP 양말 또는 <b>흰색 기성품</b> 양말 OK. 팀 전원 같은 색을 신어야 하고 <b>겉으로 보이게</b> 신으세요.',link:'',linkText:''},
+      {cls:'un',icon:'🎽',title:'유니폼 상·하의',body:'상의는 하의와 <b>같은 색·앞뒤 동일</b>, 하의는 <b>무릎 위</b>에서 끝나야 하고 <b>상의는 바지 안에 넣어</b> 입어요(올해부터 FIBA 성인 룰 적용). 홈/어웨이 구분해 준비하세요.',link:'',linkText:''},
+      {cls:'un',icon:'🔁',title:'홈/어웨이 착용 (제천 대회)',body:'예선 <b>1경기(vs KT)·2경기(vs 정관장) = 홈 유니폼</b>, <b>3경기(vs SK) = 원정(어웨이) 유니폼</b>이에요. 본선 진출 시엔 별도 안내에 따라 준비. <b>홈·어웨이 둘 다</b> 챙겨오세요!',link:'',linkText:''},
+      {cls:'un',icon:'🦶',title:'발목보호대 = 강력추천',body:'부상 예방 차원에서 <b>발목보호대는 강력추천</b>이에요. 약국·저가 제품보다 처음엔 조금 불편해도 <b>보호력 좋은 제품</b>을 권해요(예: <b>잠스트 A-1</b>). “부상은 치료보다 예방이 우선!”',link:'https://search.shopping.naver.com/search/all?query=잠스트 A1 발목보호대',linkText:'판매처·가격'},
+      {cls:'un',icon:'🔢',title:'등번호·액세서리·제재',body:'등번호는 <b>등 16cm↑ · 앞 8cm↑</b>, 상의와 대조되는 단색. 헤드밴드·손목밴드는 팀 <b>동일 색 · 너비 10cm 이하</b>. <b>유니폼 없으면 출전 불가</b>, 장비 규정 위반 시 해당 장비를 벗어야 해요.',link:'',linkText:''}
+    ],
+    tourn:[
+      {cat:'🔴 우리가 뛰는 대회'},
+      {cls:'tn',icon:'🏆',title:'KBL 유스 클럽 농구대회 (우리 대회)',body:'<span class="tmeta">🏛 <b>주최</b> KBL(한국프로농구)<br>📅 <b>대회</b> 여름~가을 (2025 양구 통합 7/31~8/3, 우리 <b>제천 예선 8/15~17 · B조</b>)<br>👥 <b>부문/규모</b> U9~U18 · 2025년 9개 구단 62팀 757명(역대 최다)<br>🏀 <b>2025 부문우승</b> U9 KCC · U10 SK · U12 삼성<br>⭐ <span class="win">소노 성적</span> 2025 창단 첫 본선 진출, U11·U12 <b>공동 3위</b><br>🎥 전 경기 KBL TV 유튜브 생중계</span><span class="tags"><a href="https://youth.kbl.or.kr/" target="_blank">KBL 유소년 ↗</a><a href="https://www.youtube.com/@onkbl" target="_blank">KBL TV ↗</a><a href="https://v.daum.net/v/20250803170326544" target="_blank">2025 결과 ↗</a></span>',link:'',linkText:''},
+
+      {cat:'🔵 KBL·프로 통합 무대'},
+      {cls:'tn',icon:'🏀',title:'KBL 유스 클럽 드림컵 (제천·신설)',body:'<span class="tmeta">🏛 <b>주최</b> KBL<br>📅 <b>대회</b> 2025.11.28~30 (3일) · 제1회 신설<br>📍 <b>장소</b> 충북 제천 (제천체육관·어울림·남부생활체육공원)<br>👥 <b>규모</b> 40팀 · <b>U10·U12</b> · 조별 풀리그+8강 토너먼트<br>🏆 <b>우승</b> 첫 대회(확인 필요)</span><span class="tags"><a href="https://youth.kbl.or.kr/" target="_blank">KBL 유소년 ↗</a><a href="https://basketkorea.com/news/newsview.php?ncode=1065576131385982" target="_blank">개최 기사 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'🏀',title:'KBL Y리그 (공식 리그)',body:'<span class="tmeta">🏛 <b>주최</b> KBL<br>📅 <b>대회</b> 5~6월 (2025 정규 5/23~6/21 예산·아산, 플레이오프 6/27~28 아산)<br>👥 <b>부문</b> 14세 이하(U14) · 9개 구단 유스클럽<br>✨ <b>특징</b> 유소년 최초 10분 4쿼터·데드볼·비디오판독 도입<br>🎥 KBL 공식 채널 중계</span><span class="tags"><a href="https://youth.kbl.or.kr/" target="_blank">KBL 유소년 ↗</a><a href="https://www.newsis.com/view/NISX20260521_0003639861" target="_blank">2026 일정 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'🦸',title:'MARVEL | KBL 3X3 유소년',body:'<span class="tmeta">🏛 <b>주최</b> KBL × 디즈니코리아<br>📅 <b>대회</b> 2025.12.7 (일)<br>📍 <b>장소</b> 서울 동국대 체육관<br>👥 <b>부문</b> 초등·중등 · KBL 10개 구단 유소년<br>🏆 <b>시상</b> 우승 200만원, 마블 히어로 유니폼</span><span class="tags"><a href="https://basketkorea.com/news/newsview.php?ncode=1065593949126133" target="_blank">대회 기사 ↗</a></span>',link:'',linkText:''},
+
+      {cat:'🥇 전국 공식 대회 (대한민국농구협회)'},
+      {cls:'tn',icon:'🥇',title:'협회장배 전국초등농구대회',body:'<span class="tmeta">🏛 <b>주최</b> 대한민국농구협회 (주관 개최지 시·도협회)<br>📅 <b>대회</b> 4월 (2025 제24회 4/14~21)<br>📝 <b>신청</b> 대회 2~3개월 전 협회 접수(확인 필요)<br>📍 <b>장소</b> 경북 김천실내체육관<br>👥 <b>규모</b> 전국 39팀 (남초 24·여초 15, 클럽 포함)<br>✨ <b>특징</b> 24회부터 엘리트+클럽 <b>통합 개최</b>, FIBA 룰</span><span class="tags"><a href="https://www.koreabasketball.or.kr/game/dom_schedule.php" target="_blank">협회 국내일정 ↗</a><a href="https://v.daum.net/v/YqL9KfQ0Z8" target="_blank">개막 영상 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'👑',title:'전국 유소년 통합 농구대회 (왕중왕)',body:'<span class="tmeta">🏛 <b>주최</b> 대한민국농구협회<br>📝 <b>신청</b> ~12/1 온라인<br>📅 <b>대회</b> 12월 (2025 12/13~21 중 4일)<br>📍 <b>장소</b> 서울 연세대 체육관 외<br>👥 <b>규모</b> 남초 16 + 여초 8 = 24팀 (각 대회 입상팀)<br>🏆 <span class="win">2025 남초 우승 분당삼성</span> (준우승 대방초 63-36)</span><span class="tags"><a href="https://www.koreabasketball.or.kr/information/notice_view.php?idx=21953" target="_blank">협회 공지 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'🏅',title:'전국소년체육대회 (소년체전)',body:'<span class="tmeta">🏛 <b>주최</b> 대한체육회<br>📅 <b>대회</b> 5월 (제54회 2025 5/24~27, 4일)<br>📍 <b>장소</b> 경남 김해 (2025)<br>👥 <b>부문</b> 12세 이하부 등 시·도 대표 엘리트<br>🏆 <b>우승</b> 종목별 결과 확인 필요</span><span class="tags"><a href="https://g1.sports.or.kr/schedule/year.do" target="_blank">스포츠지원포털 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'🏀',title:'윤덕주배 연맹회장기 전국초등',body:'<span class="tmeta">🏛 <b>주최</b> 한국초등농구연맹 계열 (통영시)<br>📅 <b>대회</b> 10~11월 (2025 제37회 10/25~11/2)<br>📍 <b>장소</b> 경남 통영 (통영·충무체육관 등)<br>👥 <b>규모</b> 76팀 1,500여 명 · 엘리트부/챌린저부</span><span class="tags"><a href="http://minibasketball.co.kr/" target="_blank">초등농구연맹 ↗</a><a href="https://www.newsis.com/view/NISX20251022_0003372438" target="_blank">2025 기사 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'📊',title:'농구 i-League · 종별선수권 (클럽리그)',body:'<span class="tmeta">🏛 <b>주최</b> 대한민국농구협회 (주관 시·군구 협회)<br>📅 <b>리그</b> 봄 개막~하반기 (연중, 4년차) · 디비전(i1·i2)<br>👥 <b>대상</b> 생활+전문+학교스포츠클럽 통합 · 국내 최대 유소년 리그<br>✨ 지역 챔피언십·i-Festa 캠프, 전 경기 유튜브 중계 · <b>종별선수권 초등부</b> 별도 개최</span><span class="tags"><a href="https://www.kba-il.kr/league/tournament_main.php" target="_blank">i-League ↗</a><a href="https://www.koreabasketball.or.kr/game/dom_schedule.php" target="_blank">협회 일정 ↗</a></span>',link:'',linkText:''},
+
+      {cat:'🏫 학교스포츠클럽 (교육감배)'},
+      {cls:'tn',icon:'🏫',title:'시·도 교육감배 학교스포츠클럽 농구',body:'<span class="tmeta">🏛 <b>주최</b> 시·도 교육청 (서울·경기 등 지역별)<br>📅 <b>대회</b> 4~10월 (서울 2026 개막 5/16)<br>👥 <b>대상</b> 초·중·고 · 교내→예선→본선→전국 단계<br>📍 서울 학생 약 5만 명 규모 · 지역마다 요강 상이</span><span class="tags"><a href="https://www.schoolsportsclub.or.kr/" target="_blank">학교스포츠클럽 ↗</a><a href="https://schoolart.sen.go.kr/sportsportal/fus/SCHOOL_SPORTS_CLUB/HTML/schoolSportsClub/html0010v.do" target="_blank">서울 포털 ↗</a></span>',link:'',linkText:''},
+
+      {cat:'🌐 프로구단 자체·국제·3x3'},
+      {cls:'tn',icon:'🌐',title:'KCC 국제 유소년 클럽 (제주)',body:'<span class="tmeta">🏛 <b>주최</b> 부산 KCC 이지스<br>📅 <b>대회</b> 6월 (2026 6/19~21)<br>📍 <b>장소</b> 제주 구좌체육관·함덕 일대<br>👥 <b>규모</b> 7개국 47팀 · <b>U9~U14</b> (초등 포함) · 국제 대회</span><span class="tags"><a href="https://www.instagram.com/kccegis_junior/" target="_blank">KCC 주니어 ↗</a><a href="https://www.youtube.com/watch?v=3gY_ann3RWQ" target="_blank">중계 영상 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'🔵',title:'삼성 리틀썬더스 유소년대회',body:'<span class="tmeta">🏛 <b>주최</b> 서울 삼성<br>📅 <b>대회</b> 5월 (2024 5/25~26)<br>👥 <b>부문</b> U9~U18 7종별 · 산하 30여 지점 경합<br>🏆 부문 우승팀이 KBL 통합대회 삼성 대표로 출전</span><span class="tags"><a href="https://jumpball.co.kr/news/newsview.php?ncode=1065589207191895" target="_blank">점프볼 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'⚔️',title:'SK 주니어 나이츠 (단장배)',body:'<span class="tmeta">🏛 <b>주최</b> 서울 SK 나이츠<br>📅 <b>대회</b> 6월 (2024 제17회 6/8~9)<br>📍 <b>장소</b> SK 나이츠 체육관·인재개발원<br>👥 <b>규모</b> 66팀 (초등 32, 중고 34)</span><span class="tags"><a href="https://knights.kbl.or.kr/youth/intro" target="_blank">SK 유소년 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'🏀',title:'현대모비스 피버스배 3대3',body:'<span class="tmeta">🏛 <b>주최</b> 울산 현대모비스<br>📅 <b>대회</b> 5월 (2026 5/23~24) · <b>신청</b> 5/11~17 선착순<br>📍 <b>장소</b> 울산 동천체육관<br>👥 <b>규모</b> 초·중·고 각 16 = 48팀 (엘리트 제외)</span><span class="tags"><a href="https://basketkorea.com/news/newsview.php?ncode=1065575468975231" target="_blank">대회 기사 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'🔊',title:'KT소닉붐배 3x3',body:'<span class="tmeta">🏛 <b>주최</b> 수원 KT 소닉붐<br>📅 <b>대회</b> 9월 (2025 9/6) · <b>신청</b> 8/14~22 네이버폼<br>📍 <b>장소</b> 수원종합운동장 야외코트<br>👥 <b>규모</b> 108팀 · 초·중·고·일반·여성부</span><span class="tags"><a href="https://sonicboom.kbl.or.kr/youth/intro" target="_blank">KT 유소년 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'🌀',title:'LG 휘센컵 3X3',body:'<span class="tmeta">🏛 <b>주최</b> 창원 LG 세이커스<br>📅 <b>대회</b> 7월 (2026 제24회 7/25~26) · <b>신청</b> 7/10~19<br>📍 <b>장소</b> 창원체육관<br>👥 <b>부문</b> 초등 4·5·6학년/중/고 9개 부문 · 총상금 615만원</span><span class="tags"><a href="https://basketkorea.com/news/newsview.php?ncode=1065587044544555" target="_blank">대회 기사 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'⭐',title:'소노 유스데이 · 페스티벌 (우리 구단)',body:'<span class="tmeta">🏛 <b>주최</b> 고양 소노 스카이거너스<br>🎯 <b>유스데이</b> 2025.3.15 고양소노아레나 · 약 1,000명 (슈팅대회 등)<br>🎪 <b>페스티벌</b> 2026.7.19 · 약 400명 (순위경쟁 X, 명랑운동회형)<br>ℹ️ 소노 자체 초등 순위 대회는 별도 없음 → KBL 유스클럽대회 출전</span><span class="tags"><a href="https://www.instagram.com/sonoskygunners_official/" target="_blank">소노 인스타 ↗</a></span>',link:'',linkText:''},
+
+      {cat:'📍 지역·소규모·구청장배 대회'},
+      {cls:'tn',icon:'📍',title:'은평유소년배 농구대회',body:'<span class="tmeta">🏛 <b>주최</b> 은평 클럽 연합 (확인 필요)<br>📅 <b>대회</b> 2026.7.18 (제2회) · 풀리그<br>📍 <b>장소</b> 은평다목적체육관 (서울 은평)<br>👥 <b>규모</b> 4팀 U-11 (용인KCC·더올바스켓·은평삼성·김포SK)<br>⚠️ "은평구청장배"는 별도 미확인 → 실제는 <b>은평유소년배</b></span><span class="tags"><a href="https://basketkorea.com/news/newsview.php?ncode=1065585361421813" target="_blank">대회 기사 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'🏀',title:'브라보 안산 전국 유소년',body:'<span class="tmeta">🏛 <b>주최</b> 안산시농구협회<br>📅 <b>대회</b> 1월 (2026.1.3 제1회 초등부)<br>📍 <b>장소</b> 신안산대 체육관 (경기 안산)<br>👥 <b>부문</b> U10·U11·U12 각 6팀<br>🏆 <span class="win">우승</span> U10 잠실삼성 · U11·U12 분당삼성</span><span class="tags"><a href="https://v.daum.net/v/20260103212435355" target="_blank">2026 기사 ↗</a><a href="https://www.youtube.com/watch?v=PHXFRz-CKwk" target="_blank">경기 영상 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'⛰️',title:'하늘내린인제 전국 유소년',body:'<span class="tmeta">🏛 <b>주최</b> 대한민국농구협회 계열 (인제군)<br>📝 <b>신청</b> 2026 7/8~7/22<br>📅 <b>대회</b> 8월 (2026 8/7~11)<br>📍 <b>장소</b> 강원 인제군 일대</span><span class="tags"><a href="https://injesports.co.kr/Home/H50000/H50100/html" target="_blank">인제스포츠 ↗</a><a href="https://www.koreabasketball.or.kr/game/dom_schedule.php" target="_blank">협회 일정 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'🌿',title:'안산 상록수배 (안산시체육회장기)',body:'<span class="tmeta">🏛 <b>주최</b> 안산시체육회 (주관 안산시농구협회)<br>📅 <b>대회</b> 4월 (2025 4/19~20)<br>📍 <b>장소</b> 신안산대 체육관<br>👥 <b>규모</b> 전국 36팀 400여 명<br>🏆 <span class="win">우승</span> U10 드림팀·U11 아산삼성·U12 분당삼성</span><span class="tags"><a href="https://www.youtube.com/watch?v=64bbP6qeCT0" target="_blank">경기 영상 ↗</a></span>',link:'',linkText:''},
+      {cls:'tn',icon:'🏛️',title:'구청장배·시장배 모음 (지자체장기)',body:'<span class="tmeta">🏀 <b>송파구청장배</b> 11월 · 송파체육문화회관 (U12 취미부 포함)<br>🏀 <b>양천구청장배</b> 10월 · 양천구민체육센터<br>🏀 <b>유성구청장배</b> 대전 유성 (제15회)<br>🏀 <b>문경시장배</b> 1월 · 17개 시·도 600여 명 · 2~6학년부<br>🏀 <b>구리시의회 의장기</b> 6월 / <b>구리협회장기</b> 1월<br>🏀 <b>상주곶감배</b> 경북 상주 (U9 성북삼성 우승 기록)<br>🏀 <b>하태(하승진·전태풍) 초청전</b> 가평 등 · 사전예약제</span><span class="tags"><a href="https://www.nocutnews.co.kr/news/6272778" target="_blank">문경시장배 ↗</a><a href="https://guri.go.kr/www/selectBbsNttView.do?key=393&bbsNo=42&nttNo=132102" target="_blank">구리 의장기 ↗</a><a href="https://hatae.co.kr/" target="_blank">하태 ↗</a></span>',link:'',linkText:''},
+
+      {cat:'✅ 정확한 일정은 여기서'},
+      {cls:'tn',icon:'✅',title:'신청·개최일 매년 확인 (필독)',body:'<span class="tmeta">대회마다 <b>신청기간·개최일이 매년 달라져요.</b> 지역·연도별 최신 날짜는 아래 공식 캘린더에서 확인하세요.</span><span class="tags"><a href="http://minibasketball.co.kr/" target="_blank">한국초등농구연맹 ↗</a><a href="https://www.koreabasketball.or.kr/game/dom_schedule.php" target="_blank">농구협회 국내일정 ↗</a><a href="https://g1.sports.or.kr/schedule/year.do" target="_blank">스포츠지원포털 ↗</a><a href="https://www.schoolsportsclub.or.kr/" target="_blank">학교스포츠클럽 ↗</a><a href="https://youth.kbl.or.kr/" target="_blank">KBL 유소년 ↗</a></span>',link:'',linkText:''}
     ],
     requests:[
       {cls:'rq',icon:'🏀',title:'소노 구단·감독에게 확인/요청',body:'· 대진표·경기 시간 <b>최종 확정 및 변경 즉시 공유</b><br>· 경기 외 시간 <b>집결/해산·이동·식사</b>(개별 이동이니 시간 명확화)<br>· 선수 등록·유니폼(홈/어웨이) 최종 확인<br>· <b>워밍업 코트·시간</b> 확보 여부<br>· 주차·응원석·입장 안내, 생중계·사진 링크<br>· 부상 시 <b>응급·보험</b>·트레이너 대응<br>· 단체 사진 일정',link:'',linkText:''},
@@ -1191,6 +1295,9 @@ var firebaseConfig = {
     opponents:{ title:'상대팀 스카우팅', box:'oppBox',
       fields:[ {k:'team',label:'팀·경기',t:'text'}, {k:'no',label:'등번호',t:'text'}, {k:'name',label:'이름(마스킹)',t:'text'}, {k:'pos',label:'포지션',t:'text'}, {k:'ht',label:'키',t:'text'} ],
       renderList:function(items){ var order=[],map={}; items.forEach(function(it){var t=it.team||'';if(!map[t]){map[t]=[];order.push(t);}map[t].push(it);}); return order.map(function(t){ var rows=map[t].map(function(p){return '<tr><td class="no">'+esc(p.no)+'</td><td>'+esc(p.name)+'</td><td>'+esc(p.pos)+'</td><td class="ht">'+esc(p.ht)+'</td></tr>';}).join(''); return '<div class="opp"><div class="oh"><span>'+esc(t)+'</span><span class="cnt">'+map[t].length+'명</span></div><table><thead><tr><th>번호</th><th>이름</th><th>포지션</th><th>키</th></tr></thead><tbody>'+rows+'</tbody></table></div>'; }).join(''); } },
+    tourn:{ title:'유소년 농구대회 캘린더 (U9·U10)', box:'tournBox',
+      fields:[{k:'cat',label:'카테고리 구분(있으면 구분줄)',t:'text'},{k:'cls',label:'색상(tn)',t:'text'},{k:'icon',label:'이모지',t:'text'},{k:'title',label:'제목',t:'text'},{k:'body',label:'내용(HTML)',t:'area'},{k:'link',label:'링크',t:'text'},{k:'linkText',label:'링크 글자',t:'text'}],
+      render:function(x){ if(x.cat){ return '<div class="tcat">'+esc(x.cat)+'</div>'; } return '<div class="icard '+esc(x.cls||'tn')+'"><h3><span class="em">'+esc(x.icon)+'</span>'+esc(x.title)+'</h3><p>'+(x.body||'')+'</p>'+(x.link?'<a href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'자세히')+' ↗</a>':'')+'</div>'; } },
     parentguide:{ title:'엄마·아빠 가이드', box:'pgBox',
       fields:[{k:'cls',label:'색상(pk)',t:'text'},{k:'icon',label:'이모지',t:'text'},{k:'title',label:'제목',t:'text'},{k:'body',label:'내용(HTML)',t:'area'},{k:'link',label:'링크',t:'text'},{k:'linkText',label:'링크 글자',t:'text'}],
       render:function(x){ return '<div class="icard '+esc(x.cls||'')+'"><h3><span class="em">'+esc(x.icon)+'</span>'+esc(x.title)+'</h3><p>'+(x.body||'')+'</p>'+(x.link?'<a href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'자세히')+' ↗</a>':'')+'</div>'; } },
@@ -1199,6 +1306,9 @@ var firebaseConfig = {
       render:function(x){ return '<div class="icard '+esc(x.cls||'')+'"><h3><span class="em">'+esc(x.icon)+'</span>'+esc(x.title)+'</h3><p>'+(x.body||'')+'</p>'+(x.link?'<a href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'자세히')+' ↗</a>':'')+'</div>'; } },
     requests:{ title:'구단·숙소 요청 체크리스트', box:'reqBox',
       fields:[{k:'cls',label:'색상(rq)',t:'text'},{k:'icon',label:'이모지',t:'text'},{k:'title',label:'제목',t:'text'},{k:'body',label:'내용(HTML)',t:'area'},{k:'link',label:'링크',t:'text'},{k:'linkText',label:'링크 글자',t:'text'}],
+      render:function(x){ return '<div class="icard '+esc(x.cls||'')+'"><h3><span class="em">'+esc(x.icon)+'</span>'+esc(x.title)+'</h3><p>'+(x.body||'')+'</p>'+(x.link?'<a href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'자세히')+' ↗</a>':'')+'</div>'; } },
+    uniform:{ title:'유니폼·이너웨어 규정', box:'uniBox',
+      fields:[{k:'cls',label:'색상(un)',t:'text'},{k:'icon',label:'이모지',t:'text'},{k:'title',label:'제목',t:'text'},{k:'body',label:'내용(HTML)',t:'area'},{k:'link',label:'링크',t:'text'},{k:'linkText',label:'링크 글자',t:'text'}],
       render:function(x){ return '<div class="icard '+esc(x.cls||'')+'"><h3><span class="em">'+esc(x.icon)+'</span>'+esc(x.title)+'</h3><p>'+(x.body||'')+'</p>'+(x.link?'<a href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'자세히')+' ↗</a>':'')+'</div>'; } },
     gear:{ title:'부상 보호 장비 (무릎·발목)', box:'gearBox',
       fields:[{k:'cls',label:'색상(gr)',t:'text'},{k:'icon',label:'이모지',t:'text'},{k:'title',label:'제목',t:'text'},{k:'body',label:'내용(HTML)',t:'area'},{k:'link',label:'판매처 링크',t:'text'},{k:'linkText',label:'링크 글자',t:'text'}],
@@ -1272,6 +1382,8 @@ var firebaseConfig = {
     db.ref('dashboard').once('value').then(function(s){
       var cur=s.val()||{}, updates={};
       Object.keys(DEFAULTS).forEach(function(k){ if(cur[k]===undefined) updates[k]=DEFAULTS[k]; });
+      // 대회 캘린더 1회 자동 갱신: 저장본에 카테고리(cat) 구분이 없으면 최신 DEFAULTS로 교체 (예약·사이즈 등 다른 데이터는 건드리지 않음)
+      var t=cur.tourn; if(Array.isArray(t) && t.length && !t.some(function(x){return x&&x.cat;})){ updates.tourn=DEFAULTS.tourn; }
       if(Object.keys(updates).length) db.ref('dashboard').update(updates);
     }).catch(function(){});
   }
