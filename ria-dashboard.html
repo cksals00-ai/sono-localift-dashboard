@@ -114,7 +114,7 @@
   <div class="wrap">
     <div class="k">Ria Performance Dashboard · 내부용</div>
     <h1>리아 성과 대시보드</h1>
-    <p>리아 IG 전략·콘텐츠 방향과 KPI·성과 데이터를 한 화면에서 추적합니다. 데이터는 <code>data/ria_kpi_feed.json</code>(리아 1일 2회 갱신)을 클라이언트에서 불러와 렌더링합니다.</p>
+    <p>리아 IG 전략·콘텐츠 방향과 KPI·성과 데이터를 한 화면에서 추적합니다. 성과 수치는 GitHub Actions가 Instagram Graph API에서 <b>1일 2회(09:30 / 21:30 KST) 자동 수집</b>해 <code>data/ria_kpi_feed.json</code>·<code>data/ria_kpi_history.json</code>에 기록하고, 이 화면은 그 두 파일을 그대로 렌더링합니다. 전략 블록은 사람이 관리하며 자동 수집이 덮어쓰지 않습니다.</p>
     <div class="meta-row">
       <span id="badge" class="badge sample">SAMPLE</span>
       <span id="updated">업데이트: —</span>
@@ -140,25 +140,87 @@
   function nf(n){return (typeof n==='number'? n.toLocaleString('ko-KR') : esc(n));}
   function pct(a,t){ if(!t) return 0; return Math.min(Math.round(a/t*100),200); }
 
-  fetch(FEED,{cache:'no-store'})
-    .then(function(r){ if(!r.ok) throw new Error('피드 로드 실패 ('+r.status+')'); return r.json(); })
-    .then(render)
+  var HISTU = './data/ria_kpi_history.json?ts=' + Date.now();
+  var SNAPS = [];   // 자동 수집 스냅샷 (없으면 빈 배열 → 추세 카드가 안내문으로 대체)
+
+  // 추세용 히스토리는 없어도 대시보드가 떠야 한다. 실패는 조용히 무시한다.
+  Promise.all([
+    fetch(FEED,{cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw new Error('피드 로드 실패 ('+r.status+')'); return r.json(); }),
+    fetch(HISTU,{cache:'no-store'})
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .catch(function(){ return null; })
+  ]).then(function(a){
+      SNAPS = (a[1] && a[1].snapshots) || [];
+      render(a[0]);
+    })
     .catch(function(e){
       board.style.display='none';
       errEl.style.display='';
       errEl.textContent = 'data/ria_kpi_feed.json 을 불러오지 못했습니다: ' + e.message + ' — 피드 도착 후 자동 표시됩니다.';
     });
 
+  // 의존성 없는 인라인 SVG 스파크라인 (CDN 추가 없이 추세만 보여준다)
+  function spark(key, color){
+    var pts = SNAPS.map(function(s){ return s[key]; }).filter(function(v){ return typeof v === 'number'; });
+    if(pts.length < 2){
+      return '<div class="pd" style="font-size:12px;color:var(--dim)">추세선은 스냅샷 2건 이상 모이면 자동으로 그려집니다 (현재 '+pts.length+'건).</div>';
+    }
+    var W=300, H=70, mn=Math.min.apply(null,pts), mx=Math.max.apply(null,pts), rg=(mx-mn)||1;
+    var poly = pts.map(function(v,i){
+      return (i/(pts.length-1)*W).toFixed(1)+','+(H-3-(v-mn)/rg*(H-6)).toFixed(1);
+    }).join(' ');
+    return '<svg viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="none" style="width:100%;height:70px;display:block">'
+      + '<polyline points="'+poly+'" fill="none" stroke="'+color+'" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>'
+      + '<div class="pd" style="display:flex;justify-content:space-between;margin-top:4px">'
+      + '<span>최저 '+nf(mn)+'</span><span>'+pts.length+'개 스냅샷</span><span>최고 '+nf(mx)+'</span></div>';
+  }
+
   function render(d){
     // 메타
     var m = d.meta||{};
     var badge = document.getElementById('badge');
     if(m.sample){ badge.className='badge sample'; badge.textContent='SAMPLE'; }
+    else if(m.auto){ badge.className='badge live'; badge.textContent='AUTO · 자동수집'; }
     else { badge.className='badge live'; badge.textContent = (d.content_sample||d.progress_sample) ? 'LIVE · 콘텐츠 SAMPLE' : 'LIVE'; }
     document.getElementById('updated').textContent = '업데이트: ' + esc(m.updated_at||'—');
     document.getElementById('source').textContent = esc(m.source||'');
 
     var html = '';
+
+    // ⊙ 실측 요약 · 추세 (Instagram Graph API 자동 수집 결과)
+    var ms = d.measured;
+    var auto = !!(ms && ms.live);
+    html += '<section class="card full"><h2><span class="tag">⊙</span>실측 요약 · 추세'
+         + (auto ? '<span class="bdg live">AUTO</span>' : '<span class="bdg sample">연결 대기</span>') + '</h2>';
+    if(auto){
+      var dy = ms.day||{}, wk = ms.week||{};
+      html += '<div class="sub">Instagram Graph API 자동 수집 · 1일 2회(09:30 / 21:30 KST) 갱신 · 주간은 최근 7일 게시물 기준</div>';
+      html += '<div class="kpis">';
+      [['팔로워', ms.followers, '명'],
+       ['일 도달', dy.reach, '회'],
+       ['일 조회', dy.views, '회'],
+       ['프로필 방문', dy.profile_views, '회'],
+       ['주간 게시', wk.posts, '건'],
+       ['주간 저장', wk.saves, '회'],
+       ['주간 댓글', wk.comments, '개'],
+       ['주간 공유', wk.shares, '회'],
+       ['릴 평균 조회', wk.reel_avg_views, '회'],
+       ['참여율', ms.engagement_rate_pct, '%']
+      ].forEach(function(t){
+        var v = (t[1]==null) ? '—' : nf(t[1]);
+        html += '<div class="kpi"><div class="kl">'+esc(t[0])+'</div>'
+             + '<div class="kv">'+v+' <span style="font-size:12px;color:var(--dim)">'+esc(t[2])+'</span></div></div>';
+      });
+      html += '</div>';
+      html += '<div class="slbl">팔로워 추세</div>' + spark('followers', '#57C4B4');
+      html += '<div class="slbl">주간 저장수 추세</div>' + spark('week_saves', '#C9A96A');
+    } else {
+      html += '<div class="sub">IG Graph API 토큰이 아직 등록되지 않았습니다. 아래 KPI·콘텐츠 수치는 사람이 입력한 값이며, '
+           + '토큰 등록(GitHub Secrets <code>IG_ACCESS_TOKEN</code> + Variables <code>IG_USER_ID</code>) 즉시 이 카드가 자동값으로 채워지고 '
+           + '상단 배지가 AUTO로 바뀝니다. 수집 실패 시에도 기존 수치는 지워지지 않습니다.</div>';
+    }
+    html += '</section>';
 
     // ① 전략·콘텐츠 방향
     var s = d.strategy||{};

@@ -1,0 +1,6 @@
+{
+  "schema_version": "1.0",
+  "note": "리아 IG 성과 스냅샷 원장. scripts/fetch_ria_kpi.py 가 실행마다 1건 append 한다. 사람이 편집하지 않는다.",
+  "updated_at": null,
+  "snapshots": []
+}
