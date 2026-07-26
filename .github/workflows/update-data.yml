@@ -3,9 +3,13 @@ name: Update dashboard data
 on:
   # 매일 06:00 KST(= 전날 21:00 UTC) 자동 갱신 — 방문자 + 소비 데이터 통합.
   # 로컬(Mac) 스케줄 작업은 은퇴(샌드박스에서 SSH/API 키 접근 불가). 이 워크플로가 단일 소스.
+  # 리아 성과 피드는 1일 2회(09:30 / 21:30 KST) 추가 — 리아 운영 캐던스와 정합.
+  # 관광 데이터(data.go.kr, 수집 ~15분)는 06:00 KST 회차와 수동 실행에서만 돈다.
   schedule:
-    - cron: "0 21 * * *"
-  workflow_dispatch: {}     # 수동 실행 버튼
+    - cron: "0 21 * * *"    # 06:00 KST — 관광 데이터 + 리아
+    - cron: "30 0 * * *"    # 09:30 KST — 리아만 (오전 엔진 후)
+    - cron: "30 12 * * *"   # 21:30 KST — 리아만 (저녁 게시 후)
+  workflow_dispatch: {}     # 수동 실행 버튼 (전체 수집)
 
 permissions:
   contents: write
@@ -21,6 +25,7 @@ jobs:
           python-version: "3.11"
 
       - name: Fetch visitor data from data.go.kr
+        if: github.event.schedule == '0 21 * * *' || github.event_name == 'workflow_dispatch'
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
           ANCHOR_AREA_CD: ${{ vars.ANCHOR_AREA_CD }}
@@ -28,9 +33,19 @@ jobs:
         run: python scripts/fetch_data.py
 
       - name: Fetch consume data from data.go.kr
+        if: github.event.schedule == '0 21 * * *' || github.event_name == 'workflow_dispatch'
         env:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python scripts/fetch_consume.py
+
+      # 리아 성과 대시보드 — 매 회차 실행.
+      # 토큰 미설정 시 스크립트가 피드를 건드리지 않고 정상 종료하므로 워크플로가 깨지지 않는다.
+      - name: Fetch Ria IG performance
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ vars.IG_USER_ID }}
+          RIA_BASELINE_FOLLOWERS: ${{ vars.RIA_BASELINE_FOLLOWERS }}
+        run: python scripts/fetch_ria_kpi.py
 
       - name: Commit if changed
         run: |
