@@ -1043,9 +1043,9 @@ var firebaseConfig = {
       {d:'14~17',m:'8월',hl:true,title:'KBL 제천 유스 클럽대회 2026 🏆',desc:'충북 제천 · B조(SK·소노·정관장·KT) 풀리그 · 예선 8/15~16, 본선 8/17 · 팀 숙소 <b>소노벨 단양</b>(신청 마감) · 1일차 석식 만이갈비 · 개별 이동·식사',badge:'공식 대회',badgeClass:'b-cup'}
     ],
     fixtures:[
-      {game:'예선 1경기',date:'8/15 (토)',time:'16:00',opp:'KT',venue:'어울림체육센터'},
-      {game:'예선 2경기',date:'8/16 (일)',time:'10:45',opp:'정관장',venue:'세명대 체육관'},
-      {game:'예선 3경기',date:'8/16 (일)',time:'16:00',opp:'SK',venue:'어울림체육센터'}
+      {game:'예선 1경기',date:'8/15 (토)',time:'16:00',opp:'KT',venue:'어울림체육센터',uniform:'홈 유니폼'},
+      {game:'예선 2경기',date:'8/16 (일)',time:'10:45',opp:'정관장',venue:'세명대 체육관',uniform:'홈 유니폼'},
+      {game:'예선 3경기',date:'8/16 (일)',time:'16:00',opp:'SK',venue:'어울림체육센터',uniform:'원정 유니폼'}
     ],
     timetable:[
       {day:'DAY 1 · 8/15 (토)',time:'15:00',title:'체육관 집결',tag:'집결',venue:'어울림체육센터'},
@@ -1278,8 +1278,8 @@ var firebaseConfig = {
       fields:[ {k:'d',label:'날짜 숫자',t:'text'}, {k:'m',label:'월/요일',t:'text'}, {k:'title',label:'제목',t:'text'}, {k:'desc',label:'설명 (HTML 가능)',t:'area'}, {k:'badge',label:'뱃지 글자',t:'text'}, {k:'badgeClass',label:'뱃지색 (b-cup/b-team/b-train)',t:'text'}, {k:'hl',label:'노란색 강조',t:'check'} ],
       render:function(x){ return '<div class="ev'+(x.hl?' hl':'')+'"><div class="date"><div class="d">'+esc(x.d)+'</div><div class="m">'+esc(x.m)+'</div></div><div class="info"><h3>'+esc(x.title)+'</h3><p>'+(x.desc||'')+'</p>'+(x.badge?'<span class="badge '+esc(x.badgeClass)+'">'+esc(x.badge)+'</span>':'')+'</div></div>'; } },
     fixtures:{ title:'제천 대회 경기 일정', box:'fixturesBox',
-      fields:[ {k:'game',label:'경기 구분',t:'text'}, {k:'date',label:'날짜(요일)',t:'text'}, {k:'time',label:'시간',t:'text'}, {k:'opp',label:'상대팀',t:'text'}, {k:'venue',label:'장소',t:'text'} ],
-      render:function(x){ return '<div class="fix"><div class="fx-top"><span class="g">'+esc(x.game)+'</span><span>'+esc(x.date)+'</span></div><div class="fx-body"><div class="fx-opp">소노 <span style="color:var(--mut);font-weight:700">vs</span> <b>'+esc(x.opp)+'</b></div><div class="fx-meta">🕓 '+esc(x.time)+'<br>📍 '+esc(x.venue)+'</div></div></div>'; } },
+      fields:[ {k:'game',label:'경기 구분',t:'text'}, {k:'date',label:'날짜(요일)',t:'text'}, {k:'time',label:'시간',t:'text'}, {k:'opp',label:'상대팀',t:'text'}, {k:'venue',label:'장소',t:'text'}, {k:'uniform',label:'유니폼(홈/원정)',t:'text'} ],
+      render:function(x){ return '<div class="fix"><div class="fx-top"><span class="g">'+esc(x.game)+'</span><span>'+esc(x.date)+'</span></div><div class="fx-body"><div class="fx-opp">소노 <span style="color:var(--mut);font-weight:700">vs</span> <b>'+esc(x.opp)+'</b></div><div class="fx-meta">🕓 '+esc(x.time)+'<br>📍 '+esc(x.venue)+(x.uniform?' · <span style="color:#e11d48;font-weight:800">'+esc(x.uniform)+'</span>':'')+'</div></div></div>'; } },
     routes:{ title:'숙소 ↔ 경기장 이동', box:'routesBox',
       fields:[ {k:'from',label:'출발',t:'text'}, {k:'to',label:'도착',t:'text'}, {k:'dist',label:'거리',t:'text'}, {k:'time',label:'소요시간',t:'text'}, {k:'note',label:'메모',t:'text'}, {k:'url',label:'도착지 지도 링크',t:'text'} ],
       render:function(x){ return '<div class="route"><div class="rt-top">'+esc(x.from)+'<span class="ar">→</span>'+esc(x.to)+'</div><div class="rt-b"><span class="rt-time">'+esc(x.time)+'</span><span class="rt-dist">'+esc(x.dist)+'</span>'+(x.note?'<div class="rt-note">'+esc(x.note)+'</div>':'')+(x.url?'<a class="rt-link" href="'+esc(x.url)+'" target="_blank">🧭 도착지 지도·길찾기</a>':'')+'</div></div>'; } },
