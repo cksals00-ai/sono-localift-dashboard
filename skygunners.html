@@ -360,6 +360,25 @@
   .opp td.no{font-weight:900;color:var(--navy);width:46px}
   .opp td.ht{font-weight:800;color:var(--navy2)}
   .tee-notebox{background:#fff7e0;border:2px dashed #9a6b00;border-radius:9px;padding:11px 14px;font-size:11.5px;font-weight:600;color:#6d4c00;line-height:1.75;margin:0 0 14px}
+
+  /* ---------- info sections (kids care / elite / asian games) ---------- */
+  .icards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:640px){.icards{grid-template-columns:1fr}}
+  .icard{background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);padding:14px 16px;border-top:7px solid var(--sky)}
+  .icard.g1{border-top-color:#2aa563}
+  .icard.g2{border-top-color:#f7b731}
+  .icard.g3{border-top-color:#d8534f}
+  .icard.el{border-top-color:#7a5cd0}
+  .icard.ag{border-top-color:#2f7bd6}
+  .icard.pk{border-top-color:#e0699e}
+  .icard.tv{border-top-color:#e08a2f}
+  .icard.rq{border-top-color:#159e8f}
+  .icard.gr{border-top-color:#5b6cc9}
+  .icard h3{font-size:14.5px;font-weight:900;display:flex;align-items:center;gap:7px;margin-bottom:6px;line-height:1.3}
+  .icard h3 .em{font-size:17px;flex:none}
+  .icard p{font-size:12.5px;color:var(--mut);font-weight:600;line-height:1.65}
+  .icard p b{color:var(--ink)}
+  .icard a{display:inline-block;margin-top:9px;font-size:11.5px;font-weight:800;color:var(--navy);border:2px solid var(--navy2);border-radius:6px;padding:4px 10px;text-decoration:none;background:var(--bg)}
 </style>
 </head>
 <body>
@@ -849,6 +868,55 @@
     <p class="refnote">* 출처: KBL 유소년 홈페이지 · 바스켓코리아(2026.6.17 유스 드림 캠프) · 뉴시스(2026.5.21 Y리그) · KBL TV. Y리그(공식 리그)와 유스드림컵(클럽대회)은 별개 대회이며, 소노 U-9은 8월 제천 클럽대회를 준비 중입니다.</p>
   </section>
 
+  <!-- PARENT GUIDE -->
+  <section>
+    <div class="sec-h"><h2>엄마·아빠 가이드</h2><span class="en">Parents</span><button class="manage-btn admin-only" data-sec="parentguide">＋ 관리</button></div>
+    <div class="icards" id="pgBox"></div>
+    <p class="refnote">* 유소년 스포츠 학부모 참고 팁이에요. 아이마다 성향이 다르니 우리 아이에게 맞게 응용하세요.</p>
+  </section>
+
+  <!-- JECHEON TRIP -->
+  <section>
+    <div class="sec-h"><h2>제천 나들이 · 카페 · 농구장</h2><span class="en">Jecheon</span><button class="manage-btn admin-only" data-sec="jecheontrip">＋ 관리</button></div>
+    <div class="icards" id="tripBox"></div>
+    <p class="refnote">* 경기 사이 짬이 날 때 참고하세요. 영업시간·휴무·요금은 방문 전 지도에서 확인하는 게 좋아요.</p>
+  </section>
+
+  <!-- REQUESTS CHECKLIST -->
+  <section>
+    <div class="sec-h"><h2>구단·숙소 요청 체크리스트</h2><span class="en">To-Ask</span><button class="manage-btn admin-only" data-sec="requests">＋ 관리</button></div>
+    <div class="icards" id="reqBox"></div>
+    <p class="refnote">* 소노 구단·감독, 소노벨 단양에 미리 확인·요청하면 좋은 항목이에요. 상황에 맞게 담당 학부모가 정리해 문의하세요.</p>
+  </section>
+
+  <!-- KIDS CARE -->
+  <section>
+    <div class="sec-h"><h2>아이 성장 · 먹거리 · 훈련</h2><span class="en">Kids Care</span><button class="manage-btn admin-only" data-sec="kidscare">＋ 관리</button></div>
+    <div class="icards" id="kidsBox"></div>
+    <p class="refnote">* 일반 정보 참고용이에요. 성장·건강은 개인차가 크니 걱정되는 부분은 소아과·전문가 상담을 권해요. 출처: 성장 식단 가이드 · i9 Sports 홈 드릴 · 점프볼 부상방지 매거진.</p>
+  </section>
+
+  <!-- INJURY GEAR -->
+  <section>
+    <div class="sec-h"><h2>부상 보호 장비 (무릎·발목)</h2><span class="en">Gear</span><button class="manage-btn admin-only" data-sec="gear">＋ 관리</button></div>
+    <div class="icards" id="gearBox"></div>
+    <p class="refnote">* NBA·농구 선수들이 쓰는 대표 브랜드예요. 링크는 네이버쇼핑 검색(판매처·가격 비교)으로 연결됩니다. 유소년은 사이즈·핏이 가장 중요하고, 실제 부상·통증은 전문가 상담을 권해요.</p>
+  </section>
+
+  <!-- ELITE PATHWAY -->
+  <section>
+    <div class="sec-h"><h2>농구 엘리트 교육 · 진로</h2><span class="en">Elite Path</span><button class="manage-btn admin-only" data-sec="elite">＋ 관리</button></div>
+    <div class="icards" id="eliteBox"></div>
+    <p class="refnote">* 출처: KBL 유소년 육성 프로그램 · 스타뉴스(2025.12.29 육성 성과) · 한국중고농구연맹.</p>
+  </section>
+
+  <!-- ASIAN GAMES -->
+  <section>
+    <div class="sec-h"><h2>2026 아시안게임 농구</h2><span class="en">Asian Games</span><button class="manage-btn admin-only" data-sec="asiangames">＋ 관리</button></div>
+    <div class="icards" id="agBox"></div>
+    <p class="refnote">* 2026 아이치·나고야 아시안게임(9/19~10/4, 일본). 세부 경기 일정·중계는 대회 임박 시 대한민국농구협회·중계사 공지를 확인하세요.</p>
+  </section>
+
   <footer>
     소노 스카이거너스 U-9 · 2026 시즌 · 학부모 단톡방 기록 기반 (2026.1.17 ~ 7.13)<br>
     데이터: 카카오톡 대화 + 경기 결과 카드 · 제작 <span class="hand">@alfred Park</span> · <span class="hand">@helnoh_khsoul</span>
@@ -969,6 +1037,47 @@ var firebaseConfig = {
       {team:'정관장 · 예선 2경기 (8/16)',no:'24',name:'K○○',pos:'가드',ht:'122cm'},
       {team:'정관장 · 예선 2경기 (8/16)',no:'30',name:'김○○',pos:'포워드',ht:'147cm ★'}
     ],
+    kidscare:[
+      {cls:'g1',icon:'🥗',title:'키·성장 먹거리',body:'뼈·근육 재료인 <b>칼슘·단백질·비타민D</b>가 핵심이에요. 우유·치즈·계란·연어/고등어·두부·닭고기·브로콜리를 챙겨주세요. <b>칼슘+비타민D를 함께</b>(우유+계란) 먹으면 흡수가 좋고, <b>탄산음료는 자제</b>(칼슘 섭취를 줄여요).',link:'https://www.bodyinsightlab.org/foods-for-children-height-growth/',linkText:'식단 가이드'},
+      {cls:'g1',icon:'🍽️',title:'하루 식단 예시',body:'아침 귀리+우유+계란 · 점심 잡곡밥+된장(두부)+브로콜리 · 간식 스트링치즈 · 저녁 고등어구이+콩밥. 편식하면 채소를 <b>잘게 갈아 계란찜·미트볼</b>에 넣고 좋아하는 소스를 곁들여 보세요.',link:'',linkText:''},
+      {cls:'g2',icon:'🏀',title:'집에서 하는 드리블',body:'① 제자리 드리블(한 손 30초씩 교대) ② 파운드 드리블(점점 낮고 빠르게) ③ 크로스오버(양손 교차 30~60초) ④ 제자리 조깅하며 앞·뒤로 볼 넘기기. <b>하루 10분</b>이면 볼 감각이 확 늘어요.',link:'https://www.i9sports.com/blog/basketball-drills-you-can-do-at-home',linkText:'홈 드릴'},
+      {cls:'g2',icon:'🎯',title:'슛 · 패스 연습',body:'슛: 가까운 거리(약 1.5m)에서 10개 중 6개 넣으면 한 발 뒤로 → 자유투 라인까지 단계별로. 패스: 벽에 한 손 패스→반대 손으로 받기 10~20회, 받아서 <b>드리블→점프스톱→피벗</b>까지 연결해요.',link:'',linkText:''},
+      {cls:'g3',icon:'🤸',title:'부상 방지 · 워밍업',body:'운동 전 <b>동적 스트레칭·가벼운 조깅</b>으로 몸을 데우고, 끝나면 정적 스트레칭으로 마무리. 성장기라 <b>과사용·무리한 점프</b>는 조심하고, 통증이 있으면 바로 쉬게 해주세요(발목·손목 접질림 주의).',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065594569338577',linkText:'부상 방지 교육'},
+      {cls:'g3',icon:'💧',title:'수분 · 휴식 · 수면',body:'훈련·경기 중 <b>자주 물</b>을 마시고(이온음료는 장시간 운동 때만), 잠은 <b>성장호르몬</b>이 나오는 시간이라 충분히 재워주세요. 대회처럼 연속 경기 땐 회복·수면이 실력만큼 중요해요.',link:'',linkText:''}
+    ],
+    elite:[
+      {cls:'el',icon:'🏗️',title:'KBL 유소년 육성 (발굴→육성→프로)',body:'엘리트 경험 없는 초·중학생 <b>장신 유망주</b>를 발굴해 전문 강사 교육·국가대표 선발 기회를 주고, 연고선수 제도로 프로까지 잇는 프로그램. 2025년 전국 51개교 622명 대상·만족도 90%+.',link:'https://youth.kbl.or.kr/',linkText:'KBL 유소년'},
+      {cls:'el',icon:'⭐',title:'실제 성공 사례',body:'발굴사업 출신 <b>에디 다니엘(18세)</b>이 2025 KBL 신인드래프트로 서울 SK 입단. 강태영·박진우는 <b>미국 IMG 아카데미</b> 해외연수 대상자로 선정 — 초등부터 시작해 프로·해외로 가는 길이 실제로 열려 있어요.',link:'https://www.starnewskorea.com/sports/2025/12/29/2025122910091671644',linkText:'육성 성과'},
+      {cls:'el',icon:'🏫',title:'진로 경로 한눈에',body:'유소년 클럽(취미·대회반) → <b>중학교 농구부/클럽</b> → 고등학교 → 대학·프로. 엘리트(학교 운동부)와 클럽(생활체육) 두 길이 있고, 요즘은 <b>클럽→엘리트 전환</b> 사례도 늘어요. 중고 진학은 중고농구연맹 정보를 참고하세요.',link:'http://kssbf.or.kr/',linkText:'중고농구연맹'},
+      {cls:'el',icon:'📋',title:'지금 우리가 할 수 있는 것',body:'① 기본기(드리블·슛·풋워크) 꾸준히 ② KBL 유스 대회·리그 경험 쌓기(지금 하고 있어요!) ③ 키·체력 관리 ④ 관심 있으면 KBL 유소년 발굴사업·캠프 <b>신청</b>. 조급해하지 말고 <b>즐기며 오래</b> 하는 게 제일 중요해요.',link:'https://youth.kbl.or.kr/',linkText:'프로그램 보기'}
+    ],
+    asiangames:[
+      {cls:'ag',icon:'🇰🇷',title:'2026 아이치·나고야 아시안게임',body:'<b>9/19~10/4</b> 일본 아이치현·나고야 개최(제20회). 농구는 <b>남자·여자 5대5</b>와 <b>3x3(남/녀)</b>가 열려요. 우리 대회(8월 제천) 끝나고 온 가족이 대표팀 응원하기 딱 좋은 시기!',link:'https://www.koreabasketball.or.kr/m/game/intl_schedule.php',linkText:'대표팀 일정'},
+      {cls:'ag',icon:'🏀',title:'한국 3x3 농구대표팀 확정',body:'2026.5.19 대한민국농구협회가 <b>남녀 3x3 국가대표팀</b>을 확정 발표. 3x3은 하프코트 3대3 스피드 농구라 아이들이 보고 따라 하기 좋은 종목이에요. 5대5 대표팀 경기와 함께 챙겨보세요.',link:'https://www.news1.kr/sports/basketball/6171308',linkText:'대표팀 소식'},
+      {cls:'ag',icon:'📺',title:'아이와 함께 보기 팁',body:'경기를 보며 <b>좋은 수비 위치·패스·스크린</b>을 같이 짚어주면 훈련 동기부여에 최고예요. 세부 일정·중계는 대회가 가까워지면 대한민국농구협회·중계사에서 공지되니 확인하세요.',link:'https://ko.wikipedia.org/wiki/2026년_아시안_게임',linkText:'대회 개요'}
+    ],
+    parentguide:[
+      {cls:'pk',icon:'📣',title:'응원의 기술 (벤치코칭 금물)',body:'경기 중엔 <b>결과보다 노력·과정</b>을 응원해 주세요. 코치 지시와 <b>다른 훈수(벤치 코칭)는 아이를 혼란·압박</b>시킬 수 있어요. 심판·상대팀 비난은 삼가고, "잘하고 있어!" 한마디가 최고예요.',link:'',linkText:''},
+      {cls:'pk',icon:'💬',title:'경기 후 대화법',body:'끝나고 첫 마디는 잘잘못 대신 <b>"재밌었어? 뭐가 제일 좋았어?"</b>. 좋은 의도의 조언도 받는 방식에 따라 압박이 될 수 있어요. 이동 중 훈수는 잠시 접고 <b>아이 감정을 먼저</b> 들어주세요.',link:'https://m.cafe.daum.net/wfage/NjFW/113',linkText:'응원하는 자세'},
+      {cls:'pk',icon:'🎒',title:'대회 짐 체크 (3박4일)',body:'홈/어웨이 유니폼 · 이너웨어(블랙) · 농구화 · 여벌옷·양말 · <b>물통·간식(바나나·에너지바)</b> · 상비약·밴드·파스·아이스팩 · 수건·세면도구 · 충전기 · 응원도구 · 보험증/신분증.',link:'',linkText:''},
+      {cls:'pk',icon:'🧴',title:'엄마·아빠 자신도 챙기기',body:'체육관 장시간 대기 대비 <b>방석·겉옷·간식·물</b>, 여름이라 <b>모자·부채·손선풍기</b>. 가정끼리 <b>교대로 케어</b>하고 무리하지 마세요 — 부모 컨디션도 아이만큼 중요해요!',link:'',linkText:''}
+    ],
+    jecheontrip:[
+      {cls:'tv',icon:'🚠',title:'청풍호반 케이블카',body:'제천 상징 청풍호를 <b>공중에서 한눈에</b>. 아이들이 좋아하는 스릴 뷰. 청풍문화재단지와 묶어 반나절 코스로 좋아요.',link:'https://map.naver.com/p/search/청풍호반케이블카',linkText:'지도'},
+      {cls:'tv',icon:'🌳',title:'의림지 · 옥순봉 출렁다리',body:'<b>의림지</b>는 걷기 좋은 호수 산책로(가족 산책), <b>옥순봉 출렁다리</b>는 강 위를 건너는 짜릿함. 경기 사이 가볍게 바람 쐬기 좋아요.',link:'https://map.naver.com/p/search/제천 옥순봉출렁다리',linkText:'지도'},
+      {cls:'tv',icon:'☕',title:'제천 카페',body:'청풍호 뷰 대형카페가 많아요. 평점 좋은 곳: <b>콘크리트월</b>(콜드브루)·<b>티카페차센</b>·<b>카페 너른</b>. 경기 전후 부모 쉼터로 딱이에요.',link:'https://www.diningcode.com/list.dc?query=제천 카페',linkText:'카페 순위'},
+      {cls:'tv',icon:'⛹️',title:'농구 연습 · 몸풀기',body:'경기장(어울림·세명대)은 대회 전용이라, 몸풀기는 <b>제천시 공공체육시설 예약</b>(생활체육공원·국민체육센터 등 대관)이나 야외 농구코트를 이용하세요. 숙소(소노벨 단양) 내·인근 체육시설도 문의해 보세요.',link:'https://jcfmc.jecheon.go.kr/',linkText:'체육시설 예약'}
+    ],
+    gear:[
+      {cls:'gr',icon:'🦶',title:'발목 보호대 — 잠스트(ZAMST)',body:'농구 발목 보호대 <b>1순위 브랜드</b>. <b>A2-DX</b>는 좌우 지지대로 강하게 잡아 접질림 방지에 좋고, <b>A1</b>은 가벼운 버전이에요. 유소년은 <b>S(스몰)·발 둘레 확인</b> 필수. 여러 NBA·농구 선수가 착용.',link:'https://search.shopping.naver.com/search/all?query=잠스트 A2-DX 발목보호대',linkText:'판매처·가격'},
+      {cls:'gr',icon:'🛡️',title:'무릎 충격보호 — 맥데이비드 헥스패드',body:'점프·다이빙 때 <b>바닥 충돌로부터 무릎을 보호</b>하는 패드형(HEX). 유소년 농구에 특히 적합해요(6446R 등). 가볍고 활동성 좋아 아이들이 부담 없이 착용.',link:'https://search.shopping.naver.com/search/all?query=맥데이비드 헥스패드 무릎보호대',linkText:'판매처·가격'},
+      {cls:'gr',icon:'🏀',title:'무릎 지지·압박 — 바우어파인드(Bauerfeind)',body:'<b>NBA 공식 라이선스</b> 무릎 서포트로 유명한 독일 프리미엄 브랜드. 무릎이 불안하거나 지지가 필요할 때 압박 슬리브형으로 좋아요. 국내 쿠팡·네이버쇼핑·해외직구.',link:'https://search.shopping.naver.com/search/all?query=바우어파인드 무릎보호대',linkText:'판매처·가격'},
+      {cls:'gr',icon:'📏',title:'구입·착용 팁',body:'유소년은 <b>유스/스몰 사이즈·정확한 핏</b>이 제일 중요해요(크면 효과 없고 불편). 건강한 관절을 <b>과하게 보호</b>할 필요는 없고, 실제 <b>부상·통증이 있으면 전문가 상담 후</b> 착용하세요. 발목 접질림이 잦으면 <b>보호대+테이핑</b> 병행이 좋아요.',link:'',linkText:''}
+    ],
+    requests:[
+      {cls:'rq',icon:'🏀',title:'소노 구단·감독에게 확인/요청',body:'· 대진표·경기 시간 <b>최종 확정 및 변경 즉시 공유</b><br>· 경기 외 시간 <b>집결/해산·이동·식사</b>(개별 이동이니 시간 명확화)<br>· 선수 등록·유니폼(홈/어웨이) 최종 확인<br>· <b>워밍업 코트·시간</b> 확보 여부<br>· 주차·응원석·입장 안내, 생중계·사진 링크<br>· 부상 시 <b>응급·보험</b>·트레이너 대응<br>· 단체 사진 일정',link:'',linkText:''},
+      {cls:'rq',icon:'🏨',title:'소노벨 단양에 확인/요청',body:'· 가정별 <b>객실 인접 배정</b>(같은 층)<br>· <b>얼리 체크인/레이트 체크아웃</b>(8/15 15시 경기·8/17 오전 경기 고려)<br>· 패밀리 <b>취사형·취사도구·냉장고</b> 확인<br>· <b>유니폼 세탁</b>(코인세탁/서비스) 여부<br>· 조식·이른 식사 가능 시간<br>· <b>단체 주차</b>(차량 다수)<br>· 어린이 침구·짐 보관(체크아웃 후)<br>· <b>요금(미정→확정)</b> 재안내',link:'',linkText:''}
+    ],
     dinnerOpts:[
       {id:'myeongryun',name:'명륜진사갈비 제천강제점',type:'고기 무한리필 · 성인 21,900원',link:'https://naver.me/5YoBlNTX',tags:'제천 확인, 주차 넓음, 아이 선호',pros:'제천시 강저로 197. 무한리필 고기라 운동한 아이들이 가장 잘 먹고 뷔페식이라 정산이 깔끔. 전용 주차장 넓어 단체·차량 다수 OK. 블로그 후기 대체로 좋음.',cons:'주말 저녁 대기 가능 · 브레이크타임 15~17시(저녁 영업 17시부터).'},
       {id:'shabu',name:'샤브올데이 제천영천점',type:'샤브 뷔페 · 평일 24,900/주말 29,900',link:'https://naver.me/xAfHReAE',tags:'제천 확인, 주차 넓음, 채소 다양',pros:'제천시 청풍호로 68. 고기+채소 무한리필 뷔페, 바로 옆 넓은 전용 주차장. 채소·죽·후식 다양해 부모 만족.',cons:'다이닝코드 평점 보통(2.8) · "리필이 늦을 때 있다"는 후기 · 샤브라 어린 선수 호불호.'}
@@ -1083,6 +1192,27 @@ var firebaseConfig = {
     opponents:{ title:'상대팀 스카우팅', box:'oppBox',
       fields:[ {k:'team',label:'팀·경기',t:'text'}, {k:'no',label:'등번호',t:'text'}, {k:'name',label:'이름(마스킹)',t:'text'}, {k:'pos',label:'포지션',t:'text'}, {k:'ht',label:'키',t:'text'} ],
       renderList:function(items){ var order=[],map={}; items.forEach(function(it){var t=it.team||'';if(!map[t]){map[t]=[];order.push(t);}map[t].push(it);}); return order.map(function(t){ var rows=map[t].map(function(p){return '<tr><td class="no">'+esc(p.no)+'</td><td>'+esc(p.name)+'</td><td>'+esc(p.pos)+'</td><td class="ht">'+esc(p.ht)+'</td></tr>';}).join(''); return '<div class="opp"><div class="oh"><span>'+esc(t)+'</span><span class="cnt">'+map[t].length+'명</span></div><table><thead><tr><th>번호</th><th>이름</th><th>포지션</th><th>키</th></tr></thead><tbody>'+rows+'</tbody></table></div>'; }).join(''); } },
+    parentguide:{ title:'엄마·아빠 가이드', box:'pgBox',
+      fields:[{k:'cls',label:'색상(pk)',t:'text'},{k:'icon',label:'이모지',t:'text'},{k:'title',label:'제목',t:'text'},{k:'body',label:'내용(HTML)',t:'area'},{k:'link',label:'링크',t:'text'},{k:'linkText',label:'링크 글자',t:'text'}],
+      render:function(x){ return '<div class="icard '+esc(x.cls||'')+'"><h3><span class="em">'+esc(x.icon)+'</span>'+esc(x.title)+'</h3><p>'+(x.body||'')+'</p>'+(x.link?'<a href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'자세히')+' ↗</a>':'')+'</div>'; } },
+    jecheontrip:{ title:'제천 나들이 (카페·관광·농구장)', box:'tripBox',
+      fields:[{k:'cls',label:'색상(tv)',t:'text'},{k:'icon',label:'이모지',t:'text'},{k:'title',label:'제목',t:'text'},{k:'body',label:'내용(HTML)',t:'area'},{k:'link',label:'링크',t:'text'},{k:'linkText',label:'링크 글자',t:'text'}],
+      render:function(x){ return '<div class="icard '+esc(x.cls||'')+'"><h3><span class="em">'+esc(x.icon)+'</span>'+esc(x.title)+'</h3><p>'+(x.body||'')+'</p>'+(x.link?'<a href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'자세히')+' ↗</a>':'')+'</div>'; } },
+    requests:{ title:'구단·숙소 요청 체크리스트', box:'reqBox',
+      fields:[{k:'cls',label:'색상(rq)',t:'text'},{k:'icon',label:'이모지',t:'text'},{k:'title',label:'제목',t:'text'},{k:'body',label:'내용(HTML)',t:'area'},{k:'link',label:'링크',t:'text'},{k:'linkText',label:'링크 글자',t:'text'}],
+      render:function(x){ return '<div class="icard '+esc(x.cls||'')+'"><h3><span class="em">'+esc(x.icon)+'</span>'+esc(x.title)+'</h3><p>'+(x.body||'')+'</p>'+(x.link?'<a href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'자세히')+' ↗</a>':'')+'</div>'; } },
+    gear:{ title:'부상 보호 장비 (무릎·발목)', box:'gearBox',
+      fields:[{k:'cls',label:'색상(gr)',t:'text'},{k:'icon',label:'이모지',t:'text'},{k:'title',label:'제목',t:'text'},{k:'body',label:'내용(HTML)',t:'area'},{k:'link',label:'판매처 링크',t:'text'},{k:'linkText',label:'링크 글자',t:'text'}],
+      render:function(x){ return '<div class="icard '+esc(x.cls||'')+'"><h3><span class="em">'+esc(x.icon)+'</span>'+esc(x.title)+'</h3><p>'+(x.body||'')+'</p>'+(x.link?'<a href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'자세히')+' ↗</a>':'')+'</div>'; } },
+    kidscare:{ title:'아이 성장·먹거리·훈련', box:'kidsBox',
+      fields:[{k:'cls',label:'색상(g1먹거리/g2훈련/g3부상)',t:'text'},{k:'icon',label:'이모지',t:'text'},{k:'title',label:'제목',t:'text'},{k:'body',label:'내용(HTML)',t:'area'},{k:'link',label:'링크',t:'text'},{k:'linkText',label:'링크 글자',t:'text'}],
+      render:function(x){ return '<div class="icard '+esc(x.cls||'')+'"><h3><span class="em">'+esc(x.icon)+'</span>'+esc(x.title)+'</h3><p>'+(x.body||'')+'</p>'+(x.link?'<a href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'자세히')+' ↗</a>':'')+'</div>'; } },
+    elite:{ title:'농구 엘리트 교육·진로', box:'eliteBox',
+      fields:[{k:'cls',label:'색상(el)',t:'text'},{k:'icon',label:'이모지',t:'text'},{k:'title',label:'제목',t:'text'},{k:'body',label:'내용(HTML)',t:'area'},{k:'link',label:'링크',t:'text'},{k:'linkText',label:'링크 글자',t:'text'}],
+      render:function(x){ return '<div class="icard '+esc(x.cls||'')+'"><h3><span class="em">'+esc(x.icon)+'</span>'+esc(x.title)+'</h3><p>'+(x.body||'')+'</p>'+(x.link?'<a href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'자세히')+' ↗</a>':'')+'</div>'; } },
+    asiangames:{ title:'2026 아시안게임 농구', box:'agBox',
+      fields:[{k:'cls',label:'색상(ag)',t:'text'},{k:'icon',label:'이모지',t:'text'},{k:'title',label:'제목',t:'text'},{k:'body',label:'내용(HTML)',t:'area'},{k:'link',label:'링크',t:'text'},{k:'linkText',label:'링크 글자',t:'text'}],
+      render:function(x){ return '<div class="icard '+esc(x.cls||'')+'"><h3><span class="em">'+esc(x.icon)+'</span>'+esc(x.title)+'</h3><p>'+(x.body||'')+'</p>'+(x.link?'<a href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'자세히')+' ↗</a>':'')+'</div>'; } },
     videos:{ title:'영상 라이브러리', box:'videosBox',
       fields:[ {k:'group',label:'그룹 제목',t:'text'}, {k:'label',label:'버튼 이름',t:'text'}, {k:'url',label:'링크 URL',t:'text'}, {k:'type',label:'아이콘 (yt / cloud / none)',t:'text'} ],
       renderList:function(items){ var order=[],map={}; items.forEach(function(it){ var g=it.group||''; if(!map[g]){map[g]=[];order.push(g);} map[g].push(it); }); return order.map(function(g){ return '<div class="vid-group"><h4><span class="dot"></span>'+g+'</h4><div class="vids">'+map[g].map(function(it){ var ic=it.type==='yt'?'<span class="yt"></span>':(it.type==='cloud'?'<span class="cloud"></span>':''); return '<a class="vid" href="'+esc(it.url)+'" target="_blank">'+ic+esc(it.label)+'</a>'; }).join('')+'</div></div>'; }).join(''); } },
