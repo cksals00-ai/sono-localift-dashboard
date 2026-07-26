@@ -263,6 +263,7 @@
   .tt-row.game{background:#fff7e6}
   .tt-row.game .ti{font-weight:800}
   .tt-row .tg{font-size:10px;font-weight:800;border:1.5px solid var(--navy2);border-radius:4px;padding:0 5px;color:var(--navy2)}
+  .tt-row .jertt{display:inline-block;height:32px;width:auto;vertical-align:-12px;margin:0 3px 0 2px;border:1.2px solid #b9d3e4;border-radius:4px;background:#fff;box-shadow:1px 1px 0 rgba(18,35,58,.12)}
 
   /* ---------- dinner vote ---------- */
   .vote-fam{display:flex;gap:9px;align-items:center;flex-wrap:wrap;background:var(--card);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);padding:13px 15px;margin-bottom:14px}
@@ -344,10 +345,18 @@
   .ts-tot{font-size:12px;font-weight:800;border:2px solid var(--navy2);border-radius:6px;padding:3px 9px;background:var(--bg);color:var(--navy2)}
   .ts-tot b{color:var(--navy)}
   .ts-table{width:100%;border-collapse:collapse;font-size:12px}
-  .ts-table th,.ts-table td{padding:8px 10px;border-bottom:1.5px solid var(--line);text-align:left;vertical-align:top}
+  .ts-table th,.ts-table td{padding:8px 7px;border-bottom:1.5px solid var(--line);text-align:left;vertical-align:top}
+  .ts-table th:nth-child(3),.ts-table td:nth-child(3){white-space:nowrap;text-align:right}
   .ts-table th{background:var(--bg);font-weight:800;color:var(--navy2);font-size:11px}
   .ts-table .fam{font-weight:900;color:var(--navy);white-space:nowrap}
   .ts-table .del{cursor:pointer;color:var(--loss);font-weight:900;border:none;background:none;font-size:14px;font-family:inherit}
+  .ts-table .amt{font-weight:900;color:var(--navy2);white-space:nowrap;text-align:right}
+  .ts-table tfoot td{background:var(--navy2);color:#fff;font-weight:900;font-size:12.5px;border-bottom:none}
+  .ts-table tfoot .amt{color:var(--accent)}
+  .ts-price-note{padding:9px 14px;border-bottom:2px solid var(--line);font-size:11.5px;font-weight:700;color:var(--mut);line-height:1.55}
+  .ts-price-note b{color:var(--navy2)}
+  .ts-est{margin-top:8px;text-align:center;font-size:12px;font-weight:800;color:var(--navy2);min-height:15px}
+  .ts-est b{color:var(--loss);font-size:13px}
   .ts-empty{padding:18px;text-align:center;color:var(--mut);font-size:12.5px;font-weight:600}
 
   /* ---------- opponents scouting ---------- */
@@ -375,6 +384,10 @@
   .icard.rq{border-top-color:#159e8f}
   .icard.gr{border-top-color:#5b6cc9}
   .icard.un{border-top-color:#9d3b4d}
+  .unihint{font-size:11.5px;font-weight:700;color:var(--mut);line-height:1.65;margin:-4px 0 13px;padding:9px 11px;background:#fff7e0;border:2px dashed #9a6b00;border-radius:10px;color:#6d4c00}
+  .ucdot{display:inline-block;width:9px;height:9px;border-radius:2px;border:1.4px solid #12233a;vertical-align:0;margin-right:3px}
+  /* 일정표용 작은 유니폼 썸네일 */
+  .jerch{display:inline-block;height:38px;width:auto;vertical-align:-14px;margin:0 4px 0 2px;border:1.3px solid #b9d3e4;border-radius:4px;background:#fff;box-shadow:1px 1px 0 rgba(18,35,58,.12)}
   .icard h3{font-size:14.5px;font-weight:900;display:flex;align-items:center;gap:7px;margin-bottom:6px;line-height:1.3}
   .icard h3 .em{font-size:17px;flex:none}
   .icard p{font-size:12.5px;color:var(--mut);font-weight:600;line-height:1.65}
@@ -391,16 +404,32 @@
 
   /* ---------- sticky top nav ---------- */
   html{scroll-behavior:smooth}
-  [id]{scroll-margin-top:54px}
+  [id]{scroll-margin-top:88px}
   .topnav{position:sticky;top:0;z-index:40;background:var(--navy2);border-bottom:3px solid #0c1a2e;overflow-x:auto;white-space:nowrap;padding:8px 10px;scrollbar-width:none;margin:0 -16px 8px}
   .topnav::-webkit-scrollbar{display:none}
   .topnav a{display:inline-block;color:#fff;background:rgba(255,255,255,.10);border:1.5px solid rgba(255,255,255,.28);border-radius:999px;padding:5px 12px;margin-right:6px;font-size:12px;font-weight:800;text-decoration:none}
   .topnav a:active,.topnav a:hover{background:var(--accent);color:var(--navy2);border-color:var(--navy2)}
+  /* ===== 그룹형 네비게이터 ===== */
+  .navwrap{position:sticky;top:0;z-index:45;margin:0 -16px 10px}
+  .navbar{background:var(--navy2);border-bottom:3px solid #0c1a2e;display:flex;overflow-x:auto;white-space:nowrap;scrollbar-width:none;padding:7px 8px;gap:6px}
+  .navbar::-webkit-scrollbar{display:none}
+  .navbar button{flex:none;display:inline-flex;align-items:center;gap:4px;color:#fff;background:rgba(255,255,255,.10);border:1.5px solid rgba(255,255,255,.28);border-radius:999px;padding:6px 13px;font-size:12.5px;font-weight:800;font-family:inherit;cursor:pointer;letter-spacing:-.2px}
+  .navbar button[aria-expanded="true"]{background:var(--accent);color:#12233a;border-color:#12233a}
+  .navpanel{display:none;position:absolute;left:0;right:0;top:100%;background:#f2f8fc;border-bottom:3px solid #0c1a2e;box-shadow:0 8px 18px rgba(12,26,46,.22);padding:11px 12px 13px;max-height:70vh;overflow-y:auto}
+  .navpanel.on{display:block}
+  .navpanel .ptitle{font-size:11px;font-weight:900;color:var(--navy2);letter-spacing:.4px;margin-bottom:8px;text-transform:uppercase}
+  .navgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  @media(max-width:340px){.navgrid{grid-template-columns:1fr}}
+  .navgrid a{display:block;background:#fff;border:2px solid var(--navy);border-radius:10px;box-shadow:2px 2px 0 var(--navy);padding:7px 9px;text-decoration:none;color:var(--ink)}
+  .navgrid a:active{background:var(--accent)}
+  .navgrid a .nl{display:block;font-size:12.5px;font-weight:900;letter-spacing:-.3px;line-height:1.3}
+  .navgrid a .nd{display:block;font-size:10px;font-weight:600;color:var(--mut);margin-top:2px;line-height:1.35}
+  .navtop{display:block;text-align:center;margin-top:9px;font-size:11px;font-weight:800;color:var(--navy2);text-decoration:none}
 </style>
 </head>
 <body>
 
-<header>
+<header id="top">
   <div class="hd-inner">
     <div class="crest">
       <svg viewBox="0 0 64 64" fill="none">
@@ -429,28 +458,17 @@
 
 <div class="wrap">
 
-  <nav class="topnav" aria-label="섹션 바로가기">
-    <a href="#matchesBox">경기결과</a>
-    <a href="#fixturesBox">대회일정</a>
-    <a href="#oppBox">상대팀</a>
-    <a href="#timetableBox">타임테이블</a>
-    <a href="#routesBox">이동</a>
-    <a href="#resv">숙박</a>
-    <a href="#tshirt">단체티</a>
-    <a href="#uniBox">유니폼규정</a>
-    <a href="#dinner">석식</a>
-    <a href="#eatsBox">맛집</a>
-    <a href="#gearBox">보호장비</a>
-    <a href="#tournBox">대회검색</a>
-    <a href="#kidsBox">성장·훈련</a>
-    <a href="#eliteBox">엘리트</a>
-    <a href="#agBox">아시안게임</a>
-    <a href="#pgBox">학부모</a>
-    <a href="#tripBox">제천나들이</a>
-    <a href="#reqBox">요청</a>
-    <a href="#rosterBox">명단</a>
-    <a href="#newsList">뉴스</a>
-  </nav>
+  <div class="navwrap" id="navWrap">
+    <nav class="navbar" id="navBar" aria-label="섹션 바로가기">
+      <button type="button" data-g="g1" aria-expanded="false">🏀 경기</button>
+      <button type="button" data-g="g2" aria-expanded="false">🚗 이동·숙박</button>
+      <button type="button" data-g="g3" aria-expanded="false">👕 준비물</button>
+      <button type="button" data-g="g4" aria-expanded="false">🍚 먹거리</button>
+      <button type="button" data-g="g5" aria-expanded="false">📚 정보·자료</button>
+      <button type="button" data-g="g6" aria-expanded="false">👨‍👩‍👧 우리 팀</button>
+    </nav>
+    <div class="navpanel" id="navPanel"></div>
+  </div>
 
   <!-- SEASON STATS -->
   <div class="admin-only block" style="text-align:right;margin:22px 0 -6px"><button class="manage-btn" data-sec="stats">＋ 시즌성적 관리</button></div>
@@ -695,18 +713,21 @@
       </div>
       <div class="ts-grid" id="tsGrid"></div>
       <button class="ts-submit" id="tsSubmit">우리 가정 사이즈 저장 · 수정</button>
+      <div class="ts-est" id="tsEst"></div>
       <div class="ts-status" id="tsStatus"></div>
     </div>
     <div class="ts-summary">
-      <div class="sh"><span>📋 사이즈 취합 현황</span><span><span class="cnt" id="tsFamCnt">0</span>가정 · 총 <span class="cnt" id="tsTot">0</span>장</span></div>
+      <div class="sh"><span>📋 사이즈 취합 현황</span><span><span class="cnt" id="tsFamCnt">0</span>가정 · 총 <span class="cnt" id="tsTot">0</span>장 · <span class="cnt" id="tsAmt">0원</span></span></div>
+      <div class="ts-price-note">💰 <b>단가</b> — 130·140·150·XS~XL <b>15,500원</b> / 2XL·3XL <b>16,500원</b> (+1,000원) · 대금은 <b>8월 1주차</b> 가정별 입금 정산</div>
       <div class="ts-totals" id="tsTotals"></div>
       <div id="tsBody"><div class="ts-empty">아직 저장된 사이즈가 없습니다.</div></div>
     </div>
   </section>
 
   <!-- UNIFORM RULES -->
-  <section>
+  <section id="uniSec">
     <div class="sec-h"><h2>유니폼 · 이너웨어 규정</h2><span class="en">Uniform Rules</span><button class="manage-btn admin-only" data-sec="uniform">＋ 관리</button></div>
+    <div class="unihint">👕 <b>홈 = 스카이블루</b>, <b>원정 = 흰색</b>이에요. 제천 대회는 <b>둘 다</b> 챙겨오셔야 합니다 (1·2경기 스카이블루 / 3경기 흰색, 본선 진출 시 별도 안내). 마킹·번호는 아이별로 지급된 유니폼을 따릅니다.</div>
     <div class="icards" id="uniBox"></div>
     <p class="refnote">* 우리 팀(TOP농구교실·소노) 복장 규정 + 초등농구연맹 FIBA 룰 기준이에요 — <b>양말=흰색, 이너웨어=블랙 컴프레션, 발목보호대 강력추천</b>. 출처: 호원 아버님 공유 블로그 · 초등농구연맹 유니폼 규정(다음스포츠) · <a href="https://m.sports.naver.com/basketball/article/065/0000280948" target="_blank" style="color:var(--navy);font-weight:800">참고 기사(전국초등농구대회)</a>.</p>
   </section>
@@ -807,7 +828,7 @@
       </div>
       <div class="notice">
         <h3><span class="em">🎽</span>단체복</h3>
-        <p>선수: 연습경기 시 홈 유니폼 · 학부모: 소노 응원 티셔츠 착용 권장</p>
+        <p>선수: 연습경기 시 홈 유니폼(스카이블루) · 학부모: 소노 응원 티셔츠 착용 권장</p>
       </div>
     </div>
   </section>
@@ -1020,6 +1041,13 @@ var firebaseConfig = {
 
 (function(){
   var ADMIN_PASS='sono2026';   // 관리자 비밀번호 (원하면 이 값만 바꾸세요)
+  /* 콘텐츠 버전: 이 파일의 내용을 수정해서 새로 올릴 때마다 숫자를 1 올리면
+     접속하는 순간 DB의 dashboard/ 콘텐츠가 이 파일 기준으로 자동 갱신됩니다.
+     (reservations / votes / tshirt 등 학부모 입력 데이터는 전혀 건드리지 않습니다) */
+  var CONTENT_VER = 5;
+  /* 일정표에 붙는 작은 유니폼 이미지 (홈/원정) */
+  var JER_HOME='data:image/png;base64,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';
+  var JER_AWAY='data:image/png;base64,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';
   var db=null, configured = firebaseConfig.apiKey.indexOf('PASTE_')!==0;
   if(configured){ try{ firebase.initializeApp(firebaseConfig); db=firebase.database(); }catch(e){ configured=false; } }
 
@@ -1043,21 +1071,21 @@ var firebaseConfig = {
       {d:'14~17',m:'8월',hl:true,title:'KBL 제천 유스 클럽대회 2026 🏆',desc:'충북 제천 · B조(SK·소노·정관장·KT) 풀리그 · 예선 8/15~16, 본선 8/17 · 팀 숙소 <b>소노벨 단양</b>(신청 마감) · 1일차 석식 만이갈비 · 개별 이동·식사',badge:'공식 대회',badgeClass:'b-cup'}
     ],
     fixtures:[
-      {game:'예선 1경기',date:'8/15 (토)',time:'16:00',opp:'KT',venue:'어울림체육센터',uniform:'홈 유니폼'},
-      {game:'예선 2경기',date:'8/16 (일)',time:'10:45',opp:'정관장',venue:'세명대 체육관',uniform:'홈 유니폼'},
-      {game:'예선 3경기',date:'8/16 (일)',time:'16:00',opp:'SK',venue:'어울림체육센터',uniform:'원정 유니폼'}
+      {game:'예선 1경기',date:'8/15 (토)',time:'16:00',opp:'KT',venue:'어울림체육센터',uniform:'홈 · 스카이블루'},
+      {game:'예선 2경기',date:'8/16 (일)',time:'10:45',opp:'정관장',venue:'세명대 체육관',uniform:'홈 · 스카이블루'},
+      {game:'예선 3경기',date:'8/16 (일)',time:'16:00',opp:'SK',venue:'어울림체육센터',uniform:'원정 · 흰색'}
     ],
     timetable:[
       {day:'DAY 1 · 8/15 (토)',time:'15:00',title:'체육관 집결',tag:'집결',venue:'어울림체육센터'},
-      {day:'DAY 1 · 8/15 (토)',time:'16:00',title:'소노 U-9 1경기 vs KT',tag:'경기',venue:'홈 유니폼'},
+      {day:'DAY 1 · 8/15 (토)',time:'16:00',title:'소노 U-9 1경기 vs KT',tag:'경기',venue:'홈 · 스카이블루'},
       {day:'DAY 1 · 8/15 (토)',time:'17:00',title:'1경기 종료',tag:'종료',venue:''},
       {day:'DAY 1 · 8/15 (토)',time:'18:30',title:'단체 석식 (만이갈비 청전점)',tag:'식사',venue:''},
       {day:'DAY 1 · 8/15 (토)',time:'20:00',title:'1일차 종료 · 숙소 이동/휴식',tag:'휴식',venue:''},
       {day:'DAY 2 · 8/16 (일)',time:'10:00',title:'체육관 집결',tag:'집결',venue:'세명대체육관'},
-      {day:'DAY 2 · 8/16 (일)',time:'10:45',title:'소노 U-9 2경기 vs 정관장',tag:'경기',venue:'홈 유니폼'},
+      {day:'DAY 2 · 8/16 (일)',time:'10:45',title:'소노 U-9 2경기 vs 정관장',tag:'경기',venue:'홈 · 스카이블루'},
       {day:'DAY 2 · 8/16 (일)',time:'11:30',title:'2경기 종료 · 개별 가족 시간(점심/관람)',tag:'자유',venue:''},
       {day:'DAY 2 · 8/16 (일)',time:'15:00',title:'체육관 재집결',tag:'집결',venue:'어울림체육센터'},
-      {day:'DAY 2 · 8/16 (일)',time:'16:00',title:'소노 U-9 3경기 vs SK',tag:'경기',venue:'원정 유니폼'},
+      {day:'DAY 2 · 8/16 (일)',time:'16:00',title:'소노 U-9 3경기 vs SK',tag:'경기',venue:'원정 · 흰색'},
       {day:'DAY 2 · 8/16 (일)',time:'17:00',title:'3경기 · 예선 일정 종료',tag:'종료',venue:''},
       {day:'DAY 3 · 8/17 (월) · 본선(예선 2위 이내 진출 시)',time:'11:30',title:'준결승전 (4강)',tag:'경기',venue:'세명대 or 어울림'},
       {day:'DAY 3 · 8/17 (월) · 본선(예선 2위 이내 진출 시)',time:'13:10',title:'결승전 (FINAL)',tag:'경기',venue:'어울림체육센터'},
@@ -1115,7 +1143,7 @@ var firebaseConfig = {
     parentguide:[
       {cls:'pk',icon:'📣',title:'응원의 기술 (벤치코칭 금물)',body:'경기 중엔 <b>결과보다 노력·과정</b>을 응원해 주세요. 코치 지시와 <b>다른 훈수(벤치 코칭)는 아이를 혼란·압박</b>시킬 수 있어요. 심판·상대팀 비난은 삼가고, "잘하고 있어!" 한마디가 최고예요.',link:'',linkText:''},
       {cls:'pk',icon:'💬',title:'경기 후 대화법',body:'끝나고 첫 마디는 잘잘못 대신 <b>"재밌었어? 뭐가 제일 좋았어?"</b>. 좋은 의도의 조언도 받는 방식에 따라 압박이 될 수 있어요. 이동 중 훈수는 잠시 접고 <b>아이 감정을 먼저</b> 들어주세요.',link:'https://m.cafe.daum.net/wfage/NjFW/113',linkText:'응원하는 자세'},
-      {cls:'pk',icon:'🎒',title:'대회 짐 체크 (3박4일)',body:'홈/어웨이 유니폼 · 이너웨어(블랙) · 농구화 · 여벌옷·양말 · <b>물통·간식(바나나·에너지바)</b> · 상비약·밴드·파스·아이스팩 · 수건·세면도구 · 충전기 · 응원도구 · 보험증/신분증.',link:'',linkText:''},
+      {cls:'pk',icon:'🎒',title:'대회 짐 체크 (3박4일)',body:'홈(스카이블루)·원정(흰색) 유니폼 · 이너웨어(블랙) · 농구화 · 여벌옷·양말 · <b>물통·간식(바나나·에너지바)</b> · 상비약·밴드·파스·아이스팩 · 수건·세면도구 · 충전기 · 응원도구 · 보험증/신분증.',link:'',linkText:''},
       {cls:'pk',icon:'🧴',title:'엄마·아빠 자신도 챙기기',body:'체육관 장시간 대기 대비 <b>방석·겉옷·간식·물</b>, 여름이라 <b>모자·부채·손선풍기</b>. 가정끼리 <b>교대로 케어</b>하고 무리하지 마세요 — 부모 컨디션도 아이만큼 중요해요!',link:'',linkText:''}
     ],
     jecheontrip:[
@@ -1134,8 +1162,8 @@ var firebaseConfig = {
       {cls:'un',icon:'👕',title:'이너웨어 = 블랙 (컴프레션)',body:'반팔·긴팔 <b>컴프레션("쫄쫄이")</b> 또는 <b>유니폼만</b> 착용해요. <b>일반 반팔/긴팔 티셔츠·히트텍은 불가</b>. 팀 전원 <b>블랙으로 통일</b>(세탁 편함). 추위·근육부상 예방으로 이너웨어 착용을 권장해요.',link:'https://v.daum.net/v/20250626152941966',linkText:'규정 기사'},
       {cls:'un',icon:'🛒',title:'추천 이너웨어 — 코어핏 키즈 (호원 아버님 추천)',body:'아동용 스포츠 이너웨어 세트. 가볍고 빨리 마르며 세탁기 OK, 아동 사이즈(4XS~S). 정가 43,000원 → <b>할인가 약 14,900원</b>(시기별 변동). <b>블랙 옵션</b>으로 규정에 맞춰 구매하세요.',link:'https://m.withplayerskids.com/product/코어핏-키즈-이너웨어-세트/5185/category/213/display/1/',linkText:'제품 보기'},
       {cls:'un',icon:'🧦',title:'양말 = 흰색',body:'우리 팀(TOP농구교실)은 <b>흰색으로 통일</b>해요. TOP 양말 또는 <b>흰색 기성품</b> 양말 OK. 팀 전원 같은 색을 신어야 하고 <b>겉으로 보이게</b> 신으세요.',link:'',linkText:''},
-      {cls:'un',icon:'🎽',title:'유니폼 상·하의',body:'상의는 하의와 <b>같은 색·앞뒤 동일</b>, 하의는 <b>무릎 위</b>에서 끝나야 하고 <b>상의는 바지 안에 넣어</b> 입어요(올해부터 FIBA 성인 룰 적용). 홈/어웨이 구분해 준비하세요.',link:'',linkText:''},
-      {cls:'un',icon:'🔁',title:'홈/어웨이 착용 (제천 대회)',body:'예선 <b>1경기(vs KT)·2경기(vs 정관장) = 홈 유니폼</b>, <b>3경기(vs SK) = 원정(어웨이) 유니폼</b>이에요. 본선 진출 시엔 별도 안내에 따라 준비. <b>홈·어웨이 둘 다</b> 챙겨오세요!',link:'',linkText:''},
+      {cls:'un',icon:'🎽',title:'유니폼 상·하의',body:'상의는 하의와 <b>같은 색·앞뒤 동일</b>, 하의는 <b>무릎 위</b>에서 끝나야 하고 <b>상의는 바지 안에 넣어</b> 입어요(올해부터 FIBA 성인 룰 적용). <b>홈 = 스카이블루</b>, <b>원정 = 흰색</b>으로 구분해 준비하세요.',link:'',linkText:''},
+      {cls:'un',icon:'🔁',title:'홈/어웨이 착용 (제천 대회)',body:'예선 <b>1경기(vs KT)·2경기(vs 정관장) = 홈(스카이블루)</b>, <b>3경기(vs SK) = 원정(흰색)</b>이에요. 본선 진출 시엔 별도 안내에 따라 준비. <b>스카이블루·흰색 둘 다</b> 챙겨오세요!',link:'',linkText:''},
       {cls:'un',icon:'🦶',title:'발목보호대 = 강력추천',body:'부상 예방 차원에서 <b>발목보호대는 강력추천</b>이에요. 약국·저가 제품보다 처음엔 조금 불편해도 <b>보호력 좋은 제품</b>을 권해요(예: <b>잠스트 A-1</b>). “부상은 치료보다 예방이 우선!”',link:'https://search.shopping.naver.com/search/all?query=잠스트 A1 발목보호대',linkText:'판매처·가격'},
       {cls:'un',icon:'🔢',title:'등번호·액세서리·제재',body:'등번호는 <b>등 16cm↑ · 앞 8cm↑</b>, 상의와 대조되는 단색. 헤드밴드·손목밴드는 팀 <b>동일 색 · 너비 10cm 이하</b>. <b>유니폼 없으면 출전 불가</b>, 장비 규정 위반 시 해당 장비를 벗어야 해요.',link:'',linkText:''}
     ],
@@ -1178,7 +1206,7 @@ var firebaseConfig = {
       {cls:'tn',icon:'✅',title:'신청·개최일 매년 확인 (필독)',body:'<span class="tmeta">대회마다 <b>신청기간·개최일이 매년 달라져요.</b> 지역·연도별 최신 날짜는 아래 공식 캘린더에서 확인하세요.</span><span class="tags"><a href="http://minibasketball.co.kr/" target="_blank">한국초등농구연맹 ↗</a><a href="https://www.koreabasketball.or.kr/game/dom_schedule.php" target="_blank">농구협회 국내일정 ↗</a><a href="https://g1.sports.or.kr/schedule/year.do" target="_blank">스포츠지원포털 ↗</a><a href="https://www.schoolsportsclub.or.kr/" target="_blank">학교스포츠클럽 ↗</a><a href="https://youth.kbl.or.kr/" target="_blank">KBL 유소년 ↗</a></span>',link:'',linkText:''}
     ],
     requests:[
-      {cls:'rq',icon:'🏀',title:'소노 구단·감독에게 확인/요청',body:'· 대진표·경기 시간 <b>최종 확정 및 변경 즉시 공유</b><br>· 경기 외 시간 <b>집결/해산·이동·식사</b>(개별 이동이니 시간 명확화)<br>· 선수 등록·유니폼(홈/어웨이) 최종 확인<br>· <b>워밍업 코트·시간</b> 확보 여부<br>· 주차·응원석·입장 안내, 생중계·사진 링크<br>· 부상 시 <b>응급·보험</b>·트레이너 대응<br>· 단체 사진 일정',link:'',linkText:''},
+      {cls:'rq',icon:'🏀',title:'소노 구단·감독에게 확인/요청',body:'· 대진표·경기 시간 <b>최종 확정 및 변경 즉시 공유</b><br>· 경기 외 시간 <b>집결/해산·이동·식사</b>(개별 이동이니 시간 명확화)<br>· 선수 등록·유니폼(홈 스카이블루 / 원정 흰색) 최종 확인<br>· <b>워밍업 코트·시간</b> 확보 여부<br>· 주차·응원석·입장 안내, 생중계·사진 링크<br>· 부상 시 <b>응급·보험</b>·트레이너 대응<br>· 단체 사진 일정',link:'',linkText:''},
       {cls:'rq',icon:'🏨',title:'소노벨 단양에 확인/요청',body:'· 가정별 <b>객실 인접 배정</b>(같은 층)<br>· <b>얼리 체크인/레이트 체크아웃</b>(8/15 15시 경기·8/17 오전 경기 고려)<br>· 패밀리 <b>취사형·취사도구·냉장고</b> 확인<br>· <b>유니폼 세탁</b>(코인세탁/서비스) 여부<br>· 조식·이른 식사 가능 시간<br>· <b>단체 주차</b>(차량 다수)<br>· 어린이 침구·짐 보관(체크아웃 후)<br>· <b>요금(미정→확정)</b> 재안내',link:'',linkText:''}
     ],
     dinnerOpts:[
@@ -1237,8 +1265,8 @@ var firebaseConfig = {
       {emoji:'🏨',title:'대회 숙소 — 소노벨 단양',body:'3.17 투표로 확정. 객실가 조정 후 재공지 예정이며, 사용 객실은 <b>7/20 전</b>까지 회신 필요. (숙소 담당: 성규 아빠·소노 본사)',warn:true},
       {emoji:'🍔',title:'연습경기 간식 규칙',body:'홈팀이 상대팀 아이들 간식까지 준비 · 공금 조성 후 7가구 정산. (7/12 햄버거 가구당 14,400원 / 커피 6,100원)',warn:false},
       {emoji:'📷',title:'역할 분담',body:'학부모 대표: 선우 아빠 · 영상 촬영: 호원 아빠·우찬 아빠 · 장소 제공: 권오 아빠(이야짐)',warn:false},
-      {emoji:'🎽',title:'단체복',body:'선수: 연습경기 시 홈 유니폼 · 학부모: 소노 응원 티셔츠 착용 권장',warn:false},
-      {emoji:'🚌',title:'제천 대회 이동·식사',body:'이번 제천 대회부터 <b>개별 이동·개별 식사</b>로 진행됩니다. 대회 유니폼은 홈/어웨이 개인톡 신청.',warn:false}
+      {emoji:'🎽',title:'단체복',body:'선수: 연습경기 시 홈 유니폼(스카이블루) · 학부모: 소노 응원 티셔츠 착용 권장',warn:false},
+      {emoji:'🚌',title:'제천 대회 이동·식사',body:'이번 제천 대회부터 <b>개별 이동·개별 식사</b>로 진행됩니다. 대회 유니폼은 홈(스카이블루)/원정(흰색) 개인톡 신청.',warn:false}
     ],
     news:[
       {src:'점프볼',title:'[26드림캠프] 소노의 시작을 빛냈던 어린이 위너스, 그 응원이 만든 고양의 봄 "꼭 파이널 우승해주세요!"',url:'https://jumpball.co.kr/news/newsview.php?ncode=1065621855615468',tag:'소노',star:false,hidden:false},
@@ -1279,13 +1307,13 @@ var firebaseConfig = {
       render:function(x){ return '<div class="ev'+(x.hl?' hl':'')+'"><div class="date"><div class="d">'+esc(x.d)+'</div><div class="m">'+esc(x.m)+'</div></div><div class="info"><h3>'+esc(x.title)+'</h3><p>'+(x.desc||'')+'</p>'+(x.badge?'<span class="badge '+esc(x.badgeClass)+'">'+esc(x.badge)+'</span>':'')+'</div></div>'; } },
     fixtures:{ title:'제천 대회 경기 일정', box:'fixturesBox',
       fields:[ {k:'game',label:'경기 구분',t:'text'}, {k:'date',label:'날짜(요일)',t:'text'}, {k:'time',label:'시간',t:'text'}, {k:'opp',label:'상대팀',t:'text'}, {k:'venue',label:'장소',t:'text'}, {k:'uniform',label:'유니폼(홈/원정)',t:'text'} ],
-      render:function(x){ return '<div class="fix"><div class="fx-top"><span class="g">'+esc(x.game)+'</span><span>'+esc(x.date)+'</span></div><div class="fx-body"><div class="fx-opp">소노 <span style="color:var(--mut);font-weight:700">vs</span> <b>'+esc(x.opp)+'</b></div><div class="fx-meta">🕓 '+esc(x.time)+'<br>📍 '+esc(x.venue)+(x.uniform?' · <span style="color:#e11d48;font-weight:800">'+esc(x.uniform)+'</span>':'')+'</div></div></div>'; } },
+      render:function(x){ return '<div class="fix"><div class="fx-top"><span class="g">'+esc(x.game)+'</span><span>'+esc(x.date)+'</span></div><div class="fx-body"><div class="fx-opp">소노 <span style="color:var(--mut);font-weight:700">vs</span> <b>'+esc(x.opp)+'</b></div><div class="fx-meta">🕓 '+esc(x.time)+'<br>📍 '+esc(x.venue)+(x.uniform?' · <img class="jerch" alt="" src="'+(String(x.uniform).indexOf('\uc6d0\uc815')>=0?JER_AWAY:JER_HOME)+'"><span style="color:#e11d48;font-weight:800">'+esc(x.uniform)+'</span>':'')+'</div></div></div>'; } },
     routes:{ title:'숙소 ↔ 경기장 이동', box:'routesBox',
       fields:[ {k:'from',label:'출발',t:'text'}, {k:'to',label:'도착',t:'text'}, {k:'dist',label:'거리',t:'text'}, {k:'time',label:'소요시간',t:'text'}, {k:'note',label:'메모',t:'text'}, {k:'url',label:'도착지 지도 링크',t:'text'} ],
       render:function(x){ return '<div class="route"><div class="rt-top">'+esc(x.from)+'<span class="ar">→</span>'+esc(x.to)+'</div><div class="rt-b"><span class="rt-time">'+esc(x.time)+'</span><span class="rt-dist">'+esc(x.dist)+'</span>'+(x.note?'<div class="rt-note">'+esc(x.note)+'</div>':'')+(x.url?'<a class="rt-link" href="'+esc(x.url)+'" target="_blank">🧭 도착지 지도·길찾기</a>':'')+'</div></div>'; } },
     timetable:{ title:'대회 타임테이블', box:'timetableBox',
       fields:[ {k:'day',label:'DAY 구분',t:'text'}, {k:'time',label:'시간',t:'text'}, {k:'title',label:'내용',t:'text'}, {k:'tag',label:'태그(경기/집결/식사 등)',t:'text'}, {k:'venue',label:'장소(선택)',t:'text'} ],
-      renderList:function(items){ var order=[],map={}; items.forEach(function(it){var d=it.day||'';if(!map[d]){map[d]=[];order.push(d);}map[d].push(it);}); return order.map(function(d){ return '<div class="tt-day"><div class="tt-h">'+esc(d)+'</div>'+map[d].map(function(it){ var g=/경기/.test(it.tag||''); return '<div class="tt-row'+(g?' game':'')+'"><span class="tm">'+esc(it.time)+'</span><span class="ti">'+esc(it.title)+(it.venue?' <span class="tg">'+esc(it.venue)+'</span>':'')+'</span></div>'; }).join('')+'</div>'; }).join(''); } },
+      renderList:function(items){ var order=[],map={}; items.forEach(function(it){var d=it.day||'';if(!map[d]){map[d]=[];order.push(d);}map[d].push(it);}); return order.map(function(d){ return '<div class="tt-day"><div class="tt-h">'+esc(d)+'</div>'+map[d].map(function(it){ var g=/경기/.test(it.tag||''); var uni=/원정/.test(it.venue||'')?JER_AWAY:(/홈/.test(it.venue||'')?JER_HOME:''); return '<div class="tt-row'+(g?' game':'')+'"><span class="tm">'+esc(it.time)+'</span><span class="ti">'+esc(it.title)+(uni?' <img class="jertt" alt="" src="'+uni+'">':'')+(it.venue?' <span class="tg">'+esc(it.venue)+'</span>':'')+'</span></div>'; }).join('')+'</div>'; }).join(''); } },
     eats:{ title:'제천 맛집 리스트', box:'eatsBox',
       fields:[ {k:'name',label:'상호',t:'text'}, {k:'note',label:'메모',t:'text'}, {k:'url',label:'링크(비우면 네이버 지도 검색 자동)',t:'text'} ],
       render:function(x,i){ var url=x.url||('https://map.naver.com/p/search/'+encodeURIComponent('제천 '+(x.name||''))); return '<a class="eat'+((i>=8)?' hidden-eat':'')+'" href="'+esc(url)+'" target="_blank"><div class="en2">'+esc(x.name)+' <span style="color:var(--sky);font-size:10px">↗</span></div>'+(x.note?'<div class="no2">'+esc(x.note)+'</div>':'')+'</a>'; },
@@ -1382,9 +1410,21 @@ var firebaseConfig = {
     db.ref('dashboard').once('value').then(function(s){
       var cur=s.val()||{}, updates={};
       Object.keys(DEFAULTS).forEach(function(k){ if(cur[k]===undefined) updates[k]=DEFAULTS[k]; });
-      // 대회 캘린더 1회 자동 갱신: 저장본에 카테고리(cat) 구분이 없으면 최신 DEFAULTS로 교체 (예약·사이즈 등 다른 데이터는 건드리지 않음)
-      var t=cur.tourn; if(Array.isArray(t) && t.length && !t.some(function(x){return x&&x.cat;})){ updates.tourn=DEFAULTS.tourn; }
       if(Object.keys(updates).length) db.ref('dashboard').update(updates);
+    }).catch(function(){});
+  }
+  /* 콘텐츠 버전 동기화: 파일의 CONTENT_VER 이 DB에 저장된 버전보다 높으면
+     dashboard/ 아래 콘텐츠 전체를 이 파일(DEFAULTS) 기준으로 새로 씁니다.
+     dashboard/ 밖(reservations, votes/dinner, tshirt)은 절대 건드리지 않습니다. */
+  function syncContent(){
+    if(!configured) return;
+    db.ref('dashboard/_ver').once('value').then(function(s){
+      var v = Number(s.val()||0);
+      if(v >= CONTENT_VER) return;
+      var updates={};
+      Object.keys(DEFAULTS).forEach(function(k){ updates[k]=DEFAULTS[k]; });
+      updates._ver = CONTENT_VER;
+      db.ref('dashboard').update(updates);
     }).catch(function(){});
   }
   function saveSec(sec,val){
@@ -1503,11 +1543,20 @@ var firebaseConfig = {
 
   /* ===== 단체티 사이즈 취합 ===== */
   var SIZES=['130','140','150','XS','S','M','L','XL','2XL','3XL'];
+  /* 단가: 기본 15,500원 / 2XL 이상 +1,000원 */
+  var TEE_PRICE=15500, TEE_PRICE_BIG=16500, BIG_SIZES={'2XL':1,'3XL':1};
+  function teeUnit(s){ return BIG_SIZES[s]? TEE_PRICE_BIG : TEE_PRICE; }
+  function won(n){ return (Math.round(n)||0).toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')+'원'; }
+  function famAmount(sizes){ var a=0; Object.keys(sizes||{}).forEach(function(s){ a+=(parseInt(sizes[s],10)||0)*teeUnit(s); }); return a; }
   var tshirtData={};
   var tsFam=el('tsFam'), tsFamCustom=el('tsFamCustom');
-  function buildTsGrid(){ var g=el('tsGrid'); if(!g) return; g.innerHTML=SIZES.map(function(s){ return '<div class="ts-cell"><label>'+esc(s)+'</label><input id="ts_'+s+'" type="number" min="0" inputmode="numeric" placeholder="0"></div>'; }).join(''); }
+  function buildTsGrid(){ var g=el('tsGrid'); if(!g) return; g.innerHTML=SIZES.map(function(s){ return '<div class="ts-cell"><label>'+esc(s)+'</label><input id="ts_'+s+'" type="number" min="0" inputmode="numeric" placeholder="0"></div>'; }).join('');
+    SIZES.forEach(function(s){ var i=el('ts_'+s); if(i) i.addEventListener('input',updateTsEst); }); updateTsEst(); }
+  function formSizes(){ var o={}; SIZES.forEach(function(s){ var i=el('ts_'+s); var v=i?(parseInt(i.value,10)||0):0; if(v>0) o[s]=v; }); return o; }
+  function updateTsEst(){ var e2=el('tsEst'); if(!e2) return; var sz=formSizes(); var cnt=0; Object.keys(sz).forEach(function(s){ cnt+=sz[s]; });
+    e2.innerHTML= cnt? ('우리 가정 '+cnt+'장 · 예상 금액 <b>'+won(famAmount(sz))+'</b>') : ''; }
   function currentTsFam(){ return tsFam? (tsFam.value==='__custom'? (tsFamCustom.value||'').trim() : tsFam.value) : ''; }
-  function prefillTshirt(){ SIZES.forEach(function(s){ var i=el('ts_'+s); if(i) i.value=''; }); var fam=currentTsFam(); if(!fam) return; var rec=tshirtData[famKey(fam)]; if(rec&&rec.sizes){ SIZES.forEach(function(s){ var i=el('ts_'+s); if(i&&rec.sizes[s]) i.value=rec.sizes[s]; }); } }
+  function prefillTshirt(){ SIZES.forEach(function(s){ var i=el('ts_'+s); if(i) i.value=''; }); var fam=currentTsFam(); if(!fam){ updateTsEst(); return; } var rec=tshirtData[famKey(fam)]; if(rec&&rec.sizes){ SIZES.forEach(function(s){ var i=el('ts_'+s); if(i&&rec.sizes[s]) i.value=rec.sizes[s]; }); } updateTsEst(); }
   if(tsFam) tsFam.addEventListener('change',function(){ tsFamCustom.style.display= tsFam.value==='__custom'?'inline-block':'none'; prefillTshirt(); });
   function tsStatus(m,e2){ var s=el('tsStatus'); if(!s) return; s.textContent=m; s.style.color=e2?'var(--loss)':'var(--win)'; }
   function delTshirt(k){ if(configured){ db.ref('tshirt/'+k).remove(); } else { delete tshirtData[k]; renderTshirt(); } }
@@ -1518,27 +1567,94 @@ var firebaseConfig = {
     if(total===0){ tsStatus('사이즈별 수량을 1개 이상 입력해 주세요.',true); return; }
     var rec={ family:fam, sizes:sizes, ts:new Date().toISOString() };
     if(configured){ db.ref('tshirt/'+famKey(fam)).set(rec); } else { tshirtData[famKey(fam)]=rec; renderTshirt(); }
-    tsStatus('✓ 「'+fam+'」 사이즈 '+total+'장 저장 완료'+(configured?' · 실시간 공유':''),false);
+    tsStatus('✓ 「'+fam+'」 '+total+'장 · '+won(famAmount(sizes))+' 저장 완료'+(configured?' · 실시간 공유':''),false);
   });
   function renderTshirt(){
     var body=el('tsBody'); if(!body) return;
     var fams=Object.keys(tshirtData||{}).map(function(k){return {k:k,v:tshirtData[k]};}).filter(function(e){return e.v&&e.v.sizes;});
     fams.sort(function(a,b){return (a.v.family||'').localeCompare(b.v.family||'');});
-    var totals={}, grand=0;
-    fams.forEach(function(e){ Object.keys(e.v.sizes).forEach(function(s){ var n=parseInt(e.v.sizes[s],10)||0; totals[s]=(totals[s]||0)+n; grand+=n; }); });
+    var totals={}, grand=0, grandAmt=0;
+    fams.forEach(function(e){ Object.keys(e.v.sizes).forEach(function(s){ var n=parseInt(e.v.sizes[s],10)||0; totals[s]=(totals[s]||0)+n; grand+=n; }); grandAmt+=famAmount(e.v.sizes); });
     if(el('tsFamCnt')) el('tsFamCnt').textContent=fams.length;
     if(el('tsTot')) el('tsTot').textContent=grand;
+    if(el('tsAmt')) el('tsAmt').textContent=won(grandAmt);
     if(el('tsTotals')) el('tsTotals').innerHTML= grand? SIZES.filter(function(s){return totals[s];}).map(function(s){return '<span class="ts-tot">'+esc(s)+' <b>'+totals[s]+'</b></span>';}).join('') : '<span style="font-size:11.5px;color:var(--mut);font-weight:600">아직 집계 없음</span>';
     if(!fams.length){ body.innerHTML='<div class="ts-empty">아직 저장된 사이즈가 없습니다.</div>'; return; }
-    var rows=fams.map(function(e){ var v=e.v; var det=SIZES.filter(function(s){return v.sizes[s];}).map(function(s){return esc(s)+'×'+v.sizes[s];}).join(', '); var cnt=Object.keys(v.sizes).reduce(function(a,s){return a+(parseInt(v.sizes[s],10)||0);},0); return '<tr><td class="fam">'+esc(v.family)+'</td><td>'+esc(det)+'</td><td>'+cnt+'장</td><td><button class="del" data-k="'+esc(e.k)+'" title="삭제">✕</button></td></tr>'; }).join('');
-    body.innerHTML='<table class="ts-table"><thead><tr><th>가정</th><th>사이즈·수량</th><th>합계</th><th></th></tr></thead><tbody>'+rows+'</tbody></table>';
+    var rows=fams.map(function(e){ var v=e.v; var det=SIZES.filter(function(s){return v.sizes[s];}).map(function(s){return esc(s)+'×'+v.sizes[s];}).join(', '); var cnt=Object.keys(v.sizes).reduce(function(a,s){return a+(parseInt(v.sizes[s],10)||0);},0); return '<tr><td class="fam">'+esc(v.family)+'</td><td>'+esc(det)+'</td><td>'+cnt+'장</td><td class="amt">'+won(famAmount(v.sizes))+'</td><td><button class="del" data-k="'+esc(e.k)+'" title="삭제">✕</button></td></tr>'; }).join('');
+    body.innerHTML='<table class="ts-table"><thead><tr><th>가정</th><th>사이즈·수량</th><th>합계</th><th style="text-align:right">금액</th><th></th></tr></thead><tbody>'+rows+'</tbody>'
+      +'<tfoot><tr><td>총 '+fams.length+'가정</td><td></td><td>'+grand+'장</td><td class="amt">'+won(grandAmt)+'</td><td></td></tr></tfoot></table>';
     Array.prototype.forEach.call(body.querySelectorAll('.del'),function(btn){ btn.addEventListener('click',function(){ if(confirm('이 가정 사이즈를 삭제할까요?')) delTshirt(btn.getAttribute('data-k')); }); });
   }
   buildTsGrid();
 
+  /* ===== 그룹형 네비게이터 ===== */
+  var NAVG = {
+    g1:{t:'🏀 경기 · 대회',items:[
+      ['#fixturesBox','제천 대회 일정','8/15~17 · 3경기 상대·시간·유니폼'],
+      ['#timetableBox','전체 타임테이블','집결·경기·식사·이동 시간표'],
+      ['#oppBox','상대팀 분석','KT · 정관장 · SK 스카우팅'],
+      ['#matchesBox','경기 결과','2026 연습경기 전적'],
+      ['#statsBox','시즌 성적','승패·득실·평균득점']
+    ]},
+    g2:{t:'🚗 이동 · 숙박',items:[
+      ['#routesBox','이동 경로','고양→제천 · 체육관 간 이동'],
+      ['#resv','숙소 예약','소노벨 단양 · 가정별 예약 현황'],
+      ['#tripBox','제천 나들이','경기 사이 빈 시간 가볼 곳']
+    ]},
+    g3:{t:'👕 준비물 · 복장',items:[
+      ['#uniSec','유니폼 규정','홈=스카이블루 / 원정=흰색'],
+      ['#tshirt','단체 응원티','디자인·사이즈 신청'],
+      ['#gearBox','보호 장비','무릎·발목 보호대 추천']
+    ]},
+    g4:{t:'🍚 먹거리',items:[
+      ['#dinner','1일차 단체 석식','만이갈비 청전점 · 8/15 18:30'],
+      ['#eatsBox','제천 맛집','가족끼리 먹을 곳 정리']
+    ]},
+    g5:{t:'📚 정보 · 자료',items:[
+      ['#tournBox','유소년 대회 캘린더','전국·지역 대회 신청/일정'],
+      ['#kidsBox','성장 · 훈련','키·먹거리·홈트레이닝'],
+      ['#eliteBox','엘리트 진로','선수 진학 경로 안내'],
+      ['#agBox','아시안게임','국가대표·관전 포인트'],
+      ['#newsList','농구 뉴스','최신 소식 모아보기']
+    ]},
+    g6:{t:'👨‍👩‍👧 우리 팀',items:[
+      ['#rosterBox','선수 명단','U-9 로스터'],
+      ['#pgBox','학부모 안내','응원 매너 · 3박4일 짐 체크'],
+      ['#reqBox','요청 체크리스트','구단·숙소에 확인할 것']
+    ]}
+  };
+  (function(){
+    var bar=el('navBar'), panel=el('navPanel'); if(!bar||!panel) return;
+    var open=null;
+    function close(){ open=null; panel.className='navpanel'; panel.innerHTML='';
+      Array.prototype.forEach.call(bar.querySelectorAll('button'),function(b){ b.setAttribute('aria-expanded','false'); }); }
+    function show(g){
+      var d=NAVG[g]; if(!d) return;
+      if(open===g){ close(); return; }
+      open=g;
+      Array.prototype.forEach.call(bar.querySelectorAll('button'),function(b){ b.setAttribute('aria-expanded', b.getAttribute('data-g')===g?'true':'false'); });
+      var h='<div class="ptitle">'+esc(d.t)+'</div><div class="navgrid">';
+      d.items.forEach(function(it){
+        if(!document.querySelector(it[0])) return;
+        h+='<a href="'+it[0]+'"><span class="nl">'+esc(it[1])+'</span><span class="nd">'+esc(it[2])+'</span></a>';
+      });
+      h+='</div><a class="navtop" href="#top">▲ 맨 위로</a>';
+      panel.innerHTML=h; panel.className='navpanel on';
+    }
+    bar.addEventListener('click',function(e){
+      var b=e.target.closest? e.target.closest('button') : null;
+      if(!b||!b.getAttribute('data-g')) return;
+      show(b.getAttribute('data-g'));
+    });
+    panel.addEventListener('click',function(e){ if(e.target.closest && e.target.closest('a')) setTimeout(close,60); });
+    document.addEventListener('click',function(e){ if(open && !e.target.closest('#navWrap')) close(); });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&open) close(); });
+  })();
+
   /* ===== 실시간 구독 + 최초 렌더 ===== */
   renderAll(); renderTshirt();
   if(configured){
+    syncContent();
     db.ref('dashboard').on('value',function(snap){ dbData=snap.val()||{}; renderAll(); });
     db.ref('reservations').on('value',function(snap){ renderResv(snap.val()||{}); });
     db.ref('votes/dinner').on('value',function(snap){ voteData=snap.val()||{}; renderDinner(); });
