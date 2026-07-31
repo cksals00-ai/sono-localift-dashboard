@@ -96,6 +96,13 @@
   .mv-frame{position:relative; aspect-ratio:16/9; background:#000}
   .mv-frame img{width:100%;height:100%;object-fit:cover;opacity:.86}
   .mv-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .mv-soon{position:absolute; inset:0; display:grid; align-content:center; justify-items:center;
+    text-align:center; gap:12px; padding:24px;
+    background:radial-gradient(120% 90% at 50% 42%, rgba(127,196,232,.10), rgba(11,18,32,0) 70%)}
+  .mv-soon-tag{font-size:12px; letter-spacing:.08em; color:var(--sky); border:1px solid var(--line);
+    background:rgba(127,196,232,.07); padding:5px 11px; border-radius:999px}
+  .mv-soon strong{font-size:22px; color:var(--ink); font-weight:700}
+  .mv-soon p{font-size:14px; max-width:440px; color:var(--muted); margin:0; line-height:1.6}
   .play{
     position:absolute; inset:0; display:grid; place-items:center; cursor:pointer;
     background:linear-gradient(to top, rgba(11,18,32,.62), rgba(11,18,32,.12) 55%, rgba(11,18,32,.42));
@@ -387,21 +394,22 @@
     <h2>리아는 광고 모델이 아니라<br>서사를 가진 캐릭터입니다.</h2>
     <p class="lead">
       구단 홍보가 설득력을 갖는 이유는 리아에게 이미 자기 콘텐츠가 있기 때문입니다.
-      리아의 첫 뮤직비디오는 지역을 배경으로 한 드라마 형식으로 제작했습니다.
+      리아의 뮤직비디오는 지역을 배경으로 한 드라마 3부작으로 기획했습니다.
       팬은 광고를 기억하지 않지만 캐릭터는 기억합니다.
     </p>
 
     <div class="mv-wrap">
       <div class="mv-frame" id="mvFrame" data-youtube="">
-        <img src="assets/skygunners/mv.jpg" alt="리아 뮤직비디오 1편 스틸">
-        <div class="play" id="mvPlay" role="button" tabindex="0" aria-label="뮤직비디오 재생">
-          <div class="play-btn"></div>
+        <div class="mv-soon">
+          <span class="mv-soon-tag">MV2 준비 중</span>
+          <strong>리아 MV 2편</strong>
+          <p>드라마 3부작의 두 번째 편을 제작하고 있습니다. 공개되는 대로 이 자리에서 바로 재생됩니다.</p>
         </div>
       </div>
       <div class="mv-meta">
         <div>
-          <h3>리아 MV 1편</h3>
-          <p style="margin-top:6px; font-size:14px">양양 로케이션 · 드라마 형식 · 립싱크 없음</p>
+          <h3>리아 MV 2편 — 제작 중</h3>
+          <p style="margin-top:6px; font-size:14px">드라마 형식 · 립싱크 없음 · 3부작 구성</p>
         </div>
         <div style="text-align:right">
           <span class="pill">Original Song</span><span class="pill">AI Generated</span>
@@ -879,16 +887,23 @@
 
 <script>
   (function(){
-    var f=document.getElementById('mvFrame'), p=document.getElementById('mvPlay');
-    if(!f||!p) return;
+    // data-youtube 에 영상 ID 를 넣으면 자동으로 재생 UI 로 전환된다. 비어 있으면 준비 중 안내 유지.
+    var f=document.getElementById('mvFrame');
+    if(!f) return;
+    var id=f.getAttribute('data-youtube');
+    if(!id) return;
+    var soon=f.querySelector('.mv-soon'); if(soon) soon.remove();
+    var p=document.createElement('div');
+    p.className='play'; p.setAttribute('role','button'); p.setAttribute('tabindex','0');
+    p.setAttribute('aria-label','뮤직비디오 재생');
+    p.innerHTML='<div class="play-btn"></div>';
+    f.appendChild(p);
     function play(){
-      var id=f.getAttribute('data-youtube');
-      if(!id){ p.querySelector('.play-btn').style.opacity=.35; return; }
       var i=document.createElement('iframe');
       i.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';
       i.setAttribute('allow','accelerometer; autoplay; encrypted-media; picture-in-picture');
       i.setAttribute('allowfullscreen','');
-      i.setAttribute('title','리아 MV 1편');
+      i.setAttribute('title','리아 MV 2편');
       f.innerHTML=''; f.appendChild(i);
     }
     p.addEventListener('click',play);
