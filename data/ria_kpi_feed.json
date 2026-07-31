@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-01T00:01:13+09:00",
+    "updated_at": "2026-08-01T07:18:18+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -154,7 +154,7 @@
       {
         "label": "팔로워 순증 (참고)",
         "target": null,
-        "actual": 14,
+        "actual": 15,
         "unit": "명",
         "note": "참고 지표. 관리 지표가 아니다 — 0730 v2 는 도달·팔로워·좋아요를 '원인이 아니라 결과'로 규정했다. 목표 자리에 두지 않는다.",
         "pending": false
@@ -210,7 +210,7 @@
       "title": "Nobody in this reel says \"I love you.\"…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/Dba8ITVj_mq/",
-      "views": 136,
+      "views": 137,
       "likes": 4,
       "comments": 1,
       "saves": 0,
@@ -223,7 +223,7 @@
       "title": "Couples who rarely fight aren't calmer…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/Dba2abTAcSM/",
-      "views": 178,
+      "views": 179,
       "likes": 1,
       "comments": 1,
       "saves": 0,
@@ -314,7 +314,7 @@
       "title": "A tiger once put on a mother's clothes…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbNzyrkjB2U/",
-      "views": 1052,
+      "views": 1053,
       "likes": 63,
       "comments": 1,
       "saves": 13,
@@ -408,12 +408,12 @@
   },
   "measured": {
     "live": true,
-    "followers": 945,
+    "followers": 946,
     "media_count": 32,
     "baseline_followers": 931,
     "day": {
-      "reach": 340,
-      "views": 432,
+      "reach": 343,
+      "views": 437,
       "profile_views": 7,
       "interactions": 9
     },
@@ -424,8 +424,8 @@
       "saves": 14,
       "comments": 19,
       "shares": 25,
-      "reach": 2141,
-      "views": 3362
+      "reach": 2143,
+      "views": 3365
     },
     "engagement_rate_pct": 2.71,
     "retention": {
