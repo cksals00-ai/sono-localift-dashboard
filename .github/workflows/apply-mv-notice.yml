@@ -1,0 +1,113 @@
+name: apply-mv-notice
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Decode patch
+        run: |
+          cat > /tmp/mv.b64 <<'B64_EOF'
+          RnJvbSA4OTBlY2JkMTNiNGUyZWI0M2ExMzk2ODBlYzQwNzU5Mjg1NDZlNmE4IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9t
+          OiBDbGF1ZGUgPG5vcmVwbHlAYW50aHJvcGljLmNvbT4KRGF0ZTogRnJpLCAzMSBKdWwgMjAyNiAwMjo0NzoxMCArMDAwMApTdWJq
+          ZWN0OiBbUEFUQ0hdID0/VVRGLTg/cT9mZWF0KHJpYSk6PTIwTVY9MjA9RUM9ODQ9Qjk9RUM9ODU9OTg9RUM9OUQ9ODQ/PQogPT9V
+          VEYtOD9xPz0yMCdNVjI9MjA9RUM9QTQ9ODA9RUI9Qjk9ODQ9MjA9RUM9QTQ9OTEnPTIwPUVDPTk1PTg4PUVCPTgyPUI0Pz0KID0/
+          VVRGLTg/cT89RUI9QTE9OUM9MjA9RUM9QTA9ODQ9RUQ9OTk9OTg9MjA9RTI9ODA9OTQ9MjAxPUVEPThFPUI4PTIwPz0KID0/VVRG
+          LTg/cT89RUM9OEE9QTQ9RUQ9ODI9QjU9MjA9RUE9QjI9QjA9RUM9QTA9OTU9MjA9RUI9QjA9OTg9RUM9OTg9ODE/PQpNSU1FLVZl
+          cnNpb246IDEuMApDb250ZW50LVR5cGU6IHRleHQvcGxhaW47IGNoYXJzZXQ9VVRGLTgKQ29udGVudC1UcmFuc2Zlci1FbmNvZGlu
+          ZzogOGJpdAoKLSDsnqzsg50g7ZSE66CI7J6E7J2YIOu5iCBkYXRhLXlvdXR1YmUg66GcIOyduO2VnCDrrLTrsJjsnZEg7IOB7YOc
+          IOygnOqxsAotIE1WMSDsiqTti7gv7J6s7IOd67KE7Yq8IOuMgOyLoCDspIDruYQg7KSRIOyViOuCtCDsubTrk5wg64W47LacCi0g
+          ZGF0YS15b3V0dWJlIOyXkCBJRCDsnoXroKUg7IucIOyerOyDnSBVSSDsnpDrj5kg67O17JuQ65CY64+E66GdIOyKpO2BrOumve2K
+          uCDsoJXrpqwKLSDsubTtlLzrpbwgM+u2gOyekSDquLDtmo0g6riw7KSA7Jy866GcIOygleyglSAo7LKrIOuupOyngeu5hOuUlOyY
+          pCAtPiDrk5zrnbzrp4ggM+u2gOyekSkKLS0tCiBza3lndW5uZXJzLXJpYS5odG1sIHwgMzcgKysrKysrKysrKysrKysrKysrKysr
+          KysrKystLS0tLS0tLS0tLQogMSBmaWxlIGNoYW5nZWQsIDI2IGluc2VydGlvbnMoKyksIDExIGRlbGV0aW9ucygtKQoKZGlmZiAt
+          LWdpdCBhL3NreWd1bm5lcnMtcmlhLmh0bWwgYi9za3lndW5uZXJzLXJpYS5odG1sCmluZGV4IGUwZmQ4NzcuLjJlNmQxY2IgMTAw
+          NjQ0Ci0tLSBhL3NreWd1bm5lcnMtcmlhLmh0bWwKKysrIGIvc2t5Z3VubmVycy1yaWEuaHRtbApAQCAtOTYsNiArOTYsMTMgQEAK
+          ICAgLm12LWZyYW1le3Bvc2l0aW9uOnJlbGF0aXZlOyBhc3BlY3QtcmF0aW86MTYvOTsgYmFja2dyb3VuZDojMDAwfQogICAubXYt
+          ZnJhbWUgaW1ne3dpZHRoOjEwMCU7aGVpZ2h0OjEwMCU7b2JqZWN0LWZpdDpjb3ZlcjtvcGFjaXR5Oi44Nn0KICAgLm12LWZyYW1l
+          IGlmcmFtZXtwb3NpdGlvbjphYnNvbHV0ZTtpbnNldDowO3dpZHRoOjEwMCU7aGVpZ2h0OjEwMCU7Ym9yZGVyOjB9CisgIC5tdi1z
+          b29ue3Bvc2l0aW9uOmFic29sdXRlOyBpbnNldDowOyBkaXNwbGF5OmdyaWQ7IGFsaWduLWNvbnRlbnQ6Y2VudGVyOyBqdXN0aWZ5
+          LWl0ZW1zOmNlbnRlcjsKKyAgICB0ZXh0LWFsaWduOmNlbnRlcjsgZ2FwOjEycHg7IHBhZGRpbmc6MjRweDsKKyAgICBiYWNrZ3Jv
+          dW5kOnJhZGlhbC1ncmFkaWVudCgxMjAlIDkwJSBhdCA1MCUgNDIlLCByZ2JhKDEyNywxOTYsMjMyLC4xMCksIHJnYmEoMTEsMTgs
+          MzIsMCkgNzAlKX0KKyAgLm12LXNvb24tdGFne2ZvbnQtc2l6ZToxMnB4OyBsZXR0ZXItc3BhY2luZzouMDhlbTsgY29sb3I6dmFy
+          KC0tc2t5KTsgYm9yZGVyOjFweCBzb2xpZCB2YXIoLS1saW5lKTsKKyAgICBiYWNrZ3JvdW5kOnJnYmEoMTI3LDE5NiwyMzIsLjA3
+          KTsgcGFkZGluZzo1cHggMTFweDsgYm9yZGVyLXJhZGl1czo5OTlweH0KKyAgLm12LXNvb24gc3Ryb25ne2ZvbnQtc2l6ZToyMnB4
+          OyBjb2xvcjp2YXIoLS1pbmspOyBmb250LXdlaWdodDo3MDB9CisgIC5tdi1zb29uIHB7Zm9udC1zaXplOjE0cHg7IG1heC13aWR0
+          aDo0NDBweDsgY29sb3I6dmFyKC0tbXV0ZWQpOyBtYXJnaW46MDsgbGluZS1oZWlnaHQ6MS42fQogICAucGxheXsKICAgICBwb3Np
+          dGlvbjphYnNvbHV0ZTsgaW5zZXQ6MDsgZGlzcGxheTpncmlkOyBwbGFjZS1pdGVtczpjZW50ZXI7IGN1cnNvcjpwb2ludGVyOwog
+          ICAgIGJhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KHRvIHRvcCwgcmdiYSgxMSwxOCwzMiwuNjIpLCByZ2JhKDExLDE4LDMyLC4x
+          MikgNTUlLCByZ2JhKDExLDE4LDMyLC40MikpOwpAQCAtMzg3LDIxICszOTQsMjIgQEAKICAgICA8aDI+66as7JWE64qUIOq0keqz
+          oCDrqqjrjbjsnbQg7JWE64uI6528PGJyPuyEnOyCrOulvCDqsIDsp4Qg7LqQ66at7YSw7J6F64uI64ukLjwvaDI+CiAgICAgPHAg
+          Y2xhc3M9ImxlYWQiPgogICAgICAg6rWs64uoIO2ZjeuztOqwgCDshKTrk53roKXsnYQg6rCW64qUIOydtOycoOuKlCDrpqzslYTs
+          l5Dqsowg7J2066+4IOyekOq4sCDsvZjthZDsuKDqsIAg7J6I6riwIOuVjOusuOyeheuLiOuLpC4KLSAgICAgIOumrOyVhOydmCDs
+          sqsg666k7KeB67mE65SU7Jik64qUIOyngOyXreydhCDrsLDqsr3snLzroZwg7ZWcIOuTnOudvOuniCDtmJXsi53snLzroZwg7KCc
+          7J6R7ZaI7Iq164uI64ukLgorICAgICAg66as7JWE7J2YIOuupOyngeu5hOuUlOyYpOuKlCDsp4Dsl63snYQg67Cw6rK97Jy866Gc
+          IO2VnCDrk5zrnbzrp4ggM+u2gOyekeycvOuhnCDquLDtmo3tlojsirXri4jri6QuCiAgICAgICDtjKzsnYAg6rSR6rOg66W8IOq4
+          sOyWte2VmOyngCDslYrsp4Drp4wg7LqQ66at7YSw64qUIOq4sOyWte2VqeuLiOuLpC4KICAgICA8L3A+CiAKICAgICA8ZGl2IGNs
+          YXNzPSJtdi13cmFwIj4KICAgICAgIDxkaXYgY2xhc3M9Im12LWZyYW1lIiBpZD0ibXZGcmFtZSIgZGF0YS15b3V0dWJlPSIiPgot
+          ICAgICAgICA8aW1nIHNyYz0iYXNzZXRzL3NreWd1bm5lcnMvbXYuanBnIiBhbHQ9IuumrOyVhCDrrqTsp4HruYTrlJTsmKQgMe2O
+          uCDsiqTti7giPgotICAgICAgICA8ZGl2IGNsYXNzPSJwbGF5IiBpZD0ibXZQbGF5IiByb2xlPSJidXR0b24iIHRhYmluZGV4PSIw
+          IiBhcmlhLWxhYmVsPSLrrqTsp4HruYTrlJTsmKQg7J6s7IOdIj4KLSAgICAgICAgICA8ZGl2IGNsYXNzPSJwbGF5LWJ0biI+PC9k
+          aXY+CisgICAgICAgIDxkaXYgY2xhc3M9Im12LXNvb24iPgorICAgICAgICAgIDxzcGFuIGNsYXNzPSJtdi1zb29uLXRhZyI+TVYy
+          IOykgOu5hCDspJE8L3NwYW4+CisgICAgICAgICAgPHN0cm9uZz7rpqzslYQgTVYgMu2OuDwvc3Ryb25nPgorICAgICAgICAgIDxw
+          PuuTnOudvOuniCAz67aA7J6R7J2YIOuRkCDrsojsp7gg7Y647J2EIOygnOyeke2VmOqzoCDsnojsirXri4jri6QuIOqzteqwnOuQ
+          mOuKlCDrjIDroZwg7J20IOyekOumrOyXkOyEnCDrsJTroZwg7J6s7IOd65Cp64uI64ukLjwvcD4KICAgICAgICAgPC9kaXY+CiAg
+          ICAgICA8L2Rpdj4KICAgICAgIDxkaXYgY2xhc3M9Im12LW1ldGEiPgogICAgICAgICA8ZGl2PgotICAgICAgICAgIDxoMz7rpqzs
+          lYQgTVYgMe2OuDwvaDM+Ci0gICAgICAgICAgPHAgc3R5bGU9Im1hcmdpbi10b3A6NnB4OyBmb250LXNpemU6MTRweCI+7JaR7JaR
+          IOuhnOy8gOydtOyFmCDCtyDrk5zrnbzrp4gg7ZiV7IudIMK3IOumveyLse2BrCDsl4bsnYw8L3A+CisgICAgICAgICAgPGgzPuum
+          rOyVhCBNViAy7Y64IOKAlCDsoJzsnpEg7KSRPC9oMz4KKyAgICAgICAgICA8cCBzdHlsZT0ibWFyZ2luLXRvcDo2cHg7IGZvbnQt
+          c2l6ZToxNHB4Ij7rk5zrnbzrp4gg7ZiV7IudIMK3IOumveyLse2BrCDsl4bsnYwgwrcgM+u2gOyekSDqtazshLE8L3A+CiAgICAg
+          ICAgIDwvZGl2PgogICAgICAgICA8ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOnJpZ2h0Ij4KICAgICAgICAgICA8c3BhbiBjbGFzcz0i
+          cGlsbCI+T3JpZ2luYWwgU29uZzwvc3Bhbj48c3BhbiBjbGFzcz0icGlsbCI+QUkgR2VuZXJhdGVkPC9zcGFuPgpAQCAtODc5LDE2
+          ICs4ODcsMjMgQEAKIAogPHNjcmlwdD4KICAgKGZ1bmN0aW9uKCl7Ci0gICAgdmFyIGY9ZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQo
+          J212RnJhbWUnKSwgcD1kb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbXZQbGF5Jyk7Ci0gICAgaWYoIWZ8fCFwKSByZXR1cm47Cisg
+          ICAgLy8gZGF0YS15b3V0dWJlIOyXkCDsmIHsg4EgSUQg66W8IOuEo+ycvOuptCDsnpDrj5nsnLzroZwg7J6s7IOdIFVJIOuhnCDs
+          oITtmZjrkJzri6QuIOu5hOyWtCDsnojsnLzrqbQg7KSA67mEIOykkSDslYjrgrQg7Jyg7KeALgorICAgIHZhciBmPWRvY3VtZW50
+          LmdldEVsZW1lbnRCeUlkKCdtdkZyYW1lJyk7CisgICAgaWYoIWYpIHJldHVybjsKKyAgICB2YXIgaWQ9Zi5nZXRBdHRyaWJ1dGUo
+          J2RhdGEteW91dHViZScpOworICAgIGlmKCFpZCkgcmV0dXJuOworICAgIHZhciBzb29uPWYucXVlcnlTZWxlY3RvcignLm12LXNv
+          b24nKTsgaWYoc29vbikgc29vbi5yZW1vdmUoKTsKKyAgICB2YXIgcD1kb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTsKKyAg
+          ICBwLmNsYXNzTmFtZT0ncGxheSc7IHAuc2V0QXR0cmlidXRlKCdyb2xlJywnYnV0dG9uJyk7IHAuc2V0QXR0cmlidXRlKCd0YWJp
+          bmRleCcsJzAnKTsKKyAgICBwLnNldEF0dHJpYnV0ZSgnYXJpYS1sYWJlbCcsJ+uupOyngeu5hOuUlOyYpCDsnqzsg50nKTsKKyAg
+          ICBwLmlubmVySFRNTD0nPGRpdiBjbGFzcz0icGxheS1idG4iPjwvZGl2Pic7CisgICAgZi5hcHBlbmRDaGlsZChwKTsKICAgICBm
+          dW5jdGlvbiBwbGF5KCl7Ci0gICAgICB2YXIgaWQ9Zi5nZXRBdHRyaWJ1dGUoJ2RhdGEteW91dHViZScpOwotICAgICAgaWYoIWlk
+          KXsgcC5xdWVyeVNlbGVjdG9yKCcucGxheS1idG4nKS5zdHlsZS5vcGFjaXR5PS4zNTsgcmV0dXJuOyB9CiAgICAgICB2YXIgaT1k
+          b2N1bWVudC5jcmVhdGVFbGVtZW50KCdpZnJhbWUnKTsKICAgICAgIGkuc3JjPSdodHRwczovL3d3dy55b3V0dWJlLmNvbS9lbWJl
+          ZC8nK2lkKyc/YXV0b3BsYXk9MSZyZWw9MCZtb2Rlc3RicmFuZGluZz0xJzsKICAgICAgIGkuc2V0QXR0cmlidXRlKCdhbGxvdycs
+          J2FjY2VsZXJvbWV0ZXI7IGF1dG9wbGF5OyBlbmNyeXB0ZWQtbWVkaWE7IHBpY3R1cmUtaW4tcGljdHVyZScpOwogICAgICAgaS5z
+          ZXRBdHRyaWJ1dGUoJ2FsbG93ZnVsbHNjcmVlbicsJycpOwotICAgICAgaS5zZXRBdHRyaWJ1dGUoJ3RpdGxlJywn66as7JWEIE1W
+          IDHtjrgnKTsKKyAgICAgIGkuc2V0QXR0cmlidXRlKCd0aXRsZScsJ+umrOyVhCBNViAy7Y64Jyk7CiAgICAgICBmLmlubmVySFRN
+          TD0nJzsgZi5hcHBlbmRDaGlsZChpKTsKICAgICB9CiAgICAgcC5hZGRFdmVudExpc3RlbmVyKCdjbGljaycscGxheSk7Ci0tIAoy
+          LjQzLjAKCg==
+          B64_EOF
+          tr -d ' \t' < /tmp/mv.b64 | base64 -d > /tmp/mv.patch
+          wc -c /tmp/mv.patch
+
+      - name: Apply
+        run: |
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          git apply --check /tmp/mv.patch
+          git apply /tmp/mv.patch
+          git add -A
+          git commit -m "feat(ria): MV 섹션을 'MV2 준비 중' 안내로 전환 — 1편 스킵 결정 반영"
+
+      - name: Verify
+        run: |
+          grep -q 'MV2 준비 중' skygunners-ria.html
+          if grep -q 'mvPlay' skygunners-ria.html; then echo "mvPlay 잔존"; exit 1; fi
+          if grep -q 'assets/skygunners/mv.jpg' skygunners-ria.html; then echo "MV1 스틸 잔존"; exit 1; fi
+          echo OK
+
+      - name: Push
+        run: git push origin HEAD:main
+        
