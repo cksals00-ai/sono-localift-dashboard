@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-07-31T12:24:33+09:00",
+    "updated_at": "2026-07-31T13:01:36+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -122,7 +122,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 323,
+        "actual": 324,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -194,7 +194,7 @@
       "title": "Nobody in this reel says \"I love you.\"…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/Dba8ITVj_mq/",
-      "views": 49,
+      "views": 52,
       "likes": 2,
       "comments": 1,
       "saves": 0
@@ -214,7 +214,7 @@
       "title": "The Dragon King was dying, and his doc…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbZ2a27DVtK/",
-      "views": 69,
+      "views": 71,
       "likes": 0,
       "comments": 1,
       "saves": 0
@@ -344,21 +344,21 @@
     "media_count": 32,
     "baseline_followers": 931,
     "day": {
-      "reach": 295,
-      "views": 479,
+      "reach": 299,
+      "views": 482,
       "profile_views": 8,
       "interactions": 10
     },
     "week": {
       "posts": 12,
       "reels": 6,
-      "reel_avg_views": 323,
+      "reel_avg_views": 324,
       "saves": 14,
       "comments": 19,
       "shares": 25,
-      "reach": 2052,
-      "views": 3261
+      "reach": 2055,
+      "views": 3266
     },
-    "engagement_rate_pct": 2.83
+    "engagement_rate_pct": 2.82
   }
 }
