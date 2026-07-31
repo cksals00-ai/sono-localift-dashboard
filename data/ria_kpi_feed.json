@@ -1,12 +1,12 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-07-31T13:01:36+09:00",
+    "updated_at": "2026-08-01T00:01:13+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
-    "schema_version": "0.3",
-    "note": "전략 블록은 사람이 관리하는 편집 데이터이며 자동수집이 덮어쓰지 않는다. KPI actual·콘텐츠 성과·측정 블록은 IG Graph API 실값이다.",
+    "schema_version": "0.4",
+    "note": "전략 블록은 사람이 관리하는 편집 데이터이며 자동수집이 덮어쓰지 않는다. KPI actual·콘텐츠 성과·측정 블록은 IG Graph API 실값이다. 리텐션은 평균 시청시간 ÷ 영상 길이이며, 계산은 수집기 한 곳에서만 한다. 영상 길이는 data/ria_media_duration.json 에 사람이 한 번만 채운다.",
     "auto": true
   },
   "strategy": {
@@ -122,7 +122,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 324,
+        "actual": 339,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -154,7 +154,7 @@
       {
         "label": "팔로워 순증 (참고)",
         "target": null,
-        "actual": 15,
+        "actual": 14,
         "unit": "명",
         "note": "참고 지표. 관리 지표가 아니다 — 0730 v2 는 도달·팔로워·좋아요를 '원인이 아니라 결과'로 규정했다. 목표 자리에 두지 않는다.",
         "pending": false
@@ -210,40 +210,52 @@
       "title": "Nobody in this reel says \"I love you.\"…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/Dba8ITVj_mq/",
-      "views": 52,
-      "likes": 2,
+      "views": 136,
+      "likes": 4,
       "comments": 1,
-      "saves": 0
+      "saves": 0,
+      "avg_watch_sec": 6.3,
+      "duration_sec": null,
+      "retention_pct": null
     },
     {
       "date": "2026-07-30",
       "title": "Couples who rarely fight aren't calmer…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/Dba2abTAcSM/",
-      "views": 173,
+      "views": 178,
       "likes": 1,
       "comments": 1,
-      "saves": 0
+      "saves": 0,
+      "avg_watch_sec": 3.1,
+      "duration_sec": null,
+      "retention_pct": null
     },
     {
       "date": "2026-07-30",
       "title": "The Dragon King was dying, and his doc…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbZ2a27DVtK/",
-      "views": 71,
+      "views": 72,
       "likes": 0,
       "comments": 1,
-      "saves": 0
+      "saves": 0,
+      "avg_watch_sec": 5.2,
+      "duration_sec": null,
+      "retention_pct": null
     },
     {
       "date": "2026-07-27",
       "title": "The place is called Brooklyn Coffee an…",
       "format": "Image",
       "url": "https://www.instagram.com/p/DbSgdE4oHCd/",
-      "views": 167,
+      "views": 168,
       "likes": 0,
       "comments": 3,
-      "saves": 0
+      "saves": 0,
+      "avg_watch_sec": null,
+      "duration_sec": null,
+      "retention_pct": null
     },
     {
       "date": "2026-07-27",
@@ -253,7 +265,10 @@
       "views": 200,
       "likes": 0,
       "comments": 1,
-      "saves": 0
+      "saves": 0,
+      "avg_watch_sec": null,
+      "duration_sec": null,
+      "retention_pct": null
     },
     {
       "date": "2026-07-27",
@@ -263,7 +278,10 @@
       "views": 168,
       "likes": 4,
       "comments": 1,
-      "saves": 0
+      "saves": 0,
+      "avg_watch_sec": 5.0,
+      "duration_sec": null,
+      "retention_pct": null
     },
     {
       "date": "2026-07-26",
@@ -273,7 +291,10 @@
       "views": 430,
       "likes": 18,
       "comments": 1,
-      "saves": 1
+      "saves": 1,
+      "avg_watch_sec": 41.0,
+      "duration_sec": null,
+      "retention_pct": null
     },
     {
       "date": "2026-07-26",
@@ -283,17 +304,23 @@
       "views": 216,
       "likes": 1,
       "comments": 1,
-      "saves": 0
+      "saves": 0,
+      "avg_watch_sec": null,
+      "duration_sec": null,
+      "retention_pct": null
     },
     {
       "date": "2026-07-25",
       "title": "A tiger once put on a mother's clothes…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbNzyrkjB2U/",
-      "views": 1050,
+      "views": 1052,
       "likes": 63,
       "comments": 1,
-      "saves": 13
+      "saves": 13,
+      "avg_watch_sec": 48.5,
+      "duration_sec": null,
+      "retention_pct": null
     },
     {
       "date": "2026-07-25",
@@ -303,27 +330,36 @@
       "views": 264,
       "likes": 1,
       "comments": 3,
-      "saves": 0
+      "saves": 0,
+      "avg_watch_sec": null,
+      "duration_sec": null,
+      "retention_pct": null
     },
     {
       "date": "2026-07-25",
       "title": "That summer, we drew the night in circ…",
       "format": "Image",
       "url": "https://www.instagram.com/p/DbNhKDAoHo_/",
-      "views": 236,
+      "views": 237,
       "likes": 0,
       "comments": 1,
-      "saves": 0
+      "saves": 0,
+      "avg_watch_sec": null,
+      "duration_sec": null,
+      "retention_pct": null
     },
     {
       "date": "2026-07-24",
       "title": "3 AM. The whole room is monitor light …",
       "format": "Image",
       "url": "https://www.instagram.com/p/DbMeR41EU-N/",
-      "views": 239,
+      "views": 241,
       "likes": 1,
       "comments": 4,
-      "saves": 0
+      "saves": 0,
+      "avg_watch_sec": null,
+      "duration_sec": null,
+      "retention_pct": null
     }
   ],
   "progress_sample": false,
@@ -372,25 +408,82 @@
   },
   "measured": {
     "live": true,
-    "followers": 946,
+    "followers": 945,
     "media_count": 32,
     "baseline_followers": 931,
     "day": {
-      "reach": 299,
-      "views": 482,
-      "profile_views": 8,
-      "interactions": 10
+      "reach": 340,
+      "views": 432,
+      "profile_views": 7,
+      "interactions": 9
     },
     "week": {
       "posts": 12,
       "reels": 6,
-      "reel_avg_views": 324,
+      "reel_avg_views": 339,
       "saves": 14,
       "comments": 19,
       "shares": 25,
-      "reach": 2055,
-      "views": 3266
+      "reach": 2141,
+      "views": 3362
     },
-    "engagement_rate_pct": 2.82
+    "engagement_rate_pct": 2.71,
+    "retention": {
+      "window": 5,
+      "pass_threshold_pct": 40.0,
+      "measurable": 0,
+      "unmeasurable": 5,
+      "pass_count": null,
+      "latest": [
+        {
+          "date": "2026-07-30",
+          "title": "Nobody in this reel says \"I love you.\"…",
+          "retention_pct": null,
+          "avg_watch_sec": 6.3,
+          "duration_sec": null
+        },
+        {
+          "date": "2026-07-30",
+          "title": "Couples who rarely fight aren't calmer…",
+          "retention_pct": null,
+          "avg_watch_sec": 3.1,
+          "duration_sec": null
+        },
+        {
+          "date": "2026-07-30",
+          "title": "The Dragon King was dying, and his doc…",
+          "retention_pct": null,
+          "avg_watch_sec": 5.2,
+          "duration_sec": null
+        },
+        {
+          "date": "2026-07-27",
+          "title": "Somebody said the hard thing first. So…",
+          "retention_pct": null,
+          "avg_watch_sec": 5.0,
+          "duration_sec": null
+        },
+        {
+          "date": "2026-07-26",
+          "title": "Above the sky there is a river made en…",
+          "retention_pct": null,
+          "avg_watch_sec": 41.0,
+          "duration_sec": null
+        }
+      ]
+    },
+    "retention_probe": {
+      "metric_tried": [
+        "ig_reels_avg_watch_time",
+        "ig_reels_video_view_total_time"
+      ],
+      "metric_ok": [
+        "ig_reels_avg_watch_time"
+      ],
+      "metric_failed": [],
+      "reels": 13,
+      "with_avg_watch": 13,
+      "with_duration": 0
+    }
   }
 }
