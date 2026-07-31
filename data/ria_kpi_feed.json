@@ -112,12 +112,12 @@
     "baseline_date": "2026-07-24",
     "weekly": [
       {
-        "label": "팔로워 순증",
-        "target": 3000,
-        "actual": 15,
-        "unit": "명",
-        "note": "베이스라인 931 (7/21 0 시작 · 오가닉 100% · 광고 0원) → 4주 목표 3,000 (주평균 +500)",
-        "pending": false
+        "label": "직전 5개 중 리텐션 40% 이상",
+        "target": 3,
+        "actual": null,
+        "unit": "개",
+        "pending": true,
+        "note": "유일한 관리 지표. 리텐션 = 평균 시청시간 ÷ 영상 길이. 직전 릴 5개 중 3개 이상이 40%를 넘으면 통과. 길이가 비어 계산되지 않은 릴은 실패로 세지 않고 판정에서 제외한다 (data/ria_media_duration.json)."
       },
       {
         "label": "릴 평균 조회수",
@@ -150,15 +150,31 @@
         "unit": "회",
         "pending": true,
         "note": "스토어 오픈 후 측정 개시 (shop UTM 연동)"
+      },
+      {
+        "label": "팔로워 순증 (참고)",
+        "target": null,
+        "actual": 15,
+        "unit": "명",
+        "note": "참고 지표. 관리 지표가 아니다 — 0730 v2 는 도달·팔로워·좋아요를 '원인이 아니라 결과'로 규정했다. 목표 자리에 두지 않는다.",
+        "pending": false
       }
     ],
     "monthly": [
       {
-        "label": "팔로워 (4주 목표)",
-        "target": 3000,
+        "label": "리텐션 통과 주 수",
+        "target": 4,
+        "actual": null,
+        "unit": "주",
+        "pending": true,
+        "note": "4주 중 몇 주가 '직전 5개 중 3개 이상 40%↑'를 통과했는가. 사람이 주 1회 기입."
+      },
+      {
+        "label": "팔로워 (참고)",
+        "target": null,
         "actual": 15,
         "unit": "명",
-        "note": "월간 = 4주 로드맵 목표",
+        "note": "참고 지표. 관리 지표는 리텐션이다.",
         "pending": false
       },
       {
@@ -312,31 +328,47 @@
   ],
   "progress_sample": false,
   "progress": {
-    "week_label": "2026-W30 (7/21~7/27)",
-    "planned": 4,
+    "week_label": "2026-W31 (7/28~8/3)",
+    "planned": 5,
     "published": 12,
     "items": [
       {
-        "title": "선케어 루틴 Reels",
-        "status": "published",
-        "date": "2026-07-22"
-      },
-      {
-        "title": "마스크 비포애프터 Reels",
-        "status": "published",
-        "date": "2026-07-20"
-      },
-      {
-        "title": "제품 큐레이션 Carousel",
+        "title": "설화 회화 롱 — 장면형",
+        "format_key": "folktale-painterly-long",
+        "hook": "장면형",
         "status": "planned",
-        "date": "2026-07-25"
+        "date": "2026-08-01"
       },
       {
-        "title": "Q&A Live",
+        "title": "설화 회화 롱 — 고백형",
+        "format_key": "folktale-painterly-long",
+        "hook": "고백형",
         "status": "planned",
-        "date": "2026-07-27"
+        "date": "2026-08-02"
+      },
+      {
+        "title": "풍경 회화 롱 — 질문형",
+        "format_key": "landscape-painterly-long",
+        "hook": "질문형",
+        "status": "planned",
+        "date": "2026-08-04"
+      },
+      {
+        "title": "커플 대화 회화 롱 — 반전형",
+        "format_key": "couple-dialogue-painterly-long",
+        "hook": "반전형",
+        "status": "planned",
+        "date": "2026-08-05"
+      },
+      {
+        "title": "설화 회화 롱 — 장면형(4편 간격 후 재사용)",
+        "format_key": "folktale-painterly-long",
+        "hook": "장면형",
+        "status": "planned",
+        "date": "2026-08-07"
       }
-    ]
+    ],
+    "note": "포맷 키·훅 유형은 0730 v2 기준. 같은 훅 유형을 연속으로 쓰지 않는다. 0프레임 5규칙을 못 지키면 제작에 들어가지 않는다."
   },
   "measured": {
     "live": true,

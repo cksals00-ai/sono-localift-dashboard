@@ -195,10 +195,14 @@
     html += '<section class="card full"><h2><span class="tag">⊙</span>실측 요약 · 추세'
          + (auto ? '<span class="bdg live">AUTO</span>' : '<span class="bdg sample">연결 대기</span>') + '</h2>';
     if(auto){
-      var dy = ms.day||{}, wk = ms.week||{};
+      var dy = ms.day||{}, wk = ms.week||{}, rt = ms.retention||{};
       html += '<div class="sub">Instagram Graph API 자동 수집 · 1일 2회(09:30 / 21:30 KST) 갱신 · 주간은 최근 7일 게시물 기준</div>';
+      html += '<div class="sub" style="margin-top:6px"><b>관리 지표는 리텐션 하나입니다</b> — 리텐션 = 평균 시청시간 ÷ 영상 길이. '
+           + '아래 도달·조회·팔로워는 <b>원인이 아니라 결과</b>이며 목표가 아닙니다. 초 단위 비교는 노이즈입니다.</div>';
       html += '<div class="kpis">';
-      [['팔로워', ms.followers, '명'],
+      [['리텐션 40%↑ (직전 '+nf(rt.window||5)+'개)', rt.pass_count, '개 / 목표 3'],
+       ['길이 미입력 (판정 제외)', rt.unmeasurable, '개'],
+       ['팔로워', ms.followers, '명'],
        ['일 도달', dy.reach, '회'],
        ['일 조회', dy.views, '회'],
        ['프로필 방문', dy.profile_views, '회'],
@@ -266,12 +270,19 @@
     // ③ 콘텐츠 현황
     var c = d.content||[];
     html += '<section class="card full"><h2><span class="tag">③</span>콘텐츠 현황'+(d.content_sample?'<span class="bdg sample">SAMPLE</span>':'')+'</h2>';
-    html += '<div class="sub">최근 포스트별 성과 (조회·좋아요·댓글·저장)</div>';
-    html += '<table><thead><tr><th>날짜</th><th>제목</th><th>형식</th><th class="num">조회</th><th class="num">좋아요</th><th class="num">댓글</th><th class="num">저장</th></tr></thead><tbody>';
-    if(!c.length) html += '<tr><td colspan="7" style="color:var(--dim)">데이터 없음</td></tr>';
+    html += '<div class="sub">최근 포스트별 성과 · <b>리텐션이 판정 기준</b> (40%↑ 성공 / 20~40% 보통 / 20% 미만 14일 잠금). '
+         + '「—」는 영상 길이가 비어 계산되지 않은 것이며 실패가 아닙니다.</div>';
+    html += '<table><thead><tr><th>날짜</th><th>제목</th><th>형식</th><th class="num">리텐션</th><th class="num">평균시청</th><th class="num">길이</th><th class="num">조회</th><th class="num">좋아요</th><th class="num">댓글</th><th class="num">저장</th></tr></thead><tbody>';
+    if(!c.length) html += '<tr><td colspan="10" style="color:var(--dim)">데이터 없음</td></tr>';
     c.forEach(function(row){
       var t = row.url ? '<a href="'+esc(row.url)+'" target="_blank" rel="noopener" style="color:var(--gold2)">'+esc(row.title)+'</a>' : esc(row.title);
+      var r = row.retention_pct;
+      var rcol = (r==null) ? 'var(--dim)' : (r>=40 ? '#57C4B4' : (r<20 ? '#E06C6C' : 'inherit'));
+      var rtxt = (r==null) ? '—' : nf(r)+'%';
       html += '<tr><td>'+esc(row.date)+'</td><td>'+t+'</td><td><span class="fmt">'+esc(row.format)+'</span></td>'
+        +'<td class="num" style="color:'+rcol+';font-weight:700">'+rtxt+'</td>'
+        +'<td class="num">'+(row.avg_watch_sec==null?'—':nf(row.avg_watch_sec)+'초')+'</td>'
+        +'<td class="num">'+(row.duration_sec==null?'—':nf(row.duration_sec)+'초')+'</td>'
         +'<td class="num">'+nf(row.views)+'</td><td class="num">'+nf(row.likes)+'</td><td class="num">'+nf(row.comments)+'</td><td class="num">'+nf(row.saves)+'</td></tr>';
     });
     html += '</tbody></table></section>';
@@ -297,7 +308,7 @@
         if(k.pending || k.actual==null || k.target==null){
           h += '<div class="kpi pend"><div class="kl">'+esc(k.label)+'</div>'
             +'<div class="kv" style="font-size:14px">'+(k.actual!=null?nf(k.actual):'—')+' <span style="font-size:12px;color:var(--dim)">/ '+(k.target!=null?nf(k.target)+' '+esc(k.unit||''):'목표 미확정')+'</span></div>'
-            +'<div class="kpend">측정 대기</div>'
+            +'<div class="kpend">'+((k.actual!=null&&k.target==null)?'참고 지표 (목표 아님)':'측정 대기')+'</div>'
             +(k.note?'<div class="knote">'+esc(k.note)+'</div>':'')+'</div>';
         } else {
           var p = pct(k.actual, k.target);
