@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-01T23:07:25+09:00",
+    "updated_at": "2026-08-02T07:09:08+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -122,7 +122,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 195,
+        "actual": 303,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -130,7 +130,7 @@
       {
         "label": "주간 저장수",
         "target": 100,
-        "actual": 3,
+        "actual": 8,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 측정 중 → 4주 목표 주 100"
@@ -154,7 +154,7 @@
       {
         "label": "팔로워 순증 (참고)",
         "target": null,
-        "actual": 15,
+        "actual": 14,
         "unit": "명",
         "note": "참고 지표. 관리 지표가 아니다 — 0730 v2 는 도달·팔로워·좋아요를 '원인이 아니라 결과'로 규정했다. 목표 자리에 두지 않는다.",
         "pending": false
@@ -188,7 +188,7 @@
       {
         "label": "저장수 (주)",
         "target": 100,
-        "actual": 3,
+        "actual": 8,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 측정 중"
@@ -210,7 +210,7 @@
       "title": "we planned nothing. it turned out to b…",
       "format": "Carousel",
       "url": "https://www.instagram.com/p/Dbfn2FtGwv9/",
-      "views": 49,
+      "views": 64,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -223,11 +223,11 @@
       "title": "I sit at a desk all day and my shoulde…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbfWk9xINe2/",
-      "views": 181,
-      "likes": 0,
+      "views": 827,
+      "likes": 8,
       "comments": 1,
-      "saves": 2,
-      "avg_watch_sec": 6.9,
+      "saves": 7,
+      "avg_watch_sec": 8.0,
       "duration_sec": null,
       "retention_pct": null
     },
@@ -340,7 +340,7 @@
       "title": "A tiger once put on a mother's clothes…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbNzyrkjB2U/",
-      "views": 1056,
+      "views": 1057,
       "likes": 63,
       "comments": 1,
       "saves": 13,
@@ -408,26 +408,26 @@
   },
   "measured": {
     "live": true,
-    "followers": 946,
+    "followers": 945,
     "media_count": 34,
     "baseline_followers": 931,
     "day": {
-      "reach": 237,
-      "views": 357,
-      "profile_views": 3,
-      "interactions": 6
+      "reach": 792,
+      "views": 1011,
+      "profile_views": 4,
+      "interactions": 32
     },
     "week": {
       "posts": 10,
       "reels": 6,
-      "reel_avg_views": 195,
-      "saves": 3,
+      "reel_avg_views": 303,
+      "saves": 8,
       "comments": 12,
-      "shares": 18,
-      "reach": 1158,
-      "views": 1807
+      "shares": 24,
+      "reach": 1706,
+      "views": 2468
     },
-    "engagement_rate_pct": 2.85,
+    "engagement_rate_pct": 2.58,
     "retention": {
       "window": 5,
       "pass_threshold_pct": 40.0,
@@ -439,7 +439,7 @@
           "date": "2026-08-01",
           "title": "I sit at a desk all day and my shoulde…",
           "retention_pct": null,
-          "avg_watch_sec": 6.9,
+          "avg_watch_sec": 8.0,
           "duration_sec": null
         },
         {
