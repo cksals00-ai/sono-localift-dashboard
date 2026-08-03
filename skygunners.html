@@ -314,6 +314,44 @@
   .route .rt-note{font-size:11.5px;color:var(--mut);font-weight:600;margin-top:6px;line-height:1.5}
   .route .rt-link{display:inline-block;margin-top:9px;font-size:11px;font-weight:800;color:var(--navy);border:2px solid var(--navy2);border-radius:6px;padding:4px 9px;text-decoration:none;background:var(--bg)}
 
+  /* ---------- collapsible sections ---------- */
+  .wrap > section{scroll-margin-top:74px}
+  .wrap > section.fold{margin-top:14px}
+  .wrap > section.fold + section.fold{margin-top:9px}
+  .sec-h{flex-wrap:wrap}
+  @media (max-width:460px){
+    .sec-h h2{font-size:19px}
+    .sec-h .en{font-size:9px;padding:2px 6px;letter-spacing:.6px}
+    .sec-h .tog{padding:6px 10px;font-size:10.5px}
+    .wrap > section.fold .sec-h h2{font-size:17.5px}
+    .wrap > section.fold .sec-h .en{display:none}
+  }
+  .sec-h{cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+  .sec-h.nofold{cursor:default}
+  .sec-h .tog{margin-left:auto;flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;
+    background:var(--navy2);color:#fff;border:none;border-radius:999px;padding:6px 12px;
+    font-family:inherit;font-size:11px;font-weight:900;letter-spacing:-.2px;cursor:pointer;box-shadow:2px 2px 0 rgba(0,0,0,.18)}
+  .sec-h .tog .cv{display:inline-block;transition:transform .22s ease;font-size:10px}
+  .sec-h .tog .ct{opacity:.85;font-weight:800}
+  section.fold .sec-h .tog .cv{transform:rotate(-90deg)}
+  section.fold .sec-h{margin-bottom:0}
+  .secbody{overflow:hidden}
+  section.fold > .secbody{display:none}
+  .foldbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 18px}
+  .foldbar button{background:var(--bg);color:var(--navy2);border:2.5px solid var(--navy2);border-radius:999px;
+    padding:7px 14px;font-family:inherit;font-size:11.5px;font-weight:900;cursor:pointer;box-shadow:2px 2px 0 var(--navy2)}
+  .foldbar button:active{transform:translate(2px,2px);box-shadow:none}
+  .foldbar .hint{font-size:11px;font-weight:700;color:var(--mut)}
+
+  /* ---------- training-log app entry ---------- */
+  .applink{display:block;text-decoration:none;background:linear-gradient(135deg,#1b3a5c 0%,#2d5f8f 100%);border:3px solid var(--navy2);border-radius:14px;box-shadow:var(--hs);padding:15px 16px;margin:0 0 14px;position:relative;overflow:hidden}
+  .applink:before{content:'';position:absolute;right:-26px;top:-26px;width:96px;height:96px;border-radius:50%;background:rgba(247,183,49,.16)}
+  .applink .tp{display:flex;align-items:center;gap:9px;flex-wrap:wrap;position:relative}
+  .applink .tp .ttl{font-size:15.5px;font-weight:900;color:#fff;letter-spacing:-.3px}
+  .applink .tp .nbg{font-size:9.5px;font-weight:900;color:var(--navy2);background:var(--accent);border-radius:999px;padding:3px 8px;letter-spacing:.4px}
+  .applink .ds{margin-top:7px;font-size:12px;font-weight:700;color:#cfe0f0;line-height:1.7;position:relative}
+  .applink .ds b{color:var(--accent)}
+  .applink .cta{display:inline-flex;align-items:center;gap:6px;margin-top:11px;background:var(--accent);color:var(--navy2);font-size:12.5px;font-weight:900;border-radius:9px;padding:8px 15px;position:relative}
   /* ---------- team tee (closed / notice only) ---------- */
   .tee-closed{background:var(--bg);border:3px solid var(--navy2);border-radius:12px;box-shadow:var(--hs);padding:15px 16px;font-size:12.5px;font-weight:700;color:var(--navy2);line-height:1.85}
   .tee-closed b{color:var(--navy)}
@@ -397,6 +435,57 @@
   .navgrid a .nb{display:inline-block;margin-left:5px;font-size:8.5px;font-weight:900;letter-spacing:.6px;color:#7a4a00;background:var(--accent);border:1.5px solid #7a4a00;border-radius:999px;padding:1px 5px;vertical-align:2px;animation:skTwinkle 1.6s ease-in-out infinite}
   @media(prefers-reduced-motion:reduce){.navbar button.spark,.navbar button.spark::after,.navbar button.spark .sp,.navgrid a .nb{animation:none}}
   /* ===== 개인훈련 · 전술 챕터 ===== */
+  /* -- 7영역 타일 -- */
+  .vgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:0 0 12px}
+  .vgrid .vt{border:2.5px solid var(--navy2);border-radius:11px;background:#fff;box-shadow:2px 2px 0 var(--navy2);
+    padding:9px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:3px;text-decoration:none}
+  .vgrid .vt .vi{font-size:20px;line-height:1.1}
+  .vgrid .vt .vn{font-size:9.5px;font-weight:900;letter-spacing:-.5px;color:var(--ink);text-align:center;line-height:1.25}
+  .vgrid .vt .vd{font-size:8.5px;font-weight:800;color:var(--mut);text-align:center;line-height:1.3}
+  .vgrid .vt.acc{background:var(--navy);border-color:var(--navy2)}
+  .vgrid .vt.acc .vn,.vgrid .vt.acc .vd{color:#fff}
+  .vlead{font-size:11.5px;font-weight:800;color:var(--mut);line-height:1.6;margin:0 0 8px}
+  .vlead b{color:var(--ink)}
+
+  /* -- 40분 루틴 비율 막대 -- */
+  .rbar{display:flex;height:26px;border:2.5px solid var(--navy2);border-radius:9px;overflow:hidden;margin:2px 0 4px;box-shadow:2px 2px 0 var(--navy2)}
+  .rbar i{display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:900;color:#fff;
+    letter-spacing:-.4px;border-right:2px solid rgba(255,255,255,.35)}
+  .rbar i:last-child{border-right:0}
+  .rbar i.s1{background:#7fa8c9}.rbar i.s2{background:#4d86bd}.rbar i.s3{background:#2d5f8f}
+  .rbar i.s4{background:var(--pop)}.rbar i.s5{background:#9db9cf}
+  .rlg{display:flex;flex-wrap:wrap;gap:4px 10px;margin:0 0 11px}
+  .rlg span{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;color:var(--mut)}
+  .rlg span:before{content:'';width:9px;height:9px;border-radius:3px;background:#7fa8c9}
+  .rlg span.s2:before{background:#4d86bd}.rlg span.s3:before{background:#2d5f8f}
+  .rlg span.s4:before{background:var(--pop)}.rlg span.s5:before{background:#9db9cf}
+
+  /* -- 훈련량 막대 -- */
+  .lbar{display:grid;grid-template-columns:74px 1fr 64px;align-items:center;gap:8px;margin-top:8px}
+  .lbar .ll{font-size:10.5px;font-weight:900;color:var(--mut);text-align:right;letter-spacing:-.3px;line-height:1.3}
+  .lbar .lt{height:17px;border-radius:99px;background:#e4edf5;border:2px solid #cbd9e6;overflow:hidden;position:relative}
+  .lbar .lt i{display:block;height:100%;background:#9db9cf;border-radius:99px}
+  .lbar .lv{font-size:10.5px;font-weight:900;color:var(--mut);letter-spacing:-.3px}
+  .lbar.ok .lt{border-color:#0d6b48}.lbar.ok .lt i{background:#2fa877}.lbar.ok .lv{color:#0d6b48}
+  .lbar.bad .lt{border-color:#b3332f}.lbar.bad .lt i{background:#e2574c}.lbar.bad .lv{color:#b3332f}
+  .lbar .lt s{position:absolute;top:-2px;bottom:-2px;width:3px;background:#b3332f;text-decoration:none}
+  .lcap{font-size:10px;font-weight:800;color:var(--mut);margin-top:9px;line-height:1.6;text-align:center}
+  .lcap b{color:#b3332f}
+
+  /* -- 카드 더보기 -- */
+  .morebtn{display:block;width:100%;margin:10px 0 0;background:var(--bg);color:var(--navy2);
+    border:2.5px solid var(--navy2);border-radius:10px;padding:9px;font-family:inherit;
+    font-size:12px;font-weight:900;letter-spacing:-.3px;cursor:pointer;box-shadow:2px 2px 0 var(--navy2)}
+  .morebtn:active{transform:translate(2px,2px);box-shadow:none}
+  .icards > .hid{display:none}
+  /* -- tblock 접기 -- */
+  .tblock>h3{cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .tblock>h3 .tv{margin-left:auto;flex:none;font-size:11px;color:var(--mut);transition:transform .2s ease}
+  .tblock.tf>h3 .tv{transform:rotate(-90deg)}
+  .tblock.tf{padding-bottom:15px}
+  .tblock.tf>.tbody{display:none}
+  .tblock>h3 .tk{flex:none;font-size:9px;font-weight:900;color:var(--navy2);background:var(--accent);
+    border-radius:999px;padding:2px 7px;letter-spacing:-.2px}
   .icard.tp{border-top-color:#3f7fd8}
   .icard.tg{border-top-color:#12a19a}
   .icard.tr{border-top-color:#e07a2f}
@@ -982,11 +1071,32 @@
 
     <p class="thead">아빠와 집·야외에서 하는 <b>주 1~2회 40분 루틴</b>과, U-9에서 <b>지금 붙여야 할 것 / 아직 안 해도 되는 것</b>을 정리했어요. 스킬코치·스포츠의학·부모심리·체격별 관점으로 <b>네 갈래 자문</b>을 받아 반영했고, 원래 계획과 <b>달라진 부분은 그대로 적어뒀습니다</b>. 계속 다듬어 갈 챕터예요.</p>
 
+    <a class="applink" href="skylog.html" target="_blank" rel="noopener">
+      <div class="tp"><span class="ttl">🏀 훈련일지 앱 열기</span><span class="nbg">NEW</span></div>
+      <div class="ds">아래 훈련법을 <b>앱으로</b> 옮겼어요 — 일지 쓰기 · 사진/영상 보관 · <b>주간 훈련량 자동 체크</b> · 부족한 영역 알려주기. 종이 양식 그대로 <b>인쇄</b>도 됩니다.<br>기록은 <b>내 폰에만</b> 저장되고 어디에도 전송되지 않아요.</div>
+      <span class="cta">앱 열기 →</span>
+    </a>
+
+    <p class="vlead">이 챕터가 다루는 <b>7가지 영역</b>이에요. 훈련일지 앱에서도 같은 7영역으로 드릴을 골라 넣을 수 있습니다.</p>
+    <div class="vgrid">
+      <div class="vt"><span class="vi">🏀</span><span class="vn">드리블</span><span class="vd">머리 들고</span></div>
+      <div class="vt"><span class="vi">🎯</span><span class="vn">슛</span><span class="vd">골밑 3걸음</span></div>
+      <div class="vt"><span class="vi">🤝</span><span class="vn">패스</span><span class="vd">보고 던지기</span></div>
+      <div class="vt"><span class="vi">🛡️</span><span class="vn">수비</span><span class="vd">내 사람만</span></div>
+      <div class="vt"><span class="vi">👟</span><span class="vn">풋워크·민첩</span><span class="vd">착지·방향전환</span></div>
+      <div class="vt"><span class="vi">💪</span><span class="vn">힘·체력</span><span class="vd">맨몸만</span></div>
+      <div class="vt"><span class="vi">🧠</span><span class="vn">전술·이해</span><span class="vd">받기 전에 보기</span></div>
+      <a class="vt acc" href="skylog.html" target="_blank" rel="noopener"><span class="vi">📓</span><span class="vn">훈련일지</span><span class="vd">앱에서 고르기</span></a>
+    </div>
     <div class="icards" id="trainBox"></div>
 
     <div class="tblock">
       <h3><span class="em">⏱️</span>아빠와 40분 루틴 (주 1~2회)</h3>
       <p class="tsub">원래 6블록 · 50/30/20 구성이었는데, 자문 결과 <b>실전(1대1·2대2) 비중을 12분으로 늘리고 설명 시간을 0으로</b> 줄였습니다. 이 나이대는 <b>말로 배운 것보다 부딪히며 배운 것</b>이 훨씬 오래 남아요.</p>
+      <div class="rbar">
+        <i class="s1" style="width:20%">8분</i><i class="s2" style="width:20%">8분</i><i class="s3" style="width:25%">10분</i><i class="s4" style="width:30%">12분</i><i class="s5" style="width:5%"></i>
+      </div>
+      <div class="rlg"><span>몸풀기 8</span><span class="s2">드리블 8</span><span class="s3">레이업 10</span><span class="s4">1대1·2대2 12</span><span class="s5">슛 게임 2</span></div>
       <div class="trow f"><div class="tmin">8분</div><div class="tbd"><b>놀이형 몸풀기</b><span>줄넘기 · 사이드스텝 · 한 발 서서 공 주고받기. 스트레칭보다 <b>움직이면서</b> 데우기.</span></div></div>
       <div class="trow"><div class="tmin">8분</div><div class="tbd"><b>움직이면서 드리블</b><span>제자리 드리블은 최소화. 걸어가며 · 뛰어가며 · 방향 바꾸며. 핵심 한마디는 <b>"머리 들고!"</b> 하나뿐.</span></div></div>
       <div class="trow"><div class="tmin">10분</div><div class="tbd"><b>레이업 · 골밑 마무리</b><span>양손 각 5개씩. 막히면 <b>반대손</b>으로 바꾸는 것까지 한 세트로.</span></div></div>
@@ -1012,21 +1122,16 @@
     <div class="tblock">
       <h3><span class="em">🩺</span>훈련량 안전 기준 · 우리 상황 점검</h3>
       <p class="tsub">NBA · USA Basketball 유소년 지침과 미국소아과학회(AAP) 권고 기준이에요. <b>확인해 보니 아빠 훈련 80분을 더하면 이미 권고를 넘습니다.</b> 숨기지 않고 그대로 적어요.</p>
-      <div class="twrap"><table class="ttab nw">
-        <tr><th>나이</th><th>주당 상한</th><th>휴식</th><th>연간</th></tr>
-        <tr class="ok"><td><b>7~8세</b></td><td><b>3시간</b><br>(180분)</td><td>주 2일</td><td>4개월</td></tr>
-        <tr class="ok"><td><b>9~11세</b></td><td><b>5시간</b><br>(300분)</td><td>주 2일</td><td>5개월</td></tr>
-        <tr><td>12~14세</td><td>10시간</td><td>주 1일</td><td>7개월</td></tr>
-      </table></div>
+      <div class="lbar ok"><span class="ll">7~8세</span><div class="lt"><i style="width:30%"></i></div><span class="lv">180분</span></div>
+      <div class="lbar ok"><span class="ll">9~11세</span><div class="lt"><i style="width:50%"></i></div><span class="lv">300분</span></div>
+      <div class="lbar"><span class="ll">12~14세</span><div class="lt"><i style="width:100%"></i></div><span class="lv">600분</span></div>
+      <p class="lcap">주당 상한(분) · 휴식은 <b style="color:var(--ink)">7~11세 주 2일 · 12~14세 주 1일</b>, 연간 참여는 4~7개월</p>
       <p class="tnote" style="margin-top:7px">수면 권고는 <b>7~11세 9~12시간</b>, 12~14세 8~10시간. 이 나이대에는 <b>잘 자는 것이 훈련의 일부</b>예요.</p>
       <p class="tnote"><b>우리 아이 주당 합계로 계산하면</b> ↓</p>
-      <p class="thint">↔ 표는 옆으로 밀어서 볼 수 있어요</p>
-      <div class="twrap"><table class="ttab">
-        <tr><th>클럽 훈련</th><th>+ 아빠 40분×2</th><th>주당 합계</th><th>7~8세 기준</th></tr>
-        <tr class="warn"><td>주 2회 × 60분</td><td>80분</td><td>200분</td><td><b>111%</b></td></tr>
-        <tr class="warn"><td>주 3회 × 60분</td><td>80분</td><td>260분</td><td><b>144%</b></td></tr>
-        <tr class="warn"><td>주 3회 × 90분</td><td>80분</td><td>350분</td><td><b>194%</b> (9~11세 기준으로도 117%)</td></tr>
-      </table></div>
+      <div class="lbar bad"><span class="ll">주 2회×60분<br>+아빠 80</span><div class="lt"><i style="width:57%"></i><s style="left:51.4%"></s></div><span class="lv">200분<br>111%</span></div>
+      <div class="lbar bad"><span class="ll">주 3회×60분<br>+아빠 80</span><div class="lt"><i style="width:74%"></i><s style="left:51.4%"></s></div><span class="lv">260분<br>144%</span></div>
+      <div class="lbar bad"><span class="ll">주 3회×90분<br>+아빠 80</span><div class="lt"><i style="width:100%"></i><s style="left:51.4%"></s></div><span class="lv">350분<br>194%</span></div>
+      <p class="lcap">빨간 세로선 = <b>7~8세 상한 180분</b> · 세 경우 모두 넘습니다 (맨 아래는 9~11세 기준으로도 117%)</p>
       <p class="tnote">→ 그래서 <b>40분을 한 번에 두 번 다 넣지 말고</b>, 주 1회로 시작해 <b>4~6주에 걸쳐</b> 늘리는 걸 권합니다. AAP 권고는 <b>주당 증가폭 10~20% 이내</b>인데, 80분을 한 번에 더하면 +44%라 두 배를 넘어요. 훈련일은 <b>주 5~6일을 넘기지 않기</b>, 한 시즌엔 <b>한 팀만</b>.</p>
       <details class="tacc"><summary>🏆 대회 앞두고 · 끝나고 (테이퍼링)</summary><div class="tin"><b>D-10 ~ D-7</b> 정상 훈련(여기까지가 실력이 올라가는 구간)<hr><b>D-6 ~ D-4</b> 20~25분으로 줄이고 <em>점프·전력질주·몸싸움 빼기</em><hr><b>D-3 ~ D-1</b> 개인훈련 중단. <b>전날은 완전 휴식</b><hr><b>대회 3일간</b> 추가 훈련 0<hr><b>대회 후</b> 3~5일 완전 휴식 → 첫 주는 평소의 50~60%만</div></details>
       <details class="tacc"><summary>🚨 병원에 가야 하는 신호</summary><div class="tin">· <b>뼈 한 지점을 콕 짚어 아프고</b> 부어 있을 때<hr>· <b>2~3일 넘게 절뚝일 때</b><hr>· 쉬고 있는데도 · 밤에 아플 때<hr>· 관절이 <b>걸리거나 덜컥거릴 때</b><hr>· 저리거나 감각이 이상할 때<hr><b>이 나이대 흔한 것</b> — 발뒤꿈치(세버병), 무릎 아래 튀어나온 뼈(오스굿-슐라터), 손목 성장판, 먼 거리 슛으로 인한 어깨·팔꿈치, 방향전환에서 오는 발목·무릎.</div></details>
@@ -1504,6 +1609,7 @@ var firebaseConfig = {
     });
     buildFamilyOptions();
     renderDinner();
+    if(window.__setupMore) window.__setupMore();
   }
 
   /* ===== 관리자 모드 ===== */
@@ -1737,7 +1843,148 @@ var firebaseConfig = {
   })();
 
   /* ===== 실시간 구독 + 최초 렌더 ===== */
+  /* ===== 섹션 접기 · 더보기 ===== */
+  var FOLDKEY='sky_fold_v1', OPEN_BY_DEFAULT=3;
+  function foldState(){ try{ return JSON.parse(localStorage.getItem(FOLDKEY)||'{}')||{}; }catch(e){ return {}; } }
+  function foldSave(o){ try{ localStorage.setItem(FOLDKEY,JSON.stringify(o)); }catch(e){} }
+  function sectionKey(sec,i){ return sec.id || ('s'+i); }
+  function countHint(sec){
+    var n=sec.querySelectorAll('.secbody .icard').length
+        || sec.querySelectorAll('.secbody .tcard').length
+        || sec.querySelectorAll('.secbody tbody tr').length
+        || sec.querySelectorAll('.secbody .item').length;
+    return n>1? (n+'개') : '';
+  }
+  function setFold(sec,folded,persist){
+    sec.classList.toggle('fold',!!folded);
+    var t=sec.querySelector('.sec-h .tog');
+    if(t){
+      t.setAttribute('aria-expanded', folded?'false':'true');
+      var lab=t.querySelector('.cl'); if(lab) lab.textContent= folded? '더보기':'접기';
+      var ct=t.querySelector('.ct'); if(ct) ct.textContent= folded? countHint(sec) : '';
+    }
+    if(persist){ var st=foldState(); st[sec.getAttribute('data-fk')]= folded?1:0; foldSave(st); }
+  }
+  function openSection(sec){ if(sec && sec.classList.contains('fold')) setFold(sec,false,true); }
+  function setupFold(){
+    var secs=document.querySelectorAll('.wrap > section');
+    if(!secs.length || document.querySelector('.secbody')) return;
+    var st=foldState();
+    Array.prototype.forEach.call(secs,function(sec,i){
+      var h=sec.querySelector('.sec-h'); if(!h){ return; }
+      var body=document.createElement('div'); body.className='secbody';
+      while(h.nextSibling) body.appendChild(h.nextSibling);
+      sec.appendChild(body);
+      var k=sectionKey(sec,i); sec.setAttribute('data-fk',k);
+      var btn=document.createElement('button');
+      btn.type='button'; btn.className='tog';
+      btn.innerHTML='<span class="ct"></span><span class="cl">접기</span><span class="cv">▾</span>';
+      h.appendChild(btn);
+      var folded = (k in st)? !!st[k] : (i>=OPEN_BY_DEFAULT);
+      setFold(sec,folded,false);
+      h.addEventListener('click',function(e){
+        if(e.target.closest && e.target.closest('.manage-btn')) return;
+        setFold(sec,!sec.classList.contains('fold'),true);
+      });
+    });
+    /* 전체 펼치기 / 접기 */
+    var wrap=document.querySelector('.wrap'), first=wrap? wrap.querySelector('section') : null;
+    if(first){
+      var bar=document.createElement('div'); bar.className='foldbar';
+      bar.innerHTML='<button type="button" data-all="open">▾ 전체 펼치기</button>'+
+                    '<button type="button" data-all="close">▸ 전체 접기</button>'+
+                    '<span class="hint">제목을 탭하면 열고 닫혀요</span>';
+      wrap.insertBefore(bar,first);
+      bar.addEventListener('click',function(e){
+        var b=e.target.closest? e.target.closest('button[data-all]') : null; if(!b) return;
+        var close=b.getAttribute('data-all')==='close';
+        Array.prototype.forEach.call(document.querySelectorAll('.wrap > section[data-fk]'),function(sec){ setFold(sec,close,true); });
+        if(close) window.scrollTo({top:0,behavior:'smooth'});
+      });
+    }
+  }
+  /* 카드가 많은 목록은 3개만 보여주고 나머지는 더보기 */
+  var MORE_SHOW=3, MORE_MIN=5, moreOpen={};
+  function setupMore(){
+    Array.prototype.forEach.call(document.querySelectorAll('.icards'),function(box){
+      var old=box.parentNode.querySelector(':scope > .morebtn');
+      if(old) old.parentNode.removeChild(old);
+      var kids=Array.prototype.slice.call(box.children);
+      var cards=kids.filter(function(x){ return x.classList.contains('icard'); });
+      if(cards.length<MORE_MIN) return;
+      var key=box.id||'x';
+      var draw=function(){
+        var open=!!moreOpen[key], shown=0, lastVis=null;
+        kids.forEach(function(cd){
+          var card=cd.classList.contains('icard');
+          var hide = !open && shown>=MORE_SHOW;
+          cd.classList.toggle('hid',hide);
+          if(!hide){ if(card) shown++; lastVis=cd; }
+        });
+        /* 카드 없이 구분줄만 남지 않게 */
+        if(!open && lastVis && !lastVis.classList.contains('icard')) lastVis.classList.add('hid');
+        btn.textContent = open ? '▴ 접기' : '＋ '+(cards.length-MORE_SHOW)+'개 더보기';
+      };
+      var btn=document.createElement('button');
+      btn.type='button'; btn.className='morebtn';
+      btn.addEventListener('click',function(){
+        moreOpen[key]=!moreOpen[key]; draw();
+        if(!moreOpen[key]) box.scrollIntoView({block:'start',behavior:'smooth'});
+      });
+      box.parentNode.insertBefore(btn, box.nextSibling);
+      draw();
+    });
+  }
+  window.__setupMore=setupMore;
+
+  /* 챕터 안의 tblock 도 접기 (첫 블록만 열어둠) */
+  var BKEY='sky_blk_v1';
+  function blkState(){ try{ return JSON.parse(localStorage.getItem(BKEY)||'{}')||{}; }catch(e){ return {}; } }
+  function setupBlocks(){
+    var bs=document.querySelectorAll('.tblock');
+    if(!bs.length || document.querySelector('.tblock > .tbody')) return;
+    var st=blkState();
+    Array.prototype.forEach.call(bs,function(bl,i){
+      var h=bl.querySelector(':scope > h3'); if(!h) return;
+      var body=document.createElement('div'); body.className='tbody';
+      while(h.nextSibling) body.appendChild(h.nextSibling);
+      bl.appendChild(body);
+      var k='b'+i; bl.setAttribute('data-bk',k);
+      var n=body.querySelectorAll('.tacc').length;
+      if(n>1) h.insertAdjacentHTML('beforeend','<span class="tk">'+n+'개 항목</span>');
+      h.insertAdjacentHTML('beforeend','<span class="tv">\u25BE</span>');
+      var folded = (k in st)? !!st[k] : (i>0);
+      bl.classList.toggle('tf',folded);
+      h.addEventListener('click',function(){
+        var f=!bl.classList.contains('tf');
+        bl.classList.toggle('tf',f);
+        var o=blkState(); o[k]=f?1:0;
+        try{ localStorage.setItem(BKEY,JSON.stringify(o)); }catch(e){}
+      });
+    });
+  }
+
+  /* 앵커로 이동하면 그 섹션을 자동으로 펼침 */
+  function revealHash(hash,smooth){
+    if(!hash || hash.charAt(0)!=='#' || hash.length<2) return false;
+    var t=null; try{ t=document.querySelector(hash); }catch(e){}
+    if(!t) return false;
+    openSection(t.closest? t.closest('section') : null);
+    setTimeout(function(){ t.scrollIntoView({block:'start',behavior:smooth?'smooth':'auto'}); },40);
+    return true;
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest? e.target.closest('a[href^="#"]') : null; if(!a) return;
+    var h=a.getAttribute('href'); if(h==='#top'){ return; }
+    if(revealHash(h,true)) e.preventDefault();
+  },true);
+  window.addEventListener('hashchange',function(){ revealHash(location.hash,true); });
+
   renderAll();
+  setupFold();
+  setupBlocks();
+  setupMore();
+  if(location.hash) setTimeout(function(){ revealHash(location.hash,false); },120);
   if(configured){
     syncContent();
     db.ref('dashboard').on('value',function(snap){ dbData=snap.val()||{}; renderAll(); });
