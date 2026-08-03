@@ -344,6 +344,32 @@
   .foldbar .hint{font-size:11px;font-weight:700;color:var(--mut)}
 
   /* ---------- training-log app entry ---------- */
+  /* ===== 상단 훈련일지 배너 ===== */
+  .logbnr{display:flex;align-items:center;gap:13px;text-decoration:none;margin:22px 0 12px;
+    padding:15px 16px;border:3px solid var(--navy2);border-radius:14px;box-shadow:var(--hs);
+    background:linear-gradient(115deg,#12233a 0%,#234b6e 48%,#2f6b9e 100%);
+    position:relative;overflow:hidden}
+  .logbnr:before{content:'';position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(115deg,rgba(255,255,255,.055) 0 12px,transparent 12px 27px)}
+  .logbnr .sh{position:absolute;top:-60%;left:-45%;width:36%;height:220%;pointer-events:none;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+    transform:rotate(18deg);animation:lbsheen 5s ease-in-out infinite}
+  @keyframes lbsheen{0%{left:-45%}42%{left:125%}100%{left:125%}}
+  .logbnr .ic{flex:none;width:46px;height:46px;border-radius:13px;background:var(--accent);
+    border:3px solid var(--navy2);display:flex;align-items:center;justify-content:center;
+    font-size:23px;box-shadow:3px 3px 0 rgba(0,0,0,.3);position:relative}
+  .logbnr .tx{flex:1;min-width:0;position:relative}
+  .logbnr .t1{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .logbnr .t1 b{font-size:16px;font-weight:900;color:#fff;letter-spacing:-.5px;word-break:keep-all}
+  .logbnr .t1 em{font-style:normal;font-size:9px;font-weight:900;letter-spacing:.6px;
+    color:var(--navy2);background:var(--accent);border-radius:999px;padding:3px 8px}
+  .logbnr .t2{display:block;margin-top:4px;font-size:11px;font-weight:800;color:#bcd6ea;line-height:1.55;word-break:keep-all}
+  .logbnr .t2 b{color:var(--accent);font-weight:900}
+  .logbnr .go{flex:none;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.14);
+    border:2px solid rgba(255,255,255,.5);color:#fff;font-size:15px;font-weight:900;
+    display:flex;align-items:center;justify-content:center;position:relative}
+  .logbnr:active{transform:translate(3px,3px);box-shadow:none}
+  @media (prefers-reduced-motion:reduce){.logbnr .sh{display:none}}
   .applink{display:block;text-decoration:none;background:linear-gradient(135deg,#1b3a5c 0%,#2d5f8f 100%);border:3px solid var(--navy2);border-radius:14px;box-shadow:var(--hs);padding:15px 16px;margin:0 0 14px;position:relative;overflow:hidden}
   .applink:before{content:'';position:absolute;right:-26px;top:-26px;width:96px;height:96px;border-radius:50%;background:rgba(247,183,49,.16)}
   .applink .tp{display:flex;align-items:center;gap:9px;flex-wrap:wrap;position:relative}
@@ -564,6 +590,17 @@
     </nav>
     <div class="navpanel" id="navPanel"></div>
   </div>
+
+  <!-- 훈련일지 배너 -->
+  <a class="logbnr" href="skylog.html" target="_blank" rel="noopener">
+    <span class="sh"></span>
+    <span class="ic">📓</span>
+    <span class="tx">
+      <span class="t1"><b>우리 아이 훈련일지</b><em>APP</em></span>
+      <span class="t2">일지 · 사진 · 영상 기록, <b>훈련량 자동 체크</b> · 폰에만 저장</span>
+    </span>
+    <span class="go">→</span>
+  </a>
 
   <!-- SEASON STATS -->
   <div class="admin-only block" style="text-align:right;margin:22px 0 -6px"><button class="manage-btn" data-sec="stats">＋ 시즌성적 관리</button></div>
