@@ -337,11 +337,24 @@
   section.fold .sec-h{margin-bottom:0}
   .secbody{overflow:hidden}
   section.fold > .secbody{display:none}
-  .foldbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 18px}
-  .foldbar button{background:var(--bg);color:var(--navy2);border:2.5px solid var(--navy2);border-radius:999px;
-    padding:7px 14px;font-family:inherit;font-size:11.5px;font-weight:900;cursor:pointer;box-shadow:2px 2px 0 var(--navy2)}
-  .foldbar button:active{transform:translate(2px,2px);box-shadow:none}
-  .foldbar .hint{font-size:11px;font-weight:700;color:var(--mut)}
+  .foldbar{margin:16px 0 22px;padding:12px 12px 11px;background:var(--card);
+    border:3px solid var(--navy2);border-radius:15px;box-shadow:var(--hs)}
+  .foldbar .row{display:flex;gap:9px}
+  .foldbar button{flex:1;min-width:0;display:flex;align-items:center;justify-content:center;gap:7px;
+    padding:13px 6px;font-family:inherit;font-size:13.5px;font-weight:900;letter-spacing:-.4px;
+    color:var(--navy2);border:2.5px solid var(--navy2);border-radius:11px;cursor:pointer;
+    box-shadow:3px 3px 0 var(--navy2);white-space:nowrap}
+  .foldbar button .ar{flex:none;width:19px;height:19px;border-radius:50%;font-size:9px;line-height:1;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--navy2);color:#fff}
+  .foldbar button[data-all=open]{background:var(--accent)}
+  .foldbar button[data-all=close]{background:#fff}
+  .foldbar button[data-all=close] .ar{background:var(--navy);color:#fff}
+  .foldbar button:active{transform:translate(3px,3px);box-shadow:none}
+  .foldbar .hint{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:10px;
+    font-size:10.5px;font-weight:800;color:var(--mut);letter-spacing:-.2px}
+  .foldbar .hint:before{content:'☝️';font-size:11px}
+  @media(max-width:340px){.foldbar button{font-size:12px;padding:12px 4px;gap:5px}}
 
   /* ---------- training-log app entry ---------- */
   /* ===== 상단 훈련일지 배너 ===== */
@@ -1928,8 +1941,10 @@ var firebaseConfig = {
     var wrap=document.querySelector('.wrap'), first=wrap? wrap.querySelector('section') : null;
     if(first){
       var bar=document.createElement('div'); bar.className='foldbar';
-      bar.innerHTML='<button type="button" data-all="open">▾ 전체 펼치기</button>'+
-                    '<button type="button" data-all="close">▸ 전체 접기</button>'+
+      bar.innerHTML='<div class="row">'+
+                      '<button type="button" data-all="open"><span class="ar">▼</span>전체 펼치기</button>'+
+                      '<button type="button" data-all="close"><span class="ar">▲</span>전체 접기</button>'+
+                    '</div>'+
                     '<span class="hint">제목을 탭하면 열고 닫혀요</span>';
       wrap.insertBefore(bar,first);
       bar.addEventListener('click',function(e){
