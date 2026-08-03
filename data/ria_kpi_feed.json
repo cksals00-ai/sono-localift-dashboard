@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-04T00:26:04+09:00",
+    "updated_at": "2026-08-04T07:19:36+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -154,7 +154,7 @@
       {
         "label": "팔로워 순증 (참고)",
         "target": null,
-        "actual": 14,
+        "actual": 13,
         "unit": "명",
         "note": "참고 지표. 관리 지표가 아니다 — 0730 v2 는 도달·팔로워·좋아요를 '원인이 아니라 결과'로 규정했다. 목표 자리에 두지 않는다.",
         "pending": false
@@ -249,7 +249,7 @@
       "title": "we planned nothing. it turned out to b…",
       "format": "Carousel",
       "url": "https://www.instagram.com/p/Dbfn2FtGwv9/",
-      "views": 95,
+      "views": 101,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -408,12 +408,12 @@
   },
   "measured": {
     "live": true,
-    "followers": 945,
+    "followers": 944,
     "media_count": 37,
     "baseline_followers": 931,
     "day": {
-      "reach": 66,
-      "views": 95,
+      "reach": 71,
+      "views": 102,
       "profile_views": 0,
       "interactions": 4
     },
@@ -424,10 +424,10 @@
       "saves": 14,
       "comments": 8,
       "shares": 6,
-      "reach": 1540,
-      "views": 1897
+      "reach": 1544,
+      "views": 1903
     },
-    "engagement_rate_pct": 1.82,
+    "engagement_rate_pct": 1.81,
     "retention": {
       "window": 5,
       "pass_threshold_pct": 40.0,
