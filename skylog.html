@@ -98,6 +98,11 @@ textarea.lined{
   background-attachment:local;line-height:23px;padding-top:8px
 }
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.hrow{display:flex;align-items:center;gap:5px}
+.hrow select{flex:1;min-width:0;padding:9px 6px;text-align:center;text-align-last:center;
+  background-position:calc(100% - 11px) 17px,calc(100% - 6px) 17px}
+.hsep{flex:none;font-size:13px;font-weight:900;color:var(--mut)}
+#f_placeX{margin-top:7px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
 @media(max-width:400px){.grid4{grid-template-columns:repeat(2,1fr)}}
 
@@ -400,7 +405,13 @@ textarea.lined{
     <h2>📅 언제 · 어디서<span class="en">WHEN</span></h2>
     <div class="grid2">
       <div class="f"><label>날짜</label><input type="date" id="f_date"></div>
-      <div class="f"><label>시간 <span class="op">선택</span></label><input type="text" id="f_time" placeholder="예) 17:00~19:00" inputmode="numeric"></div>
+      <div class="f"><label>시간 <span class="op">선택</span></label>
+        <div class="hrow">
+          <select id="f_timeS"><option value="">시작</option><option value="00:00">00:00</option><option value="01:00">01:00</option><option value="02:00">02:00</option><option value="03:00">03:00</option><option value="04:00">04:00</option><option value="05:00">05:00</option><option value="06:00">06:00</option><option value="07:00">07:00</option><option value="08:00">08:00</option><option value="09:00">09:00</option><option value="10:00">10:00</option><option value="11:00">11:00</option><option value="12:00">12:00</option><option value="13:00">13:00</option><option value="14:00">14:00</option><option value="15:00">15:00</option><option value="16:00">16:00</option><option value="17:00">17:00</option><option value="18:00">18:00</option><option value="19:00">19:00</option><option value="20:00">20:00</option><option value="21:00">21:00</option><option value="22:00">22:00</option><option value="23:00">23:00</option></select>
+          <span class="hsep">~</span>
+          <select id="f_timeE"><option value="">종료</option><option value="00:00">00:00</option><option value="01:00">01:00</option><option value="02:00">02:00</option><option value="03:00">03:00</option><option value="04:00">04:00</option><option value="05:00">05:00</option><option value="06:00">06:00</option><option value="07:00">07:00</option><option value="08:00">08:00</option><option value="09:00">09:00</option><option value="10:00">10:00</option><option value="11:00">11:00</option><option value="12:00">12:00</option><option value="13:00">13:00</option><option value="14:00">14:00</option><option value="15:00">15:00</option><option value="16:00">16:00</option><option value="17:00">17:00</option><option value="18:00">18:00</option><option value="19:00">19:00</option><option value="20:00">20:00</option><option value="21:00">21:00</option><option value="22:00">22:00</option><option value="23:00">23:00</option></select>
+        </div>
+        <input type="hidden" id="f_time"></div>
     </div>
     <div class="grid2">
       <div class="f"><label>날씨</label>
@@ -409,7 +420,15 @@ textarea.lined{
           <option>☀️ 맑음</option><option>⛅ 구름</option><option>🌧️ 비</option>
           <option>❄️ 눈</option><option>🥵 더움</option><option>🥶 추움</option><option>🏠 실내</option>
         </select></div>
-      <div class="f"><label>장소</label><input type="text" id="f_place" placeholder="예) 체육관"></div>
+      <div class="f"><label>장소</label>
+        <select id="f_placeS">
+          <option value="">선택</option>
+          <option value="이아짐">이아짐</option>
+          <option value="고소아">고소아</option>
+          <option value="__etc">기타 (직접 입력)</option>
+        </select>
+        <input type="text" id="f_placeX" placeholder="장소를 직접 입력" style="display:none">
+        <input type="hidden" id="f_place"></div>
     </div>
   </div>
 
@@ -913,6 +932,7 @@ function touch(){ fdirty=true; }
 function clearForm(keepDate){
   var d=$('f_date').value;
   F.forEach(function(k){ $('f_'+k).value=''; });
+  syncWhenUI();
   $('f_date').value = keepDate&&d ? d : todayStr();
   $('f_src').value = (type==='game'?'game':'club');
   strokes=[]; redraw();
@@ -926,6 +946,40 @@ function todayStr(){
   var d=new Date(), p=function(n){return (n<10?'0':'')+n};
   return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());
 }
+/* ===== 시간 · 장소 선택형 ===== */
+var PLACES=['이아짐','고소아'];
+function writeWhen(){
+  var a=$('f_timeS').value, b=$('f_timeE').value;
+  $('f_time').value = (a&&b) ? a+'~'+b : (a||b||'');
+  var p=$('f_placeS').value;
+  if(p==='__etc'){ $('f_placeX').style.display=''; $('f_place').value=$('f_placeX').value.trim(); }
+  else { $('f_placeX').style.display='none'; $('f_place').value=p; }
+  touch();
+}
+function syncWhenUI(){
+  var v=String($('f_time').value||''), m=v.match(/\d{1,2}:\d{2}/g)||[];
+  var norm=function(x){ var h=parseInt(x.split(':')[0],10); return (h>=0&&h<=23)?((h<10?'0':'')+h+':00'):''; };
+  $('f_timeS').value = m[0]?norm(m[0]):'';
+  $('f_timeE').value = m[1]?norm(m[1]):'';
+  var p=String($('f_place').value||'').trim();
+  if(!p){ $('f_placeS').value=''; $('f_placeX').value=''; $('f_placeX').style.display='none'; }
+  else if(PLACES.indexOf(p)>=0){ $('f_placeS').value=p; $('f_placeX').value=''; $('f_placeX').style.display='none'; }
+  else { $('f_placeS').value='__etc'; $('f_placeX').value=p; $('f_placeX').style.display=''; }
+}
+$('f_timeS').onchange=function(){
+  if($('f_timeS').value && !$('f_timeE').value){
+    var h=parseInt($('f_timeS').value,10)+2;
+    if(h<=23) $('f_timeE').value=(h<10?'0':'')+h+':00';
+  }
+  writeWhen();
+};
+$('f_timeE').onchange=writeWhen;
+$('f_placeS').onchange=function(){
+  writeWhen();
+  if($('f_placeS').value==='__etc') $('f_placeX').focus();
+};
+$('f_placeX').oninput=writeWhen;
+
 function collect(){
   var e={ type:type, ts:Date.now() };
   F.forEach(function(k){ e[k]=$('f_'+k).value.trim(); });
@@ -940,6 +994,7 @@ function collect(){
 function fill(e){
   setType(e.type||'train');
   F.forEach(function(k){ $('f_'+k).value=e[k]||''; });
+  syncWhenUI();
   $('f_src').value=e.src||(e.type==='game'?'game':'club');
   var ins=$('chkBox').querySelectorAll('input');
   [].forEach.call(ins,function(x,i){ x.checked=!!(e.checks&&e.checks[i]); });
