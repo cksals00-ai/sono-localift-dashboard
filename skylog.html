@@ -415,7 +415,7 @@ textarea.lined{
       <div class="f"><label>장소</label>
         <select id="f_placeS">
           <option value="">선택</option>
-          <option value="이아짐">이아짐</option>
+          <option value="이야짐">이야짐</option>
           <option value="고소아">고소아</option>
           <option value="__etc">기타 (직접 입력)</option>
         </select>
@@ -939,7 +939,7 @@ function todayStr(){
   return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate());
 }
 /* ===== 시간 · 장소 선택형 ===== */
-var PLACES=['이아짐','고소아'];
+var PLACES=['이야짐','고소아'];
 function writeWhen(){
   $('f_time').value = $('f_timeS').value||'';
   var p=$('f_placeS').value;
@@ -1030,6 +1030,18 @@ function sorted(){
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){
   return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
 
+/* 시작 시각 + 훈련 시간(분) => "19:00~21:00" */
+function timeRange(e){
+  var t=String((e&&e.time)||'').trim();
+  var m=t.match(/(\d{1,2}):(\d{2})/); if(!m) return t;
+  var st=parseInt(m[1],10)*60+parseInt(m[2],10);
+  var mn=parseInt(String((e&&e.mins)||'').replace(/[^0-9]/g,''),10);
+  var p2=function(n){ return (n<10?'0':'')+n; };
+  var s0=p2(Math.floor(st/60)%24)+':'+p2(st%60);
+  if(!mn||mn<=0) return s0;
+  var en=st+mn;
+  return s0+'~'+p2(Math.floor(en/60)%24)+':'+p2(en%60)+(en>=1440?' (익일)':'');
+}
 function renderList(){
   var arr=sorted().filter(function(e){ return filt==='all'||e.type===filt; });
   if(!arr.length){
@@ -1045,6 +1057,7 @@ function renderList(){
     var sub = e.one || e.good || e.detail || '';
     sub = sub.replace(/\s+/g,' ').slice(0,34);
     var meta=[];
+    var tr=timeRange(e); if(tr) meta.push('🕒'+tr);
     if(e.mins) meta.push('⏱'+e.mins+'분');
     meta.push('✅'+n+'/'+tot);
     if((e.media||[]).length) meta.push('📷'+e.media.length);
@@ -1495,7 +1508,7 @@ function printEntry(e){
     return '<li>'+(((e.checks||[])[i])?'☑':'☐')+' '+esc(s)+'</li>'; }).join('');
   var h='<div class="ph"><h1>'+(t?'경기일지':'훈련일지')+'</h1>'+
     '<div class="m">'+esc(e.date||'')+' &nbsp;|&nbsp; '+esc(e.weather||'')+' &nbsp;|&nbsp; '+
-    esc(e.time||'')+' &nbsp;|&nbsp; '+esc(e.place||'')+' &nbsp;|&nbsp; '+esc(name+' '+num)+'</div></div>';
+    esc(timeRange(e))+' &nbsp;|&nbsp; '+esc(e.place||'')+' &nbsp;|&nbsp; '+esc(name+' '+num)+'</div></div>';
   h+='<div class="row">'+
      '<div style="flex:1">'+
        (t? bx('경기팀 정보',e.opp)+bx('전술사항 및 내 역할',e.role)
