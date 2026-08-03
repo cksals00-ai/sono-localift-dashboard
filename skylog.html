@@ -152,6 +152,13 @@ textarea.lined{
   font-size:14px;font-weight:900;letter-spacing:-.4px;box-shadow:var(--hs);text-align:center
 }
 .btn.pri{background:var(--accent)}
+.kidbar{display:flex;gap:7px;margin-top:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:3px}
+.kidbar::-webkit-scrollbar{display:none}
+.kidbar button{flex:0 0 auto;padding:8px 15px;border-radius:999px;border:2.5px solid rgba(255,255,255,.5);
+  background:rgba(255,255,255,.12);color:#fff;font-size:13px;font-weight:900;cursor:pointer;white-space:nowrap;
+  font-family:inherit;letter-spacing:-.2px}
+.kidbar button.on{background:var(--accent);border-color:var(--navy2);color:var(--navy2);box-shadow:2px 2px 0 var(--navy2)}
+.kidbar button.add{border-style:dashed;background:transparent}
 .btn.gh{flex:none;padding:14px 15px;font-size:12.5px;background:#fff;color:var(--mut)}
 .btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--navy2)}
 
@@ -270,22 +277,68 @@ textarea.lined{
 .mgrid .add b{font-size:23px;font-weight:400;line-height:1}
 
 /* ---------- drills ---------- */
-.dcat{display:flex;gap:6px;overflow-x:auto;padding:2px 0 4px;-webkit-overflow-scrolling:touch}
-.dcat button{flex:none;padding:8px 12px;border:2.5px solid var(--navy2);border-radius:99px;background:#fff;
-  font-size:11.5px;font-weight:900;letter-spacing:-.3px;box-shadow:2px 2px 0 var(--navy2)}
-.dcat button.on{background:var(--navy);color:#fff}
-.drill{border:2.5px solid var(--navy2);border-radius:12px;padding:11px 12px;margin-top:10px;background:#fff;box-shadow:2px 2px 0 var(--navy2)}
+/* 훈련량 기준 시각화 */
+.capbox{margin-top:13px}
+.capbox .ch{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;margin-bottom:9px}
+.capbox .ch b{font-size:12.5px;font-weight:900;letter-spacing:-.3px}
+.capbox .ch span{font-size:10px;font-weight:800;color:var(--mut)}
+.caprow{display:grid;grid-template-columns:62px 1fr 58px;align-items:center;gap:8px;margin-top:7px}
+.caprow .cl{font-size:10.5px;font-weight:900;color:var(--mut);letter-spacing:-.3px;text-align:right}
+.caprow .cbar{height:16px;border-radius:99px;background:#e4edf5;border:2px solid #cbd9e6;overflow:hidden;position:relative}
+.caprow .cbar i{display:block;height:100%;background:#b9cddd;border-radius:99px}
+.caprow .cv{font-size:10.5px;font-weight:900;color:var(--mut)}
+.caprow.me .cl{color:var(--navy)}
+.caprow.me .cbar{border-color:var(--navy2)}
+.caprow.me .cbar i{background:linear-gradient(90deg,#2d5f8f,#4d86bd)}
+.caprow.me .cv{color:var(--navy)}
+.caprow .cbar u{position:absolute;left:0;top:0;height:100%;background:var(--accent);border-radius:99px;opacity:.95}
+.caprow .cbar u.over{background:#e2574c}
+.capnow{font-size:11px;font-weight:800;line-height:1.7;color:var(--mut);margin-top:10px;
+  background:#f2f7fb;border-radius:8px;padding:8px 10px}
+.capnow b{color:var(--navy)}
+.capnow.warn{background:#fdeeec;color:#8f2f27}
+.capnow.warn b{color:#b3332f}
+
+/* 영역 타일 */
+.agrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:12px}
+.agrid button{border:2.5px solid var(--navy2);border-radius:11px;background:#fff;box-shadow:2px 2px 0 var(--navy2);
+  padding:8px 4px 7px;font-family:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+.agrid button .ai{font-size:19px;line-height:1.1}
+.agrid button .an{font-size:9.5px;font-weight:900;letter-spacing:-.5px;color:var(--ink);text-align:center;line-height:1.25}
+.agrid button .ac{font-size:8.5px;font-weight:800;color:var(--mut)}
+.agrid button .ab{width:80%;height:4px;border-radius:99px;background:#e4edf5;overflow:hidden;margin-top:1px}
+.agrid button .ab i{display:block;height:100%;background:var(--navy);border-radius:99px}
+.agrid button .ab i.low{background:#e2574c}
+.agrid button.on{background:var(--navy);border-color:var(--navy2)}
+.agrid button.on .an,.agrid button.on .ac{color:#fff}
+.agrid button.on .ab{background:rgba(255,255,255,.28)}
+.agrid button.on .ab i{background:var(--accent)}
+.alegend{font-size:10px;font-weight:700;color:var(--mut);line-height:1.7;margin-top:9px;text-align:center}
+
+/* 드릴 카드 (접힘형) */
+.drill{border:2.5px solid var(--navy2);border-radius:12px;margin-top:9px;background:#fff;box-shadow:2px 2px 0 var(--navy2);overflow:hidden}
 .drill.rec{border-color:#c9820f;background:#fffdf6;box-shadow:2px 2px 0 #c9820f}
-.drill h4{font-size:13px;font-weight:900;letter-spacing:-.4px;display:flex;gap:6px;align-items:flex-start;line-height:1.4}
-.drill h4 .rb{flex:none;font-size:9px;font-weight:900;background:var(--accent);border:1.5px solid #7a4a00;
-  color:#7a4a00;border-radius:99px;padding:1px 6px;letter-spacing:-.2px;margin-left:auto;white-space:nowrap}
-.drill .dose{font-size:11px;font-weight:900;color:var(--navy);background:#e6f2fb;border-radius:6px;
-  padding:3px 7px;display:inline-block;margin-top:6px}
-.drill p{font-size:11.5px;line-height:1.7;color:var(--mut);font-weight:600;margin-top:6px}
-.drill p b{color:var(--ink);font-weight:800}
+.drill .dh{display:flex;align-items:center;gap:8px;padding:10px 11px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.drill .dh .di{flex:none;font-size:16px;line-height:1}
+.drill .dh .dt{flex:1;min-width:0}
+.drill .dh .dt b{display:block;font-size:12.5px;font-weight:900;letter-spacing:-.4px;line-height:1.35}
+.drill .dh .dt em{display:block;font-style:normal;font-size:10px;font-weight:800;color:var(--navy);margin-top:3px}
+.drill .dh .rb{flex:none;font-size:8.5px;font-weight:900;background:var(--accent);border:1.5px solid #7a4a00;
+  color:#7a4a00;border-radius:99px;padding:1px 6px;white-space:nowrap}
+.drill .dh .cv{flex:none;font-size:10px;color:var(--mut);transition:transform .2s ease}
+.drill.op .dh .cv{transform:rotate(180deg)}
+.drill .db{display:none;padding:0 11px 11px;border-top:2px dashed rgba(35,75,110,.2);margin-top:0}
+.drill.op .db{display:block}
+.drill .db p{font-size:11.5px;line-height:1.7;color:var(--mut);font-weight:600;margin-top:9px}
+.drill .db p b{color:var(--ink);font-weight:800}
 .drill .warn{color:#b3332f;font-weight:800}
-.drill .go{margin-top:9px;width:100%;padding:9px;border:2px solid var(--navy2);border-radius:9px;
-  background:var(--accent);font-size:11.5px;font-weight:900;letter-spacing:-.3px}
+.drill .go{margin-top:10px;width:100%;padding:9px;border:2px solid var(--navy2);border-radius:9px;
+  background:var(--accent);font-size:11.5px;font-weight:900;letter-spacing:-.3px;font-family:inherit;cursor:pointer}
+.dtools{display:flex;gap:7px;align-items:center;margin-top:12px}
+.dtools button{flex:1;padding:7px;border:2px solid var(--navy2);border-radius:8px;background:#fff;
+  font-family:inherit;font-size:10.5px;font-weight:900;letter-spacing:-.3px;cursor:pointer}
+.dtools .dn{font-size:10.5px;font-weight:800;color:var(--mut);white-space:nowrap}
+
 .tybar{background:var(--card);border:3px solid var(--navy2);border-radius:13px;box-shadow:var(--hs-sm);padding:11px 12px;margin-top:14px}
 .tybar label{display:block;font-size:11px;font-weight:900;color:var(--navy);margin-bottom:5px}
 .tybar .tn{font-size:11.5px;font-weight:700;line-height:1.65;color:var(--mut);margin-top:8px}
@@ -328,8 +381,10 @@ textarea.lined{
   </div>
   <div class="lock">
     <span>🔒</span>
-    <div>모든 기록은 <b>이 휴대폰 안에만</b> 저장됩니다. 서버로 올라가지 않고, 공개 대시보드에도 표시되지 않아요. 기기를 바꾸면 <b>설정 &gt; 백업</b>으로 옮겨주세요.</div>
+    <div>모든 기록은 <b>이 휴대폰 안에만</b> 저장됩니다. 서버로 올라가지 않고, 공개 대시보드에도 표시되지 않아요.<br>
+    <b>한 폰에 우리 아이 한 명</b>이 기본입니다 — 다른 폰으로 열면 빈 앱이 뜨고, 남의 기록은 서로 절대 안 보여요. 형제·자매가 같이 쓸 때만 <b>설정 &gt; ＋ 아이 추가</b>로 한 명 더 만드세요. 기기를 바꾸면 <b>설정 &gt; 백업</b>으로 옮겨주세요.</div>
   </div>
+  <div class="kidbar" id="kidBar"></div>
 </header>
 
 <div class="wrap">
@@ -500,8 +555,23 @@ textarea.lined{
     </select>
     <div class="tn" id="tyNote">유형을 고르면 그 아이에게 <b>먼저 필요한 훈련</b>에 ⭐ 표시가 붙습니다.</div>
   </div>
+  <div class="blk capbox">
+    <div class="ch"><b>⏱ 이 나이에 적당한 훈련량</b><span>NBA · USA Basketball 유소년 지침</span></div>
+    <div id="capBars"></div>
+    <div id="capNow"></div>
+  </div>
   <div class="blk" style="padding-bottom:13px">
-    <div class="dcat" id="dcat"></div>
+    <div class="ch" style="display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;margin-bottom:2px">
+      <b style="font-size:12.5px;font-weight:900;letter-spacing:-.3px">🎯 영역 고르기</b>
+      <span style="font-size:10px;font-weight:800;color:var(--mut)">막대 = 최근 4주에 얼마나 했는지</span>
+    </div>
+    <div class="agrid" id="dcat"></div>
+    <div class="alegend" id="dlegend"></div>
+    <div class="dtools">
+      <span class="dn" id="dnum"></span>
+      <button type="button" id="dOpenAll">전부 펼치기</button>
+      <button type="button" id="dCloseAll">전부 접기</button>
+    </div>
     <div id="drillBox"></div>
   </div>
 </div>
@@ -557,7 +627,12 @@ textarea.lined{
         <option value="9" selected>9~11세 (주 300분 · 휴식 2일)</option>
         <option value="12">12~14세 (주 600분 · 휴식 1일)</option>
       </select></div>
-    <div class="note">인쇄물 상단에만 쓰입니다. 어디에도 전송되지 않아요. 훈련량 기준은 NBA·USA Basketball 유소년 지침을 따랐습니다.</div>
+    <div class="acts" style="margin-top:12px">
+      <button class="btn" id="btnAddKid">＋ 아이 추가</button>
+      <button class="btn gh" id="btnDelKid">이 아이 지우기</button>
+    </div>
+    <div class="note">인쇄물 상단에만 쓰입니다. 어디에도 전송되지 않아요. 훈련량 기준은 NBA·USA Basketball 유소년 지침을 따랐습니다.<br>
+    형제·자매가 같이 쓰면 <b>＋ 아이 추가</b>로 한 명 더 만드세요. 맨 위 이름 버튼으로 전환하고, 기록·사진·통계는 아이별로 완전히 따로 쌓입니다.</div>
   </div>
   <div class="blk">
     <h2>💽 저장 공간<span class="en">STORAGE</span></h2>
@@ -571,7 +646,7 @@ textarea.lined{
     </div>
     <input type="file" id="fileIn" accept="application/json,.json" hidden>
     <div class="note">휴대폰을 바꾸거나 앱을 지우면 기록이 사라집니다. <b>한 달에 한 번</b> 백업 파일을 받아 카톡 &quot;나에게 보내기&quot;에 저장해두세요.<br>
-    ※ 백업 파일에는 <b>글·체크·그림·훈련량</b>이 들어갑니다. <b>사진·영상은 용량이 커서 포함되지 않아요</b> — 남기고 싶은 영상은 사진을 눌러 <b>⬇️ 갤러리에 저장</b>으로 따로 보관해주세요.</div>
+    ※ 백업 파일에는 <b>모든 아이</b>의 <b>글·체크·그림·훈련량</b>이 들어갑니다. <b>사진·영상은 용량이 커서 포함되지 않아요</b> — 남기고 싶은 영상은 사진을 눌러 <b>⬇️ 갤러리에 저장</b>으로 따로 보관해주세요.</div>
   </div>
   <div class="blk">
     <h2>📱 홈 화면에 추가<span class="en">INSTALL</span></h2>
@@ -584,7 +659,7 @@ textarea.lined{
   <div class="blk">
     <h2>⚠️ 전체 삭제<span class="en">RESET</span></h2>
     <button class="btn" id="btnWipe" style="background:#fdf0ee;color:#b3332f">모든 기록 지우기</button>
-    <div class="note">되돌릴 수 없습니다. 먼저 백업부터 받아주세요.</div>
+    <div class="note">지금 선택된 아이의 기록만 지웁니다. 되돌릴 수 없으니 먼저 백업부터 받아주세요.</div>
   </div>
   <div class="note" style="text-align:center;margin-top:18px">
     소노 스카이거너스 U-9 · 훈련일지 v2<br>종이 양식(훈련일지/경기일지)을 그대로 옮기고<br>훈련법 · 사진/영상 · 훈련량 · 부족 영역 체크를 더했습니다.
@@ -625,10 +700,40 @@ var $=function(id){return document.getElementById(id)};
 var KEY='sky_log_v1';
 
 /* ---------------- store ---------------- */
-var DB={v:1,profile:{name:'',num:'',age:'9'},entries:{}};
+function newKid(){ return {name:'',num:'',age:'9',btype:''}; }
+function kidId(){ return 'k'+Date.now().toString(36)+Math.round(Math.random()*1e4).toString(36); }
+function bindDB(o){
+  ['profile','entries'].forEach(function(k){
+    Object.defineProperty(o,k,{configurable:true,enumerable:false,
+      get:function(){ return o.kids[o.cur][k]; },
+      set:function(v){ o.kids[o.cur][k]=v; }});
+  });
+  return o;
+}
+function freshDB(){
+  var id='k1', o={v:2,cur:id,order:[id],kids:{}};
+  o.kids[id]={profile:newKid(),entries:{}};
+  return bindDB(o);
+}
+function migrate(o){
+  if(!o||typeof o!=='object') return null;
+  if(o.kids&&o.cur){
+    o.v=2; o.order=(o.order||Object.keys(o.kids)).filter(function(x){ return !!o.kids[x]; });
+    if(!o.order.length) return null;
+    if(!o.kids[o.cur]) o.cur=o.order[0];
+    o.order.forEach(function(x){ var k=o.kids[x]; k.profile=k.profile||newKid(); k.entries=k.entries||{}; });
+    return bindDB(o);
+  }
+  if(o.entries){                       // v1 backup / v1 saved data
+    var id='k1', n={v:2,cur:id,order:[id],kids:{}};
+    n.kids[id]={profile:o.profile||newKid(),entries:o.entries};
+    return bindDB(n);
+  }
+  return null;
+}
+var DB=freshDB();
 function load(){
-  try{ var r=localStorage.getItem(KEY); if(r){ var o=JSON.parse(r);
-    if(o&&o.entries){ DB=o; DB.profile=DB.profile||{name:'',num:''}; } } }catch(e){}
+  try{ var r=localStorage.getItem(KEY); if(r){ var m=migrate(JSON.parse(r)); if(m) DB=m; } }catch(e){}
 }
 function save(){
   try{ localStorage.setItem(KEY,JSON.stringify(DB)); return true; }
@@ -719,7 +824,7 @@ function ptOf(e){
            Math.min(Math.max((e.clientY-r.top)/r.height,0),1) ];
 }
 cv.addEventListener('pointerdown',function(e){
-  e.preventDefault(); try{ cv.setPointerCapture(e.pointerId); }catch(_){}
+  e.preventDefault(); touch(); try{ cv.setPointerCapture(e.pointerId); }catch(_){}
   cur={c:penColor,w:5,p:[ptOf(e)]}; strokes.push(cur); redraw();
 });
 cv.addEventListener('pointermove',function(e){
@@ -803,6 +908,8 @@ $('tyT').onclick=function(){ setType('train') };
 $('tyG').onclick=function(){ setType('game') };
 
 var F=['date','time','weather','place','purpose','focus','opp','role','detail','good','hard','eval','vow','one','pts','ast','reb','etc','h','w','mins'];
+var fdirty=false;
+function touch(){ fdirty=true; }
 function clearForm(keepDate){
   var d=$('f_date').value;
   F.forEach(function(k){ $('f_'+k).value=''; });
@@ -813,7 +920,7 @@ function clearForm(keepDate){
   areaSel={}; renderAreas();
   media=[]; renderMedia();
   editId=null; $('editNote').textContent='';
-  renderChecks(); writeGauge();
+  renderChecks(); writeGauge(); fdirty=false;
 }
 function todayStr(){
   var d=new Date(), p=function(n){return (n<10?'0':'')+n};
@@ -860,10 +967,11 @@ $('btnSave').onclick=function(){
 };
 function commit(id,e){
   DB.entries[id]=e;
+  fdirty=false;
   if(save()){
     editId=id; $('editNote').textContent='저장됨 · 이어서 고치면 같은 일지에 반영됩니다.';
     toast('저장했어요! 📚 기록 탭에서 볼 수 있어요.');
-    renderList(); renderStat(); writeGauge();
+    renderList(); renderStat(); writeGauge(); renderDrills();
   }
 }
 $('f_mins').oninput=writeGauge;
@@ -962,7 +1070,7 @@ function renderAreas(){
     return '<button type="button" data-a="'+a.k+'"'+(areaSel[a.k]?' class="on"':'')+'>'+a.n+'</button>'; }).join('');
   [].forEach.call($('areaBox').children,function(b){
     b.onclick=function(){ var k=b.getAttribute('data-a');
-      areaSel[k]=!areaSel[k]; b.classList.toggle('on',!!areaSel[k]); };
+      areaSel[k]=!areaSel[k]; b.classList.toggle('on',!!areaSel[k]); touch(); };
   });
 }
 function areaOn(k){ areaSel[k]=true; renderAreas(); }
@@ -1185,28 +1293,112 @@ var DRILLS=[
   p:'공이 없을 때 <b>3초 안에 한 번</b>은 자리를 바꿉니다. 서 있으면 수비가 편해져요.'}
 ];
 var dcat='all';
+var AICON={dr:'🏀',sh:'🎯',ps:'🤝',df:'🛡️',ft:'👟',st:'💪',iq:'🧠'};
+
+/* ---- 최근 4주 영역별 횟수 (타일 막대용) ---- */
+function areaCounts(){
+  var now=new Date(), from=new Date(now.getFullYear(),now.getMonth(),now.getDate()-27), f=fmtD(from);
+  var cnt={}; AREAS.forEach(function(a){ cnt[a.k]=0; });
+  Object.keys(DB.entries).forEach(function(k){
+    var e=DB.entries[k]; if((e.date||'')<f) return;
+    (e.areas||[]).forEach(function(x){ if(cnt[x]!=null) cnt[x]++; });
+  });
+  var mx=Math.max.apply(null,AREAS.map(function(a){return cnt[a.k]}));
+  return {cnt:cnt, mx:mx};
+}
+
+/* ---- 나이대별 훈련량 기준 막대 ---- */
+var CAPTIERS=[{a:'8',lab:'7~8세',min:180,rest:2},{a:'9',lab:'9~11세',min:300,rest:2},{a:'12',lab:'12~14세',min:600,rest:1}];
+function renderCaps(){
+  var box=$('capBars'); if(!box) return;
+  var age=String(DB.profile.age||'9'), c=caps(), w=weekAgg({date:todayStr()});
+  var MAXV=600;
+  box.innerHTML=CAPTIERS.map(function(t){
+    var me = (t.lab===c.lab);
+    var basew=Math.round(t.min/MAXV*100);
+    var over = me && w.mins>t.min;
+    var mine = me ? Math.min(Math.round(w.mins/MAXV*100),100) : 0;
+    return '<div class="caprow'+(me?' me':'')+'">'+
+      '<span class="cl">'+t.lab+'</span>'+
+      '<div class="cbar"><i style="width:'+basew+'%"></i>'+
+        (me?'<u class="'+(over?'over':'')+'" style="width:'+mine+'%"></u>':'')+'</div>'+
+      '<span class="cv">주 '+t.min+'분</span></div>';
+  }).join('');
+  var n=$('capNow'); if(!n) return;
+  var pct = c.min? Math.round(w.mins/c.min*100) : 0;
+  var rest = 7-w.days;
+  var over = w.mins>c.min;
+  var msg;
+  if(!w.mins) msg='이번 주 기록된 훈련이 아직 없어요. 일지에 <b>시간(분)</b>만 적으면 여기가 자동으로 채워집니다.';
+  else if(over) msg='이번 주 <b>'+w.mins+'분</b> — '+c.lab+' 권장 '+c.min+'분을 <b>'+(pct-100)+'% 넘었어요.</b> 남은 날은 쉬거나 가볍게 가는 걸 권합니다.';
+  else msg='이번 주 <b>'+w.mins+'분</b> / '+c.lab+' 권장 '+c.min+'분 (<b>'+pct+'%</b>). 휴식 '+rest+'일 — 권장은 주 '+c.rest+'일입니다.';
+  n.className='capnow'+(over?' warn':'');
+  n.innerHTML=''+msg+
+    '<br><span style="opacity:.75">막대 길이 = 그 나이대의 권장 상한, 그 위에 덮인 노란 칸 = 우리 아이 이번 주 실제 훈련량(넘으면 빨강)입니다.</span>';
+}
+
 function renderDrills(){
-  var cats=[{k:'all',n:'전체'}].concat(AREAS.map(function(a){return {k:a.k,n:a.n}}));
-  $('dcat').innerHTML=cats.map(function(c){
-    return '<button data-k="'+c.k+'"'+(dcat===c.k?' class="on"':'')+'>'+c.n+'</button>'; }).join('');
+  var ac=areaCounts(), cnt=ac.cnt, mx=ac.mx;
+  var byArea={}; AREAS.forEach(function(a){ byArea[a.k]=0; });
+  DRILLS.forEach(function(d){ if(byArea[d.a]!=null) byArea[d.a]++; });
+
+  /* --- 영역 타일 --- */
+  var tiles='<button type="button" data-k="all"'+(dcat==='all'?' class="on"':'')+'>'+
+      '<span class="ai">🗂️</span><span class="an">전체</span>'+
+      '<span class="ac">'+DRILLS.length+'개</span><span class="ab"></span></button>';
+  tiles+=AREAS.map(function(a){
+    var c=cnt[a.k]||0, p=mx? Math.round(c/mx*100):0, low=(mx>0 && (c===0||c/mx<0.4));
+    return '<button type="button" data-k="'+a.k+'"'+(dcat===a.k?' class="on"':'')+'>'+
+      '<span class="ai">'+(AICON[a.k]||'🏀')+'</span>'+
+      '<span class="an">'+a.n+'</span>'+
+      '<span class="ac">'+byArea[a.k]+'개</span>'+
+      '<span class="ab"><i class="'+(low?'low':'')+'" style="width:'+(mx?Math.max(p,4):0)+'%"></i></span>'+
+      '</button>'; }).join('');
+  $('dcat').innerHTML=tiles;
   [].forEach.call($('dcat').children,function(b){
     b.onclick=function(){ dcat=b.getAttribute('data-k'); renderDrills(); };
   });
+
+  var lg=$('dlegend');
+  if(lg){
+    if(!mx) lg.innerHTML='아래 막대는 <b>최근 4주에 그 영역을 얼마나 했는지</b>예요. 일지를 쓰면 채워집니다.';
+    else {
+      var gaps=AREAS.filter(function(a){ return cnt[a.k]===0 || cnt[a.k]/mx<0.4; });
+      lg.innerHTML = gaps.length
+        ? '빨간 막대 = 최근 4주에 적었던 영역 — <b>'+gaps.map(function(a){return a.n}).join(' · ')+'</b>부터 골라보세요.'
+        : '최근 4주 일곱 영역이 고르게 채워지고 있어요. 👏';
+    }
+  }
+
   var ty=DB.profile.btype||'';
-  $('tyNote').innerHTML = ty ? TYNOTE[ty] : '유형을 고르면 그 아이에게 <b>먼저 필요한 훈련</b>에 ⭐ 표시가 붙습니다.';
+  $('tyNote').innerHTML = ty ? TYNOTE[ty] : '유형을 고르면 그 아이에게 <b>먼저 필요한 훈련</b>에 ⭐ 표시가 붙고 위로 올라옵니다.';
+
   var list=DRILLS.filter(function(d){ return dcat==='all'||d.a===dcat; });
   if(ty) list=list.slice().sort(function(x,y){
     return (y.t.indexOf(ty)>=0?1:0)-(x.t.indexOf(ty)>=0?1:0); });
-  $('drillBox').innerHTML=list.map(function(d,i){
+
+  var dn=$('dnum');
+  if(dn) dn.textContent = (dcat==='all'?'전체':areaName(dcat))+' '+list.length+'개';
+
+  $('drillBox').innerHTML=list.map(function(d){
     var rec = ty && d.t.indexOf(ty)>=0;
     return '<div class="drill'+(rec?' rec':'')+'">'+
-      '<h4><span>'+esc(d.n)+'</span>'+(rec?'<span class="rb">⭐ '+ty+' 추천</span>':'')+'</h4>'+
-      '<span class="dose">'+esc(d.d)+(d.m?' · 약 '+d.m+'분':'')+'</span>'+
-      '<p>'+d.p+'</p>'+
-      (d.m?'<button class="go" data-n="'+esc(d.n)+'" data-a="'+d.a+'" data-m="'+d.m+'" data-d="'+esc(d.d)+'">＋ 오늘 일지에 넣기</button>':'')+
-      '</div>'; }).join('');
+      '<div class="dh">'+
+        '<span class="di">'+(AICON[d.a]||'🏀')+'</span>'+
+        '<span class="dt"><b>'+esc(d.n)+'</b><em>'+esc(d.d)+(d.m?' · 약 '+d.m+'분':'')+'</em></span>'+
+        (rec?'<span class="rb">⭐ 추천</span>':'')+
+        '<span class="cv">▾</span>'+
+      '</div>'+
+      '<div class="db"><p>'+d.p+'</p>'+
+        (d.m?'<button class="go" data-n="'+esc(d.n)+'" data-a="'+d.a+'" data-m="'+d.m+'" data-d="'+esc(d.d)+'">＋ 오늘 일지에 넣기</button>':'')+
+      '</div></div>'; }).join('');
+
+  [].forEach.call($('drillBox').querySelectorAll('.dh'),function(h){
+    h.onclick=function(){ h.parentNode.classList.toggle('op'); };
+  });
   [].forEach.call($('drillBox').querySelectorAll('.go'),function(b){
-    b.onclick=function(){
+    b.onclick=function(e){
+      e.stopPropagation();
       var t=$('f_detail');
       var line=b.getAttribute('data-n')+' — '+b.getAttribute('data-d');
       t.value=(t.value?t.value.replace(/\s*$/,'')+'\n':'')+line;
@@ -1216,7 +1408,13 @@ function renderDrills(){
       toast('오늘 일지에 넣었어요.');
     };
   });
+  renderCaps();
 }
+function drillsAll(open){
+  [].forEach.call(document.querySelectorAll('#drillBox .drill'),function(d){ d.classList.toggle('op',!!open); });
+}
+if($('dOpenAll')) $('dOpenAll').onclick=function(){ drillsAll(true); };
+if($('dCloseAll')) $('dCloseAll').onclick=function(){ drillsAll(false); };
 $('p_btype').onchange=function(){ DB.profile.btype=this.value; save(); renderDrills(); };
 
 /* ---------------- 균형 · 부족한 영역 ---------------- */
@@ -1344,12 +1542,73 @@ function renderStat(){
 }
 
 /* ---------------- settings ---------------- */
-$('p_name').value=DB.profile.name||''; $('p_num').value=DB.profile.num||'';
-$('p_name').oninput=function(){ DB.profile.name=this.value; save(); };
+function kidLabel(id,i){
+  var n=(DB.kids[id].profile||{}).name||'';
+  return n || (DB.order.length>1 ? '아이 '+(i+1) : '우리 아이');
+}
+function renderKids(){
+  var h='';
+  DB.order.forEach(function(id,i){
+    h+='<button data-k="'+id+'"'+(id===DB.cur?' class="on"':'')+'>'+esc(kidLabel(id,i))+'</button>';
+  });
+  h+='<button class="add" data-k="+">＋ 아이 추가</button>';
+  $('kidBar').innerHTML=h;
+  [].forEach.call($('kidBar').children,function(b){
+    b.onclick=function(){
+      var k=b.getAttribute('data-k');
+      if(k==='+') return addKid();
+      if(k===DB.cur) return;
+      switchKid(k);
+    };
+  });
+}
+function syncProf(){
+  $('p_name').value=DB.profile.name||'';
+  $('p_num').value=DB.profile.num||'';
+  $('p_age').value=String(DB.profile.age||'9');
+  $('p_btype').value=DB.profile.btype||'';
+}
+function refreshAll(){
+  clearForm(false); syncProf(); renderKids();
+  renderDrills(); renderList(); renderStat(); quota();
+}
+function dirty(){ return fdirty; }
+function switchKid(k){
+  var go2=function(){ DB.cur=k; save(); refreshAll(); go('write'); window.scrollTo(0,0);
+    toast(kidLabel(k,DB.order.indexOf(k))+' 기록으로 바꿨어요.'); };
+  if(dirty()) confirmSheet('저장하지 않은 내용이 있어요','지금 쓰던 일지는 사라집니다. 그래도 아이를 바꿀까요?','바꾸기',go2);
+  else go2();
+}
+function addKid(){
+  if(DB.order.length>=6) return toast('아이는 6명까지 만들 수 있어요.');
+  var mk=function(){ var id=kidId(); DB.kids[id]={profile:newKid(),entries:{}};
+    DB.order.push(id); DB.cur=id; save(); refreshAll(); go('set'); window.scrollTo(0,0);
+    toast('아이를 추가했어요. 이름을 적어주세요.'); };
+  if(dirty()) confirmSheet('저장하지 않은 내용이 있어요','지금 쓰던 일지는 사라집니다. 그래도 추가할까요?','추가',mk);
+  else mk();
+}
+$('btnAddKid').onclick=addKid;
+$('btnDelKid').onclick=function(){
+  if(DB.order.length<2) return toast('아이가 한 명일 때는 지울 수 없어요. 전체 삭제를 쓰세요.');
+  var id=DB.cur, nm=kidLabel(id,DB.order.indexOf(id));
+  confirmSheet(nm+' 기록을 지울까요?','이 아이의 일지·사진·영상이 모두 사라지고 되돌릴 수 없습니다. 다른 아이의 기록은 그대로 남아요.','지우기',function(){
+    Object.keys(DB.kids[id].entries).forEach(function(k){
+      (DB.kids[id].entries[k].media||[]).forEach(function(m){ mDel(m.id); }); });
+    delete DB.kids[id]; DB.order=DB.order.filter(function(x){ return x!==id; });
+    DB.cur=DB.order[0]; save(); refreshAll(); toast(nm+' 기록을 지웠어요.');
+  });
+};
+
+['input','change'].forEach(function(ev){
+  $('v-write').addEventListener(ev,touch,true);
+});
+$('stCond').addEventListener('click',touch,true);
+$('stNutr').addEventListener('click',touch,true);
+
+syncProf();
+$('p_name').oninput=function(){ DB.profile.name=this.value; save(); renderKids(); };
 $('p_num').oninput=function(){ DB.profile.num=this.value; save(); };
-$('p_age').value=String(DB.profile.age||'9');
-$('p_age').onchange=function(){ DB.profile.age=this.value; save(); writeGauge(); renderStat(); };
-$('p_btype').value=DB.profile.btype||'';
+$('p_age').onchange=function(){ DB.profile.age=this.value; save(); writeGauge(); renderStat(); renderCaps(); };
 function closeMv(){ var o=$('mvOv'); o.classList.remove('on'); o.querySelector('.mv').innerHTML=''; }
 $('mvOv').onclick=closeMv;
 $('mvX').onclick=function(e){ e.stopPropagation(); closeMv(); };
@@ -1370,22 +1629,36 @@ $('fileIn').onchange=function(){
   r.onload=function(){
     try{
       var o=JSON.parse(r.result);
-      if(!o||!o.entries) throw 0;
-      var add=0;
-      Object.keys(o.entries).forEach(function(k){ if(!DB.entries[k]){ DB.entries[k]=o.entries[k]; add++; } });
-      if(o.profile&&!DB.profile.name) DB.profile=o.profile;
-      save(); $('p_name').value=DB.profile.name||''; $('p_num').value=DB.profile.num||'';
-      renderList(); renderStat();
-      toast(add+'개의 기록을 불러왔어요.');
+      if(!o||(!o.entries&&!o.kids)) throw 0;
+      var add=0, made=0;
+      var merge=function(tid,src){
+        Object.keys(src).forEach(function(k){ if(!DB.kids[tid].entries[k]){ DB.kids[tid].entries[k]=src[k]; add++; } });
+      };
+      if(o.kids){
+        (o.order||Object.keys(o.kids)).forEach(function(kk){
+          var src=o.kids[kk]; if(!src||!src.entries) return;
+          var nm=((src.profile||{}).name||''), tid=null;
+          DB.order.forEach(function(x){ if(!tid && ((DB.kids[x].profile||{}).name||'')===nm) tid=x; });
+          if(!tid){ tid=kidId(); DB.kids[tid]={profile:src.profile||newKid(),entries:{}}; DB.order.push(tid); made++; }
+          merge(tid,src.entries);
+        });
+      }else{
+        merge(DB.cur,o.entries);
+        if(o.profile&&!DB.profile.name) DB.profile=o.profile;
+      }
+      save(); refreshAll();
+      toast(add+'개의 기록을 불러왔어요.'+(made?' (아이 '+made+'명 추가)':''));
     }catch(e){ toast('백업 파일 형식이 아니에요.'); }
   };
   r.readAsText(f); this.value='';
 };
 $('btnWipe').onclick=function(){
-  confirmSheet('정말 모두 지울까요?','모든 일지가 사라지고 되돌릴 수 없습니다. 백업부터 받아주세요.','전부 삭제',function(){
+  var nm=kidLabel(DB.cur,DB.order.indexOf(DB.cur));
+  confirmSheet('정말 모두 지울까요?',nm+'의 일지가 모두 사라지고 되돌릴 수 없습니다.'+
+    (DB.order.length>1?' 다른 아이의 기록은 그대로 남아요.':'')+' 백업부터 받아주세요.','전부 삭제',function(){
     Object.keys(DB.entries).forEach(function(k){ (DB.entries[k].media||[]).forEach(function(m){ mDel(m.id); }); });
-    DB={v:1,profile:DB.profile,entries:{}}; save(); clearForm(false);
-    renderList(); renderStat(); quota(); toast('모든 기록을 지웠어요.');
+    DB.kids[DB.cur].entries={}; save(); clearForm(false);
+    renderList(); renderStat(); quota(); toast(nm+'의 기록을 지웠어요.');
   });
 };
 
@@ -1410,11 +1683,12 @@ redraw();
 renderAreas();
 renderMedia();
 renderDrills();
+renderKids();
 writeGauge();
 renderList();
 renderStat();
 quota();
-window.__sky={DB:function(){return DB},go:go,fill:fill,strokes:function(){return strokes}};
+window.__sky={DB:function(){return DB},go:go,fill:fill,strokes:function(){return strokes},kid:switchKid,add:addKid,save:function(){return save()},refresh:function(){refreshAll()}};
 })();
 </script>
 </body>
