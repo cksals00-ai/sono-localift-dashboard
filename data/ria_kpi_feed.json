@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-04T07:19:36+09:00",
+    "updated_at": "2026-08-04T12:49:41+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -210,7 +210,7 @@
       "title": "You only get one. The sky you came fro…",
       "format": "Image",
       "url": "https://www.instagram.com/p/DbhZSDUAALh/",
-      "views": 21,
+      "views": 22,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -227,7 +227,7 @@
       "likes": 0,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 12.5,
+      "avg_watch_sec": 12.3,
       "duration_sec": null,
       "retention_pct": null
     },
@@ -249,7 +249,7 @@
       "title": "we planned nothing. it turned out to b…",
       "format": "Carousel",
       "url": "https://www.instagram.com/p/Dbfn2FtGwv9/",
-      "views": 101,
+      "views": 106,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -412,8 +412,8 @@
     "media_count": 37,
     "baseline_followers": 931,
     "day": {
-      "reach": 71,
-      "views": 102,
+      "reach": 74,
+      "views": 105,
       "profile_views": 0,
       "interactions": 4
     },
@@ -424,8 +424,8 @@
       "saves": 14,
       "comments": 8,
       "shares": 6,
-      "reach": 1544,
-      "views": 1903
+      "reach": 1545,
+      "views": 1909
     },
     "engagement_rate_pct": 1.81,
     "retention": {
@@ -439,7 +439,7 @@
           "date": "2026-08-02",
           "title": "He hid her clothes so she couldn't fly…",
           "retention_pct": null,
-          "avg_watch_sec": 12.5,
+          "avg_watch_sec": 12.3,
           "duration_sec": null
         },
         {
