@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-04T12:49:41+09:00",
+    "updated_at": "2026-08-05T00:01:55+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -122,7 +122,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 296,
+        "actual": 297,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -154,7 +154,7 @@
       {
         "label": "팔로워 순증 (참고)",
         "target": null,
-        "actual": 13,
+        "actual": 12,
         "unit": "명",
         "note": "참고 지표. 관리 지표가 아니다 — 0730 v2 는 도달·팔로워·좋아요를 '원인이 아니라 결과'로 규정했다. 목표 자리에 두지 않는다.",
         "pending": false
@@ -210,7 +210,7 @@
       "title": "You only get one. The sky you came fro…",
       "format": "Image",
       "url": "https://www.instagram.com/p/DbhZSDUAALh/",
-      "views": 22,
+      "views": 24,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -223,11 +223,11 @@
       "title": "He hid her clothes so she couldn't fly…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbhS8XQEpZB/",
-      "views": 57,
+      "views": 58,
       "likes": 0,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 12.3,
+      "avg_watch_sec": 12.1,
       "duration_sec": null,
       "retention_pct": null
     },
@@ -236,7 +236,7 @@
       "title": "Four things a desk does to your body. …",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbhK4ZeE2kf/",
-      "views": 121,
+      "views": 122,
       "likes": 0,
       "comments": 1,
       "saves": 2,
@@ -249,7 +249,7 @@
       "title": "we planned nothing. it turned out to b…",
       "format": "Carousel",
       "url": "https://www.instagram.com/p/Dbfn2FtGwv9/",
-      "views": 106,
+      "views": 111,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -262,7 +262,7 @@
       "title": "I sit at a desk all day and my shoulde…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbfWk9xINe2/",
-      "views": 1206,
+      "views": 1207,
       "likes": 11,
       "comments": 1,
       "saves": 12,
@@ -275,7 +275,7 @@
       "title": "Nobody in this reel says \"I love you.\"…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/Dba8ITVj_mq/",
-      "views": 141,
+      "views": 142,
       "likes": 4,
       "comments": 1,
       "saves": 0,
@@ -408,26 +408,26 @@
   },
   "measured": {
     "live": true,
-    "followers": 944,
+    "followers": 943,
     "media_count": 37,
     "baseline_followers": 931,
     "day": {
-      "reach": 74,
-      "views": 105,
-      "profile_views": 0,
-      "interactions": 4
+      "reach": 17,
+      "views": 35,
+      "profile_views": 1,
+      "interactions": 0
     },
     "week": {
       "posts": 8,
       "reels": 6,
-      "reel_avg_views": 296,
+      "reel_avg_views": 297,
       "saves": 14,
       "comments": 8,
       "shares": 6,
-      "reach": 1545,
-      "views": 1909
+      "reach": 1556,
+      "views": 1920
     },
-    "engagement_rate_pct": 1.81,
+    "engagement_rate_pct": 1.8,
     "retention": {
       "window": 5,
       "pass_threshold_pct": 40.0,
@@ -439,7 +439,7 @@
           "date": "2026-08-02",
           "title": "He hid her clothes so she couldn't fly…",
           "retention_pct": null,
-          "avg_watch_sec": 12.3,
+          "avg_watch_sec": 12.1,
           "duration_sec": null
         },
         {
