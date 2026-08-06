@@ -55,6 +55,7 @@ BASE = "https://graph.facebook.com/%s" % VER
 HIST_MAX = 400          # 하루 2회 × 약 6개월
 MEDIA_LIMIT = 25        # 최근 게시물 조회 개수
 WEEK_DAYS = 7
+POST_GAP_ALERT_H = 36   # 마지막 게시 후 36시간 초과 = 게시 중단 경보
 
 
 def log(msg):
@@ -113,6 +114,94 @@ def insights(path, metric_sets, period=None):
     return {}
 
 
+HOME_COUNTRY = os.environ.get("RIA_HOME_COUNTRY", "KR").strip().upper()
+
+
+def demographics():
+    """
+    팔로워 국가 분포를 얻는다. 반환: {국가코드: 팔로워수}. 실패하면 {}.
+
+    v21 이후는 follower_demographics(metric_type=total_value, breakdown=country),
+    구버전은 audience_country(period=lifetime) 다. 응답 구조가 서로 달라 둘 다 파싱한다.
+    실패해도 예외를 던지지 않는다 — 설계 원칙 2(피드를 깨뜨리지 않는다).
+    """
+    # 1) 신형: follower_demographics + breakdown=country
+    res = api(
+        "%s/insights" % IG_USER,
+        metric="follower_demographics",
+        period="lifetime",
+        metric_type="total_value",
+        breakdown="country",
+    )
+    out = {}
+    if res and res.get("data"):
+        for row in res["data"]:
+            tv = row.get("total_value") or {}
+            for bd in tv.get("breakdowns") or []:
+                for item in bd.get("results") or []:
+                    dims = item.get("dimension_values") or []
+                    if not dims:
+                        continue
+                    try:
+                        out[str(dims[0]).upper()] = int(item.get("value") or 0)
+                    except Exception:
+                        continue
+    if out:
+        return out
+
+    # 2) 구형: audience_country
+    res = api("%s/insights" % IG_USER, metric="audience_country", period="lifetime")
+    if res and res.get("data"):
+        for row in res["data"]:
+            vals = row.get("values") or []
+            if not vals:
+                continue
+            v = vals[-1].get("value")
+            if isinstance(v, dict):
+                for cc, cnt in v.items():
+                    try:
+                        out[str(cc).upper()] = int(cnt or 0)
+                    except Exception:
+                        continue
+    return out
+
+
+def audience_split(by_country):
+    """
+    국가 분포 → 국내/해외 요약. 측정이 안 되면 measurable=False 로 둔다.
+    측정값이 없는데 0% 라고 적지 않는다 — 그건 사실이 아니라 공백이다.
+    """
+    if not by_country:
+        return {
+            "measurable": False,
+            "by_country": {},
+            "home_country": HOME_COUNTRY,
+            "home_followers": None,
+            "foreign_followers": None,
+            "foreign_pct": None,
+            "top_foreign": [],
+            "counted": 0,
+        }
+    total = sum(by_country.values())
+    home = int(by_country.get(HOME_COUNTRY, 0))
+    foreign = total - home
+    top = sorted(
+        ((cc, n) for cc, n in by_country.items() if cc != HOME_COUNTRY),
+        key=lambda kv: kv[1],
+        reverse=True,
+    )[:10]
+    return {
+        "measurable": True,
+        "by_country": dict(sorted(by_country.items(), key=lambda kv: kv[1], reverse=True)),
+        "home_country": HOME_COUNTRY,
+        "home_followers": home,
+        "foreign_followers": foreign,
+        "foreign_pct": round(foreign / total * 100, 1) if total else None,
+        "top_foreign": [{"country": cc, "followers": n} for cc, n in top],
+        "counted": total,
+    }
+
+
 def watch_time_ms(media_id, probe, plays=None):
     """
     릴 평균 시청시간(ms)을 얻는다. 없으면 None.
@@ -162,6 +251,14 @@ def collect():
         ],
         period="day",
     )
+
+    aud = audience_split(demographics())
+    if aud["measurable"]:
+        log("팔로워 국가 분포 수집 성공 — 해외 %s%% (%s/%s)"
+            % (aud["foreign_pct"], aud["foreign_followers"], aud["counted"]))
+    else:
+        log("팔로워 국가 분포 미수집 — 권한(instagram_manage_insights) 또는 "
+            "팔로워 100명 미만 제한일 수 있다. 해외 비중은 공백으로 둔다.")
 
     media = []
     res = api(
@@ -237,8 +334,11 @@ def collect():
         "views_day": int(acct.get("views") or acct.get("impressions") or 0),
         "profile_views_day": int(acct.get("profile_views") or 0),
         "interactions_day": int(acct.get("total_interactions") or 0),
+        "foreign_followers": aud["foreign_followers"],
+        "foreign_pct": aud["foreign_pct"],
     }
-    return {"profile": prof, "snapshot": snap, "media": media, "probe": probe}
+    return {"profile": prof, "snapshot": snap, "media": media, "probe": probe,
+            "audience": aud}
 
 
 def fmt_label(m):
@@ -304,9 +404,25 @@ def retention_view(media):
     }
 
 
+def hours_since_last_post(media):
+    """마지막 게시 이후 경과 시간(h). 게시가 멈춘 것을 숫자로 잡기 위한 지표다."""
+    ts_list = []
+    for m in media:
+        try:
+            ts_list.append(datetime.fromisoformat(m["ts"].replace("+0000", "+00:00")))
+        except Exception:
+            continue
+    if not ts_list:
+        return None
+    delta = datetime.now(timezone.utc) - max(ts_list)
+    return round(delta.total_seconds() / 3600.0, 1)
+
+
 # label → 측정값 계산 함수. 여기 없는 label은 사람이 관리하는 값이므로 손대지 않는다.
-def kpi_actuals(followers, wk, ret):
+def kpi_actuals(followers, wk, ret, snap=None, aud=None, gap_h=None):
     net = followers - BASELINE_FOLLOWERS
+    snap = snap or {}
+    aud = aud or {}
     return {
         "직전 5개 중 리텐션 40% 이상": ret["pass_count"],
         "팔로워 순증 (참고)": net,
@@ -316,6 +432,12 @@ def kpi_actuals(followers, wk, ret):
         "주간 저장수": wk["saves"],
         "주간 댓글수": wk["comments"],
         "저장수 (주)": wk["saves"],
+        # --- 0806 v3: 팔로워 수 목표 폐기 후 들어온 관리 축 ---
+        "주간 게시 건수": wk["posts"],
+        "일일 도달": snap.get("reach_day"),
+        "마지막 게시 후 경과 (시간)": gap_h,
+        "해외 팔로워 비중 (%)": aud.get("foreign_pct"),
+        "해외 팔로워 수": aud.get("foreign_followers"),
     }
 
 
@@ -356,7 +478,9 @@ def main():
     followers = got["snapshot"]["followers"]
     wk = weekly(got["media"])
     ret = retention_view(got["media"])
-    acts = kpi_actuals(followers, wk, ret)
+    aud = got.get("audience") or {}
+    gap_h = hours_since_last_post(got["media"])
+    acts = kpi_actuals(followers, wk, ret, got["snapshot"], aud, gap_h)
 
     # --- kpi.actual 갱신 (label 매칭된 것만. target/note/편집문구는 보존) ---
     updated = 0
@@ -402,7 +526,17 @@ def main():
         "retention": ret,
         # 이 지표가 현재 권한으로 실제로 나오는지를 매 실행마다 기록한다.
         "retention_probe": got.get("probe"),
+        # 0806 v3: 게시 무결성. 팔로워 감소의 원인은 게시 중단이었다.
+        "posting": {
+            "hours_since_last_post": gap_h,
+            "alert_threshold_h": POST_GAP_ALERT_H,
+            "stalled": (gap_h is not None and gap_h > POST_GAP_ALERT_H),
+            "week_posts": wk["posts"],
+        },
     }
+
+    # --- 0806 v3: 팔로워 국가 분포 (외국인 팔로워 관리 축) ---
+    feed["audience"] = aud
 
     # --- 주간 진행 현황: 게시 실적만 실데이터로 ---
     prog = feed.get("progress")
@@ -417,7 +551,7 @@ def main():
     meta["updated_at"] = got["snapshot"]["at"]
     meta["owner"] = "리아 (@%s)" % got["profile"].get("username", "lia_park55")
     meta["source"] = "Instagram Graph API %s 자동 수집 (GitHub Actions)" % VER
-    meta["schema_version"] = "0.4"
+    meta["schema_version"] = "0.5"
     meta["note"] = ("전략 블록은 사람이 관리하는 편집 데이터이며 자동수집이 덮어쓰지 않는다. "
                     "KPI actual·콘텐츠 성과·측정 블록은 IG Graph API 실값이다. "
                     "리텐션은 평균 시청시간 ÷ 영상 길이이며, 계산은 수집기 한 곳에서만 한다. "
@@ -432,7 +566,9 @@ def main():
                       week_reel_avg_views=wk["reel_avg_views"],
                       retention_pass_count=ret["pass_count"],
                       retention_measurable=ret["measurable"],
-                      retention_unmeasurable=ret["unmeasurable"]))
+                      retention_unmeasurable=ret["unmeasurable"],
+                      week_posts=wk["posts"],
+                      hours_since_last_post=gap_h))
     hist["snapshots"] = snaps[-HIST_MAX:]
     hist["updated_at"] = got["snapshot"]["at"]
     atomic_write(HIST, hist)

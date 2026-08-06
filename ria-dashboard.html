@@ -195,7 +195,16 @@
     html += '<section class="card full"><h2><span class="tag">⊙</span>실측 요약 · 추세'
          + (auto ? '<span class="bdg live">AUTO</span>' : '<span class="bdg sample">연결 대기</span>') + '</h2>';
     if(auto){
-      var dy = ms.day||{}, wk = ms.week||{}, rt = ms.retention||{};
+      var dy = ms.day||{}, wk = ms.week||{}, rt = ms.retention||{}, po = ms.posting||{};
+      // 게시 중단 경보 — 8/2 이후 나흘간 게시 0건이 되자 일일 도달이 1,189 → 12 로 떨어졌다.
+      // 그 나흘을 아무도 모르고 지나갔기 때문에 이 배너를 맨 위에 세운다.
+      if(po.stalled){
+        html += '<div style="margin:10px 0;padding:12px 14px;border:1px solid #E06C6C;border-radius:8px;'
+             + 'background:rgba(224,108,108,.10);color:#E06C6C;font-weight:700">'
+             + '⚠ 게시 중단 ' + nf(po.hours_since_last_post) + '시간째 '
+             + '<span style="font-weight:400;color:var(--dim)">(경보 기준 ' + nf(po.alert_threshold_h) + '시간). '
+             + '올리지 않으면 도달이 먼저 빠지고 팔로워는 그 다음에 빠집니다.</span></div>';
+      }
       html += '<div class="sub">Instagram Graph API 자동 수집 · 1일 2회(09:30 / 21:30 KST) 갱신 · 주간은 최근 7일 게시물 기준</div>';
       html += '<div class="sub" style="margin-top:6px"><b>관리 지표는 리텐션 하나입니다</b> — 리텐션 = 평균 시청시간 ÷ 영상 길이. '
            + '아래 도달·조회·팔로워는 <b>원인이 아니라 결과</b>이며 목표가 아닙니다. 초 단위 비교는 노이즈입니다.</div>';
@@ -211,7 +220,10 @@
        ['주간 댓글', wk.comments, '개'],
        ['주간 공유', wk.shares, '회'],
        ['릴 평균 조회', wk.reel_avg_views, '회'],
-       ['참여율', ms.engagement_rate_pct, '%']
+       ['참여율', ms.engagement_rate_pct, '%'],
+       ['마지막 게시 후', po.hours_since_last_post, '시간 / 기준 36'],
+       ['해외 팔로워', (d.audience||{}).foreign_followers, '명'],
+       ['해외 비중', (d.audience||{}).foreign_pct, '%']
       ].forEach(function(t){
         var v = (t[1]==null) ? '—' : nf(t[1]);
         html += '<div class="kpi"><div class="kl">'+esc(t[0])+'</div>'
@@ -220,6 +232,22 @@
       html += '</div>';
       html += '<div class="slbl">팔로워 추세</div>' + spark('followers', '#57C4B4');
       html += '<div class="slbl">주간 저장수 추세</div>' + spark('week_saves', '#C9A96A');
+      // 국가별 분포 — 측정이 안 되면 0% 라고 적지 않고 '미측정'이라고 적는다.
+      var au = d.audience||{};
+      html += '<div class="slbl">팔로워 국가 분포</div>';
+      if(au.measurable && (au.top_foreign||[]).length){
+        html += '<div class="sub">국내(' + esc(au.home_country||'KR') + ') ' + nf(au.home_followers)
+             + '명 · 해외 ' + nf(au.foreign_followers) + '명 (' + nf(au.foreign_pct) + '%) · 집계 ' + nf(au.counted) + '명</div>';
+        html += '<div class="kpis">';
+        au.top_foreign.slice(0,6).forEach(function(r){
+          html += '<div class="kpi"><div class="kl">' + esc(r.country) + '</div><div class="kv">' + nf(r.followers) + ' <span style="font-size:12px;color:var(--dim)">명</span></div></div>';
+        });
+        html += '</div>';
+      } else {
+        html += '<div class="sub">아직 미측정입니다. 국가별 계측은 2026-08-06 에 수집기에 추가했고 다음 실행부터 채워집니다. '
+             + '값이 계속 비면 <code>instagram_manage_insights</code> 권한 또는 팔로워 100명 미만 제한 때문입니다. '
+             + '<b>측정되지 않은 것을 0% 로 적지 않습니다.</b></div>';
+      }
     } else {
       html += '<div class="sub">IG Graph API 토큰이 아직 등록되지 않았습니다. 아래 KPI·콘텐츠 수치는 사람이 입력한 값이며, '
            + '토큰 등록(GitHub Secrets <code>IG_ACCESS_TOKEN</code> + Variables <code>IG_USER_ID</code>) 즉시 이 카드가 자동값으로 채워지고 '
@@ -308,13 +336,17 @@
         if(k.pending || k.actual==null || k.target==null){
           h += '<div class="kpi pend"><div class="kl">'+esc(k.label)+'</div>'
             +'<div class="kv" style="font-size:14px">'+(k.actual!=null?nf(k.actual):'—')+' <span style="font-size:12px;color:var(--dim)">/ '+(k.target!=null?nf(k.target)+' '+esc(k.unit||''):'목표 미확정')+'</span></div>'
-            +'<div class="kpend">'+((k.actual!=null&&k.target==null)?'참고 지표 (목표 아님)':'측정 대기')+'</div>'
+            +'<div class="kpend">'+(k.target_pending?'목표 미확정 (첫 실측 후 설정)':((k.actual!=null&&k.target==null)?'참고 지표 (목표 아님)':'측정 대기'))+'</div>'
             +(k.note?'<div class="knote">'+esc(k.note)+'</div>':'')+'</div>';
         } else {
-          var p = pct(k.actual, k.target);
+          // 작을수록 좋은 지표(예: 마지막 게시 후 경과 시간)는 달성률을 뒤집는다.
+          // 뒤집지 않으면 48시간/36시간 = 133% 가 '초과 달성'으로 초록색이 되어
+          // 게시가 멈춘 상태를 잘한 것처럼 보이게 만든다.
+          var low = (k.direction === 'lower_is_better');
+          var p = low ? pct(k.target, k.actual) : pct(k.actual, k.target);
           h += '<div class="kpi"><div class="kl">'+esc(k.label)+'</div>'
-            +'<div class="kv">'+nf(k.actual)+' <span style="font-size:12px;color:var(--dim)">/ '+nf(k.target)+' '+esc(k.unit||'')+'</span></div>'
-            +'<div class="kt">달성률 '+p+'%</div>'
+            +'<div class="kv">'+nf(k.actual)+' <span style="font-size:12px;color:var(--dim)">/ '+(low?'≤ ':'')+nf(k.target)+' '+esc(k.unit||'')+'</span></div>'
+            +'<div class="kt">'+(low?(k.actual<=k.target?'기준 이내':'기준 초과'):'달성률 '+p+'%')+'</div>'
             +'<div class="kbar"><i class="'+(p>=100?'over':'')+'" style="width:'+Math.min(p,100)+'%"></i></div>'
             +(k.note?'<div class="knote">'+esc(k.note)+'</div>':'')+'</div>';
         }
