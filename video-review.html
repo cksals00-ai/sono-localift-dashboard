@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>영상 검수실 · A.P LocaLift</title>
+<!-- 접근 제어: admin 역할만 열람. 미로그인/권한없음 → login.html -->
+<meta name="auth-required" content="admin">
+<script src="./js/auth.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#070A10; --panel:#111725; --panel2:#0D131F; --line:#1E2738;
+    --ink:#eef2f6; --sub:#9aa7b4; --dim:#6b7885;
+    --gold:#C9A96A; --gold2:#E7CE96; --mint:#57C4B4; --wip:#E0A63C; --red:#ff6b6b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter','Malgun Gothic',-apple-system,"Apple SD Gothic Neo",sans-serif;line-height:1.6;word-break:keep-all}
+  a{color:inherit}
+  .siteNav{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(7,10,16,.82);border-bottom:1px solid var(--line)}
+  .nvIn{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
+  .nvBrand{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-weight:800}
+  .nvBrand b{color:var(--gold2)}
+  .nvTabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s;white-space:nowrap}
+  .nvTabs a:hover{color:var(--ink);border-color:var(--line)}
+  .nvTabs a.on{color:#070A10;background:var(--gold);border-color:var(--gold);font-weight:700}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px 80px}
+  .head{padding:clamp(28px,5vh,52px) 0 6px}
+  .head .k{font-family:ui-monospace,monospace;letter-spacing:.3em;text-transform:uppercase;font-size:11px;color:var(--gold)}
+  .head h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(28px,5vw,48px);margin:10px 0 8px}
+  .head p{color:var(--sub);font-size:14px;max-width:74ch}
+  .notice{margin:16px 0 0;padding:11px 14px;border:1px solid var(--line);border-left:3px solid var(--wip);border-radius:8px;background:rgba(224,166,60,.06);color:var(--sub);font-size:12.5px}
+  .notice b{color:var(--wip)}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:16px}
+  .card h2{font-size:15px;display:flex;align-items:center;gap:9px;margin-bottom:4px}
+  .card h2 .tag{font-family:ui-monospace,monospace;font-size:10px;color:#070A10;background:var(--gold2);border-radius:6px;padding:2px 8px;font-weight:800}
+  .card .sub{color:var(--dim);font-size:12px;margin-bottom:14px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  label.fl{font-size:11.5px;color:var(--dim);display:block;margin-bottom:4px;letter-spacing:.04em}
+  input[type=text],input[type=number],select,textarea{
+    background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:9px;
+    padding:9px 11px;font-size:13px;font-family:inherit;outline:none;width:100%}
+  input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+  textarea{resize:vertical;min-height:74px;line-height:1.55}
+  .btn{background:var(--panel2);border:1px solid var(--line);color:var(--ink);border-radius:9px;
+    padding:9px 14px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit;transition:.15s;white-space:nowrap}
+  .btn:hover{border-color:var(--gold);color:var(--gold2)}
+  .btn.primary{background:var(--gold);border-color:var(--gold);color:#070A10;font-weight:800}
+  .btn.primary:hover{background:var(--gold2);color:#070A10}
+  .btn.mini{padding:6px 10px;font-size:11.5px}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+  .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  /* 플레이어 */
+  .stage{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;margin-top:16px;align-items:start}
+  @media(max-width:1000px){.stage{grid-template-columns:1fr}}
+  .vwrap{background:#000;border:1px solid var(--line);border-radius:12px;overflow:hidden;position:relative}
+  video{display:block;width:100%;max-height:64vh;background:#000}
+  .vempty{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;
+    color:var(--dim);font-size:13px;text-align:center;padding:24px}
+  .tcbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--sub)}
+  .tcnow{font-size:19px;font-weight:800;color:var(--gold2);letter-spacing:.02em}
+  .keys{margin-top:8px;font-size:11px;color:var(--dim);line-height:1.9}
+  .keys kbd{background:var(--panel2);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;font-family:ui-monospace,monospace;font-size:10.5px;color:var(--sub)}
+  /* 지적 목록 */
+  .stat{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+  .stat div{border:1px solid var(--line);border-radius:10px;padding:9px 10px}
+  .stat .sl{font-size:11px;color:var(--dim)}
+  .stat .sv{font-size:17px;font-weight:800;font-family:ui-monospace,monospace;margin-top:2px}
+  .list{max-height:52vh;overflow:auto;padding-right:4px}
+  .item{border:1px solid var(--line);border-radius:11px;padding:11px 12px;margin-bottom:8px;background:var(--panel2);transition:.15s}
+  .item:hover{border-color:#2b3752}
+  .item.done{opacity:.5}
+  .ihead{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:11.5px}
+  .ihead .jump{cursor:pointer;color:var(--gold2);font-weight:800;font-family:ui-monospace,monospace;font-size:13px;
+    background:none;border:none;padding:0;text-decoration:underline;text-underline-offset:3px}
+  .chip{border-radius:999px;padding:2px 9px;font-size:10px;font-weight:800;letter-spacing:.04em;border:1px solid var(--line);color:var(--sub)}
+  .chip.sev1{background:rgba(255,107,107,.15);color:#ff8f8f;border-color:#5c2b2b}
+  .chip.sev2{background:rgba(224,166,60,.15);color:var(--wip);border-color:#5c4520}
+  .chip.sev3{background:rgba(87,196,180,.12);color:var(--mint);border-color:#1f4a45}
+  .ibody{font-size:13px;margin-top:7px;white-space:pre-wrap;line-height:1.6}
+  .ifoot{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:9px;font-size:11px;color:var(--dim)}
+  .empty{color:var(--dim);font-size:13px;text-align:center;padding:34px 12px;border:1px dashed var(--line);border-radius:11px}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}
+  .out{width:100%;min-height:230px;font-family:ui-monospace,monospace;font-size:11.5px}
+  .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:var(--gold);color:#070A10;
+    font-weight:800;font-size:13px;padding:10px 20px;border-radius:999px;opacity:0;pointer-events:none;transition:.2s;z-index:300}
+  .toast.on{opacity:1}
+  .foot{margin-top:26px;color:var(--dim);font-size:11.5px;border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+
+<nav class="siteNav">
+  <div class="nvIn">
+    <a class="nvBrand" href="index.html">A.P <b>LocaLift</b></a>
+    <div class="nvTabs">
+      <a href="index.html" data-p="index">임팩트</a>
+      <a href="content.html" data-p="content">콘텐츠 엔진</a>
+      <a href="skygunners-ria.html" data-p="skygunners-ria">스포츠 마케팅</a>
+      <a href="about.html" data-p="about">회사 소개</a>
+      <a href="ir.html" data-p="ir">IR</a>
+      <a id="navDeliverables" href="deliverables.html" data-p="deliverables" style="display:none">산출물</a>
+      <a id="navRiaDash" href="ria-dashboard.html" data-p="ria" style="display:none">리아 대시보드</a>
+      <a id="navActionBoard" href="action-board.html" data-p="action" style="display:none">액션보드</a>
+      <a class="on" href="video-review.html" data-p="review">영상 검수실</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <div class="head">
+    <div class="k">Video Review Room</div>
+    <h1>영상 검수실</h1>
+    <p>영상을 걸어두고, 보면서 그 자리에서 수정사항을 적습니다. 적힌 것은 타임코드 순으로 정렬되어 감독에게 넘길 표 한 장으로 나옵니다.
+       말로 주고받으면 "그 부분"이 어디인지 매번 다시 찾아야 합니다. 여기서는 숫자로 남습니다.</p>
+    <div class="notice">
+      <b>내부 전용.</b> 이 페이지는 admin 로그인이 있어야 열립니다. 검수 중인 컷은 승인 전까지 외부 공유·납품하지 않습니다.
+      · <b>저장 위치:</b> 지적 사항은 <u>이 브라우저에만</u> 저장됩니다(서버 없음). 다른 사람에게 넘기려면 아래 <b>내보내기</b>를 쓰십시오.
+    </div>
+  </div>
+
+  <!-- 1. 영상 걸기 -->
+  <div class="card">
+    <h2><span class="tag">STEP 1</span> 영상 걸기</h2>
+    <div class="sub">감독님이 준 파일이면 <b>파일 선택</b>(업로드되지 않고 이 브라우저에서만 재생됩니다), 링크면 <b>주소 넣기</b>.
+      주소로 걸면 이 페이지 URL 뒤에 <span class="mono">?src=…</span> 가 붙어 그대로 공유할 수 있습니다.</div>
+    <div class="row" style="gap:10px">
+      <div style="flex:1 1 380px">
+        <label class="fl">영상 주소 (mp4 직링크)</label>
+        <input type="text" id="srcUrl" placeholder="https://… .mp4">
+      </div>
+      <div style="flex:0 0 auto;align-self:flex-end;display:flex;gap:8px">
+        <button class="btn primary" id="loadUrl">주소로 걸기</button>
+        <button class="btn" id="pickFile">파일 선택</button>
+        <input type="file" id="fileIn" accept="video/*" style="display:none">
+      </div>
+    </div>
+    <div class="g3" style="margin-top:12px">
+      <div><label class="fl">작품 / 회차 이름</label><input type="text" id="title" placeholder="예: MV2 1차 편집본"></div>
+      <div><label class="fl">프레임레이트 (fps)</label><input type="number" id="fps" value="24" min="1" max="120" step="1"></div>
+      <div><label class="fl">내 이름 (작성자)</label><input type="text" id="who" placeholder="예: 대표님 / 기획실장"></div>
+    </div>
+  </div>
+
+  <!-- 2. 보면서 적기 -->
+  <div class="stage">
+    <div>
+      <div class="vwrap">
+        <div class="vempty" id="vempty">
+          <div style="font-size:15px;color:var(--sub);font-weight:700">아직 영상이 없습니다</div>
+          <div>감독님이 파일을 주시면 위에서 걸어 주십시오.<br>영상이 걸리기 전까지 지적은 적을 수 없습니다.</div>
+        </div>
+        <video id="v" controls playsinline preload="metadata" style="display:none"></video>
+      </div>
+      <div class="tcbar">
+        <span class="tcnow mono" id="tcNow">00:00.000</span>
+        <span class="mono" id="frNow">frame —</span>
+        <span class="mono" id="durNow">/ —</span>
+        <span style="flex:1"></span>
+        <button class="btn mini" id="markIn">구간 시작 [I]</button>
+        <button class="btn mini" id="markOut">구간 끝 [O]</button>
+        <span class="mono" id="rangeNow" style="color:var(--gold2)"></span>
+        <button class="btn mini" id="clearRange">구간 해제</button>
+      </div>
+      <div class="keys">
+        <kbd>Space</kbd> 재생/정지 · <kbd>←</kbd><kbd>→</kbd> 1초 · <kbd>Shift</kbd>+<kbd>←</kbd><kbd>→</kbd> 5초 ·
+        <kbd>,</kbd><kbd>.</kbd> 1프레임 · <kbd>C</kbd> 지적 입력창으로 · <kbd>Enter</kbd>(입력창 안, Ctrl 동반) 등록
+      </div>
+    </div>
+
+    <div>
+      <div class="card" style="margin-top:0">
+        <h2><span class="tag">STEP 2</span> 수정사항 적기</h2>
+        <div class="sub">지금 보고 있는 지점이 자동으로 찍힙니다. 구간을 잡아두면 구간으로 들어갑니다.</div>
+        <div class="g2">
+          <div>
+            <label class="fl">분류</label>
+            <select id="cat">
+              <option>의상·소품</option><option>인물·얼굴</option><option>모션·동작</option>
+              <option>편집·컷</option><option>자막</option><option>사운드</option>
+              <option>색·톤</option><option>텍스트·표기</option><option>기타</option>
+            </select>
+          </div>
+          <div>
+            <label class="fl">심각도</label>
+            <select id="sev">
+              <option value="2">중대 — 고쳐야 함</option>
+              <option value="1">치명 — 이대로 못 나감</option>
+              <option value="3">경미 — 여유 되면</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-top:9px">
+          <label class="fl">내용 — 무엇이 어떻게 잘못됐고 어떻게 고칠지</label>
+          <textarea id="body" placeholder="예: 목걸이가 금색으로 보임. 은색 체인으로 교체 필요 (바이블 확정 사양)."></textarea>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <button class="btn primary" id="add">이 지점에 지적 등록</button>
+          <span class="mono" id="addAt" style="color:var(--dim);font-size:11.5px"></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><span class="tag">STEP 3</span> 정리 <span id="cnt" class="mono" style="margin-left:auto;font-size:12px;color:var(--dim)"></span></h2>
+        <div class="stat">
+          <div><div class="sl">치명</div><div class="sv" id="s1" style="color:#ff8f8f">0</div></div>
+          <div><div class="sl">중대</div><div class="sv" id="s2" style="color:var(--wip)">0</div></div>
+          <div><div class="sl">경미</div><div class="sv" id="s3" style="color:var(--mint)">0</div></div>
+          <div><div class="sl">미반영</div><div class="sv" id="sOpen">0</div></div>
+        </div>
+        <div class="row" style="margin-bottom:10px">
+          <select id="filt" style="width:auto;flex:1 1 140px">
+            <option value="all">전체 보기</option>
+            <option value="open">미반영만</option>
+            <option value="1">치명만</option>
+            <option value="2">중대만</option>
+            <option value="3">경미만</option>
+          </select>
+          <button class="btn mini" id="sortBy">타임코드순</button>
+        </div>
+        <div class="list" id="list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. 넘기기 -->
+  <div class="card">
+    <h2><span class="tag">STEP 4</span> 감독님께 넘기기</h2>
+    <div class="sub">표로 복사해서 교신함에 붙이거나, JSON으로 내려받아 파일로 넘깁니다.
+      여러 사람이 각자 적은 JSON을 <b>불러오기</b>로 합치면 중복 없이 한 장이 됩니다.</div>
+    <div class="row">
+      <button class="btn primary" id="mkMd">정리표 만들기 (Markdown)</button>
+      <button class="btn" id="copyMd">복사</button>
+      <button class="btn" id="dlJson">JSON 내려받기</button>
+      <button class="btn" id="upJson">JSON 불러와 합치기</button>
+      <input type="file" id="jsonIn" accept="application/json,.json" style="display:none">
+      <span style="flex:1"></span>
+      <button class="btn" id="wipe" style="border-color:#5c2b2b;color:#ff8f8f">전체 지우기</button>
+    </div>
+    <textarea class="out mono" id="out" style="margin-top:12px" placeholder="여기에 정리표가 나옵니다."></textarea>
+  </div>
+
+  <div class="foot">
+    이 페이지는 서버에 아무것도 보내지 않습니다. 영상 파일을 "파일 선택"으로 열면 브라우저 안에서만 재생되며 업로드되지 않습니다.
+    지적 사항은 영상 주소별로 이 브라우저에 저장되므로, 브라우저를 바꾸거나 기록을 지우면 사라집니다. 남겨야 할 것은 반드시 <b>내보내기</b>로 빼두십시오.
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>/* admin 전용 내부 탭 노출 */(function(){try{var t=localStorage.getItem("gsn_auth_token");if(!t)return;var seg=t.split(".")[0].replace(/-/g,"+").replace(/_/g,"/");while(seg.length%4)seg+="=";var p=JSON.parse(decodeURIComponent(escape(atob(seg))));if(p&&p.exp&&p.exp>Date.now()&&p.role==="admin"){["navDeliverables","navRiaDash","navActionBoard"].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display="";});}}catch(e){}})();</script>
+
+<script>
+(function(){
+  'use strict';
+  var v = document.getElementById('v');
+  var $ = function(id){ return document.getElementById(id); };
+  var items = [];          // 지적 목록
+  var srcKey = '';         // localStorage 키
+  var rangeIn = null, rangeOut = null;
+  var sortMode = 'tc';     // tc | sev
+
+  // ── 유틸 ────────────────────────────────────────────────────────────
+  function fps(){ var n = parseFloat($('fps').value); return (n>0 && n<=120) ? n : 24; }
+  function tc(sec){
+    if(sec==null || isNaN(sec)) return '—';
+    var s = Math.max(0, sec);
+    var h = Math.floor(s/3600), m = Math.floor(s%3600/60), q = Math.floor(s%60);
+    var ms = Math.round((s - Math.floor(s))*1000);
+    if(ms===1000){ ms=0; q+=1; }
+    var p2=function(n){return (n<10?'0':'')+n;}, p3=function(n){return (n<100?(n<10?'00':'0'):'')+n;};
+    return (h>0 ? p2(h)+':' : '') + p2(m)+':'+p2(q)+'.'+p3(ms);
+  }
+  function frame(sec){ return (sec==null||isNaN(sec)) ? '—' : Math.round(sec*fps()); }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  function toast(msg){
+    var t=$('toast'); t.textContent=msg; t.classList.add('on');
+    clearTimeout(t._t); t._t=setTimeout(function(){ t.classList.remove('on'); }, 1900);
+  }
+  function sevName(n){ return n==1?'치명':(n==3?'경미':'중대'); }
+
+  // ── 저장 (영상 소스별) ──────────────────────────────────────────────
+  function keyFor(src){
+    var h=0, s=String(src||'none');
+    for(var i=0;i<s.length;i++){ h=((h<<5)-h+s.charCodeAt(i))|0; }
+    return 'ria_vr_' + (h>>>0).toString(36);
+  }
+  function save(){
+    if(!srcKey) return;
+    try{
+      localStorage.setItem(srcKey, JSON.stringify({
+        title: $('title').value, fps: fps(), items: items, savedAt: new Date().toISOString()
+      }));
+    }catch(e){ toast('저장 실패 — 브라우저 저장공간을 확인하십시오'); }
+  }
+  function load(){
+    if(!srcKey) return;
+    try{
+      var raw = localStorage.getItem(srcKey);
+      if(!raw){ items=[]; render(); return; }
+      var o = JSON.parse(raw);
+      items = Array.isArray(o.items) ? o.items : [];
+      if(o.title && !$('title').value) $('title').value = o.title;
+      if(o.fps) $('fps').value = o.fps;
+      render();
+      if(items.length) toast('저장돼 있던 지적 ' + items.length + '건을 불러왔습니다');
+    }catch(e){ items=[]; render(); }
+  }
+
+  // ── 영상 걸기 ───────────────────────────────────────────────────────
+  function attach(url, label){
+    v.src = url;
+    v.style.display = '';
+    $('vempty').style.display = 'none';
+    srcKey = keyFor(label || url);
+    load();
+    v.addEventListener('loadedmetadata', function(){
+      $('durNow').textContent = '/ ' + tc(v.duration) + ' · ' + frame(v.duration) + 'f';
+    }, { once:true });
+  }
+  $('loadUrl').addEventListener('click', function(){
+    var u = $('srcUrl').value.trim();
+    if(!u){ toast('영상 주소를 넣어 주십시오'); return; }
+    attach(u, u);
+    try{
+      var url = new URL(location.href);
+      url.searchParams.set('src', u);
+      history.replaceState(null, '', url.toString());
+    }catch(e){}
+    toast('영상을 걸었습니다');
+  });
+  $('pickFile').addEventListener('click', function(){ $('fileIn').click(); });
+  $('fileIn').addEventListener('change', function(e){
+    var f = e.target.files && e.target.files[0];
+    if(!f) return;
+    attach(URL.createObjectURL(f), 'file:' + f.name + ':' + f.size);
+    if(!$('title').value) $('title').value = f.name;
+    toast('파일을 열었습니다 (업로드되지 않습니다)');
+  });
+
+  // 주소로 들어온 경우 자동으로 건다
+  (function(){
+    try{
+      var q = new URL(location.href).searchParams.get('src');
+      if(q){ $('srcUrl').value = q; attach(q, q); }
+    }catch(e){}
+  })();
+
+  // ── 재생 위치 표시 ──────────────────────────────────────────────────
+  function tick(){
+    if(v.style.display !== 'none'){
+      $('tcNow').textContent = tc(v.currentTime);
+      $('frNow').textContent = 'frame ' + frame(v.currentTime);
+      $('addAt').textContent = rangeIn!=null
+        ? ('등록 지점: ' + tc(rangeIn) + (rangeOut!=null ? ' → ' + tc(rangeOut) : ''))
+        : ('등록 지점: ' + tc(v.currentTime));
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // ── 구간 ────────────────────────────────────────────────────────────
+  function showRange(){
+    $('rangeNow').textContent = rangeIn==null ? ''
+      : ('구간 ' + tc(rangeIn) + (rangeOut!=null ? ' → ' + tc(rangeOut) : ' → …'));
+  }
+  $('markIn').addEventListener('click', function(){ rangeIn = v.currentTime; if(rangeOut!=null&&rangeOut<rangeIn) rangeOut=null; showRange(); });
+  $('markOut').addEventListener('click', function(){ if(rangeIn==null) rangeIn = 0; rangeOut = v.currentTime; showRange(); });
+  $('clearRange').addEventListener('click', function(){ rangeIn=rangeOut=null; showRange(); });
+
+  // ── 지적 등록 ───────────────────────────────────────────────────────
+  $('add').addEventListener('click', function(){
+    if(v.style.display === 'none'){ toast('먼저 영상을 걸어 주십시오'); return; }
+    var text = $('body').value.trim();
+    if(!text){ toast('무엇이 잘못됐는지 적어 주십시오'); $('body').focus(); return; }
+    var at = rangeIn!=null ? rangeIn : v.currentTime;
+    items.push({
+      id: 'c' + Date.now().toString(36) + Math.floor(Math.random()*1e4).toString(36),
+      at: at,
+      to: (rangeOut!=null && rangeOut>at) ? rangeOut : null,
+      cat: $('cat').value,
+      sev: parseInt($('sev').value, 10) || 2,
+      body: text,
+      who: $('who').value.trim() || '미기재',
+      state: 'open',
+      ts: new Date().toISOString()
+    });
+    $('body').value = '';
+    rangeIn = rangeOut = null; showRange();
+    save(); render();
+    toast('등록했습니다 — ' + tc(at));
+  });
+
+  // ── 목록 렌더 ───────────────────────────────────────────────────────
+  function sorted(){
+    var a = items.slice();
+    if(sortMode === 'tc') a.sort(function(x,y){ return x.at - y.at; });
+    else a.sort(function(x,y){ return (x.sev - y.sev) || (x.at - y.at); });
+    return a;
+  }
+  function render(){
+    var f = $('filt').value, a = sorted().filter(function(it){
+      if(f==='all') return true;
+      if(f==='open') return it.state !== 'done';
+      return String(it.sev) === f;
+    });
+    var c1=0,c2=0,c3=0,co=0;
+    items.forEach(function(it){
+      if(it.sev==1)c1++; else if(it.sev==3)c3++; else c2++;
+      if(it.state!=='done') co++;
+    });
+    $('s1').textContent=c1; $('s2').textContent=c2; $('s3').textContent=c3; $('sOpen').textContent=co;
+    $('cnt').textContent = items.length ? ('총 ' + items.length + '건') : '';
+
+    if(!a.length){
+      $('list').innerHTML = '<div class="empty">' +
+        (items.length ? '이 조건에 해당하는 지적이 없습니다.' :
+         '아직 적힌 지적이 없습니다.<br>영상을 보다가 걸리는 지점에서 위에 적어 주십시오.') + '</div>';
+      return;
+    }
+    var h = '';
+    a.forEach(function(it, i){
+      h += '<div class="item ' + (it.state==='done'?'done':'') + '" data-id="' + it.id + '">'
+        + '<div class="ihead">'
+        +   '<button class="jump" data-jump="' + it.at + '">' + tc(it.at) + (it.to!=null ? ' → ' + tc(it.to) : '') + '</button>'
+        +   '<span class="mono" style="color:var(--dim);font-size:10.5px">' + frame(it.at) + 'f</span>'
+        +   '<span class="chip">' + esc(it.cat) + '</span>'
+        +   '<span class="chip sev' + it.sev + '">' + sevName(it.sev) + '</span>'
+        +   (it.state==='done' ? '<span class="chip" style="color:var(--mint)">반영됨</span>' : '')
+        + '</div>'
+        + '<div class="ibody">' + esc(it.body) + '</div>'
+        + '<div class="ifoot">'
+        +   '<span>' + esc(it.who) + '</span><span>·</span><span class="mono">' + esc((it.ts||'').slice(0,16).replace('T',' ')) + '</span>'
+        +   '<span style="flex:1"></span>'
+        +   '<button class="btn mini" data-toggle="' + it.id + '">' + (it.state==='done'?'되돌리기':'반영 완료') + '</button>'
+        +   '<button class="btn mini" data-del="' + it.id + '" style="border-color:#5c2b2b;color:#ff8f8f">삭제</button>'
+        + '</div></div>';
+    });
+    $('list').innerHTML = h;
+  }
+  $('list').addEventListener('click', function(e){
+    var t = e.target;
+    if(t.dataset.jump != null){ v.currentTime = parseFloat(t.dataset.jump); v.pause(); return; }
+    if(t.dataset.toggle){
+      items.forEach(function(it){ if(it.id===t.dataset.toggle) it.state = (it.state==='done'?'open':'done'); });
+      save(); render(); return;
+    }
+    if(t.dataset.del){
+      items = items.filter(function(it){ return it.id !== t.dataset.del; });
+      save(); render(); toast('삭제했습니다'); return;
+    }
+  });
+  $('filt').addEventListener('change', render);
+  $('sortBy').addEventListener('click', function(){
+    sortMode = (sortMode==='tc') ? 'sev' : 'tc';
+    this.textContent = (sortMode==='tc') ? '타임코드순' : '심각도순';
+    render();
+  });
+
+  // ── 내보내기 ────────────────────────────────────────────────────────
+  function markdown(){
+    var t = $('title').value.trim() || '(제목 미기재)';
+    var src = $('srcUrl').value.trim() || '(로컬 파일)';
+    var c1=0,c2=0,c3=0,co=0;
+    items.forEach(function(it){ if(it.sev==1)c1++; else if(it.sev==3)c3++; else c2++; if(it.state!=='done')co++; });
+    var L = [];
+    L.push('# 영상 수정사항 — ' + t);
+    L.push('');
+    L.push('- 소스: ' + src);
+    L.push('- 프레임레이트: ' + fps() + ' fps (프레임 번호는 이 값 기준입니다)');
+    L.push('- 정리 시각: ' + new Date().toISOString().replace('T',' ').slice(0,19) + ' UTC');
+    L.push('- 총 ' + items.length + '건 — 치명 ' + c1 + ' / 중대 ' + c2 + ' / 경미 ' + c3 + ' · 미반영 ' + co + '건');
+    L.push('');
+    if(!items.length){ L.push('_적힌 지적이 없습니다._'); return L.join('\n'); }
+    L.push('| # | 타임코드 | 프레임 | 분류 | 심각도 | 상태 | 내용 | 작성 |');
+    L.push('|---|---|---|---|---|---|---|---|');
+    sorted().forEach(function(it, i){
+      L.push('| ' + (i+1)
+        + ' | ' + tc(it.at) + (it.to!=null ? ' → ' + tc(it.to) : '')
+        + ' | ' + frame(it.at)
+        + ' | ' + it.cat
+        + ' | ' + sevName(it.sev)
+        + ' | ' + (it.state==='done' ? '반영됨' : '미반영')
+        + ' | ' + String(it.body).replace(/\|/g,'\\|').replace(/\n/g,' ')
+        + ' | ' + it.who + ' |');
+    });
+    L.push('');
+    L.push('> 타임코드는 영상 시작을 0으로 잡은 값입니다. 앞 무음/여백 구간을 잘라내면 전부 어긋나므로, 자르기 전에 이 표를 먼저 소진하십시오.');
+    return L.join('\n');
+  }
+  $('mkMd').addEventListener('click', function(){ $('out').value = markdown(); toast('정리표를 만들었습니다'); });
+  $('copyMd').addEventListener('click', function(){
+    if(!$('out').value) $('out').value = markdown();
+    $('out').select();
+    try{ document.execCommand('copy'); toast('복사했습니다'); }
+    catch(e){ toast('복사가 막혀 있습니다 — 직접 선택해 복사하십시오'); }
+  });
+  $('dlJson').addEventListener('click', function(){
+    var pack = { title: $('title').value, src: $('srcUrl').value, fps: fps(),
+                 exportedAt: new Date().toISOString(), items: items };
+    var blob = new Blob([JSON.stringify(pack, null, 2)], {type:'application/json'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'video-review_' + (($('title').value||'untitled').replace(/[^\w가-힣-]+/g,'_')) + '.json';
+    a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+    toast('내려받았습니다');
+  });
+  $('upJson').addEventListener('click', function(){ $('jsonIn').click(); });
+  $('jsonIn').addEventListener('change', function(e){
+    var f = e.target.files && e.target.files[0];
+    if(!f) return;
+    var r = new FileReader();
+    r.onload = function(){
+      try{
+        var o = JSON.parse(r.result);
+        var incoming = Array.isArray(o) ? o : (o.items || []);
+        var have = {}; items.forEach(function(it){ have[it.id] = 1; });
+        var added = 0;
+        incoming.forEach(function(it){
+          if(!it || it.at==null || !it.body) return;
+          if(it.id && have[it.id]) return;
+          if(!it.id) it.id = 'c' + Math.random().toString(36).slice(2);
+          if(!it.state) it.state = 'open';
+          if(!it.sev) it.sev = 2;
+          items.push(it); have[it.id] = 1; added++;
+        });
+        save(); render();
+        toast(added ? (added + '건을 합쳤습니다') : '새로 합칠 것이 없었습니다');
+      }catch(err){ toast('JSON 을 읽지 못했습니다'); }
+    };
+    r.readAsText(f);
+    e.target.value = '';
+  });
+  $('wipe').addEventListener('click', function(){
+    if(!items.length){ toast('지울 것이 없습니다'); return; }
+    if(this.dataset.armed !== '1'){
+      this.dataset.armed = '1';
+      this.textContent = '정말 지웁니다 (한 번 더)';
+      var self = this;
+      setTimeout(function(){ self.dataset.armed=''; self.textContent='전체 지우기'; }, 4000);
+      return;
+    }
+    items = []; save(); render();
+    this.dataset.armed=''; this.textContent='전체 지우기';
+    toast('전부 지웠습니다');
+  });
+
+  // ── 키보드 ──────────────────────────────────────────────────────────
+  document.addEventListener('keydown', function(e){
+    var tag = (e.target.tagName || '').toLowerCase();
+    var typing = (tag==='input' || tag==='textarea' || tag==='select');
+    if(typing){
+      if(e.key==='Enter' && (e.ctrlKey||e.metaKey) && e.target.id==='body'){ e.preventDefault(); $('add').click(); }
+      return;
+    }
+    if(v.style.display === 'none') return;
+    var step = 1/fps();
+    if(e.key===' '){ e.preventDefault(); v.paused ? v.play() : v.pause(); }
+    else if(e.key==='ArrowLeft'){ e.preventDefault(); v.currentTime = Math.max(0, v.currentTime - (e.shiftKey?5:1)); }
+    else if(e.key==='ArrowRight'){ e.preventDefault(); v.currentTime = Math.min(v.duration||1e9, v.currentTime + (e.shiftKey?5:1)); }
+    else if(e.key===','){ e.preventDefault(); v.pause(); v.currentTime = Math.max(0, v.currentTime - step); }
+    else if(e.key==='.'){ e.preventDefault(); v.pause(); v.currentTime = Math.min(v.duration||1e9, v.currentTime + step); }
+    else if(e.key==='i'||e.key==='I'){ $('markIn').click(); }
+    else if(e.key==='o'||e.key==='O'){ $('markOut').click(); }
+    else if(e.key==='c'||e.key==='C'){ e.preventDefault(); $('body').focus(); }
+  });
+
+  $('fps').addEventListener('change', function(){ save(); render(); });
+  $('title').addEventListener('change', save);
+  render();
+})();
+</script>
+</body>
+</html>
