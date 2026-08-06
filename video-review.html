@@ -53,7 +53,10 @@
   .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
   /* 플레이어 */
   .stage{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;margin-top:16px;align-items:start}
-  @media(max-width:1000px){.stage{grid-template-columns:1fr}}
+  /* 지적이 쌓이면 목록이 길어진다. 그때 영상이 화면 밖으로 나가면
+     "이게 어디였더라"를 다시 하게 되므로 왼쪽(영상)을 따라오게 붙인다. */
+  .stage > .vcol{position:sticky;top:60px}
+  @media(max-width:1000px){.stage{grid-template-columns:1fr} .stage > .vcol{position:static}}
   .vwrap{background:#000;border:1px solid var(--line);border-radius:12px;overflow:hidden;position:relative}
   video{display:block;width:100%;max-height:64vh;background:#000}
   .vempty{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;
@@ -67,7 +70,7 @@
   .stat div{border:1px solid var(--line);border-radius:10px;padding:9px 10px}
   .stat .sl{font-size:11px;color:var(--dim)}
   .stat .sv{font-size:17px;font-weight:800;font-family:ui-monospace,monospace;margin-top:2px}
-  .list{max-height:52vh;overflow:auto;padding-right:4px}
+  .list{padding-right:2px}
   .item{border:1px solid var(--line);border-radius:11px;padding:11px 12px;margin-bottom:8px;background:var(--panel2);transition:.15s}
   .item:hover{border-color:#2b3752}
   .item.done{opacity:.5}
@@ -147,7 +150,7 @@
 
   <!-- 2. 보면서 적기 -->
   <div class="stage">
-    <div>
+    <div class="vcol">
       <div class="vwrap">
         <div class="vempty" id="vempty">
           <div style="font-size:15px;color:var(--sub);font-weight:700">아직 영상이 없습니다</div>
