@@ -24,6 +24,20 @@ jobs:
         with:
           python-version: "3.11"
 
+      # 리아 성과 대시보드 — 매 회차 실행.
+      # 토큰 미설정 시 스크립트가 피드를 건드리지 않고 정상 종료하므로 워크플로가 깨지지 않는다.
+      #
+      # [2026-08-06 순서 교체] 이 스텝은 원래 data.go.kr 두 스텝 뒤에 있었다.
+      # 그 결과 06:00 KST 회차에서 관광 데이터 수집이 죽으면 job이 거기서 멈춰
+      # 리아 수집까지 통째로 날아갔다(8/2·8/4·8/5 실패 회차에서 확인).
+      # 리아를 앞에 두면 관광 쪽이 죽어도 리아 수집은 끝난 뒤다.
+      - name: Fetch Ria IG performance
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ vars.IG_USER_ID }}
+          RIA_BASELINE_FOLLOWERS: ${{ vars.RIA_BASELINE_FOLLOWERS }}
+        run: python scripts/fetch_ria_kpi.py
+
       - name: Fetch visitor data from data.go.kr
         if: github.event.schedule == '0 21 * * *' || github.event_name == 'workflow_dispatch'
         env:
@@ -38,16 +52,11 @@ jobs:
           DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
         run: python scripts/fetch_consume.py
 
-      # 리아 성과 대시보드 — 매 회차 실행.
-      # 토큰 미설정 시 스크립트가 피드를 건드리지 않고 정상 종료하므로 워크플로가 깨지지 않는다.
-      - name: Fetch Ria IG performance
-        env:
-          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
-          IG_USER_ID: ${{ vars.IG_USER_ID }}
-          RIA_BASELINE_FOLLOWERS: ${{ vars.RIA_BASELINE_FOLLOWERS }}
-        run: python scripts/fetch_ria_kpi.py
-
+      # 앞 스텝이 실패해도 그때까지 모인 데이터는 커밋한다.
+      # continue-on-error 를 쓰지 않는 이유: job 이 green 이 되어 실패 알림이 끊긴다.
+      # 여기서는 부분 데이터를 저장하되 job 은 red 로 남겨 문제를 계속 드러낸다.
       - name: Commit if changed
+        if: '!cancelled()'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
