@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-07T10:01:44+09:00",
+    "updated_at": "2026-08-07T12:29:47+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -114,7 +114,7 @@
       {
         "label": "주간 게시 건수",
         "target": 6,
-        "actual": 7,
+        "actual": 6,
         "unit": "건",
         "pending": false,
         "note": "게시 무결성. 8/2 이후 나흘간 게시 0건이 되자 일일 도달이 1,189 → 12 로 99% 증발했다. 팔로워 감소는 결과이고 원인은 게시 중단이다. 기준선은 주간 계획 5건(2026-W31)이고 그 주 실적은 8건이었다. 목표 6건은 계획선 위·실적선 아래로 지속 가능하게 잡은 잠정치이며 대표님 확정 전이다."
@@ -122,7 +122,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 22.8,
+        "actual": 25.3,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -131,7 +131,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 130,
+        "actual": 131,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -147,7 +147,7 @@
       {
         "label": "주간 댓글수",
         "target": 50,
-        "actual": 7,
+        "actual": 6,
         "unit": "개",
         "note": "본인 제외 · 베이스라인 0 → 4주 목표 주 50 (답글 SLA 가동)",
         "pending": false
@@ -259,19 +259,6 @@
   "content": [
     {
       "date": "2026-08-06",
-      "title": "My Japanese notebook vs my Mandarin no…",
-      "format": "Image",
-      "url": "https://www.instagram.com/p/DbrnLT_E2LW/",
-      "views": 22,
-      "likes": 0,
-      "comments": 1,
-      "saves": 0,
-      "avg_watch_sec": null,
-      "duration_sec": null,
-      "retention_pct": null
-    },
-    {
-      "date": "2026-08-06",
       "title": "Three checkpoints for wrists that spen…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbrnGcigbBP/",
@@ -279,7 +266,7 @@
       "likes": 1,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 7.3,
+      "avg_watch_sec": 7.2,
       "duration_sec": null,
       "retention_pct": null
     },
@@ -412,13 +399,26 @@
       "avg_watch_sec": null,
       "duration_sec": null,
       "retention_pct": null
+    },
+    {
+      "date": "2026-07-27",
+      "title": "Somebody said the hard thing first. So…",
+      "format": "Reels",
+      "url": "https://www.instagram.com/reel/DbSa1jkD4Kh/",
+      "views": 170,
+      "likes": 4,
+      "comments": 1,
+      "saves": 0,
+      "avg_watch_sec": 4.9,
+      "duration_sec": null,
+      "retention_pct": null
     }
   ],
   "progress_sample": false,
   "progress": {
     "week_label": "2026-W31 (7/28~8/3)",
     "planned": 5,
-    "published": 7,
+    "published": 6,
     "items": [
       {
         "title": "설화 회화 롱 — 장면형",
@@ -461,25 +461,25 @@
   "measured": {
     "live": true,
     "followers": 941,
-    "media_count": 39,
+    "media_count": 38,
     "baseline_followers": 931,
     "day": {
-      "reach": 130,
-      "views": 161,
+      "reach": 131,
+      "views": 162,
       "profile_views": 2,
       "interactions": 5
     },
     "week": {
-      "posts": 7,
+      "posts": 6,
       "reels": 4,
       "reel_avg_views": 378,
       "saves": 14,
-      "comments": 7,
+      "comments": 6,
       "shares": 6,
-      "reach": 1347,
-      "views": 1677
+      "reach": 1335,
+      "views": 1655
     },
-    "engagement_rate_pct": 2.0,
+    "engagement_rate_pct": 1.95,
     "retention": {
       "window": 5,
       "pass_threshold_pct": 40.0,
@@ -491,7 +491,7 @@
           "date": "2026-08-06",
           "title": "Three checkpoints for wrists that spen…",
           "retention_pct": null,
-          "avg_watch_sec": 7.3,
+          "avg_watch_sec": 7.2,
           "duration_sec": null
         },
         {
@@ -533,15 +533,15 @@
         "ig_reels_avg_watch_time"
       ],
       "metric_failed": [],
-      "reels": 14,
-      "with_avg_watch": 14,
+      "reels": 15,
+      "with_avg_watch": 15,
       "with_duration": 0
     },
     "posting": {
-      "hours_since_last_post": 22.8,
+      "hours_since_last_post": 25.3,
       "alert_threshold_h": 36,
       "stalled": false,
-      "week_posts": 7
+      "week_posts": 6
     }
   },
   "audience": {
