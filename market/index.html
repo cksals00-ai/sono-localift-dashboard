@@ -61,12 +61,45 @@
     <nav class="dates" aria-label="낱짜별 이동">
       <h2>Dates</h2>
       <!-- DATE_NAV_START : 새 리포트 추가 시 맨 위에 링크 삽입 -->
-      <a class="on" href="#r20260806">2026-08-06</a>
+      <a class="on" href="#r20260807">2026-08-07</a>
+      <a href="#r20260806">2026-08-06</a>
       <!-- DATE_NAV_END -->
     </nav>
 
     <main>
       <!-- REPORTS_START : 새 리포트 <article>를 맨 위에 삽입 -->
+      <article id="r20260807">
+        <h2>2026-08-07 — 제2호</h2>
+        <p class="meta">발행: 기획실 · 한국관광공사 KorService2 / EngService2 활용신청 승인 직후 실수집</p>
+
+        <section class="axis">
+          <h3>① 강원 4개 시군 관광 콘텐츠 등록 현황 — 국문 (실측)</h3>
+          <ul>
+            <li>삼척시 관광지 67 · 숙박 3 · 음식점 19 · 축제 1 (총 90건).<span class="im">출처: 한국관광공사 국문 관광정보 서비스(KorService2 / areaBasedList2), 2026-08-07 수집.</span></li>
+            <li>양양군 관광지 64 · 숙박 13 · 음식점 22 · 축제 2 (총 101건).<span class="im">출처: 동일. 4개 시군 중 등록 총량 최다.</span></li>
+            <li>홍천군 관광지 33 · 숙박 11 · 음식점 15 · 축제 3 (총 62건).<span class="im">출처: 동일.</span></li>
+            <li>고성군 관광지 41 · 숙박 8 · 음식점 26 · 축제 1 (총 76건, 강원 고성).<span class="im">출처: 동일. 경남 고성과 구분해 areaCode 32로 한정 수집.</span></li>
+          </ul>
+        </section>
+
+        <section class="axis">
+          <h3>② 영문 콘텐츠 결손 — 외국인 대상 상품 설계의 실제 제약 (실측)</h3>
+          <ul>
+            <li>동일 4개 시군 영문 등록 총 79건 / 국문 329건 = <strong>영문화율 24%</strong>.<span class="im">출처: 한국관광공사 영문 관광정보 서비스(EngService2 / areaBasedList2), 2026-08-07 수집.</span></li>
+            <li>숙박 영문 등록은 4개 시군 합계 5건(삼척 0건).<span class="im">시사점: 당사 기획안 — 외국인 단체 일정에 숙박을 공공 데이터로 채우는 방식은 성립하지 않으며, 직접 확보한 숙박 정보를 우리가 영문으로 작성해야 합니다.</span></li>
+            <li>축제·공연행사 영문 등록은 4개 시군 전부 0건.<span class="im">시사점: 당사 기획안 — 계절 이벤트를 외국인 상품의 축으로 잡으려면 번역·표기를 당사가 생산해야 합니다. 이것이 현지 여행사 대비 우리 쪽 기여분이 될 수 있습니다.</span></li>
+            <li>국문 관광지 대표이미지 보유율은 높음(양양 64/64, 삼척 62/67, 홍천 32/33, 고성 38/41).<span class="im">시사점: 당사 기획안 — 이미지는 공공 데이터로 충당 가능, 텍스트는 자체 생산이라는 역할 분담이 성립합니다.</span></li>
+          </ul>
+        </section>
+
+        <section class="axis">
+          <h3>③ 데이터 계정 상태</h3>
+          <ul>
+            <li>KorService1 / KorService 계열은 폐기(NO_OPENAPI_SERVICE_ERROR). KorService2 · EngService2 활용신청 승인 완료, 실호출 resultCode 0000 확인.<span class="im">시사점: 관광지·숙박·축제 상세 경로가 열렸습니다. 기존 방문객 수치(DataLabService)는 별도 원천으로 계속 유효합니다.</span></li>
+          </ul>
+        </section>
+      </article>
+
       <article id="r20260806">
         <h2>2026-08-06 — 제1호</h2>
         <p class="meta">발행: 마케팅 · 수동 초회 발행 (2호부터 매일 08:00 KST 자동)</p>
