@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.P Local Lift · 관광 데이터로 되살아난 지역 경제</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{--bg:#070A10;--panel:#111725;--panel2:#0D131F;--line:#1E2738;--ink:#F2F5FB;--sub:#9AA4B8;--dim:#697086;
+    --gold:#C9A96A;--gold2:#E7CE96;--blue:#6FA8DC;--teal:#57C4B4;--good:#5BC98E;--down:#E0896A;--slate:#39445B;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter','Malgun Gothic','맑은 고딕',-apple-system,'Apple SD Gothic Neo',sans-serif;color:var(--ink);line-height:1.5;min-height:100vh;word-break:keep-all;overflow-wrap:break-word;
+    background:radial-gradient(1200px 620px at 78% -8%,rgba(201,169,106,.13),transparent 60%),radial-gradient(1000px 560px at -5% 2%,rgba(111,168,220,.08),transparent 55%),var(--bg);}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px 80px}
+  a{color:inherit}
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* HERO */
+  .hero{min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:64px 0 40px}
+  .over{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .live{display:inline-flex;align-items:center;gap:7px;margin-top:20px;padding:6px 13px;border-radius:999px;border:1px solid rgba(91,201,142,.35);background:rgba(91,201,142,.08);font-size:11.5px;color:#8ee0b1;font-weight:600;text-decoration:none}
+  .live:hover{border-color:rgba(91,201,142,.6)}
+  .live .dot{width:7px;height:7px;border-radius:50%;background:#5BC98E;animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(91,201,142,.5)}70%{box-shadow:0 0 0 8px rgba(91,201,142,0)}100%{box-shadow:0 0 0 0 rgba(91,201,142,0)}}
+  .hero h1{font-size:clamp(38px,6vw,66px);font-weight:800;letter-spacing:-1.6px;line-height:1.07;margin:24px 0 0}
+  .hero h1 b{background:linear-gradient(110deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+  .hero .sub{font-size:clamp(15px,2vw,18px);color:var(--sub);margin-top:22px;max-width:660px;line-height:1.65;font-weight:400}
+  .hero .sub b{color:var(--ink);font-weight:600}
+  .proof{display:flex;flex-wrap:wrap;justify-content:center;gap:13px;margin-top:40px}
+  .proof .p{min-width:158px;padding:16px 22px;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01));border:1px solid var(--line)}
+  .proof .pv{font-size:26px;font-weight:800;letter-spacing:-.5px;background:linear-gradient(120deg,#fff,var(--gold2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .proof .pl{font-size:11px;color:var(--dim);margin-top:4px;font-weight:500;letter-spacing:.2px}
+  .scrollhint{margin-top:44px;font-size:11px;color:var(--dim);letter-spacing:2px}
+
+  /* FLOW */
+  .flowline{display:flex;flex-wrap:wrap;align-items:stretch;justify-content:center;gap:9px}
+  .step{flex:1;min-width:140px;padding:15px 16px;border-radius:13px;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);position:relative}
+  .step .sn{font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1.5px}
+  .step .st{font-size:13.5px;font-weight:700;margin-top:6px;letter-spacing:-.2px}
+  .step .sd{font-size:11px;color:var(--sub);margin-top:3px;line-height:1.45}
+  .step .arw{position:absolute;right:-11px;top:50%;transform:translateY(-50%);color:var(--slate);font-size:15px;z-index:2}
+  @media(max-width:820px){.step .arw{display:none}}
+
+  /* SECTION */
+  .sec{margin-top:76px}
+  .sec .actno{font-size:12px;letter-spacing:3px;color:var(--gold);font-weight:700;text-transform:uppercase}
+  .sec .big{font-size:clamp(25px,3.4vw,38px);font-weight:800;letter-spacing:-1px;line-height:1.14;margin-top:9px}
+  .sec .big b{color:var(--gold2)}
+  .sec .kw{margin-top:14px;font-size:13.5px;color:var(--sub);font-weight:500;display:flex;flex-wrap:wrap;gap:6px 0}
+  .sec .kw span{padding:0 14px;border-right:1px solid var(--line);white-space:nowrap}
+  .sec .kw span:first-child{padding-left:0}.sec .kw span:last-child{border-right:0}
+  .sec .kw b{color:var(--ink);font-weight:700}.sec .kw .dn{color:var(--down);font-weight:700}
+
+  .grid{display:grid;gap:16px;margin-top:22px}
+  .k4{grid-template-columns:repeat(4,1fr)}.k3{grid-template-columns:repeat(3,1fr)}
+  .c2{grid-template-columns:1.35fr 1fr}.c2b{grid-template-columns:1fr 1.35fr}
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:18px 20px;box-shadow:0 14px 34px -20px rgba(0,0,0,.7);position:relative}
+  .card.planned{border-style:dashed;border-color:rgba(111,168,220,.4);background:linear-gradient(180deg,rgba(111,168,220,.05),rgba(111,168,220,.01))}
+  .kpi{overflow:hidden}.kpi::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:2px;border-radius:2px;background:linear-gradient(180deg,var(--gold2),var(--gold))}
+  .kpi.g::before{background:linear-gradient(180deg,#7fe0aa,#4bbf85)}.kpi.b::before{background:linear-gradient(180deg,#8fc0ea,var(--blue))}.kpi.d::before{background:linear-gradient(180deg,#efb199,var(--down))}
+  .kpi .lab{font-size:10px;letter-spacing:.4px;text-transform:uppercase;color:var(--dim);font-weight:600;padding-left:8px}
+  .kpi .val{font-size:22px;font-weight:800;margin-top:6px;padding-left:8px;letter-spacing:-.5px;background:linear-gradient(120deg,#fff,var(--gold2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .kpi .val.plain{-webkit-text-fill-color:var(--ink);background:none}
+  .kpi .val.up{-webkit-text-fill-color:var(--good);background:none}.kpi .val.dn{-webkit-text-fill-color:var(--down);background:none}
+  .kpi .delta{font-size:11px;font-weight:600;margin-top:4px;padding-left:8px;color:var(--sub)}
+  h3.ct{font-size:14px;font-weight:700}h3.ct .q{font-size:10.5px;color:var(--dim);font-weight:500}
+  p.cd{font-size:11px;color:var(--dim);margin:3px 0 12px}
+  .chart-box{position:relative;height:290px}.chart-box.sm{height:250px}
+  .lead{font-size:12.5px;color:var(--ink);line-height:1.75}.lead b{color:var(--gold2)}.lead .dn{color:var(--down);font-weight:700}.lead .up{color:var(--good);font-weight:700}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+  thead th{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);font-weight:700}
+  td{color:var(--sub)}td b{color:var(--ink)}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  tbody tr:hover td{background:rgba(255,255,255,.02)}
+  .rt th,.rt td{padding:7px 9px;font-size:11.8px}
+  .pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600}
+  .pill.dep{background:rgba(201,169,106,.14);color:var(--gold2);border:1px solid rgba(201,169,106,.3)}
+  .dn{color:var(--down);font-weight:700}.up{color:var(--good);font-weight:700}
+  .tag{display:inline-block;padding:1px 7px;border-radius:6px;font-size:10px;font-weight:600;background:rgba(111,168,220,.12);color:var(--blue);border:1px solid rgba(111,168,220,.25)}
+  .tag.plan{background:rgba(224,177,90,.12);color:#E8CE97;border-color:rgba(224,177,90,.3)}
+  .badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:10.5px;border:1px solid rgba(224,177,90,.3);background:rgba(224,177,90,.08);color:#E8CE97}
+  .note{font-size:11px;color:var(--dim);margin-top:11px;line-height:1.65}.note b{color:var(--sub)}
+  .src{font-size:10px;color:var(--dim);margin-top:8px;line-height:1.55}
+  footer{margin-top:70px;font-size:11px;color:var(--dim);text-align:center;line-height:1.95;border-top:1px solid var(--line);padding-top:22px}
+  footer a{color:var(--sub);text-decoration:underline;text-underline-offset:2px}
+  @media(max-width:820px){.k4,.k3{grid-template-columns:repeat(2,1fr)}.c2,.c2b,.cc{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<style>
+  .siteNav{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(7,10,16,.82);border-bottom:1px solid var(--line)}
+  .nvIn{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
+  .nvBrand{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-weight:800}
+  .nvBrand b{color:var(--gold2)}
+  .nvTabs{display:flex;gap:8px}
+  .nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s}
+  .nvTabs a:hover{color:var(--ink);border-color:var(--line)}
+  .nvTabs a.on{color:#070A10;background:var(--gold);border-color:var(--gold);font-weight:700}
+</style>
+<nav class="siteNav">
+  <div class="nvIn">
+    <a class="nvBrand" href="index.html">A.P <b>LocaLift</b></a>
+    <div class="nvTabs">
+      <a href="index.html" data-p="index">홈</a>
+      <a href="opendata.html" data-p="opendata">공공데이터</a>
+      <a href="content.html" data-p="content">콘텐츠 엔진</a>
+      <a href="impact.html" data-p="impact">데이터 임팩트</a>
+      <a href="skygunners-ria.html" data-p="skygunners-ria">스포츠 마케팅</a>
+      <a href="about.html" data-p="about">회사 소개</a>
+      <a href="shop.html" data-p="shop">SHOP</a>
+      <a href="ir.html" data-p="ir">IR</a>
+      <a id="navDeliverables" href="deliverables.html" data-p="deliverables" style="display:none">산출물</a>
+      <a id="navActionBoard" href="action-board.html" data-p="action" style="display:none">액션보드</a>
+      <a id="navVideoReview" href="video-review.html" data-p="review" style="display:none">영상 검수실</a>
+    </div>
+  </div>
+</nav>
+<script>(function(){var f=(location.pathname.split('/').pop()||'index.html').toLowerCase();if(!f)f='index.html';document.querySelectorAll('.siteNav .nvTabs a').forEach(function(a){var h=a.getAttribute('href').toLowerCase();if(h===f||((f===''||f==='index.html')&&a.dataset.p==='index'))a.classList.add('on');});})();</script>
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="over">A.P · LOCAL LIFT — Regional Economy Impact</div>
+    <a class="live" id="liveLink" href="https://github.com/cksals00-ai/sono-localift-dashboard/actions" target="_blank" rel="noopener"><span class="dot"></span> <span id="liveStamp">LIVE · KTO DataLab API</span> · 갱신 이력 ↗</a>
+    <h1>관광 데이터로 되살아난<br><b>지역 경제</b></h1>
+    <div class="sub">한국관광공사 데이터랩으로 <b>인구 감소 지역</b> 진단 후,<br>국가 캠페인 <b>‘숙박세일페스타’</b> 상품 주력 판매.<br>지역 관광 매출로 이어진 성과를 데이터랩 지표로 재검증하는 <b>선순환 구조</b>.</div>
+    <div class="proof" id="heroStats"></div>
+    <div class="scrollhint">↓ SCROLL</div>
+  </section>
+
+  <!-- DATA-DRIVEN CAUSAL PROCESS -->
+  <section class="sec reveal" style="margin-top:44px">
+    <div class="actno" style="text-align:center">DATA-DRIVEN PROCESS · 관광 데이터 활용의 인과 구조</div>
+    <div class="big" style="text-align:center;margin-top:8px"><b>분석</b>과 <b>검증</b>, 모두 관광 데이터로.</div>
+    <div id="causalChain" style="margin-top:26px"></div>
+  </section>
+
+  <!-- ACT 1 -->
+  <section class="sec reveal">
+    <div class="actno">ACT 01 · INSIGHT — 진단</div>
+    <div class="big">데이터로 진단한 <b>관광 취약 지역</b>.</div>
+    <div class="kw"><span>인구감소지역 <b>100%</b></span><span>성수기 대비 비수기 <span class="dn" id="kwDrop">-45%</span></span><span id="kwRange">지역별 -40%~-58%</span><span>관광 진작 필요</span></div>
+
+    <div class="grid k4" id="trendCards"></div>
+    <div class="note" id="trendNote"></div>
+
+    <div class="grid c2">
+      <div class="card">
+        <h3 class="ct">지역 방문 추이 <span id="visbadge"></span> <span class="q">— 24M continuous observation</span></h3>
+        <p class="cd" id="viscap">KTO DataLab · 이동통신 방문자수(외지인+외국인)</p>
+        <div class="chart-box"><canvas id="visChart"></canvas></div>
+      </div>
+      <div class="card">
+        <h3 class="ct">월별 평균 방문 <span class="q">— <span style="color:var(--down)">여름 성수기(8월) vs 겨울 비수기(2월)</span></span></h3>
+        <p class="cd">9개 지역 합계 · 월평균 방문(만명)</p>
+        <div class="chart-box"><canvas id="seasonChart"></canvas></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="ct">지역별 수요 진단 <span class="q">— DataLab 이동통신 · 방문 규모순</span></h3>
+      <p class="cd">소노 소재 9개 인구감소 시군구 · 최근 24개월 월평균 방문 · 성수기/비수기 편차</p>
+      <div style="overflow:auto"><table class="rt" id="regTable1"></table></div>
+      <div class="note" id="reg1note"></div>
+    </div>
+  </section>
+
+  <!-- ACT 2 -->
+  <section class="sec reveal">
+    <div class="actno">ACT 02 · ACTION — 실행</div>
+    <div class="big">인구감소지역에, <b>국가 숙세페로 집중</b>.</div>
+    <div class="kw"><span>숙세페(정부 주도) 연계</span><span>국가 캠페인 6–7월</span><span>채널 다변화</span><span>인구감소 <b>100%</b> 타깃</span></div>
+    <div style="margin-top:18px;padding:15px 19px;border-radius:14px;background:linear-gradient(90deg,rgba(201,169,106,.12),rgba(111,168,220,.06));border:1px solid rgba(201,169,106,.32)">
+      <span style="font-size:10.5px;color:var(--gold);font-weight:800;letter-spacing:1.2px">무엇을, 어떻게 집중했나 · HOW</span>
+      <div style="font-size:12.5px;color:var(--ink);margin-top:8px;line-height:1.7">인구감소지역 <b>14개 사업장</b>에 상품 <b>54개</b>를 집중 배치 —
+        <br>① <b style="color:var(--gold2)">채널별 할인 11~15%</b>(OTA·GOTA·네이버) &nbsp;② <b>워터파크·부대시설 결합</b> 패키지 &nbsp;③ 일부 <b>굿즈·사은품</b>(남해 등) &nbsp;④ <b>OTA 배너·노출</b>로 외부 관광객 유입.</div>
+    </div>
+
+    <div class="grid k4" id="mktChips"></div>
+
+    <div class="grid c2b">
+      <div class="card">
+        <h3 class="ct">채널별 집행 <span class="q">— Channel mix</span></h3>
+        <p class="cd">숙세페 프로모션 54개 · 채널 구성 (매출 백만원)</p>
+        <div class="chart-box sm"><canvas id="chanChart"></canvas></div>
+      </div>
+      <div class="card">
+        <h3 class="ct">수요 전환 시나리오 <span class="q">— Data → Product</span></h3>
+        <div class="lead" id="exec" style="margin-top:8px"></div>
+        <div id="funnel" style="margin-top:20px"></div>
+      </div>
+    </div>
+
+    <div class="grid c2" style="margin-top:16px">
+      <div class="card">
+        <h3 class="ct">지도로 본 관광 매출 <span class="q">— 소노 9개 인구감소지역 사업장</span></h3>
+        <p class="cd">버블 = 소노 관광 매출 · 색 = 성수기 대비 계절 낙폭 · 위치 = 실제 소재지</p>
+        <div id="mapWrap"></div>
+      </div>
+      <div class="card">
+        <h3 class="ct">데이터로 본 9개 지역 <span class="q">— API 지표 요약</span></h3>
+        <p class="cd">데이터랩 방문·소비 + 숙세페 실적</p>
+        <div id="mapInsight"></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="ct">지역별 사업장 · 수요전환 · 관광 매출 <span class="q">— 데이터 진단이 어디에 어떤 상품으로</span></h3>
+      <p class="cd">시군구 → 소노 사업장 → 데이터랩 계절 낙폭 → 숙세페 집행·소노 관광 매출 · 매출순</p>
+      <div style="overflow:auto"><table class="rt" id="regTable2"></table></div>
+      <div class="note" id="reg2note"></div>
+    </div>
+  </section>
+
+  <!-- ACT 3 -->
+  <section class="sec reveal">
+    <div class="actno">ACT 03 · IMPACT — 성과 & 검증</div>
+    <div class="big">인구감소지역에서, <b>관광 매출</b>을.</div>
+    <div class="kw"><span>숙세페 관광 매출 <b id="kwRev">4.50억</b></span><span>부대시설 매출 <b id="kwSpill">50%</b></span><span>숙세페 <b id="kwRn">—</b> 투숙</span><span>소재지 100% 인구감소</span></div>
+
+    <div class="grid k4" id="act3kpi"></div>
+    <div class="grid c2">
+      <div class="card">
+        <h3 class="ct">사업장별 관광 매출 <span class="q">— 소노 · 백만원</span></h3>
+        <p class="cd">전 사업장 인구감소지역 소재</p>
+        <div class="chart-box"><canvas id="propChart"></canvas></div>
+      </div>
+      <div class="card">
+        <h3 class="ct">사업장 상세</h3>
+        <div style="max-height:290px;overflow:auto"><table id="propTable"></table></div>
+      </div>
+    </div>
+
+    <div class="grid c2b" style="margin-top:16px">
+      <div class="card">
+        <h3 class="ct">마케팅 효과 프레임 <span class="q">— 4 frames</span></h3>
+        <div class="grid k4" id="effChips" style="margin-top:12px;grid-template-columns:1fr 1fr"></div>
+        <div class="lead" id="effect" style="margin-top:14px"></div>
+        <div class="src" id="effSrc"></div>
+      </div>
+      <div class="card" id="consumeCard">
+        <h3 class="ct">지역 관광소비 구조 <span id="consumeTag" class="tag plan">연동 예정</span> <span class="q">— DataLab 지수 · 구조 지표</span></h3>
+        <p class="cd" id="consumeCap">지역의 관광소비 의존도를 데이터랩 공공지표로 · 관광 소비액 지수(0~100)</p>
+        <div class="chart-box" style="height:150px"><canvas id="consumeChart"></canvas></div>
+        <div style="overflow:auto;margin-top:10px"><table class="rt" id="consumeTable"></table></div>
+        <div class="src" id="consumeSrc"></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="ct">지역별 비교 · 방문객 전년동월 & 숙세페 성과 <span style="font-size:11px;font-weight:700;color:#5BC98E;border:1px solid rgba(91,201,142,.4);border-radius:20px;padding:2px 9px;vertical-align:middle">● 매일 갱신</span></h3>
+      <p class="cd">데이터랩 방문객(전년 동월 대비)과 소노 숙세페 성과를 지역별로 · 매출 상위순</p>
+      <div style="overflow:auto"><table class="rt" id="cmpTable"></table></div>
+      <div class="src" id="cmpSrc"></div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="ct">검증 · 소노 실적 ↔ 데이터랩 지역 소비 정합성 <span class="q">— 상관 분석</span></h3>
+      <p class="cd">지역별 소노 관광 매출(막대) vs 데이터랩 숙박소비지수(선)</p>
+      <div class="chart-box"><canvas id="corrChart"></canvas></div>
+      <div class="note" id="corrNote"></div>
+    </div>
+  </section>
+
+  <!-- MARKETING PLAYBOOK -->
+  <section class="sec reveal">
+    <div class="actno">MARKETING PLAYBOOK — 적용한 마케팅 기법</div>
+    <div class="big">데이터를 <b>실행 전략</b>으로.</div>
+    <div class="kw"><span>6개 핵심 마케팅 기법</span><span>지표 · 개념 시각화</span><span>모두 공공데이터 근거</span></div>
+    <div class="grid k3" style="margin-top:22px" id="playbook"></div>
+  </section>
+
+  <!-- GLOBAL EXTENSION -->
+  <section class="sec reveal">
+    <div class="actno">GLOBAL EXTENSION · 제5축 SPORTS BOOST — 필리핀 GSA</div>
+    <div class="big">같은 엔진을, <b>필리핀 시장</b>에.</div>
+    <div class="kw"><span>필리핀 SNS 이용자 <b>9,580만</b></span><span>광고 단가 <b>14.8배</b> 유리</span><span>방한 필리핀 관광객 <b>+9.2%</b></span><span>현지 판매는 <b>GSA 1개사</b></span></div>
+
+    <div class="grid k4">
+      <div class="card kpi"><div class="lab">SNS PENETRATION</div><div class="val">81.9%</div><div class="delta">인구 1.17억 중 SNS 9,580만</div></div>
+      <div class="card kpi b"><div class="lab">DAILY SNS TIME</div><div class="val plain">4h 50m</div><div class="delta">세계 2위 · 콘텐츠 도달 비용 최저권</div></div>
+      <div class="card kpi g"><div class="lab">CPM ADVANTAGE</div><div class="val up">14.8×</div><div class="delta">$1.39 vs 한국 $20.58</div></div>
+      <div class="card kpi"><div class="lab">INBOUND KOREA</div><div class="val plain">40,126명</div><div class="delta">2026-01 단월 · 전년 대비 +9.2%</div></div>
+    </div>
+    <div class="note">국내 사업에서 검증한 구조 — <b>데이터로 수요를 찾고, 국가·기업 캠페인 상품에 태워 판매하고, 결과를 다시 공공지표로 검증</b> — 를 그대로 해외로 옮긴 라인입니다. 국내는 인구감소지역 14개 사업장, 해외는 그 사업장을 보유한 같은 기업의 프로 구단이 진입점입니다.</div>
+
+    <div class="grid k3">
+      <div class="card">
+        <h3 class="ct">① 수요는 이미 있습니다 <span class="q">— 관측된 행동</span></h3>
+        <p class="cd">KBL 아시아쿼터 필리핀 선수 영입 직후의 실측치</p>
+        <div class="lead">구단 인스타그램 팔로워 <b>+4,000</b>, 관련 쇼츠 조회 <b>2만 → 130만(65배)</b>, 유튜브 시청시간 <b>34배</b>. 현지 팬의 <span class="up">실제 경기장 방문</span>도 보고되었습니다. 새 수요를 만드는 일이 아니라, <b>이미 흐르는 수요에 결제 창구를 붙이는 일</b>입니다.</div>
+      </div>
+      <div class="card">
+        <h3 class="ct">② 자산은 이미 한 곳에 있습니다 <span class="q">— 단일 카운터파티</span></h3>
+        <p class="cd">경기 · 숙박 · 굿즈가 한 기업 · 한 도시 안에</p>
+        <div class="lead">구단과 리조트 포트폴리오의 소유주가 동일하고, <b>소노캄 고양은 구단의 클럽하우스</b>입니다. 호텔을 따로 섭외할 필요가 없고, 3자 중개가 아니라 <b>한 카운터파티 안의 재포장</b>이 됩니다.</div>
+      </div>
+      <div class="card">
+        <h3 class="ct">③ 진입은 자본 없이 합니다 <span class="q">— GSA 위임</span></h3>
+        <p class="cd">헌법 60–40 원칙 · 외국인투자 네거티브 리스트</p>
+        <div class="lead">필리핀은 외국 자본의 소매·여행업 참여를 제한합니다. 현지 법인·납입자본금·DOT 인증을 우리가 갖추는 대신 <b>이미 인증을 보유한 현지 GSA에 판매권을 독점 위임</b>합니다. 고정비 없이 시장에 들어가는 구조입니다.</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="ct">판매 구조 <span class="q">— 2-leg + 오케스트레이터</span></h3>
+      <p class="cd">단체관광 전자비자는 <b>주필리핀 한국대사관이 지정한 현지 여행사</b>만 접수할 수 있어, 필리핀측·한국측 두 축이 모두 필요합니다</p>
+      <div class="flowline" style="margin-top:14px">
+        <div class="step"><div class="sn">LEG 1 · PH</div><div class="st">현지 GSA <span style="color:var(--gold2)">= 지정 여행사</span></div><div class="sd">DOT 인증 + <b>대사관 e-Group Visa 지정</b> 보유 · 필리핀 내 판매·홍보·결제 독점(오프라인) · <b>비자 접수</b></div><div class="arw">→</div></div>
+        <div class="step"><div class="sn">LEG 2 · KR</div><div class="st">국내 지상수배</div><div class="sd">국내 이동·가이드·소노 예약 확정 (비자 접수 권한은 여기에 없습니다)</div><div class="arw">→</div></div>
+        <div class="step"><div class="sn">ORCHESTRATOR</div><div class="st">A.P LocaLift</div><div class="sd">상품 설계 · 콘텐츠 · 데이터 소유 · GSA 관리 (principal 아님)</div><div class="arw">→</div></div>
+        <div class="step"><div class="sn">ASSET</div><div class="st">구단 · 리조트</div><div class="sd">경기 · 객실 · 굿즈 IP 보유 · 계약상 principal</div></div>
+      </div>
+      <div class="note"><b>파트너 선정이 곧 관문 통과입니다.</b> 필리핀 여행사는 수천 개지만, 단체관광 전자비자를 접수할 수 있는 곳은 대사관이 지정한 소수입니다. 지정사가 아닌 곳과 손잡으면 손님을 모아도 비자가 나오지 않습니다. 대사관은 명단을 직접 관리하며 자격 정지 공고도 냅니다 — 그래서 LEG 1 선정 기준의 1순위는 규모가 아니라 <b>지정 자격의 현재 유효 여부</b>입니다.</div>
+      <div class="note"><b>역할 구분이 리스크 관리입니다.</b> 계약상 principal은 자산 보유 기업이고 당사는 오케스트레이터입니다. 이 구분이 흐려지면 여행업 무면허 영업 리스크를 당사가 지게 됩니다.</div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="ct">상품 라인 <span class="q">— 굿즈가 본체, 여행이 객단가</span></h3>
+      <p class="cd">순서는 굿즈 → 여행입니다. 9,580만 명 중 방한하는 비중은 작고, 굿즈가 유입·데이터·반복구매를 만듭니다</p>
+      <div style="overflow:auto"><table class="rt">
+        <thead><tr><th>상품</th><th>기간</th><th>구성</th><th>역할</th></tr></thead>
+        <tbody>
+          <tr><td><b>G-0 굿즈 상시선</b></td><td>상시</td><td>구단 굿즈 크로스보더 판매 · 현지 SNS 상시 운영</td><td>유입 · 데이터 · 물량</td></tr>
+          <tr><td><b>COURTSIDE GOYANG</b></td><td>2박 3일</td><td>홈경기 관전 + 클럽하우스 숙박 + 굿즈 번들</td><td>엔트리 패키지</td></tr>
+          <tr><td><b>SKYGUNNERS GRAND</b></td><td>4박 5일</td><td>관전 + 리조트 연계 + 서울·근교 관광</td><td>객단가 최상단</td></tr>
+          <tr><td><b>EASL AWAY SQUAD</b></td><td>3박 4일</td><td>아시아 대항전 원정 · 단체 전자비자(지정사 접수) 포함</td><td>단체 · 일정 고정</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note"><b>운영 규칙 — 판매 마감 D-35.</b> 2026-03-17 기준 단체관광 전자비자 처리 기간이 영업일 20일이어서, 출발 35일 전 판매 마감을 고정값으로 둡니다. 대항전 일정에서 역산해 상품을 편성합니다. <b style="color:var(--gold2)">처리기간은 변동하는 값입니다</b> — 상기 20영업일은 2026-03-17 기준이며, 상품 판매 개시 전 재확인해 컷오프를 다시 계산합니다.</div>
+      <div class="src">단일 최대 리스크는 특정 선수 의존입니다. 상품 브랜드를 선수명이 아니라 구단·아시아 대항전·리조트에 걸고, 계약에 이탈 대응 조항을 둡니다. · 상세 전략은 <a href="skygunners-ria.html#philippines" style="color:var(--gold2);text-decoration:underline;text-underline-offset:2px">스포츠 마케팅 페이지 →</a> · 자본·계약 구조는 <a href="ir.html" style="color:var(--gold2);text-decoration:underline;text-underline-offset:2px">IR 05 해외 확장 →</a></div>
+    </div>
+  </section>
+
+  <!-- MARKETING OPERATING SYSTEM -->
+  <section class="sec reveal">
+    <div class="actno">MARKETING OPERATING SYSTEM — 마케팅 실행 구조</div>
+    <div class="big">관심을 <b>확정 예약</b>으로 바꾸는 구간.</div>
+    <div class="kw"><span>North Star <b>1개</b></span><span>퍼널 <b>6단계</b> · 단계당 숫자 1개</span><span>채널마다 <b>중단 조건</b></span><span>판단은 <b>2주 누적</b> 이후</span></div>
+
+    <div class="note">조회수 130만은 관심이고, 확정 예약은 결과입니다. 필리핀은 CPM이 한국의 <b>1/14.8</b>이라 <b>도달은 싸게 살 수 있습니다.</b> 그래서 우리 병목은 인지가 아니라 <b>문의 → 예약금</b> 구간이고, 이번 단계에 손대는 곳은 그 한 곳입니다. 병목을 두 개 지정하면 우선순위가 없어지고, 우선순위가 없으면 실행도 없습니다.</div>
+
+    <div class="flowline" style="margin-top:16px">
+      <div class="step"><div class="sn">STAGE 1</div><div class="st">인지</div><div class="sd">숏폼 · 크리에이터 · 보도 — 보는 숫자는 도달</div><div class="arw">→</div></div>
+      <div class="step"><div class="sn">STAGE 2</div><div class="st">문의</div><div class="sd">Messenger · 문의 폼 — 보는 숫자는 문의 건수</div><div class="arw">→</div></div>
+      <div class="step"><div class="sn">STAGE 3</div><div class="st">예약금</div><div class="sd">랜딩 · GSA 오프라인 — 예약금 전환율</div><div class="arw">→</div></div>
+      <div class="step"><div class="sn">STAGE 4</div><div class="st">확정</div><div class="sd">지정사 비자 접수 완료 — <b>확정 예약 인원 = North Star</b></div><div class="arw">→</div></div>
+      <div class="step"><div class="sn">STAGE 5</div><div class="st">후기 · 재방문</div><div class="sd">귀국 48시간 내 후기 — 후기 수집률</div></div>
+    </div>
+
+    <div class="grid k3">
+      <div class="card">
+        <h3 class="ct">① 채널은 늘리지 않고 역할을 줍니다 <span class="q">— 설명 안 되는 채널은 끕니다</span></h3>
+        <p class="cd">수요 창출 / 수요 수확 / 신뢰 보강 — 한 채널에 두 역할을 주지 않습니다</p>
+        <div class="lead">예산은 <b>검증 70 · 유망 20 · 실험 10</b>으로 시작하고, 채널마다 <b>중단 조건</b>을 먼저 씁니다. 중단 조건 없는 채널은 표에 올리지 않습니다. 필리핀은 <span class="up">Facebook·Messenger 비중</span>이 높아 문의 창구를 Messenger 기준으로 설계합니다 — 국내 채널표를 그대로 옮기면 전환이 죽습니다.</div>
+      </div>
+      <div class="card">
+        <h3 class="ct">② 그릇을 먼저 고칩니다 <span class="q">— 랜딩이 집행보다 앞</span></h3>
+        <p class="cd">광고 문구와 랜딩 첫 화면이 같은 약속을 하는지부터 봅니다</p>
+        <div class="lead">화면당 CTA는 <b>하나</b>. 가격·일정·환불·소요시간에 답이 없으면 그것이 곧 마찰입니다. 개선은 <b>한 번에 한 가지</b>만 바꿉니다 — 두 개를 바꾸면 무엇이 효과였는지 알 수 없습니다. <span class="up">새는 그릇에 물을 붓는 비용이 그릇을 고치는 비용보다 항상 큽니다.</span></div>
+      </div>
+      <div class="card">
+        <h3 class="ct">③ 컷오프가 예산을 끕니다 <span class="q">— 매일 점검</span></h3>
+        <p class="cd">판매할 수 없는 회차에 광고비가 계속 나가는 것이 가장 흔한 순손실</p>
+        <div class="lead"><b>D-35</b>에 도달한 회차의 소재는 내리고 예산을 다음 회차로 넘깁니다. 측정은 <b>기준이 되는 하나</b>를 정하고 나머지는 참고로만 씁니다. 기여는 마지막 클릭 + 문의 시 유입경로 1문항. 관광은 인지에서 예약까지 지연이 길어 <b>최소 2주 누적</b>으로만 채널을 판단합니다.</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3 class="ct">운영 체계 <span class="q">— 10부서 52스킬 · 마케팅은 두 부서</span></h3>
+      <p class="cd">BRAND가 무엇을 말할지 고정하고, GROWTH가 얼마에 몇 명에게 닿았는지 셉니다. 성격이 달라 한 부서에 두면 급한 숫자가 느린 축을 잡아먹습니다</p>
+      <div style="overflow:auto"><table class="rt">
+        <thead><tr><th>부서</th><th>고정하는 것</th><th>갱신 주기</th><th>정기 점검</th></tr></thead>
+        <tbody>
+          <tr><td><b>BRAND · 마케팅 전략 &amp; 브랜드</b></td><td>메시지 축 · 대체재 정의 · 캠페인 설계 · 현지화 정책 · 게시 전 차단 검사</td><td>분기</td><td>월 1회 축 유지/수정 판정</td></tr>
+          <tr><td><b>GROWTH · 그로스 &amp; 퍼포먼스</b></td><td>퍼널 · 채널·예산 배분 · 광고 상한 · 랜딩 · 재구매 시퀀스 · 측정</td><td>주</td><td>주 1회 리포트 (North Star · 단계 전환 · 채널별 CAC · 배운 것 1개)</td></tr>
+          <tr><td><b>공통 관문</b></td><td>대외 문안은 게시 직전 차단 검사를 통과 — 미검증 수치 · 미체결 관계를 체결처럼 쓴 표현 · 승인 범위 밖 이미지</td><td>상시</td><td>매일 컷오프 점검</td></tr>
+        </tbody>
+      </table></div>
+      <div class="src"><b>사업성 검토 단계입니다.</b> 본 마케팅 실행 구조는 당사 기획안이며 체결된 계약이 아닙니다. 지표 목표·채널 구성·집행 순서는 파트너 합의에 따라 변경될 수 있고, 광고 집행·크리에이터 계약·발송은 대표 승인 후에만 개시합니다. 단가·원가·마진 등 내부 수치는 본 페이지에 포함하지 않습니다. · 상세는 <a href="skygunners-ria.html#marketing" style="color:var(--gold2);text-decoration:underline;text-underline-offset:2px">스포츠 마케팅 · 마케팅 실행 구조 →</a> · 자본·계약 구조는 <a href="ir.html" style="color:var(--gold2);text-decoration:underline;text-underline-offset:2px">IR →</a></div>
+    </div>
+  </section>
+
+  <footer>
+    <b style="color:var(--sub)">데이터 출처</b> · 방문 수요 = <a href="https://www.data.go.kr/data/15101972/openapi.do" target="_blank" rel="noopener">한국관광공사 관광빅데이터 지역별 방문자수 OpenAPI(15101972)</a> · 실적 = 소노 온라인영업팀 예약자료(취소 제외) · 인구감소지역 = 행정안전부 지정<br>
+    <b style="color:var(--sub)">검증</b> · <a href="https://github.com/cksals00-ai/sono-localift-dashboard/actions" target="_blank" rel="noopener">자동갱신 실행 이력(GitHub Actions)</a> · <a href="data/dashboard_data.json" target="_blank" rel="noopener">원본 데이터(JSON)</a> · 매일 06:00 KST 자동갱신<br>
+    <span id="footStamp"></span> · ※ 862억 유발효과 = 데이터랩·ONDA 숙세페 거시효과 집계(전국 기준, 소노 실적은 그 일부)
+  </footer>
+</div>
+
+<script>
+const REPO="https://github.com/cksals00-ai/sono-localift-dashboard";
+const SUKSE_FB={"meta":{"updated":"2026-07-06","period":"2026 상반기 · 숙세페 6월 캠페인"},
+ "grand":{"rn":1158,"room_rev_m":225.5,"total_rev_m":450.2,"adr_k":195,"props":14,"dep_ratio":100,"pkgs":54},
+ "macro":{"spend_eok":862,"visitors_man":48},
+ "by_prop":[{"prop":"소노 삼척","loc":"강원 삼척","rn":252,"room_rev_m":46.3,"total_rev_m":92.5,"adr_k":184},{"prop":"소노 남해","loc":"경남 남해","rn":130,"room_rev_m":43.3,"total_rev_m":86.6,"adr_k":333},{"prop":"소노캄 진도","loc":"전남 진도","rn":122,"room_rev_m":23.9,"total_rev_m":47.9,"adr_k":196},{"prop":"소노벨 변산","loc":"전북 부안","rn":146,"room_rev_m":21.1,"total_rev_m":42.2,"adr_k":144},{"prop":"소노펠리체","loc":"강원 홍천","rn":76,"room_rev_m":19.2,"total_rev_m":38.4,"adr_k":253},{"prop":"소노 단양","loc":"충북 단양","rn":130,"room_rev_m":17.2,"total_rev_m":34.3,"adr_k":132},{"prop":"소노벨 비발디","loc":"강원 홍천","rn":96,"room_rev_m":14.9,"total_rev_m":29.7,"adr_k":155},{"prop":"소노문 델피노","loc":"강원 고성","rn":70,"room_rev_m":12.2,"total_rev_m":23.6,"adr_k":174},{"prop":"쏠비치 양양","loc":"강원 양양","rn":36,"room_rev_m":6.7,"total_rev_m":13.4,"adr_k":186},{"prop":"소노벨 청송","loc":"경북 청송","rn":42,"room_rev_m":6.5,"total_rev_m":12.9,"adr_k":154},{"prop":"소노문(르네)","loc":"강원 홍천","rn":28,"room_rev_m":5.2,"total_rev_m":10.3,"adr_k":184},{"prop":"소노캄 비발디","loc":"강원 홍천","rn":12,"room_rev_m":3.6,"total_rev_m":7.2,"adr_k":301},{"prop":"소노펫클럽","loc":"강원 홍천","rn":10,"room_rev_m":3.0,"total_rev_m":6.0,"adr_k":299},{"prop":"오션월드 빌리지","loc":"강원 홍천","rn":8,"room_rev_m":2.6,"total_rev_m":5.1,"adr_k":321}],
+ "by_chan":[{"chan":"OTA","rn":776,"total_rev_m":292.0},{"chan":"GOTA15%","rn":308,"total_rev_m":131.0},{"chan":"GOTA13%","rn":52,"total_rev_m":17.6},{"chan":"GOTA12%","rn":22,"total_rev_m":9.6}],
+ "by_loc":[{"loc":"강원 홍천","rn":230,"total_rev_m":96.8},{"loc":"강원 삼척","rn":252,"total_rev_m":92.5},{"loc":"경남 남해","rn":130,"total_rev_m":86.6},{"loc":"전남 진도","rn":122,"total_rev_m":47.9},{"loc":"전북 부안","rn":146,"total_rev_m":42.2},{"loc":"충북 단양","rn":130,"total_rev_m":34.3},{"loc":"강원 고성","rn":70,"total_rev_m":23.6},{"loc":"강원 양양","rn":36,"total_rev_m":13.4},{"loc":"경북 청송","rn":42,"total_rev_m":12.9}],
+ "by_month":[{"m":"202606","rn":1110,"total_rev_m":432.9},{"m":"202607","rn":48,"total_rev_m":17.4}]};
+const VIS_FB={"meta":{"isSample":true,"anchor":"강원 홍천군(앵커)"},"visitors":{"labels":["2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"],"values":[850000,940000,590000,670000,540000,810000,790000,720000,500000,540000,630000,560000],"byRegion":null,"mix":null}};
+
+const GOLD="#C9A96A",GOLD2="#E7CE96",BLUE="#6FA8DC",SLATE="#39445B",SUB="#9AA4B8",GOOD="#5BC98E",DOWN="#E0896A";
+if(window.Chart){Chart.defaults.color=SUB;Chart.defaults.font.family="Inter,'Malgun Gothic',sans-serif";Chart.defaults.font.size=11;}
+const eok=m=>(m/100).toFixed(2)+'억';
+const man=v=>Math.round(v/10000).toLocaleString()+'만';
+const sign=x=>(x>=0?'+':'')+x;
+const REGIONS=[
+ {key:'홍천군',loc:'강원 홍천',hero:'비발디파크·오션월드'},{key:'삼척시',loc:'강원 삼척',hero:'소노 삼척'},
+ {key:'남해군',loc:'경남 남해',hero:'소노 남해'},{key:'진도군',loc:'전남 진도',hero:'소노캄 진도'},
+ {key:'부안군',loc:'전북 부안',hero:'소노벨 변산'},{key:'단양군',loc:'충북 단양',hero:'소노 단양'},
+ {key:'고성군',loc:'강원 고성',hero:'소노문 델피노'},{key:'양양군',loc:'강원 양양',hero:'쏠비치 양양'},
+ {key:'청송군',loc:'경북 청송',hero:'소노벨 청송'}];
+function calAvg(vals,labels){const m={};labels.forEach((lab,i)=>{const mm=+lab.split('-')[1];(m[mm]=m[mm]||[]).push(vals[i]);});const o={};for(let k=1;k<=12;k++){const a=m[k]||[0];o[k]=a.reduce((x,y)=>x+y,0)/a.length;}return o;}
+const sum=a=>a.reduce((x,y)=>x+y,0);
+
+Promise.all([
+  fetch('data/sukse.json',{cache:'no-store'}).then(r=>r.ok?r.json():SUKSE_FB).catch(()=>SUKSE_FB),
+  fetch('data/dashboard_data.json',{cache:'no-store'}).then(r=>r.ok?r.json():VIS_FB).catch(()=>VIS_FB),
+  fetch('data/consume.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null),
+]).then(([S,V,C])=>render(S,V,C));
+
+function render(S,V,C){
+  const g=S.grand;
+  const vv=(V.visitors&&V.visitors.values)||VIS_FB.visitors.values;
+  const vl=(V.visitors&&V.visitors.labels)||VIS_FB.visitors.labels;
+  const BR=(V.visitors&&V.visitors.byRegion)||null;
+  const MIX=(V.visitors&&V.visitors.mix)||null;
+  const isSample=!V.meta||V.meta.isSample;
+  const avgOutR=(C&&C.byRegion)?(()=>{const v=C.byRegion.map(r=>r.out_ratio).filter(x=>x!=null);return v.length?Math.round(v.reduce((a,b)=>a+b,0)/v.length):null;})():null;
+  const avgOutR2=avgOutR;
+
+  const vu=(V.meta&&V.meta.updated)||'';
+  const stamp=vu?vu.slice(0,16).replace('T',' ')+' KST':'—';
+  document.getElementById('liveStamp').textContent='LIVE · 최신 '+stamp;
+  document.getElementById('footStamp').textContent='실적 기준 '+S.meta.updated+' · 방문데이터 자동갱신 '+stamp;
+
+  document.getElementById('heroStats').innerHTML=[
+    {v:eok(g.total_rev_m),l:'인구감소지역 관광 매출 · 소노 창출'},
+    {v:'100%',l:'사업장 전부('+g.props+'곳)가 인구감소지역 소재'},
+    {v:g.rn.toLocaleString()+'박',l:'숙세페(6–7월) 판매한 객실'},
+    {v:Math.round((g.total_rev_m-g.room_rev_m)/g.total_rev_m*100)+'%',l:'총매출의 약 절반이 객실 外 부대매출'},
+  ].map(p=>`<div class="p"><div class="pv">${p.v}</div><div class="pl">${p.l}</div></div>`).join('');
+  document.getElementById('kwRev').textContent=eok(g.total_rev_m);
+  document.getElementById('kwRn').textContent=g.rn.toLocaleString()+'박';
+
+  // 잠정(집계 미완성) 마지막 달 제외 — 월평균/계절성/낙폭을 실데이터로만 산출
+  const n=vv.length;let cpl=n;if(n>=4&&vv[n-1]<0.5*((vv[n-2]+vv[n-3]+vv[n-4])/3))cpl=n-1;
+  const vlC=vl.slice(0,cpl);const trim=a=>a.slice(0,cpl);
+  const cmAll=calAvg(trim(vv),vlC);
+  let pk=1,lo=1;for(let k=2;k<=12;k++){if(cmAll[k]>cmAll[pk])pk=k;if(cmAll[k]<cmAll[lo])lo=k;}
+  const dropPeak=Math.round((cmAll[pk]-cmAll[lo])/cmAll[pk]*100);
+  const allAvg=Object.values(cmAll).reduce((a,b)=>a+b,0)/12;
+  document.getElementById('kwDrop').textContent='-'+dropPeak+'%';
+
+  const lastLab=vl[cpl-1];
+  const yoy=(cpl-13>=0&&vv[cpl-13]>0)?Math.round((vv[cpl-1]-vv[cpl-13])/vv[cpl-13]*100):null;
+  const avgSlice=(a,s,e)=>{const x=a.slice(s,e);return x.length?sum(x)/x.length:0;};
+  let m3=null;if(cpl-15>=0){const cur=avgSlice(vv,cpl-3,cpl),prev=avgSlice(vv,cpl-15,cpl-12);if(prev>0)m3=Math.round((cur-prev)/prev*100);}
+
+  let R=[];
+  if(BR){R=REGIONS.filter(r=>BR[r.key]).map(r=>{
+    const cm=calAvg(trim(BR[r.key]),vlC);let p=1,l=1;for(let k=2;k<=12;k++){if(cm[k]>cm[p])p=k;if(cm[k]<cm[l])l=k;}
+    const drop=Math.round((cm[p]-cm[l])/cm[p]*100);const y=Object.values(cm).reduce((a,b)=>a+b,0)/12;
+    const lm=[];for(let k=1;k<=12;k++)if(cm[k]<y*0.9)lm.push(k);
+    const props=S.by_prop.filter(x=>x.loc===r.loc);const perf=(S.by_loc||[]).find(x=>x.loc===r.loc)||{rn:0,total_rev_m:0};
+    return {...r,peakM:p,peakV:cm[p],lowM:l,lowV:cm[l],drop,yavg:y,lowM12:lm,props,perf};});}
+  if(R.length){const ds=R.map(r=>r.drop);document.getElementById('kwRange').textContent='지역별 -'+Math.min(...ds)+'%~-'+Math.max(...ds)+'%';}
+
+  // 지역별 비교표 — 방문객 전년동월(YoY, 최신 완결월) + 숙세페 성과(소노 실적)
+  if(R.length&&BR&&document.getElementById('cmpTable')){
+    const [yy,mm]=(lastLab||'2026-05').split('-');const py=(+yy-1);
+    const cmp=[...R].sort((a,b)=>((b.perf&&b.perf.total_rev_m)||0)-((a.perf&&a.perf.total_rev_m)||0));
+    const GH1='background:rgba(91,201,142,.07);border-left:1px solid var(--line)';
+    const GH2='background:rgba(224,137,106,.07);border-left:1px solid var(--line)';
+    const rows=cmp.map(r=>{
+      const cur=BR[r.key][cpl-1],prev=(cpl-13>=0)?BR[r.key][cpl-13]:null;
+      const yv=(prev&&prev>0)?Math.round((cur-prev)/prev*100):null;
+      const rev=(r.perf&&r.perf.total_rev_m)||0,rn=(r.perf&&r.perf.rn)||0;
+      const nm=r.key.replace(/(군|시)$/,''),cls=yv==null?'plain':(yv>=0?'up':'dn');
+      return `<tr>
+        <td style="text-align:left"><b>${nm}</b> <span style="color:var(--dim);font-size:11px">${r.hero}</span></td>
+        <td>${prev?Math.round(prev).toLocaleString():'—'}</td>
+        <td>${cur?Math.round(cur).toLocaleString():'—'}</td>
+        <td class="${cls}">${yv==null?'—':sign(yv)+'%'}</td>
+        <td style="${GH2}"><b>${(rev/100).toFixed(2)}</b></td>
+        <td style="${GH2}">${rn.toLocaleString()}</td></tr>`;}).join('');
+    document.getElementById('cmpTable').innerHTML=`<thead>
+      <tr><th rowspan="2" style="text-align:left">지역 · 대표시설</th><th colspan="3" style="${GH1}">데이터랩 방문객 · 전년동월(YoY)</th><th colspan="2" style="${GH2}">소노 숙세페 성과 · 2026.6~7월</th></tr>
+      <tr><th style="${GH1}">前 ${py}.${mm}</th><th>現 ${yy}.${mm}</th><th>증감</th><th style="${GH2}">매출(억)</th><th style="${GH2}">투숙(박)</th></tr></thead><tbody>${rows}</tbody>`;
+    document.getElementById('cmpSrc').innerHTML=`<b>기준(Methodology)</b> — ① <b>방문객</b>: 한국관광공사 데이터랩 이동통신, 외지인+외국인 합, <b>전년 동월 대비</b>. 기준월=API가 제공하는 최신 <b>완결</b> 월(부분 집계월 제외) — 현재 <b>${yy}.${mm}</b>. 발표 시차 약 1개월이며 <b>매일 06:00(KST) 자동 갱신</b>, 6·7월이 완결되면 캠페인월 비교로 자동 전환. ② <b>매출·투숙</b>: 소노 예약DB 실적, 숙박세일페스타 패키지(투숙월 2026.6~7월), 예약번호 최신본 중복제거·노쇼 제외 = 소노 사업장 <b>직접 매출</b>(자사, 지역경제 전체 기여와 구분). ③ 방문(YoY)과 매출은 데이터 출처·기간이 다른 <b>병렬 지표</b>로 직접 인과가 아님.`;
+  }
+
+  // ACT1 트렌드(검증) 카드
+  const tc=[];
+  tc.push({cls:'b',lab:'최신 관측월',val:lastLab||'—',delta:'매일 DataLab API 갱신'});
+  tc.push({cls:yoy>=0?'g':'d',lab:'전년 동월 대비 · YoY',val:yoy===null?'—':sign(yoy)+'%',delta:lastLab+' vs 전년'});
+  tc.push({cls:m3>=0?'g':'d',lab:'최근 3개월 추세',val:m3===null?'—':sign(m3)+'%',delta:'전년 동기 3개월 대비'});
+  if(MIX&&sum(MIX.foreign)>0){
+    const f12=sum(MIX.foreign.slice(cpl-12,cpl)),fp=sum(MIX.foreign.slice(Math.max(0,cpl-24),cpl-12));
+    const fY=fp>0?Math.round((f12-fp)/fp*100):null;
+    const tl=(MIX.local[cpl-1]+MIX.outside[cpl-1]+MIX.foreign[cpl-1])||1;
+    const os=Math.round((MIX.outside[cpl-1]+MIX.foreign[cpl-1])/tl*100);
+    tc.push({cls:'',lab:'외국인 유입 추세',val:fY===null?'—':sign(fY)+'%',delta:'관광 유입 비중 '+os+'%'});
+  } else tc.push({cls:'d',lab:'연중 최저 시기',val:lo+'월',delta:'성수기('+pk+'월) 대비 -'+dropPeak+'%'});
+  document.getElementById('trendCards').innerHTML=tc.map(c=>`<div class="card kpi ${c.cls}"><div class="lab">${c.lab}</div><div class="val ${c.cls==='g'?'up':(c.cls==='d'?'dn':'plain')}">${c.val}</div><div class="delta">${c.delta}</div></div>`).join('');
+  document.getElementById('trendNote').innerHTML=`※ <b>데이터랩 기반 효과 검증(VALIDATE)</b> — 진단에 쓴 같은 공공데이터로 캠페인 이후 방문 추세를 <b>매일 06:00 자동 갱신</b>하며 추적한다. 스냅샷이 아닌 연속 관측.`+(cpl<n?` (${vl[n-1]}은 잠정치, 추세 계산 제외)`:``);
+
+  document.getElementById('visbadge').innerHTML=isSample?'<span class="badge">데모</span>':'<span class="badge" style="border-color:rgba(91,201,142,.35);background:rgba(91,201,142,.08);color:#8ee0b1">실데이터</span>';
+  document.getElementById('viscap').textContent='KTO DataLab · '+((V.meta&&V.meta.anchor)||'이동통신 방문자수');
+  new Chart(document.getElementById('visChart'),{type:'line',
+    data:{labels:vlC,datasets:[{data:trim(vv),borderColor:BLUE,borderWidth:2,tension:.35,pointRadius:0,fill:true,
+      backgroundColor:c=>{const a=c.chart.chartArea;if(!a)return'transparent';const gr=c.chart.ctx.createLinearGradient(0,a.top,0,a.bottom);gr.addColorStop(0,'rgba(111,168,220,.22)');gr.addColorStop(1,'rgba(111,168,220,0)');return gr;}}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>man(c.parsed.y)+'명'}}},
+      scales:{y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{callback:x=>(x/10000)+'만'}},x:{grid:{display:false},ticks:{maxTicksLimit:8,font:{size:9}}}}}});
+  const sd=[];for(let k=1;k<=12;k++)sd.push(Math.round(cmAll[k]/10000));
+  new Chart(document.getElementById('seasonChart'),{type:'bar',
+    data:{labels:['1','2','3','4','5','6','7','8','9','10','11','12'].map(x=>x+'월'),datasets:[{data:sd,borderRadius:5,backgroundColor:c=>{const k=c.dataIndex+1;return k===lo?DOWN:(cmAll[k]>allAvg*1.1?GOLD:SLATE);}}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+'만명'}}},scales:{y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{callback:x=>x+'만'}},x:{grid:{display:false},ticks:{font:{size:10}}}}}});
+
+  if(R.length){
+    const byVol=[...R].sort((a,b)=>b.yavg-a.yavg);
+    const GL='border-left:1px solid var(--line)';                 // 그룹 구분선
+    const PKBG='background:rgba(91,201,142,.06)';                   // 성수기 틴트
+    const LOBG='background:rgba(224,137,106,.06)';                  // 비수기 틴트
+    let t='<thead>'+
+      '<tr><th rowspan="2">시군구</th><th rowspan="2">대표 시설</th><th class="num" rowspan="2">월평균<br>방문</th>'+
+      `<th colspan="3" style="text-align:center;color:#8ee0b1;border-bottom:1px solid var(--line);${GL};${PKBG}">▲ 최고 · 성수기</th>`+
+      `<th colspan="3" style="text-align:center;color:var(--down);border-bottom:1px solid var(--line);${GL};${LOBG}">▼ 최저 · 비수기</th></tr>`+
+      `<tr><th class="num" style="${GL};${PKBG}">월</th><th class="num" style="${PKBG}">방문</th><th class="num" style="${PKBG}">월평균比</th>`+
+      `<th class="num" style="${GL};${LOBG}">월</th><th class="num" style="${LOBG}">방문</th><th class="num" style="${LOBG}">월평균比</th></tr>`+
+      '</thead><tbody>';
+    byVol.forEach(r=>{const pk=Math.round((r.peakV/r.yavg-1)*100);const lo=Math.round((r.lowV/r.yavg-1)*100);
+      t+=`<tr><td><b>${r.key}</b> <span class="pill dep">인구감소</span></td><td>${r.hero}</td>`+
+        `<td class="num"><b>${man(r.yavg)}</b></td>`+
+        `<td class="num" style="${GL};${PKBG}"><b>${r.peakM}월</b></td><td class="num" style="${PKBG}">${man(r.peakV)}</td><td class="num" style="${PKBG}"><span class="up">+${pk}%</span></td>`+
+        `<td class="num" style="${GL};${LOBG}"><b>${r.lowM}월</b></td><td class="num" style="${LOBG}"><span class="dn">${man(r.lowV)}</span></td><td class="num" style="${LOBG}"><span class="dn">${lo}%</span></td></tr>`;});
+    document.getElementById('regTable1').innerHTML=t+'</tbody>';
+    const ds=R.map(r=>r.drop);
+    document.getElementById('reg1note').innerHTML=`※ KTO DataLab <b>외지인+외국인 월평균 방문객</b>(최근 24개월 · 집계 미완성 최근월 제외). <b>성수기는 8월</b>, <b>비수기는 대부분 겨울(2월)</b>이며 성수기 대비 <b>-${Math.min(...ds)}%~-${Math.max(...ds)}%</b>의 계절 편중. 이 취약 구조(인구감소+계절편중)가 국가 숙세페로 진작할 대상이다.`;
+  } else document.getElementById('regTable1').innerHTML='<tbody><tr><td>지역별 데이터 로딩 대기 — API 갱신 후 표시됩니다.</td></tr></tbody>';
+
+  // ACT2
+  const CHANPAL=['#C9A96A','#6FA8DC','#57C4B4','#E0B15A','#8E7CC3','#7C6A45','#5BC98E','#4B6A8F','#39445B'];
+  new Chart(document.getElementById('chanChart'),{type:'doughnut',
+    data:{labels:S.by_chan.map(c=>c.chan),datasets:[{data:S.by_chan.map(c=>c.total_rev_m),backgroundColor:S.by_chan.map((_,i)=>CHANPAL[i%CHANPAL.length]),borderColor:'#0D131F',borderWidth:2}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:10},padding:7}},tooltip:{callbacks:{label:c=>c.label+' '+c.parsed+'백만'}}}}});
+  const juneShare=Math.round((S.by_month.find(x=>x.m==='202606')||{total_rev_m:0}).total_rev_m/g.total_rev_m*100);
+  const nChan=S.by_chan.length;
+  const totRev=S.by_chan.reduce((a,c)=>a+c.total_rev_m,0)||1;
+  const chSorted=[...S.by_chan].sort((a,b)=>b.total_rev_m-a.total_rev_m);
+  const top3=Math.round(chSorted.slice(0,3).reduce((a,c)=>a+c.total_rev_m,0)/totRev*100);
+  const topCh=chSorted.slice(0,3).map(c=>c.chan).join('·');
+  const spill=+(g.total_rev_m-g.room_rev_m).toFixed(1);const spillPct=Math.round((g.total_rev_m-g.room_rev_m)/g.total_rev_m*100);
+  document.getElementById('kwSpill').textContent=spillPct+'%';
+
+  document.getElementById('mktChips').innerHTML=[
+    {lab:'숙세페 투숙',val:g.rn.toLocaleString()+'박',delta:'6–7월 인구감소지역'},
+    {lab:'채널 다변화',val:nChan+'개 OTA',delta:'상위 3사 '+top3+'% · 다각 유입'},
+    {lab:'평균 ADR (실적)',val:g.adr_k+'천원',delta:'비수기 캠페인 객단가'},
+    {lab:'지역 소비 확산',val:spillPct+'%',delta:'객실 외 부대시설 매출 '+spill.toFixed(1)+'백만'},
+  ].map(c=>`<div class="card kpi"><div class="lab">${c.lab}</div><div class="val">${c.val}</div><div class="delta">${c.delta}</div></div>`).join('');
+
+  document.getElementById('exec').innerHTML=
+    `데이터랩 분석으로 <b>계절편중·관광 의존도가 높은 인구감소지역</b> 선별. 국가 숙박세일페스타(6–7월)에 맞춰 해당 지역 사업장에 할인 상품 집중 편성.`+
+    `<br>· <b>상품 구성</b> — 14개 사업장, 채널별 할인 상품 <b>${g.pkgs}개</b>. OTA·GOTA·네이버 <b>11~15% 할인</b>, 워터파크·부대시설(일부 굿즈) 결합 패키지.`+
+    `<br>· <b>채널 운영</b> — ${topCh} 등 <b>${nChan}개 OTA</b> 유통. 외부·신규 관광객 유입 경로 다변화(특정 채널 편중 없음).`+
+    `<br>· <b>지역 배분</b> — 계절편중 큰 지역일수록 상품 물량 확대.`;
+
+  // 전환 퍼널
+  const FUN=[
+    {t:'데이터랩 방문 수요 진단',s:'9개 인구감소지역',w:100},
+    {t:'관광 취약 지역 선별',s:`인구감소·계절편중`,w:84},
+    {t:'숙세페 상품 집행',s:`${g.props}사업장·${g.pkgs}패키지`,w:68},
+    {t:'숙세페 투숙 전환',s:`${g.rn.toLocaleString()}박`,w:52},
+    {t:'소노 관광 매출',s:eok(g.total_rev_m),w:38},
+  ];
+  document.getElementById('funnel').innerHTML='<div style="font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:11px">Conversion Funnel · 수요 → 실적</div>'+FUN.map((f,i)=>`<div style="margin:0 auto 7px;width:${f.w}%;background:linear-gradient(90deg,rgba(201,169,106,${(0.95-i*0.14).toFixed(2)}),rgba(231,206,150,${(0.78-i*0.11).toFixed(2)}));border-radius:8px;padding:9px 15px;display:flex;justify-content:space-between;align-items:center;gap:8px;color:#141C2E"><span style="font-size:11px;font-weight:700">${f.t}</span><span style="font-size:12px;font-weight:800;white-space:nowrap">${f.s}</span></div>`).join('');
+
+  if(R.length){
+    const byPerf=[...R].sort((a,b)=>b.perf.total_rev_m-a.perf.total_rev_m);
+    let t='<thead><tr><th>시군구</th><th>소노 사업장</th><th class="num">DataLab 계절 낙폭</th><th class="num">RN</th><th class="num">관광 매출</th><th class="num">전환효율</th></tr></thead><tbody>';
+    byPerf.forEach(r=>{const names=r.props.map(p=>p.prop);const disp=names.length>2?`${r.hero} 등 ${names.length}개`:(names.join(' · ')||r.hero);
+      const eff=r.yavg?(r.perf.total_rev_m/(r.yavg/10000)).toFixed(2):'—';
+      t+=`<tr><td><b>${r.key}</b></td><td>${disp}</td><td class="num"><span class="dn">-${r.drop}%</span></td><td class="num">${r.perf.rn.toLocaleString()}박</td><td class="num"><b style="color:${GOLD2}">${r.perf.total_rev_m.toFixed(1)}</b></td><td class="num">${eff}</td></tr>`;});
+    t+=`<tr style="border-top:2px solid var(--line)"><td><b>합계</b></td><td>${g.props}개 · 54패키지</td><td class="num"><span class="dn">성수기 대비 편중</span></td><td class="num"><b>${g.rn.toLocaleString()}박</b></td><td class="num"><b style="color:${GOLD2}">${g.total_rev_m.toFixed(1)}</b></td><td class="num">—</td></tr>`;
+    document.getElementById('regTable2').innerHTML=t+'</tbody>';
+    const lowEff=[...R].map(r=>({k:r.key,eff:r.yavg?r.perf.total_rev_m/(r.yavg/10000):999})).sort((a,b)=>a.eff-b.eff).slice(0,2);
+    document.getElementById('reg2note').innerHTML=`※ <b>지역 매출</b>=해당 시군구 숙세페 총매출(백만) · <b>전환효율</b>=매출÷데이터랩 월평균 방문(만). `+(lowEff.length?`<b>다음 확장 전략</b> — 전환효율 최저 <b>${lowEff.map(x=>x.k.replace(/(군|시)$/,'')+'('+x.eff.toFixed(2)+')').join('·')}</b>: 방문 대비 실적이 낮아 <span class="tag">차기 공략 지역</span>(상품·객실 보강 대상). 데이터가 다음 성장 지점을 지목한다.`:``);
+
+    // ── 지도 버블맵 (실제 소재지 좌표) ──
+    const GEO={'고성군':[204,50],'양양군':[214,84],'홍천군':[164,112],'삼척시':[222,142],'단양군':[138,156],'청송군':[214,202],'부안군':[80,244],'남해군':[172,288],'진도군':[74,332]};
+    const maxRev=Math.max(...R.map(r=>r.perf.total_rev_m));
+    const cByK={}; if(C&&C.byRegion)C.byRegion.forEach(x=>cByK[x.key]=x);
+    // 더 지도다운 대한민국 외곽선(해안 굴곡·태안반도·남해안)
+    const KOREA='<path d="M204,46 L212,64 L221,96 L228,130 L235,160 L243,193 L247,222 L244,248 L235,266 L210,278 L182,288 L156,294 L138,306 L108,320 L84,334 L66,340 L79,316 L73,286 L77,258 L70,232 L75,206 L57,182 L80,166 L70,146 L75,124 L66,108 L90,96 L124,86 L160,78 L192,64 L205,48 Z" fill="rgba(201,169,106,0.05)" stroke="rgba(201,169,106,0.28)" stroke-width="1.1" stroke-linejoin="round"/>';
+    // 라벨 방향: L=버블 왼쪽, R=버블 오른쪽 (중앙 밀집구간 충돌 방지 위해 지역별 지정) · dy=세로 미세조정
+    const LBL={'홍천군':['L',0],'삼척시':['R',2]};
+    const HALO='stroke="#070A10" stroke-width="2.6" stroke-linejoin="round" paint-order="stroke"';
+    const bub=R.map(r=>{const c=GEO[r.key];if(!c)return'';const rev=r.perf.total_rev_m;const rad=6+Math.sqrt(rev)/Math.sqrt(maxRev)*15;const deep=r.drop>=57;const fill=deep?'#D98C63':'#C9A96A';const cfg=LBL[r.key]||[(c[0]>185?'L':'R'),0];const isL=cfg[0]==='L';const lx=isL?c[0]-rad-5:c[0]+rad+5;const anc=isL?'end':'start';const dy=cfg[1];const nm=r.key.replace(/(군|시)$/,'');const ci=cByK[r.key];const outv=ci&&ci.out_ratio!=null?ci.out_ratio:null;
+      return `<circle cx="${c[0]}" cy="${c[1]}" r="${(rad+2.5).toFixed(1)}" fill="none" stroke="${fill}" stroke-opacity="0.25" stroke-width="1"/>`+
+        `<circle cx="${c[0]}" cy="${c[1]}" r="${rad.toFixed(1)}" fill="${fill}" fill-opacity="0.9" stroke="#0D131F" stroke-width="1.2"/>`+
+        `<text x="${lx.toFixed(0)}" y="${(c[1]-2+dy).toFixed(0)}" text-anchor="${anc}" font-size="10" font-weight="800" fill="#F2F5FB" ${HALO}>${nm}</text>`+
+        `<text x="${lx.toFixed(0)}" y="${(c[1]+8+dy).toFixed(0)}" text-anchor="${anc}" font-size="8.6" fill="#E7CE96" ${HALO}>${rev.toFixed(0)}<tspan fill="#697086"> · </tspan><tspan fill="#E0896A">▼${r.drop}%</tspan></text>`+
+        (outv!=null?`<text x="${lx.toFixed(0)}" y="${(c[1]+17+dy).toFixed(0)}" text-anchor="${anc}" font-size="8.2" fill="#8ee0b1" ${HALO}>외지인 ${outv}%</text>`:'');}).join('');
+    document.getElementById('mapWrap').innerHTML=`<svg viewBox="0 0 300 360" style="width:100%;max-width:400px;height:auto;display:block;margin:2px auto 0">${KOREA}${bub}</svg>`+
+      `<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:4px;font-size:10px;color:var(--sub)"><span>◍ 크기=매출(백만)</span><span><span style="color:#D98C63">●</span> 진함=계절 낙폭 큼</span><span><span style="color:#8ee0b1">외지인%</span>=관광소비 의존</span></div>`;
+
+    // ── 오른쪽 지표 카드 (데이터랩 수요·소비 지표 · 아래 실행표와 비중복) ──
+    const byVol=[...R].sort((a,b)=>b.yavg-a.yavg);
+    const deepest=[...R].sort((a,b)=>b.drop-a.drop)[0];
+    let topOut=null,topLodge=null; if(C&&C.byRegion){const oo=C.byRegion.filter(x=>x.out_ratio!=null); if(oo.length)topOut=oo.sort((a,b)=>b.out_ratio-a.out_ratio)[0]; const ll=C.byRegion.filter(x=>x.lodge!=null); if(ll.length)topLodge=ll.sort((a,b)=>b.lodge-a.lodge)[0];}
+    const short=s=>s.replace(/(군|시)$/,'');
+    const HL=[
+      {v:Math.round(byVol[0].yavg/10000).toLocaleString(),s:'만',l:'최대 방문 수요',r:short(byVol[0].key),c:'#8fc0ea'},
+      {v:topOut?topOut.out_ratio+'%':'—',s:'',l:'외지인 소비의존 최고',r:topOut?short(topOut.key):'',c:'#8ee0b1'},
+      {v:'▼'+deepest.drop+'%',s:'성수기比',l:'최심 계절 낙폭',r:short(deepest.key),c:'#E0896A'},
+      {v:topLodge?topLodge.lodge:'—',s:'',l:'숙박소비 지수 최고',r:topLodge?short(topLodge.key):'',c:'#E7CE96'},
+    ];
+    let ins='<div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">'+HL.map(h=>`<div style="background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:11px;padding:11px 13px"><div style="font-size:9.5px;color:var(--dim);font-weight:600">${h.l}</div><div style="font-size:19px;font-weight:800;letter-spacing:-.4px;color:${h.c};margin-top:3px">${h.v}<span style="font-size:10px;color:var(--dim);font-weight:600"> ${h.s}</span></div><div style="font-size:10.5px;color:var(--sub);font-weight:700;margin-top:1px">${h.r}</div></div>`).join('')+'</div>';
+    ins+='<table class="rt" style="margin-top:12px"><thead><tr><th>시군구</th><th class="num">월평균 방문</th><th class="num">외지인비중</th><th class="num">숙박소비지수</th></tr></thead><tbody>';
+    byVol.forEach(r=>{const ci=cByK[r.key];const outv=ci&&ci.out_ratio!=null?ci.out_ratio+'%':'—';const lod=ci&&ci.lodge!=null?ci.lodge:'—';
+      ins+=`<tr><td><b>${r.key}</b></td><td class="num"><b>${man(r.yavg)}</b></td><td class="num"><b style="color:#8ee0b1">${outv}</b></td><td class="num">${lod}</td></tr>`;});
+    ins+='</tbody></table><div class="src" style="margin-top:8px"><b style="color:var(--sub)">데이터랩 수요·소비 지표</b> — 방문=이동통신, 외지인비중·숙박소비지수=관광소비 API. 숙세페 <b>실행 성과</b>(낙폭·RN·매출·전환효율)는 아래 표.</div>';
+    document.getElementById('mapInsight').innerHTML=ins;
+
+    // 검증: 소노 관광 매출 ↔ 데이터랩 숙박소비지수 상관 정합성
+    if(C&&C.byRegion&&document.getElementById('corrChart')){
+      const pairs=R.map(r=>({k:r.key,rev:r.perf.total_rev_m,lo:(cByK[r.key]||{}).lodge})).filter(p=>p.lo!=null).sort((a,b)=>b.rev-a.rev);
+      const xs=pairs.map(p=>p.rev),ys=pairs.map(p=>p.lo),nn=xs.length||1;
+      const mx=xs.reduce((a,b)=>a+b,0)/nn,my=ys.reduce((a,b)=>a+b,0)/nn;
+      const cov=xs.reduce((s,x,i)=>s+(x-mx)*(ys[i]-my),0);
+      const sx=Math.sqrt(xs.reduce((s,x)=>s+(x-mx)**2,0)),sy=Math.sqrt(ys.reduce((s,y)=>s+(y-my)**2,0));
+      const rr=sx&&sy?cov/(sx*sy):0;
+      new Chart(document.getElementById('corrChart'),{data:{labels:pairs.map(p=>p.k.replace(/(군|시)$/,'')),datasets:[
+        {type:'bar',label:'소노 관광 매출(백만)',data:xs,backgroundColor:GOLD,borderRadius:5,yAxisID:'y',order:2},
+        {type:'line',label:'데이터랩 숙박소비지수',data:ys,borderColor:'#8ee0b1',backgroundColor:'#8ee0b1',borderWidth:2,pointRadius:3,tension:.3,yAxisID:'y1',order:1}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{boxWidth:11,font:{size:10},padding:8}}},
+          scales:{y:{position:'left',grid:{color:'rgba(255,255,255,.05)'},ticks:{font:{size:9}}},
+            y1:{position:'right',grid:{display:false},min:64,max:73,ticks:{font:{size:9}}},
+            x:{grid:{display:false},ticks:{font:{size:10}}}}}});
+      document.getElementById('corrNote').innerHTML=`※ <b>상관계수 r = ${rr.toFixed(2)}</b> (강한 양의 상관) — 소노가 관광객을 많이 유치한 지역일수록 <b>데이터랩 지역 숙박소비지수</b>도 높다. 소노 숙박 유치와 <b>지역 관광소비</b>의 <b>구조 정합성</b>을 공공데이터로 확인(외지인 소비액과도 r≈0.79). ※ 상관은 정합 근거이며 직접 인과는 아님.`;
+    }
+  } else { document.getElementById('regTable2').innerHTML='<tbody><tr><td>지역별 데이터 로딩 대기.</td></tr></tbody>'; }
+
+  // ACT3
+  document.getElementById('act3kpi').innerHTML=[
+    {lab:'숙세페 관광 매출(소노)',val:eok(g.total_rev_m),delta:g.total_rev_m.toFixed(1)+'백만원 · 인구감소지역 사업장'},
+    {lab:'숙세페 객실 창출',val:g.rn.toLocaleString()+'박',delta:'6–7월 · 인구감소지역'},
+    {lab:'평균 ADR (실적)',val:g.adr_k+'천원',delta:'비수기 캠페인 객단가'},
+    {lab:'소재지 인구감소지역',val:'100%',delta:'소노 사업장 입지 특성 · 매출 전액 해당'},
+  ].map(c=>`<div class="card kpi"><div class="lab">${c.lab}</div><div class="val">${c.val}</div><div class="delta">${c.delta}</div></div>`).join('');
+
+  const P=S.by_prop;
+  new Chart(document.getElementById('propChart'),{type:'bar',
+    data:{labels:P.map(p=>p.prop),datasets:[{data:P.map(p=>p.total_rev_m),borderRadius:6,backgroundColor:P.map((_,i)=>i===0?GOLD:SLATE),hoverBackgroundColor:P.map((_,i)=>i===0?GOLD2:BLUE)}]},
+    options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,.05)'}},y:{grid:{display:false},ticks:{font:{size:10}}}}}});
+  let tt='<thead><tr><th>사업장</th><th>소재지</th><th class="num">RN</th><th class="num">매출</th><th class="num">ADR</th></tr></thead><tbody>';
+  P.forEach(p=>{tt+=`<tr><td><b>${p.prop}</b> <span class="pill dep">인구감소</span></td><td>${p.loc}</td><td class="num">${p.rn}</td><td class="num"><b style="color:${GOLD2}">${p.total_rev_m.toFixed(1)}</b></td><td class="num">${p.adr_k}</td></tr>`;});
+  tt+=`<tr style="border-top:2px solid var(--line)"><td><b>합계 · 100% 인구감소</b></td><td>14곳</td><td class="num"><b>${g.rn.toLocaleString()}</b></td><td class="num"><b style="color:${GOLD2}">${g.total_rev_m.toFixed(1)}</b></td><td class="num"><b>${g.adr_k}</b></td></tr>`;
+  document.getElementById('propTable').innerHTML=tt+'</tbody>';
+
+  document.getElementById('effChips').innerHTML=[
+    {lab:'① 비수기 갭 필링',val:eok(g.total_rev_m),delta:'인구감소지역에 '+g.rn.toLocaleString()+'박'},
+    {lab:'② 사업장 부대시설 매출',val:spillPct+'%',delta:'F&B·워터파크 등 객실 외 '+spill.toFixed(1)+'백만(자사)'},
+    {lab:'③ 지역 관광소비 의존도',val:(avgOutR2!=null?avgOutR2+'%':'—'),delta:'외지인 소비비중(데이터랩) · 구조 지표'},
+    {lab:'④ 거시 유발(전국·공식)',val:S.macro.spend_eok+'억',delta:'데이터랩·ONDA 산출 '+S.macro.visitors_man+'만명'},
+  ].map(c=>`<div class="card kpi"><div class="lab">${c.lab}</div><div class="val">${c.val}</div><div class="delta">${c.delta}</div></div>`).join('');
+  const m6=(S.by_month.find(x=>x.m==='202606')||{}).total_rev_m||0;
+  const m7=(S.by_month.find(x=>x.m==='202607')||{}).total_rev_m||0;
+  document.getElementById('effect').innerHTML=
+    `국가 숙세페 <b>6–7월 통합</b>(6월 ${eok(m6)} + 7월 ${eok(m7)}) — 인구감소지역 사업장 상품 집행으로 <b>${g.rn.toLocaleString()}박·${eok(g.total_rev_m)}</b> <b>관광 매출</b> 창출(소노 사업장 기준, 직접). `+
+    `객실료 외 <b>${spill.toFixed(1)}백만(${spillPct}%)</b> = 워터파크·F&B 등 <b>사업장 내 부대시설 매출</b>(자사 데이터). `+
+    `해당 지역, 데이터랩 <b>외지인 소비비중${avgOutR!=null?` ${avgOutR}%`:''}</b>(구조 지표) — 관광이 지역경제 핵심, 소노 숙박 유치의 <b>지역 파급 개연성</b> 큼. <span style="color:var(--dim)">캠페인 기간(6–7월) 소비 변화는 데이터랩 발표(월 16일) 후 전년 동기 대비 검증 반영 예정.</span>`;
+  document.getElementById('effSrc').innerHTML=`<b style="color:var(--sub)">성과 정의</b> — 위 매출은 <b>소노 사업장이 인구감소지역에서 창출한 관광 매출</b>(직접 지역 경제활동). 소노 <b>밖</b> 지역 상권(식당·상점·오락) 파급은 <b>직접 측정 아님</b> — 데이터랩 관광소비 구조로 <b>시사</b>. 소재지 100% 인구감소는 <b>소노 입지 특성</b>(별도 선별 아님).<br>출처 · ①② 소노 예약자료(취소 제외, 자사 부대시설 매출) · ③ 데이터랩 외지인 소비비중(15152138·15151868, 구조 지표) · ④ 862억·48만명 = 데이터랩·ONDA 공식 산출(전국·소노는 일부). 실적은 숙세페 <b>6–7월 통합 투숙</b> 기준.`;
+
+  // ── 지역 소비 외부검증 (데이터랩 관광소비 지수) ──
+  if(C && C.byRegion && C.byRegion.length){
+    const tag=document.getElementById('consumeTag');
+    tag.textContent='데이터랩 실연동'; tag.className='badge';
+    tag.style.cssText='border-color:rgba(91,201,142,.35);background:rgba(91,201,142,.08);color:#8ee0b1';
+    const bym=C.meta&&C.meta.baseYm;
+    document.getElementById('consumeCap').textContent='데이터랩 관광소비 지수(0~100) · 기준월 '+(bym?bym.slice(0,4)+'-'+bym.slice(4,6):'—')+' (캠페인 이전·구조 지표) · 소노 9개 인구감소지역';
+    let tL=((C.lodgeTrend&&C.lodgeTrend.labels)||[]).slice(), tV=((C.lodgeTrend&&C.lodgeTrend.values)||[]).slice();
+    let te=tV.length; while(te>0 && tV[te-1]==null) te--;   // 꼬리 null 제거(수집 중 일시오류 방어)
+    tL=tL.slice(0,te); tV=tV.slice(0,te);
+    new Chart(document.getElementById('consumeChart'),{type:'line',
+      data:{labels:tL,datasets:[{data:tV,spanGaps:true,borderColor:GOLD2,borderWidth:2,tension:.35,pointRadius:0,fill:true,
+        backgroundColor:c=>{const a=c.chart.chartArea;if(!a)return'transparent';const gr=c.chart.ctx.createLinearGradient(0,a.top,0,a.bottom);gr.addColorStop(0,'rgba(201,169,106,.22)');gr.addColorStop(1,'rgba(201,169,106,0)');return gr;}}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'숙박 소비지수 '+c.parsed.y}}},
+        scales:{y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{font:{size:9}}},x:{grid:{display:false},ticks:{maxTicksLimit:6,font:{size:9}}}}}});
+    const rows=[...C.byRegion].sort((a,b)=>(b.out_ratio||0)-(a.out_ratio||0));
+    const ors=rows.map(r=>r.out_ratio).filter(v=>v!=null);
+    const avgOut=ors.length?Math.round(ors.reduce((a,b)=>a+b,0)/ors.length):null;
+    let ct='<thead><tr><th>시군구</th><th class="num">숙박소비</th><th class="num">외지인소비</th><th class="num">외지인비중</th></tr></thead><tbody>';
+    rows.forEach(r=>{ct+=`<tr><td><b>${r.key}</b></td><td class="num">${r.lodge??'—'}</td><td class="num">${r.out_spend??'—'}</td><td class="num"><b style="color:${GOLD2}">${r.out_ratio!=null?r.out_ratio+'%':'—'}</b></td></tr>`;});
+    document.getElementById('consumeTable').innerHTML=ct+'</tbody>';
+    document.getElementById('consumeSrc').innerHTML=(avgOut!=null?`<b style="color:var(--sub)">구조 지표</b> · 9개 지역 <b>외지인 소비비중 평균 ${avgOut}%</b> — 이 지역들은 <b>관광(외지인) 소비 의존도가 구조적으로 높다</b>. 관광이 지역경제의 핵심이라, 소노 숙박 유치의 <b>지역 파급 개연성</b>이 크다.<br><span style="color:var(--dim)">※ 기준월은 캠페인 이전(배경)입니다. 캠페인 기간(6–7월) 소비지수·전년 동기 대비 변화는 데이터랩 발표(매월 16일) 후 반영해 <b>효과 검증</b>으로 확장할 계획.</span><br>`:'')+'출처 · 데이터랩 <b>지역별 관광 자원 수요(15152138)·수요강도(15151868)</b> · 상대지수 0~100. 외지인비중=전체 소비 중 외지인 비율.';
+  } else {
+    document.getElementById('consumeTable').innerHTML='<tbody><tr><td>데이터랩 소비지수 로딩 대기 — scripts/fetch_consume.py 실행 후 표시됩니다.</td></tr></tbody>';
+    document.getElementById('consumeSrc').innerHTML='데이터랩 지역별 관광 자원 수요 API(15152138) 연동 · 활용신청(무료) 승인 완료.';
+  }
+
+  // ── 데이터 기반 인과 체인 ──
+  const DL='<span style="display:inline-block;margin-top:7px;padding:2px 8px;border-radius:999px;font-size:9px;font-weight:800;letter-spacing:.4px;border:1px solid rgba(91,201,142,.4);background:rgba(91,201,142,.1);color:#8ee0b1">KTO DataLab</span>';
+  const CC=[
+    {tag:'원인 · PROBLEM',c:'#E0896A',dl:false,lab:'인구감소지역 비수기',big:'▼'+dropPeak+'%',desc:'성수기 대비 심각한 비수기<br>관광의존·인구감소 지역'},
+    {tag:'분석 · ANALYSIS',c:'#8ee0b1',dl:true,lab:'데이터랩 정밀 진단',big:'9곳',desc:'이동통신 방문·소비로<br>관광 취약 지역 선별'},
+    {tag:'행동 · ACTION',c:'#6FA8DC',dl:false,lab:'숙세페 상품 집행',big:g.pkgs+'개',desc:'11~15% 할인 패키지<br>국가 숙세페 6–7월'},
+    {tag:'결과 · RESULT',c:'#E7CE96',dl:false,lab:'소노 관광 매출',big:eok(g.total_rev_m),desc:'인구감소지역 사업장<br>'+g.rn.toLocaleString()+'박 유치'},
+    {tag:'검증 · VALIDATE',c:'#8ee0b1',dl:true,lab:'데이터랩 재검증',big:(yoy!=null?(yoy>=0?'+':'')+yoy+'%':'추적'),desc:'방문 추세(YoY) 관측<br>소비 효과는 발표 후'},
+  ];
+  const ARW=['데이터로 분석','그래서 실행','그 결과','데이터로 검증'];
+  let cc='<div style="display:flex;align-items:stretch;justify-content:center;flex-wrap:wrap;gap:6px">';
+  CC.forEach((s,i)=>{
+    cc+=`<div style="flex:1;min-width:132px;max-width:200px;text-align:center;padding:16px 11px;border-radius:16px;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid ${s.dl?'rgba(91,201,142,.35)':'var(--line)'}"><div style="font-size:9.5px;letter-spacing:1px;color:${s.c};font-weight:800">${s.tag}</div>${s.dl?DL:''}<div style="font-size:11.5px;color:var(--ink);margin-top:6px;font-weight:700">${s.lab}</div><div style="font-size:26px;font-weight:900;letter-spacing:-1px;margin-top:5px;color:${s.c}">${s.big}</div><div style="font-size:9.5px;color:var(--dim);margin-top:5px;line-height:1.5">${s.desc}</div></div>`;
+    if(i<CC.length-1)cc+=`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:46px"><div style="font-size:20px;color:var(--gold)">→</div><div style="font-size:8.5px;color:var(--sub);font-weight:700;margin-top:2px;text-align:center;line-height:1.2">${ARW[i]}</div></div>`;
+  });
+  cc+='</div>';
+  document.getElementById('causalChain').innerHTML=cc;
+
+  // ── MARKETING PLAYBOOK ──
+  const outTxt=avgOutR!=null?`${avgOutR}%`:'80%+';
+  const SV='width="42" height="42" viewBox="0 0 40 40" fill="none" stroke="#C9A96A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"';
+  const ICON={
+    smooth:`<svg ${SV}><rect x="5" y="15" width="6" height="17" rx="1"/><rect x="17" y="24" width="6" height="8" rx="1"/><rect x="29" y="11" width="6" height="21" rx="1"/><path d="M20 21 V10 M16 14 L20 10 L24 14" stroke="#8ee0b1"/></svg>`,
+    anchor:`<svg ${SV}><circle cx="20" cy="20" r="5"/><circle cx="7" cy="9" r="2.6"/><circle cx="33" cy="9" r="2.6"/><circle cx="7" cy="31" r="2.6"/><circle cx="33" cy="31" r="2.6"/><path d="M16.5 17 L9 11 M23.5 17 L31 11 M16.5 23 L9 29 M23.5 23 L31 29"/></svg>`,
+    ppp:`<svg ${SV}><circle cx="15" cy="20" r="9.5"/><circle cx="25" cy="20" r="9.5"/></svg>`,
+    channel:`<svg ${SV}><circle cx="20" cy="29" r="4"/><path d="M9 8 L18 26 M31 8 L22 26 M20 6 V25"/></svg>`,
+    target:`<svg ${SV}><circle cx="20" cy="20" r="12.5"/><circle cx="20" cy="20" r="6.5"/><circle cx="20" cy="20" r="1.6" fill="#C9A96A"/></svg>`,
+    ripple:`<svg ${SV}><circle cx="20" cy="20" r="2.6" fill="#C9A96A"/><circle cx="20" cy="20" r="8"/><circle cx="20" cy="20" r="13.5" stroke="#8ee0b1"/></svg>`,
+  };
+  const PLAY=[
+    {ic:ICON.smooth, metric:`-${dropPeak}%`, ml:'성수기比 계절 낙폭', t:'비수기 수요 평준화', en:'Off-season smoothing',
+     note:`계절 편중 큰 인구감소지역에 국가 숙세페로 <b>${g.rn.toLocaleString()}박</b> 집객 → 지역 연중 가동률·고용 안정.`},
+    {ic:ICON.anchor, metric:'70.69', ml:'홍천 숙박소비 1위', t:'앵커 허브 집객 전환', en:'Anchor-hub',
+     note:'비발디파크·오션월드 집객을 <b>지역 숙박·소비</b>로 전환.'},
+    {ic:ICON.ppp, metric:`${S.macro.spend_eok}억`, ml:'숙세페 전국 유발', t:'민관 협력 캠페인', en:'Public-private',
+     note:'국가 숙세페(정부)를 <b>민간이 현장 집행·증명</b>. 정책 ROI 가시화.'},
+    {ic:ICON.channel, metric:`${nChan}개`, ml:'OTA 채널', t:'채널 다변화 유입', en:'Channel mix',
+     note:`${topCh} 등 외부 OTA로 <b>인구감소지역에 신규 관광객</b> 유입.`},
+    {ic:ICON.target, metric:'100%', ml:'인구감소지역', t:'지방소멸 대응 타깃팅', en:'Geo-targeting',
+     note:'취약지(<b>청송 -62%</b>) 우선 — 지방소멸 위기지역에 수요 집중.'},
+    {ic:ICON.ripple, metric:outTxt, ml:'외지인 소비비중', t:'풍선효과·외부수요', en:'Spillover',
+     note:`자사 부대시설 매출 <b>${spillPct}%</b> + 데이터랩 <b>외지인 소비비중</b>(구조 지표) — 관광이 지역경제 핵심.`},
+  ];
+  document.getElementById('playbook').innerHTML=PLAY.map(p=>`<div class="card">`+
+    `<div style="display:flex;justify-content:space-between;align-items:center">${p.ic}`+
+    `<div style="text-align:right"><div style="font-size:25px;font-weight:800;letter-spacing:-.6px;background:linear-gradient(120deg,#fff,var(--gold2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">${p.metric}</div>`+
+    `<div style="font-size:9.5px;color:var(--dim);margin-top:1px">${p.ml}</div></div></div>`+
+    `<div style="font-size:14.5px;font-weight:800;margin-top:14px;letter-spacing:-.2px">${p.t}</div>`+
+    `<div style="font-size:9.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.7px;margin-top:2px">${p.en}</div>`+
+    `<div style="font-size:11.5px;color:var(--sub);margin-top:9px;line-height:1.55">${p.note}</div>`+
+    `</div>`).join('');
+
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}
+</script>
+<script>/* admin 전용: 로그인한 관리자에게만 "산출물" 탭 노출 */(function(){try{var t=localStorage.getItem("gsn_auth_token");if(!t)return;var seg=t.split(".")[0].replace(/-/g,"+").replace(/_/g,"/");while(seg.length%4)seg+="=";var p=JSON.parse(decodeURIComponent(escape(atob(seg))));if(p&&p.exp&&p.exp>Date.now()&&p.role==="admin"){["navDeliverables","navActionBoard","navVideoReview"].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display="";});}}catch(e){}})();</script>
+</body>
+</html>

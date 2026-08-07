@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>공공데이터 활용 · A.P LocaLift</title>
+<meta name="description" content="A.P LocaLift가 활용하는 공공데이터 — 한국관광공사 TourAPI(국문·영문 관광정보 서비스)와 한국관광 데이터랩. 활용 데이터·활용 방법·활용 효과와 강원 4개 시군 실측 결과를 공개합니다.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#070A10;--panel:#111725;--panel2:#0D131F;--line:#1E2738;--ink:#F2F5FB;--sub:#9AA4B8;--dim:#697086;
+    --gold:#C9A96A;--gold2:#E7CE96;--blue:#6FA8DC;--teal:#57C4B4;--good:#5BC98E;--down:#E0896A;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter','Malgun Gothic','맑은 고딕',-apple-system,'Apple SD Gothic Neo',sans-serif;color:var(--ink);line-height:1.6;word-break:keep-all;overflow-wrap:break-word;
+    background:radial-gradient(1200px 620px at 78% -8%,rgba(201,169,106,.13),transparent 60%),radial-gradient(1000px 560px at -5% 2%,rgba(111,168,220,.08),transparent 55%),var(--bg);}
+  a{color:inherit}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px 90px}
+
+  .siteNav{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(7,10,16,.82);border-bottom:1px solid var(--line)}
+  .nvIn{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .nvBrand{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-weight:800;white-space:nowrap}
+  .nvBrand b{color:var(--gold2)}
+  .nvTabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+  .nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s}
+  .nvTabs a:hover{color:var(--ink);border-color:var(--line)}
+  .nvTabs a.on{color:#070A10;background:var(--gold);border-color:var(--gold);font-weight:700}
+
+  .hero{padding:78px 0 10px}
+  .over{font-size:11.5px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .hero h1{font-size:clamp(27px,4.6vw,46px);font-weight:800;letter-spacing:-1.3px;line-height:1.18;margin:18px 0 0}
+  .hero h1 b{background:linear-gradient(110deg,var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
+  .hero .sub{font-size:clamp(14px,1.8vw,16.5px);color:var(--sub);margin:20px 0 0;max-width:720px;line-height:1.8}
+  .hero .sub b{color:var(--ink);font-weight:600}
+
+  .sec{margin-top:74px}
+  .sec .no{font-size:11.5px;letter-spacing:3px;color:var(--gold);font-weight:700;text-transform:uppercase}
+  .sec h2{font-size:clamp(21px,2.9vw,30px);font-weight:800;letter-spacing:-.9px;line-height:1.2;margin-top:9px}
+  .sec h2 b{color:var(--gold2)}
+  .sec .lede{font-size:14.5px;color:var(--sub);margin-top:14px;max-width:740px;line-height:1.8}
+  .sec .lede b{color:var(--ink);font-weight:600}
+
+  .card{background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-top:22px}
+  .card h3{font-size:14.5px;font-weight:800;letter-spacing:-.2px}
+  .card h3 .en{font-size:11px;color:var(--dim);font-weight:500;letter-spacing:.3px;margin-left:8px}
+
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);font-weight:700}
+  td{color:var(--sub)}td b{color:var(--ink)}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--gold2);background:rgba(201,169,106,.08);border:1px solid rgba(201,169,106,.2);border-radius:5px;padding:1px 6px}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  tbody tr:last-child td{border-bottom:0}
+  tfoot td{border-top:1px solid var(--line);border-bottom:0;color:var(--ink);font-weight:700}
+  .src{font-size:11px;color:var(--dim);margin-top:12px;line-height:1.65}
+
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+  .step{padding:16px 17px;border-radius:13px;background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line)}
+  .step .sn{font-size:10px;color:var(--gold);font-weight:700;letter-spacing:1.5px}
+  .step .st{font-size:14px;font-weight:700;margin-top:7px;letter-spacing:-.2px}
+  .step .sd{font-size:12px;color:var(--sub);margin-top:6px;line-height:1.6}
+
+  .effects{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}
+  .eff{padding:17px 19px;border-radius:13px;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),var(--panel2))}
+  .eff .t{font-size:14px;font-weight:700;color:var(--gold2)}
+  .eff .d{font-size:12.5px;color:var(--sub);margin-top:7px;line-height:1.7}
+
+  .rules{margin-top:22px;display:grid;gap:10px}
+  .rule{padding:13px 16px;border-radius:11px;border:1px solid var(--line);background:rgba(255,255,255,.018);font-size:12.5px;color:var(--sub);line-height:1.7}
+  .rule b{color:var(--ink);font-weight:700}
+
+  .gapbar{display:flex;height:9px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.06);margin-top:6px}
+  .gapbar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2))}
+
+  .notice{margin-top:70px;padding:18px 20px;border-radius:14px;border:1px solid rgba(201,169,106,.42);background:rgba(201,169,106,.06)}
+  .notice .h{font-size:12px;font-weight:800;color:var(--gold2);letter-spacing:.5px}
+  .notice p{font-size:12px;color:var(--sub);margin-top:8px;line-height:1.75}
+
+  footer{margin-top:48px;padding-top:26px;border-top:1px solid var(--line);font-size:11.5px;color:var(--dim);line-height:1.8}
+  footer b{color:var(--sub)}
+
+  @media(max-width:880px){.steps{grid-template-columns:repeat(2,1fr)}.effects{grid-template-columns:1fr}}
+  @media(max-width:560px){.steps{grid-template-columns:1fr}.nvTabs a{padding:6px 10px;font-size:11.5px}table{font-size:12px}th,td{padding:8px 6px}}
+</style>
+</head>
+<body>
+
+<nav class="siteNav">
+  <div class="nvIn">
+    <a class="nvBrand" href="index.html">A.P <b>LocaLift</b></a>
+    <div class="nvTabs">
+      <a href="index.html" data-p="index">홈</a>
+      <a href="opendata.html" data-p="opendata">공공데이터</a>
+      <a href="content.html" data-p="content">콘텐츠 엔진</a>
+      <a href="impact.html" data-p="impact">데이터 임팩트</a>
+      <a href="skygunners-ria.html" data-p="skygunners-ria">스포츠 마케팅</a>
+      <a href="about.html" data-p="about">회사 소개</a>
+      <a href="shop.html" data-p="shop">SHOP</a>
+      <a href="ir.html" data-p="ir">IR</a>
+      <a id="navDeliverables" href="deliverables.html" data-p="deliverables" style="display:none">산출물</a>
+      <a id="navActionBoard" href="action-board.html" data-p="action" style="display:none">액션보드</a>
+      <a id="navVideoReview" href="video-review.html" data-p="review" style="display:none">영상 검수실</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="over">Open Data</div>
+    <h1>어디를 찍을지, <b>데이터가 먼저 답합니다.</b></h1>
+    <p class="sub">
+      A.P LocaLift는 한국관광공사 <b>TourAPI</b>(공공데이터포털 오픈API)와 <b>한국관광 데이터랩</b>을 사용합니다.
+      감으로 지역을 고르지 않고, <b>어느 시군에 어떤 관광 콘텐츠가 있고 무엇이 비어 있는지</b>를 먼저 수치로 확인한 뒤
+      그 결과를 콘텐츠 배경·소재 선정의 기준으로 씁니다. 아래는 실제로 수집한 데이터와 그 결과입니다.
+    </p>
+  </section>
+
+  <!-- 01 활용 데이터 -->
+  <section class="sec">
+    <div class="no">01 · 활용 데이터</div>
+    <h2>무엇을 <b>어디서</b> 받아오는가</h2>
+    <p class="lede">
+      제공기관은 <b>한국관광공사</b>이며, 공공데이터포털(data.go.kr) 오픈API 방식(<code>_type=json</code>)으로 호출합니다.
+      국문과 영문을 같은 조건으로 각각 호출해 <b>동일 항목의 언어별 제공 여부</b>를 대조하는 것이 우리 수집의 핵심입니다.
+    </p>
+    <div class="card">
+      <table>
+        <thead><tr><th>서비스</th><th>오퍼레이션</th><th>우리가 쓰는 목적</th></tr></thead>
+        <tbody>
+          <tr><td><b>국문 관광정보 서비스</b><br><span style="font-size:11px;color:var(--dim)">KorService2</span></td><td><code>areaBasedList2</code></td><td>시군·유형별 관광지·숙박·음식점 목록 확보 — 지역 선정의 기준표</td></tr>
+          <tr><td><b>영문 관광정보 서비스</b><br><span style="font-size:11px;color:var(--dim)">EngService2</span></td><td><code>areaBasedList2</code></td><td>같은 항목의 영문 제공 여부 대조 — <b>결손 구간 식별</b></td></tr>
+          <tr><td>국문·영문 공통</td><td><code>searchKeyword2</code></td><td>특정 장소·테마 키워드로 소재 후보 탐색</td></tr>
+          <tr><td>국문·영문 공통</td><td><code>detailImage2</code></td><td>실경 이미지 참조 — 배경 고증용 레퍼런스</td></tr>
+          <tr><td>국문·영문 공통</td><td><code>searchFestival2</code></td><td>행사·축제의 시기 확인 — 공개 시점 설계</td></tr>
+          <tr><td><b>한국관광 데이터랩</b></td><td><code>locgoRegnVisitrDDList</code></td><td>시군별 방문객 규모 — 콘텐츠 효과의 분모</td></tr>
+        </tbody>
+      </table>
+      <div class="src">
+        수집 범위: 강원특별자치도(areaCode 32) 삼척시·양양군·홍천군·고성군. 국문 contentTypeId 12·32·39·15 / 영문 76·80·82·85.
+        수집 시점 2026-08-07. 출처: 한국관광공사 — 공공데이터포털 data.go.kr, 한국관광 데이터랩.
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 활용 방법 -->
+  <section class="sec">
+    <div class="no">02 · 활용 방법</div>
+    <h2>수집에서 <b>콘텐츠 소재</b>가 되기까지</h2>
+    <p class="lede">
+      원문을 그대로 옮겨 쓰지 않습니다. 시군×유형 축으로 정규화해 저장한 뒤,
+      <b>어느 지역이 콘텐츠로 다뤄질 가치가 있으면서 외국인이 접근할 정보는 부족한가</b>를 계산하고, 그 지역만 제작 대상으로 올립니다.
+    </p>
+    <div class="steps">
+      <div class="step"><div class="sn">STEP 1</div><div class="st">수집</div><div class="sd">국문·영문을 같은 조건으로 각각 호출합니다. 실패 시 재시도는 3회까지이며, 그 이상은 중단하고 기록합니다. 실패분을 추정치로 메우지 않습니다.</div></div>
+      <div class="step"><div class="sn">STEP 2</div><div class="st">정제·구조화</div><div class="sd">시군 코드와 콘텐츠 유형으로 축을 세워 정규화 데이터셋으로 저장합니다. 중복·좌표 결측·유형 미상 항목을 분리합니다.</div></div>
+      <div class="step"><div class="sn">STEP 3</div><div class="st">결손 계산</div><div class="sd">같은 항목의 영문 제공률을 시군별로 산출합니다. 이 비율이 낮을수록 「외국인이 찾아갈 수 없는 지역」이며, 우리 콘텐츠의 우선순위가 높아집니다.</div></div>
+      <div class="step"><div class="sn">STEP 4</div><div class="st">소재화</div><div class="sd">선정된 지역의 실경을 참조해 캐릭터 콘텐츠를 제작하고, 캡션에 공식 지명과 출처를 명시합니다.</div></div>
+    </div>
+  </section>
+
+  <!-- 03 실측 -->
+  <section class="sec">
+    <div class="no">03 · 실측 결과</div>
+    <h2>강원 4개 시군에서 <b>확인한 것</b></h2>
+    <p class="lede">
+      국문으로는 <b>329건</b>이 제공되지만 같은 항목의 영문은 <b>79건</b>뿐입니다. 제공률 <b>24.0%</b>.
+      네 시군의 연간 방문객은 합계 <b>536만 명</b>입니다. 오는 사람은 있는데, 외국인이 읽을 수 있는 정보가 넷 중 하나뿐인 상태입니다.
+      <b>이 격차가 우리가 메우려는 자리입니다.</b>
+    </p>
+
+    <div class="card">
+      <h3>시군별 국문·영문 제공 현황<span class="en">TourAPI areaBasedList2 · 2026-08-07 수집</span></h3>
+      <table style="margin-top:12px">
+        <thead>
+          <tr><th>시군</th><th class="num">국문</th><th class="num">영문</th><th>영문 제공률</th><th class="num">연간 방문객</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>삼척시</b></td><td class="num">90</td><td class="num">17</td><td><b>18.9%</b><div class="gapbar"><i style="width:18.9%"></i></div></td><td class="num">975,579</td></tr>
+          <tr><td><b>홍천군</b></td><td class="num">62</td><td class="num">13</td><td><b>21.0%</b><div class="gapbar"><i style="width:21.0%"></i></div></td><td class="num">1,856,947</td></tr>
+          <tr><td><b>고성군</b></td><td class="num">76</td><td class="num">19</td><td><b>25.0%</b><div class="gapbar"><i style="width:25.0%"></i></div></td><td class="num">1,202,183</td></tr>
+          <tr><td><b>양양군</b></td><td class="num">101</td><td class="num">30</td><td><b>29.7%</b><div class="gapbar"><i style="width:29.7%"></i></div></td><td class="num">1,327,811</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><td>합계</td><td class="num">329</td><td class="num">79</td><td>24.0%</td><td class="num">5,362,520</td></tr>
+        </tfoot>
+      </table>
+      <div class="src">
+        국문·영문 건수 출처: 한국관광공사 국문/영문 관광정보 서비스 <code>areaBasedList2</code>, areaCode 32, 2026-08-07 수집.
+        연간 방문객 출처: 한국관광 데이터랩 <code>locgoRegnVisitrDDList</code>. 수치는 수집 시점 기준이며 원문 데이터는 재배포하지 않습니다.
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>유형별 분해<span class="en">무엇이 특히 비어 있는가</span></h3>
+      <table style="margin-top:12px">
+        <thead>
+          <tr><th>유형</th><th class="num">국문</th><th class="num">영문</th><th class="num">제공률</th><th>해석</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><b>관광지</b></td><td class="num">205</td><td class="num">65</td><td class="num">31.7%</td><td>그나마 가장 나은 구간. 그래도 셋 중 둘은 영문이 없습니다.</td></tr>
+          <tr><td><b>음식점</b></td><td class="num">82</td><td class="num">9</td><td class="num">11.0%</td><td>외국인이 「무엇을 먹을지」 알 방법이 사실상 없습니다.</td></tr>
+          <tr><td><b>숙박</b></td><td class="num">35</td><td class="num">5</td><td class="num">14.3%</td><td>체류를 결정할 정보가 부족해 당일치기로 밀립니다.</td></tr>
+          <tr><td><b>축제·행사</b></td><td class="num">7</td><td class="num">0</td><td class="num">0.0%</td><td><b>영문 0건.</b> 방문 시점을 만드는 정보가 전무합니다.</td></tr>
+        </tbody>
+        <tfoot><tr><td>합계</td><td class="num">329</td><td class="num">79</td><td class="num">24.0%</td><td></td></tr></tfoot>
+      </table>
+      <div class="src">
+        국문 contentTypeId 12(관광지)·39(음식점)·32(숙박)·15(축제행사), 영문 76·82·80·85 기준. 동일 수집 배치.
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 활용 효과 -->
+  <section class="sec">
+    <div class="no">04 · 활용 효과</div>
+    <h2>데이터가 <b>콘텐츠에서 하는 일</b></h2>
+    <div class="effects">
+      <div class="eff"><div class="t">출처가 분명한 실존 지역</div><div class="d">배경이 어디인지 공식 지명으로 특정되고 출처가 병기됩니다. 「어딘가 한국스러운 곳」이 아니라 찾아갈 수 있는 좌표가 됩니다.</div></div>
+      <div class="eff"><div class="t">결손 구간 우선 제작</div><div class="d">영문 제공률이 낮은 시군을 우선 대상으로 올립니다. 이미 잘 알려진 곳이 아니라 알려질 방법이 없던 곳을 고릅니다.</div></div>
+      <div class="eff"><div class="t">시점 설계</div><div class="d">축제·행사 데이터로 공개 시점을 맞춥니다. 방문 동기가 실제로 존재하는 기간에 콘텐츠를 내보냅니다.</div></div>
+      <div class="eff"><div class="t">아카이브 축적</div><div class="d">제작된 콘텐츠가 실존 지역 아카이브로 쌓여, 시간이 갈수록 지역별 검색 가능한 자산이 됩니다.</div></div>
+    </div>
+  </section>
+
+  <!-- 05 준수 -->
+  <section class="sec">
+    <div class="no">05 · 준수 사항</div>
+    <h2>공공데이터를 <b>다루는 규칙</b></h2>
+    <div class="rules">
+      <div class="rule"><b>원문 재배포 금지.</b> 수집한 데이터를 원문 그대로 재배포하거나 별도 데이터 서비스로 제공하지 않습니다. 내부 분석과 콘텐츠 소재 선정에만 사용합니다.</div>
+      <div class="rule"><b>출처 병기.</b> 공개 지면에 인용하는 모든 수치에 제공기관과 수집 시점을 함께 적습니다. 출처가 병기되지 않은 서술은 실측값이 아니라 당사의 판단입니다.</div>
+      <div class="rule"><b>실패를 추정치로 메우지 않습니다.</b> 수집 실패 시 재시도는 3회까지이며, 그 이상은 중단하고 결측으로 기록합니다. 빈칸을 만들어 채우지 않습니다.</div>
+      <div class="rule"><b>인증키 비공개.</b> 오픈API 인증키는 코드·문서·로그·공개 지면 어디에도 기재하지 않습니다.</div>
+      <div class="rule"><b>개인정보 미수집.</b> 활용하는 공공데이터는 장소·시설·행사 정보이며 개인정보를 포함하지 않습니다.</div>
+    </div>
+  </section>
+
+  <div class="notice">
+    <div class="h">고지</div>
+    <p>
+      본 페이지의 수치는 출처를 병기한 것만 실측값이며, 출처가 병기되지 않은 서술은 당사의 판단 또는 계획입니다.
+      수치는 2026-08-07 수집 시점 기준이므로 이후 제공기관의 데이터 갱신에 따라 달라질 수 있습니다.
+      공공데이터 원문은 재배포하지 않습니다. 캐릭터 영상·이미지는 생성형 AI로 제작되었으며 AI 고지를 유지합니다.
+    </p>
+  </div>
+
+  <footer>
+    <b>A.P LocaLift</b> · 대표 박찬민 · cksals00@gmail.com<br>
+    공공데이터 출처: 한국관광공사(공공데이터포털 data.go.kr) — 국문/영문 관광정보 서비스, 한국관광 데이터랩<br>
+    © 2026 A.P LocaLift. 본 사이트의 캐릭터·영상·이미지 저작권은 A.P LocaLift에 있습니다.
+  </footer>
+</div>
+
+<script>(function(){var f=(location.pathname.split('/').pop()||'index.html').toLowerCase();if(!f)f='index.html';document.querySelectorAll('.siteNav .nvTabs a').forEach(function(a){var h=a.getAttribute('href').toLowerCase();if(h===f||((f===''||f==='index.html')&&a.dataset.p==='index'))a.classList.add('on');});})();</script>
+<script>(function(){try{var t=localStorage.getItem("ap_session");if(!t)return;var seg=t.split(".")[1].replace(/-/g,"+").replace(/_/g,"/");while(seg.length%4)seg+="=";var p=JSON.parse(decodeURIComponent(escape(atob(seg))));if(p&&p.exp&&p.exp>Date.now()&&p.role==="admin"){["navDeliverables","navActionBoard","navVideoReview"].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display="";});}}catch(e){}})();</script>
+</body>
+</html>
