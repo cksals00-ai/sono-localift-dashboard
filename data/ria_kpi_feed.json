@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-08T06:40:28+09:00",
+    "updated_at": "2026-08-08T11:28:44+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -122,7 +122,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 43.5,
+        "actual": 48.3,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -275,7 +275,7 @@
       "title": "You only get one. The sky you came fro…",
       "format": "Image",
       "url": "https://www.instagram.com/p/DbhZSDUAALh/",
-      "views": 24,
+      "views": 25,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -314,7 +314,7 @@
       "title": "we planned nothing. it turned out to b…",
       "format": "Carousel",
       "url": "https://www.instagram.com/p/Dbfn2FtGwv9/",
-      "views": 120,
+      "views": 121,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -465,7 +465,7 @@
     "baseline_followers": 931,
     "day": {
       "reach": 31,
-      "views": 49,
+      "views": 51,
       "profile_views": 2,
       "interactions": 3
     },
@@ -476,8 +476,8 @@
       "saves": 14,
       "comments": 6,
       "shares": 6,
-      "reach": 1338,
-      "views": 1661
+      "reach": 1339,
+      "views": 1663
     },
     "engagement_rate_pct": 1.94,
     "retention": {
@@ -538,7 +538,7 @@
       "with_duration": 0
     },
     "posting": {
-      "hours_since_last_post": 43.5,
+      "hours_since_last_post": 48.3,
       "alert_threshold_h": 36,
       "stalled": true,
       "week_posts": 6
@@ -547,7 +547,7 @@
   "audience": {
     "measurable": true,
     "by_country": {
-      "KR": 931,
+      "KR": 933,
       "AU": 2,
       "IN": 2,
       "DE": 1,
@@ -558,7 +558,7 @@
       "US": 1
     },
     "home_country": "KR",
-    "home_followers": 931,
+    "home_followers": 933,
     "foreign_followers": 10,
     "foreign_pct": 1.1,
     "top_foreign": [
@@ -595,6 +595,6 @@
         "followers": 1
       }
     ],
-    "counted": 941
+    "counted": 943
   }
 }
