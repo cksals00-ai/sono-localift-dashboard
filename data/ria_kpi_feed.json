@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-11T06:42:33+09:00",
+    "updated_at": "2026-08-11T11:36:00+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -122,7 +122,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 22.6,
+        "actual": 27.5,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -172,7 +172,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 96,
+        "actual": 97,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -262,7 +262,7 @@
       "title": "Three shoulder resets I do between tak…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/Db1lTTgIGQz/",
-      "views": 75,
+      "views": 77,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -465,19 +465,19 @@
     "baseline_followers": 931,
     "day": {
       "reach": 71,
-      "views": 77,
+      "views": 79,
       "profile_views": 2,
       "interactions": 1
     },
     "week": {
       "posts": 2,
       "reels": 2,
-      "reel_avg_views": 96,
+      "reel_avg_views": 97,
       "saves": 0,
       "comments": 2,
       "shares": 0,
       "reach": 178,
-      "views": 192
+      "views": 194
     },
     "engagement_rate_pct": 1.12,
     "retention": {
@@ -538,7 +538,7 @@
       "with_duration": 0
     },
     "posting": {
-      "hours_since_last_post": 22.6,
+      "hours_since_last_post": 27.5,
       "alert_threshold_h": 36,
       "stalled": false,
       "week_posts": 2
@@ -547,7 +547,7 @@
   "audience": {
     "measurable": true,
     "by_country": {
-      "KR": 929,
+      "KR": 930,
       "AU": 2,
       "IN": 2,
       "DE": 1,
@@ -557,7 +557,7 @@
       "US": 1
     },
     "home_country": "KR",
-    "home_followers": 929,
+    "home_followers": 930,
     "foreign_followers": 9,
     "foreign_pct": 1.0,
     "top_foreign": [
@@ -590,6 +590,6 @@
         "followers": 1
       }
     ],
-    "counted": 938
+    "counted": 939
   }
 }
