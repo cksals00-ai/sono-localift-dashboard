@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-11T11:36:00+09:00",
+    "updated_at": "2026-08-11T22:55:22+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -122,7 +122,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 27.5,
+        "actual": 38.8,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -131,7 +131,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 71,
+        "actual": 8,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -327,7 +327,7 @@
       "title": "we planned nothing. it turned out to b…",
       "format": "Carousel",
       "url": "https://www.instagram.com/p/Dbfn2FtGwv9/",
-      "views": 122,
+      "views": 123,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -464,10 +464,10 @@
     "media_count": 39,
     "baseline_followers": 931,
     "day": {
-      "reach": 71,
-      "views": 79,
-      "profile_views": 2,
-      "interactions": 1
+      "reach": 8,
+      "views": 13,
+      "profile_views": 0,
+      "interactions": 0
     },
     "week": {
       "posts": 2,
@@ -538,9 +538,9 @@
       "with_duration": 0
     },
     "posting": {
-      "hours_since_last_post": 27.5,
+      "hours_since_last_post": 38.8,
       "alert_threshold_h": 36,
-      "stalled": false,
+      "stalled": true,
       "week_posts": 2
     }
   },
