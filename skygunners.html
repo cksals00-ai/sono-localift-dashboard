@@ -218,6 +218,39 @@
   .fld input[readonly]{background:var(--bg);color:var(--navy2);font-weight:800}
   .ktmenu{margin-top:12px;background:#fffaf0;border:2px solid var(--accent);border-radius:9px;
     padding:9px 12px;font-size:11.5px;font-weight:600;color:var(--ink);line-height:1.75;word-break:keep-all}
+  .ktgrp{margin-top:13px;border:2px solid var(--navy2);border-radius:11px;padding:11px 12px;background:#fbfdff}
+  .ktgrp .gh{font-size:12.5px;font-weight:900;color:var(--navy2);margin-bottom:9px}
+  .ktgrp .ghint{margin-top:9px;font-size:11px;font-weight:700;color:var(--mut);line-height:1.6;word-break:keep-all}
+  .ktgrp .addrow{width:100%;margin-top:2px;padding:9px;border:2px dashed var(--navy2);background:#fff;
+    color:var(--navy2);font-family:inherit;font-size:12px;font-weight:900;border-radius:9px;cursor:pointer}
+  .mealrow{border:2px solid var(--navy2);border-radius:9px;padding:9px 10px;background:#fff;margin-bottom:8px}
+  .mealrow .r1,.mealrow .r2{display:flex;gap:6px;align-items:center}
+  .mealrow .r2{margin-top:7px}
+  .mealrow input,.mealrow select{font-family:inherit;font-size:12.5px;font-weight:600;color:var(--ink);
+    border:2px solid var(--navy2);border-radius:8px;padding:8px 9px;background:#fff;min-width:0}
+  .mealrow .md{flex:none;width:92px}
+  .mealrow .mn{flex:1}
+  .mealrow .mt{flex:1}
+  .mealrow .mp{flex:none;width:64px;text-align:center}
+  .mealrow .avg{flex:none;font-size:11px;font-weight:900;color:var(--navy);white-space:nowrap}
+  .mealrow .rm{flex:none;border:none;background:none;color:var(--loss);font-size:15px;font-weight:900;
+    cursor:pointer;font-family:inherit;padding:0 2px}
+  .ktbtns{display:flex;gap:9px;margin-top:11px;flex-wrap:wrap}
+  .ktbtns .ktcopy{flex:1;min-width:150px;margin-top:0}
+  .ktbtns .ktcopy.alt{background:#fff}
+  .ktrelwrap{margin-top:13px;border:2px dashed var(--navy2);border-radius:10px;padding:11px 12px;background:#fbfdff}
+  .ktrelwrap .rl{display:block;font-size:11.5px;font-weight:800;color:var(--navy2);margin-bottom:8px}
+  .ktrel{display:flex;flex-wrap:wrap;gap:6px}
+  .ktrel button{font-family:inherit;font-size:12px;font-weight:800;color:var(--navy2);background:#fff;
+    border:2px solid var(--navy2);border-radius:999px;padding:7px 12px;cursor:pointer}
+  .ktrel button.on{background:var(--accent);box-shadow:2px 2px 0 var(--navy2)}
+  #ktRelEtc{margin-top:8px;font-family:inherit;font-size:13px;font-weight:600;color:var(--ink);
+    border:2px solid var(--navy2);border-radius:8px;padding:9px 10px;background:#fff;width:100%}
+  .ktcnt{display:flex;align-items:center;gap:8px;margin-top:10px}
+  .ktcnt .lb{font-size:11.5px;font-weight:800;color:var(--navy2)}
+  .ktcnt input{width:78px;font-family:inherit;font-size:13px;font-weight:700;color:var(--ink);
+    border:2px solid var(--navy2);border-radius:8px;padding:8px 10px;background:#fff;text-align:center}
+  .ktcnt .un{font-size:12px;font-weight:800;color:var(--navy2)}
   .ktcards{padding:11px 12px;display:flex;flex-direction:column;gap:10px}
   .ktcard{border:2px solid var(--navy2);border-radius:10px;background:#fbfdff;padding:10px 12px}
   .ktcard .kh{display:flex;align-items:center;justify-content:space-between;gap:8px;
@@ -880,7 +913,7 @@
     <div class="vote-callout sky"><span>📮</span><span><b>KBL에서 대회 종료 후 취합을 요청했습니다.</b> 숙박·식사 비용과 방문 관광지 정보예요. <b>대회가 끝난 뒤</b> 각 가정에서 아래에 입력해 주시면 한 번에 모아 전달드립니다.</span></div>
 
     <div class="ktnote">
-      📌 <b>KBL 요청 항목</b> — 숙박 업소 · 1박 금액 · 객실당 숙박 인원 / 식당 · 1식 금액 / 선수단 외 참가인(가족 등) / 대회 기간 전후 다녀온 관광지<br>
+      📌 <b>KBL 제출 양식 그대로</b> 받습니다 — 숙박(업소명·1박당 금액·객실당 인원) / 식사(일자·식당명·총 금액·식사인원) / 선수외 참가·인원수 / 관광장소<br>
       🏨 팀 숙소 <b>소노벨 단양은 1박 233,000원</b>으로 미리 채워뒀어요. 다른 곳에서 더 묵으셨다면 <b>추가 숙소</b> 칸에 적어주세요.<br>
       🧾 영수증이나 카드 결제 내역을 <b>미리 사진으로 남겨두시면</b> 나중에 적기 훨씬 편해요.<br>
       🗓 작성은 <b>대회가 끝난 뒤</b>에 해주시면 됩니다. 미리 적어두셨다가 나중에 고치셔도 괜찮아요.
@@ -889,57 +922,76 @@
     <div class="resv-form">
       <div class="grid">
         <div class="fld">
-          <label>가정(선수) *</label>
+          <label>가정 *</label>
           <select id="ktFam"><option value="">— 선택 —</option></select>
           <input id="ktFamCustom" type="text" placeholder="가정 이름 직접 입력" style="display:none">
         </div>
         <div class="fld">
-          <label>숙박 ① 팀 숙소</label>
-          <input id="ktHotel" type="text" value="소노벨 단양" readonly>
-        </div>
-        <div class="fld">
-          <label>1박 금액 (원)</label>
-          <input id="ktRoomFee" type="number" inputmode="numeric" min="0" step="1000" value="233000">
-        </div>
-        <div class="fld">
-          <label>객실당 숙박 인원 (명)</label>
-          <input id="ktRoomPax" type="number" inputmode="numeric" min="1" max="20" placeholder="예) 4">
-        </div>
-        <div class="fld">
-          <label>숙박 ② 추가 숙소 <span class="opt">선택</span></label>
-          <input id="ktHotel2" type="text" placeholder="다른 곳에서도 묵었다면 숙소명">
-        </div>
-        <div class="fld">
-          <label>추가 숙소 1박 금액 (원) <span class="opt">선택</span></label>
-          <input id="ktRoomFee2" type="number" inputmode="numeric" min="0" step="1000" placeholder="예) 90000">
-        </div>
-        <div class="fld">
-          <label>식당 (단체 석식)</label>
-          <input id="ktRest" type="text" value="만이갈비 청전점" readonly>
-        </div>
-        <div class="fld">
-          <label>드신 메뉴</label>
-          <select id="ktMenu">
-            <option value="">— 선택 —</option>
-            <option value="13000">숯불돼지갈비 무한리필 · 성인 (13,000원)</option>
-            <option value="__kid">숯불돼지갈비 무한리필 · 초등 (금액 직접 입력)</option>
-            <option value="__etc">그 외 메뉴 (금액 직접 입력)</option>
-          </select>
-        </div>
-        <div class="fld">
-          <label>1식 금액 (원 · 1인 기준)</label>
-          <input id="ktMealFee" type="number" inputmode="numeric" min="0" step="500" placeholder="예) 13000">
-        </div>
-        <div class="fld">
-          <label>선수단 외 참가인 (명)</label>
-          <input id="ktGuest" type="number" inputmode="numeric" min="0" max="30" placeholder="선수 뺀 가족 인원 · 예) 3">
-        </div>
-        <div class="fld">
-          <label>다녀온 관광지</label>
-          <input id="ktSpot" type="text" placeholder="예) 도담삼봉, 만천하스카이워크">
+          <label>선수명 <span class="opt">KBL 양식 표기</span></label>
+          <input id="ktPlayer" type="text" placeholder="예) 박선우">
         </div>
       </div>
-      <div class="ktmenu">🍖 <b>만이갈비 청전점</b> — 숯불돼지갈비 무한리필 <b>성인 13,000원</b> (다이닝코드·당근 기준, 공기밥 포함). 우리 팀은 <b>초등 요금</b>으로 예약돼 있어 아이 금액은 다를 수 있어요. <b>영수증 금액 그대로</b> 적어주시면 가장 정확합니다.</div>
+
+      <div class="ktgrp">
+        <div class="gh">🏨 숙박</div>
+        <div class="grid">
+          <div class="fld">
+            <label>업소명 ①</label>
+            <input id="ktHotel" type="text" value="소노벨 단양" readonly>
+          </div>
+          <div class="fld">
+            <label>1박당 금액 (원)</label>
+            <input id="ktRoomFee" type="number" inputmode="numeric" min="0" step="1000" value="233000">
+          </div>
+          <div class="fld">
+            <label>객실당 인원 (명)</label>
+            <input id="ktRoomPax" type="number" inputmode="numeric" min="1" max="20" placeholder="예) 4">
+          </div>
+          <div class="fld">
+            <label>업소명 ② <span class="opt">선택</span></label>
+            <input id="ktHotel2" type="text" placeholder="다른 곳에서도 묵었다면">
+          </div>
+          <div class="fld">
+            <label>② 1박당 금액 (원) <span class="opt">선택</span></label>
+            <input id="ktRoomFee2" type="number" inputmode="numeric" min="0" step="1000" placeholder="예) 90000">
+          </div>
+          <div class="fld">
+            <label>② 객실당 인원 (명) <span class="opt">선택</span></label>
+            <input id="ktRoomPax2" type="number" inputmode="numeric" min="1" max="20" placeholder="예) 4">
+          </div>
+        </div>
+        <div class="ghint">＃ 1박당 금액은 <b>총 숙박금액 ÷ 숙박일수</b>로 적어주세요 (KBL 계산 기준).</div>
+      </div>
+
+      <div class="ktgrp">
+        <div class="gh">🍚 식사 <span class="opt">드신 끼니만큼 추가하세요</span></div>
+        <div id="ktMeals"></div>
+        <button type="button" class="addrow" id="ktAddMeal">＋ 식사 추가</button>
+        <div class="ktmenu">🍖 <b>만이갈비 청전점</b> — 숯불돼지갈비 무한리필 <b>성인 13,000원</b> (다이닝코드·당근 기준, 공기밥 포함). 우리 팀은 <b>초등 요금</b>으로 예약돼 있어요. <b>총 금액과 식사인원</b>을 적으면 인당 평균은 자동으로 계산됩니다.</div>
+      </div>
+
+      <div class="ktrelwrap">
+        <label class="rl">선수외 참가 가족 <span class="opt">해당되는 분을 모두 눌러주세요</span></label>
+        <div class="ktrel" id="ktRel">
+          <button type="button" data-r="아빠">아빠</button>
+          <button type="button" data-r="엄마">엄마</button>
+          <button type="button" data-r="형제자매">형제자매</button>
+          <button type="button" data-r="할아버지">할아버지</button>
+          <button type="button" data-r="할머니">할머니</button>
+          <button type="button" data-r="__etc">그 외</button>
+        </div>
+        <input id="ktRelEtc" type="text" placeholder="그 외 — 예) 이모, 삼촌, 사촌형" style="display:none">
+        <div class="ktcnt">
+          <span class="lb">모두 몇 명인가요?</span>
+          <input id="ktGuest" type="number" inputmode="numeric" min="0" max="30" placeholder="예) 3">
+          <span class="un">명</span>
+        </div>
+      </div>
+
+      <div class="fld" style="margin-top:13px">
+        <label>관광장소 <span class="opt">여러 곳이면 쉼표로 구분 · 안 가셨으면 비워두세요</span></label>
+        <input id="ktSpot" type="text" placeholder="예) 제천 의림지, 도담삼봉">
+      </div>
       <div class="fld" style="margin-top:11px">
         <label>기타 의견 <span class="opt">자유롭게</span></label>
         <textarea id="ktMemo" placeholder="예: 숙소·식당 좋았던 점이나 아쉬웠던 점 / 다음 대회 때 이렇게 하면 좋겠다 / 관광지 추천 / 그 외 KBL에 전할 의견"></textarea>
@@ -952,7 +1004,10 @@
       <div class="sh"><span>📋 가정별 제출 현황</span><span>회신 <span class="cnt" id="ktFamCnt">0</span>가정 · 참가인 <span class="cnt" id="ktGuestCnt">0</span>명</span></div>
       <div id="ktBody"><div class="resv-empty">아직 제출된 내용이 없습니다.</div></div>
     </div>
-    <button class="ktcopy admin-only block" id="ktCopy">📋 KBL 제출용으로 전체 복사</button>
+    <div class="ktbtns admin-only block">
+      <button class="ktcopy" id="ktXlsx">📊 KBL 양식 엑셀로 다운로드</button>
+      <button class="ktcopy alt" id="ktCopy">📋 텍스트로 전체 복사</button>
+    </div>
     <p class="refnote">* 입력하신 내용은 <b>KBL 제출용으로만</b> 사용하고, 전달이 끝나면 삭제합니다. 이 대시보드는 링크를 아는 사람이면 볼 수 있으니 <b>연락처·계좌번호·객실번호 같은 정보는 적지 말아 주세요.</b></p>
   </section>
 
@@ -1927,42 +1982,135 @@ var firebaseConfig = {
 
   /* ===== KBL 제출 자료 취합 ===== */
   var LOCAL_KT='skygunners_kbltally';
+  var KT_DATES=['8/14','8/15','8/16','8/17'];
+  var KT_RELMAP={'아빠':'부','엄마':'모','형제자매':'형제','할아버지':'조부','할머니':'조모'};
   var ktFamSel=el('ktFam'), ktFamCustom=el('ktFamCustom');
-  if(ktFamSel) ktFamSel.addEventListener('change',function(){ ktFamCustom.style.display= ktFamSel.value==='__custom'?'block':'none'; });
-  var ktMenuSel=el('ktMenu');
-  if(ktMenuSel) ktMenuSel.addEventListener('change',function(){
-    var v=ktMenuSel.value;
-    if(/^[0-9]+$/.test(v)) el('ktMealFee').value=v;
-    else { el('ktMealFee').value=''; el('ktMealFee').focus(); }
+  if(ktFamSel) ktFamSel.addEventListener('change',function(){
+    ktFamCustom.style.display= ktFamSel.value==='__custom'?'block':'none';
+    var pl=el('ktPlayer');
+    if(pl && !pl.value && ktFamSel.value && ktFamSel.value!=='__custom'){
+      pl.value=ktFamSel.value.replace(/\s*가정$/,'');
+    }
   });
-  function readLocalKt(){ try{return JSON.parse(localStorage.getItem(LOCAL_KT)||'{}');}catch(e){return {};} }
-  function writeLocalKt(o){ try{localStorage.setItem(LOCAL_KT,JSON.stringify(o));}catch(e){} renderKt(o); }
-  function ktStatus(m,bad){ var n=el('ktStatus'); if(!n) return; n.textContent=m; n.style.color=bad?'var(--loss)':'var(--win)'; }
   function won(v){ var n=parseInt(String(v==null?'':v).replace(/[^0-9]/g,''),10); return isNaN(n)?null:n; }
   function wonTxt(v){ var n=won(v); return n==null?'-':n.toLocaleString('ko-KR')+'원'; }
+  function ktStatus(m,bad){ var n=el('ktStatus'); if(!n) return; n.textContent=m; n.style.color=bad?'var(--loss)':'var(--win)'; }
+
+  /* --- 식사 행 --- */
+  var ktMealsBox=el('ktMeals');
+  function mealRowHtml(m){
+    m=m||{};
+    var opts=KT_DATES.map(function(d){ return '<option'+(m.d===d?' selected':'')+'>'+d+'</option>'; }).join('');
+    return '<div class="mealrow">'+
+      '<div class="r1"><select class="md"><option value="">일자</option>'+opts+'</select>'+
+      '<input class="mn" type="text" placeholder="식당명" value="'+esc(m.name||'')+'"></div>'+
+      '<div class="r2"><input class="mt" type="number" inputmode="numeric" min="0" step="1000" placeholder="총 금액" value="'+(m.total!=null?esc(String(m.total)):'')+'">'+
+      '<input class="mp" type="number" inputmode="numeric" min="1" max="30" placeholder="인원" value="'+(m.pax!=null?esc(String(m.pax)):'')+'">'+
+      '<span class="avg">인당 -</span><button type="button" class="rm" title="삭제">✕</button></div></div>';
+  }
+  function ktMealsPaint(){
+    if(!ktMealsBox) return;
+    Array.prototype.forEach.call(ktMealsBox.querySelectorAll('.mealrow'),function(r){
+      var t=won(r.querySelector('.mt').value), p=won(r.querySelector('.mp').value);
+      r.querySelector('.avg').textContent = (t!=null&&p)? '인당 '+Math.round(t/p).toLocaleString('ko-KR')+'원' : '인당 -';
+    });
+  }
+  function ktMealsSet(list){
+    if(!ktMealsBox) return;
+    list=(list&&list.length)?list:[{d:'8/15',name:'만이갈비 청전점'}];
+    ktMealsBox.innerHTML=list.map(mealRowHtml).join('');
+    ktMealsPaint();
+  }
+  function ktMealsRead(){
+    if(!ktMealsBox) return [];
+    return Array.prototype.map.call(ktMealsBox.querySelectorAll('.mealrow'),function(r){
+      return { d:r.querySelector('.md').value, name:(r.querySelector('.mn').value||'').trim(),
+               total:won(r.querySelector('.mt').value), pax:won(r.querySelector('.mp').value) };
+    }).filter(function(m){ return m.name||m.total!=null; });
+  }
+  if(ktMealsBox){
+    ktMealsBox.addEventListener('input',ktMealsPaint);
+    ktMealsBox.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('.rm'):null; if(!b) return;
+      var rows=ktMealsBox.querySelectorAll('.mealrow');
+      if(rows.length<=1){ ktMealsSet([{}]); return; }
+      b.parentNode.parentNode.parentNode.removeChild(b.parentNode.parentNode);
+    });
+    ktMealsSet(null);
+  }
+  if(el('ktAddMeal')) el('ktAddMeal').addEventListener('click',function(){
+    if(ktMealsBox.querySelectorAll('.mealrow').length>=6){ ktStatus('식사는 6개까지 적을 수 있어요.',true); return; }
+    ktMealsBox.insertAdjacentHTML('beforeend',mealRowHtml({}));
+  });
+
+  /* --- 선수외 참가 가족 --- */
+  var ktRelBox=el('ktRel'), ktGuestTouched=false;
+  if(el('ktGuest')) el('ktGuest').addEventListener('input',function(){ ktGuestTouched=true; });
+  function ktRelList(){
+    if(!ktRelBox) return [];
+    var out=[];
+    Array.prototype.forEach.call(ktRelBox.querySelectorAll('button.on'),function(b){
+      var r=b.getAttribute('data-r');
+      if(r==='__etc'){ var t=(el('ktRelEtc').value||'').trim(); if(t) out.push(t); }
+      else out.push(r);
+    });
+    return out;
+  }
+  function ktRelSync(){
+    var etcOn = ktRelBox && ktRelBox.querySelector('button[data-r="__etc"]').classList.contains('on');
+    el('ktRelEtc').style.display = etcOn?'block':'none';
+    if(!ktGuestTouched){
+      var n=ktRelBox.querySelectorAll('button.on').length;
+      el('ktGuest').value = n?String(n):'';
+    }
+  }
+  if(ktRelBox) ktRelBox.addEventListener('click',function(e){
+    var b=e.target.closest?e.target.closest('button[data-r]'):null; if(!b) return;
+    b.classList.toggle('on'); ktRelSync();
+    if(b.getAttribute('data-r')==='__etc' && b.classList.contains('on')) el('ktRelEtc').focus();
+  });
+
+  /* --- 저장 --- */
+  function readLocalKt(){ try{return JSON.parse(localStorage.getItem(LOCAL_KT)||'{}');}catch(e){return {};} }
+  function writeLocalKt(o){ try{localStorage.setItem(LOCAL_KT,JSON.stringify(o));}catch(e){} renderKt(o); }
+  function delKt(k){ if(configured){ db.ref('kbltally/'+k).remove(); } else { var o=readLocalKt(); delete o[k]; writeLocalKt(o); } }
   if(el('ktSubmit')) el('ktSubmit').addEventListener('click',function(){
     var fam = ktFamSel.value==='__custom' ? (ktFamCustom.value||'').trim() : ktFamSel.value;
     if(!fam){ ktStatus('가정을 선택하거나 입력해 주세요.',true); return; }
     var rec={ family:fam,
+      player:(el('ktPlayer').value||'').trim() || fam.replace(/\s*가정$/,''),
       hotel:(el('ktHotel').value||'').trim(),
       roomFee:won(el('ktRoomFee').value),
       roomPax:won(el('ktRoomPax').value),
       hotel2:(el('ktHotel2').value||'').trim(),
       roomFee2:won(el('ktRoomFee2').value),
-      rest:(el('ktRest').value||'').trim(),
-      menu:(function(){ var v=el('ktMenu'); return v&&v.selectedIndex>0 ? v.options[v.selectedIndex].text.replace(/\s*\(.*\)$/,'') : ''; })(),
-      mealFee:won(el('ktMealFee').value),
+      roomPax2:won(el('ktRoomPax2').value),
+      meals:ktMealsRead(),
+      rel:ktRelList().join(', '),
       guest:won(el('ktGuest').value),
       spot:(el('ktSpot').value||'').trim(),
       memo:(el('ktMemo').value||'').trim(),
       ts:new Date().toISOString() };
-    if(rec.roomFee==null && rec.mealFee==null && !rec.spot && !rec.memo){ ktStatus('금액·관광지·의견 중 하나는 적어주세요.',true); return; }
+    if(rec.roomFee==null && !rec.meals.length && !rec.spot && !rec.memo){ ktStatus('숙박·식사·관광·의견 중 하나는 적어주세요.',true); return; }
     if(configured){ db.ref('kbltally/'+famKey(fam)).set(rec); }
     else { var o=readLocalKt(); o[famKey(fam)]=rec; writeLocalKt(o); }
     ktStatus('✓ 「'+fam+'」 제출 완료.'+(configured?' 다시 제출하면 덮어써집니다.':' (임시 저장 · 실시간 설정 대기중)'),false);
   });
-  function delKt(k){ if(configured){ db.ref('kbltally/'+k).remove(); } else { var o=readLocalKt(); delete o[k]; writeLocalKt(o); } }
+
+  /* --- 표시 --- */
   var ktData={};
+  function ktLodges(v){
+    var a=[];
+    if(v.hotel||v.roomFee!=null) a.push({name:v.hotel||'',fee:v.roomFee,pax:v.roomPax});
+    if(v.hotel2||v.roomFee2!=null) a.push({name:v.hotel2||'',fee:v.roomFee2,pax:v.roomPax2});
+    return a;
+  }
+  function ktMealsOf(v){
+    if(v.meals&&v.meals.length) return v.meals;
+    if(v.rest||v.mealFee!=null) return [{d:'8/15',name:v.rest||'',total:v.mealFee,pax:1}];
+    return [];
+  }
+  function ktSpots(v){ return String(v.spot||'').split(/[,·\n]+/).map(function(x){return x.trim();}).filter(Boolean); }
   function renderKt(data){
     ktData=data||{};
     var body=el('ktBody'); if(!body) return;
@@ -1974,14 +2122,16 @@ var firebaseConfig = {
     if(!rows.length){ body.innerHTML='<div class="resv-empty">아직 제출된 내용이 없습니다. 대회가 끝난 뒤 위에서 입력해 주세요.</div>'; return; }
     var line=function(ic,lab,val){ return val? '<div class="kl"><span class="ic">'+ic+'</span><span class="lb">'+lab+'</span><span class="vl">'+val+'</span></div>' : ''; };
     var tr=rows.map(function(e){ var v=e.v;
-      var lodge=(v.hotel||v.roomFee!=null)? esc(v.hotel||'-')+' · <b>'+wonTxt(v.roomFee)+'</b>'+(v.roomPax?' / 객실당 '+esc(String(v.roomPax))+'인':'') : '';
-      var lodge2=(v.hotel2||v.roomFee2!=null)? esc(v.hotel2||'-')+' · <b>'+wonTxt(v.roomFee2)+'</b>' : '';
-      var meal=(v.rest||v.mealFee!=null)? esc(v.rest||'-')+(v.menu?' <span style="color:var(--mut)">'+esc(v.menu)+'</span>':'')+' · <b>'+wonTxt(v.mealFee)+'</b>' : '';
-      return '<div class="ktcard"><div class="kh"><span class="fam">'+esc(v.family||'')+'</span>'+
+      var lo=ktLodges(v).map(function(x){ return esc(x.name||'-')+' · <b>'+wonTxt(x.fee)+'</b>'+(x.pax?' / 객실당 '+esc(String(x.pax))+'인':''); }).join('<br>');
+      var me=ktMealsOf(v).map(function(m){
+        var avg=(m.total!=null&&m.pax)?' → 인당 <b>'+Math.round(m.total/m.pax).toLocaleString('ko-KR')+'원</b>':'';
+        return (m.d?esc(m.d)+' ':'')+esc(m.name||'-')+' · '+wonTxt(m.total)+(m.pax?' / '+esc(String(m.pax))+'명':'')+avg;
+      }).join('<br>');
+      return '<div class="ktcard"><div class="kh"><span class="fam">'+esc(v.player||v.family||'')+'</span>'+
         '<button class="del admin-only" data-k="'+esc(e.k)+'" title="삭제">✕</button></div>'+
-        line('🏨','숙박',lodge)+line('🏨','숙박②',lodge2)+line('🍚','식사',meal)+
-        line('👥','선수단 외',v.guest!=null?'<b>'+esc(String(v.guest))+'명</b>':'')+
-        line('📍','관광',esc(v.spot||''))+
+        line('🏨','숙박',lo)+line('🍚','식사',me)+
+        line('👥','선수외',(v.guest!=null||v.rel)?((v.guest!=null?'<b>'+esc(String(v.guest))+'명</b>':'')+(v.rel?' <span style="color:var(--mut)">'+esc(v.rel)+'</span>':'')):'')+
+        line('📍','관광',esc(ktSpots(v).join(', ')))+
         line('💬','의견',esc(v.memo||''))+'</div>';
     }).join('');
     body.innerHTML='<div class="ktcards">'+tr+'</div>';
@@ -1989,27 +2139,126 @@ var firebaseConfig = {
       btn.addEventListener('click',function(){ if(confirm('이 가정 제출 내용을 삭제할까요?')) delKt(btn.getAttribute('data-k')); });
     });
   }
-  function ktPlainText(){
+
+  /* --- 내보내기 --- */
+  function ktSorted(){
     var rows=Object.keys(ktData).map(function(k){ return ktData[k]||{}; });
     rows.sort(function(a,b){ return (a.family||'').localeCompare(b.family||''); });
-    var L=['[2026 KBL 제천 유스드림컵 · 소노 U-9 취합]',''];
-    rows.forEach(function(v){
-      L.push('· '+(v.family||'')
-        +' / 숙박 '+(v.hotel||'-')+' '+wonTxt(v.roomFee)+(v.roomPax?' (객실당 '+v.roomPax+'인)':'')
-        +((v.hotel2||v.roomFee2!=null)?' + '+(v.hotel2||'-')+' '+wonTxt(v.roomFee2):'')
-        +' / 식당 '+(v.rest||'-')+(v.menu?' '+v.menu:'')+' '+wonTxt(v.mealFee)
-        +' / 선수단 외 참가인 '+(v.guest!=null?v.guest+'명':'-')
-        +' / 관광 '+(v.spot||'-')
+    return rows;
+  }
+  function ktRelShort(s2){
+    return String(s2||'').split(/\s*,\s*/).filter(Boolean).map(function(x){ return KT_RELMAP[x]||x; }).join(', ');
+  }
+  function ktSpotTxt(v){
+    var a=ktSpots(v); if(!a.length) return '관광 없음';
+    if(a.length===1) return a[0];
+    var num=['①','②','③','④','⑤','⑥'];
+    return a.map(function(x,i){ return (num[i]||('('+(i+1)+')'))+' '+x; }).join('\n');
+  }
+  function ktPlainText(){
+    var rows=ktSorted(), L=['[2026 KBL 제천 유스드림컵 · 소노 U-9 취합]',''];
+    rows.forEach(function(v,i){
+      var lo=ktLodges(v).map(function(x){ return (x.name||'-')+' '+wonTxt(x.fee)+(x.pax?' (객실당 '+x.pax+'인)':''); }).join(' + ')||'-';
+      var me=ktMealsOf(v).map(function(m){
+        var avg=(m.total!=null&&m.pax)?' → 인당 '+Math.round(m.total/m.pax).toLocaleString('ko-KR')+'원':'';
+        return (m.d?m.d+' ':'')+(m.name||'-')+' '+wonTxt(m.total)+(m.pax?' / '+m.pax+'명':'')+avg;
+      }).join(' , ')||'-';
+      L.push((i+1)+'. '+(v.player||v.family||'')
+        +' / 숙박 '+lo
+        +' / 식사 '+me
+        +' / 선수외 참가 '+ktRelShort(v.rel)+' '+(v.guest!=null?v.guest+'명':'-')
+        +' / 관광 '+ktSpotTxt(v).replace(/\n/g,' ')
         +(v.memo?' / 의견 '+v.memo:''));
     });
     var g=rows.reduce(function(t,v){ return t+(won(v.guest)||0); },0);
-    L.push('', '합계: '+rows.length+'가정 · 선수단 외 참가인 '+g+'명');
+    L.push('', '합계: '+rows.length+'명 · 선수외 참가 '+g+'명');
     return L.join('\n');
   }
   if(el('ktCopy')) el('ktCopy').addEventListener('click',function(){
     var t=ktPlainText();
     if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(function(){ ktStatus('✓ 클립보드에 복사했습니다.',false); },function(){ window.prompt('복사해서 사용하세요',t); }); }
     else { window.prompt('복사해서 사용하세요',t); }
+  });
+
+  /* KBL 양식 그대로 엑셀 만들기 */
+  function ktBuildAoa(){
+    var rows=ktSorted();
+    var aoa=[
+      ['No.','선수명','숙박','','','식사','','','','','기타','','관광장소'],
+      ['','','업소명','1박당 금액','객실당 인원','일자','식당명','총 금액','식사인원','인당 평균','선수외 참가','인원수','']
+    ];
+    var merges=[
+      {s:{r:0,c:0},e:{r:1,c:0}},{s:{r:0,c:1},e:{r:1,c:1}},
+      {s:{r:0,c:2},e:{r:0,c:4}},{s:{r:0,c:5},e:{r:0,c:9}},
+      {s:{r:0,c:10},e:{r:0,c:11}},{s:{r:0,c:12},e:{r:1,c:12}}
+    ];
+    var r=2;
+    rows.forEach(function(v,idx){
+      var lo=ktLodges(v), me=ktMealsOf(v);
+      var h=Math.max(lo.length, me.length, 1);
+      for(var k=0;k<h;k++){
+        var L=lo[k]||{}, M=me[k]||{};
+        var avg=(M.total!=null&&M.pax)?Math.round(M.total/M.pax):'';
+        aoa.push([
+          k===0?(idx+1):'', k===0?(v.player||v.family||''):'',
+          L.name||'', L.fee!=null?L.fee:'', L.pax!=null?L.pax:'',
+          M.d||'', M.name||'', M.total!=null?M.total:'', M.pax!=null?M.pax:'', avg,
+          k===0?ktRelShort(v.rel):'', k===0?(v.guest!=null?v.guest:''):'',
+          k===0?ktSpotTxt(v):''
+        ]);
+      }
+      if(h>1){
+        [0,1,10,11,12].forEach(function(c){ merges.push({s:{r:r,c:c},e:{r:r+h-1,c:c}}); });
+      }
+      r+=h;
+    });
+    aoa.push([]);
+    aoa.push(['＃ 1박당 금액의 경우, [총 숙박금액] ÷ [숙박일수]로 계산']);
+    return {aoa:aoa,merges:merges,n:rows.length};
+  }
+  function ktDownload(blob,name){
+    var a=document.createElement('a'), u=URL.createObjectURL(blob);
+    a.href=u; a.download=name; document.body.appendChild(a); a.click();
+    setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(u); },400);
+  }
+  function ktCsvFallback(){
+    var b=ktBuildAoa();
+    var csv=b.aoa.map(function(row){
+      return row.map(function(c){ var t=String(c==null?'':c).replace(/\n/g,' '); return /[",]/.test(t)?'"'+t.replace(/"/g,'""')+'"':t; }).join(',');
+    }).join('\n');
+    var blob=new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8;'});
+    ktDownload(blob,'KBL_제천대회_소노U9_취합.csv');
+    ktStatus('✓ CSV로 저장했어요 (엑셀 변환이 안 될 때의 대체본).',false);
+  }
+  function ktLoadXlsx(cb){
+    if(window.XLSX) return cb(true);
+    var sc=document.createElement('script');
+    sc.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+    sc.onload=function(){ cb(!!window.XLSX); };
+    sc.onerror=function(){ cb(false); };
+    document.head.appendChild(sc);
+  }
+  if(el('ktXlsx')) el('ktXlsx').addEventListener('click',function(){
+    var b=ktBuildAoa();
+    if(!b.n){ ktStatus('아직 제출된 내용이 없어요.',true); return; }
+    ktStatus('엑셀 파일을 만드는 중…',false);
+    ktLoadXlsx(function(ok){
+      if(!ok){ ktCsvFallback(); return; }
+      try{
+        var ws=XLSX.utils.aoa_to_sheet(b.aoa);
+        ws['!merges']=b.merges;
+        ws['!cols']=[{wch:5},{wch:11},{wch:14},{wch:12},{wch:12},{wch:8},{wch:16},{wch:11},{wch:10},{wch:11},{wch:14},{wch:8},{wch:24}];
+        Object.keys(ws).forEach(function(k){
+          if(k.charAt(0)==='!') return;
+          var c=ws[k];
+          if(c.t==='n' && c.v>=1000) c.z='#,##0';
+        });
+        var wb=XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb,ws,'KBL 취합');
+        XLSX.writeFile(wb,'KBL_제천대회_소노U9_취합.xlsx');
+        ktStatus('✓ 엑셀 파일을 내려받았어요.',false);
+      }catch(err){ ktCsvFallback(); }
+    });
   });
 
   /* ===== 그룹형 네비게이터 ===== */
