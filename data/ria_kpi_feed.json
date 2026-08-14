@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-14T06:46:28+09:00",
+    "updated_at": "2026-08-14T12:07:41+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -122,7 +122,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 94.6,
+        "actual": 100.0,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -131,7 +131,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 2,
+        "actual": 3,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -172,7 +172,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 77,
+        "actual": 78,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -262,7 +262,7 @@
       "title": "Three shoulder resets I do between tak…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/Db1lTTgIGQz/",
-      "views": 77,
+      "views": 78,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -275,11 +275,11 @@
       "title": "Three checkpoints for wrists that spen…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbrnGcigbBP/",
-      "views": 117,
+      "views": 118,
       "likes": 1,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 7.2,
+      "avg_watch_sec": 7.1,
       "duration_sec": null,
       "retention_pct": null
     },
@@ -288,7 +288,7 @@
       "title": "You only get one. The sky you came fro…",
       "format": "Image",
       "url": "https://www.instagram.com/p/DbhZSDUAALh/",
-      "views": 25,
+      "views": 26,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -301,11 +301,11 @@
       "title": "He hid her clothes so she couldn't fly…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbhS8XQEpZB/",
-      "views": 63,
+      "views": 64,
       "likes": 0,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 11.4,
+      "avg_watch_sec": 11.2,
       "duration_sec": null,
       "retention_pct": null
     },
@@ -464,22 +464,22 @@
     "media_count": 39,
     "baseline_followers": 931,
     "day": {
-      "reach": 2,
-      "views": 2,
-      "profile_views": 1,
+      "reach": 3,
+      "views": 7,
+      "profile_views": 2,
       "interactions": 0
     },
     "week": {
       "posts": 1,
       "reels": 1,
-      "reel_avg_views": 77,
+      "reel_avg_views": 78,
       "saves": 0,
       "comments": 1,
       "shares": 0,
-      "reach": 69,
-      "views": 77
+      "reach": 70,
+      "views": 78
     },
-    "engagement_rate_pct": 1.45,
+    "engagement_rate_pct": 1.43,
     "retention": {
       "window": 5,
       "pass_threshold_pct": 40.0,
@@ -498,14 +498,14 @@
           "date": "2026-08-06",
           "title": "Three checkpoints for wrists that spen…",
           "retention_pct": null,
-          "avg_watch_sec": 7.2,
+          "avg_watch_sec": 7.1,
           "duration_sec": null
         },
         {
           "date": "2026-08-02",
           "title": "He hid her clothes so she couldn't fly…",
           "retention_pct": null,
-          "avg_watch_sec": 11.4,
+          "avg_watch_sec": 11.2,
           "duration_sec": null
         },
         {
@@ -538,7 +538,7 @@
       "with_duration": 0
     },
     "posting": {
-      "hours_since_last_post": 94.6,
+      "hours_since_last_post": 100.0,
       "alert_threshold_h": 36,
       "stalled": true,
       "week_posts": 1
@@ -547,18 +547,18 @@
   "audience": {
     "measurable": true,
     "by_country": {
-      "KR": 926,
+      "KR": 924,
       "AU": 2,
       "IN": 2,
       "DE": 1,
       "HK": 1,
-      "TH": 1,
       "UY": 1,
+      "TH": 1,
       "GB": 1,
       "US": 1
     },
     "home_country": "KR",
-    "home_followers": 926,
+    "home_followers": 924,
     "foreign_followers": 10,
     "foreign_pct": 1.1,
     "top_foreign": [
@@ -579,11 +579,11 @@
         "followers": 1
       },
       {
-        "country": "TH",
+        "country": "UY",
         "followers": 1
       },
       {
-        "country": "UY",
+        "country": "TH",
         "followers": 1
       },
       {
@@ -595,6 +595,6 @@
         "followers": 1
       }
     ],
-    "counted": 936
+    "counted": 934
   }
 }
