@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-16T06:22:07+09:00",
+    "updated_at": "2026-08-16T11:07:25+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -122,7 +122,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 142.2,
+        "actual": 147.0,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -131,7 +131,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 1,
+        "actual": 2,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -172,7 +172,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 81,
+        "actual": 82,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -262,7 +262,7 @@
       "title": "Three shoulder resets I do between tak…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/Db1lTTgIGQz/",
-      "views": 81,
+      "views": 82,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -314,7 +314,7 @@
       "title": "Four things a desk does to your body. …",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbhK4ZeE2kf/",
-      "views": 131,
+      "views": 132,
       "likes": 0,
       "comments": 1,
       "saves": 2,
@@ -464,22 +464,22 @@
     "media_count": 39,
     "baseline_followers": 931,
     "day": {
-      "reach": 1,
-      "views": 1,
+      "reach": 2,
+      "views": 3,
       "profile_views": 0,
       "interactions": 0
     },
     "week": {
       "posts": 1,
       "reels": 1,
-      "reel_avg_views": 81,
+      "reel_avg_views": 82,
       "saves": 0,
       "comments": 1,
       "shares": 0,
-      "reach": 72,
-      "views": 81
+      "reach": 73,
+      "views": 82
     },
-    "engagement_rate_pct": 1.39,
+    "engagement_rate_pct": 1.37,
     "retention": {
       "window": 5,
       "pass_threshold_pct": 40.0,
@@ -538,7 +538,7 @@
       "with_duration": 0
     },
     "posting": {
-      "hours_since_last_post": 142.2,
+      "hours_since_last_post": 147.0,
       "alert_threshold_h": 36,
       "stalled": true,
       "week_posts": 1
