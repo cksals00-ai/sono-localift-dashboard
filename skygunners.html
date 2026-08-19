@@ -547,35 +547,60 @@
   .tlegend{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
   .tlegend span{font-size:10px;font-weight:900;border:2px solid var(--navy2);border-radius:999px;
     padding:3px 9px;background:#fff;color:var(--navy2)}
-  /* ===== 대회 캘린더 표 ===== */
-  .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:3px solid var(--navy2);
-    border-radius:12px;box-shadow:var(--hs);background:var(--card)}
-  .ttbl{border-collapse:collapse;min-width:1180px;width:100%;font-size:11.5px;line-height:1.65}
-  .ttbl th,.ttbl td{padding:9px 10px;border-bottom:1.5px solid var(--line);
-    border-right:1.5px solid #dde6ee;vertical-align:top;text-align:left;word-break:keep-all}
-  .ttbl th{background:var(--navy2);color:#fff;font-size:11px;font-weight:900;white-space:nowrap;
-    position:sticky;top:0;z-index:3}
-  .ttbl td{font-weight:600;color:var(--ink)}
-  .ttbl td b{font-weight:900;color:var(--navy2)}
-  .ttbl .dim{color:var(--mut);font-weight:600;font-size:10.5px}
-  .ttbl tr:last-child td{border-bottom:none}
-  .ttbl .c-nm{position:sticky;left:0;z-index:2;background:#f4f9fd;min-width:172px;max-width:172px;
-    border-right:3px solid var(--navy2)}
-  .ttbl th.c-nm{background:var(--navy2);z-index:4}
-  .ttbl .c-nm b{display:block;font-size:12px;color:var(--navy);line-height:1.45}
-  .ttbl .c-nm .ho{display:block;margin-top:4px;font-size:10px;font-weight:700;color:var(--mut);line-height:1.5}
-  .ttbl .c-nm .lk{display:inline-block;margin-top:6px;font-size:10px;font-weight:900;color:var(--sky);
-    text-decoration:none;border-bottom:1.5px solid var(--sky)}
-  .ttbl .mrow td{background:var(--navy);color:#fff;font-size:12.5px;font-weight:900;letter-spacing:-.3px;
-    border-right:none;padding:8px 10px}
-  .ttbl .mrow .ms{position:sticky;left:10px;display:inline-block}
-  .ttbl tr.r-chk .c-nm{background:#fff2f0}
-  .ttbl tr.r-closed .c-nm{background:#fff5f3}
-  .ttbl tr.r-end .c-nm{background:#eef3f7}
-  .ttbl tr.r-go .c-nm{background:#eefaf3}
-  .ttbl .tstat{display:inline-block;text-align:center;font-size:9.5px;font-weight:900;line-height:1.4;
-    border:2px solid var(--navy2);border-radius:9px;padding:4px 7px;background:#fff;color:var(--navy2);white-space:nowrap;position:static}
-  .tscroll{margin:0 0 8px;font-size:10.5px;font-weight:800;color:var(--mut);text-align:right}
+  /* ===== 대회 캘린더 (모바일 우선) ===== */
+  .tfil{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 11px}
+  .tfil button{font-family:inherit;font-size:11px;font-weight:900;letter-spacing:-.2px;cursor:pointer;
+    border:2px solid var(--navy2);border-radius:999px;padding:6px 11px;background:#fff;color:var(--navy2)}
+  .tfil button i{font-style:normal;color:var(--mut);font-size:10px;margin-left:1px}
+  .tfil button.on{background:var(--navy2);color:#fff;box-shadow:2px 2px 0 rgba(0,0,0,.2)}
+  .tfil button.on i{color:var(--accent)}
+  .tcal-act{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 10px}
+  .tcal-act button{font-family:inherit;font-size:11.5px;font-weight:900;cursor:pointer;
+    border:2px dashed var(--navy2);border-radius:9px;padding:7px 12px;background:#fff;color:var(--navy2)}
+  .tcal-act .hint{font-size:10.5px;font-weight:700;color:var(--mut)}
+  .tmon{margin:16px 0 8px;font-size:13px;font-weight:900;color:#fff;letter-spacing:-.3px;
+    background:var(--navy);border:2px solid var(--navy2);border-radius:9px;padding:7px 12px;
+    box-shadow:2px 2px 0 var(--navy2)}
+  .tmon:first-child{margin-top:2px}
+  .titem{border:2.5px solid var(--navy2);border-radius:12px;background:var(--card);
+    margin-bottom:9px;overflow:hidden;box-shadow:3px 3px 0 rgba(18,35,58,.13)}
+  .titem .thead{display:flex;align-items:center;gap:10px;width:100%;padding:11px 12px;
+    background:none;border:none;font-family:inherit;text-align:left;cursor:pointer}
+  .titem .mm{flex:none;width:38px;height:38px;border-radius:10px;background:var(--bg);
+    border:2px solid var(--navy2);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+  .titem .mm b{font-size:15px;font-weight:900;font-style:italic;color:var(--navy)}
+  .titem .mm i{font-style:normal;font-size:8.5px;font-weight:800;color:var(--mut);margin-top:1px}
+  .titem .tx{flex:1;min-width:0}
+  .titem .tx>b{display:block;font-size:12.5px;font-weight:900;color:var(--navy2);line-height:1.4;word-break:keep-all}
+  .titem .tx .u9{display:inline-block;margin-top:4px;font-style:normal;font-size:9px;font-weight:900;
+    border-radius:999px;padding:2px 7px;border:1.5px solid var(--navy2)}
+  .titem .tx .u9.y{background:#c9f2dd;color:#0d5b3a}
+  .titem .tx .u9.n{background:#ffd9d4;color:#8a2b23}
+  .titem .tx .u9.q{background:#eceff2;color:var(--mut)}
+  .titem .tx .sb{display:block;margin-top:4px;font-size:10.5px;font-weight:700;color:var(--mut);
+    line-height:1.5;word-break:keep-all}
+  .titem .rt{flex:none;display:flex;flex-direction:column;align-items:center;gap:4px}
+  .titem .rt .tstat{font-size:13px;padding:3px 6px;border-radius:8px;line-height:1;position:static}
+  .titem .rt .cv{font-style:normal;font-size:11px;font-weight:900;color:var(--navy2);transition:transform .18s}
+  .titem.open .rt .cv{transform:rotate(180deg)}
+  .titem .tbody{display:none;padding:2px 12px 12px;border-top:2px dashed var(--navy2);margin-top:2px}
+  .titem.open .tbody{display:block}
+  .titem .dr{display:flex;gap:9px;padding:8px 0;border-bottom:1.5px solid #e3ecf3;font-size:11.5px;line-height:1.7}
+  .titem .dr:last-of-type{border-bottom:none}
+  .titem .dr .dt{flex:none;width:64px;font-weight:900;color:var(--mut);font-size:10.5px;padding-top:1px}
+  .titem .dr .dd{flex:1;min-width:0;font-weight:600;color:var(--ink);word-break:keep-all}
+  .titem .dr .dd b{font-weight:900;color:var(--navy2)}
+  .titem .dr .dd .dim{color:var(--mut);font-weight:600;font-size:10.5px}
+  .titem .dlk{display:inline-block;margin-top:9px;font-size:11px;font-weight:900;color:#fff;
+    background:var(--sky);border:2px solid var(--navy2);border-radius:8px;padding:6px 11px;text-decoration:none}
+  .titem[data-stat=chk]{border-color:#c2544c}
+  .titem[data-stat=closed]{border-color:#9aa4ad;background:#fbfbfc}
+  .titem[data-stat=end]{border-color:#9aa4ad;background:#f7f9fa}
+  @media(min-width:720px){
+    .tcal-list{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+    .tmon{grid-column:1/-1}
+    .titem.open{grid-column:1/-1}
+  }
   .tcat:first-child{margin-top:2px}
 
   /* ---------- sticky top nav ---------- */
@@ -1045,12 +1070,7 @@
   <!-- TOURNAMENT CALENDAR -->
   <section>
     <div class="sec-h"><h2>유소년 농구대회 캘린더 (2026-27)</h2><span class="en">Tournaments</span><button class="manage-btn admin-only" data-sec="tourn">＋ 관리</button></div>
-    <div class="unihint">🗓 <b>2026-27 시즌</b> 대회 캘린더예요. 카드 오른쪽 위 <b>상태 표시</b>로 준비 단계를 관리합니다 — 관리자 화면에서 바꿀 수 있어요.</div>
-    <div class="tlegend">
-      <span>🔎 확인 필요</span><span>👀 요강 대기</span><span>🟢 접수중</span><span>🔒 신청 마감</span>
-      <span>✍️ 신청 예정</span><span>✅ 참가 확정</span><span>⛔ 불참</span><span>🏁 종료</span>
-    </div>
-    <p class="tscroll">← 표를 옆으로 밀면 나머지 칸이 보여요 →</p>
+    <div class="unihint">🗓 <b>2026-27 시즌</b> 대회 캘린더예요. <b>대회를 누르면</b> 주최·부문·지난 우승·신청 방법이 펼쳐집니다. 위 칩으로 <b>U9 나갈 수 있는 대회</b>만 골라 볼 수도 있어요.</div>
     <div id="tournBox"></div>
     <p class="refnote">* 2026년 8월 기준으로 <b>기사·협회 공지를 직접 찾아</b> 정리했습니다. 2027년 요강은 대부분 아직 안 나와서 <b>직전 대회 실제 기록</b>을 넣었고, 확인 못 한 항목은 <b>"미확인"</b>으로 남겼습니다 — 추측으로 채우지 않았어요.<br>
       * <b>U9 부문이 확실한 대회</b> — 양양 오색케이블카배, 상주 곶감배, 강남구청장배, 홍천 슈퍼컵, 제천 종별대잔치, 양구 사과배, 결초보은배, 인천 춘계, 횡성 유소년 농구대잔치, 횡성 한우컵, 하늘내린인제. <b>원주 치악배는 U10부터</b>라 U9은 못 나갑니다.<br>
@@ -1624,39 +1644,39 @@ var firebaseConfig = {
     ],
     tourn:[
       {cat:'🍂 2026년 10월'},
-      {stat:'wait',name:'용인특례시 우지원 유소년 농구대회',host:'용인특례시체육회 · 우지원농구교실 / 용인시농구협회',when:'10월 셋째 주 주말 2일<br><span class="dim">2025년 10/18~19 · 2024년 11/2~3</span>',place:'용인실내체육관<br>용인청소년수련관',div:'초등 3·4학년부 / 5·6학년부 / 중등부<br><b>U10부 확인</b>',scale:'39팀 · 약 500명<br><span class="dim">2025년 (2024년 32팀 400명)</span>',champ:'<b>U10</b> 오산동탄 더 모스트<br><span class="dim">준우승 분당 삼성 · MVP 박찬율</span>',apply:'미확인<br><span class="dim">용인시농구협회 페이스북이 공지 채널</span>',link:'http://www.dtoday.co.kr/news/articleView.html?idxno=734340',linkText:'2025 대회 기사'},
-      {stat:'wait',name:'강남구청장배 농구대회 (제11회 예상)',host:'강남구체육회 / 강남구농구협회 <span class="dim">(추정)</span>',when:'10월 셋째 주 주말 2일<br><span class="dim">2025년 10/18~19</span>',place:'대진체육관 (개포로109길 62)<br>강남구민체육관 (개포로28길 47)',div:'<b>i3 U9부 · U10부</b><br><span class="dim">U12부 확인</span>',scale:'미확인',champ:'<b>U10</b> 스티즈 강남<br><span class="dim">준우승 디오스포츠 (18-4) · 3위 파주운정 TOP</span><br><b>U9</b> 3위 스티즈 강남 <span class="dim">(우승팀 미확인)</span>',apply:'미확인<br><span class="dim">5월 협회장배와 별개 대회</span>',link:'http://gangnamsportal.or.kr/',linkText:'강남구체육회'},
-      {stat:'closed',name:'스마트 아산 전국 농구대회 (제9회 예상)',host:'아산시 <span class="dim">(주최 미확인)</span>',when:'10월 중순 2일<br><span class="dim">2025년(제8회) 10/11~12</span>',place:'충남 아산시 일대<br><span class="dim">체육관명 미확인</span>',div:'U11 확인<br><span class="dim">저학년 부문 미확인</span>',scale:'미확인',champ:'U11 아산 우리은행 주니어 <span class="dim">(준우승 평택 김훈 23-17 · 2025)</span>',apply:'<b>올해는 이미 신청 마감</b><br><span class="dim">다음 회차 요강을 기다려야 합니다</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065600463441380',linkText:'제8회 U11 우승 기사'},
-      {stat:'chk',name:'시흥시 10월 유소년 대회 — 대회명 확인 필요',host:'시흥시농구협회 <span class="dim">(추정)</span>',when:'<b>10월 대회 미확인</b><br><span class="dim">확인된 건 춘계 4월 · 5월 · 협회장배 7월</span>',place:'미확인',div:'미확인',scale:'미확인',champ:'미확인',apply:'<b>정확한 대회명을 알려주시면 다시 찾겠습니다</b><br><span class="dim">시흥시체육회 031-314-9922</span>',link:'http://www.shsports.or.kr/3',linkText:'시흥시체육회'},
+      {stat:'wait',u9:'?',name:'용인특례시 우지원 유소년 농구대회',host:'용인특례시체육회 · 우지원농구교실 / 용인시농구협회',when:'10월 셋째 주 주말 2일<br><span class="dim">2025년 10/18~19 · 2024년 11/2~3</span>',place:'용인실내체육관<br>용인청소년수련관',div:'초등 3·4학년부 / 5·6학년부 / 중등부<br><b>U10부 확인</b>',scale:'39팀 · 약 500명<br><span class="dim">2025년 (2024년 32팀 400명)</span>',champ:'<b>U10</b> 오산동탄 더 모스트<br><span class="dim">준우승 분당 삼성 · MVP 박찬율</span>',apply:'미확인<br><span class="dim">용인시농구협회 페이스북이 공지 채널</span>',link:'http://www.dtoday.co.kr/news/articleView.html?idxno=734340',linkText:'2025 대회 기사'},
+      {stat:'wait',u9:'Y',name:'강남구청장배 농구대회 (제11회 예상)',host:'강남구체육회 / 강남구농구협회 <span class="dim">(추정)</span>',when:'10월 셋째 주 주말 2일<br><span class="dim">2025년 10/18~19</span>',place:'대진체육관 (개포로109길 62)<br>강남구민체육관 (개포로28길 47)',div:'<b>i3 U9부 · U10부</b><br><span class="dim">U12부 확인</span>',scale:'미확인',champ:'<b>U10</b> 스티즈 강남<br><span class="dim">준우승 디오스포츠 (18-4) · 3위 파주운정 TOP</span><br><b>U9</b> 3위 스티즈 강남 <span class="dim">(우승팀 미확인)</span>',apply:'미확인<br><span class="dim">5월 협회장배와 별개 대회</span>',link:'http://gangnamsportal.or.kr/',linkText:'강남구체육회'},
+      {stat:'closed',u9:'?',name:'스마트 아산 전국 농구대회 (제9회 예상)',host:'아산시 <span class="dim">(주최 미확인)</span>',when:'10월 중순 2일<br><span class="dim">2025년(제8회) 10/11~12</span>',place:'충남 아산시 일대<br><span class="dim">체육관명 미확인</span>',div:'U11 확인<br><span class="dim">저학년 부문 미확인</span>',scale:'미확인',champ:'U11 아산 우리은행 주니어 <span class="dim">(준우승 평택 김훈 23-17 · 2025)</span>',apply:'<b>올해는 이미 신청 마감</b><br><span class="dim">다음 회차 요강을 기다려야 합니다</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065600463441380',linkText:'제8회 U11 우승 기사'},
+      {stat:'chk',u9:'?',name:'시흥시 10월 유소년 대회 — 대회명 확인 필요',host:'시흥시농구협회 <span class="dim">(추정)</span>',when:'<b>10월 대회 미확인</b><br><span class="dim">확인된 건 춘계 4월 · 5월 · 협회장배 7월</span>',place:'미확인',div:'미확인',scale:'미확인',champ:'미확인',apply:'<b>정확한 대회명을 알려주시면 다시 찾겠습니다</b><br><span class="dim">시흥시체육회 031-314-9922</span>',link:'http://www.shsports.or.kr/3',linkText:'시흥시체육회'},
       {cat:'❄️ 2026년 11~12월'},
-      {stat:'wait',name:'상주 곶감배 전국 유소년 농구대회',host:'상주시 · 상주시체육회 / 상주시농구협회 <span class="dim">(추정)</span>',when:'<b>11월 중순 ~ 12월</b> 2일<br><span class="dim">2025년 11/15~16 · 2024년 12/21 — 해마다 변동</span>',place:'경북 상주 일대<br><span class="dim">체육관명 미확인</span>',div:'<b>U9</b> · U11 · U12 · U13 · U14',scale:'미확인',champ:'<b>U9</b> 성북 삼성 <span class="dim">(2025)</span>',apply:'미확인<br><span class="dim">상주시체육회 대회안내 게시판</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065597416504403',linkText:'U9 우승 기사'},
-      {stat:'wait',name:'양양 오색케이블카배 전국 유소년 농구 왕중왕전',host:'양양군체육회 / 양양군농구협회 <span class="dim">(추정)</span>',when:'12월 셋째~넷째 주 2일<br><span class="dim">2025년 12/20~21</span>',place:'양양실내체육관 외 3개소<br><span class="dim">총 4개 체육관</span>',div:'<b>U9 ~ U18 6개 종별</b>',scale:'약 500명',champ:'<b>U10</b> 광주 플릭 <span class="dim">(준우승 의정부 SK)</span><br>U13 강남 삼성 <span class="dim">(준우승 의정부 SK)</span>',apply:'미확인<br><span class="dim">양양군체육회 대회안내 게시판</span>',link:'https://basketkorea.com/news/newsview.php?ncode=1065580879247409',linkText:'2025 대회 기사'},
-      {stat:'chk',name:'강서구협회장배 농구대회 (제15회 예상)',host:'강서구농구협회 / 강서구체육회 <span class="dim">(추정)</span>',when:'<b>12월 초</b> <span class="dim">(제14회 2025년 12월 · 정확한 기간 미확인)</span>',place:'서울 강서구<br><span class="dim">체육관명 미확인</span>',div:'<b>i3 U10부 확인</b><br><span class="dim">U9 등 나머지 종별 미확인</span>',scale:'미확인',champ:'<b>U10</b> 팀 강서 <span class="dim">(준우승 락스포츠 20-15 · 공동 3위 운정 TOP·스티즈 강남)</span>',apply:'<b>강서구농구협회에 확인 중</b><br><span class="dim">강서구체육회 gangseosportal.or.kr</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065609530527372',linkText:'제14회 U10 우승 기사'},
-      {stat:'chk',name:'홍천 무궁화배 — 유소년 대회 존속 확인 필요',host:'강원도농구협회 · 홍천군체육회 / KXO <span class="dim">(연도별로 다름)</span>',when:'<b>12월 근거 없음</b><br><span class="dim">2021년 11월 · 2022년 1월 개최</span>',place:'홍천 일원',div:'2022년 초등 3~6학년 · 중등 · 고등 8개 종별',scale:'약 100팀 <span class="dim">(2021·2022)</span>',champ:'미확인',apply:'<b>11월 성인 생활체육 대회와 별개</b><br><span class="dim">현재는 아래 1월 슈퍼컵으로 이어진 듯</span>',link:'https://v.daum.net/v/20220114142201752',linkText:'2022 유소년 대회 기사'},
+      {stat:'wait',u9:'Y',name:'상주 곶감배 전국 유소년 농구대회',host:'상주시 · 상주시체육회 / 상주시농구협회 <span class="dim">(추정)</span>',when:'<b>11월 중순 ~ 12월</b> 2일<br><span class="dim">2025년 11/15~16 · 2024년 12/21 — 해마다 변동</span>',place:'경북 상주 일대<br><span class="dim">체육관명 미확인</span>',div:'<b>U9</b> · U11 · U12 · U13 · U14',scale:'미확인',champ:'<b>U9</b> 성북 삼성 <span class="dim">(2025)</span>',apply:'미확인<br><span class="dim">상주시체육회 대회안내 게시판</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065597416504403',linkText:'U9 우승 기사'},
+      {stat:'wait',u9:'Y',name:'양양 오색케이블카배 전국 유소년 농구 왕중왕전',host:'양양군체육회 / 양양군농구협회 <span class="dim">(추정)</span>',when:'12월 셋째~넷째 주 2일<br><span class="dim">2025년 12/20~21</span>',place:'양양실내체육관 외 3개소<br><span class="dim">총 4개 체육관</span>',div:'<b>U9 ~ U18 6개 종별</b>',scale:'약 500명',champ:'<b>U10</b> 광주 플릭 <span class="dim">(준우승 의정부 SK)</span><br>U13 강남 삼성 <span class="dim">(준우승 의정부 SK)</span>',apply:'미확인<br><span class="dim">양양군체육회 대회안내 게시판</span>',link:'https://basketkorea.com/news/newsview.php?ncode=1065580879247409',linkText:'2025 대회 기사'},
+      {stat:'chk',u9:'?',name:'강서구협회장배 농구대회 (제15회 예상)',host:'강서구농구협회 / 강서구체육회 <span class="dim">(추정)</span>',when:'<b>12월 초</b> <span class="dim">(제14회 2025년 12월 · 정확한 기간 미확인)</span>',place:'서울 강서구<br><span class="dim">체육관명 미확인</span>',div:'<b>i3 U10부 확인</b><br><span class="dim">U9 등 나머지 종별 미확인</span>',scale:'미확인',champ:'<b>U10</b> 팀 강서 <span class="dim">(준우승 락스포츠 20-15 · 공동 3위 운정 TOP·스티즈 강남)</span>',apply:'<b>강서구농구협회에 확인 중</b><br><span class="dim">강서구체육회 gangseosportal.or.kr</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065609530527372',linkText:'제14회 U10 우승 기사'},
+      {stat:'chk',u9:'?',name:'홍천 무궁화배 — 유소년 대회 존속 확인 필요',host:'강원도농구협회 · 홍천군체육회 / KXO <span class="dim">(연도별로 다름)</span>',when:'<b>12월 근거 없음</b><br><span class="dim">2021년 11월 · 2022년 1월 개최</span>',place:'홍천 일원',div:'2022년 초등 3~6학년 · 중등 · 고등 8개 종별',scale:'약 100팀 <span class="dim">(2021·2022)</span>',champ:'미확인',apply:'<b>11월 성인 생활체육 대회와 별개</b><br><span class="dim">현재는 아래 1월 슈퍼컵으로 이어진 듯</span>',link:'https://v.daum.net/v/20220114142201752',linkText:'2022 유소년 대회 기사'},
       {cat:'🎿 2027년 1월'},
-      {stat:'chk',name:'홍천 글로벌 유소년 농구 슈퍼컵 <span class="dim">(NH농협은행)</span>',host:'KXO(한국3x3농구연맹) · 홍천군 · 홍천군체육회',when:'1월 중순 3일<br><span class="dim">2026년 1/16~18 (5회째)</span>',place:'홍천군 일원 6개 체육시설',div:'<b>U8 · U9 · U10</b> · U11~U15 · 여자초등부',scale:'<b>84팀 · 약 2,000명 · 4개국</b><br><span class="dim">한국·일본·태국·몽골</span>',champ:'<b>U9</b> 분당 삼성 · <b>U10</b> 하남 KCC<br><span class="dim">U8 분당삼성 / U11 아산우리은행 / U13 모비스 (2026)</span>',apply:'<b>개최지가 도는 순회 대회</b><br><span class="dim">2027년 1월이 홍천일지 미정</span>',link:'https://www.mt.co.kr/sports/2026/01/17/202601171507773371O',linkText:'2026 홍천 대회 기사'},
-      {stat:'wait',name:'자연치유도시제천 전국 유소년 농구 스토브리그',host:'제천시농구협회',when:'1월 둘째 주 시작 · 약 1주일<br><span class="dim">2025년 1/13~19 · 2024년 1/8~14</span>',place:'제천 어울림체육센터 · 제천족구장<br><span class="dim">우리가 8월에 뛴 그 체육관</span>',div:'엘리트 / 생활체육 2개 트랙<br><span class="dim">연령 종별 구성 미확인</span>',scale:'18팀 · 약 600명 <span class="dim">(2025)</span>',champ:'<b>순위를 매기지 않는 대회</b><br><span class="dim">전지훈련 성격 · 합숙 진행</span>',apply:'미확인<br><span class="dim">장소가 익숙해 이동·숙소 준비가 수월</span>',link:'https://www.ccdailynews.com/news/articleView.html?idxno=2318819',linkText:'2025 개막 기사'},
-      {stat:'chk',name:'횡성 전국 유소년 스토브리그',host:'미확인',when:'<b>1월</b> <span class="dim">(2026년 1/20) — 7월 아님</span>',place:'횡성국민체육센터',div:'U11 · U12 확인 <span class="dim">· 저학년 미확인</span>',scale:'미확인',champ:'미확인',apply:'7월 횡성 대회를 찾으신 거면<br><b>6월 농구대잔치</b> 또는 <b>8월 한우컵</b>일 수 있어요',link:'https://v.daum.net/v/Bmb52ZWIXA',linkText:'2026 대회 기사'},
-      {stat:'chk',name:'서울시농구협회 유소년 농구대회 — 명칭·시기 확인 필요',host:'서울특별시농구협회',when:'<b>미확인</b><br><span class="dim">협회 게시판 등록일이 2월이라 1월이 아닐 수도</span>',place:'미확인',div:'미확인',scale:'미확인',champ:'미확인',apply:'<b>협회 02-490-2800 전화가 가장 빠름</b><br><span class="dim">유튜브 채널에 지난 대회 영상 17편</span>',link:'https://www.youtube.com/playlist?list=PLLOgwJ3la9S7ScaiHNy-77p8o8tL6T3is',linkText:'유튜브 지난 대회'},
+      {stat:'chk',u9:'Y',name:'홍천 글로벌 유소년 농구 슈퍼컵 <span class="dim">(NH농협은행)</span>',host:'KXO(한국3x3농구연맹) · 홍천군 · 홍천군체육회',when:'1월 중순 3일<br><span class="dim">2026년 1/16~18 (5회째)</span>',place:'홍천군 일원 6개 체육시설',div:'<b>U8 · U9 · U10</b> · U11~U15 · 여자초등부',scale:'<b>84팀 · 약 2,000명 · 4개국</b><br><span class="dim">한국·일본·태국·몽골</span>',champ:'<b>U9</b> 분당 삼성 · <b>U10</b> 하남 KCC<br><span class="dim">U8 분당삼성 / U11 아산우리은행 / U13 모비스 (2026)</span>',apply:'<b>개최지가 도는 순회 대회</b><br><span class="dim">2027년 1월이 홍천일지 미정</span>',link:'https://www.mt.co.kr/sports/2026/01/17/202601171507773371O',linkText:'2026 홍천 대회 기사'},
+      {stat:'wait',u9:'?',name:'자연치유도시제천 전국 유소년 농구 스토브리그',host:'제천시농구협회',when:'1월 둘째 주 시작 · 약 1주일<br><span class="dim">2025년 1/13~19 · 2024년 1/8~14</span>',place:'제천 어울림체육센터 · 제천족구장<br><span class="dim">우리가 8월에 뛴 그 체육관</span>',div:'엘리트 / 생활체육 2개 트랙<br><span class="dim">연령 종별 구성 미확인</span>',scale:'18팀 · 약 600명 <span class="dim">(2025)</span>',champ:'<b>순위를 매기지 않는 대회</b><br><span class="dim">전지훈련 성격 · 합숙 진행</span>',apply:'미확인<br><span class="dim">장소가 익숙해 이동·숙소 준비가 수월</span>',link:'https://www.ccdailynews.com/news/articleView.html?idxno=2318819',linkText:'2025 개막 기사'},
+      {stat:'chk',u9:'?',name:'횡성 전국 유소년 스토브리그',host:'미확인',when:'<b>1월</b> <span class="dim">(2026년 1/20) — 7월 아님</span>',place:'횡성국민체육센터',div:'U11 · U12 확인 <span class="dim">· 저학년 미확인</span>',scale:'미확인',champ:'미확인',apply:'7월 횡성 대회를 찾으신 거면<br><b>6월 농구대잔치</b> 또는 <b>8월 한우컵</b>일 수 있어요',link:'https://v.daum.net/v/Bmb52ZWIXA',linkText:'2026 대회 기사'},
+      {stat:'chk',u9:'?',name:'서울시농구협회 유소년 농구대회 — 명칭·시기 확인 필요',host:'서울특별시농구협회',when:'<b>미확인</b><br><span class="dim">협회 게시판 등록일이 2월이라 1월이 아닐 수도</span>',place:'미확인',div:'미확인',scale:'미확인',champ:'미확인',apply:'<b>협회 02-490-2800 전화가 가장 빠름</b><br><span class="dim">유튜브 채널에 지난 대회 영상 17편</span>',link:'https://www.youtube.com/playlist?list=PLLOgwJ3la9S7ScaiHNy-77p8o8tL6T3is',linkText:'유튜브 지난 대회'},
       {cat:'🏅 2027년 2월'},
-      {stat:'wait',name:'자연치유도시제천 전국 종별 농구대잔치 (제11회)',host:'<b>대한민국농구협회</b> / 충북 · 제천시농구협회',when:'2월 첫째~둘째 주 4~6일<br><span class="dim">2026년 2/7~12</span>',place:'제천체육관 (숭의로 85) · 명지국민체육센터<br>세명대 · 세명고 · 홍광초 <span class="dim">5개 경기장</span>',div:'<b>U8 · U9 · U10</b> ~ U18 · 여자부<br><b>12개 종별</b> <span class="dim">· 유소년 7분 4쿼터제</span>',scale:'187팀 신청 → 133팀 참가 <span class="dim">(2025)</span><br>선수단 1,500명 <span class="dim">(2026)</span>',champ:'<b>U9</b> 분당 삼성 <span class="dim">(준우승 팀식스17, 24-12 · MVP 권이준)</span><br>U11 광주 정관장 <span class="dim">(준우승 분당 삼성 47-44)</span>',apply:'<b>농구협회 홈페이지 온라인 선착순</b> (KBA ONE)<br>📺 <b>KBA Live 유튜브 생중계</b><br><span class="dim">4팀 미만 종별은 개설 취소 · 문의 02-422-4917</span>',link:'https://www.koreabasketball.or.kr/information/notice_view.php?idx=22020',linkText:'2026 대회 공지'},
-      {stat:'wait',name:'양구 사과배 전국 유소년 농구대회 (제2회)',host:'㈜이상커뮤니케이션즈 / 양구스포츠재단 · 아잇스포츠 후원',when:'2월 셋째~넷째 주 3박 4일<br><span class="dim">2026년 2/21~24</span>',place:'강원 양구군 일대<br><span class="dim">체육관명 미확인</span>',div:'<b>U8 · U9 · U10</b> ~ U18 <b>9개 종별</b>',scale:'미확인<br><span class="dim">SK·삼성·KCC·정관장·모비스·KT 유스 참가</span>',champ:'<b>U10 상위</b> 오산동탄 더 모스트 <span class="dim">(준우승 경기광주 플릭 · MVP 임준성)</span><br><b>U10 하위</b> 훕스쿨 <span class="dim">(준우승 원주 YKK)</span>',apply:'미확인<br><b>예선 탈락 없이 전 팀 최소 4경기 보장</b><br><span class="dim">2026년엔 생중계 없었고 2회 대회에 준비 예고</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065613695593298',linkText:'제1회 종별 결과'},
-      {stat:'wait',name:'결초보은배 점프볼 전국 유소년 농구대회 (제6회)',host:'충청북도농구협회 · 점프볼 공동주관 / 보은군 협력',when:'2월 마지막 주 ~ 3월 초 4일<br><span class="dim">2026년 2/27~3/2</span>',place:'보은국민체육센터 · 결초보은다목적체육관<br>보은중 · 보은여중 <span class="dim">4개 경기장</span>',div:'초등 <b>U8 · U9 · U10</b> · U11 · U12 · 여초 5대5<br><span class="dim">중·고등 U15 · U18 3대3</span>',scale:'<b>110팀 · 약 1,000명</b> <span class="dim">(2026 · 2025년 69팀)</span>',champ:'<b>U9</b> 원주 DB <span class="dim">(준우승 부산 모션스포츠 26-6 · MVP 유하준)</span><br><b>U10</b> 아산 우리은행 <span class="dim">(준우승 현대모비스 17-9 · 2025)</span>',apply:'미확인<br>📺 <b>보은군 유튜브·인스타 생중계</b><br><span class="dim">AI 카메라 앱 포착(POCHACK) 시범 중계</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065582661140932',linkText:'U9 MVP 기사'},
+      {stat:'wait',u9:'Y',name:'자연치유도시제천 전국 종별 농구대잔치 (제11회)',host:'<b>대한민국농구협회</b> / 충북 · 제천시농구협회',when:'2월 첫째~둘째 주 4~6일<br><span class="dim">2026년 2/7~12</span>',place:'제천체육관 (숭의로 85) · 명지국민체육센터<br>세명대 · 세명고 · 홍광초 <span class="dim">5개 경기장</span>',div:'<b>U8 · U9 · U10</b> ~ U18 · 여자부<br><b>12개 종별</b> <span class="dim">· 유소년 7분 4쿼터제</span>',scale:'187팀 신청 → 133팀 참가 <span class="dim">(2025)</span><br>선수단 1,500명 <span class="dim">(2026)</span>',champ:'<b>U9</b> 분당 삼성 <span class="dim">(준우승 팀식스17, 24-12 · MVP 권이준)</span><br>U11 광주 정관장 <span class="dim">(준우승 분당 삼성 47-44)</span>',apply:'<b>농구협회 홈페이지 온라인 선착순</b> (KBA ONE)<br>📺 <b>KBA Live 유튜브 생중계</b><br><span class="dim">4팀 미만 종별은 개설 취소 · 문의 02-422-4917</span>',link:'https://www.koreabasketball.or.kr/information/notice_view.php?idx=22020',linkText:'2026 대회 공지'},
+      {stat:'wait',u9:'Y',name:'양구 사과배 전국 유소년 농구대회 (제2회)',host:'㈜이상커뮤니케이션즈 / 양구스포츠재단 · 아잇스포츠 후원',when:'2월 셋째~넷째 주 3박 4일<br><span class="dim">2026년 2/21~24</span>',place:'강원 양구군 일대<br><span class="dim">체육관명 미확인</span>',div:'<b>U8 · U9 · U10</b> ~ U18 <b>9개 종별</b>',scale:'미확인<br><span class="dim">SK·삼성·KCC·정관장·모비스·KT 유스 참가</span>',champ:'<b>U10 상위</b> 오산동탄 더 모스트 <span class="dim">(준우승 경기광주 플릭 · MVP 임준성)</span><br><b>U10 하위</b> 훕스쿨 <span class="dim">(준우승 원주 YKK)</span>',apply:'미확인<br><b>예선 탈락 없이 전 팀 최소 4경기 보장</b><br><span class="dim">2026년엔 생중계 없었고 2회 대회에 준비 예고</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065613695593298',linkText:'제1회 종별 결과'},
+      {stat:'wait',u9:'Y',name:'결초보은배 점프볼 전국 유소년 농구대회 (제6회)',host:'충청북도농구협회 · 점프볼 공동주관 / 보은군 협력',when:'2월 마지막 주 ~ 3월 초 4일<br><span class="dim">2026년 2/27~3/2</span>',place:'보은국민체육센터 · 결초보은다목적체육관<br>보은중 · 보은여중 <span class="dim">4개 경기장</span>',div:'초등 <b>U8 · U9 · U10</b> · U11 · U12 · 여초 5대5<br><span class="dim">중·고등 U15 · U18 3대3</span>',scale:'<b>110팀 · 약 1,000명</b> <span class="dim">(2026 · 2025년 69팀)</span>',champ:'<b>U9</b> 원주 DB <span class="dim">(준우승 부산 모션스포츠 26-6 · MVP 유하준)</span><br><b>U10</b> 아산 우리은행 <span class="dim">(준우승 현대모비스 17-9 · 2025)</span>',apply:'미확인<br>📺 <b>보은군 유튜브·인스타 생중계</b><br><span class="dim">AI 카메라 앱 포착(POCHACK) 시범 중계</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065582661140932',linkText:'U9 MVP 기사'},
       {cat:'🌸 2027년 3~4월'},
-      {stat:'wait',name:'인천 춘계 종별 농구대회',host:'인천광역시농구협회 <span class="dim">(추정)</span>',when:'<b>3월 말 ~ 4월 중순</b> 종별로 나눠 개최<br><span class="dim">2026년 U11 3/22 · <b>U9 4/4</b> · U13 4/18</span>',place:'송림초 체육관 <span class="dim">(U9)</span><br>인천청소년수련관 <span class="dim">(U11)</span> · 미추홀국민체육센터 <span class="dim">(U13)</span>',div:'<b>U9</b> · U11 · U13',scale:'미확인',champ:'<b>U9</b> 분당 SK 주니어 나이츠 <span class="dim">(준우승 고스포츠 27-19 · MVP 김하영 · 통산 2회)</span><br>U13 오산동탄 더 모스트 <span class="dim">(준우승 미추홀 41-35)</span>',apply:'미확인<br><b>3월부터 챙겨보셔야</b> 놓치지 않아요',link:'https://v.daum.net/v/20260408135025383',linkText:'2026 U9 우승 기사'},
+      {stat:'wait',u9:'Y',name:'인천 춘계 종별 농구대회',host:'인천광역시농구협회 <span class="dim">(추정)</span>',when:'<b>3월 말 ~ 4월 중순</b> 종별로 나눠 개최<br><span class="dim">2026년 U11 3/22 · <b>U9 4/4</b> · U13 4/18</span>',place:'송림초 체육관 <span class="dim">(U9)</span><br>인천청소년수련관 <span class="dim">(U11)</span> · 미추홀국민체육센터 <span class="dim">(U13)</span>',div:'<b>U9</b> · U11 · U13',scale:'미확인',champ:'<b>U9</b> 분당 SK 주니어 나이츠 <span class="dim">(준우승 고스포츠 27-19 · MVP 김하영 · 통산 2회)</span><br>U13 오산동탄 더 모스트 <span class="dim">(준우승 미추홀 41-35)</span>',apply:'미확인<br><b>3월부터 챙겨보셔야</b> 놓치지 않아요',link:'https://v.daum.net/v/20260408135025383',linkText:'2026 U9 우승 기사'},
       {cat:'🌱 2027년 4~5월'},
-      {stat:'chk',name:'시흥시협회장배 춘계 종별 농구대회',host:'시흥시농구협회 <span class="dim">(추정)</span>',when:'<b>4월 말</b> <span class="dim">(2026년 4/26) — 5월 아님</span>',place:'시흥시 체육관 <span class="dim">(명칭 미확인)</span>',div:'학년별 운영 · 초등 6학년부 확인<br><b>저학년 부문 미확인</b>',scale:'미확인',champ:'미확인',apply:'미확인<br><span class="dim">7월 협회장배 종별대회는 별개</span>',link:'https://m.basketkorea.com/news/newsview.php?ncode=1065606983291927',linkText:'2026 대회 기사'},
-      {stat:'chk',name:'양양컵 전국 유소년 농구대회',host:'양양군농구협회 <span class="dim">(추정)</span>',when:'<b>5월 초</b> <span class="dim">(2026년 5/9~10) — 2025년엔 7월, 유동적</span>',place:'강원 양양 일원<br><span class="dim">체육관명 미확인</span>',div:'U10 · U11 · U14 · U15<br><b>U9 부문 미확인</b>',scale:'미확인',champ:'U11 아산 우리은행 <span class="dim">(준우승 성북 삼성 36-23 · 2025)</span><br>U14 평택 김훈 · U15 안산 TOP <span class="dim">(2026)</span>',apply:'미확인<br><span class="dim">12월 오색케이블카배와 다른 대회</span>',link:'https://v.daum.net/v/20260515141939420',linkText:'2026 대회 기사'},
+      {stat:'chk',u9:'?',name:'시흥시협회장배 춘계 종별 농구대회',host:'시흥시농구협회 <span class="dim">(추정)</span>',when:'<b>4월 말</b> <span class="dim">(2026년 4/26) — 5월 아님</span>',place:'시흥시 체육관 <span class="dim">(명칭 미확인)</span>',div:'학년별 운영 · 초등 6학년부 확인<br><b>저학년 부문 미확인</b>',scale:'미확인',champ:'미확인',apply:'미확인<br><span class="dim">7월 협회장배 종별대회는 별개</span>',link:'https://m.basketkorea.com/news/newsview.php?ncode=1065606983291927',linkText:'2026 대회 기사'},
+      {stat:'chk',u9:'?',name:'양양컵 전국 유소년 농구대회',host:'양양군농구협회 <span class="dim">(추정)</span>',when:'<b>5월 초</b> <span class="dim">(2026년 5/9~10) — 2025년엔 7월, 유동적</span>',place:'강원 양양 일원<br><span class="dim">체육관명 미확인</span>',div:'U10 · U11 · U14 · U15<br><b>U9 부문 미확인</b>',scale:'미확인',champ:'U11 아산 우리은행 <span class="dim">(준우승 성북 삼성 36-23 · 2025)</span><br>U14 평택 김훈 · U15 안산 TOP <span class="dim">(2026)</span>',apply:'미확인<br><span class="dim">12월 오색케이블카배와 다른 대회</span>',link:'https://v.daum.net/v/20260515141939420',linkText:'2026 대회 기사'},
       {cat:'☀️ 2027년 6월'},
-      {stat:'wait',name:'횡성 유소년 농구대잔치',host:'횡성군체육회 / 원주 YKK 주관',when:'6월 중순 2일<br><span class="dim">2026년 6/13~14</span>',place:'횡성국민체육센터 · 횡성실내체육관',div:'<b>U9 · U10</b> · U11 · U12 <span class="dim">4개 종별</span>',scale:'10팀 · 선수 200명<br><span class="dim">학부모 포함 약 500명</span>',champ:'<b>순위를 매기지 않는 대회</b><br><span class="dim">2일간 팀당 6경기 이상 · 경험 쌓기 목적</span>',apply:'미확인<br><span class="dim">참가팀: 강남삼성·원주YKK·성북삼성·플릭·강동SK 등</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065585959194773',linkText:'2026 대회 기사'},
-      {stat:'chk',name:'춘천 소양강배 농구대회 — 실재 확인 필요',host:'미확인',when:'6월 말 2일 <span class="dim">(2026년 6/27~28 · 기사 1건)</span>',place:'강원 춘천 일원',div:'U10 · U11 확인',scale:'미확인',champ:'미확인',apply:'<b>"소양강배"는 춘천의 야구·테니스 대회명</b><br><span class="dim">농구 버전은 협회 일정에 없음 — 이름 재확인 필요</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065592717409982',linkText:'관련 기사'},
-      {stat:'chk',name:'서초 서리풀배 — 실재 확인 필요',host:'미확인',when:'미확인',place:'미확인',div:'미확인',scale:'미확인',champ:'미확인',apply:'<b>검색 결과 0건.</b> 서울시농구협회 공지에도 없음<br><span class="dim">"서리풀"은 서초구 문화행사 브랜드 · 서초구청장기/체육회장배도 확인 안 됨</span>',link:'',linkText:''},
+      {stat:'wait',u9:'Y',name:'횡성 유소년 농구대잔치',host:'횡성군체육회 / 원주 YKK 주관',when:'6월 중순 2일<br><span class="dim">2026년 6/13~14</span>',place:'횡성국민체육센터 · 횡성실내체육관',div:'<b>U9 · U10</b> · U11 · U12 <span class="dim">4개 종별</span>',scale:'10팀 · 선수 200명<br><span class="dim">학부모 포함 약 500명</span>',champ:'<b>순위를 매기지 않는 대회</b><br><span class="dim">2일간 팀당 6경기 이상 · 경험 쌓기 목적</span>',apply:'미확인<br><span class="dim">참가팀: 강남삼성·원주YKK·성북삼성·플릭·강동SK 등</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065585959194773',linkText:'2026 대회 기사'},
+      {stat:'chk',u9:'?',name:'춘천 소양강배 농구대회 — 실재 확인 필요',host:'미확인',when:'6월 말 2일 <span class="dim">(2026년 6/27~28 · 기사 1건)</span>',place:'강원 춘천 일원',div:'U10 · U11 확인',scale:'미확인',champ:'미확인',apply:'<b>"소양강배"는 춘천의 야구·테니스 대회명</b><br><span class="dim">농구 버전은 협회 일정에 없음 — 이름 재확인 필요</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065592717409982',linkText:'관련 기사'},
+      {stat:'chk',u9:'?',name:'서초 서리풀배 — 실재 확인 필요',host:'미확인',when:'미확인',place:'미확인',div:'미확인',scale:'미확인',champ:'미확인',apply:'<b>검색 결과 0건.</b> 서울시농구협회 공지에도 없음<br><span class="dim">"서리풀"은 서초구 문화행사 브랜드 · 서초구청장기/체육회장배도 확인 안 됨</span>',link:'',linkText:''},
       {cat:'🌞 2027년 7월'},
-      {stat:'wait',name:'원주 치악배 전국 유소년 농구대회 (제2회)',host:'원주시농구협회 / 원주시 · 원주시체육회 후원',when:'7월 둘째 주 2일<br><span class="dim">2026년 7/11~12 (제1회)</span>',place:'원주종합체육관 · 원주치악체육관<br>원주백운체육관',div:'U10 · U11 · U12 · U15<br><b>U9 부문 없음</b>',scale:'<b>38팀 · 약 500명</b><br><span class="dim">U10 12팀 / U11 8팀 / U12 12팀 / U15 6팀</span>',champ:'미확인 <span class="dim">(제1회 부문별 시상 기사 없음)</span>',apply:'미확인<br>📺 <b>전 경기 유튜브 생중계</b> <span class="dim">(채널 미확인)</span><br><span class="dim">8월 성인 치악배와 별개</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065591372098130',linkText:'제1회 개막 기사'},
+      {stat:'wait',u9:'N',name:'원주 치악배 전국 유소년 농구대회 (제2회)',host:'원주시농구협회 / 원주시 · 원주시체육회 후원',when:'7월 둘째 주 2일<br><span class="dim">2026년 7/11~12 (제1회)</span>',place:'원주종합체육관 · 원주치악체육관<br>원주백운체육관',div:'U10 · U11 · U12 · U15<br><b>U9 부문 없음</b>',scale:'<b>38팀 · 약 500명</b><br><span class="dim">U10 12팀 / U11 8팀 / U12 12팀 / U15 6팀</span>',champ:'미확인 <span class="dim">(제1회 부문별 시상 기사 없음)</span>',apply:'미확인<br>📺 <b>전 경기 유튜브 생중계</b> <span class="dim">(채널 미확인)</span><br><span class="dim">8월 성인 치악배와 별개</span>',link:'https://jumpball.co.kr/news/newsview.php?ncode=1065591372098130',linkText:'제1회 개막 기사'},
       {cat:'🏖 2027년 8월'},
-      {stat:'wait',name:'하늘내린인제 전국 유소년 농구대회',host:'<b>대한민국농구협회(KBA)</b>',when:'8월 초 4박 5일<br><span class="dim">2026년 8/7~11</span>',place:'인제군다목적체육관 A·B · 인제군실내체육관<br>남면체육관 · 원통체육관 <span class="dim">5개 코트</span>',div:'<b>U8 · U9 · U10</b> ~ U18 · 여자 U12·U15<br><b>11개 종별</b>',scale:'<b>99팀 · 1,200명</b> <span class="dim">(2026 · 2025년 105팀)</span>',champ:'<b>U9</b> 리바운드 <span class="dim">(준우승 분당 삼성 38-16 · MVP 김지훈)</span><br><b>U10</b> 원주 DB <span class="dim">(준우승 더 모스트 · MVP 조하율)</span><br><span class="dim">2025: U9 원주DB · U10 더 모스트</span>',apply:'<b>농구협회 홈페이지 선착순 온라인 신청</b><br>💰 2025년 <b>팀당 200,000원</b> · 요강은 <b>6월 말</b> 공지<br>📺 KBA Live 유튜브 생중계 · 문의 02-420-4221',link:'https://www.koreabasketball.or.kr/information/notice_view.php?idx=22215',linkText:'2026 참가요강 공지'},
-      {stat:'chk',name:'횡성 한우컵 전국 유소년 농구대회 <span class="dim">(NH농협은행)</span>',host:'횡성군 · 횡성군체육회 · 강원도농구협회 · KXO',when:'<b>8월 말</b> <span class="dim">(2025년 8/30~31) — 7월 아님</span><br><span class="dim">2022년엔 7월 개최 · 2026년 개최 소식 없음</span>',place:'강원 횡성군 일원<br><span class="dim">체육관명 미확인</span>',div:'<b>U9 · U10</b> · U11 ~ U14 <span class="dim">6개 종별</span>',scale:'미확인',champ:'미확인',apply:'미확인<br><span class="dim">명칭이 "한우배"에서 "한우컵"으로 바뀐 듯</span>',link:'https://www.rookie.co.kr/news/articleView.html?idxno=113041',linkText:'2025 대회 기사'},
-      {stat:'end',name:'KBL 유스 클럽 농구대회 <span class="dim">(우리 대회)</span>',host:'KBL(한국프로농구)',when:'8월 중순 3일<br><span class="dim">2026년 제천 8/15~17 · B조</span>',place:'제천 어울림체육센터 · 세명대 체육관',div:'U9 ~ U18 · 구단 유소년 클럽',scale:'미확인',champ:'<b>2026년 우리 팀 — 예선 2승 1패, 최종 3위 🥉</b><br><span class="dim">우승 SK · 준우승 KCC</span>',apply:'KBL 유소년 공식 페이지 · 구단 통해 신청<br>📺 전 경기 유튜브 생중계',link:'https://youth.kbl.or.kr/',linkText:'KBL 유소년 공식'}
+      {stat:'wait',u9:'Y',name:'하늘내린인제 전국 유소년 농구대회',host:'<b>대한민국농구협회(KBA)</b>',when:'8월 초 4박 5일<br><span class="dim">2026년 8/7~11</span>',place:'인제군다목적체육관 A·B · 인제군실내체육관<br>남면체육관 · 원통체육관 <span class="dim">5개 코트</span>',div:'<b>U8 · U9 · U10</b> ~ U18 · 여자 U12·U15<br><b>11개 종별</b>',scale:'<b>99팀 · 1,200명</b> <span class="dim">(2026 · 2025년 105팀)</span>',champ:'<b>U9</b> 리바운드 <span class="dim">(준우승 분당 삼성 38-16 · MVP 김지훈)</span><br><b>U10</b> 원주 DB <span class="dim">(준우승 더 모스트 · MVP 조하율)</span><br><span class="dim">2025: U9 원주DB · U10 더 모스트</span>',apply:'<b>농구협회 홈페이지 선착순 온라인 신청</b><br>💰 2025년 <b>팀당 200,000원</b> · 요강은 <b>6월 말</b> 공지<br>📺 KBA Live 유튜브 생중계 · 문의 02-420-4221',link:'https://www.koreabasketball.or.kr/information/notice_view.php?idx=22215',linkText:'2026 참가요강 공지'},
+      {stat:'chk',u9:'Y',name:'횡성 한우컵 전국 유소년 농구대회 <span class="dim">(NH농협은행)</span>',host:'횡성군 · 횡성군체육회 · 강원도농구협회 · KXO',when:'<b>8월 말</b> <span class="dim">(2025년 8/30~31) — 7월 아님</span><br><span class="dim">2022년엔 7월 개최 · 2026년 개최 소식 없음</span>',place:'강원 횡성군 일원<br><span class="dim">체육관명 미확인</span>',div:'<b>U9 · U10</b> · U11 ~ U14 <span class="dim">6개 종별</span>',scale:'미확인',champ:'미확인',apply:'미확인<br><span class="dim">명칭이 "한우배"에서 "한우컵"으로 바뀐 듯</span>',link:'https://www.rookie.co.kr/news/articleView.html?idxno=113041',linkText:'2025 대회 기사'},
+      {stat:'end',u9:'Y',name:'KBL 유스 클럽 농구대회 <span class="dim">(우리 대회)</span>',host:'KBL(한국프로농구)',when:'8월 중순 3일<br><span class="dim">2026년 제천 8/15~17 · B조</span>',place:'제천 어울림체육센터 · 세명대 체육관',div:'U9 ~ U18 · 구단 유소년 클럽',scale:'미확인',champ:'<b>2026년 우리 팀 — 예선 2승 1패, 최종 3위 🥉</b><br><span class="dim">우승 SK · 준우승 KCC</span>',apply:'KBL 유소년 공식 페이지 · 구단 통해 신청<br>📺 전 경기 유튜브 생중계',link:'https://youth.kbl.or.kr/',linkText:'KBL 유소년 공식'}
     ],
     requests:[
       {cls:'rq',icon:'🏀',title:'소노 구단·감독에게 확인/요청',body:'· 대진표·경기 시간 <b>최종 확정 및 변경 즉시 공유</b><br>· 경기 외 시간 <b>집결/해산·이동·식사</b>(개별 이동이니 시간 명확화)<br>· 선수 등록·유니폼(홈 스카이블루 / 원정 흰색) 최종 확인<br>· <b>워밍업 코트·시간</b> 확보 여부<br>· 주차·응원석·입장 안내, 생중계·사진 링크<br>· 부상 시 <b>응급·보험</b>·트레이너 대응<br>· 단체 사진 일정',link:'',linkText:''},
@@ -1802,20 +1822,75 @@ var firebaseConfig = {
                {k:'link',label:'링크 URL',t:'text'}, {k:'linkText',label:'링크 글자',t:'text'} ],
       renderList:function(items){
         var S={chk:['확인 필요','🔎'],wait:['요강 대기','👀'],open:['접수중','🟢'],closed:['신청 마감','🔒'],plan:['신청 예정','✍️'],go:['참가 확정','✅'],no:['불참','⛔'],end:['종료','🏁']};
-        var h='<div class="tbl-wrap"><table class="ttbl"><thead><tr>'+
-          '<th class="c-nm">대회</th><th>상태</th><th>시기</th><th>장소</th><th>부문</th><th>참가 규모</th><th>지난 우승 (U9·U10)</th><th>신청 · 중계</th>'+
-          '</tr></thead><tbody>';
+        var strip=function(v){ return String(v||'').split('<br>')[0].replace(/<[^>]*>/g,'').trim(); };
+        var mon=function(c){ var m=String(c||'').match(/(\d+)월/); return m?m[1]:''; };
+        var yr=function(c){ var m=String(c||'').match(/(\d{4})/); return m?m[1].slice(2):''; };
+        var rows=[], cur={cat:'',m:'',y:''}, n=0, u9n=0, cnt={};
         items.forEach(function(x){
-          if(x.cat){ h+='<tr class="mrow"><td colspan="8"><span class="ms">'+esc(x.cat)+'</span></td></tr>'; return; }
-          var st=S[x.stat]||null;
-          h+='<tr'+(x.stat?' class="r-'+esc(x.stat)+'"':'')+'>'+
-            '<td class="c-nm"><b>'+(x.name||'')+'</b>'+(x.host?'<span class="ho">'+x.host+'</span>':'')+
-              (x.link?'<a class="lk" href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'링크')+' ↗</a>':'')+'</td>'+
-            '<td>'+(st?'<span class="tstat s-'+esc(x.stat)+'">'+st[1]+'<br>'+st[0]+'</span>':'')+'</td>'+
-            '<td>'+(x.when||'')+'</td><td>'+(x.place||'')+'</td><td>'+(x.div||'')+'</td>'+
-            '<td>'+(x.scale||'')+'</td><td>'+(x.champ||'')+'</td><td>'+(x.apply||'')+'</td></tr>';
+          if(x.cat){ cur={cat:x.cat,m:mon(x.cat),y:yr(x.cat)}; rows.push({cat:x.cat}); return; }
+          n++; if(x.u9==='Y') u9n++;
+          cnt[x.stat]=(cnt[x.stat]||0)+1;
+          rows.push({x:x,m:cur.m,y:cur.y});
         });
-        return h+'</tbody></table></div>';
+        var chip=function(f,label,c){ return '<button type="button" data-f="'+f+'"'+(f==='all'?' class="on"':'')+'>'+label+(c!=null?' <i>'+c+'</i>':'')+'</button>'; };
+        var h='<div class="tcal">';
+        h+='<div class="tfil" id="tcalFil">'+chip('all','전체',n)+chip('u9','U9 가능',u9n);
+        ['chk','wait','closed','end'].forEach(function(k){ if(cnt[k]) h+=chip(k,S[k][1]+' '+S[k][0],cnt[k]); });
+        h+='</div>';
+        h+='<div class="tcal-act"><button type="button" id="tcalAll">＋ 모두 펼치기</button><span class="hint">대회를 누르면 자세히 나와요</span></div>';
+        h+='<div class="tcal-list" id="tcalList">';
+        rows.forEach(function(r,i){
+          if(r.cat){ h+='<div class="tmon">'+esc(r.cat)+'</div>'; return; }
+          var x=r.x, st=S[x.stat]||['',''];
+          var sub=[strip(x.when), strip(x.place)].filter(function(v){ return v && v!=='미확인'; }).join(' · ');
+          var badge=x.u9==='Y'?'<em class="u9 y">U9</em>':(x.u9==='N'?'<em class="u9 n">U9✕</em>':'<em class="u9 q">U9?</em>');
+          var row=function(lab,val){ return val? '<div class="dr"><span class="dt">'+lab+'</span><span class="dd">'+val+'</span></div>' : ''; };
+          h+='<div class="titem" data-stat="'+esc(x.stat||'')+'" data-u9="'+esc(x.u9||'')+'">'+
+            '<button type="button" class="thead">'+
+              '<span class="mm"><b>'+esc(r.m||'')+'</b><i>월</i></span>'+
+              '<span class="tx"><b>'+(x.name||'')+'</b>'+badge+
+                (sub?'<span class="sb">'+esc(sub)+'</span>':'')+'</span>'+
+              '<span class="rt"><span class="tstat s-'+esc(x.stat||'')+'">'+st[1]+'</span><i class="cv">▾</i></span>'+
+            '</button>'+
+            '<div class="tbody">'+
+              row('주최·주관',x.host)+row('시기',x.when)+row('장소',x.place)+
+              row('부문',x.div)+row('참가 규모',x.scale)+row('지난 우승',x.champ)+
+              row('신청 · 중계',x.apply)+
+              '<div class="dr"><span class="dt">상태</span><span class="dd"><b>'+st[1]+' '+st[0]+'</b></span></div>'+
+              (x.link?'<a class="dlk" href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'자세히')+' ↗</a>':'')+
+            '</div></div>';
+        });
+        return h+'</div></div>';
+      },
+      after:function(items, box){
+        var list=box.querySelector('#tcalList'), fil=box.querySelector('#tcalFil'), all=box.querySelector('#tcalAll');
+        if(!list) return;
+        list.addEventListener('click',function(e){
+          var b=e.target.closest? e.target.closest('.thead') : null; if(!b) return;
+          b.parentNode.classList.toggle('open');
+        });
+        if(all) all.addEventListener('click',function(){
+          var opened=list.querySelectorAll('.titem.open').length;
+          var vis=[].filter.call(list.querySelectorAll('.titem'),function(t){ return t.style.display!=='none'; });
+          var on = opened < vis.length;
+          vis.forEach(function(t){ t.classList.toggle('open',on); });
+          all.textContent = on ? '－ 모두 접기' : '＋ 모두 펼치기';
+        });
+        if(fil) fil.addEventListener('click',function(e){
+          var b=e.target.closest? e.target.closest('button[data-f]') : null; if(!b) return;
+          [].forEach.call(fil.querySelectorAll('button'),function(x){ x.classList.remove('on'); });
+          b.classList.add('on');
+          var f=b.getAttribute('data-f');
+          [].forEach.call(list.querySelectorAll('.titem'),function(t){
+            var ok = f==='all' || (f==='u9'? t.getAttribute('data-u9')==='Y' : t.getAttribute('data-stat')===f);
+            t.style.display = ok?'':'none';
+          });
+          [].forEach.call(list.querySelectorAll('.tmon'),function(m){
+            var any=false, nx=m.nextElementSibling;
+            while(nx && !nx.classList.contains('tmon')){ if(nx.style.display!=='none'){ any=true; break; } nx=nx.nextElementSibling; }
+            m.style.display = any?'':'none';
+          });
+        });
       } },
     parentguide:{ title:'엄마·아빠 가이드', box:'pgBox',
       fields:[{k:'cls',label:'색상(pk)',t:'text'},{k:'icon',label:'이모지',t:'text'},{k:'title',label:'제목',t:'text'},{k:'body',label:'내용(HTML)',t:'area'},{k:'link',label:'링크',t:'text'},{k:'linkText',label:'링크 글자',t:'text'}],
@@ -1883,7 +1958,7 @@ var firebaseConfig = {
       var box=el(S.box); if(!box) return;
       var items=getSec(sec)||[];
       box.innerHTML = S.renderList ? S.renderList(items) : items.map(S.render).join('');
-      if(S.after) S.after(items);
+      if(S.after) S.after(items, box);
     });
     buildFamilyOptions();
     renderDinner();
