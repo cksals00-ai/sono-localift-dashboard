@@ -1087,7 +1087,12 @@
         <div class="grid">
           <div class="fld">
             <label>업소명 ①</label>
-            <input id="ktHotel" type="text" value="소노벨 단양" readonly>
+            <select id="ktHotelSel">
+              <option value="소노벨 단양">소노벨 단양 (팀 숙소)</option>
+              <option value="">숙박 안 함</option>
+              <option value="__etc">직접 입력</option>
+            </select>
+            <input id="ktHotel" type="text" value="소노벨 단양" placeholder="숙소명" style="margin-top:7px">
           </div>
           <div class="fld">
             <label>1박당 금액 (원)</label>
@@ -2122,22 +2127,26 @@ var firebaseConfig = {
   var KT_DATES=['8/14','8/15','8/16','8/17'];
   var KT_RELMAP={'아빠':'부','엄마':'모','형제자매':'형제','할아버지':'조부','할머니':'조모'};
   /* 실제 영수증·정산 기준 기본값 (2026.8 제천 대회) — 가정에서 고칠 수 있습니다 */
-  var KT_MANY='만이갈비 청전점', KT_JISU='지수성 (제천 중식)';
-  function ktRow(player,pax,rel,many,jisu){
-    return { player:player, roomPax:pax, rel:rel, guest:rel.split(', ').length,
-      meals:[{d:'8/15',name:KT_MANY,total:many,pax:pax},{d:'8/17',name:KT_JISU,total:jisu,pax:pax}] };
+  var KT_MANY='만이갈비 청전점', KT_JISU='지수성';
+  function ktRow(player,pax,rel,many,jisu,stay){
+    var m=[];
+    if(many!=null) m.push({d:'8/15',name:KT_MANY,total:many,pax:pax});
+    if(jisu!=null) m.push({d:'8/17',name:KT_JISU,total:jisu,pax:pax});
+    return { player:player, roomPax:(stay===false?null:pax), stay:(stay!==false),
+      rel:rel, guest:rel.split(', ').length, meals:m };
   }
   var PMOM='아빠, 엄마', PSIB='아빠, 엄마, 형제자매';
   var KT_PRESET={
+    '조연호 가정':ktRow('조연호',3,PMOM,56000,47000),
+    '박나은·박도윤 가정':ktRow('박나은, 박도윤',null,PMOM,null,null,false),
     '이영재·이영우 가정':ktRow('이영재, 이영우',4,PMOM,66000,47000),
     '박성규 가정':ktRow('박성규',4,PSIB,66000,47000),
-    '정승후 가정':ktRow('정승후',4,PSIB,71000,47000),
     '노권오 가정':ktRow('노권오',3,PMOM,56000,47000),
     '석호원 가정':ktRow('석호원',3,PMOM,56000,47000),
-    '조연호 가정':ktRow('조연호',3,PMOM,56000,47000),
+    '김우진 가정':ktRow('김우진',3,PMOM,56000,47000,false),
     '노우찬 가정':ktRow('노우찬',3,PMOM,56000,47000),
-    '박선우 가정':ktRow('박선우',3,PMOM,56000,47000),
-    '김우진 가정':ktRow('김우진',3,PMOM,56000,47000)
+    '정승후 가정':ktRow('정승후',4,PSIB,71000,47000,false),
+    '박선우 가정':ktRow('박선우',3,PMOM,56000,47000)
   };
   var ktFamSel=el('ktFam'), ktFamCustom=el('ktFamCustom');
   if(ktFamSel) ktFamSel.addEventListener('change',function(){
@@ -2146,7 +2155,7 @@ var firebaseConfig = {
     if(!fam || fam==='__custom') return;
     var saved = ktData && ktData[famKey(fam)];
     if(saved){ ktFormSet(saved); ktStatus('이미 제출한 내용을 불러왔어요. 고치고 다시 제출하면 덮어써집니다.',false); return; }
-    if(KT_PRESET[fam]){ ktFormSet(KT_PRESET[fam]); ktStatus('영수증·정산 기준 기본값을 넣었어요. 다르면 고쳐서 제출해 주세요.',false); return; }
+    if(KT_PRESET[fam]){ ktFormSet(ktPresetRec(fam)); ktStatus('영수증·정산 기준 기본값을 넣었어요. 다르면 고쳐서 제출해 주세요.',false); return; }
     ktFormSet({ player:fam.replace(/\s*가정$/,''), rel:'아빠, 엄마' });
     ktStatus('기본값이 없는 가정이에요. 직접 적어주세요.',false);
   });
@@ -2154,7 +2163,8 @@ var firebaseConfig = {
   function ktFormSet(v){
     v=v||{};
     el('ktPlayer').value = v.player||'';
-    el('ktRoomFee').value = (v.roomFee!=null? v.roomFee : 233000);
+    ktHotelSet(v.hotel!==undefined ? v.hotel : '소노벨 단양');
+    el('ktRoomFee').value = (v.roomFee!=null? v.roomFee : (v.hotel===''? '' : 233000));
     el('ktRoomPax').value = (v.roomPax!=null? v.roomPax : '');
     el('ktHotel2').value = v.hotel2||'';
     el('ktRoomFee2').value = (v.roomFee2!=null? v.roomFee2 : '');
@@ -2180,6 +2190,28 @@ var firebaseConfig = {
   function won(v){ var n=parseInt(String(v==null?'':v).replace(/[^0-9]/g,''),10); return isNaN(n)?null:n; }
   function wonTxt(v){ var n=won(v); return n==null?'-':n.toLocaleString('ko-KR')+'원'; }
   function ktStatus(m,bad){ var n=el('ktStatus'); if(!n) return; n.textContent=m; n.style.color=bad?'var(--loss)':'var(--win)'; }
+
+  /* --- 숙박 업소 선택 --- */
+  var ktHotelSel=el('ktHotelSel');
+  function ktHotelSync(){
+    if(!ktHotelSel) return;
+    var v=ktHotelSel.value;
+    if(v==='__etc'){ el('ktHotel').style.display=''; if(el('ktHotel').value==='소노벨 단양') el('ktHotel').value=''; el('ktHotel').focus(); }
+    else {
+      el('ktHotel').value=v; el('ktHotel').style.display='none';
+      if(v===''){ el('ktRoomFee').value=''; el('ktRoomPax').value=''; }
+      else if(!el('ktRoomFee').value) el('ktRoomFee').value='233000';
+    }
+  }
+  if(ktHotelSel){ ktHotelSel.addEventListener('change',ktHotelSync); ktHotelSync(); }
+  function ktHotelSet(name){
+    if(!ktHotelSel) return;
+    if(!name) ktHotelSel.value='';
+    else if(name==='소노벨 단양') ktHotelSel.value='소노벨 단양';
+    else ktHotelSel.value='__etc';
+    el('ktHotel').value=name||'';
+    el('ktHotel').style.display = (ktHotelSel.value==='__etc')?'':'none';
+  }
 
   /* --- 식사 행 --- */
   var ktMealsBox=el('ktMeals');
@@ -2286,7 +2318,8 @@ var firebaseConfig = {
   var ktData={};
   function ktPresetRec(fam){
     var v=KT_PRESET[fam]; if(!v) return null;
-    return { family:fam, player:v.player, hotel:'소노벨 단양', roomFee:233000, roomPax:v.roomPax,
+    return { family:fam, player:v.player,
+      hotel:(v.stay? '소노벨 단양':''), roomFee:(v.stay? 233000:null), roomPax:v.roomPax,
       hotel2:'', roomFee2:null, roomPax2:null, meals:v.meals.slice(),
       rel:v.rel, guest:v.guest, spot:'', memo:'', preset:true };
   }
@@ -2388,9 +2421,7 @@ var firebaseConfig = {
       var k=famKey(fam);
       if(ktData && ktData[k]){ skipped++; return; }
       var v=KT_PRESET[fam];
-      var rec={ family:fam, player:v.player, hotel:'소노벨 단양', roomFee:233000, roomPax:v.roomPax,
-        hotel2:'', roomFee2:null, roomPax2:null, meals:v.meals.slice(),
-        rel:v.rel, guest:v.guest, spot:'', memo:'', ts:new Date().toISOString(), seeded:true };
+      var rec=ktPresetRec(fam); rec.preset=false; rec.ts=new Date().toISOString(); rec.seeded=true;
       if(configured){ db.ref('kbltally/'+k).set(rec); }
       else { var o=readLocalKt(); o[k]=rec; writeLocalKt(o); }
       added++;
@@ -2448,33 +2479,94 @@ var firebaseConfig = {
     ktDownload(blob,'KBL_제천대회_소노U9_취합.csv');
     ktStatus('✓ CSV로 저장했어요 (엑셀 변환이 안 될 때의 대체본).',false);
   }
-  function ktLoadXlsx(cb){
-    if(window.XLSX) return cb(true);
-    var sc=document.createElement('script');
-    sc.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
-    sc.onload=function(){ cb(!!window.XLSX); };
-    sc.onerror=function(){ cb(false); };
+  function ktLoadLib(src,test,cb){
+    if(test()) return cb(true);
+    var sc=document.createElement('script'); sc.src=src;
+    sc.onload=function(){ cb(test()); }; sc.onerror=function(){ cb(false); };
     document.head.appendChild(sc);
   }
+  /* KBL 제출 양식 그대로 · 테두리·병합·서식 포함 (ExcelJS) */
+  function ktMakeXlsx(){
+    var rows=ktSorted();
+    var wb=new ExcelJS.Workbook();
+    var ws=wb.addWorksheet('KBL 취합',{ pageSetup:{ paperSize:9, orientation:'landscape',
+      fitToPage:true, fitToWidth:1, fitToHeight:0,
+      margins:{left:0.3,right:0.3,top:0.4,bottom:0.4,header:0.2,footer:0.2} } });
+    ws.columns=[{width:5},{width:15},{width:14},{width:12},{width:12},{width:8},{width:18},
+                {width:11},{width:10},{width:11},{width:14},{width:8},{width:18}];
+    var thin={style:'thin',color:{argb:'FF000000'}}, med={style:'medium',color:{argb:'FF000000'}};
+    var boxAll={top:thin,left:thin,bottom:thin,right:thin};
+    var mid={vertical:'middle',horizontal:'center',wrapText:true};
+    ws.addRow(['No.','선수명','숙박','','','식사','','','','','기타','','관광장소']);
+    ws.addRow(['','','업소명','1박당 금액','객실당 인원','일자','식당명','총 금액','식사인원','인당 평균','선수외 참가','인원수','']);
+    ws.mergeCells('A1:A2'); ws.mergeCells('B1:B2'); ws.mergeCells('M1:M2');
+    ws.mergeCells('C1:E1'); ws.mergeCells('F1:J1'); ws.mergeCells('K1:L1');
+    ws.getRow(1).height=20; ws.getRow(2).height=30;
+    [1,2].forEach(function(rn){
+      for(var c=1;c<=13;c++){
+        var cell=ws.getRow(rn).getCell(c);
+        cell.font={name:'Arial',bold:true,size:10};
+        cell.alignment=mid; cell.border=boxAll;
+        cell.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FFD9D9D9'}};
+      }
+    });
+    var r=3;
+    rows.forEach(function(v,idx){
+      var lo=ktLodges(v), me=ktMealsOf(v);
+      var h=Math.max(lo.length, me.length, 1), top=r;
+      for(var k=0;k<h;k++){
+        var L=lo[k]||{}, M=me[k]||{};
+        var avg=(M.total!=null&&M.pax)?Math.round(M.total/M.pax):'';
+        ws.addRow([ k===0?(idx+1):'', k===0?(v.player||v.family||''):'',
+          L.name||'', L.fee!=null?L.fee:'', L.pax!=null?L.pax:'',
+          M.d||'', M.name||'', M.total!=null?M.total:'', M.pax!=null?M.pax:'', avg,
+          k===0?ktRelShort(v.rel):'', k===0?(v.guest!=null?v.guest:''):'',
+          k===0?ktSpotTxt(v).replace(/\n/g,' '):'' ]);
+        r++;
+      }
+      if(h>1){ [1,2,3,4,5,11,12,13].forEach(function(c){ ws.mergeCells(top,c,top+h-1,c); }); }
+    });
+    var last=r-1, tr=r;
+    ws.addRow(['','합계','전체 합','','','','','','','','','','']);
+    ws.getRow(tr).getCell(4).value={formula:'SUM(D3:D'+last+')'};
+    ws.getRow(tr).getCell(8).value={formula:'SUM(H3:H'+last+')'};
+    ws.getRow(tr).getCell(12).value={formula:'SUM(L3:L'+last+')'};
+    for(var rr=3;rr<=tr;rr++){
+      for(var cc=1;cc<=13;cc++){
+        var cl=ws.getRow(rr).getCell(cc);
+        cl.font={name:'Arial',size:10,bold:(rr===tr)};
+        cl.alignment=mid; cl.border=boxAll;
+        if(cc===4||cc===8||cc===10) cl.numFmt='#,##0';
+      }
+    }
+    for(var c2=1;c2<=13;c2++){
+      ws.getRow(1).getCell(c2).border={top:med,left:thin,bottom:thin,right:thin};
+      ws.getRow(tr).getCell(c2).border={top:med,left:thin,bottom:med,right:thin};
+    }
+    var notes=[
+      '＃ 1박당 금액의 경우, [총 숙박금액] ÷ [숙박일수]로 계산',
+      '＃ 숙박: 소노벨 단양(팀 숙소) 1박 233,000원 · 2026.8.14~17 · 팀 숙소를 이용하지 않은 가정은 숙박란이 비어 있습니다',
+      '＃ 식사 8/15 만이갈비 청전점 — 단체 결제 540,000원(고기 무한리필 성인 15,000×19명, 어린이 10,000×11명 / 그 외 식대 9가정×16,000)을 가정별 정산액으로 기재',
+      '＃ 식사 8/17 지수성(제천 의병대로 250) — 단체 결제 425,000원을 9가정이 가정당 47,000원씩 부담',
+      '＃ 선수외 참가: 부=아버지, 모=어머니, 형제=형제자매',
+      '＃ 2026 KBL 유스클럽농구대회 IN 제천 (8.15~17) · 고양 소노 스카이거너스 U-9'
+    ];
+    notes.forEach(function(n){ ws.addRow([n]).getCell(1).font={name:'Arial',size:9}; });
+    ws.views=[{state:'frozen',ySplit:2}];
+    return wb;
+  }
   if(el('ktXlsx')) el('ktXlsx').addEventListener('click',function(){
-    var b=ktBuildAoa();
-    if(!b.n){ ktStatus('아직 제출된 내용이 없어요.',true); return; }
+    if(!ktSorted().length){ ktStatus('아직 내용이 없어요.',true); return; }
     ktStatus('엑셀 파일을 만드는 중…',false);
-    ktLoadXlsx(function(ok){
+    ktLoadLib('https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js',
+      function(){ return !!window.ExcelJS; }, function(ok){
       if(!ok){ ktCsvFallback(); return; }
       try{
-        var ws=XLSX.utils.aoa_to_sheet(b.aoa);
-        ws['!merges']=b.merges;
-        ws['!cols']=[{wch:5},{wch:11},{wch:14},{wch:12},{wch:12},{wch:8},{wch:16},{wch:11},{wch:10},{wch:11},{wch:14},{wch:8},{wch:24}];
-        Object.keys(ws).forEach(function(k){
-          if(k.charAt(0)==='!') return;
-          var c=ws[k];
-          if(c.t==='n' && c.v>=1000) c.z='#,##0';
-        });
-        var wb=XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb,ws,'KBL 취합');
-        XLSX.writeFile(wb,'KBL_제천대회_소노U9_취합.xlsx');
-        ktStatus('✓ 엑셀 파일을 내려받았어요.',false);
+        ktMakeXlsx().xlsx.writeBuffer().then(function(buf){
+          ktDownload(new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),
+                     'KBL_제천대회_소노U9_취합.xlsx');
+          ktStatus('✓ KBL 양식 그대로 내려받았어요.',false);
+        },function(){ ktCsvFallback(); });
       }catch(err){ ktCsvFallback(); }
     });
   });
