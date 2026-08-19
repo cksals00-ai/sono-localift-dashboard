@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사업 현황 상황판 · A.P LocaLift</title>
+<!-- 접근 제어: admin 역할만 열람 가능. 미로그인/권한없음 → login.html 로 이동 -->
+<meta name="auth-required" content="admin">
+<meta name="robots" content="noindex, nofollow">
+<script src="./js/auth.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0b10;--card:#14141c;--line:#26262f;--gold:#C9A96A;--gold2:#E7CE96;--amber:#C05A1E;--ink:#e8e8ec;--sub:#8a8a96;
+ --ok:#4caf7d;--wip:#e0a63c;--old:#666;--crit:#d95050;
+ --s1:#3987e5;--s2:#d95926;--grid:#22222b;--axis:#33333d}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Inter','Apple SD Gothic Neo','Malgun Gothic',sans-serif;line-height:1.6}
+a{color:var(--gold)}
+.siteNav{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(7,10,16,.82);border-bottom:1px solid var(--line)}
+.nvIn{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
+.nvBrand{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-weight:800}
+.nvBrand b{color:var(--gold2)}
+.nvTabs{display:flex;gap:8px;flex-wrap:wrap}
+.nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s;white-space:nowrap}
+.nvTabs a:hover{color:var(--ink);border-color:var(--line)}
+.nvTabs a.on{color:#0b0b10;background:var(--gold);border-color:var(--gold);font-weight:700}
+.pgwrap{max-width:1020px;margin:0 auto;padding:34px 20px 70px}
+h1{font-size:27px;margin-bottom:5px;letter-spacing:-.01em}
+h1 b{color:var(--gold)}
+.sub{color:var(--sub);font-size:13px;margin-bottom:14px}
+.badge{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.05em;padding:4px 11px;border:1px solid var(--amber);color:var(--amber);border-radius:999px}
+h2{font-size:14px;color:var(--amber);margin:38px 0 6px;letter-spacing:.08em;text-transform:uppercase;font-weight:800}
+.lede{color:var(--sub);font-size:13.5px;margin-bottom:16px}
+p{color:var(--sub);font-size:14px;margin-bottom:12px}
+p b,li b{color:var(--ink);font-weight:650}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.grid{display:grid;gap:12px}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:800px){.g3{grid-template-columns:1fr}.nvTabs{gap:4px}}
+.tile .lab{font-size:12px;color:var(--sub);margin-bottom:5px;letter-spacing:.03em}
+.tile .val{font-size:30px;font-weight:800;color:var(--gold2);letter-spacing:-.02em;line-height:1.15}
+.tile .note{font-size:11.5px;color:var(--old);margin-top:6px}
+.row{display:grid;grid-template-columns:1fr auto;gap:10px 18px;padding:14px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row h3{font-size:14.5px;font-weight:700;margin-bottom:3px;color:var(--ink)}
+.row p{font-size:13px;margin:0}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;color:var(--sub);white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;flex:none}
+.d1{background:var(--ok)}.d2{background:var(--wip)}.d3{background:var(--amber)}.d4{background:var(--crit)}
+figcaption{font-size:12px;color:var(--old);margin-top:10px}
+details{margin-top:12px}
+summary{cursor:pointer;color:var(--old);font-size:12px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin-top:10px}
+th,td{text-align:left;padding:8px 10px 8px 0;border-bottom:1px solid var(--line);color:var(--sub)}
+th{color:var(--old);font-size:11.5px;font-weight:700;letter-spacing:.04em}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;padding-right:0}
+td.nm{color:var(--ink);font-weight:600}
+ul{padding-left:19px;color:var(--sub);font-size:14px}
+li{margin-bottom:9px}
+.ask li{margin-bottom:13px}
+footer{margin-top:52px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--old)}
+svg text{font-family:inherit}
+.tt{position:fixed;pointer-events:none;opacity:0;transition:opacity .1s;background:#1c1c26;border:1px solid var(--line);
+ border-radius:8px;padding:7px 10px;font-size:12px;color:var(--ink);z-index:200;font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<nav class="siteNav">
+  <div class="nvIn">
+    <a class="nvBrand" href="index.html">A.P <b>LocaLift</b></a>
+    <div class="nvTabs">
+      <a href="index.html" data-p="index">홈</a>
+      <a href="opendata.html" data-p="opendata">공공데이터</a>
+      <a href="content.html" data-p="content">콘텐츠 엔진</a>
+      <a href="impact.html" data-p="impact">데이터 임팩트</a>
+      <a href="skygunners-ria.html" data-p="skygunners-ria">스포츠 마케팅</a>
+      <a href="about.html" data-p="about">회사 소개</a>
+      <a href="shop.html" data-p="shop">SHOP</a>
+      <a href="ir.html" data-p="ir">IR</a>
+      <a id="navStatus" href="status.html" data-p="status" style="display:none">상황판</a>
+      <a id="navDeliverables" href="deliverables.html" data-p="deliverables" style="display:none">산출물</a>
+      <a id="navActionBoard" href="action-board.html" data-p="action" style="display:none">액션보드</a>
+      <a id="navVideoReview" href="video-review.html" data-p="review" style="display:none">영상 검수실</a>
+    </div>
+  </div>
+</nav>
+
+<div class="pgwrap">
+<h1>사업 현황 <b>상황판</b></h1>
+<p class="sub">2026년 8월 19일(수) 기준 · 작성 기획실장</p>
+<span class="badge">내부 열람용 · admin 전용</span>
+
+<h2>지금 상태</h2>
+<p class="lede">여섯 개 전선의 현재 위치입니다.</p>
+<div class="grid g3" style="margin-bottom:12px">
+  <div class="card tile"><div class="lab">지원사업 접수</div><div class="val">제출 완료</div><div class="note">8/14(금) 마감 · 심사 대기</div></div>
+  <div class="card tile"><div class="lab">리아 게시 공백</div><div class="val">9일</div><div class="note">8/10 이후 게시 0건 · 오늘 밤 해소 예정</div></div>
+  <div class="card tile"><div class="lab">HANGEUL CUBS EP.01</div><div class="val">키프레임 완료</div><div class="note">8컷 전수 검수 통과 · 영상 단계 대기</div></div>
+</div>
+
+<div class="card">
+  <div class="row"><div><h3>지원사업 — 공공데이터 AI 연계 맞춤형 성장</h3><p>행정안전부·NIA 주관. 8/14 마감 당일 제출 완료. 제출 후 수정이 불가능하므로 발송본이 유일한 근거입니다.</p></div><span class="st"><span class="dot d1"></span>정상</span></div>
+  <div class="row"><div><h3>리아 인스타그램</h3><p>엔진은 정상 작동 중이며 6시간마다 보고가 올라옵니다. 게시가 멈춘 원인은 기술이 아니라 승인 지연이었습니다. 계류 3건을 모두 해소하고 크레딧을 사전 승인했습니다.</p></div><span class="st"><span class="dot d3"></span>복구 중</span></div>
+  <div class="row"><div><h3>HANGEUL CUBS — 받침 친구들</h3><p>호랑 4남매 자체 IP 기반 한국어 교육 시리즈. EP.01 「바 + 받침」 기획과 키프레임 8컷 확정. 화면 글자는 후처리로 얹어 한글 정확도를 100% 확보합니다.</p></div><span class="st"><span class="dot d1"></span>진행</span></div>
+  <div class="row"><div><h3>앱 시리즈 런칭</h3><p>1호 유료 · 2호 무료의 역할 분리 구조. 목표 역산 결과 무료 앱을 깔때기로 쓰는 설계가 필수입니다. 캠페인 링크 발급이 착수 전제 조건입니다.</p></div><span class="st"><span class="dot d2"></span>준비</span></div>
+  <div class="row"><div><h3>교신함 자동화</h3><p>맥북 기반 러너로 집행을 내리는 구조. 검토 완료했고 도입에 찬성합니다. 전원 정책 결정만 남았습니다.</p></div><span class="st"><span class="dot d2"></span>결정 대기</span></div>
+  <div class="row"><div><h3>감독 라인</h3><p>8/7 이후 회신이 없고 8/10 기한 5건이 미제출 상태입니다. MV2 공개 여부도 확인되지 않았습니다.</p></div><span class="st"><span class="dot d4"></span>정체</span></div>
+</div>
+
+<h2>리아 팔로워 추이</h2>
+<p class="lede">게시가 멈춘 기간에 팔로워가 빠졌습니다. 공백이 지표로 나타난 구간입니다.</p>
+<div class="card">
+  <figure><svg id="c1" viewBox="0 0 880 290" width="100%" role="img" aria-label="리아 팔로워 추이"></svg>
+  <figcaption>8/16~8/19 각 회차 보고 실측치. 같은 기간 게시물은 0건입니다.</figcaption></figure>
+  <details><summary>표로 보기</summary><table><thead><tr><th>일자</th><th class="num">팔로워</th><th class="num">게시</th></tr></thead><tbody>
+  <tr><td class="nm">8/16</td><td class="num">942</td><td class="num">0</td></tr>
+  <tr><td class="nm">8/16 오후</td><td class="num">931</td><td class="num">0</td></tr>
+  <tr><td class="nm">8/17</td><td class="num">930</td><td class="num">0</td></tr>
+  <tr><td class="nm">8/17 오후</td><td class="num">928</td><td class="num">0</td></tr>
+  <tr><td class="nm">8/18</td><td class="num">927</td><td class="num">0</td></tr></tbody></table></details>
+</div>
+
+<h2>강원 4개 시군 관광정보 영문 제공률</h2>
+<p class="lede">지원사업의 근거가 된 실측입니다. 국문 329건 중 영문은 79건뿐입니다.</p>
+<div class="card">
+  <figure><svg id="c2" viewBox="0 0 880 300" width="100%" role="img" aria-label="시군별 영문 제공률"></svg>
+  <figcaption>전체 평균 24.0%. 유형별로는 축제·공연·행사가 7건 중 영문 0건으로 가장 심각합니다.</figcaption></figure>
+  <details><summary>표로 보기</summary><table><thead><tr><th>시군</th><th class="num">국문</th><th class="num">영문</th><th class="num">제공률</th><th class="num">연간 방문객</th></tr></thead><tbody>
+  <tr><td class="nm">삼척시</td><td class="num">90</td><td class="num">17</td><td class="num">18.9%</td><td class="num">975,579</td></tr>
+  <tr><td class="nm">홍천군</td><td class="num">62</td><td class="num">13</td><td class="num">21.0%</td><td class="num">1,856,947</td></tr>
+  <tr><td class="nm">고성군</td><td class="num">76</td><td class="num">19</td><td class="num">25.0%</td><td class="num">1,202,183</td></tr>
+  <tr><td class="nm">양양군</td><td class="num">101</td><td class="num">30</td><td class="num">29.7%</td><td class="num">1,327,811</td></tr>
+  <tr><td class="nm">합계</td><td class="num">329</td><td class="num">79</td><td class="num">24.0%</td><td class="num">5,362,520</td></tr></tbody></table></details>
+</div>
+
+<h2>키즈 콘텐츠 수익 구조</h2>
+<p class="lede">광고 수익만으로는 사업이 서지 않는다는 판단의 근거입니다.</p>
+<div class="card">
+  <figure><svg id="c3" viewBox="0 0 880 250" width="100%" role="img" aria-label="니치별 유튜브 롱폼 RPM"></svg>
+  <figcaption>업계 실측 RPM(1,000회 조회당 달러). 키즈는 COPPA로 맞춤광고가 차단돼 구조적으로 낮습니다. 막대는 각 구간의 상단값 기준입니다.</figcaption></figure>
+  <p style="margin-top:14px">그래서 유튜브는 <b>깔때기 입구</b>로 쓰고 수익은 앱 구독과 B2B에서 받는 구조로 갑니다.</p>
+</div>
+
+<h2>오늘 집행한 것</h2>
+<div class="card"><ul>
+  <li>리아 계류 3건 일괄 회신. <b>크레딧을 사전 승인</b>해 건별 재승인 없이 집행하도록 전환</li>
+  <li>무회신 시 기본동작을 <b>「슬롯 비움」에서 「상한 내에서 채움」으로</b> 변경</li>
+  <li>오늘 밤 슬롯을 <b>동화 롱폼으로 교체</b>. 칠석 당일에 맞춘 편성</li>
+  <li>콘텐츠 엔진 프롬프트 v6.1 갱신 — <b>「자막 금지」 폐기, 영문 자막 표준화</b></li>
+  <li>AI 자동 더빙 <b>미사용 확정</b> — 리아 목소리를 정체성 고정값으로 유지</li>
+  <li>해외 팔로워 목표를 <b>1,000명</b>으로 확정 (AI 번역 기능 잠금 해제선)</li>
+  <li>매일 21:00 <b>리아 게시 파이프라인 자동 검증</b> 신설</li>
+  <li>HANGEUL CUBS EP.01 키프레임 8컷 확정. 의상 고정값 도입으로 캐릭터 일관성 확보</li>
+</ul></div>
+
+<h2>결정을 기다리는 것</h2>
+<p class="lede">기획실장 권한 밖이라 대표님만 하실 수 있는 항목입니다.</p>
+<div class="card"><ul class="ask">
+  <li><b>App Store 캠페인 링크와 프로모션 코드 발급</b> — 계정 접근이 필요합니다. 링크 없이 챌린지를 돌리면 유입 측정이 불가능해 7일이 데이터로 남지 않습니다</li>
+  <li><b>앱 심사 통과 여부</b> — 홍보 착수 시점을 이것에 맞춰야 합니다</li>
+  <li><b>교회 네트워크 접촉</b> — 대표님 개인 관계입니다</li>
+  <li><b>기존 게시물 교체 승인</b> — 원본을 내려야 하는 작업이라 단독 결정하지 않습니다</li>
+  <li><b>교신함 자동화 전원 정책</b> — 야간 게시를 위한 맥북 자동 기상 설정 여부</li>
+</ul></div>
+
+<footer>
+수치는 전부 실측이거나 출처가 확인된 벤치마크입니다. 추정치는 추정임을 본문에 명기했고, 확인되지 않은 값은 비워 두었습니다.<br>
+이 페이지는 admin 전용 내부 열람용입니다. 원가·마진·개인정보·인증정보는 포함하지 않습니다.
+</footer>
+</div>
+<div class="tt" id="tt"></div>
+<script>(function(){var f=(location.pathname.split('/').pop()||'index.html').toLowerCase();if(!f)f='index.html';document.querySelectorAll('.siteNav .nvTabs a').forEach(function(a){var h=a.getAttribute('href').toLowerCase();if(h===f||((f===''||f==='index.html')&&a.dataset.p==='index'))a.classList.add('on');});})();</script>
+<script>(function(){try{var t=localStorage.getItem("ap_session");if(!t)return;var seg=t.split(".")[1].replace(/-/g,"+").replace(/_/g,"/");while(seg.length%4)seg+="=";var p=JSON.parse(decodeURIComponent(escape(atob(seg))));if(p&&p.exp&&p.exp>Date.now()&&p.role==="admin"){["navStatus","navDeliverables","navActionBoard","navVideoReview"].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display="";});}}catch(e){}})();</script>
+
+<script>
+(function(){
+ var NS='http://www.w3.org/2000/svg', tt=document.getElementById('tt');
+ function cv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+ function el(t,a){var n=document.createElementNS(NS,t);for(var k in a)n.setAttribute(k,a[k]);return n;}
+ function tip(e,h){tt.innerHTML=h;tt.style.opacity=1;tt.style.left=Math.min(e.clientX+14,innerWidth-180)+'px';tt.style.top=(e.clientY-12)+'px';}
+ function hide(){tt.style.opacity=0;}
+
+ var svg=document.getElementById('c1'),W=880,H=290,L=54,R=28,T=20,B=42;
+ var D=[['8/16',942],['8/16 오후',931],['8/17',930],['8/17 오후',928],['8/18',927]];
+ var mn=920,mx=946,iw=W-L-R,ih=H-T-B;
+ var X=function(i){return L+iw*i/(D.length-1);},Y=function(v){return T+ih*(1-(v-mn)/(mx-mn));};
+ [920,928,936,944].forEach(function(t){svg.appendChild(el('line',{x1:L,x2:W-R,y1:Y(t),y2:Y(t),stroke:cv('--grid'),'stroke-width':1}));
+  var x=el('text',{x:L-9,y:Y(t)+4,'text-anchor':'end','font-size':11,fill:cv('--old')});x.textContent=t;svg.appendChild(x);});
+ svg.appendChild(el('path',{d:D.map(function(p,i){return (i?'L':'M')+X(i)+' '+Y(p[1]);}).join(' '),fill:'none',stroke:cv('--s1'),'stroke-width':2,'stroke-linejoin':'round','stroke-linecap':'round'}));
+ D.forEach(function(p,i){
+  svg.appendChild(el('circle',{cx:X(i),cy:Y(p[1]),r:5,fill:cv('--s1'),stroke:cv('--card'),'stroke-width':2}));
+  var l=el('text',{x:X(i),y:H-B+20,'text-anchor':'middle','font-size':11,fill:cv('--old')});l.textContent=p[0];svg.appendChild(l);
+  var h=el('circle',{cx:X(i),cy:Y(p[1]),r:16,fill:'transparent'});
+  h.addEventListener('mousemove',function(e){tip(e,'<b>'+p[0]+'</b><br>팔로워 '+p[1]+'명<br>게시 0건');});
+  h.addEventListener('mouseleave',hide);svg.appendChild(h);});
+ var a=el('text',{x:X(0)+10,y:Y(942)-11,'font-size':12.5,fill:cv('--ink'),'font-weight':700});a.textContent='942';svg.appendChild(a);
+ var b=el('text',{x:X(4),y:Y(927)-13,'text-anchor':'end','font-size':12.5,fill:cv('--ink'),'font-weight':700});b.textContent='927';svg.appendChild(b);
+
+ function bars(id,rows,unit,dec,max){
+  var s=document.getElementById(id),W=880,H=+s.getAttribute('viewBox').split(' ')[3],L=94,R=74,T=16,B=26;
+  var iw=W-L-R,ih=H-T-B,band=ih/rows.length,bh=Math.min(22,band-13);
+  rows.forEach(function(r,i){
+   var y=T+band*i+(band-bh)/2,w=Math.max(3,iw*r[1]/max);
+   var p=el('path',{d:'M'+L+' '+y+' H'+(L+w-4)+' a4,4 0 0 1 4,4 V'+(y+bh-4)+' a4,4 0 0 1 -4,4 H'+L+' Z',fill:r[2]||cv('--s1')});
+   p.addEventListener('mousemove',function(e){tip(e,'<b>'+r[0]+'</b><br>'+r[1].toFixed(dec)+unit);});
+   p.addEventListener('mouseleave',hide);s.appendChild(p);
+   var lb=el('text',{x:L-11,y:y+bh/2+4,'text-anchor':'end','font-size':12.5,fill:cv('--sub')});lb.textContent=r[0];s.appendChild(lb);
+   var vl=el('text',{x:L+w+9,y:y+bh/2+4,'font-size':12,fill:cv('--ink'),'font-weight':700});vl.textContent=r[1].toFixed(dec)+unit;s.appendChild(vl);});
+  s.appendChild(el('line',{x1:L,x2:L,y1:T,y2:H-B+2,stroke:cv('--axis'),'stroke-width':1}));
+ }
+ bars('c2',[['양양군',29.7],['고성군',25.0],['홍천군',21.0],['삼척시',18.9],['축제·행사',0.0,cv('--s2')]],'%',1,32);
+ bars('c3',[['교육·과학',18.23],['일반 평균',15.00],['키즈·틴',2.06,cv('--s2')]],' USD',2,20);
+})();
+</script>
+</body>
+</html>
