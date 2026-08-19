@@ -531,14 +531,6 @@
   .tstat{position:absolute;top:10px;right:10px;font-size:9.5px;font-weight:900;letter-spacing:-.2px;
     border:2px solid var(--navy2);border-radius:999px;padding:3px 8px;background:#fff;color:var(--navy2);
     white-space:nowrap;z-index:1}
-  .tstat.s-chk{background:#ffe0dc}
-  .tstat.s-wait{background:#e6eef6}
-  .tstat.s-open{background:#c9f2dd}
-  .tstat.s-closed{background:#ffd9d4}
-  .tstat.s-plan{background:#ffe6b0}
-  .tstat.s-go{background:var(--win);color:#fff}
-  .tstat.s-no{background:#e4e4e4;color:var(--mut)}
-  .tstat.s-end{background:#eceff2;color:var(--mut)}
   .icard.s-chk{background:#fffaf9}
   .icard.s-go{background:#f3fbf7}
   .icard h3{padding-right:88px}
@@ -573,13 +565,35 @@
   .ctbl .crow .c-t i{font-style:normal;font-size:9px;font-weight:800;color:var(--mut)}
   .ctbl .crow .c-t span{display:block;margin-top:3px;font-size:9.5px;font-weight:800;color:var(--mut);word-break:keep-all}
   .ctbl .crow .c-n b{display:block;font-size:12.5px;font-weight:900;color:var(--navy2);line-height:1.35;word-break:keep-all}
-  .ctbl .crow .c-n .u9{display:inline-block;margin-top:5px;font-style:normal;font-size:9px;font-weight:900;
-    border-radius:999px;padding:2px 7px;border:1.5px solid var(--navy2)}
-  .ctbl .crow .c-n .u9.y{background:#25b57a;color:#fff}
-  .ctbl .crow .c-n .u9.n{background:#ffd9d4;color:#8a2b23}
-  .ctbl .crow .c-n .u9.q{background:#eceff2;color:var(--mut)}
+  .ctbl .crow .c-n .u9{display:inline-block;margin-top:5px;font-style:normal;font-size:9.5px;font-weight:900;
+    border-radius:999px;padding:3px 8px;border:1.5px solid rgba(18,35,58,.28);letter-spacing:-.3px}
+  .ctbl .crow .c-n .u9.y{background:#25b57a;color:#fff;border-color:#0f7a51}
+  .ctbl .crow .c-n .u9.n{background:#ffdcd6;color:#a3352c;border-color:#e0897f}
+  .ctbl .crow .c-n .u9.q{background:#eceff2;color:#6b767f;border-color:#c2cbd3}
   .ctbl .crow .c-s{text-align:center;border-left:1.5px solid #e6edf4}
-  .ctbl .crow .c-s .tstat{display:block;font-size:15px;padding:0;border:none;background:none;line-height:1.1;position:static}
+  /* 상태 배지 — 색 + 두 글자 */
+  .tstat{display:inline-block;font-size:10px;font-weight:900;letter-spacing:-.3px;line-height:1;
+    padding:4px 7px;border-radius:7px;border:1.5px solid rgba(18,35,58,.28);white-space:nowrap}
+  .tstat.s-chk{background:#ffdcd6;color:#a3352c;border-color:#e0897f}
+  .tstat.s-wait{background:#dceaf7;color:#1d4f75;border-color:#8fb8d6}
+  .tstat.s-open{background:#25b57a;color:#fff;border-color:#0f7a51}
+  .tstat.s-plan{background:#ffdf9e;color:#7a5410;border-color:#dfb257}
+  .tstat.s-go{background:#0f8a5f;color:#fff;border-color:#0a5e41}
+  .tstat.s-closed{background:#e6e9ec;color:#6b767f;border-color:#b7bfc6}
+  .tstat.s-no{background:#f0f0f0;color:#8b8b8b;border-color:#c9c9c9}
+  .tstat.s-end{background:#dfe5ea;color:#5b6870;border-color:#adb8c0}
+  .tfil button .dot{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;
+    vertical-align:-1px;border:1.5px solid rgba(18,35,58,.3)}
+  .tfil button .dot.s-chk{background:#ffdcd6}
+  .tfil button .dot.s-wait{background:#dceaf7}
+  .tfil button .dot.s-open{background:#25b57a}
+  .tfil button .dot.s-plan{background:#ffdf9e}
+  .tfil button .dot.s-go{background:#0f8a5f}
+  .tfil button .dot.s-closed{background:#e6e9ec}
+  .tfil button .dot.s-no{background:#f0f0f0}
+  .tfil button .dot.s-end{background:#dfe5ea}
+  .ctbl .crow .c-s .tstat{display:inline-block;font-size:9.5px;padding:4px 5px;line-height:1;position:static}
+
   .ctbl .crow .c-s .cv{font-style:normal;font-size:10px;font-weight:900;color:var(--mut);display:block;transition:transform .18s}
   .ctbl .crow.open{background:#eef6fc}
   .ctbl .crow.open .c-s .cv{transform:rotate(180deg)}
@@ -1830,14 +1844,14 @@ var firebaseConfig = {
                {k:'champ',label:'지난 우승(HTML)',t:'area'}, {k:'apply',label:'신청·중계(HTML)',t:'area'},
                {k:'link',label:'링크 URL',t:'text'}, {k:'linkText',label:'링크 글자',t:'text'} ],
       renderList:function(items){
-        var S={chk:['확인 필요','🔎'],wait:['요강 대기','👀'],open:['접수중','🟢'],closed:['신청 마감','🔒'],plan:['신청 예정','✍️'],go:['참가 확정','✅'],no:['불참','⛔'],end:['종료','🏁']};
+        var S={chk:['확인 필요','확인'],wait:['요강 대기','대기'],open:['접수중','접수'],closed:['신청 마감','마감'],plan:['신청 예정','예정'],go:['참가 확정','확정'],no:['불참','불참'],end:['종료','종료']};
         var strip=function(v){ return String(v||'').split('<br>')[0].replace(/<[^>]*>/g,'').trim(); };
         var mon=function(c){ var m=String(c||'').match(/(\d+(?:~\d+)?)월/); return m?m[1]:''; };
         var n=0,u9n=0,cnt={},cur='';
         items.forEach(function(x){ if(x.cat){cur=x.cat;return;} n++; if(x.u9==='Y')u9n++; cnt[x.stat]=(cnt[x.stat]||0)+1; });
-        var chip=function(f,label,c){ return '<button type="button" data-f="'+f+'"'+(f==='all'?' class="on"':'')+'>'+label+(c!=null?' <i>'+c+'</i>':'')+'</button>'; };
-        var h='<div class="tcal"><div class="tfil" id="tcalFil">'+chip('all','전체',n)+chip('u9','U9 가능',u9n);
-        ['chk','wait','closed','end'].forEach(function(k){ if(cnt[k]) h+=chip(k,S[k][1]+' '+S[k][0],cnt[k]); });
+        var chip=function(f,label,c,k){ return '<button type="button" data-f="'+f+'"'+(f==='all'?' class="on"':'')+'>'+(k?'<span class="dot s-'+k+'"></span>':'')+label+(c!=null?' <i>'+c+'</i>':'')+'</button>'; };
+        var h='<div class="tcal"><div class="tfil" id="tcalFil">'+chip('all','전체',n)+chip('u9','U9 출전 가능',u9n);
+        ['open','plan','go','chk','wait','closed','no','end'].forEach(function(k){ if(cnt[k]) h+=chip(k,S[k][0],cnt[k],k); });
         h+='</div><div class="tcal-act"><button type="button" id="tcalAll">＋ 모두 펼치기</button><span class="hint">행을 누르면 상세가 열려요</span></div>';
         h+='<div class="ctbl-wrap"><table class="ctbl" id="tcalTbl"><thead><tr>'+
              '<th class="c-t">시기</th><th class="c-n">대회</th>'+
@@ -1847,7 +1861,7 @@ var firebaseConfig = {
         items.forEach(function(x,idx){
           if(x.cat){ cur=mon(x.cat); h+='<tr class="mrow"><td colspan="6">'+esc(x.cat)+'</td></tr>'; return; }
           var st=S[x.stat]||['',''];
-          var u9 = x.u9==='Y'?'<em class="u9 y">U9</em>':(x.u9==='N'?'<em class="u9 n">U9 ✕</em>':'<em class="u9 q">U9 ?</em>');
+          var u9 = x.u9==='Y'?'<em class="u9 y">U9 출전 가능</em>':(x.u9==='N'?'<em class="u9 n">U9 부문 없음</em>':'<em class="u9 q">U9 여부 미확인</em>');
           var place=strip(x.place);
           var dr=function(lab,val){ return val? '<div class="dr"><span class="dt">'+lab+'</span><span class="dd">'+val+'</span></div>' : ''; };
           h+='<tr class="crow" data-i="'+idx+'" data-stat="'+esc(x.stat||'')+'" data-u9="'+esc(x.u9||'')+'">'+
@@ -1856,13 +1870,13 @@ var firebaseConfig = {
               '<td class="c-w hd">'+(x.div||'')+'</td>'+
               '<td class="c-w hd">'+(x.scale||'')+'</td>'+
               '<td class="c-w hd">'+(x.champ||'')+'</td>'+
-              '<td class="c-s"><span class="tstat s-'+esc(x.stat||'')+'">'+st[1]+'</span><i class="cv">▾</i></td></tr>'+
+              '<td class="c-s"><span class="tstat s-'+esc(x.stat||'')+'">'+esc(st[1])+'</span><i class="cv">▾</i></td></tr>'+
             '<tr class="drow" data-i="'+idx+'"><td colspan="6"><div class="dbox">'+
               '<div class="dnm">'+(x.name||'')+'</div>'+
               dr('주최·주관',x.host)+dr('시기',x.when)+dr('장소',x.place)+
               '<div class="only-sm">'+dr('부문',x.div)+dr('참가 규모',x.scale)+dr('지난 우승',x.champ)+'</div>'+
               dr('신청 · 중계',x.apply)+
-              '<div class="dr"><span class="dt">상태</span><span class="dd"><b>'+st[1]+' '+st[0]+'</b></span></div>'+
+              '<div class="dr"><span class="dt">상태</span><span class="dd"><span class="tstat s-'+esc(x.stat||'')+'">'+esc(st[1])+'</span> <b>'+esc(st[0])+'</b></span></div>'+
               (x.link?'<a class="dlk" href="'+esc(x.link)+'" target="_blank">'+esc(x.linkText||'자세히')+' ↗</a>':'')+
             '</div></td></tr>';
         });
