@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-21T11:08:40+09:00",
+    "updated_at": "2026-08-21T22:26:51+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -122,7 +122,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 2.7,
+        "actual": 10.2,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -131,7 +131,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 36,
+        "actual": 119,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -155,7 +155,7 @@
       {
         "label": "주간 저장수",
         "target": 100,
-        "actual": 0,
+        "actual": 1,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 측정 중 → 4주 목표 주 100"
@@ -163,7 +163,7 @@
       {
         "label": "해외 팔로워 비중 (%)",
         "target": null,
-        "actual": 1.1,
+        "actual": 1.2,
         "unit": "%",
         "pending": false,
         "note": "대표님 지시(0806): 외국인 팔로워에 집중. 2026-08-06 수집기에 국가별 계측을 신설했으며 첫 실측이 들어오기 전까지 목표를 걸지 않는다 — 측정 없이 목표를 세우지 않는다. 콘텐츠 캡션은 이미 12건 전부 영어다.",
@@ -172,7 +172,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 2,
+        "actual": 127,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -188,7 +188,7 @@
       {
         "label": "팔로워 순증 (참고)",
         "target": null,
-        "actual": -10,
+        "actual": -11,
         "unit": "명",
         "note": "참고 지표. 관리 지표가 아니다 — 0730 v2 는 도달·팔로워·좋아요를 '원인이 아니라 결과'로 규정했다. 목표 자리에 두지 않는다.",
         "pending": false
@@ -214,7 +214,7 @@
       {
         "label": "해외 팔로워 수",
         "target": null,
-        "actual": 10,
+        "actual": 11,
         "unit": "명",
         "pending": false,
         "note": "국가별 계측 신설(2026-08-06) 후 첫 실측이 들어오면 목표를 건다.",
@@ -239,7 +239,7 @@
       {
         "label": "저장수 (주)",
         "target": 100,
-        "actual": 0,
+        "actual": 1,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 측정 중"
@@ -258,15 +258,15 @@
   "content_sample": false,
   "content": [
     {
-      "date": "2026-08-20",
+      "date": "2026-08-21",
       "title": "Once a year, two stars are allowed to …",
       "format": "Reels",
-      "url": "https://www.instagram.com/reel/DcR8QfhDVP9/",
-      "views": 2,
-      "likes": 0,
+      "url": "https://www.instagram.com/reel/DcSWCSYCFi8/",
+      "views": 127,
+      "likes": 3,
       "comments": 1,
-      "saves": 0,
-      "avg_watch_sec": 1.0,
+      "saves": 1,
+      "avg_watch_sec": 3.7,
       "duration_sec": null,
       "retention_pct": null
     },
@@ -275,11 +275,11 @@
       "title": "Three shoulder resets I do between tak…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/Db1lTTgIGQz/",
-      "views": 82,
-      "likes": 0,
+      "views": 84,
+      "likes": 1,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 2.4,
+      "avg_watch_sec": 2.5,
       "duration_sec": null,
       "retention_pct": null
     },
@@ -288,8 +288,8 @@
       "title": "Three checkpoints for wrists that spen…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbrnGcigbBP/",
-      "views": 121,
-      "likes": 1,
+      "views": 122,
+      "likes": 2,
       "comments": 1,
       "saves": 0,
       "avg_watch_sec": 7.0,
@@ -301,8 +301,8 @@
       "title": "You only get one. The sky you came fro…",
       "format": "Image",
       "url": "https://www.instagram.com/p/DbhZSDUAALh/",
-      "views": 29,
-      "likes": 0,
+      "views": 32,
+      "likes": 1,
       "comments": 1,
       "saves": 0,
       "avg_watch_sec": null,
@@ -314,11 +314,11 @@
       "title": "He hid her clothes so she couldn't fly…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbhS8XQEpZB/",
-      "views": 67,
-      "likes": 0,
+      "views": 68,
+      "likes": 1,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 10.9,
+      "avg_watch_sec": 10.8,
       "duration_sec": null,
       "retention_pct": null
     },
@@ -327,8 +327,8 @@
       "title": "Four things a desk does to your body. …",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbhK4ZeE2kf/",
-      "views": 132,
-      "likes": 0,
+      "views": 133,
+      "likes": 1,
       "comments": 1,
       "saves": 2,
       "avg_watch_sec": 5.2,
@@ -340,8 +340,8 @@
       "title": "we planned nothing. it turned out to b…",
       "format": "Carousel",
       "url": "https://www.instagram.com/p/Dbfn2FtGwv9/",
-      "views": 127,
-      "likes": 0,
+      "views": 128,
+      "likes": 1,
       "comments": 1,
       "saves": 0,
       "avg_watch_sec": null,
@@ -353,8 +353,8 @@
       "title": "I sit at a desk all day and my shoulde…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbfWk9xINe2/",
-      "views": 1214,
-      "likes": 11,
+      "views": 1215,
+      "likes": 12,
       "comments": 1,
       "saves": 12,
       "avg_watch_sec": 8.2,
@@ -366,8 +366,8 @@
       "title": "Nobody in this reel says \"I love you.\"…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/Dba8ITVj_mq/",
-      "views": 145,
-      "likes": 4,
+      "views": 146,
+      "likes": 5,
       "comments": 1,
       "saves": 0,
       "avg_watch_sec": 6.0,
@@ -379,8 +379,8 @@
       "title": "Couples who rarely fight aren't calmer…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/Dba2abTAcSM/",
-      "views": 183,
-      "likes": 1,
+      "views": 184,
+      "likes": 2,
       "comments": 1,
       "saves": 0,
       "avg_watch_sec": 3.1,
@@ -392,11 +392,11 @@
       "title": "The Dragon King was dying, and his doc…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbZ2a27DVtK/",
-      "views": 77,
-      "likes": 0,
+      "views": 78,
+      "likes": 1,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 5.0,
+      "avg_watch_sec": 4.9,
       "duration_sec": null,
       "retention_pct": null
     },
@@ -405,8 +405,8 @@
       "title": "The place is called Brooklyn Coffee an…",
       "format": "Image",
       "url": "https://www.instagram.com/p/DbSgdE4oHCd/",
-      "views": 168,
-      "likes": 0,
+      "views": 170,
+      "likes": 1,
       "comments": 3,
       "saves": 0,
       "avg_watch_sec": null,
@@ -460,26 +460,26 @@
   },
   "measured": {
     "live": true,
-    "followers": 921,
+    "followers": 920,
     "media_count": 40,
     "baseline_followers": 931,
     "day": {
-      "reach": 36,
-      "views": 44,
-      "profile_views": 2,
-      "interactions": 4
+      "reach": 119,
+      "views": 209,
+      "profile_views": 5,
+      "interactions": 44
     },
     "week": {
       "posts": 1,
       "reels": 1,
-      "reel_avg_views": 2,
-      "saves": 0,
+      "reel_avg_views": 127,
+      "saves": 1,
       "comments": 1,
       "shares": 0,
-      "reach": 1,
-      "views": 2
+      "reach": 110,
+      "views": 127
     },
-    "engagement_rate_pct": 100.0,
+    "engagement_rate_pct": 1.82,
     "retention": {
       "window": 5,
       "pass_threshold_pct": 40.0,
@@ -488,17 +488,17 @@
       "pass_count": null,
       "latest": [
         {
-          "date": "2026-08-20",
+          "date": "2026-08-21",
           "title": "Once a year, two stars are allowed to …",
           "retention_pct": null,
-          "avg_watch_sec": 1.0,
+          "avg_watch_sec": 3.7,
           "duration_sec": null
         },
         {
           "date": "2026-08-09",
           "title": "Three shoulder resets I do between tak…",
           "retention_pct": null,
-          "avg_watch_sec": 2.4,
+          "avg_watch_sec": 2.5,
           "duration_sec": null
         },
         {
@@ -512,7 +512,7 @@
           "date": "2026-08-02",
           "title": "He hid her clothes so she couldn't fly…",
           "retention_pct": null,
-          "avg_watch_sec": 10.9,
+          "avg_watch_sec": 10.8,
           "duration_sec": null
         },
         {
@@ -538,7 +538,7 @@
       "with_duration": 0
     },
     "posting": {
-      "hours_since_last_post": 2.7,
+      "hours_since_last_post": 10.2,
       "alert_threshold_h": 36,
       "stalled": false,
       "week_posts": 1
@@ -547,20 +547,21 @@
   "audience": {
     "measurable": true,
     "by_country": {
-      "KR": 910,
+      "KR": 911,
       "AU": 2,
       "IN": 2,
       "DE": 1,
       "HK": 1,
-      "TH": 1,
       "UY": 1,
+      "TH": 1,
+      "PH": 1,
       "GB": 1,
       "US": 1
     },
     "home_country": "KR",
-    "home_followers": 910,
-    "foreign_followers": 10,
-    "foreign_pct": 1.1,
+    "home_followers": 911,
+    "foreign_followers": 11,
+    "foreign_pct": 1.2,
     "top_foreign": [
       {
         "country": "AU",
@@ -579,11 +580,15 @@
         "followers": 1
       },
       {
+        "country": "UY",
+        "followers": 1
+      },
+      {
         "country": "TH",
         "followers": 1
       },
       {
-        "country": "UY",
+        "country": "PH",
         "followers": 1
       },
       {
@@ -595,6 +600,6 @@
         "followers": 1
       }
     ],
-    "counted": 920
+    "counted": 922
   }
 }
