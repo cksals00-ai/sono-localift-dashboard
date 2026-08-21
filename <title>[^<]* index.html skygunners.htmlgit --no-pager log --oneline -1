@@ -1,0 +1,62 @@
+ .github/workflows/update-data.yml        |   35 [32m+[m[31m-[m
+ .gitignore                               |    1 [32m+[m
+ .nojekyll                                |    0
+ about.html                               |  487 [32m++++++++++[m
+ action-board.html                        |  208 [32m++++[m
+ admin-users.html                         |  428 [32m++++++++[m
+ assets/img/kstay_demo_before.png         |  Bin [31m0[m -> [32m2302032[m bytes
+ assets/img/lia_kbeauty_hero_square.png   |  Bin [31m0[m -> [32m4945971[m bytes
+ assets/img/lia_kbeauty_hero_vertical.png |  Bin [31m0[m -> [32m8052485[m bytes
+ assets/img/rimg_cleanser.png             |  Bin [31m0[m -> [32m573768[m bytes
+ assets/img/rimg_cushion.png              |  Bin [31m0[m -> [32m606388[m bytes
+ assets/img/rimg_essence.png              |  Bin [31m0[m -> [32m478226[m bytes
+ assets/img/rimg_mask.png                 |  Bin [31m0[m -> [32m547937[m bytes
+ assets/img/rimg_suncream.png             |  Bin [31m0[m -> [32m603263[m bytes
+ assets/img/rimg_tint.png                 |  Bin [31m0[m -> [32m599060[m bytes
+ assets/img/shop/shop_01_dalba.jpg        |  Bin [31m0[m -> [32m44016[m bytes
+ assets/img/shop/shop_02_cosrx.jpg        |  Bin [31m0[m -> [32m26610[m bytes
+ assets/img/shop/shop_03_tirtir.png       |  Bin [31m0[m -> [32m2193666[m bytes
+ assets/img/shop/shop_04_biodance.jpg     |  Bin [31m0[m -> [32m116983[m bytes
+ assets/img/shop/shop_06_romnd.jpg        |  Bin [31m0[m -> [32m28638[m bytes
+ assets/img/shop/shop_07_anua.jpg         |  Bin [31m0[m -> [32m40454[m bytes
+ assets/img/shop/shop_08_skin1004.png     |  Bin [31m0[m -> [32m56010[m bytes
+ assets/img/shop/shop_09_mediheal.jpg     |  Bin [31m0[m -> [32m63718[m bytes
+ assets/img/shop/shop_10_banilaco.jpg     |  Bin [31m0[m -> [32m188218[m bytes
+ assets/img/thumbs/thumb_ep1.png          |  Bin [31m0[m -> [32m3121737[m bytes
+ assets/img/thumbs/thumb_ep2.png          |  Bin [31m0[m -> [32m2873923[m bytes
+ assets/img/thumbs/thumb_ep3.png          |  Bin [31m0[m -> [32m3086464[m bytes
+ assets/skygunners/bk1.jpg                |  Bin [31m0[m -> [32m144192[m bytes
+ assets/skygunners/bk2.jpg                |  Bin [31m0[m -> [32m95792[m bytes
+ assets/skygunners/hero.jpg               |  Bin [31m0[m -> [32m151140[m bytes
+ assets/skygunners/mv.jpg                 |  Bin [31m0[m -> [32m120039[m bytes
+ assets/skygunners/r1.jpg                 |  Bin [31m0[m -> [32m119640[m bytes
+ assets/skygunners/r2.jpg                 |  Bin [31m0[m -> [32m58909[m bytes
+ assets/skygunners/r3.jpg                 |  Bin [31m0[m -> [32m51407[m bytes
+ assets/skygunners/r4.jpg                 |  Bin [31m0[m -> [32m106819[m bytes
+ assets/skygunners/tee_b.jpg              |  Bin [31m0[m -> [32m21734[m bytes
+ assets/skygunners/tee_f.jpg              |  Bin [31m0[m -> [32m21880[m bytes
+ assets/video/EP1_vowel_A_16x9.mp4        |  Bin [31m0[m -> [32m27259747[m bytes
+ assets/video/EP1_vowel_A_poster.png      |  Bin [31m0[m -> [32m5951929[m bytes
+ assets/video/kstay_demo.mp4              |  Bin [31m0[m -> [32m7799974[m bytes
+ assets/video/ria_review_ep1_suncream.mp4 |  Bin [31m0[m -> [32m4101468[m bytes
+ assets/video/ria_review_ep2_mask.mp4     |  Bin [31m0[m -> [32m4090037[m bytes
+ assets/video/ria_review_ep3_tint.mp4     |  Bin [31m0[m -> [32m5461758[m bytes
+ content.html                             |   75 [32m+[m[31m-[m
+ data/consume.json                        |  124 [32m+[m[31m--[m
+ data/dashboard_data.json                 |   28 [32m+[m[31m-[m
+ data/ria_kpi_feed.json                   |   79 [32m++[m
+ data/ria_kpi_history.json                |    6 [32m+[m
+ deliverables.html                        |  117 [32m+++[m
+ index.html                               | 1013 [32m+++++++++++[m[31m--------[m
+ ir.html                                  |  183 [32m++++[m
+ js/auth.js                               |  367 [32m+++++++[m
+ login.html                               |  294 [32m++++++[m
+ market-watch.html                        |   21 [32m+[m
+ products/detail.html                     |  281 [32m++++++[m
+ proposal-sono.html                       |  215 [32m+++++[m
+ ria-dashboard.html                       |  328 [32m+++++++[m
+ scripts/fetch_ria_kpi.py                 |  330 [32m+++++++[m
+ shop.html                                |  271 [32m++++++[m
+ skygunners-ria.html                      |  518 [32m++++++++++[m
+ skygunners.html                          | 1552 [32m++++++++++++++++++++++++++++++[m
+ 61 files changed, 6441 insertions(+), 520 deletions(-)
