@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-23T11:10:12+09:00",
+    "updated_at": "2026-08-23T22:11:45+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -122,7 +122,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 46.9,
+        "actual": 58.0,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -131,7 +131,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 71,
+        "actual": 1,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -188,7 +188,7 @@
       {
         "label": "팔로워 순증 (참고)",
         "target": null,
-        "actual": -17,
+        "actual": -20,
         "unit": "명",
         "note": "참고 지표. 관리 지표가 아니다 — 0730 v2 는 도달·팔로워·좋아요를 '원인이 아니라 결과'로 규정했다. 목표 자리에 두지 않는다.",
         "pending": false
@@ -460,14 +460,14 @@
   },
   "measured": {
     "live": true,
-    "followers": 914,
+    "followers": 911,
     "media_count": 40,
     "baseline_followers": 931,
     "day": {
-      "reach": 71,
-      "views": 151,
-      "profile_views": 3,
-      "interactions": 40
+      "reach": 1,
+      "views": 0,
+      "profile_views": 1,
+      "interactions": 0
     },
     "week": {
       "posts": 1,
@@ -476,10 +476,10 @@
       "saves": 1,
       "comments": 1,
       "shares": 0,
-      "reach": 111,
+      "reach": 112,
       "views": 128
     },
-    "engagement_rate_pct": 1.8,
+    "engagement_rate_pct": 1.79,
     "retention": {
       "window": 5,
       "pass_threshold_pct": 40.0,
@@ -538,7 +538,7 @@
       "with_duration": 0
     },
     "posting": {
-      "hours_since_last_post": 46.9,
+      "hours_since_last_post": 58.0,
       "alert_threshold_h": 36,
       "stalled": true,
       "week_posts": 1
@@ -547,7 +547,7 @@
   "audience": {
     "measurable": true,
     "by_country": {
-      "KR": 907,
+      "KR": 903,
       "AU": 2,
       "IN": 2,
       "DE": 1,
@@ -559,7 +559,7 @@
       "US": 1
     },
     "home_country": "KR",
-    "home_followers": 907,
+    "home_followers": 903,
     "foreign_followers": 11,
     "foreign_pct": 1.2,
     "top_foreign": [
@@ -600,6 +600,6 @@
         "followers": 1
       }
     ],
-    "counted": 918
+    "counted": 914
   }
 }
