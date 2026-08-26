@@ -273,8 +273,15 @@
         html += '<div class="pill"><div class="pt">'+esc(c.ch)+'</div><div class="pd">'+esc(c.role)+'</div></div>';
       });
     }
+    if(s.revision){
+      var rv = s.revision;
+      html += '<div class="slbl">전환 근거 ('+esc(rv.at||'')+')</div>';
+      html += '<div class="pill"><div class="pd">'+esc(rv.why||'')+'</div>';
+      if(rv.supersedes) html += '<div class="pd" style="opacity:.7;margin-top:6px">대체: '+esc(rv.supersedes)+'</div>';
+      html += '</div>';
+    }
     if((s.pillars||[]).length){
-      html += '<div class="slbl">콘텐츠 필러 5</div>';
+      html += '<div class="slbl">콘텐츠 필러 '+s.pillars.length+'</div>';
       s.pillars.forEach(function(p){
         var rt = (p.tag!=null&&p.tag!=='') ? p.tag : (p.ratio!=null? nf(p.ratio)+'%' : '');
         html += '<div class="pill"><div class="pt">'+esc(p.name)+(rt?'<b>'+esc(rt)+'</b>':'')+'</div><div class="pd">'+esc(p.desc)+'</div></div>';
@@ -287,6 +294,22 @@
       });
       html += '</div>';
       if(s.plan_note) html += '<div class="pd" style="margin-top:8px">'+esc(s.plan_note)+'</div>';
+    }
+    if(s.foreign_reach){
+      var fr = s.foreign_reach;
+      html += '<div class="slbl">해외 도달 — 무엇을 바꾸는가</div>';
+      html += '<div class="pill"><div class="pt">문제</div><div class="pd">'+esc(fr.problem||'')+'</div></div>';
+      (fr.actions||[]).forEach(function(a,i){
+        html += '<div class="pill"><div class="pt">실행 '+(i+1)+'</div><div class="pd">'+esc(a)+'</div></div>';
+      });
+      if(fr.note) html += '<div class="pd" style="margin-top:8px">'+esc(fr.note)+'</div>';
+    }
+    if(s.business_link){
+      html += '<div class="slbl">사업 연결</div>';
+      (s.business_link.map||[]).forEach(function(b){
+        html += '<div class="pill"><div class="pt">'+esc(b.axis)+'<b>'+esc(b.pillar)+'</b></div><div class="pd">'+esc(b.how)+'</div></div>';
+      });
+      if(s.business_link.why) html += '<div class="pd" style="margin-top:8px">'+esc(s.business_link.why)+'</div>';
     }
     html += '</section>';
 
