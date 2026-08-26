@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-26T06:29:31+09:00",
+    "updated_at": "2026-08-26T11:09:45+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -122,7 +122,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 42.0,
+        "actual": 46.7,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -538,7 +538,7 @@
       "with_duration": 0
     },
     "posting": {
-      "hours_since_last_post": 42.0,
+      "hours_since_last_post": 46.7,
       "alert_threshold_h": 36,
       "stalled": true,
       "week_posts": 2
@@ -547,7 +547,7 @@
   "audience": {
     "measurable": true,
     "by_country": {
-      "KR": 901,
+      "KR": 899,
       "AU": 2,
       "IN": 2,
       "DE": 1,
@@ -559,7 +559,7 @@
       "US": 1
     },
     "home_country": "KR",
-    "home_followers": 901,
+    "home_followers": 899,
     "foreign_followers": 11,
     "foreign_pct": 1.2,
     "top_foreign": [
@@ -600,6 +600,6 @@
         "followers": 1
       }
     ],
-    "counted": 912
+    "counted": 910
   }
 }
