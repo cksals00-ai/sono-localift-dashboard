@@ -21,6 +21,7 @@
 
 import json
 import os
+import struct
 import sys
 import urllib.error
 import urllib.parse
@@ -35,9 +36,10 @@ DUR = os.path.join(ROOT, "data", "ria_media_duration.json")
 
 DUR_NOTE = (
     "릴 영상 길이(초). 리텐션 = 평균 시청시간 ÷ 영상 길이 의 분모다. "
-    "IG Graph API 가 미디어 길이를 주지 않으므로 사람이 한 번만 채운다(길이는 바뀌지 않는다). "
-    "새 릴은 수집기가 값 null 로 자동 추가하므로, 숫자만 적어 넣으면 된다. "
-    "null 인 항목은 리텐션이 계산되지 않고 판정에서 제외된다."
+    "2026-08-25 자동화: IG Graph API 는 길이 필드를 주지 않지만 media_url(CDN mp4)은 준다. "
+    "수집기가 그 URL 의 moov/mvhd 헤더만 HTTP Range 로 읽어 길이를 실측해 채운다 "
+    "— 사람이 손으로 넣지 않는다(넣은 값이 있으면 그대로 존중한다). "
+    "null 은 실측 실패(만료된 CDN URL 등)를 뜻하며 리텐션 판정에서 제외된다."
 )
 
 # 리텐션 분자 후보. Graph API 버전마다 이름이 다르므로 순서대로 시도한다.
@@ -202,6 +204,66 @@ def audience_split(by_country):
     }
 
 
+# ------------------------------------------------- 릴 길이 실측 (mp4 moov)
+
+_MP4_MAX_HOPS = 40
+
+
+def _range_get(url, start, end, timeout=25):
+    req = urllib.request.Request(
+        url, headers={"User-Agent": "APLocaLift-RiaKPI/1.0",
+                      "Range": "bytes=%d-%d" % (start, end)})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return r.read()
+
+
+def _mvhd_seconds(buf):
+    """moov 페이로드에서 mvhd 를 찾아 duration/timescale 을 초로 돌려준다."""
+    i, n = 0, len(buf)
+    while i + 8 <= n:
+        size = struct.unpack(">I", buf[i:i + 4])[0]
+        if buf[i + 4:i + 8] == b"mvhd":
+            p = i + 8
+            if buf[p] == 1:
+                ts, dur = struct.unpack(">IQ", buf[p + 20:p + 32])
+            else:
+                ts, dur = struct.unpack(">II", buf[p + 12:p + 20])
+            return (dur / ts) if ts else None
+        if size < 8:
+            return None
+        i += size
+    return None
+
+
+def remote_duration_sec(url, timeout=25):
+    """CDN mp4 의 재생시간(초). 전체 파일을 받지 않고 moov 박스만 Range 로 읽는다.
+    실패하면 None — 실패는 실패로 남기고 추정치를 만들지 않는다."""
+    if not url:
+        return None
+    try:
+        off = 0
+        for _ in range(_MP4_MAX_HOPS):
+            head = _range_get(url, off, off + 15, timeout)
+            if len(head) < 8:
+                return None
+            size = struct.unpack(">I", head[0:4])[0]
+            typ = head[4:8]
+            if size == 1:
+                size = struct.unpack(">Q", head[8:16])[0]
+                hdr = 16
+            elif size == 0:
+                return None
+            else:
+                hdr = 8
+            if typ == b"moov":
+                return _mvhd_seconds(_range_get(url, off + hdr, off + size - 1, timeout))
+            off += size
+    except (urllib.error.URLError, urllib.error.HTTPError, OSError,
+            struct.error, ValueError):
+        return None
+    return None
+
+
 def watch_time_ms(media_id, probe, plays=None):
     """
     릴 평균 시청시간(ms)을 얻는다. 없으면 None.
@@ -263,13 +325,16 @@ def collect():
     media = []
     res = api(
         "%s/media" % IG_USER,
-        fields="id,caption,media_type,media_product_type,permalink,timestamp,like_count,comments_count",
+        fields=("id,caption,media_type,media_product_type,permalink,timestamp,"
+                "like_count,comments_count,media_url"),
         limit=MEDIA_LIMIT,
     )
     durations = load(DUR, {"schema_version": "1.0", "note": DUR_NOTE, "durations": {}})
     dur_map = durations.get("durations") or {}
     probe = {"metric_tried": RETENTION_METRICS, "metric_ok": [], "metric_failed": [],
-             "reels": 0, "with_avg_watch": 0, "with_duration": 0}
+             "reels": 0, "with_avg_watch": 0, "with_duration": 0,
+             "duration_measured": 0, "duration_failed": 0,
+             "duration_source": "media_url mp4 moov/mvhd (HTTP Range 실측)"}
 
     for m in (res or {}).get("data", []):
         ins = insights(
@@ -304,6 +369,16 @@ def collect():
             avg_ms = watch_time_ms(m["id"], probe, plays=ins.get("plays") or ins.get("views"))
             row["avg_watch_sec"] = round(avg_ms / 1000.0, 1) if avg_ms else None
             d = dur_map.get(m["id"])
+            if not (isinstance(d, (int, float)) and d > 0):
+                measured = remote_duration_sec(m.get("media_url"))
+                if measured and measured > 0:
+                    d = round(float(measured), 2)
+                    dur_map[m["id"]] = d
+                    probe["duration_measured"] += 1
+                    log("길이 실측 %s = %.2fs" % (m["id"], d))
+                else:
+                    d = None
+                    probe["duration_failed"] += 1
             row["duration_sec"] = float(d) if isinstance(d, (int, float)) and d > 0 else None
             if row["avg_watch_sec"] is not None:
                 probe["with_avg_watch"] += 1
@@ -377,6 +452,9 @@ def weekly(media):
         "shares": sum(m["shares"] for m in win),
         "reach": sum(m["reach"] for m in win),
         "views": sum(m["views"] for m in win),
+        "save_rate_pct": (
+            round(sum(m["saves"] for m in win) / sum(m["reach"] for m in win) * 100, 2)
+            if sum(m["reach"] for m in win) else None),
     }
 
 
@@ -425,6 +503,8 @@ def kpi_actuals(followers, wk, ret, snap=None, aud=None, gap_h=None):
     aud = aud or {}
     return {
         "직전 5개 중 리텐션 40% 이상": ret["pass_count"],
+        "팔로워 순증 (참고 · 목표 없음)": net,
+        "팔로워 (참고 · 목표 없음)": net,
         "팔로워 순증 (참고)": net,
         "팔로워 순증": net,
         "팔로워 (4주 목표)": net,
@@ -438,6 +518,7 @@ def kpi_actuals(followers, wk, ret, snap=None, aud=None, gap_h=None):
         "마지막 게시 후 경과 (시간)": gap_h,
         "해외 팔로워 비중 (%)": aud.get("foreign_pct"),
         "해외 팔로워 수": aud.get("foreign_followers"),
+        "저장률 (저장 ÷ 도달, %)": wk["save_rate_pct"],
     }
 
 
@@ -568,6 +649,7 @@ def main():
                       retention_measurable=ret["measurable"],
                       retention_unmeasurable=ret["unmeasurable"],
                       week_posts=wk["posts"],
+                      week_save_rate_pct=wk["save_rate_pct"],
                       hours_since_last_post=gap_h))
     hist["snapshots"] = snaps[-HIST_MAX:]
     hist["updated_at"] = got["snapshot"]["at"]
