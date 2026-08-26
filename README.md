@@ -1,4 +1,4 @@
-# 소노 로컬리프트 · 데이터랩 대시보드
+# A.P LocaLift · 데이터랩 대시보드
 
 2026 한국관광 데이터랩 활용 경진대회(지역경제 기여 트랙) 파일럿 대시보드.
 공공데이터포털(한국관광공사 빅데이터) OpenAPI를 **GitHub Actions가 매일 06:00(KST) 자동 호출** → `data/dashboard_data.json` 갱신 → **GitHub Pages**가 서빙합니다. 소노 GS팀 대시보드의 "구글시트 연동 + 06시 자동갱신"과 동일한 결의 무(無)서버 구조입니다.
@@ -16,7 +16,7 @@ scripts/fetch_data.py          공공데이터포털 API 수집기 (키 없으�
 
 1. 이 폴더를 GitHub 새 저장소에 푸시
    ```bash
-   git init && git add . && git commit -m "init: sono localift dashboard"
+   git init && git add . && git commit -m "init: localift dashboard"
    git branch -M main
    git remote add origin https://github.com/<계정>/sono-localift-dashboard.git
    git push -u origin main

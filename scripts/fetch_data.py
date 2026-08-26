@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-소노 로컬리프트 대시보드 · 데이터 자동 수집기
+A.P LocaLift 대시보드 · 데이터 자동 수집기
 공공데이터포털(한국관광공사 관광빅데이터) OpenAPI → data/dashboard_data.json
 
 실행: DATA_GO_KR_KEY=발급키 python scripts/fetch_data.py
@@ -18,7 +18,7 @@
 
 동작 원칙
 - 키가 없거나 호출이 실패하면 기존 dashboard_data.json 을 보존하고 meta 만 갱신(대시보드가 깨지지 않게).
-- 성공 시 최근 N개월 '소노 9개 인구감소 시군구'의 월별 외지인+외국인(관광 유입) 합계를 저장.
+- 성공 시 최근 N개월 '대상 9개 인구감소지역'의 월별 외지인+외국인(관광 유입) 합계를 저장.
 """
 import os, json, sys, time, datetime as dt
 from pathlib import Path
@@ -35,7 +35,7 @@ OP = "locgoRegnVisitrDDList"        # 기초지자체(시군구) 방문자수 ·
 KEY = os.getenv("DATA_GO_KR_KEY", "").strip()
 MONTHS = int(os.getenv("VISIT_MONTHS", "24"))   # 최근 몇 개월
 
-# ── 소노 소재 인구감소 시군구 (이름으로 매칭) ──
+# ── 대상 인구감소지역 시군구 (이름으로 매칭) ──
 #   이름은 전국에서 유일(고성군만 강원/경남 중복 → 강원 코드 51 로 한정)
 TARGET_NAMES = {"홍천군", "부안군", "고성군", "청송군", "남해군", "삼척시", "단양군", "진도군", "양양군"}
 GOSEONG_GANGWON_PREFIX = "51"       # 고성군 동명이역 방지 (강원=51)
@@ -62,9 +62,9 @@ def month_labels(n):
 
 def api_page(op, params):
     q = urlencode({**params, "serviceKey": KEY, "MobileOS": "ETC",
-                   "MobileApp": "SonoLift", "_type": "json"}, safe="%")
+                   "MobileApp": "LocaLift", "_type": "json"}, safe="%")
     url = f"{BASE}/{op}?{q}"
-    req = Request(url, headers={"User-Agent": "SonoLift/1.0"})
+    req = Request(url, headers={"User-Agent": "LocaLift/1.0"})
     with urlopen(req, timeout=60) as r:
         raw = r.read().decode("utf-8", errors="replace")
     preview = raw[:400].replace("\n", " ")
@@ -172,7 +172,7 @@ def main():
         base["visitors"] = {"labels": months, "values": values, "byRegion": regions, "mix": mixout}
         base["meta"] = {
             "updated": now,
-            "anchor": "소노 소재 인구감소 시군구 9곳(홍천·부안·고성·청송·남해·삼척·단양·진도·양양)",
+            "anchor": "인구감소지역 9곳(홍천·부안·고성·청송·남해·삼척·단양·진도·양양)",
             "anchorType": "인구감소지역",
             "metric": "월별 외지인+외국인 방문객 합계(관광 유입) · 한국관광 데이터랩 이동통신",
             "source": "공공데이터포털 · 한국관광공사 관광빅데이터 locgoRegnVisitrDDList(15101972)",
@@ -193,15 +193,14 @@ def main():
 
 
 FALLBACK_TIMING = {"months": ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"],
-                   "demandIndex": [88,80,58,62,72,66,95,100,70,78,64,90],
-                   "sonoOccupancy": [72,68,55,58,63,60,85,90,64,70,58,80]}
+                   "demandIndex": [88,80,58,62,72,66,95,100,70,78,64,90]}
 FALLBACK_SCORING = {"labels": ["홍천(비발디)","고성(델피노)","청송","영덕","단양","부안(변산)"],
                     "values": [4.45,4.35,4.30,4.30,4.00,3.95]}
 FALLBACK_KPI = [
     {"name":"지역 방문자 증가","unit":"%","bench":"+18%","target":"+15%","source":"이동통신 방문자수"},
     {"name":"지역 관광 소비 유도액","unit":"억원","bench":"69억","target":"30억","source":"신용카드 지출액"},
-    {"name":"지역화폐/쿠폰 사용률","unit":"%","bench":"+71%","target":"+50%","source":"지자체+소노 발권"},
-    {"name":"비수기 가동률 개선","unit":"%p","bench":"-","target":"+8%p","source":"소노 대시보드"},
+    {"name":"지역화폐/쿠폰 사용률","unit":"%","bench":"+71%","target":"+50%","source":"지자체 발권"},
+    {"name":"비수기 가동률 개선","unit":"%p","bench":"-","target":"+8%p","source":"운영 실적"},
     {"name":"생산유발효과","unit":"억원","bench":"240억","target":"100억","source":"산업연관표 추정"},
 ]
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-소노 로컬리프트 · 지역 관광소비 지수 수집기 (풍선효과 외부검증)
+A.P LocaLift · 지역 관광소비 지수 수집기 (풍선효과 외부검증)
 공공데이터포털 · 한국관광공사 '지역별 관광 자원 수요'(15152138) OpenAPI
   → AreaTarResDemService/areaTarSvcDemList
 
@@ -29,17 +29,17 @@ KEY = os.getenv("DATA_GO_KR_KEY", "").strip()
 # 소비강도 지표: 2201 외지인 소비액, 2202 전체 대비 외지인소비액 비중, 2203 방문량 대비 소비액
 DS_IX = {"2201": "out_spend", "2202": "out_ratio", "2203": "spend_per_visit"}
 
-# 소노 소재 9개 인구감소 시군구 (법정동 areaCd/signguCd · 고성=강원 51820)
+# 대상 9개 인구감소지역 시군구 (법정동 areaCd/signguCd · 고성=강원 51820)
 REGIONS = [
-    {"key": "홍천군", "loc": "강원 홍천", "area": "51", "signgu": "51720", "hero": "비발디파크·오션월드"},
-    {"key": "삼척시", "loc": "강원 삼척", "area": "51", "signgu": "51230", "hero": "소노 삼척"},
-    {"key": "고성군", "loc": "강원 고성", "area": "51", "signgu": "51820", "hero": "소노문 델피노"},
-    {"key": "양양군", "loc": "강원 양양", "area": "51", "signgu": "51830", "hero": "쏠비치 양양"},
-    {"key": "부안군", "loc": "전북 부안", "area": "52", "signgu": "52800", "hero": "소노벨 변산"},
-    {"key": "단양군", "loc": "충북 단양", "area": "43", "signgu": "43800", "hero": "소노 단양"},
-    {"key": "남해군", "loc": "경남 남해", "area": "48", "signgu": "48840", "hero": "소노 남해"},
-    {"key": "진도군", "loc": "전남 진도", "area": "46", "signgu": "46900", "hero": "소노캄 진도"},
-    {"key": "청송군", "loc": "경북 청송", "area": "47", "signgu": "47750", "hero": "소노벨 청송"},
+    {"key": "홍천군", "loc": "강원 홍천", "area": "51", "signgu": "51720"},
+    {"key": "삼척시", "loc": "강원 삼척", "area": "51", "signgu": "51230"},
+    {"key": "고성군", "loc": "강원 고성", "area": "51", "signgu": "51820"},
+    {"key": "양양군", "loc": "강원 양양", "area": "51", "signgu": "51830"},
+    {"key": "부안군", "loc": "전북 부안", "area": "52", "signgu": "52800"},
+    {"key": "단양군", "loc": "충북 단양", "area": "43", "signgu": "43800"},
+    {"key": "남해군", "loc": "경남 남해", "area": "48", "signgu": "48840"},
+    {"key": "진도군", "loc": "전남 진도", "area": "46", "signgu": "46900"},
+    {"key": "청송군", "loc": "경북 청송", "area": "47", "signgu": "47750"},
 ]
 # 소비액 지표 (풍선효과=객실 외 지역 소비)
 IX = {"1107": "lodge", "1106": "food", "1105": "shop", "1108": "leisure"}
@@ -49,8 +49,8 @@ IX_NM = {"lodge": "숙박업 소비액", "food": "식음료 소비액", "shop": 
 
 def api(base, op, params):
     q = urlencode({**params, "serviceKey": KEY, "MobileOS": "ETC",
-                   "MobileApp": "SonoLift", "_type": "json"}, safe="%")
-    req = Request(f"{base}/{op}?{q}", headers={"User-Agent": "SonoLift/1.0"})
+                   "MobileApp": "LocaLift", "_type": "json"}, safe="%")
+    req = Request(f"{base}/{op}?{q}", headers={"User-Agent": "LocaLift/1.0"})
     last = None
     for attempt in range(3):                    # 502 등 일시오류 재시도
         try:
@@ -137,7 +137,7 @@ def main():
     # 1) 지역별 최신월 4개 소비지수
     by_region = []
     for r in REGIONS:
-        row = {"key": r["key"], "loc": r["loc"], "hero": r["hero"]}
+        row = {"key": r["key"], "loc": r["loc"]}
         for ixcd, name in IX.items():          # 자원수요: 업종별 소비액
             row[name] = get_val(r["area"], r["signgu"], ym, ixcd)
             time.sleep(0.05)
