@@ -132,6 +132,8 @@
       <a href="opendata.html" data-p="opendata">공공데이터</a>
       <a href="about.html" data-p="about">회사 소개</a>
       <a href="shop.html" data-p="shop">SHOP</a>
+      <a href="apps.html" data-p="apps">APPS</a>
+      <a href="ir.html" data-p="ir">IR</a>
     </div>
   </div>
 </nav>
@@ -155,7 +157,7 @@
     <p class="lead" style="margin-top:20px">통계는 사람을 움직이지 못한다. A.P는 데이터랩이 짚은 인구감소·관광 취약 지역을 뮤직비디오의 무대로 삼아, 지도 위의 지명을 ‘가 보고 싶은 곳’으로 바꾼다.</p>
     <div class="missionGrid">
       <div class="mcard"><div class="n">진단</div><h3>데이터가 고른 무대</h3><p>임팩트 대시보드가 짚은 9개 인구감소 시군구를, 그대로 이야기의 배경으로.</p></div>
-      <div class="mcard"><div class="n">제작</div><h3>뮤직비디오 · 숏폼 · IP</h3><p>두 주연을 축으로, 세로 뮤직비디오부터 릴스까지 하나의 세계관으로.</p></div>
+      <div class="mcard"><div class="n">제작</div><h3>뮤직비디오 · 숏폼 · IP</h3><p>두 주연과 아기호랑이 4남매를 축으로, 세로 뮤직비디오부터 릴스·굿즈까지 하나의 세계관으로.</p></div>
       <div class="mcard"><div class="n">전환</div><h3>관심 → 방문</h3><p>콘텐츠에서 태어난 관심을, 실제 그 지역의 방문·소비로 잇는다.</p></div>
     </div>
   </div>
@@ -193,6 +195,21 @@
   </div>
 </section>
 
+<!-- CHARACTERS -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="shead reveal">
+      <h2 class="display">The Horang Cubs</h2>
+      <p>산신을 지키는 네 마리 아기 호랑이. 세계관의 마스코트이자 굿즈·숏폼의 주인공.</p>
+    </div>
+    <div class="cubs reveal">
+      <div class="cub"><div class="imw"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041250_f9f3ad0a-d83b-434c-9de0-f4acb0b82eb2.png" alt="Daho"></div><div class="cn">Daho</div><div class="ck">다호 · 맏이</div><p>든든한 주황 호랑이. 넷을 이끄는 리더.</p></div>
+      <div class="cub"><div class="imw"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041255_d7177151-2ac7-4a01-859e-f1e96c05af2a.png" alt="Kkobi"></div><div class="cn">Kkobi</div><div class="ck">꼬비 · 먹보</div><p>초록 후드에 김밥을 쥔 통통이. 먹는 게 일.</p></div>
+      <div class="cub"><div class="imw"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041304_0471ff32-0a80-4bf9-bf94-c33bb17076ad.png" alt="Ari"></div><div class="cn">Ari</div><div class="ck">아리 · 호기심</div><p>큰 눈망울의 눈치 빠른 탐험가.</p></div>
+      <div class="cub"><div class="imw"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041306_f3e00dcf-6c35-41b2-8702-fa3336f6f288.png" alt="Rami"></div><div class="cn">Rami</div><div class="ck">라미 · 막내</div><p>제일 작고 껌딱지. 늘 누군가 뒤에 붙어 있다.</p></div>
+    </div>
+  </div>
+</section>
 
 <!-- MV SERIES -->
 <section class="sec">
@@ -236,9 +253,141 @@
   </div>
 </section>
 
+<!-- axis divider -->
+<div class="wrap reveal"><div class="axisDiv"></div></div>
+
+<!-- EDUCATION LINE : HANGEUL CUBS -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:30px" class="reveal">
+      <span class="kicker">Education line · Pilot in production</span>
+      <h2 class="display" style="font-size:clamp(30px,5.4vw,70px);margin-top:14px">HANGEUL CUBS</h2>
+      <div style="color:var(--gold2);letter-spacing:.2em;font-size:13px;margin-top:6px">호랑 4남매의 한글놀이 · 유아·외국인 한글교육 애니메이션</div>
+      <div style="font-family:'Cormorant Garamond',serif;color:#e6ebf1;font-size:clamp(16px,2vw,22px);margin-top:12px;font-style:italic">“Learn to read Korean with the Tiger Cubs.”</div>
+    </div>
+    <div class="reveal" style="border-radius:22px;overflow:hidden;border:1px solid var(--line);margin-bottom:32px">
+      <img loading="lazy" style="width:100%;display:block" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260722_012549_e9595dcf-f79e-47b0-b36d-f6e2749b6446.png" alt="Hangeul Cubs treehouse classroom">
+    </div>
+    <p class="logline reveal">같은 세계관, 두 번째 콘텐츠 축. 뮤직비디오가 <span class="g">어른</span>을 지역으로 부른다면,<br>HANGEUL CUBS는 <span class="g">아이와 세계의 초심자</span>에게 한글을 가르치며 한류의 문을 연다.</p>
+    <div class="drammeta reveal" style="margin-bottom:40px">
+      <span><b>타깃</b> 유아 2~4세 · 외국인 초심자</span>
+      <span><b>포맷</b> 3분 세로 애니메이션</span>
+      <span><b>언어</b> 영어 내레이션 + 한글 학습</span>
+      <span><b>커리큘럼</b> 모음→자음→단어→문장 (5시즌)</span>
+    </div>
+    <div class="gal reveal">
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260721_233844_8880fc26-ef4c-410a-b17f-2e861c7d2353.png" alt="opening"><figcaption>트리하우스 교실로 뛰어드는 4남매</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260722_012553_68b98a37-deea-415b-a8f1-f572d985abf9.png" alt="vowel squad"><figcaption>Vowel Squad — 오늘 배울 모음들</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260721_233848_093ac203-58d8-4983-bb06-7433516189f0.png" alt="letter a"><figcaption>오늘의 글자 ‘ㅏ’ — 살아 움직이는 등불 글자판</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260721_233857_5e0ebbe6-8afb-4aae-be77-c28f7d6fc819.png" alt="pronounce"><figcaption>입모양으로 배우는 발음 — “Open wide, ahh!”</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260722_012614_72283a0e-5042-46a2-a827-e22e14e99c0d.png" alt="ari mirror"><figcaption>거울 따라하기 — 발음 코치 아리</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260722_012557_3e2edbb2-aba0-4264-98df-0f73c7734ba7.png" alt="kobi words"><figcaption>먹으며 외우는 단어 — 먹보 꼬비</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260722_012600_532637b8-518d-434e-be47-ba66f0c46736.png" alt="rami trace"><figcaption>획순 따라 쓰기 — 막내 라미</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260722_012610_51ba8f40-fffc-4181-8362-bac01b34a98f.png" alt="daho highfive"><figcaption>“You did it!” — 진행 선생님 다호</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260721_233902_4ef367b6-ae85-406d-8409-a6740da459c9.png" alt="chant"><figcaption>함께 부르는 챈트 송 — “ㅏ ㅏ ㅏ, AH AH AH!”</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION : TEACHER ROLES -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="shead reveal">
+      <h2 class="display">선생님이 된 4남매</h2>
+      <p>MV 세계관의 마스코트가 한글 교실에선 각자 ‘선생님’이 된다.</p>
+    </div>
+    <div class="cubs reveal">
+      <div class="cub"><div class="imw"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041250_f9f3ad0a-d83b-434c-9de0-f4acb0b82eb2.png" alt="Daho"></div><div class="cn">Daho</div><div class="ck">다호 · 진행</div><p>오늘의 글자를 소개하고 수업을 이끄는 진행 선생님.</p></div>
+      <div class="cub"><div class="imw"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041255_d7177151-2ac7-4a01-859e-f1e96c05af2a.png" alt="Kkobi"></div><div class="cn">Kkobi</div><div class="ck">꼬비 · 단어</div><p>먹거리로 단어를 외우는 먹방 니모닉 선생님.</p></div>
+      <div class="cub"><div class="imw"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041304_0471ff32-0a80-4bf9-bf94-c33bb17076ad.png" alt="Ari"></div><div class="cn">Ari</div><div class="ck">아리 · 발음</div><p>입모양·폰릭스로 소리를 잡아주는 발음 코치.</p></div>
+      <div class="cub"><div class="imw"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260710_041306_f3e00dcf-6c35-41b2-8702-fa3336f6f288.png" alt="Rami"></div><div class="cn">Rami</div><div class="ck">라미 · 쓰기</div><p>획순을 함께 따라 쓰고 챈트를 리드하는 응원 막내.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION : SHOW SET & GOODS -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="shead reveal">
+      <h2 class="display">쇼 제작 현장 · 굿즈</h2>
+      <p>MV 제작과 별개로, 한글놀이 쇼는 밝은 키즈쇼 무대와 IP 굿즈로 확장된다.</p>
+    </div>
+    <div class="bts reveal">
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260722_012619_db499cd5-63d4-4b98-b2be-7f12ca397b4b.png" alt="show set"><figcaption>밝은 키즈쇼 무대 — 노래하고 배우는 한글 교실</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260722_012623_a6d57e22-d0e3-4331-9924-ce7c2ab43d6b.png" alt="goods"><figcaption>인형·글자블록 굿즈</figcaption></figure>
+      <figure><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260721_233844_8880fc26-ef4c-410a-b17f-2e861c7d2353.png" alt="cubs"><figcaption>호랑 4남매, 오늘도 수업 시작</figcaption></figure>
+    </div>
+    <div style="text-align:center;margin-top:30px;color:var(--sub);font-size:13px" class="reveal">
+      영어 주언어 · 화면에 큰 한글 · 유아 안전 연출 &nbsp;|&nbsp; 유튜브 무료 공개 → 재생목록·컴필레이션 → 굿즈·앱·B2B(어린이집·한국어학당·문화원)
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION : EP1 DELIVERABLE (16:9) -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:30px" class="reveal">
+      <span class="kicker">Deliverable · EP1 Complete</span>
+      <h2 class="display" style="font-size:clamp(28px,4.6vw,58px);margin-top:12px">산출물 — HANGEUL CUBS EP1 「모음 ㅏ」</h2>
+      <p class="lead" style="margin:12px auto 0;text-align:center;max-width:62ch">호랑 4남매가 영어로 진행하며 한글 첫 모음 ‘ㅏ’를 가르치는 3분 애니메이션 — 영상·오디오 완성본.</p>
+    </div>
+    <div class="reveal" style="max-width:900px;margin:0 auto;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#000;box-shadow:0 24px 60px rgba(0,0,0,.5)">
+      <video controls preload="metadata" style="width:100%;display:block;aspect-ratio:16/9;background:#000" poster="assets/video/EP1_vowel_A_poster.png">
+        <source src="assets/video/EP1_vowel_A_16x9.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="reveal" style="max-width:900px;margin:20px auto 0;display:flex;gap:9px;flex-wrap:wrap;justify-content:center">
+      <span style="font-size:12px;color:var(--gold2);border:1px solid rgba(201,169,106,.3);border-radius:999px;padding:5px 12px">3:00 · 16:9 (1920×1080)</span>
+      <span style="font-size:12px;color:var(--gold2);border:1px solid rgba(201,169,106,.3);border-radius:999px;padding:5px 12px">영어 VO + 한글</span>
+      <span style="font-size:12px;color:var(--gold2);border:1px solid rgba(201,169,106,.3);border-radius:999px;padding:5px 12px">오디오 −15 LUFS</span>
+      <span style="font-size:12px;color:var(--gold2);border:1px solid rgba(201,169,106,.3);border-radius:999px;padding:5px 12px">22컷</span>
+      <span style="font-size:12px;color:var(--gold2);border:1px solid rgba(201,169,106,.3);border-radius:999px;padding:5px 12px">9:16 Shorts 별도</span>
+    </div>
+    <div class="reveal" style="max-width:900px;margin:22px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:18px 20px">
+        <div style="color:var(--gold2);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">구성</div>
+        <div style="color:var(--sub);font-size:13px;line-height:1.8">시그니처 송 → 글자 소개(다호) → 발음(아리) → 단어 먹방(꼬비) → 따라쓰기(라미) → 챈트 송.</div>
+      </div>
+      <div style="background:linear-gradient(180deg,var(--panel),var(--panel2));border:1px solid var(--line);border-radius:16px;padding:18px 20px">
+        <div style="color:var(--gold2);font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">부속 산출물</div>
+        <div style="color:var(--sub);font-size:13px;line-height:1.8">시놉시스 · 22컷 대본 · 아트 바이블 · 캐릭터 턴어라운드 4종 · 썸네일 · 워드마크</div>
+      </div>
+    </div>
+    <div class="reveal" style="text-align:center;margin-top:18px;color:var(--dim);font-size:12.5px"><span style="color:var(--mint)">●</span> 제작 완료 · 발음 검수 진행 중 · 유튜브 공개 예정</div>
+  </div>
+</section>
+
+<!-- ============ HANGEUL CUBS 교육 섹션 끝 ============ -->
 
 
 
+<!-- LIA INSTAGRAM -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap reveal">
+    <div class="ig">
+      <div class="igHead">
+        <div class="igAv" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_113123_d8fde60d-1e99-433e-9891-7daceddeb1e7.png')"></div>
+        <div>
+          <div class="igName">Lia · 한리아</div>
+          <div class="igHandle">@lia.localift</div>
+          <div class="igStats"><span><b>128</b> 게시물</span><span><b>52.4k</b> 팔로워</span><span><b>영어·한국어</b> 콘텐츠</span></div>
+        </div>
+        <a class="igFollow" href="#" onclick="return false">팔로우</a>
+      </div>
+      <div class="igGrid">
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_221856_caf7cae2-ee40-43e1-8883-7e23313469c2.png" alt="jeonju"><span class="cap">전주 한옥마을 골목</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_115941_f1ef09d6-221b-4e0f-bde9-b15c9946cdc8.png" alt="baseball"><span class="cap">야구장 직관 데이</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_135259_a2885f39-b597-48f9-9304-1bfcc08f0418.png" alt="surf"><span class="cap">양양 서핑 첫 도전</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_113139_885d9b13-b92b-4991-b510-7462f3965ee6.png" alt="run"><span class="cap">한강 새벽 러닝</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_221907_f91bbf21-260e-4ad8-b7c0-03c755bc90d9.png" alt="atlanta"><span class="cap">고향 애틀랜타 가을</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_113148_6ad8b902-7c95-47f3-9ff2-725f318f51e4.png" alt="yoga"><span class="cap">아침 홈 요가</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_221852_3e554516-5323-481d-9733-1976b70f01f0.png" alt="study"><span class="cap">카페에서 일본어 공부</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_113144_180f5e03-423b-4555-8baa-ef294948fce7.png" alt="journal"><span class="cap">오늘의 저널링</span></a>
+        <a href="#" onclick="return false"><img loading="lazy" src="https://d8j0ntlcm91z4.cloudfront.net/user_3GDgP9Te2W8sU4yUFszupEi96BL/hf_20260712_235846_6271160d-3af0-4c1d-96f9-59a74b5b3f11.png" alt="onset"><span class="cap">제작 현장에서</span></a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- K-BEAUTY GLOBAL COMMERCE -->
 <section class="sec" style="padding-top:0">
@@ -276,9 +425,45 @@
       <span style="font-size:12.5px;color:var(--dim);border:1px dashed var(--line);border-radius:999px;padding:8px 16px">리아 숏폼 채널 — 개설 후 공개</span>
     </div>
     <p class="reveal" style="text-align:center;margin-top:20px;font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2vw,22px);color:var(--gold2);font-style:italic">“리아가 고른 진짜 K뷰티 — A.P LocaLift 글로벌 스토어, Coming Soon”</p>
+    <p class="reveal" style="text-align:center;margin-top:22px;color:var(--sub);font-size:13.5px;max-width:64ch;margin-left:auto;margin-right:auto;line-height:1.75">그리고 제5축 <b style="color:var(--gold2)">Sports Boost</b> — 구단 자산으로 만드는 리아 스포츠 콘텐츠에, 관전·인근 리조트 숙박·굿즈를 하나로 묶어 필리핀에 판매하는 해외 확장(GSA)까지. 같은 생성·유통 엔진으로 이어집니다.</p>
   </div>
 </section>
 
+<!-- IP · ASSET PROTECTION -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:30px" class="reveal">
+      <span class="kicker">IP · Asset Protection</span>
+      <h2 class="display" style="font-size:clamp(28px,4.6vw,58px);margin-top:12px">호랑 4남매, 자산으로 지킨다</h2>
+      <p class="lead" style="margin:14px auto 0;text-align:center;max-width:60ch">캐릭터 IP는 저작권·상표·디자인 세 겹으로 보호한다. 그림 그 자체, 브랜드(이름·로고), 외관까지 — 콘텐츠와 굿즈 사업의 기반 자산.</p>
+    </div>
+    <div class="missionGrid" style="margin-top:0">
+      <div class="mcard reveal">
+        <div style="color:var(--gold2);font-size:13px;letter-spacing:.12em;text-transform:uppercase">저작권 등록</div>
+        <div style="color:var(--dim);font-size:12px;margin:4px 0 12px">한국저작권위원회</div>
+        <p style="color:#cfd7df;font-size:13.5px;margin:0 0 10px">캐릭터 <b>그림(창작물)</b> 그 자체. 창작자·시점 입증력 확보.</p>
+        <ul style="color:var(--sub);font-size:12.5px;margin:0;padding-left:16px;line-height:1.7"><li>보호 <b style="color:var(--ink)">사후 70년</b></li><li>비용 <b style="color:var(--ink)">약 2.4만원/건</b></li><li>기간 <b style="color:var(--ink)">2~3주</b> · 가장 빠름</li></ul>
+      </div>
+      <div class="mcard reveal">
+        <div style="color:var(--gold2);font-size:13px;letter-spacing:.12em;text-transform:uppercase">상표 등록</div>
+        <div style="color:var(--dim);font-size:12px;margin:4px 0 12px">특허청 (KIPO)</div>
+        <p style="color:#cfd7df;font-size:13.5px;margin:0 0 10px">이름·로고를 <b>브랜드</b>로. 굿즈·머천다이징 필수.</p>
+        <ul style="color:var(--sub);font-size:12.5px;margin:0;padding-left:16px;line-height:1.7"><li>보호 <b style="color:var(--ink)">10년(갱신 반영구)</b></li><li>비용 출원 4.6만+등록 20.1만/류</li><li>기간 14~18개월(<b style="color:var(--ink)">우선심사 2~3개월</b>)</li></ul>
+      </div>
+      <div class="mcard reveal">
+        <div style="color:var(--gold2);font-size:13px;letter-spacing:.12em;text-transform:uppercase">디자인 등록</div>
+        <div style="color:var(--dim);font-size:12px;margin:4px 0 12px">특허청 (KIPO) · 선택</div>
+        <p style="color:#cfd7df;font-size:13.5px;margin:0 0 10px">캐릭터 <b>외관·형상</b>. 굿즈 상품화 단계에서 강화.</p>
+        <ul style="color:var(--sub);font-size:12.5px;margin:0;padding-left:16px;line-height:1.7"><li>보호 <b style="color:var(--ink)">20년</b></li><li>비용 출원 수만원대/건</li><li>부분·동적·화상디자인 가능</li></ul>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:22px;background:rgba(201,169,106,.06);border:1px solid rgba(201,169,106,.28);border-radius:16px;padding:20px 24px">
+      <div style="color:var(--gold2);font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">등록 로드맵</div>
+      <div style="color:#cfd7df;font-size:13.5px;line-height:1.9"><b>1단계(즉시)</b> 4남매 저작권 등록(턴어라운드 도안) — 권리 입증 즉시 확보 &nbsp;·&nbsp; <b>2단계</b> ‘HANGEUL CUBS/호랑 4남매’ 상표 출원(완구·교육·콘텐츠 지정류) &nbsp;·&nbsp; <b>3단계</b> 굿즈 확정 시 디자인 등록</div>
+    </div>
+    <p style="color:var(--dim);font-size:11.5px;margin-top:14px;text-align:center">※ 2026년 기준 조사값. 일반 정보이며 법률 자문이 아닙니다 — 실제 출원은 변리사 상담 권장.</p>
+  </div>
+</section>
 
 <footer>
   <div class="wrap">

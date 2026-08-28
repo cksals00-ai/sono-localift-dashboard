@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HANGEUL CUBS — Batchim Buddies · A.P LocaLift</title>
+<meta name="description" content="호랑 4남매와 배우는 한글 받침 학습 앱 HANGEUL CUBS 'Batchim Buddies'. 한국어 초심자를 위한 오프라인 학습 — 출시 준비 중.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0b10;--card:#14141c;--line:#26262f;--gold:#C9A96A;--gold2:#E7CE96;--amber:#C05A1E;--ink:#e8e8ec;--sub:#8a8a96;--old:#666;--mint:#57C4B4}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Inter','Apple SD Gothic Neo','Malgun Gothic',sans-serif;line-height:1.65;-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:var(--gold)}
+img{display:block;max-width:100%}
+.siteNav{position:sticky;top:0;z-index:100;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);background:rgba(7,10,16,.82);border-bottom:1px solid var(--line)}
+.nvIn{max-width:1180px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;justify-content:space-between}
+.nvBrand{font-size:13.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;font-weight:800}
+.nvBrand b{color:var(--gold2)}
+.nvTabs{display:flex;gap:8px;flex-wrap:wrap}
+.nvTabs a{font-size:12.5px;color:var(--sub);text-decoration:none;padding:7px 14px;border-radius:999px;border:1px solid transparent;transition:.15s;white-space:nowrap}
+.nvTabs a:hover{color:var(--ink);border-color:var(--line)}
+.nvTabs a.on{color:#0b0b10;background:var(--gold);border-color:var(--gold);font-weight:700}
+.wrap{max-width:1020px;margin:0 auto;padding:0 20px}
+.kicker{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.28em;text-transform:uppercase;font-size:11px;color:var(--gold)}
+/* hero */
+.hero{padding:clamp(34px,6vh,64px) 0 clamp(20px,4vh,40px)}
+.heroGrid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(20px,4vw,44px);align-items:center}
+@media(max-width:800px){.heroGrid{grid-template-columns:1fr}}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:900;letter-spacing:-.01em;line-height:1.05;margin:12px 0 6px}
+.hero h1 .g{color:var(--gold2)}
+.hero .bb{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,3vw,28px);color:var(--gold2);font-style:italic;margin-bottom:14px}
+.hero p{color:var(--sub);font-size:15px;max-width:46ch}
+.hero p b{color:var(--ink);font-weight:650}
+.soon{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);border:1px solid rgba(201,169,106,.4);border-radius:999px;padding:7px 15px}
+.soon .dot{width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
+.shot{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--card);box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.shot img{width:100%;height:auto}
+/* sections */
+.sec{padding:clamp(30px,5vh,56px) 0;border-top:1px solid var(--line)}
+.sec h2{font-size:clamp(20px,3vw,28px);font-weight:800;letter-spacing:-.01em;margin-bottom:6px}
+.sec .lede{color:var(--sub);font-size:14px;max-width:60ch;margin-bottom:20px}
+.figc{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+.figc img{width:100%;height:auto}
+.cap{color:var(--old);font-size:12px;margin-top:10px;text-align:center}
+/* feature grid */
+.grid{display:grid;gap:14px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:760px){.g3,.g2{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.card .t{color:var(--gold2);font-size:13.5px;font-weight:700;letter-spacing:.02em;margin-bottom:7px}
+.card p{color:var(--sub);font-size:13.5px;line-height:1.7}
+.card p b{color:var(--ink);font-weight:650}
+/* lessons list */
+.lessons{list-style:none;display:flex;flex-direction:column;gap:10px}
+.lessons li{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;gap:14px;align-items:baseline}
+.lessons li .n{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);line-height:1;flex:none;width:26px}
+.lessons li .tx{color:var(--sub);font-size:14px}
+.lessons li .tx b{color:var(--ink)}
+.batchim{color:var(--amber);font-weight:800}
+/* platforms */
+.plats{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.plat{border:1px dashed var(--line);border-radius:999px;padding:9px 18px;color:var(--sub);font-size:13px;font-weight:600}
+.plat b{color:var(--ink)}
+footer{margin-top:8px;padding:34px 0 60px;border-top:1px solid var(--line);color:var(--old);font-size:12.5px}
+footer .fb{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold2);margin-bottom:8px}
+footer .ai{color:var(--sub);margin-top:8px}
+</style>
+</head>
+<body>
+<nav class="siteNav">
+  <div class="nvIn">
+    <a class="nvBrand" href="index.html">A.P <b>LocaLift</b></a>
+    <div class="nvTabs">
+      <a href="index.html" data-p="index">홈</a>
+      <a href="opendata.html" data-p="opendata">공공데이터</a>
+      <a href="about.html" data-p="about">회사 소개</a>
+      <a href="shop.html" data-p="shop">SHOP</a>
+      <a href="apps.html" data-p="apps">APPS</a>
+      <a href="ir.html" data-p="ir">IR</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="heroGrid">
+      <div>
+        <span class="kicker">New · Language Learning App</span>
+        <h1>HANGEUL <span class="g">CUBS</span></h1>
+        <div class="bb">Batchim Buddies</div>
+        <p>호랑 4남매 <b>다호·꼬비·아리·라미</b>와 함께 배우는 한글 <b>받침</b> 학습 앱. 한국어를 처음 배우는 외국인 초심자를 위해, 가장 헷갈리는 받침을 놀이처럼 익힙니다.</p>
+        <div class="soon"><span class="dot"></span>출시 준비 중 · Coming Soon</div>
+      </div>
+      <div class="shot">
+        <img src="img/hangeul_cubs_hero.jpg" alt="HANGEUL CUBS — 호랑 4남매와 배우는 한글 받침 학습 앱 히어로 이미지" width="1600" height="900" loading="eager">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <h2>배우고 · 듣고 · 풀고</h2>
+    <p class="lede">받침을 소리로 듣고, 색으로 구분하고, 퀴즈로 확인합니다. 세 화면으로 한 흐름이 완성됩니다.</p>
+    <div class="figc">
+      <img src="img/hangeul_cubs_screens.jpg" alt="HANGEUL CUBS 3화면 쇼케이스 — 배우고, 듣고, 풀고" width="1600" height="900" loading="lazy">
+    </div>
+    <p class="cap">앱 화면 쇼케이스 — 학습 · 듣기 · 퀴즈</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <h2>무엇을 배우나요</h2>
+    <p class="lede">레슨 6개로 구성됩니다. 받침 단어를 익히고, 소리로 구별하고, 첫 문장까지 이어집니다.</p>
+    <ul class="lessons">
+      <li><span class="n">1</span><span class="tx"><b>받침 단어 학습</b> — 받침이 들어간 기초 단어 4개 과</span></li>
+      <li><span class="n">2</span><span class="tx"><b>최소대립쌍 듣기</b> — <span class="batchim">반/방 · 발/밥 · 문/물 · 곰/공</span> 처럼 받침 하나로 뜻이 갈리는 소리 구별</span></li>
+      <li><span class="n">3</span><span class="tx"><b>첫 문장</b> — “물 주세요” 같은 실사용 첫 문장으로 마무리</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <h2>이렇게 학습합니다</h2>
+    <div class="grid g3">
+      <div class="card"><div class="t">듀오링고식 퀴즈</div><p>틀린 문제는 <b>다시 출제</b>됩니다. 맞힐 때까지 자연스럽게 반복돼 기억에 남습니다.</p></div>
+      <div class="card"><div class="t">복습 모드</div><p>지나온 레슨을 <b>다시 훑는</b> 복습 모드로 잊기 전에 되짚습니다.</p></div>
+      <div class="card"><div class="t">EN / VI 힌트 전환</div><p>영어·베트남어 <b>힌트를 전환</b>하며 학습. 베트남 학습자를 겨냥해 설계했습니다.</p></div>
+      <div class="card"><div class="t">발음 재생</div><p>기기 내장 <b>한국어 음성</b>으로 단어·문장 발음을 바로 들려줍니다.</p></div>
+      <div class="card"><div class="t">받침 분리 색상 표시</div><p>받침을 <b>색으로 분리</b>해 보여주는 시그니처 장치. 글자 구조가 한눈에 들어옵니다.</p></div>
+      <div class="card"><div class="t">완전 오프라인</div><p>네트워크 없이도 <b>전부 동작</b>합니다. 어디서나 끊김 없이 학습합니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <h2>어디서 만나나요</h2>
+    <p class="lede">iPhone · iPad · Android로 준비 중입니다. 출시 소식은 이곳과 공식 SNS로 알려드립니다.</p>
+    <div class="figc">
+      <img src="img/hangeul_cubs_devices.jpg" alt="HANGEUL CUBS — 폰과 태블릿 디바이스 화면" width="1600" height="900" loading="lazy">
+    </div>
+    <div class="plats">
+      <span class="plat"><b>iPhone</b> · 준비 중</span>
+      <span class="plat"><b>iPad</b> · 준비 중</span>
+      <span class="plat"><b>Android</b> · 준비 중</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fb">A.P LocaLift</div>
+    <div>HANGEUL CUBS “Batchim Buddies” · 호랑 4남매와 배우는 한글 받침 · 출시 준비 중</div>
+    <div class="ai">Illustrations created with AI tools.</div>
+  </div>
+</footer>
+
+<script>(function(){var f=(location.pathname.split('/').pop()||'index.html').toLowerCase();if(!f)f='index.html';document.querySelectorAll('.siteNav .nvTabs a').forEach(function(a){var h=a.getAttribute('href').toLowerCase();if(h===f||((f===''||f==='index.html')&&a.dataset.p==='index'))a.classList.add('on');});})();</script>
+<script>(function(){try{var t=localStorage.getItem("ap_session");if(!t)return;var seg=t.split(".")[1].replace(/-/g,"+").replace(/_/g,"/");while(seg.length%4)seg+="=";var p=JSON.parse(decodeURIComponent(escape(atob(seg))));if(p&&p.exp&&p.exp>Date.now()&&p.role==="admin"){["navStatus","navDeliverables","navActionBoard","navVideoReview"].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display="";});}}catch(e){}})();</script>
+</body>
+</html>

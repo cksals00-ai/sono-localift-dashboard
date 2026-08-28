@@ -104,6 +104,8 @@
       <a href="opendata.html" data-p="opendata">공공데이터</a>
       <a href="about.html" data-p="about">회사 소개</a>
       <a href="shop.html" data-p="shop">SHOP</a>
+      <a href="apps.html" data-p="apps">APPS</a>
+      <a href="ir.html" data-p="ir">IR</a>
     </div>
   </div>
 </nav>
@@ -123,7 +125,7 @@
       <div class="p"><div class="pv">329건</div><div class="pl">강원 4개 시군 관광 콘텐츠<br>국문 수집 (TourAPI)</div></div>
       <div class="p"><div class="pv">24.0%</div><div class="pl">같은 항목의 영문 제공률<br>79 / 329 — 우리가 메우는 결손</div></div>
       <div class="p"><div class="pv">536만명</div><div class="pl">해당 4개 시군 연간 방문객<br>한국관광 데이터랩</div></div>
-      <div class="p"><div class="pv">3축</div><div class="pl">AI 뮤직비디오 · AI 홍보<br>· K뷰티 커머스</div></div>
+      <div class="p"><div class="pv">3축</div><div class="pl">MV · 한글교육 애니<br>· K뷰티 커머스</div></div>
     </div>
   </section>
 
@@ -148,7 +150,7 @@
     <div class="no">02 · What we make</div>
     <h2>하나의 세계관, <b>세 개의 사업 축</b></h2>
     <p class="lede">
-      같은 캐릭터와 제작 파이프라인이 각각 다른 일을 합니다. 지역을 무대로 뮤직비디오를 만들고, 보유 사진으로 홍보 콘텐츠를 만들고, 해외 소비자에게 상품을 팝니다.
+      같은 캐릭터가 세 곳에서 각각 다른 일을 합니다. 어른을 지역으로 부르고, 아이에게 한글을 가르치고, 해외 소비자에게 상품을 팝니다.
       IP를 세 번 쓰기 때문에 제작비가 한 번만 듭니다.
     </p>
     <div class="axes">
@@ -161,16 +163,16 @@
       </div>
       <div class="axis">
         <div class="ax">AXIS 02</div>
-        <h3>AI 홍보 콘텐츠</h3>
-        <div class="en">B2B · B2G · 저예산 AI 홍보영상</div>
-        <p>호텔·리조트·지자체가 보유한 사진만으로 저예산·고속 AI 홍보영상을 만들고 다국어로 배포합니다. 성과(도달·저장·전환)를 실측해 다음 편을 고치는 것이 차별점입니다.</p>
-        <div class="stat">제작 파이프라인 <b>가동</b> · 문의 기반 계약형</div>
+        <h3>HANGEUL CUBS</h3>
+        <div class="en">호랑 4남매 · 한글교육 애니메이션</div>
+        <p>유아와 외국인 한글 학습자를 위한 애니메이션입니다. 자모 하나에 한 편, 캐릭터가 직접 선생님이 되는 구조로 어린이집·한국어학당·문화원 라이선스까지 확장을 설계했습니다.</p>
+        <div class="stat">EP.1 「모음 ㅏ」 <b>3분 완성본 제작 완료</b></div>
       </div>
       <div class="axis">
         <div class="ax">AXIS 03</div>
         <h3>리아 K뷰티 커머스</h3>
-        <div class="en">크로스보더 셀렉트숍 · 베트남 우선</div>
-        <p>가상 크리에이터 「리아」가 직접 쓰고 소개하는 K뷰티 셀렉트숍입니다. 영어·베트남어 콘텐츠로 동남아 소비자에게 접근하며, 콘텐츠가 만든 도달을 판매로 회수하는 구간입니다.</p>
+        <div class="en">@lia_park55 · 크로스보더 셀렉트숍</div>
+        <p>AI 홍보 배우 「리아」가 직접 쓰고 소개하는 K뷰티 셀렉트숍입니다. 영어 계정을 축으로 동남아·일본 소비자에게 접근하며, 콘텐츠가 만든 도달을 판매로 회수하는 구간입니다.</p>
         <div class="stat">쇼피 크로스보더 <b>리스팅 운영 중</b></div>
       </div>
     </div>
@@ -215,10 +217,14 @@
     <div class="no">04 · What exists today</div>
     <h2>기획서가 아니라 <b>이미 돌아가는 것들입니다.</b></h2>
     <p class="lede">아래는 계획이 아니라 지금 존재하는 산출물입니다. 진행 중인 것은 진행 중이라고 적었습니다.</p>
-    <div class="made">      <div class="item"><div class="t">MV 시리즈 EP.2 「그대라는 이유」<span class="tag live">최종 검수</span></div><div class="d">뮤직비디오 2편. 3분 34초·43컷 편집 완료로 최종 검수 단계이며, 통과 시점에 공개합니다. EP.1은 공개, EP.3은 제작 중입니다.</div></div>      <div class="item"><div class="t">K뷰티 커머스 리스팅<span class="tag live">운영 중</span></div><div class="d">쇼피 크로스보더 셀렉트숍 상품 리스팅 및 다국어 상세 운영.</div></div>
+    <div class="made">
+      <div class="item"><div class="t">한글교육 애니메이션 EP.1<span class="tag live">완성</span></div><div class="d">「모음 ㅏ」 3분 완성본. 영상·오디오 포함 풀 파이프라인 1회차 검증 완료.</div></div>
+      <div class="item"><div class="t">MV 시리즈 EP.2 「그대라는 이유」<span class="tag live">최종 검수</span></div><div class="d">뮤직비디오 2편. 3분 34초·43컷 편집 완료로 최종 검수 단계이며, 통과 시점에 공개합니다. EP.1은 공개, EP.3은 제작 중입니다.</div></div>
+      <div class="item"><div class="t">리아 채널 운영<span class="tag live">운영 중</span></div><div class="d">영어 인스타그램 계정을 주 5건 슬롯제로 운영. 도달·저장·공유 지표를 주 단위로 회수합니다.</div></div>
+      <div class="item"><div class="t">K뷰티 커머스 리스팅<span class="tag live">운영 중</span></div><div class="d">쇼피 크로스보더 셀렉트숍 상품 리스팅 및 다국어 상세 운영.</div></div>
       <div class="item"><div class="t">강원 4개 시군 정규화 데이터셋<span class="tag live">적재</span></div><div class="d">국문 329건·영문 79건을 유형별로 정규화해 저장. 콘텐츠 소재 선정의 기준표로 사용합니다.</div></div>
       <div class="item"><div class="t">일일 시장분석 아카이브<span class="tag live">운영 중</span></div><div class="d">관광·콘텐츠·커머스 시장 동향을 매일 수집해 누적하는 내부 리포트.</div></div>
-      <div class="item"><div class="t">캐릭터 IP 자산화<span class="tag wip">진행 중</span></div><div class="d">캐릭터 도안 저작권 등록 및 콘텐츠 지정류 상표 출원 진행 중.</div></div>
+      <div class="item"><div class="t">캐릭터 IP 자산화<span class="tag wip">진행 중</span></div><div class="d">캐릭터 도안 저작권 등록 및 교육·콘텐츠·완구 지정류 상표 출원 진행 중.</div></div>
       <div class="item"><div class="t">지역 파트너십 기획<span class="tag wip">기획안</span></div><div class="d">숙박·레저 사업자 연계 상품 구조를 설계 중입니다. <b>체결된 계약이 아닌 당사 기획안</b>입니다.</div></div>
     </div>
   </section>
@@ -229,8 +235,8 @@
     <h2>지역에 <b>사람과 매출</b>을 남기는 것이 목표입니다.</h2>
     <div class="effects">
       <div class="eff"><div class="t">지역관광 활성화</div><div class="d">실존 지역 콘텐츠로 외국인의 「숨은 지역」 방문 수요를 만들어 수도권 집중을 완화합니다.</div></div>
-      <div class="eff"><div class="t">지역경제·일자리</div><div class="d">로컬 상품·숙박 연계로 콘텐츠가 만든 관심을 지역 매출로 회수합니다.</div></div>
-      <div class="eff"><div class="t">K-컬처 수출</div><div class="d">AI 홍보 콘텐츠와 K뷰티 커머스로 콘텐츠와 상품을 함께 내보냅니다.</div></div>
+      <div class="eff"><div class="t">지역경제·일자리</div><div class="d">지역 굿즈·로컬 상품·숙박 연계로 콘텐츠가 만든 관심을 지역 매출로 회수합니다.</div></div>
+      <div class="eff"><div class="t">K-컬처 수출</div><div class="d">한글교육 애니메이션과 K뷰티 커머스로 콘텐츠와 상품을 함께 내보냅니다.</div></div>
       <div class="eff"><div class="t">공공데이터 이용 활성화</div><div class="d">TourAPI를 실사용 서비스에 결합한 활용 사례를 만들고, 영문 결손 구간을 콘텐츠로 보완합니다.</div></div>
     </div>
   </section>
