@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-28T14:08:39+09:00",
+    "updated_at": "2026-08-28T20:40:34+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -148,7 +148,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 29.8,
+        "actual": 36.3,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -157,7 +157,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 151,
+        "actual": 141,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -173,7 +173,7 @@
       {
         "label": "저장률 (저장 ÷ 도달, %)",
         "target": 1.0,
-        "actual": 0.37,
+        "actual": 0.35,
         "unit": "%",
         "pending": false,
         "note": "신설(2026-08-25). 저장은 알고리즘이 해외로 밀어 주는 유일한 신호다. 기준점: 8/1 '책상 앞 어깨' 릴이 1,215뷰·저장 12 = 약 1.0%로 유일하게 확산됐다. 그 수치를 바닥이 아니라 목표선으로 삼는다."
@@ -206,7 +206,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 167,
+        "actual": 177,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -222,7 +222,7 @@
       {
         "label": "팔로워 순증 (참고 · 목표 없음)",
         "target": null,
-        "actual": -32,
+        "actual": -33,
         "unit": "명",
         "note": "2026-08-25 대표님 지시로 팔로워 목표를 공식 폐지했다. 관리 지표가 아니다. 숫자는 계속 기록하되 목표 자리에 두지 않는다 — 팔로워는 저장·해외 도달의 결과이지 직접 움직이는 대상이 아니다. 12주 1,000명 목표는 여기서 종료한다.",
         "pending": false
@@ -257,7 +257,7 @@
       {
         "label": "팔로워 (참고 · 목표 없음)",
         "target": null,
-        "actual": -32,
+        "actual": -33,
         "unit": "명",
         "note": "참고 지표. 관리 지표는 게시 무결성·리텐션·해외 도달 세 가지다. (2026-08-25 확정)",
         "pending": false
@@ -296,13 +296,13 @@
       "title": "A mother walked a mountain road with r…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DchYFOEkckv/",
-      "views": 187,
-      "likes": 6,
+      "views": 207,
+      "likes": 9,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 15.9,
+      "avg_watch_sec": 15.5,
       "duration_sec": 31.2,
-      "retention_pct": 51.0
+      "retention_pct": 49.7
     },
     {
       "date": "2026-08-24",
@@ -494,27 +494,27 @@
   },
   "measured": {
     "live": true,
-    "followers": 899,
+    "followers": 898,
     "media_count": 42,
     "baseline_followers": 931,
     "day": {
-      "reach": 151,
-      "views": 193,
+      "reach": 141,
+      "views": 185,
       "profile_views": 3,
       "interactions": 10
     },
     "week": {
       "posts": 2,
       "reels": 2,
-      "reel_avg_views": 167,
+      "reel_avg_views": 177,
       "saves": 1,
       "comments": 2,
       "shares": 1,
-      "reach": 270,
-      "views": 334,
-      "save_rate_pct": 0.37
+      "reach": 289,
+      "views": 354,
+      "save_rate_pct": 0.35
     },
-    "engagement_rate_pct": 1.48,
+    "engagement_rate_pct": 1.38,
     "retention": {
       "window": 5,
       "pass_threshold_pct": 40.0,
@@ -525,8 +525,8 @@
         {
           "date": "2026-08-26",
           "title": "A mother walked a mountain road with r…",
-          "retention_pct": 51.0,
-          "avg_watch_sec": 15.9,
+          "retention_pct": 49.7,
+          "avg_watch_sec": 15.5,
           "duration_sec": 31.2
         },
         {
@@ -576,9 +576,9 @@
       "duration_source": "media_url mp4 moov/mvhd (HTTP Range 실측)"
     },
     "posting": {
-      "hours_since_last_post": 29.8,
+      "hours_since_last_post": 36.3,
       "alert_threshold_h": 36,
-      "stalled": false,
+      "stalled": true,
       "week_posts": 2
     }
   },
