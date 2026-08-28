@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "note": "리아 IG 성과 스냅샷 원장. scripts/fetch_ria_kpi.py 가 실행마다 1건 append 한다. 사람이 편집하지 않는다.",
-  "updated_at": "2026-08-28T07:29:46+09:00",
+  "updated_at": "2026-08-28T14:08:39+09:00",
   "snapshots": [
     {
       "at": "2026-07-31T12:24:33+09:00",
@@ -1475,6 +1475,26 @@
       "week_posts": 3,
       "week_save_rate_pct": 0.55,
       "hours_since_last_post": 23.2
+    },
+    {
+      "at": "2026-08-28T14:08:39+09:00",
+      "followers": 899,
+      "media_count": 42,
+      "reach_day": 151,
+      "views_day": 193,
+      "profile_views_day": 3,
+      "interactions_day": 10,
+      "foreign_followers": 11,
+      "foreign_pct": 1.2,
+      "week_saves": 1,
+      "week_comments": 2,
+      "week_reel_avg_views": 167,
+      "retention_pass_count": 1,
+      "retention_measurable": 5,
+      "retention_unmeasurable": 0,
+      "week_posts": 2,
+      "week_save_rate_pct": 0.37,
+      "hours_since_last_post": 29.8
     }
   ]
 }
