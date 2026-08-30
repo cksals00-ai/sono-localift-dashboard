@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-08-30T08:01:28+09:00",
+    "updated_at": "2026-08-30T14:41:14+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -148,7 +148,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 71.7,
+        "actual": 78.4,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -157,7 +157,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 19,
+        "actual": 20,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -206,7 +206,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 178,
+        "actual": 179,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -222,7 +222,7 @@
       {
         "label": "팔로워 순증 (참고 · 목표 없음)",
         "target": null,
-        "actual": -37,
+        "actual": -38,
         "unit": "명",
         "note": "2026-08-25 대표님 지시로 팔로워 목표를 공식 폐지했다. 관리 지표가 아니다. 숫자는 계속 기록하되 목표 자리에 두지 않는다 — 팔로워는 저장·해외 도달의 결과이지 직접 움직이는 대상이 아니다. 12주 1,000명 목표는 여기서 종료한다.",
         "pending": false
@@ -257,7 +257,7 @@
       {
         "label": "팔로워 (참고 · 목표 없음)",
         "target": null,
-        "actual": -37,
+        "actual": -38,
         "unit": "명",
         "note": "참고 지표. 관리 지표는 게시 무결성·리텐션·해외 도달 세 가지다. (2026-08-25 확정)",
         "pending": false
@@ -296,7 +296,7 @@
       "title": "A mother walked a mountain road with r…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DchYFOEkckv/",
-      "views": 210,
+      "views": 211,
       "likes": 9,
       "comments": 1,
       "saves": 0,
@@ -494,24 +494,24 @@
   },
   "measured": {
     "live": true,
-    "followers": 894,
+    "followers": 893,
     "media_count": 42,
     "baseline_followers": 931,
     "day": {
-      "reach": 19,
-      "views": 22,
-      "profile_views": 0,
+      "reach": 20,
+      "views": 23,
+      "profile_views": 1,
       "interactions": 3
     },
     "week": {
       "posts": 2,
       "reels": 2,
-      "reel_avg_views": 178,
+      "reel_avg_views": 179,
       "saves": 1,
       "comments": 2,
       "shares": 1,
-      "reach": 291,
-      "views": 357,
+      "reach": 292,
+      "views": 358,
       "save_rate_pct": 0.34
     },
     "engagement_rate_pct": 1.37,
@@ -576,7 +576,7 @@
       "duration_source": "media_url mp4 moov/mvhd (HTTP Range 실측)"
     },
     "posting": {
-      "hours_since_last_post": 71.7,
+      "hours_since_last_post": 78.4,
       "alert_threshold_h": 36,
       "stalled": true,
       "week_posts": 2
@@ -585,19 +585,19 @@
   "audience": {
     "measurable": true,
     "by_country": {
-      "KR": 887,
+      "KR": 883,
       "AU": 2,
       "IN": 2,
       "DE": 1,
       "HK": 1,
-      "UY": 1,
       "TH": 1,
+      "UY": 1,
       "PH": 1,
       "GB": 1,
       "US": 1
     },
     "home_country": "KR",
-    "home_followers": 887,
+    "home_followers": 883,
     "foreign_followers": 11,
     "foreign_pct": 1.2,
     "top_foreign": [
@@ -618,11 +618,11 @@
         "followers": 1
       },
       {
-        "country": "UY",
+        "country": "TH",
         "followers": 1
       },
       {
-        "country": "TH",
+        "country": "UY",
         "followers": 1
       },
       {
@@ -638,6 +638,6 @@
         "followers": 1
       }
     ],
-    "counted": 898
+    "counted": 894
   }
 }
