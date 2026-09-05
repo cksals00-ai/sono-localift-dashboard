@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-09-05T07:49:42+09:00",
+    "updated_at": "2026-09-05T13:50:32+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -148,7 +148,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 215.5,
+        "actual": 221.5,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -157,7 +157,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 1,
+        "actual": 2,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -498,8 +498,8 @@
     "media_count": 42,
     "baseline_followers": 931,
     "day": {
-      "reach": 1,
-      "views": 2,
+      "reach": 2,
+      "views": 3,
       "profile_views": 1,
       "interactions": 0
     },
@@ -576,7 +576,7 @@
       "duration_source": "media_url mp4 moov/mvhd (HTTP Range 실측)"
     },
     "posting": {
-      "hours_since_last_post": 215.5,
+      "hours_since_last_post": 221.5,
       "alert_threshold_h": 36,
       "stalled": true,
       "week_posts": 0
