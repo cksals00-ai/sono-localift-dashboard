@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-09-06T13:58:16+09:00",
+    "updated_at": "2026-09-07T00:39:17+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -148,7 +148,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 245.6,
+        "actual": 256.3,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -222,7 +222,7 @@
       {
         "label": "팔로워 순증 (참고 · 목표 없음)",
         "target": null,
-        "actual": -50,
+        "actual": -54,
         "unit": "명",
         "note": "2026-08-25 대표님 지시로 팔로워 목표를 공식 폐지했다. 관리 지표가 아니다. 숫자는 계속 기록하되 목표 자리에 두지 않는다 — 팔로워는 저장·해외 도달의 결과이지 직접 움직이는 대상이 아니다. 12주 1,000명 목표는 여기서 종료한다.",
         "pending": false
@@ -257,7 +257,7 @@
       {
         "label": "팔로워 (참고 · 목표 없음)",
         "target": null,
-        "actual": -50,
+        "actual": -54,
         "unit": "명",
         "note": "참고 지표. 관리 지표는 게시 무결성·리텐션·해외 도달 세 가지다. (2026-08-25 확정)",
         "pending": false
@@ -400,7 +400,7 @@
       "title": "we planned nothing. it turned out to b…",
       "format": "Carousel",
       "url": "https://www.instagram.com/p/Dbfn2FtGwv9/",
-      "views": 128,
+      "views": 129,
       "likes": 1,
       "comments": 1,
       "saves": 0,
@@ -439,7 +439,7 @@
       "title": "Couples who rarely fight aren't calmer…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/Dba2abTAcSM/",
-      "views": 184,
+      "views": 185,
       "likes": 2,
       "comments": 1,
       "saves": 0,
@@ -494,13 +494,13 @@
   },
   "measured": {
     "live": true,
-    "followers": 881,
+    "followers": 877,
     "media_count": 42,
     "baseline_followers": 931,
     "day": {
       "reach": 1,
-      "views": 1,
-      "profile_views": 0,
+      "views": 5,
+      "profile_views": 1,
       "interactions": 0
     },
     "week": {
@@ -576,7 +576,7 @@
       "duration_source": "media_url mp4 moov/mvhd (HTTP Range 실측)"
     },
     "posting": {
-      "hours_since_last_post": 245.6,
+      "hours_since_last_post": 256.3,
       "alert_threshold_h": 36,
       "stalled": true,
       "week_posts": 0
