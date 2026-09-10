@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-09-10T14:05:00+09:00",
+    "updated_at": "2026-09-11T01:36:20+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -148,7 +148,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 0.7,
+        "actual": 12.3,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -157,7 +157,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 11,
+        "actual": 20,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -206,7 +206,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 10,
+        "actual": 21,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -296,13 +296,13 @@
       "title": "해가 지고 나서 달리는 대회를 찾아봤어요.  10월 4일 일요일, 소…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DdF9nDzCraC/",
-      "views": 10,
+      "views": 21,
       "likes": 0,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": null,
+      "avg_watch_sec": 6.4,
       "duration_sec": 31.03,
-      "retention_pct": null
+      "retention_pct": 20.6
     },
     {
       "date": "2026-09-07",
@@ -498,35 +498,35 @@
     "media_count": 44,
     "baseline_followers": 931,
     "day": {
-      "reach": 11,
-      "views": 13,
-      "profile_views": 1,
+      "reach": 20,
+      "views": 25,
+      "profile_views": 0,
       "interactions": 1
     },
     "week": {
       "posts": 2,
       "reels": 1,
-      "reel_avg_views": 10,
+      "reel_avg_views": 21,
       "saves": 0,
       "comments": 2,
       "shares": 0,
-      "reach": 4,
-      "views": 24,
+      "reach": 20,
+      "views": 35,
       "save_rate_pct": 0.0
     },
-    "engagement_rate_pct": 50.0,
+    "engagement_rate_pct": 10.0,
     "retention": {
       "window": 5,
       "pass_threshold_pct": 40.0,
-      "measurable": 4,
-      "unmeasurable": 1,
+      "measurable": 5,
+      "unmeasurable": 0,
       "pass_count": 1,
       "latest": [
         {
           "date": "2026-09-10",
           "title": "해가 지고 나서 달리는 대회를 찾아봤어요.  10월 4일 일요일, 소…",
-          "retention_pct": null,
-          "avg_watch_sec": null,
+          "retention_pct": 20.6,
+          "avg_watch_sec": 6.4,
           "duration_sec": 31.03
         },
         {
@@ -569,14 +569,14 @@
       ],
       "metric_failed": [],
       "reels": 16,
-      "with_avg_watch": 15,
+      "with_avg_watch": 16,
       "with_duration": 14,
-      "duration_measured": 1,
+      "duration_measured": 0,
       "duration_failed": 2,
       "duration_source": "media_url mp4 moov/mvhd (HTTP Range 실측)"
     },
     "posting": {
-      "hours_since_last_post": 0.7,
+      "hours_since_last_post": 12.3,
       "alert_threshold_h": 36,
       "stalled": false,
       "week_posts": 2
@@ -585,19 +585,19 @@
   "audience": {
     "measurable": true,
     "by_country": {
-      "KR": 866,
+      "KR": 864,
       "AU": 2,
       "IN": 2,
       "DE": 1,
       "HK": 1,
-      "TH": 1,
       "UY": 1,
+      "TH": 1,
       "PH": 1,
       "GB": 1,
       "US": 1
     },
     "home_country": "KR",
-    "home_followers": 866,
+    "home_followers": 864,
     "foreign_followers": 11,
     "foreign_pct": 1.3,
     "top_foreign": [
@@ -618,11 +618,11 @@
         "followers": 1
       },
       {
-        "country": "TH",
+        "country": "UY",
         "followers": 1
       },
       {
-        "country": "UY",
+        "country": "TH",
         "followers": 1
       },
       {
@@ -638,6 +638,6 @@
         "followers": 1
       }
     ],
-    "counted": 877
+    "counted": 875
   }
 }
