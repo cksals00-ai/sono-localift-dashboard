@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-09-13T07:52:53+09:00",
+    "updated_at": "2026-09-13T14:13:07+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -148,7 +148,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 15.3,
+        "actual": 21.7,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -296,7 +296,7 @@
       "title": "A woodcutter hid a deer from a hunter,…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DdLdLT_DR0q/",
-      "views": 3,
+      "views": 4,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -511,7 +511,7 @@
       "comments": 6,
       "shares": 0,
       "reach": 43,
-      "views": 55,
+      "views": 56,
       "save_rate_pct": 0.0
     },
     "engagement_rate_pct": 13.95,
@@ -576,7 +576,7 @@
       "duration_source": "media_url mp4 moov/mvhd (HTTP Range 실측)"
     },
     "posting": {
-      "hours_since_last_post": 15.3,
+      "hours_since_last_post": 21.7,
       "alert_threshold_h": 36,
       "stalled": false,
       "week_posts": 5
