@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-09-15T08:42:49+09:00",
+    "updated_at": "2026-09-15T14:10:43+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -148,7 +148,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 10.6,
+        "actual": 16.1,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -157,7 +157,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 647,
+        "actual": 657,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -173,7 +173,7 @@
       {
         "label": "저장률 (저장 ÷ 도달, %)",
         "target": 1.0,
-        "actual": 0.68,
+        "actual": 0.67,
         "unit": "%",
         "pending": false,
         "note": "신설(2026-08-25). 저장은 알고리즘이 해외로 밀어 주는 유일한 신호다. 기준점: 8/1 '책상 앞 어깨' 릴이 1,215뷰·저장 12 = 약 1.0%로 유일하게 확산됐다. 그 수치를 바닥이 아니라 목표선으로 삼는다."
@@ -197,7 +197,7 @@
       {
         "label": "해외 팔로워 비중 (%)",
         "target": 5.0,
-        "actual": 1.3,
+        "actual": 1.4,
         "unit": "%",
         "pending": false,
         "note": "관리 지표(2026-08-25 승격). 대표님 지시: 해외 시청자를 만든다. 실측 916명 중 해외 11명(1.2%) — 한국 905명. 4주 목표 5%는 해외 팔로워 약 46명 수준이며 실적 추정이 아니라 목표 설정값이다.",
@@ -206,7 +206,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 232,
+        "actual": 234,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -248,7 +248,7 @@
       {
         "label": "해외 팔로워 수",
         "target": 46,
-        "actual": 11,
+        "actual": 12,
         "unit": "명",
         "pending": false,
         "note": "주간 해외 비중 5% 목표에 대응하는 절대수. 현재 11명.",
@@ -300,22 +300,22 @@
       "likes": 2,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 11.1,
+      "avg_watch_sec": 11.3,
       "duration_sec": 32.55,
-      "retention_pct": 34.1
+      "retention_pct": 34.7
     },
     {
       "date": "2026-09-13",
       "title": "A mother raised seven sons alone. Ever…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DdOunrwAVeM/",
-      "views": 770,
-      "likes": 35,
+      "views": 779,
+      "likes": 36,
       "comments": 2,
       "saves": 5,
-      "avg_watch_sec": 16.6,
+      "avg_watch_sec": 16.5,
       "duration_sec": 35.11,
-      "retention_pct": 47.3
+      "retention_pct": 47.0
     },
     {
       "date": "2026-09-12",
@@ -326,9 +326,9 @@
       "likes": 0,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 7.6,
+      "avg_watch_sec": 7.5,
       "duration_sec": 34.09,
-      "retention_pct": 22.3
+      "retention_pct": 22.0
     },
     {
       "date": "2026-09-10",
@@ -348,7 +348,7 @@
       "title": "산이 물드는 데도 순서가 있더라구요.  '첫 단풍'이 날짜인 줄 알았…",
       "format": "Carousel",
       "url": "https://www.instagram.com/p/DdH-4nak4fW/",
-      "views": 3,
+      "views": 4,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -498,23 +498,23 @@
     "media_count": 49,
     "baseline_followers": 931,
     "day": {
-      "reach": 647,
-      "views": 892,
+      "reach": 657,
+      "views": 902,
       "profile_views": 2,
-      "interactions": 54
+      "interactions": 55
     },
     "week": {
       "posts": 6,
       "reels": 4,
-      "reel_avg_views": 232,
+      "reel_avg_views": 234,
       "saves": 5,
       "comments": 8,
       "shares": 4,
-      "reach": 732,
-      "views": 942,
-      "save_rate_pct": 0.68
+      "reach": 743,
+      "views": 952,
+      "save_rate_pct": 0.67
     },
-    "engagement_rate_pct": 2.32,
+    "engagement_rate_pct": 2.29,
     "retention": {
       "window": 5,
       "pass_threshold_pct": 40.0,
@@ -525,22 +525,22 @@
         {
           "date": "2026-09-14",
           "title": "Every time she goes home, her mother s…",
-          "retention_pct": 34.1,
-          "avg_watch_sec": 11.1,
+          "retention_pct": 34.7,
+          "avg_watch_sec": 11.3,
           "duration_sec": 32.55
         },
         {
           "date": "2026-09-13",
           "title": "A mother raised seven sons alone. Ever…",
-          "retention_pct": 47.3,
-          "avg_watch_sec": 16.6,
+          "retention_pct": 47.0,
+          "avg_watch_sec": 16.5,
           "duration_sec": 35.11
         },
         {
           "date": "2026-09-12",
           "title": "A woodcutter hid a deer from a hunter,…",
-          "retention_pct": 22.3,
-          "avg_watch_sec": 7.6,
+          "retention_pct": 22.0,
+          "avg_watch_sec": 7.5,
           "duration_sec": 34.09
         },
         {
@@ -576,7 +576,7 @@
       "duration_source": "media_url mp4 moov/mvhd (HTTP Range 실측)"
     },
     "posting": {
-      "hours_since_last_post": 10.6,
+      "hours_since_last_post": 16.1,
       "alert_threshold_h": 36,
       "stalled": false,
       "week_posts": 6
@@ -586,8 +586,8 @@
     "measurable": true,
     "by_country": {
       "KR": 863,
+      "IN": 3,
       "AU": 2,
-      "IN": 2,
       "DE": 1,
       "HK": 1,
       "TH": 1,
@@ -598,15 +598,15 @@
     },
     "home_country": "KR",
     "home_followers": 863,
-    "foreign_followers": 11,
-    "foreign_pct": 1.3,
+    "foreign_followers": 12,
+    "foreign_pct": 1.4,
     "top_foreign": [
       {
-        "country": "AU",
-        "followers": 2
+        "country": "IN",
+        "followers": 3
       },
       {
-        "country": "IN",
+        "country": "AU",
         "followers": 2
       },
       {
@@ -638,6 +638,6 @@
         "followers": 1
       }
     ],
-    "counted": 874
+    "counted": 875
   }
 }
