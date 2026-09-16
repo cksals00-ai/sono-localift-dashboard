@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-09-16T14:05:52+09:00",
+    "updated_at": "2026-09-17T02:13:27+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -148,7 +148,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 40.0,
+        "actual": 52.1,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -157,7 +157,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 524,
+        "actual": 9,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -206,7 +206,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 235,
+        "actual": 238,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -222,7 +222,7 @@
       {
         "label": "팔로워 순증 (참고 · 목표 없음)",
         "target": null,
-        "actual": -57,
+        "actual": 7,
         "unit": "명",
         "note": "2026-08-25 대표님 지시로 팔로워 목표를 공식 폐지했다. 관리 지표가 아니다. 숫자는 계속 기록하되 목표 자리에 두지 않는다 — 팔로워는 저장·해외 도달의 결과이지 직접 움직이는 대상이 아니다. 12주 1,000명 목표는 여기서 종료한다.",
         "pending": false
@@ -257,7 +257,7 @@
       {
         "label": "팔로워 (참고 · 목표 없음)",
         "target": null,
-        "actual": -57,
+        "actual": 7,
         "unit": "명",
         "note": "참고 지표. 관리 지표는 게시 무결성·리텐션·해외 도달 세 가지다. (2026-08-25 확정)",
         "pending": false
@@ -296,46 +296,46 @@
       "title": "Every time she goes home, her mother s…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DdRMyOAEgVk/",
-      "views": 131,
+      "views": 136,
       "likes": 2,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 11.4,
+      "avg_watch_sec": 12.3,
       "duration_sec": 32.55,
-      "retention_pct": 35.0
+      "retention_pct": 37.8
     },
     {
       "date": "2026-09-13",
       "title": "A mother raised seven sons alone. Ever…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DdOunrwAVeM/",
-      "views": 780,
+      "views": 785,
       "likes": 36,
       "comments": 2,
       "saves": 5,
-      "avg_watch_sec": 16.5,
+      "avg_watch_sec": 16.6,
       "duration_sec": 35.11,
-      "retention_pct": 47.0
+      "retention_pct": 47.3
     },
     {
       "date": "2026-09-12",
       "title": "A woodcutter hid a deer from a hunter,…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DdLdLT_DR0q/",
-      "views": 6,
+      "views": 8,
       "likes": 0,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 7.5,
+      "avg_watch_sec": 12.4,
       "duration_sec": 34.09,
-      "retention_pct": 22.0
+      "retention_pct": 36.4
     },
     {
       "date": "2026-09-10",
       "title": "어제 올린 대회, 사진으로 한 번 더 보여드릴게요.  소노 런트립 1…",
       "format": "Carousel",
       "url": "https://www.instagram.com/p/DdH_CwME8Xr/",
-      "views": 9,
+      "views": 11,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -374,7 +374,7 @@
       "title": "Four takes of the same four lines toda…",
       "format": "Image",
       "url": "https://www.instagram.com/p/Dc90Vr5EyaV/",
-      "views": 16,
+      "views": 21,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -413,39 +413,39 @@
       "title": "Once a year, two stars are allowed to …",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DcSWCSYCFi8/",
-      "views": 129,
+      "views": 133,
       "likes": 3,
       "comments": 1,
       "saves": 1,
-      "avg_watch_sec": 3.7,
+      "avg_watch_sec": 4.9,
       "duration_sec": 53.72,
-      "retention_pct": 6.9
+      "retention_pct": 9.1
     },
     {
       "date": "2026-08-09",
       "title": "Three shoulder resets I do between tak…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/Db1lTTgIGQz/",
-      "views": 85,
+      "views": 86,
       "likes": 1,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 2.5,
+      "avg_watch_sec": 2.9,
       "duration_sec": 34.07,
-      "retention_pct": 7.3
+      "retention_pct": 8.5
     },
     {
       "date": "2026-08-06",
       "title": "Three checkpoints for wrists that spen…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DbrnGcigbBP/",
-      "views": 123,
+      "views": 126,
       "likes": 2,
       "comments": 2,
       "saves": 0,
-      "avg_watch_sec": 7.0,
+      "avg_watch_sec": 7.4,
       "duration_sec": 25.11,
-      "retention_pct": 27.9
+      "retention_pct": 29.5
     }
   ],
   "progress_sample": false,
@@ -494,27 +494,27 @@
   },
   "measured": {
     "live": true,
-    "followers": 874,
+    "followers": 938,
     "media_count": 49,
     "baseline_followers": 931,
     "day": {
-      "reach": 524,
-      "views": 718,
-      "profile_views": 1,
-      "interactions": 40
+      "reach": 9,
+      "views": 43,
+      "profile_views": 0,
+      "interactions": 0
     },
     "week": {
       "posts": 6,
       "reels": 4,
-      "reel_avg_views": 235,
+      "reel_avg_views": 238,
       "saves": 5,
       "comments": 8,
       "shares": 4,
-      "reach": 747,
-      "views": 956,
+      "reach": 749,
+      "views": 970,
       "save_rate_pct": 0.67
     },
-    "engagement_rate_pct": 2.28,
+    "engagement_rate_pct": 2.27,
     "retention": {
       "window": 5,
       "pass_threshold_pct": 40.0,
@@ -525,22 +525,22 @@
         {
           "date": "2026-09-14",
           "title": "Every time she goes home, her mother s…",
-          "retention_pct": 35.0,
-          "avg_watch_sec": 11.4,
+          "retention_pct": 37.8,
+          "avg_watch_sec": 12.3,
           "duration_sec": 32.55
         },
         {
           "date": "2026-09-13",
           "title": "A mother raised seven sons alone. Ever…",
-          "retention_pct": 47.0,
-          "avg_watch_sec": 16.5,
+          "retention_pct": 47.3,
+          "avg_watch_sec": 16.6,
           "duration_sec": 35.11
         },
         {
           "date": "2026-09-12",
           "title": "A woodcutter hid a deer from a hunter,…",
-          "retention_pct": 22.0,
-          "avg_watch_sec": 7.5,
+          "retention_pct": 36.4,
+          "avg_watch_sec": 12.4,
           "duration_sec": 34.09
         },
         {
@@ -576,7 +576,7 @@
       "duration_source": "media_url mp4 moov/mvhd (HTTP Range 실측)"
     },
     "posting": {
-      "hours_since_last_post": 40.0,
+      "hours_since_last_post": 52.1,
       "alert_threshold_h": 36,
       "stalled": true,
       "week_posts": 6
