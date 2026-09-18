@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updated": "2026-09-08T08:25:08+09:00",
-    "baseYm": "202607",
+    "updated": "2026-09-19T08:11:27+09:00",
+    "baseYm": "202608",
     "source": "데이터랩 지역별 관광 자원 수요(15152138)·수요강도(15151868) · AreaTarResDemService/AreaTarDemDsService",
     "note": "값=관광수요지수 구성 지표(상대지수 0~100, 원화 아님) · 월 1회(16일) 갱신 · 외지인소비비중=관광객이 지역 소비에서 차지하는 비중"
   },
@@ -18,87 +18,87 @@
     {
       "key": "홍천군",
       "loc": "강원 홍천",
-      "lodge": 74.85,
-      "food": 61.93,
-      "shop": 59.9,
-      "leisure": 62.06,
-      "out_spend": 72.19,
-      "out_ratio": 82.0,
-      "spend_per_visit": 88.6
+      "lodge": 77.75,
+      "food": 61.95,
+      "shop": 59.92,
+      "leisure": 62.24,
+      "out_spend": 74.23,
+      "out_ratio": 82.4,
+      "spend_per_visit": 92.41
     },
     {
       "key": "삼척시",
       "loc": "강원 삼척",
-      "lodge": 68.57,
-      "food": 61.91,
-      "shop": 59.85,
-      "leisure": 61.11,
-      "out_spend": 66.16,
-      "out_ratio": 77.43,
-      "spend_per_visit": 69.85
+      "lodge": 68.95,
+      "food": 61.93,
+      "shop": 59.87,
+      "leisure": 61.19,
+      "out_spend": 67.29,
+      "out_ratio": 78.39,
+      "spend_per_visit": 74.37
     },
     {
       "key": "고성군",
       "loc": "강원 고성",
-      "lodge": 70.74,
-      "food": 61.91,
-      "shop": 59.85,
-      "leisure": 61.34,
-      "out_spend": 67.21,
-      "out_ratio": 84.0,
-      "spend_per_visit": 79.9
+      "lodge": 71.76,
+      "food": 61.94,
+      "shop": 59.87,
+      "leisure": 61.44,
+      "out_spend": 68.76,
+      "out_ratio": 84.24,
+      "spend_per_visit": 85.4
     },
     {
       "key": "양양군",
       "loc": "강원 양양",
-      "lodge": 68.46,
-      "food": 61.95,
-      "shop": 59.86,
-      "leisure": 61.61,
-      "out_spend": 69.15,
-      "out_ratio": 82.6,
-      "spend_per_visit": 86.57
+      "lodge": 68.84,
+      "food": 61.98,
+      "shop": 59.87,
+      "leisure": 61.72,
+      "out_spend": 71.05,
+      "out_ratio": 83.39,
+      "spend_per_visit": 91.88
     },
     {
       "key": "부안군",
       "loc": "전북 부안",
-      "lodge": 67.2,
-      "food": 61.88,
-      "shop": 59.84,
-      "leisure": 60.82,
-      "out_spend": 64.86,
-      "out_ratio": 83.83,
-      "spend_per_visit": 67.43
+      "lodge": 67.43,
+      "food": 61.89,
+      "shop": 59.85,
+      "leisure": 60.83,
+      "out_spend": 65.44,
+      "out_ratio": 83.7,
+      "spend_per_visit": 69.71
     },
     {
       "key": "단양군",
       "loc": "충북 단양",
-      "lodge": 66.8,
-      "food": 61.88,
-      "shop": 59.82,
-      "leisure": 60.97,
-      "out_spend": 64.79,
-      "out_ratio": 83.44,
-      "spend_per_visit": 76.83
+      "lodge": 67.17,
+      "food": 61.89,
+      "shop": 59.83,
+      "leisure": 61.02,
+      "out_spend": 65.66,
+      "out_ratio": 84.17,
+      "spend_per_visit": 80.11
     },
     {
       "key": "남해군",
       "loc": "경남 남해",
-      "lodge": 68.6,
-      "food": 61.88,
-      "shop": 59.83,
-      "leisure": 60.94,
-      "out_spend": 64.63,
-      "out_ratio": 80.58,
-      "spend_per_visit": 69.49
+      "lodge": 68.84,
+      "food": 61.89,
+      "shop": 59.84,
+      "leisure": 60.97,
+      "out_spend": 65.28,
+      "out_ratio": 82.9,
+      "spend_per_visit": 73.2
     },
     {
       "key": "진도군",
       "loc": "전남 진도",
-      "lodge": 66.23,
-      "food": 61.84,
-      "shop": 59.8,
-      "leisure": 60.78,
+      "lodge": null,
+      "food": null,
+      "shop": null,
+      "leisure": null,
       "out_spend": null,
       "out_ratio": null,
       "spend_per_visit": null
@@ -106,18 +106,17 @@
     {
       "key": "청송군",
       "loc": "경북 청송",
-      "lodge": 66.52,
-      "food": 61.85,
-      "shop": 59.81,
+      "lodge": 66.64,
+      "food": 61.86,
+      "shop": 59.82,
       "leisure": 60.79,
-      "out_spend": 63.0,
-      "out_ratio": 84.08,
-      "spend_per_visit": 62.72
+      "out_spend": 63.2,
+      "out_ratio": 84.03,
+      "spend_per_visit": 65.11
     }
   ],
   "lodgeTrend": {
     "labels": [
-      "2025-08",
       "2025-09",
       "2025-10",
       "2025-11",
@@ -128,10 +127,10 @@
       "2026-04",
       "2026-05",
       "2026-06",
-      "2026-07"
+      "2026-07",
+      "2026-08"
     ],
     "values": [
-      74.98,
       70.08,
       71.5,
       69.88,
@@ -142,7 +141,8 @@
       67.29,
       67.87,
       67.75,
-      68.66
+      68.66,
+      69.67
     ]
   }
 }
