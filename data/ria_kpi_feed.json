@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-09-22T03:17:57+09:00",
+    "updated_at": "2026-09-22T08:53:04+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -148,7 +148,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 14.2,
+        "actual": 19.7,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -157,7 +157,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 18,
+        "actual": 19,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -206,7 +206,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 8,
+        "actual": 9,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -296,7 +296,7 @@
       "title": "Eight counts, and I still lose the fou…",
       "format": "Reels",
       "url": "https://www.instagram.com/reel/DdiRC2KjmU5/",
-      "views": 8,
+      "views": 9,
       "likes": 1,
       "comments": 1,
       "saves": 0,
@@ -498,20 +498,20 @@
     "media_count": 52,
     "baseline_followers": 931,
     "day": {
-      "reach": 18,
+      "reach": 19,
       "views": 52,
-      "profile_views": 1,
+      "profile_views": 2,
       "interactions": 3
     },
     "week": {
       "posts": 3,
       "reels": 1,
-      "reel_avg_views": 8,
+      "reel_avg_views": 9,
       "saves": 0,
       "comments": 3,
       "shares": 0,
       "reach": 42,
-      "views": 86,
+      "views": 87,
       "save_rate_pct": 0.0
     },
     "engagement_rate_pct": 7.14,
@@ -576,7 +576,7 @@
       "duration_source": "media_url mp4 moov/mvhd (HTTP Range 실측)"
     },
     "posting": {
-      "hours_since_last_post": 14.2,
+      "hours_since_last_post": 19.7,
       "alert_threshold_h": 36,
       "stalled": false,
       "week_posts": 3
