@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-09-22T08:53:04+09:00",
+    "updated_at": "2026-09-22T14:16:52+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -148,7 +148,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 19.7,
+        "actual": 25.1,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -157,7 +157,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 19,
+        "actual": 21,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -300,9 +300,9 @@
       "likes": 1,
       "comments": 1,
       "saves": 0,
-      "avg_watch_sec": 3.4,
+      "avg_watch_sec": 3.2,
       "duration_sec": 5.03,
-      "retention_pct": 67.6
+      "retention_pct": 63.6
     },
     {
       "date": "2026-09-19",
@@ -322,7 +322,7 @@
       "title": "In six days Korea empties out. Trains …",
       "format": "Carousel",
       "url": "https://www.instagram.com/p/DddPtmLj_xh/",
-      "views": 63,
+      "views": 65,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -498,8 +498,8 @@
     "media_count": 52,
     "baseline_followers": 931,
     "day": {
-      "reach": 19,
-      "views": 52,
+      "reach": 21,
+      "views": 55,
       "profile_views": 2,
       "interactions": 3
     },
@@ -510,11 +510,11 @@
       "saves": 0,
       "comments": 3,
       "shares": 0,
-      "reach": 42,
-      "views": 87,
+      "reach": 44,
+      "views": 89,
       "save_rate_pct": 0.0
     },
-    "engagement_rate_pct": 7.14,
+    "engagement_rate_pct": 6.82,
     "retention": {
       "window": 5,
       "pass_threshold_pct": 40.0,
@@ -525,8 +525,8 @@
         {
           "date": "2026-09-21",
           "title": "Eight counts, and I still lose the fou…",
-          "retention_pct": 67.6,
-          "avg_watch_sec": 3.4,
+          "retention_pct": 63.6,
+          "avg_watch_sec": 3.2,
           "duration_sec": 5.03
         },
         {
@@ -576,7 +576,7 @@
       "duration_source": "media_url mp4 moov/mvhd (HTTP Range 실측)"
     },
     "posting": {
-      "hours_since_last_post": 19.7,
+      "hours_since_last_post": 25.1,
       "alert_threshold_h": 36,
       "stalled": false,
       "week_posts": 3
