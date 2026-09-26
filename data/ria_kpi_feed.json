@@ -1,7 +1,7 @@
 {
   "meta": {
     "sample": false,
-    "updated_at": "2026-09-26T14:18:55+09:00",
+    "updated_at": "2026-09-27T01:36:10+09:00",
     "source": "Instagram Graph API v21.0 자동 수집 (GitHub Actions)",
     "owner": "리아 (@lia_park55)",
     "cadence": "1일 2회 갱신 (오전 엔진 후 09:30 KST / 저녁 게시 후 21:30 KST)",
@@ -148,7 +148,7 @@
       {
         "label": "마지막 게시 후 경과 (시간)",
         "target": 36,
-        "actual": 16.1,
+        "actual": 3.5,
         "unit": "시간",
         "pending": false,
         "direction": "lower_is_better",
@@ -157,7 +157,7 @@
       {
         "label": "일일 도달",
         "target": 1000,
-        "actual": 21,
+        "actual": 8,
         "unit": "명",
         "pending": false,
         "note": "회복 목표. 게시가 있던 8/2~8/3 실측이 1,166 / 1,189 이었으므로 1,000 은 새 목표가 아니라 원래 자리로의 복귀다."
@@ -165,7 +165,7 @@
       {
         "label": "직전 5개 중 리텐션 40% 이상",
         "target": 3,
-        "actual": 4,
+        "actual": 3,
         "unit": "개",
         "pending": false,
         "note": "최우선 관리 지표. 리텐션 = 평균 시청시간 ÷ 영상 길이. 직전 릴 5개 중 3개 이상이 40%를 넘으면 통과. 2026-08-25 이전에는 분모(영상 길이)가 비어 한 번도 계산된 적이 없었다 — 같은 날 수집기를 고쳐 판정을 복구했다."
@@ -206,7 +206,7 @@
       {
         "label": "릴 평균 조회수",
         "target": null,
-        "actual": 23,
+        "actual": 18,
         "unit": "회",
         "pending": false,
         "note": "베이스라인 7/31 확정 후 4주 목표 +100% (현재 심청전 3h차 180뷰)"
@@ -292,6 +292,19 @@
   "content_sample": false,
   "content": [
     {
+      "date": "2026-09-26",
+      "title": "A king wanted a son. He got seven daug…",
+      "format": "Reels",
+      "url": "https://www.instagram.com/reel/DdwGJ6AADNJ/",
+      "views": 1,
+      "likes": 0,
+      "comments": 1,
+      "saves": 0,
+      "avg_watch_sec": null,
+      "duration_sec": 56.6,
+      "retention_pct": null
+    },
+    {
       "date": "2026-09-25",
       "title": "Gyeongbokgung burned twice and came ba…",
       "format": "Carousel",
@@ -309,7 +322,7 @@
       "title": "There's a new form for visiting Korea,…",
       "format": "Carousel",
       "url": "https://www.instagram.com/p/Ddq9RPKj2rs/",
-      "views": 6,
+      "views": 7,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -426,20 +439,7 @@
       "title": "어제 올린 대회, 사진으로 한 번 더 보여드릴게요.  소노 런트립 1…",
       "format": "Carousel",
       "url": "https://www.instagram.com/p/DdH_CwME8Xr/",
-      "views": 12,
-      "likes": 0,
-      "comments": 1,
-      "saves": 0,
-      "avg_watch_sec": null,
-      "duration_sec": null,
-      "retention_pct": null
-    },
-    {
-      "date": "2026-09-10",
-      "title": "산이 물드는 데도 순서가 있더라구요.  '첫 단풍'이 날짜인 줄 알았…",
-      "format": "Carousel",
-      "url": "https://www.instagram.com/p/DdH-4nak4fW/",
-      "views": 6,
+      "views": 13,
       "likes": 0,
       "comments": 1,
       "saves": 0,
@@ -495,33 +495,40 @@
   "measured": {
     "live": true,
     "followers": 928,
-    "media_count": 56,
+    "media_count": 57,
     "baseline_followers": 931,
     "day": {
-      "reach": 21,
+      "reach": 8,
       "views": 32,
-      "profile_views": 0,
-      "interactions": 4
+      "profile_views": 2,
+      "interactions": 3
     },
     "week": {
       "posts": 7,
-      "reels": 3,
-      "reel_avg_views": 23,
+      "reels": 4,
+      "reel_avg_views": 18,
       "saves": 0,
       "comments": 7,
       "shares": 0,
-      "reach": 106,
-      "views": 169,
+      "reach": 70,
+      "views": 103,
       "save_rate_pct": 0.0
     },
-    "engagement_rate_pct": 6.6,
+    "engagement_rate_pct": 10.0,
     "retention": {
       "window": 5,
       "pass_threshold_pct": 40.0,
-      "measurable": 5,
-      "unmeasurable": 0,
-      "pass_count": 4,
+      "measurable": 4,
+      "unmeasurable": 1,
+      "pass_count": 3,
       "latest": [
+        {
+          "date": "2026-09-26",
+          "title": "A king wanted a son. He got seven daug…",
+          "retention_pct": null,
+          "avg_watch_sec": null,
+          "duration_sec": 56.6
+        },
         {
           "date": "2026-09-24",
           "title": "I've been copying the shape and ignori…",
@@ -549,13 +556,6 @@
           "retention_pct": 36.6,
           "avg_watch_sec": 11.9,
           "duration_sec": 32.55
-        },
-        {
-          "date": "2026-09-13",
-          "title": "A mother raised seven sons alone. Ever…",
-          "retention_pct": 47.3,
-          "avg_watch_sec": 16.6,
-          "duration_sec": 35.11
         }
       ]
     },
@@ -569,14 +569,14 @@
       ],
       "metric_failed": [],
       "reels": 16,
-      "with_avg_watch": 16,
+      "with_avg_watch": 15,
       "with_duration": 16,
-      "duration_measured": 0,
+      "duration_measured": 1,
       "duration_failed": 0,
       "duration_source": "media_url mp4 moov/mvhd (HTTP Range 실측)"
     },
     "posting": {
-      "hours_since_last_post": 16.1,
+      "hours_since_last_post": 3.5,
       "alert_threshold_h": 36,
       "stalled": false,
       "week_posts": 7
