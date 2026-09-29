@@ -1158,12 +1158,12 @@
 
   <div class="navwrap" id="navWrap">
     <nav class="navbar" id="navBar" aria-label="섹션 바로가기">
-      <button type="button" data-g="g1" aria-expanded="false">🏀 경기</button>
-      <button type="button" data-g="g2" aria-expanded="false">🚗 이동·숙박</button>
-      <button type="button" data-g="g3" aria-expanded="false">👕 준비물</button>
-      <button type="button" data-g="g4" aria-expanded="false">🍚 먹거리</button>
+      <button type="button" data-g="g1" aria-expanded="false" id="navG1">🏀 상주 대회</button>
+      <button type="button" data-g="g2" aria-expanded="false">🚗 이동·숙박·밥</button>
+      <button type="button" data-g="g3" aria-expanded="false">🧳 준비물</button>
+      <button type="button" data-g="g4" aria-expanded="false">👨‍👩‍👧 우리 팀</button>
       <button type="button" data-g="g5" aria-expanded="false">📚 정보·자료</button>
-      <button type="button" data-g="g6" aria-expanded="false">👨‍👩‍👧 우리 팀</button>
+      <button type="button" data-g="g6" aria-expanded="false">🗂 지난 대회</button>
     </nav>
     <div class="navpanel" id="navPanel"></div>
   </div>
@@ -1232,7 +1232,7 @@
       </div>
     </div>
 
-    <div class="pbox">
+    <div class="pbox" id="sjTodo">
       <span class="pt">👨‍👩‍👧 학부모가 챙길 것</span>
       <p class="pl">접수 · 참가비 · 선수등록은 <b>구단에서 처리합니다.</b> 학부모님이 하실 일만 시기별로 모았어요.</p>
 
@@ -1282,7 +1282,7 @@
     </div>
 
 
-    <div class="tblock">
+    <div class="tblock" id="sjInfo">
       <h3><span class="em">📋</span>대회 개요</h3>
       <div class="sjrow"><span class="k">대회명</span><span class="v"><b>상주시농구협회와 함께하는 제1회 KOSEPA 전국 우수클럽 초청 농구대회</b></span></div>
       <div class="sjrow"><span class="k">기간</span><span class="v"><b>2026년 10월 24일(토) ~ 25일(일)</b> · 2일간</span></div>
@@ -1295,7 +1295,7 @@
       <p class="tnote">⚠️ <b>&quot;상주 곶감배&quot;와는 다른 대회입니다.</b> 단톡방에서 곶감배라고 부르기도 했는데, 확인해보니 별개였어요.<br>곶감배는 <b>U14까지 있고</b>(이 대회는 U12까지), <b>연도로만 표기</b>해 회차를 쓰지 않으며(이 대회는 <b>제1회</b>), 주최에 <b>KOSEPA가 없습니다.</b> 시기도 <b>11월 중순~12월</b>이에요.<br>헷갈린 이유는 <b>공동 주최인 성북 삼성이 2025 곶감배 U9 우승팀</b>이기 때문으로 보입니다. <b>곶감배는 캘린더 11~12월에 따로 넣어뒀어요.</b><br>* 대회 일정과 세부 운영사항은 <b>추후 공지 예정</b>입니다. <b>대진표와 경기 시간은 아직 미정</b>이고 확인되는 대로 공유해주신다고 했어요.</p>
     </div>
 
-    <div class="tblock">
+    <div class="tblock" id="sjFee">
       <h3><span class="em">💰</span>참가 선수 · 회비 · 예상 비용</h3>
       <p class="tsub">감독님 확인 기준 <b>출전 선수 10명</b>입니다. (10/24~25)</p>
       <div class="plist">
@@ -1344,7 +1344,7 @@
       <em>상주 시내 숙소가 빠르게 차고 있습니다.</em> 이미 <b>타 지역으로 예약한 가정</b>이 나왔어요 — 아직이시면 서두르시는 게 좋겠습니다.</p>
     </div>
 
-    <div class="tblock">
+    <div class="tblock" id="sjSked">
       <h3><span class="em">🗓</span>U9 일정 — 우리 종별만</h3>
       <p class="tsub">전체 시간표에서 <b>U9 경기만</b> 뽑았습니다. 예선 조 편성(A~H)은 아직 안 나왔어요 — <b>우리가 어느 조인지에 따라 시간이 정해집니다.</b></p>
       <b style="display:block;font-size:12.5px;font-weight:900;color:var(--navy);margin-top:12px">DAY 1 · 10/24(토) 예선</b>
@@ -1370,7 +1370,7 @@
       <p class="tnote"><b>예선</b>은 조별 풀리그, <b>본선</b>은 4강 토너먼트(A조 1위 vs B조 2위 / B조 1위 vs A조 2위)입니다. 3·4위 팀도 <b>각 조 같은 순위끼리 순위결정전</b>을 뛰니 <b>모든 팀이 둘째 날 경기를 합니다.</b> 공동 3위는 경기 끝나고 바로 간이 시상이에요.</p>
     </div>
 
-    <div class="tblock">
+    <div class="tblock" id="sjRule">
       <h3><span class="em">📏</span>경기 규정 — U9 기준</h3>
       <div class="sjrow"><span class="k">경기시간</span><span class="v"><b>7분 × 4쿼터</b> · 쿼터 종료 <b>1분 전부터 데드타임</b> 적용</span></div>
       <div class="sjrow"><span class="k">공격시간</span><span class="v"><b>30초</b> <span class="dim">(U11 이상은 24초)</span></span></div>
@@ -1382,14 +1382,14 @@
       <p class="tnote">8월 제천 KBL 유스클럽 대회와 <b>경기시간 · 공격시간 · 3점슛 규정이 똑같습니다.</b> 다른 건 <b>쿼터 종료 1분 전 데드타임</b>과 <b>수비자 3초룰</b>이에요.</p>
     </div>
 
-    <div class="tblock">
+    <div class="tblock" id="sjAward">
       <h3><span class="em">🏅</span>시상</h3>
       <div class="sjrow"><span class="k">우승·준우승</span><span class="v">모든 부서 우승·준우승팀 <b>함께 시상</b> · 트로피 · 상장 · 시상품</span></div>
       <div class="sjrow"><span class="k">대회 MVP</span><span class="v"><b>각 부서 1명</b>씩 선정 <span class="dim">(요강엔 &quot;7개 부서&quot;로 적혀 있는데 종별은 4개라 숫자가 안 맞습니다 — 주최측 확인 필요)</span></span></div>
       <div class="sjrow"><span class="k">공동 3위</span><span class="v">해당 경기 종료 직후 <b>간이 시상</b></span></div>
     </div>
 
-    <div class="tblock">
+    <div class="tblock" id="sjGym">
       <h3><span class="em">📍</span>경기장 3곳</h3>
       <p class="tsub">세 곳 모두 <b>상주 시내 북쪽</b>에 모여 있어요. 상산초와 실내체육관은 <b>같은 행정동(계림동)</b>이고 상주중도 바로 옆 북문동입니다.</p>
       <div class="sjvenue"><b>상산초등학교</b>경북 상주시 왕산로 374 (냉림동)<br>☎ 교무실 054-532-3851 · 행정실 054-533-2092</div>
@@ -1398,7 +1398,7 @@
       <p class="tnote">⚠️ 이름이 비슷한 <b>상주국민체육센터</b>(영남제일로 1432)가 따로 있습니다. 내비 찍으실 때 헷갈리지 마세요. 세 경기장의 주차 상황은 확인하지 못했습니다.</p>
     </div>
 
-    <div class="tblock">
+    <div class="tblock" id="sjDrive">
       <h3><span class="em">🚗</span>고양 → 상주 이동</h3>
       <div class="sjrow"><span class="k">자차</span><span class="v">서울 기준 <b>약 197km · 2시간 20분</b>. 고양에서는 <b>210~220km · 2시간 40분~3시간</b>으로 보시면 됩니다.<br><b>중부내륙고속도로</b>가 상주를 관통하고, 진입은 <b>상주IC</b> 또는 <b>남상주IC</b>.</span></div>
       <div class="sjrow"><span class="k">고속버스</span><span class="v">고양에서 상주로 가는 <b>직통은 없습니다.</b> 서울고속버스터미널(반포) → 상주 <b>2시간 30분 · 1일 14회</b> · 우등 21,100원 / 일반 14,400원<br>상주종합버스터미널 ☎ 1668-1200</span></div>
@@ -1407,7 +1407,7 @@
       <p class="tnote">통행료는 확인하지 못했습니다. 출발 전 내비 앱에서 봐주세요. 2026년 6월에 중부내륙고속도로 상주~북상주 구간 야간 통제 공사가 있었으니 10월 상황도 한 번 확인하시면 좋겠습니다.</p>
     </div>
 
-    <div class="tblock">
+    <div class="tblock" id="sjStay">
       <h3><span class="em">🏨</span>숙박 — 상주 시내</h3>
       <p class="tsub"><b>9가정</b>입니다 — <b>3인실 5개 + 4인실 3개 + 진호근네 1개</b>(인원 확인 중)로 <b>총 9실</b>이 필요해요. 대부분 호텔이 <b>2인 기준에 추가 1인당 2만 원</b>씩 받으니 예약할 때 인원을 정확히 말씀하셔야 합니다.<br>
       가격은 <b>2026년 9월 21일 여기어때·야놀자 조회 기준 최저가</b>예요. <b>대회 주말(토요일)은 더 비쌉니다.</b> 전화로 다시 확인해주세요.</p>
@@ -1447,7 +1447,7 @@
       <p class="tnote"><b>여기어때·야놀자는 한 번에 잡을 수 있는 객실 수가 제한</b>되는 경우가 많습니다. 9실을 한꺼번에 잡으시려면 <b>호텔에 직접 전화</b>가 거의 필수예요.</p>
     </div>
 
-    <div class="tblock">
+    <div class="tblock" id="sjFood">
       <h3><span class="em">🍚</span>밥 · 빈 시간</h3>
       <div class="hotel pick">
         <div class="hn"><b>상주축협 명실상감한우 홍보테마타운</b><span class="pk">단체 1순위</span></div>
@@ -1465,7 +1465,7 @@
       <details class="tacc"><summary>🚲 경기 사이 빈 시간 — 아이들과 갈 곳</summary><div class="tin"><b>상주자전거박물관</b> — 용마로 415 · ☎ 054-534-4973 · 09:30~17:30(매표 17:00 마감). 4D 상영관과 자전거 체험장이 있어요. 입장료는 무료라는 얘기가 많은데 공식 확인은 못 했습니다.<hr><b>경천섬</b> — 자전거박물관 바로 옆 낙동강 한가운데 섬. 입장료 없고 평지 산책로라 아이들 뛰놀기 좋습니다.<hr><b>국립낙동강생물자원관</b> — 도남2길 137 · ☎ 054-530-0700 · 09:30~17:30 · 대인 3,000원 / 청소년·소인 2,000원. <b>비 오면 여기.</b><hr>세 곳 모두 <b>도남동 권역</b>이라 묶어서 반나절 코스로 돌 수 있어요.</div></details>
     </div>
 
-    <div class="tblock">
+    <div class="tblock" id="sjPrac">
       <h3><span class="em">🏀</span>대회 전 개인연습 — 이야짐 무료개방</h3>
       <p class="tsub">대회 직전 한 주, <b>이야짐 농구장을 무료로 열어주십니다.</b> 대상은 <b>소노 U9팀 선수 + 선수매니저(박승규)</b>예요.</p>
       <table class="sjtt"><thead><tr><th>날짜</th><th>요일</th><th>시간</th></tr></thead><tbody>
@@ -1479,7 +1479,7 @@
       <p class="tnote">공지에 적힌 기간은 <b>10/18 ~ 10/22, 대회 전까지</b>입니다. 대회가 10/24(토)이니 <b>목요일이 마지막 연습</b>이고 금요일은 쉬는 셈이에요.<br>수요일만 <b>1시간(20~21시)</b>이고 일요일은 <b>낮 2시</b>라 헷갈리기 쉽습니다.</p>
     </div>
 
-    <div class="tblock">
+    <div class="tblock" id="sjPack">
       <h3><span class="em">🧳</span>준비물 · 챙길 것</h3>
       <p class="tsub">1박 이상 원정이고 <b>이틀 내내 경기</b>입니다. 10월 하순 상주는 내륙이라 <b>아침저녁이 쌀쌀</b>하고, 학교 체육관은 난방이 없을 수 있어요.</p>
 
@@ -1498,7 +1498,7 @@
       <p class="tnote">10월 하순 상주 기온은 <b>출발 3~4일 전에 예보를 확인</b>해주세요. 내륙 분지라 낮과 아침 기온 차이가 큽니다.</p>
     </div>
 
-    <div class="tblock">
+    <div class="tblock" id="sjStart">
       <h3><span class="em">🗺</span>언제 출발할까 — 먼저 정해야 할 것</h3>
       <div class="sjnow" style="margin:0 0 11px">
         <span class="t">⚠️ 금요일 밤에 내려갈지부터 정해야 합니다</span>
@@ -1511,7 +1511,7 @@
       <p class="tnote">일요일 본선은 <b>준결승 11:00 · 결승 12:20</b>이고, 4·3위 결정전은 <b>09:00 · 09:40</b>입니다. 어느 경기를 뛰든 <b>일요일 오전에는 경기장에 있어야</b> 하니 일요일 아침 출발은 불가능합니다.</p>
     </div>
 
-    <div class="tblock">
+    <div class="tblock" id="sjAsk">
       <h3><span class="em">❓</span>구단·주최측에 확인할 것</h3>
       <p class="tsub">학부모가 직접 알아보기 어려운 것들이에요. <b>감독님이나 매니저님께 여쭤보면</b> 정리됩니다.</p>
       <div class="trow f"><div class="tmin">1</div><div class="tbd"><b>실내체육관이 구관인지 신관인지</b><span>주차 위치가 달라집니다. <b>상주시청 054-537-6114</b> 또는 주최측에 확인.</span></div></div>
@@ -2942,50 +2942,73 @@ var firebaseConfig = {
 
   /* ===== 그룹형 네비게이터 ===== */
   var NAVG = {
-    g1:{t:'🏀 경기 · 대회',items:[
-      ['#sangju','🏀 10월 상주 대회','KOSEPA · 10/24~25 · 일정·숙박·이동'],
-      ['#fixturesBox','제천 대회 일정','8/15~17 · 3경기 상대·시간·유니폼'],
-      ['#timetableBox','전체 타임테이블','집결·경기·식사·이동 시간표'],
-      ['#oppBox','상대팀 분석','KT · 정관장 · SK 스카우팅'],
+    g1:{t:'🏀 10월 상주 대회 · 10/24~25',items:[
+      ['#sjTodo','✅ 학부모가 챙길 것','시기별 할 일 10가지','지금'],
+      ['#sjSked','🗓 U9 일정 · 집결','경기 40분 전 집결 · 대진 미정'],
+      ['#sjFee','💰 회비 · 가정별 비용','선수 1명당 93,500원'],
+      ['#sjStart','🗺 언제 출발할까','조 편성에 따라 금요일 1박'],
+      ['#sjRule','📏 경기 규정 — U9','7분 4쿼터 · 3점슛 없음 · 지역방어 금지'],
+      ['#sangju','📋 대회 안내 전체','개요 · 시상 · 정정 안내까지'],
+      ['#sjAsk','❓ 구단에 확인할 것','아직 안 정해진 것들']
+    ]},
+    g2:{t:'🚗 상주 이동 · 숙박 · 밥',items:[
+      ['#sjStay','🏨 상주 숙박','시내 숙소 · 예약 연락처','지금'],
+      ['#sjDrive','🚗 고양 → 상주','경로 · 소요시간 · 주유비'],
+      ['#sjGym','📍 경기장 3곳','상산초 · 상주중 · 실내체육관'],
+      ['#sjFood','🍚 밥 · 빈 시간','식사 후보 · 경기 사이 뭐 할까']
+    ]},
+    g3:{t:'🧳 준비물 · 몸 만들기',items:[
+      ['#sjPack','🧳 상주 준비물','날씨 · 장비 · 서류 체크리스트'],
+      ['#uniSec','👕 유니폼 규정','홈=스카이블루 / 원정=흰색'],
+      ['#gearBox','🦵 보호 장비','무릎·발목 보호대 추천'],
+      ['#sjPrac','🏀 대회 전 개인연습','이야짐 무료개방 요일·시간']
+    ]},
+    g4:{t:'👨‍👩‍👧 우리 팀',items:[
+      ['#rosterBox','선수 명단','U-9 로스터'],
       ['#matchesBox','경기 결과','2026 연습경기 전적'],
-      ['#statsBox','시즌 성적','승패·득실·평균득점']
-    ]},
-    g2:{t:'🚗 이동 · 숙박',items:[
-      ['#routesBox','이동 경로','고양→제천 · 체육관 간 이동'],
-      ['#resv','숙소 예약','소노벨 단양 · 가정별 예약 현황'],
-      ['#tripBox','제천 나들이','경기 사이 빈 시간 가볼 곳']
-    ]},
-    g3:{t:'👕 준비물 · 복장',items:[
-      ['#uniSec','유니폼 규정','홈=스카이블루 / 원정=흰색'],
-      ['#tshirt','단체 응원티','취합 마감 · 사이즈 정보 삭제'],
-      ['#gearBox','보호 장비','무릎·발목 보호대 추천']
-    ]},
-    g4:{t:'🍚 먹거리',items:[
-      ['#dinner','1일차 단체 석식','만이갈비 청전점 · 8/15 18:30'],
-      ['#eatsBox','제천 맛집','가족끼리 먹을 곳 정리']
+      ['#statsBox','시즌 성적','승패·득실·평균득점'],
+      ['#videosBox','경기 영상','쿼터별 복기 영상'],
+      ['#pgBox','학부모 안내','응원 매너 · 원정 짐 체크'],
+      ['#reqBox','요청 체크리스트','구단·숙소에 확인할 것']
     ]},
     g5:{t:'📚 정보 · 자료',items:[
-      ['#tournBox','유소년 대회 캘린더','2026-27 시즌 21개 대회 · 신청 상태'],
-      ['#kidsBox','성장 · 훈련','키·먹거리·홈트레이닝'],
-      ['#trainBox','개인훈련 · 전술','기본기·판단·아빠와 40분 루틴'],
+      ['#tournBox','📅 유소년 대회 캘린더','2026-27 시즌 전체 · 신청 상태'],
       ['https://apps.apple.com/kr/app/id6803709958','🍎 The Other Hours','훈련일지 앱 · App Store에서 받기','NEW'],
       ['#appSec','앱 사용 설명서','받는 법 · 하루 순서 · 개인정보'],
-      ['skylog.html','🌐 훈련일지 (웹 버전)','기존 · 안드로이드 · PC도 사용 가능'],
-      ['#eliteBox','엘리트 진로','선수 진학 경로 안내'],
+      ['skylog.html','🌐 훈련일지 (웹 버전)','안드로이드 · PC도 사용 가능'],
+      ['#trainBox','개인훈련 · 전술','기본기·판단·아빠와 40분 루틴'],
+      ['#kidsBox','성장 · 먹거리','키·영양·홈트레이닝'],
       ['#helpSec','학부모 지원제도','초3 이용권 · 선수등록 · 보험'],
+      ['#eliteBox','엘리트 진로','선수 진학 경로 안내'],
       ['#agBox','아시안게임','국가대표·관전 포인트'],
       ['#newsList','농구 뉴스','최신 소식 모아보기']
     ]},
-    g6:{t:'👨‍👩‍👧 우리 팀',items:[
-      ['#rosterBox','선수 명단','U-9 로스터'],
-      ['#pgBox','학부모 안내','응원 매너 · 3박4일 짐 체크'],
-      ['#reqBox','요청 체크리스트','구단·숙소에 확인할 것']
+    g6:{t:'🗂 지난 대회 — 제천 (8/15~17)',items:[
+      ['#fixturesBox','제천 대회 일정','8/15~17 · 3경기 상대·시간'],
+      ['#timetableBox','전체 타임테이블','집결·경기·식사·이동'],
+      ['#oppBox','상대팀 분석','KT · 정관장 · SK 스카우팅'],
+      ['#routesBox','고양 → 제천 이동','경로 · 체육관 간 이동'],
+      ['#resv','숙소 예약 현황','소노벨 단양 · 가정별 등록'],
+      ['#dinner','1일차 단체 석식','만이갈비 청전점 · 8/15'],
+      ['#tshirt','단체 응원티','취합 마감'],
+      ['#tripBox','제천 나들이','경기 사이 가볼 곳'],
+      ['#eatsBox','제천 맛집','가족끼리 먹을 곳']
     ]}
   };
   (function(){
     var bar=el('navBar'), panel=el('navPanel'); if(!bar||!panel) return;
     var open=null;
     var showNew=true; try{ showNew=!localStorage.getItem('sky_seen_skylog_v1'); }catch(e){}
+    /* 첫 버튼에 상주 대회 D-day 자동 표시 (대회 지나면 일반 라벨로 복귀) */
+    (function(){
+      var btn=el('navG1'); if(!btn) return;
+      var start=new Date(2026,9,24), over=new Date(2026,9,26);
+      var n=new Date(), today=new Date(n.getFullYear(),n.getMonth(),n.getDate());
+      if(today>=over){ btn.textContent='🏀 경기 · 대회'; NAVG.g1.t='🏀 경기 · 대회'; return; }
+      var d=Math.round((start-today)/86400000);
+      if(d>0){ btn.textContent='🏀 상주 D-'+d; NAVG.g1.t='🏀 10월 상주 대회 · D-'+d+' · 10/24~25'; }
+      else { btn.textContent='🏀 상주 대회 · 진행중'; NAVG.g1.t='🏀 10월 상주 대회 · 진행중 · 10/24~25'; }
+    })();
     function close(){ open=null; panel.className='navpanel'; panel.innerHTML='';
       Array.prototype.forEach.call(bar.querySelectorAll('button'),function(b){ b.setAttribute('aria-expanded','false'); }); }
     function show(g){
@@ -2997,7 +3020,7 @@ var firebaseConfig = {
       d.items.forEach(function(it){
         var ext = it[0].charAt(0)!=='#';
         if(!ext && !document.querySelector(it[0])) return;
-        var nu=(it[3]&&showNew);
+        var nu=(it[3] && (it[3]!=='NEW' || showNew));
         h+='<a href="'+it[0]+'"'+(ext?' target="_blank" rel="noopener"':'')+(nu?' class="isnew"':'')+
            '><span class="nl">'+esc(it[1])+(nu?'<span class="nb">'+esc(it[3])+'</span>':'')+'</span><span class="nd">'+esc(it[2])+'</span></a>';
       });
@@ -3172,6 +3195,15 @@ var firebaseConfig = {
     if(!t) return false;
     if(t.closest && t.closest('#cupBody')) cupOpen(true);
     openSection(t.closest? t.closest('section') : null);
+    /* 접혀 있는 소블록(.tblock)으로 점프하면 자동으로 펼친다 */
+    try{
+      var bl = t.classList && t.classList.contains('tblock') ? t : (t.closest? t.closest('.tblock') : null);
+      if(bl && bl.classList.contains('tf')){
+        bl.classList.remove('tf');
+        var bk=bl.getAttribute('data-bk');
+        if(bk){ var o=blkState(); o[bk]=0; try{ localStorage.setItem(BKEY,JSON.stringify(o)); }catch(e2){} }
+      }
+    }catch(e3){}
     setTimeout(function(){ t.scrollIntoView({block:'start',behavior:smooth?'smooth':'auto'}); },40);
     return true;
   }
