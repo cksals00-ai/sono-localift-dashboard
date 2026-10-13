@@ -947,6 +947,50 @@
   .fixrow .why b{color:#4a3a10;font-weight:900}
   .fixbox .fnote{margin:11px 0 0;font-size:11px;font-weight:700;color:#7a6428;line-height:1.7}
   .fixbox .fnote b{color:#4a3a10;font-weight:900}
+
+  /* ===== 상대 클럽 지도 (scoutSec) ===== */
+  .scnote{background:#eef5fb;border:2px solid var(--line);border-radius:14px;padding:12px 13px;margin:0 0 14px;
+    font-size:12px;font-weight:700;color:var(--mut);line-height:1.75;word-break:keep-all}
+  .scnote b{color:var(--navy)}
+  .scnote .st{display:block;font-size:12.5px;font-weight:900;color:var(--navy);margin-bottom:5px}
+  .scard{border:2.5px solid var(--navy);border-radius:14px;padding:11px 12px;margin-top:9px;background:#fff;
+    box-shadow:3px 3px 0 var(--navy)}
+  .scard.hot{border-color:#b3862a;box-shadow:3px 3px 0 #b3862a;background:#fffdf5}
+  .scard.us{border-color:var(--sky);box-shadow:3px 3px 0 var(--sky);background:#f2f9ff}
+  .scard .sh{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap;margin-bottom:3px}
+  .scard .sn{font-size:14px;font-weight:900;color:var(--navy);letter-spacing:-.4px}
+  .scard .sr{font-size:9.5px;font-weight:900;color:#fff;background:var(--navy2);border-radius:999px;padding:2px 7px;letter-spacing:.2px}
+  .scard.hot .sr{background:#b3862a}
+  .scard.us .sr{background:var(--sky)}
+  .scard .sg{font-size:10.5px;font-weight:800;color:var(--mut)}
+  .scard ul{margin:6px 0 0;padding-left:16px}
+  .scard li{font-size:11.5px;font-weight:700;color:var(--mut);line-height:1.7;margin-bottom:2px;word-break:keep-all}
+  .scard li b{color:var(--navy)}
+  .scard .sw{display:block;margin-top:7px;font-size:11px;font-weight:800;color:var(--navy);line-height:1.65;
+    border-top:1.5px dashed var(--line);padding-top:6px;word-break:keep-all}
+  .scard .sw em{font-style:normal;color:var(--mut);font-weight:700}
+  .h2h td.w{color:var(--win);font-weight:900}
+  .h2h td.l{color:var(--loss);font-weight:900}
+  .h2h td.tmn{text-align:left;color:var(--navy);font-weight:900}
+  .ytc{display:flex;align-items:center;gap:10px;text-decoration:none;border:2px solid var(--line);border-radius:12px;
+    padding:9px 11px;margin-top:8px;background:#fff}
+  .ytc:active{transform:translate(2px,2px)}
+  .ytc .yi{flex:none;width:30px;height:21px;border-radius:5px;background:#e8342a;position:relative}
+  .ytc .yi:after{content:'';position:absolute;top:50%;left:50%;transform:translate(-40%,-50%);
+    border-left:8px solid #fff;border-top:5px solid transparent;border-bottom:5px solid transparent}
+  .ytc .yt{flex:1;min-width:0}
+  .ytc .yt b{display:block;font-size:12.5px;font-weight:900;color:var(--navy);letter-spacing:-.3px}
+  .ytc .yt span{display:block;font-size:10.5px;font-weight:700;color:var(--mut);margin-top:2px;line-height:1.5;word-break:keep-all}
+  .ytc .ya{flex:none;font-size:13px;font-weight:900;color:var(--navy)}
+  .tierb{border-left:4px solid var(--navy);padding:2px 0 2px 10px;margin-top:11px}
+  .tierb .tn{display:block;font-size:12.5px;font-weight:900;color:var(--navy);margin-bottom:2px}
+  .tierb .td2{display:block;font-size:11.5px;font-weight:700;color:var(--mut);line-height:1.7;word-break:keep-all}
+  .tierb .td2 b{color:var(--navy)}
+  .tierb.t1{border-left-color:#b3862a}
+  .tierb.t1 .tn{color:#8d6a1e}
+  .tierb.t3{border-left-color:#9fb3c4}
+  .sctbl th:nth-child(2),.sctbl td:nth-child(2){white-space:nowrap;width:40px}
+  .sctbl th:first-child,.sctbl td:first-child{text-align:left}
 </style>
 </head>
 <body>
@@ -1696,6 +1740,232 @@
 
 
 
+
+  <!-- SCOUTING : CLUB MAP -->
+  <section id="scoutSec">
+    <div class="sec-h"><h2>대회 고르기 · 상대 클럽 지도</h2><span class="en">Scouting Map</span></div>
+
+    <div class="scnote">
+      <span class="st">🔭 이건 뭔가요</span>
+      지난 1~2년 유소년 대회 결과를 모아 <b>① 다음에 어떤 대회를 나갈지</b>, <b>② 거기서 누구를 만나게 되는지</b>를 미리 보려고 만든 챕터입니다.<br>
+      <b>경기 영상</b>은 유튜브 <b>농구연구소 B-LAB</b>·<b>동아리농구방</b> 같은 중계 채널에, <b>결과 기록</b>은 <b>점프볼</b> 기사에 남습니다. 영상만 봐서는 누가 센지 알기 어려워서, <b>기록으로 지도를 그리고 영상으로 확인하는</b> 순서로 정리했어요.<br>
+      <b>여기 적힌 성적은 전부 기사 원문에서 확인한 것</b>이고, 확인 못한 건 <b>&quot;확인 못함&quot;</b>으로 남겼습니다. 추측은 넣지 않았어요.<br>
+      <em style="font-style:normal;color:#8d2a26;font-weight:800">아이들 개인 이름·등번호·학교는 싣지 않습니다. 클럽 단위로만 봅니다.</em>
+    </div>
+
+    <div class="tblock">
+      <h3><span class="em">📊</span>2026 U9 전국 판도 — 우리는 어디쯤</h3>
+      <p class="tsub">2026년에 열린 <b>전국 단위 U9 대회</b>의 결승 결과입니다. 이 다섯 대회가 지금 U9 최상위권을 보여줘요.</p>
+      <table class="sjtt sctbl"><thead><tr><th>대회</th><th>시기</th><th>우승</th><th>준우승</th></tr></thead><tbody>
+        <tr class="hi"><td class="gm">하늘내린인제</td><td>8월</td><td class="tm"><b>서울 리바운드</b></td><td>분당 삼성 <span class="dim">38-16</span></td></tr>
+        <tr><td class="gm">KBL 유스클럽 제천</td><td>8월</td><td class="tm"><b>서울 SK</b></td><td>전주 KCC</td></tr>
+        <tr class="hi"><td class="gm">제천 HOOPCITY</td><td>10월</td><td class="tm"><b>서울 리바운드</b></td><td>아산 우리은행 <span class="dim">35-20</span></td></tr>
+        <tr><td class="gm">결초보은배</td><td>2월</td><td class="tm"><b>원주 DB</b></td><td>부산 모션스포츠 <span class="dim">26-6</span></td></tr>
+        <tr><td class="gm">제5회 의림지배</td><td>9월</td><td class="tm"><b>울산 현대모비스</b></td><td>이승민농구교실 <span class="dim">20-13</span></td></tr>
+      </tbody></table>
+      <p class="tnote"><b>올해 U9 최강은 서울 리바운드입니다.</b> 전국대회 두 개를 쓸어담았고, 결승 점수차가 <b>22점 · 15점</b>이었어요. 우리 캘린더에 한 번도 등장한 적 없는 이름이라 <b>따로 추적이 필요합니다.</b><br>
+      우리는 <b>2026 KBL 유스클럽 제천에서 U9 공동 3위</b>였습니다. 그 대회 우승팀 서울 SK에게 예선에서 <b>12-28</b>, 준결승에서 전주 KCC에게 <b>6-33</b>으로 졌어요. <b>지금 전국 최상위와의 간격은 20점 안팎</b>이라고 보는 게 정확합니다.</p>
+    </div>
+
+    <div class="tblock">
+      <h3><span class="em">🤝</span>우리가 실제로 붙어본 클럽</h3>
+      <p class="tsub">2026 시즌 소노 U9이 맞붙은 <b>7개 클럽</b>입니다. 다시 만날 가능성이 높은 상대들이에요.</p>
+      <table class="sjtt h2h"><thead><tr><th>상대</th><th>최근 결과</th><th>성격</th></tr></thead><tbody>
+        <tr><td class="tmn">남양주 소노</td><td class="w">43-25 승 · 34-32 승</td><td>같은 소노 · 2번 다 승</td></tr>
+        <tr><td class="tmn">더 모스트</td><td class="w">34-24 승</td><td>U10 전국 강팀 보유</td></tr>
+        <tr><td class="tmn">은평 삼성</td><td class="w">46-17 승 · 30-25 승</td><td>삼성 지점</td></tr>
+        <tr><td class="tmn">강남 삼성</td><td class="w">29-24 승</td><td>삼성 지점 · 다종별 강세</td></tr>
+        <tr><td class="tmn">수원 KT</td><td class="w">23-13 승</td><td>KBL 유스클럽</td></tr>
+        <tr><td class="tmn">정관장</td><td class="w">10-9 승</td><td>KBL 유스클럽 · <b>1점차</b></td></tr>
+        <tr class="hi"><td class="tmn">서울 SK</td><td class="l">12-28 패</td><td>2026 U9 전국 우승</td></tr>
+        <tr class="hi"><td class="tmn">전주 KCC</td><td class="l">6-33 패</td><td>7개 전 종별 운영</td></tr>
+      </tbody></table>
+      <p class="tnote">클럽 상대 전적은 <b>6승 0패</b>, KBL 구단 유스팀 상대로는 <b>2승 2패</b>입니다. <b>진 두 경기가 모두 그 대회 결승 진출팀</b>이었어요.<br>
+      <b>정관장전 10-9</b>는 눈여겨볼 만합니다 — 같은 KBL 유스클럽을 상대로 한 점 차 승리였고, 그날 양 팀 득점이 모두 10점 아래였습니다.</p>
+    </div>
+
+    <div class="tblock">
+      <h3><span class="em">🏆</span>눈여겨볼 클럽 7곳</h3>
+      <p class="tsub">2025~2026 <b>U9·U10 성적만</b> 추려서 꼽았습니다. 상위 연령대 성적은 뺐어요 — 같은 클럽이라도 학년마다 전력이 전혀 다릅니다.</p>
+
+      <div class="scard hot">
+        <div class="sh"><span class="sn">서울 리바운드</span><span class="sr">U9 최우선</span></div>
+        <span class="sg">서울 · 소재지 확인 못함</span>
+        <ul>
+          <li>하늘내린인제 2026 <b>U9 우승</b> <span class="dim">결승 38-16</span></li>
+          <li>제천 HOOPCITY 2026 <b>U9 우승</b> <span class="dim">결승 35-20</span></li>
+          <li>제1회 양구사과배 U8 CP 준우승 <span class="dim">16-18</span></li>
+        </ul>
+        <span class="sw">2026년 U9 전국 2관왕. <em>정보가 거의 없습니다 — 연락처·U10 운영 여부 모두 확인 못했어요. 대회에서 마주치면 영상부터 확보해두는 게 좋겠습니다.</em></span>
+      </div>
+
+      <div class="scard">
+        <div class="sh"><span class="sn">성북 삼성</span><span class="sr">연습경기 거론</span></div>
+        <span class="sg">서울 성북 · U9·U10 모두 운영</span>
+        <ul>
+          <li>2025 <b>상주 곶감배 U9 우승</b></li>
+          <li>2025 은평구 생활체육 <b>U9 우승 · U10 준우승</b> <span class="dim">전 종별 결승 진출</span></li>
+          <li>2026 강서구협회장배 <b>U10 우승</b> <span class="dim">결승 27-21</span></li>
+          <li>2026 제천 HOOPCITY <b>U10 우승</b></li>
+          <li>도이치모터스배 2025 <b>U9 준우승</b></li>
+        </ul>
+        <span class="sw"><b>U9·U10 양쪽에서 2년 연속 우승 기록이 있는 유일한 클럽</b>입니다. 기사에는 U9팀이 <b>&quot;다섯이 한 덩어리로 움직이는 팀 수비와 빠른 템포&quot;</b>로 소개돼 있어요. <em>10/11 공지에서 연습경기 상대로 거론된 팀입니다 — 아직 오피셜은 아닙니다.</em></span>
+      </div>
+
+      <div class="scard">
+        <div class="sh"><span class="sn">아산 우리은행 주니어</span></div>
+        <span class="sg">충남 아산 · U8·U9·U10 모두 운영</span>
+        <ul>
+          <li>2026 스마트아산 <b>U10 우승 · U8 우승 · U9 공동3위</b></li>
+          <li>2026 충북 청소년 페스티벌 <b>U10 우승</b></li>
+          <li>2026 제천 HOOPCITY <b>U9 준우승</b></li>
+        </ul>
+        <span class="sw">저학년 전 연령을 두껍게 굴립니다. <b>네 개 대회 연속 U9·U10 입상</b>이에요.</span>
+      </div>
+
+      <div class="scard">
+        <div class="sh"><span class="sn">서울 SK</span><span class="sr">직접 패배</span></div>
+        <span class="sg">서울 · KBL 유스클럽</span>
+        <ul>
+          <li>2026 KBL 유스클럽 제천 <b>U9 우승 · U10 준우승 · U11 우승</b></li>
+          <li>우리와 예선 <b>12-28</b> <span class="dim">(2026.8.16)</span></li>
+        </ul>
+        <span class="sw">KBL 유스클럽 대회에서는 <b>구단당 한 팀</b>만 나옵니다. 그래서 이 무대가 가장 좁고 가장 셉니다.</span>
+      </div>
+
+      <div class="scard">
+        <div class="sh"><span class="sn">전주 KCC</span><span class="sr">직접 패배</span></div>
+        <span class="sg">전주 · 지점: 구리다산 · 하남 · 남양주 · 부산</span>
+        <ul>
+          <li>2026 KBL 유스클럽 제천 <b>U10 우승 · U9 준우승</b> <span class="dim">7개 전 종별 참가</span></li>
+          <li>부산 KCC(모션스포츠) 2026 문경 <b>U10 우승</b> · 결초보은배 <b>U9 준우승</b></li>
+          <li>우리와 준결승 <b>6-33</b> <span class="dim">(2026.8.17)</span></li>
+        </ul>
+        <span class="sw">유일하게 <b>7개 전 종별</b>을 다 돌립니다. 지점까지 합치면 저학년 층이 가장 두꺼워요.</span>
+      </div>
+
+      <div class="scard">
+        <div class="sh"><span class="sn">원주 DB</span></div>
+        <span class="sg">강원 원주 · U9·U10 모두 운영</span>
+        <ul>
+          <li>2026 결초보은배 <b>U9 우승</b> <span class="dim">결승 26-6</span></li>
+          <li>2026 제5회 의림지배 <b>U10 준우승</b> <span class="dim">31-35</span></li>
+        </ul>
+        <span class="sw">결초보은배 결승 <b>26-6</b>은 올해 U9 전국대회 결승 중 가장 큰 점수차였습니다.</span>
+      </div>
+
+      <div class="scard">
+        <div class="sh"><span class="sn">오산동탄 더 모스트</span><span class="sr">직접 승리</span></div>
+        <span class="sg">경기 오산·동탄 / 수지 지점 · U10 운영 확인</span>
+        <ul>
+          <li>2026 양구사과배 <b>U10 CP 우승</b></li>
+          <li>2026 제5회 의림지배 <b>U10 우승</b> <span class="dim">결승 35-31</span></li>
+          <li>우리와 연습경기 <b>34-24 승</b> <span class="dim">(2026.9.13)</span></li>
+        </ul>
+        <span class="sw">U10이 전국 2관왕입니다. <em>우리가 이긴 더 모스트가 같은 지점인지는 확인 못했어요</em> — 지점이 여러 개입니다.</span>
+      </div>
+
+      <div class="scard us">
+        <div class="sh"><span class="sn">고양 소노 (우리)</span><span class="sr">기준점</span></div>
+        <span class="sg">경기 고양 · U9</span>
+        <ul>
+          <li>2026 KBL 유스클럽 제천 <b>U9 공동 3위</b> <span class="dim">예선 2승 1패</span></li>
+          <li>2026 연습경기 <b>6승 0패</b></li>
+        </ul>
+        <span class="sw"><b>공개 대회 성적이 제천 한 건뿐</b>입니다. 기록이 남는 대회를 더 나가야 다른 클럽이 우리를 읽을 수 있고, 우리도 우리 위치를 알 수 있어요.</span>
+      </div>
+    </div>
+
+    <div class="tblock">
+      <h3><span class="em">⚖️</span>&quot;우승&quot;이라고 다 같은 우승이 아닙니다</h3>
+      <p class="tsub">대회 기사를 읽을 때 <b>가장 많이 속는 부분</b>이라 따로 떼어놨습니다.</p>
+      <div class="agwarn" style="margin:9px 0 0">
+        <span class="wt">⚠️ i3 · i4 · CP · CL — 이 표시를 먼저 보세요</span>
+        강남구청장배·강서구협회장배·i리그 같은 대회는 <b>같은 U10 안에서도 실력 등급(디비전)으로 조를 나눕니다.</b> 기사 제목에 <b>i3</b>, <b>i4</b>, <b>I2</b> 같은 표시가 붙어 있으면 그 등급 안에서의 우승이에요.<br>
+        그래서 <b>「U10 우승」 네 글자만 보고 전력을 판단하면 안 됩니다.</b> 전국대회(하늘내린인제 · KBL 유스클럽 · 결초보은배) 우승과 디비전 대회 우승은 수준이 다릅니다.<br>
+        <b>양구사과배의 CP · CL</b>은 성격이 다릅니다 — 예선에서 탈락시키지 않고 <b>상위(CP) · 하위(CL)로 본선을 나눠</b> 모든 팀의 경기 수를 보장하는 구조예요. <b>U9에게는 오히려 좋은 방식</b>입니다.
+      </div>
+      <p class="tnote">위 클럽 카드에서는 <b>디비전 대회 성적을 일부러 뺐습니다.</b> 넥스트레벨·스티즈 강남·팀 강서처럼 U10 우승 기록이 있는 클럽들이 있지만 전부 디비전·지역 대회라, 전국대회 성적과 섞어 놓으면 지도가 왜곡돼요.</p>
+    </div>
+
+    <div class="tblock">
+      <h3><span class="em">📅</span>대회 고르는 법 — 세 단계로 나눠 보기</h3>
+      <p class="tsub">나가는 목적이 다르면 고를 대회도 달라집니다.</p>
+
+      <div class="tierb t1">
+        <span class="tn">1단계 · 전국대회 — 우리 위치를 재는 곳</span>
+        <span class="td2"><b>하늘내린인제</b>(8월 초, 4박5일, 11개 종별) · <b>KBL 유스클럽대회</b>(8월 중순, 구단 선발팀만) · <b>결초보은배</b>(2월 말, 110팀) · <b>홍천 글로벌 슈퍼컵</b>(1월, 2026년 84팀 2,000명) · <b>제천 종별대잔치</b>(2월, 160팀).<br>
+        실력 확인이 목적이면 여기. 다만 <b>이기러 가는 곳은 아닙니다</b> — 올해 우리가 20점 차로 진 상대들이 여기 있어요.</span>
+      </div>
+
+      <div class="tierb">
+        <span class="tn">2단계 · 지역 거점 전국대회 — 경기 수를 쌓는 곳</span>
+        <span class="td2"><b>제천이 사실상 유소년 농구의 수도</b>입니다. 한 해에 네 개가 제천에서 열려요 — 8월 KBL 유스클럽 · <b>9월 의림지배</b> · <b>10월 HOOPCITY</b>(2026 신설, U9 7팀) · 2월 종별대잔치.<br>
+        그 밖에 <b>양구사과배</b>(2월, CP/CL 구조라 U9에 유리) · <b>스마트아산</b>(9월, U8~U11) · <b>문경 하계</b>(8월 말) · <b>상주 곶감배</b>(우리가 10월에 나가는 대회).<br>
+        <b>U9에게 가장 현실적인 구간</b>입니다. 전국 팀을 만나되 경기 수도 챙길 수 있어요.</span>
+      </div>
+
+      <div class="tierb t3">
+        <span class="tn">3단계 · 지역·디비전 대회 — 부담 없이 경험하는 곳</span>
+        <span class="td2"><b>강남구청장배</b>(9월) · <b>강남구협회장배</b>(5월, <b>둘은 다른 대회</b>) · <b>강서구협회장배</b>(연중 부문별 하루) · <b>i리그</b>(권역 리그제) · 은평구·시흥시 생활체육 대회.<br>
+        주말 하루짜리가 많아 <b>원정 부담이 작습니다.</b> 다만 디비전 구분이 있어 성적의 의미는 위 1·2단계와 다릅니다.</span>
+      </div>
+
+      <p class="tnote" style="margin-top:12px"><b>U9만의 사정 두 가지.</b><br>
+      ① <b>U9은 대회 자체가 적습니다.</b> 의림지배 U9은 6~7팀, HOOPCITY U9도 7팀이었어요. <b>U10부터 참가팀이 급증</b>합니다 — 내년에 초4가 되면 선택지가 확 늘어납니다.<br>
+      ② <b>공고가 웹에 거의 안 뜹니다.</b> 의림지배는 <b>접수 10분 만에 전 부문 마감</b>됐고, 강남구청장배는 사전 공고를 끝내 못 찾고 결과 기사로만 확인됐습니다. <b>캘린더의 전화번호 목록이 지금도 가장 확실한 방법</b>이에요.</p>
+    </div>
+
+    <div class="tblock">
+      <h3><span class="em">🎥</span>영상으로 상대 보는 법</h3>
+      <p class="tsub">유소년 경기는 <b>중계 채널</b>에 통째로 올라옵니다. 대회 나가기 전에 상대 영상을 찾아보는 게 가능해요.</p>
+
+      <a class="ytc" href="https://www.youtube.com/@basket-lab" target="_blank" rel="noopener">
+        <span class="yi"></span>
+        <span class="yt"><b>농구연구소 B-LAB</b><span>제천 의림지배 중계 채널 · 한국초등농구연맹 제작 파트너</span></span>
+        <span class="ya">↗</span>
+      </a>
+      <a class="ytc" href="https://www.youtube.com/@BDRBASKET" target="_blank" rel="noopener">
+        <span class="yi"></span>
+        <span class="yt"><b>[BDR] 동아리농구방</b><span>강남구협회장배 U9 재생목록 보유 · 설명란에 조 편성까지 적혀 있음</span></span>
+        <span class="ya">↗</span>
+      </a>
+      <a class="ytc" href="https://www.youtube.com/@kbalive1925" target="_blank" rel="noopener">
+        <span class="yi"></span>
+        <span class="yt"><b>KBA Live</b><span>제천 종별대잔치 · 하늘내린인제 생중계</span></span>
+        <span class="ya">↗</span>
+      </a>
+      <a class="ytc" href="https://www.youtube.com/@boeungun" target="_blank" rel="noopener">
+        <span class="yi"></span>
+        <span class="yt"><b>보은군</b><span>결초보은배 생중계 (AI 중계 포함)</span></span>
+        <span class="ya">↗</span>
+      </a>
+
+      <div class="sjnow" style="margin:12px 0 0">
+        <span class="t">🔎 영상 제목 읽는 법</span>
+        <p>이 채널들은 제목을 <b>「팀A : 팀B [대회명] 날짜」</b> 형식으로 답니다. 그래서 <b>제목만 봐도 대진과 날짜를 알 수 있어요.</b><br>
+        예시 — <b>인피니트 : 강남삼성 [2025 자연치유도시제천 전국유소년 농구 스토브리그] 2025/01/18</b><br>
+        <b>⚠️ 함정</b> — <b>성인 동호회 디비전리그도 똑같은 제목 형식</b>을 씁니다. 연령 표기(<b>[U-10]</b> 같은)가 없으면 유소년 경기가 아닐 수 있으니 영상을 열어 확인하세요.</p>
+      </div>
+
+      <p class="tnote" style="margin-top:11px"><b>찾는 요령</b> — 유튜브 검색창에 <b>대회명 + U9</b> 또는 <b>클럽명 + 대회명</b>으로 넣는 게 가장 잘 걸립니다. 채널 안에서 뒤지는 것보다 <b>재생목록</b>을 먼저 찾아보세요. 대회 단위로 묶여 있고, <b>설명란에 조 편성과 경기장</b>이 적혀 있는 경우가 많습니다.<br>
+      실제로 <b>제17회 강남구협회장배 U9</b> 재생목록(영상 12개, 수도공업고)에서 조 편성 전체를 받을 수 있었어요 — <span class="dim">A조 분당SFA·위례삼성·분당정관장·은평삼성 / B조 강동SK·그로우·넥스트레벨·스티즈강남</span>.</p>
+
+      <p class="tnote"><em style="font-style:normal;color:#8d2a26;font-weight:800">다른 팀 아이들 영상입니다.</em> 클럽의 움직임·대형을 보는 용도로만 쓰고, <b>개별 아이를 지목해 분석한 내용은 이 페이지에 올리지 않습니다.</b> 우리 아이들 영상을 남이 그렇게 쓰는 걸 원하지 않는 것과 같은 이유예요.</p>
+    </div>
+
+    <div class="tblock">
+      <h3><span class="em">❓</span>아직 못 찾은 것</h3>
+      <p class="tsub">다음에 이어서 찾을 목록입니다. 혹시 아시는 분 계시면 알려주세요.</p>
+      <div class="sjrow"><span class="k">서울 리바운드</span><span class="v">2026 U9 전국 2관왕인데 <b>소재지·연락처·U10 운영 여부를 모릅니다.</b> 점프볼 기사 2건 외에 정보가 없어요.</span></div>
+      <div class="sjrow"><span class="k">강서구협회장배</span><span class="v"><b>U9부가 있는지</b> 아직 확인 못했습니다. <b class="ph">☎ 강서구체육회 02-6347-7330</b></span></div>
+      <div class="sjrow"><span class="k">의림지배 · HOOPCITY</span><span class="v">둘 다 제천에서 열리고 <b>접수가 순식간에 마감</b>됩니다. <b>2027년 접수 시점</b>을 알아둬야 하는데 제천시농구협회 연락처를 못 구했어요.</span></div>
+      <div class="sjrow"><span class="k">2025 KBL 유스클럽</span><span class="v">양구에서 열린 <b>2025년 대회 U9·U10 결과</b>를 못 열었습니다. 올해와 비교하면 흐름이 보일 텐데요.</span></div>
+      <div class="sjrow"><span class="k">은평 삼성 · 분당 SFA · 그로우</span><span class="v">우리와 붙었거나 U9 대회에서 본 이름인데 <b>공개 성적 기록을 못 찾았습니다.</b></span></div>
+      <p class="tnote">※ 출처는 전부 <b>점프볼</b> 유소년 기사와 각 대회 중계 채널입니다. 성적은 기사 원문에서 확인한 것만 적었고, 프로젝트 기록에만 있고 기사로 재확인하지 못한 항목(분당 삼성의 홍천 U9 우승 등)은 <b>이 표에서 뺐습니다.</b></p>
+    </div>
+  </section>
+
   <!-- OPPONENTS SCOUTING -->
 
   <!-- TOURNAMENT TIMETABLE -->
@@ -2205,7 +2475,7 @@ var firebaseConfig = {
   /* 콘텐츠 버전: 이 파일의 내용을 수정해서 새로 올릴 때마다 숫자를 1 올리면
      접속하는 순간 DB의 dashboard/ 콘텐츠가 이 파일 기준으로 자동 갱신됩니다.
      (reservations / votes / tshirt 등 학부모 입력 데이터는 전혀 건드리지 않습니다) */
-  var CONTENT_VER = 49;
+  var CONTENT_VER = 50;
   /* 일정표에 붙는 작은 유니폼 이미지 (홈/원정) */
   var JER_HOME='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADkAAABoCAIAAADEqM+AAAAoFElEQVR4nL27Wa8l2ZUe9q219o6IM935Zt4cbo5VmcUqjkU2u0mRVrNFo1tyA42WDFiSZQEyDBuwn/xoA/4Tgt8Ew7ZgWLAakgwJ3S1YYlPdnEQ2WWSxipVVlZVVOd68N+98hpj23mv5Ic65mVVsqeV+cKBQeXBPIM6KFWv41re+IDPD/y/H2Q8R0V/sCu7/6++pKhERkc0PEIGZf9kIOzsDIKLuHAApJWb5CxhM/+F+TSmJyL//TrrjRcvOjqZp6qoaLS11X/25V/sL2GrdOWbGzMenk//tf/2Hf/xv/mg8nvQHg+3ty6+++uprr7360s0b5zY3i17xot2zabnz9Ok779z56Rs//fFPfvLw0UeT2XRzY/Nv/a2/89/9t/9NnmUxKTMzzX/lz7X1z4kBMwCRyBHRz95+73/++//gf/kHfx/obi8tPsjG2tqFrXPr6xtra6suy6um3X+2f3R0uPNkZzo7fX458Q8+vH/3o4O7D5/913/vb3/hM58CYBYNzP8BMfFn+9UMgBEBIIUejOv/8/f+73/x+/86lc29d34B549Px3U1dY7NooUWmkKogeZFLxBlzheul4EcjBXsi0HR6128eKEo8rqt/8f/6X/4ja9+YXPYA6CmZET877P4uV8NakaAEYiIAAop7uwe/ezuo6dTeuO9XXJYPbf+n9z+TREcHpw+fbz39NnBeDqrytn46MgXw6w3CCEZgYWEGCmW1aTXXyqK4tzy2vaV7fXNtcFosLNzuH90zP3Rd956fP9QX7u69tnbF66sr4IAmCrQWfBLceEWjjQYmAkgwE5m5XuPD96+f3R6OgtRe4Oli5cv7t3/OWKYTmX70upSwS9fXg+GqmxOjk4Pjg8nZWOcp2QKeCcMEot5js3zm1vnN0f9wjGahEmVjk8OqzYsnd9eXTt3Wtl33t7507uPXr66/vr1Sy9fXPc+AwBoAjE+FhmdrUZEIDo4Le892b337PTx3knZmvl+5gsn2qRm9fy5RL02pvZ0vDIa9rxFq4VlOPBra1u3sytMAspYHJiZibq7p0QaU6KqjVVbZS7f39ufVtV4Vr/yhRssWYp1nuVNW73x7tFbd48uLA9evrZxbWv16oXVgfeqKsQL75ozgIx2x+N/9eN779zbg7CSELjf60FTrFs4B0K/GNx+5TNvv/mDzMnewbMbF9cAT+ySoWkSKO4fjv/Vt96MTpmcQWLbvv65G1/78it12xK8CEuv106bDx881ITV5dWrN2+0MRqgSElNyCu5h8ftg8PHMX2U5fJXvnjlr71+S1WZuEshhhkIv//dD/71G7szhcvzzDshSyGmpAZSM4DqmK6/8lrRWw5VqMv65HQmXowb50jEs4iCnhwdTSNqSEN8WDezuslcLuxFiCm6LLvzYHdax6pubn3m9f7KatRoZgoYkVIya51YL3d5vzicpn/2x+++8/gJMydVAEpgIprU7cPjWX955EVIPNipoQ2tqmLRGzUaisHnfu0/iooytPefHs1aFeeg88Qkgnfeu0Ikl7xwPhOXAUwkBuoXvQ8f7N354GETwvL57duvf6VMBEIyU7ARGxsEytpSEqKljILmf/ijR60pCAqrQmIAj44mh2XLaNk7KEjhxXW9lIkYBDMiqpp269qtl7/wleNJGS2+/+GTaZuLZ7JIYDKilHYfPd7Zefj0waPJyVicFwYYw97yk4fjn//sfbK25eyrv/k7kTMzA5hMoCAIGSGBjGBgYWYTwb39av9kJsQEmswaBnB4PNEIMRBxjDHFSEzOOQBMxMwEMhgTlVXz6pe+8qkvfuXwdDqp0jvvPDydEfcGJpIIITWpTctL62CflMzUCxW9wdvvPvo33/vpbFLXwX3zt//TwcZm07ZiYBAzm4GJCKSqMAgxEVjYkVVN/fjgFAABp7PGAZiUbUrqmZg8zGJKLOScM7OUdNHZyQDA6rb53Fd/I+8N3vzh90M1ffOdDy9dXn75pe2iPzh/YX2Lcu/9hbVR07Zry8Na8f037rzz9r0mtH5p5Rvf/O3z126VTfDEBHDX9wiqqmodwCGmlJKBEpIlOj2tuyDbG88cgJOyBRkInsRI6xQpWOY8MRGhwyJmDAMRwbiqw63P/1p/aemNb3/7+ORoNjs93j++eePaf/l3frcQZlXfK4JhZ2f/n/7BH+8eHafQDM9tfe2v/vXl1fNVUwl7hRJsXoxMQUZ0BtNENQIEQqsYlwGAAQcnlQNQ1o2qpgQmYhKoaUomwuQ6+Df36gIHwjArq63rr3xjefWtH/3bj+7eu//w2bO9o/XNzZvXL29fvvB4d//Oe+/v7hzOIlzWu/XpL7365b+kMqzqKCIKBQxmBKiQGUJSBqhDlaqWjIlNVY0ns1nXqybT0ilQ1q0mNSGNKcuzIsuatlEzOWtphLMO0iFWESnrGsPV1//Kb2/duv/uj767c+/OuH707PDkvXtPjsfjyWQ26A0uXbty+/O/cu78lSqpaSJA1VzOMCJ0uNHaNmQsqkogJoJCQDpHw1Y1LYCkNp6WLqjNGjUxAoGikWRZFlNSVZCBqfuiAzlmAFihyUAkKWKmafPStQt/7fyju3cePnj/cP/g0bPj4fLyzRu3r9+8tX5xu2U/CRFMItLG8tmj+1CrQ1wajULTDvvF2sa5uglFUYjLFKZIYDCYiDyoUQJQxnA0DU6TppSIyGCqii4HnUP3pAA665cgMyigBBBIiWACaBMadRdvf+7Sq68d7h+MT082Ns+NlldVtY0xWYIwGYgots1sfLK2srq7sxdm09Pjk0Ev33n0YDybXr3xUt4brK5vEIsZHImAiLlqGwB1m07K1jUhlFVFIMDUtCt73nvV2KEtAMxsZjAymMLUTM1oHrowglJqYzTlpY0LK+cuhhSrYAQS9o4sgkAwM7BbWd/c2DhXB1saDS9d3D48PFheWW4ePxDJTk8ny6sbXtiYmEiImKkMbYC2dWzr6Ko6hAghYjZiqEaCZyYmIQULW9KmrqTwZl6RDESLUaGrY125YRAMKYbYFR+aoyRTOCIjJLX+YLg0upVCvHrjFgjeu7ULl7z3Gxe286J3Ops6dkRMBENiYkaqg8WYZm2YNbU7mTZNC0cQIiZnRsRR2JkyGyhVH37w/vR0snXp8saVm6FNZKp6NlmpKl4E6za/FQXBjLUDxEQEOCQnEtuG1Mw4kyxESpZSjOR9NFsdrbSxNdPFxRIRNa2VTYrJ6gQ3qYIqEycGwcgUYKMu8YkOdp9OTw4HWb7z3vvseqP1jahqdjYGdgMhuhCyRfICZkaL6kFmAJkje+/HP9jbeZTU+kWPoly69cqll2+3TeuclMfPGrPh+nqbuvlLiYmUmqhNjCGEuol8UlZJEzOxUFf8ATJNzGhjc//+w9zlo9FSVKsmp06IukhNpgmaoAqoqWrS+ZGSmbIpwQjdbamSyNMnj9/90ffKk4ONi9uTyeHjB3fbZsoZkRPR9qff+86bf/rds9mdiZmFwBq1roLBmrbl01kZCSzOi9Bi2DMQzArH/SIT7wMJZ5n3Us5OU4opJXvhiKbJkpqpavdVFyWq3d8sWXSMyfQ0aGKXv/7lbwyG68xcZIOUtOf5wd07Ws/6RW4AdXkMEhEWVrXppO4VBRNcWTfGTMyuCwIQDOKkHJ8c7T6JIW5fubq6fq4e1zsfPSjvvvfyZ1/vD1dMTVUN0EV8EYzMznpbRxF0MybIyqreuHjza7/zXxR5UU0mTTkDaUjmwNOT/Y/uvhPb0mzFwF18mxkTE2JUPa1n2ytFzuTaNjAJgYjNTAkwYxAfPXv68MO7y2sb45NxXceyqZ1Iezg+OXw2XNpIMQBIpjYf1TAHOAv2ZV7muoNc0rTU61Wx+eijDw8f3K1Od8u6RMYO9NH7d8q6ygQsAmMgzoc/IjY18KRKvSJnNldOWygxzADtAATDgMlkkud5Cu3J8WHRa6bTsWdyXuqqonlGfSz/bWFo59QzKglmSZPPsumz3e/8wT+JKQAYrax99tUvbW9v7+8+fvThvevXb+8+fBcG1ZSSMpHBUheRSifjcnWQrQ4zV7ehrttRnkc1lu6pQc2IuOj1jo9PvM9CiLPJeH1teTga+rwX7Xmlem4ykcGsi6LF0U3OMPXe7zzb1RB6g+HrX/vL6+e2kGUGvPPWT9fXll9++fb9998SJ+IEKXbRBcBIY0ghpozd1vrQFT3XxNOYvDNAlVgoQZysjJaPm7I3GPaLXlEU2rSaYjC6sLHVJu3ux8xMn5dXIwCQFw1dVDbVoGIWQ1Hk61dvfvcP//nx5PjmtRtHTx6fO7/+wXtvM+fVpKxOjmUwSilCwQCYQgj93AO4fH6Zz28saQxtm2JUVahCDSGkja2tum5SCCzdYBQn48nWlWuDwcjSi/X/Y7TNi1ThGUkoRgSKqsRkKdbjk1BNaVaHul2/vB053zncW1ofVXU4ODgQdqZkBlWkhKZu+70cwNWLG25rczUlm82qzGfCDkQwCjH5otff3DzYefpkZ1eTDnq90fJ6b7Ck6LgZWFKbx4AtTCTMsVgXvWfQRxkaVacJMq2/9U/+MVmanlbLWxevfvrTEnW8//jbv/+Pr1197eL1m00bzBAjYgptEwzh3MYSgAtra+761nrO2tStasYCYiMCASFi/eL2xe2r7/3incnp+OXPftEV/agaY7SUtOsteB4C85Qi8CKCCXODlaxq6nMXt7/0jd9iQgg1ARptsLZZTpuM4fPhrVe/vLS8nizBTA1Rrayro5NyaeRvXF4DsNzvuatro9eubXzv50823bIIOSEzU02qVmTDZPGlVz+LpAHSGIi8aezcGXWBGu05e0xEqfuHulbZsWNogmbD1a3RcgdskiYnLqWkmiLY58PXvvTrgMaoCkuwNoYmxtlk/OufeWW9KAzGzA7Ab/zK7R/deSIiIo7ZJU2qyZIpEBRsooZIagaGGiylpIAqJe24xA7lL2qXGZgY3NkMWDKDUVKNqSEzVTC5yIkFTkQVARZT6ViEWaGqRmTEvNzjb375VueQNkQH4Mbl9ZXlviPxkhkxkhmSmraaghqDoZQomXZXQQRMEWPsOJv50yagYyUJCJZoziowkYFAbJrmvgcbyNQAJCixAWyEZKpqaskSnJAwra6vXLq4AShByrJ0AI6Oxk3bsnA3sqmqJm3JICKUTI2YHHu1yEwhhmBKyux9F44850CNyExNU8qyvMuvLnQdiyZr29jBXzP4jLx3xPDshFiIjTqUk7BoNHmeHz87OTg4Wr90HkCMwQEQ70ajUUpq1s2wSQHEVI6PU2xCiKaWEmtMpPBLfRkMtJzt7+2GFJiMFj8hxHmvNzi/+ezu3ajBVA1gFlMaLi0tX9gycEihx64+PHi0/9QJnPO58945Jusvr/bWNmOy7ukZbLA06CgVAM6JA8DiHEvbNKGXdfhIjH/2R3/04M4bg6JIajBLKaUQjw6PvvjXf/fc5ta//If/e1uO+/0+kAgwJXEyGVeDcxtf/xu/+71/+n9kPenlucKYHJGbltPlrXNf/ObvZOvnTx998K3f+78yJ6NhwQKfefaumk7Ov/TaF7/5N5omgSBMIQUSiJNFnVEGYCFm7AxWVmXTNCGESTV7+uTD1YFv0TRa1mnWpnplY3U46oGyt/70x+3p3vmLF1OylCSpgzhX9Da3tli8BsnzYuPipUatCaFuw6yeLS31j3Ye/sk//0eZyds/fUNQrZ9bqWOV1FJrHGR1tKbWtqlNMWpKqkrM4nxKqbO16PUcgEGWb28s7c1CU5fagY4UvZPjcbO6cT7f2EqWpk+ffXjn5yFUKYRmVvaWl3Z2H229/JmNzW0AmuKdH357ZTjgvG8xqaXJ4XFQeuXXvtmmQAHv/+S7K+tLz3ae7N17l8j1XG/3ybNXv/aN/vJG38mTd35y8Gxnc32zCaGJtRMxdkJyYXlpqdfv6kDG4gBMJ4c5xqPeUlOhqRvyTiwZoY7N5uWr1778tcRudny8cuniLFSDtRWrZ6mNPvOf+9qv+8E6CBbCvZ99XzUJI5opjNWW187feP3r03LcHywJx7e+/y8zn08Od5lQN+1gaXjzc68nNxr1s6P9D8POBxpNo8bUgjyDB+R6bcUhdl1wNp11deDo7js/v/mlb5xOXTIPEUdcziYrw8GDO289enjPZ0V/tLK8fv7S1iUq8hQbYhCkqVOQionRzGCJyHcAoUMCKcW6KkPTzLgk50TFNMKULBmZEoXQGoXQagwt1BjkRSI5x84TDzz9/MffKf/q6+sYAXpweOAAaLKdJ7u3vxDWhoM6c5ZlrcaLN1+596f/dmW0FE6Oy7Y+Mfr50enKxoWv/83/PAFkRsbM3rkcQFJiaGclmQFIihzimEjIsZASQEysXXUzIwiLsJPcZcKOIJ448865AYMyL9Pxs4ePH0nmAQP45PDIAVDA5bml0C/6ReEiy97h6ee/+huvfPYLB48fPH346Nnu0/pwd/vilQ937+3v7zqXETGY1BBiFGbV+YwlxDBTKLhb+5AB3WcQjNg6hocspaQxUqHKYMciDCID+SwXotzRztGhiBee14EQggOQCL6XOwc48Vk+ns6oHt9//15WFDe/8Ks3vvDV6bR864d/ePfHPxiOBmxETMoQ53r9Poq+E45tO/cbk0KN1CgplOa7MjrjG0HdSKVgLXKfFXk/9wITz+rElFLUougJY3V1ZbfILc3pAuedA2DRvIgUWZENW43jySSG8PC9n1kTTh5/GInbKuztP3FO0FpGlBTO+bqs7/3wj1KeC0u5txuaOBz6kOZ7b+tIym7XABgpEwwegJIJu8l4+p1/9nvDjc1ceLy3MxiMFA0JN3WdOeck46zIetlzIA9zAMjMu9y5HhFPy6oOQbJsfWN1KS/uf/TB/uF+XTUF3ObK6u70KcFAMcvF+/zBL37IBCJnJJsXtp49fnLupVcFBE0UAgPEDBiZEkhjIg5OoJrIdH1l9fTpEw61jAYro8Gzpw/Pv7TEIkrahDbLC1f0B8OBLDg1zG1lE/YwV9bN6WQalXpZlgkfHeyP2za2gSwFR4/2d4qsNxqshrZ+urPTW1kFkRAbyEBPdp64Inv1q1+r1ZpZ3VanS5tXtYNaBHVu1tSwhnwu2XA8HkdiGIc2weXjWK9cun7rta+EGNkhqtZtzDnPXH62oLXF3pDzolDFZFY2dfDMkme/+uu/dTwer+3tl8djiYCXKDRYWdHh8qt/6bde+vyvJkDABDaar0aXz13kpY3pbPr1/+y/8gb0e02qAW5Ds3Ll1n/8d/97B/DSaO38jRuf/nyLVg2j4fLa2goLmFnVmyYWRkIIDZONegPnpKuv0uFXFvG5T6YhBuccEeVFb9hbq/1wkDIMNpx474WJLGnVNMPz26ArSY27CZ0ZRKbJYgz1LPeud+UmQVMKKSaALcH7fra5RBpbBJeJFCNta4W2zkfXLzLXNrVp7HY+YFZTEK0srzjnYQoS531nK/s8TzBidt4Lcy9zbWrHZdmUlbXBnFly5iWZOSC1bUxRiCIUzDpHr2ByjsUSUhMSJTYj9qYgNbXUJmUHALGbJ4iTtggamrpfjJxISKnjUcBsRKqpKArnpJvdFMYAvGPvnCpI4D2xqGOkpE2oo6oBnmVQFMww0ciAcK8YkmRu2GPHXsiZOailNlRTEqUUMiDFti1PkSjXlHFij2oyhTqYCMFRk2KpmqyqwmQay5oAUTM1EAlzBA/6uZP5qDzsD7rcmlO/c5qOjYhVbe/BR5OD04s3btXl9HBvZ+vGjVQrGZWnJ6dP7t//4K2br3125dJLex/eObz34aXr1w6OTxzzldufuvPjHy0vr5mG8cnhy1/+5uGznZPH99dv3jx88vTyF1+vynL/Fz+q6tna5ZcuXv/0T771/6ysr7jB8OXPfMayuQqFmAxYW1t14roF06VL2wygVxTMnFJiYmZ24og4tM2j9957evedwrHG5vjZh0sF55qcc7Px0d2ffX/73Ma73/8Tr2G8txfL03p6OjvYyxwePHiwsb6cmqPdj96f7u87KjmPdXU0O3ia50Ztc+PypUHeQ+LLV2+mJk33dwq0K33xAgUbALNujVjkBboIBvr9AQPInFdNChIWMjCRCt595xcGy1ZW77737vkLF9nz9//gX7z7ox+E2eTcufXVC1trW9fWz10vlpa3rt/qD5cIcm7rPJFcefml09m0t3Jx9fyF4ahoqur9n7154dYrF2+8fHR4UOT9B+/d86P1a6/c/ujee1L43uZKFSsjEvag59gnWVIkAAoCqEkNA/CZj6kbgNVMRaScTEXJm+REWxtLoR6/dOPT0/Hh9uVLoY5EcmHr2g+//a2XPv9qOR2vXXm5t7YxPd6dHO4cHx4O1y8urV85f/X29S99/fIXfq23vn3p+u3jvWcPP7wTynFbng5GfUDLRwfbGxdO9nYGg6U2WD2tj/aPhOkMpplZjBEvHA5A5rO5TMys6+pt1e4+3gtNJEn7z57OqsnxyenyyrkP7r3bW15vq3E9G69ePn/v7TvFxtr1z37p8dPHI0lMrlgapZQmx3v7H32wduFyJO1fTFe/9CvttBoWvbfCn8RGp+Nnzrv+9uVJE0QyZEtZkfU2zvWXlhnQBX0DIKXnts7rqwiTBaOUDJ6E4CdVc/HW7fWXbmeZGw763vtrZtNZNS1rtWApOWYiSqoGqlN87et/2SYTY+/zUdtWV3/ly+XhCSuIvZgPLVM2mCW6/PlfHfSz8zdv+tyBKcY4nZa96jyRrKyt9peHqWmAOXFPhKosAWMIACdwAJy4FIKlSHBOOGqa1vWkqgwkUiRNrBJTqtsmxNDxLHMCnNgAIh5sXHGbQgCrNW0Lv7S0vcYQVqQYzNSIQJYPB9HSuKoHlolIjEFjik2bDJOxG/RyIU5zAhJEFGM4Y/l8N8d650iRQhQnTFQ2zawNYHLMzrETEaYQTWEdKcQd6QWYQQmk0KQBamRmYDArrI6JkgIgNaZuNaNtdN2KjZiYnfPeJeKaEtq2DTH6PEOc73FU9cV4Lbyb55YTiU0gI+ekqtqmDmZGQl5c5rwwA5ZiTBo7vuSMrwSg8/UQQCCGynyJ3VHHBoadoW4ktWgWARAxU+Z8ly1taJum6W6zo6I1xdDWIFn41TGALPPEiLGlboE9m6UYiVhEnPPMDEMMSZVgbJ0lnV5jgaM7H2O+J3rOydoLd9URRNrROjF1fyEyESKyGGNZlimlM9FkR/+cXceLMADHzIwQa+9F1SazWVJlZhEhgjCpaowpxQQQ1BbGPd8ZzD/anIb7hOPPjm4wSN22GmBmFmGZw766aWKMnXiTQJpSG8LCVEjH5gHo+Ty2lYiWTTurm2SJCAJyAkeIpiFFNeUFcwYCjDsZUrcrMiMs7oHohaHl7GZswSIbpWQpKREDJCwsbNCo2sQkkpGxRkMIoRMyAQAYNrc181mMUVxWVk1sEykY5Nl5lwMSQ6qbEBPi2U5jTggCIDYIwAtDz4x77s4zcUcnEiTSRCkBMGZzTpxjIY5NW1d1tzI0NY1J536dl9t5cPiMNSWXZePpLLaRjRyx9847T8wpaUwpoeNkOz0NrEsmmifNmTVnpPGZX+c75u5H53tQjTGZGc8Hb2EiTTqbTlOMzjvAkFJTt1isTGALW5eGOUyTYlKVyZQsMSDMPnNKaEOjGomUCczMLGZdi1EzVZrn0IuOPHPti3YTwAQyTRrb0KqCIZ6dJyY1ACHGpmnFM1EiaF23HXhlAxvNbR32+pm4EFJZN0qJiJz3eZGLcymlEILNe7CdCSDOHPk8d87S/4Xcn+/lPp5kZhZC6PQgIuK9d86baYqxbmooQIgpVHXZ5RnmIQsA2NxYHw4Gdd2WdW2m4sQ5V2SZY27aNsXUsbNEMFOzdLZvM1vEAi2uafbi01/c3vP1Z0eGm1obIpjVzInzXgCEEOq67rYDltqqLF98XHOJ6frGWjEYnI6nIQQmck7y3PW8N9M6NG2I3SaPzTrFBaBnqb5QqZp9Uk4+9+tcz4SzJRLBTNVCiFEBYnHsvRBD1aqqbtuQZbnF5vR0nFK3IoYC85l2aTTIer2j8ZSJzOC9ywvvvISYZnVTdfIL67QiIMOZKPWFx7qIgUVuPQ/ZM6N5LlBIptFS0KSq4oSIxbmOwm7b0DQ1syy0TMD8Pm0uSlkejZT8eDplwIv4zHknzBRiqtsQYlps3J8XznlEzqsC8EK/+lgQ/5Knu1OTWRtiiolBRMiyebONoS3LGsSOhVTnLZ1gNI9XA2RWatO2jiT3rsizYa/HLNOybuqmm8+YhBbdee6nDoN0kcrdM3reruiF40Vb5ztxoxhT0wQmZiZhyrxzjk1TOSuTWuaLzMviWp2tBjM6nVXH4wkskViWu8JnXlywNCvrEDQlg5ojFjx/jmeJ1S00/52e/Fg5sw4AdH9VTXVTB43inMGyLMvzgonbpmnbxheZy/yZMt5Acx3Ezv7kdFKCUBRZv1/0ej2fFWXVjCfj2EYo5pXVydnyDWbUYRVeLGPnbeF5ZT1z5mKQUrPEDMcEoqRWh7ZuWggTSZZlRebZcdA0mZVZr58PeiKdawmAI6I33/7FP/qDH5hfnx4dp6BQIR1Py0YNeS93ZaspEVEnIZvrQgymbHNcpfM4WvQzeqEAnz13hoGUFnvlTooWYiqrajAonDhoLPK8CWFW1WVZjYb5uQsXZC5moHnfmpTVwbie1U3btlERVGdVM52VQY3miqV51NHCTQAZs4LUCMYwBub/fYxtfcHNXaPvYIMwC4gBTVbXIYTEzMTkxPWLXuZcWVZ1tIuXLj0P9K4XXL9+bWVtsxxPe1nW63vxIt65PI8pTaczMzUzZhERFiIWgxAJzdl2fExMsjDuY5iwC+tFp2RxLCSOO6lcCLEsa3aOnSMh710vz03TtGxuvnR7Hqpntvb6g8YQY/TeO3EEBoGYyrpqmmBmRB2aZczN425pPNfSmy2Ekva83C9ADBaNwBYYHSASFifdezsxxllVJzPi+e86751Q1dTFcHR2/3M+a1y2x9OwwJ8ggogzs3JWdhMPM4sTYeEFEpy3zW40eC4wtE94lBZnnzUszKViJCLM0t1PXVdN0zgnxM/jpwq2dzwFzioMMYA379w/OZmQoBsfmFmcq+umaWoQmEmEhKn7lmyhayQCfbKEnR0dCKRFv+rEkWenCktXVFiIiFJMs1lpZl585yxmGOytO49mdd2Vrelsxmb6iw8exBiEyDnXoR4QZmUZosIgwt53axJiYlgnIuia1sdr0y8dZz22645nlbiTEDth7wQENVR107TROS9dXnh2Eh89PXz/wV53qY8ePOZo2J/MDMlxx2VRlmVNG8uqiUYgct2EKG6Rjh3A/tjc9+cc85imM8M7YCbOZc6LSGLUbZzNKl6gAiYWdqdV9WDvpLvGo6f7LoY4m9VeXJ5lmff9Xp+Yy6pqQzRN4pilC/q5yKKb0DphXsc8vlgG/kwkMM8y045X5jkws+5ZC4OSRU1V3YSQer0ihQA19VpX9eHxKYAQ0+7eM27btp5Vmcsy53t53usVIYTZtDRVEWZhFhZmmsvqMV8BLbSjL1p6hmleLAJzgEsw+tj5XRh3F/fCTGjqZjarnPOD/iD3LpMsk+zNN35Wt2EynT19+pRPxxNNWuR57rOi8IBNxmXTtDbXuzthIaIuZxe/9Vwo9O8K0z9r4H6+/aH5LEkAxEmXPappOp3Udchyl2Uu927Qy95666fPDo6mZd3GyMfHp6EplweDovAsVFZVVTZmTMSZk8wLMZlxR6UomXVLonlaEb8wan+iVJ39f85PYf5MoKRg7fqYd97nmWRMbKA2WFU3IM1y3y/8yrB49PDBo4cPp7NZE9TFEEE6GBTOu939ozbGXi8fjladc2bp6GQyPp2asXPkvXO+E0t3ZgqeD6if9Cu9gLgxjwEAzMSuyLsXQpBiaiqLxmqCmJI2s3a3nhS8PRgORMkLAN4/OIxKZVm7lFKee5854cysI4bEecnzfFZWTRNS6tqSJxIYL7DUPGA/YdwnLH6eW916myk05f3337HUhrY6PT7q5z3VeHS0H1MkElWrQ+r95u/cfu1T5lon+WDQn07K0ZJmWY9dLqOVVXIcNYG0gx5MpKaz2SyE1O08RFikK/wCLJatZMb0y+a++AFdwJACysxt0/78B398erCfZ+7weH9p48LS6qbPi6XR8sbq6rXLl9eWV46O9kPbkkjeL/rLa2Vo27aJKbk8K8Tn5Hw1ncaYnHfM5J1vmlBVtZlyJ92Rs6ZjmMtlASJb9KcXI/X5hwXMXfRZB/DKynA4Gjnf74+WFSFSvHjlqmrKxT+4f39a1lVdj2ezwaBPLrtw6UZ/MOgIOTcarfb7S9M2jmelASLinCPisqxjVIOysAgx80LTPLcP8wpkn5gJXvDoPErMqJNlpWjCHGL77MnDrCisnh3vPYWqFzetynI6SykZcYJNZjMWyXv+/Nb2SzdvHh0cwswZM2XFbFw2oQaImbMsa0OcVWVUBbMTn3nPIl2Z1G4csG5gUwKfvRHwYry+mF50RqpTkix/5fWv9zLf7xV5kWdZnmf50mD01i9+fve9XwwHo2g0HC6lqLO6yptieX3j1ks3v7e7pwSnzDGhqVtVc07yPGfmsqrrNiWDEz4DRDR/vbYjNWjeLV8g2z5BvL0w8Xa9itTUZXLt5U+BuGvR7MRYZpDtm7fWz296yRJxTBpS5OjaNgiwfzo9mc2SmTsez6ZlrQkimRM2s7Zt+7m/vLUekrZRoUZAMg3JRDokkAgMko75/YRHz46U5roMJpgxUac6QZPUNHbLqWSaOCl8MRyNVkcW0SStylnbBgI3dWue33v49Gg8i5rcoyd7GqODFkXuMk/MAGU+Y05myTimxQs9HRSe83Yd8IOpafe+1IsN9qw/dffQncFmMJ6/JcOs3QJZTU0TpdbMtCs06PV63vsYo6WWnH/z7uPx/pFjuJ39sXOu32NmAguYNKUYYxtTG5KmmFICdXwrEUHV5psAMpoPtF0W2dlMNncznU2g86Bd8FoAtHtBN6UkwikZw4sSwRwRORFC5h2pCeFk2lQ1LJkb18FnGWns2oqiE1saE0Q6yGoAaYeurNN0q5mppc411MnJrSOdOpO4U11ytwcExaQMYgYZiQixEcDcMSHEzN3GkIicEyYShpKRSQwxQsQNs7x1Jj5ZNE1klEKKqsm0o/Q7EpudEJyg0xtrQhIRMwW4I2DZuPOrwogcg7tXvIjP2m/XO8CdGJa7YaubfJKZGTRpsMCmbDExE7NAOAFgmZX15aVBbwXOOzWEsq2SglKmDDMTzPW9gMUmmKUuZjtVIjOrKpPhLAgMxGAQTM/2HZ37iQmqMFLVrjSomXTvCXWhS2AhBTnHahZSogTSwKLOy1q/d25z9Jtfee2l7XP08NlhG3E8mR4cnRydzPZm1bhsy0k4LatZXdWttm1MCVFtTl5TR+V2L6gCzN1CpWtTpjDrdlJmlnC2+ulCSFN3pnNMBGb27LOMi5wGXnq9YjDoDwq33s83R7219eH66vK55aW1UZ8AhX0ScCjQpljO2pNJeTKbnczqEGJV1bMq1k0TY6pirNpQNm0MqNpYVk3TxBTnb8ZoSgY4YZ85YeSZ7/eKfuGL3PUHPvfSy/ywKHpZlmcuK3ye5f3cD3IZ5llR5EVRZL9El3ZcIRH9vzdioVFjZqRHAAAAAElFTkSuQmCC';
   var JER_AWAY='data:image/png;base64,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';
@@ -2905,6 +3175,7 @@ var firebaseConfig = {
     ]},
     g5:{t:'📚 정보 · 자료',items:[
       ['#tournBox','📅 유소년 대회 캘린더','2026-27 시즌 전체 · 신청 상태'],
+      ['#scoutSec','🔭 대회 고르기 · 상대 클럽','어떤 대회를 나갈까 · 누구를 만나나','신규'],
       ['skylog.html','📓 훈련일지 쓰기','훈련·경기 기록 · 브라우저로 바로'],
       ['#appSec','훈련일지 안내','쓰는 법 · 들어가는 곳'],
       ['#trainBox','개인훈련 · 전술','기본기·판단·아빠와 40분 루틴'],
@@ -3074,12 +3345,20 @@ var firebaseConfig = {
     var bs=document.querySelectorAll('.tblock');
     if(!bs.length || document.querySelector('.tblock > .tbody')) return;
     var st=blkState();
+    /* 블록 키를 「섹션 + 섹션 안 순번」으로 고정한다.
+       예전처럼 문서 전체 순번(b0,b1…)을 쓰면 섹션을 하나 끼워 넣을 때마다
+       뒤쪽 블록들의 키가 통째로 밀려서 접기 상태가 엉뚱하게 뒤섞인다. */
+    var secs=document.querySelectorAll('.wrap > section'), cnt={};
     Array.prototype.forEach.call(bs,function(bl,i){
       var h=bl.querySelector(':scope > h3'); if(!h) return;
       var body=document.createElement('div'); body.className='tbody';
       while(h.nextSibling) body.appendChild(h.nextSibling);
       bl.appendChild(body);
-      var k='b'+i; bl.setAttribute('data-bk',k);
+      var sec=bl.closest?bl.closest('section'):null;
+      var sid=sec?(sec.id||('s'+Array.prototype.indexOf.call(secs,sec))):'x';
+      var n=(cnt[sid]=(cnt[sid]||0)+1)-1;
+      var k=sid+':'+n; bl.setAttribute('data-bk',k);
+      i=n;  /* 기본 펼침 판정은 섹션 안 순번 기준 — 각 섹션의 첫 블록은 열어둔다 */
       var n=body.querySelectorAll('.tacc').length;
       if(n>1) h.insertAdjacentHTML('beforeend','<span class="tk">'+n+'개 항목</span>');
       h.insertAdjacentHTML('beforeend','<span class="tv">\u25BE</span>');
