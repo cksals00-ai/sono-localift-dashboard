@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updated": "2026-10-15T08:50:30+09:00",
-    "baseYm": "202608",
+    "updated": "2026-10-16T08:39:46+09:00",
+    "baseYm": "202609",
     "source": "데이터랩 지역별 관광 자원 수요(15152138)·수요강도(15151868) · AreaTarResDemService/AreaTarDemDsService",
     "note": "값=관광수요지수 구성 지표(상대지수 0~100, 원화 아님) · 월 1회(16일) 갱신 · 외지인소비비중=관광객이 지역 소비에서 차지하는 비중"
   },
@@ -18,79 +18,79 @@
     {
       "key": "홍천군",
       "loc": "강원 홍천",
-      "lodge": 77.75,
-      "food": 61.95,
-      "shop": 59.92,
-      "leisure": 62.24,
-      "out_spend": 74.23,
-      "out_ratio": 82.4,
-      "spend_per_visit": 92.41
+      "lodge": 69.45,
+      "food": 61.91,
+      "shop": 59.88,
+      "leisure": 62.58,
+      "out_spend": 70.16,
+      "out_ratio": 81.4,
+      "spend_per_visit": 84.94
     },
     {
       "key": "삼척시",
       "loc": "강원 삼척",
-      "lodge": 68.95,
-      "food": 61.93,
-      "shop": 59.87,
-      "leisure": 61.19,
-      "out_spend": 67.29,
-      "out_ratio": 78.39,
-      "spend_per_visit": 74.37
+      "lodge": 67.2,
+      "food": 61.89,
+      "shop": 59.84,
+      "leisure": 61.08,
+      "out_spend": 65.01,
+      "out_ratio": 67.91,
+      "spend_per_visit": 64.59
     },
     {
       "key": "고성군",
       "loc": "강원 고성",
-      "lodge": 71.76,
-      "food": 61.94,
-      "shop": 59.87,
-      "leisure": 61.44,
-      "out_spend": 68.76,
-      "out_ratio": 84.24,
-      "spend_per_visit": 85.4
+      "lodge": 68.88,
+      "food": 61.89,
+      "shop": 59.84,
+      "leisure": 61.28,
+      "out_spend": 65.61,
+      "out_ratio": 82.72,
+      "spend_per_visit": 73.86
     },
     {
       "key": "양양군",
       "loc": "강원 양양",
-      "lodge": 68.84,
-      "food": 61.98,
-      "shop": 59.87,
-      "leisure": 61.72,
-      "out_spend": 71.05,
-      "out_ratio": 83.39,
-      "spend_per_visit": 91.88
+      "lodge": 67.4,
+      "food": 61.9,
+      "shop": 59.85,
+      "leisure": 61.48,
+      "out_spend": 67.31,
+      "out_ratio": 82.57,
+      "spend_per_visit": 82.0
     },
     {
       "key": "부안군",
       "loc": "전북 부안",
-      "lodge": 67.43,
-      "food": 61.89,
+      "lodge": 66.65,
+      "food": 61.87,
       "shop": 59.85,
-      "leisure": 60.83,
-      "out_spend": 65.44,
-      "out_ratio": 83.7,
-      "spend_per_visit": 69.71
+      "leisure": 60.81,
+      "out_spend": 64.93,
+      "out_ratio": 84.3,
+      "spend_per_visit": 66.01
     },
     {
       "key": "단양군",
       "loc": "충북 단양",
-      "lodge": 67.17,
-      "food": 61.89,
-      "shop": 59.83,
-      "leisure": 61.02,
-      "out_spend": 65.66,
-      "out_ratio": 84.17,
-      "spend_per_visit": 80.11
+      "lodge": 66.67,
+      "food": 61.88,
+      "shop": 59.82,
+      "leisure": 61.0,
+      "out_spend": 64.91,
+      "out_ratio": 83.29,
+      "spend_per_visit": 74.58
     },
     {
       "key": "남해군",
       "loc": "경남 남해",
-      "lodge": 68.84,
-      "food": 61.89,
-      "shop": 59.84,
-      "leisure": 60.97,
-      "out_spend": 65.28,
-      "out_ratio": 82.9,
-      "spend_per_visit": 73.2
+      "lodge": 67.78,
+      "food": 61.87,
+      "shop": 59.83,
+      "leisure": 60.95,
+      "out_spend": 64.11,
+      "out_ratio": 82.15,
+      "spend_per_visit": 65.18
     },
     {
       "key": "진도군",
@@ -106,18 +106,17 @@
     {
       "key": "청송군",
       "loc": "경북 청송",
-      "lodge": 66.64,
+      "lodge": 66.6,
       "food": 61.86,
       "shop": 59.82,
-      "leisure": 60.79,
-      "out_spend": 63.2,
-      "out_ratio": 84.03,
-      "spend_per_visit": 65.11
+      "leisure": 60.8,
+      "out_spend": 63.21,
+      "out_ratio": 83.74,
+      "spend_per_visit": 64.59
     }
   ],
   "lodgeTrend": {
     "labels": [
-      "2025-09",
       "2025-10",
       "2025-11",
       "2025-12",
@@ -128,10 +127,10 @@
       "2026-05",
       "2026-06",
       "2026-07",
-      "2026-08"
+      "2026-08",
+      "2026-09"
     ],
     "values": [
-      70.08,
       71.5,
       69.88,
       70.83,
@@ -142,7 +141,8 @@
       67.87,
       67.75,
       68.66,
-      69.67
+      69.67,
+      67.58
     ]
   }
 }
