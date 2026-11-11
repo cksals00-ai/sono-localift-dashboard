@@ -1294,6 +1294,24 @@
   .szpay .szsum{display:block;margin-top:6px;padding-top:6px;border-top:1.5px dashed rgba(63,143,84,.4);
     font-size:11.5px;font-weight:900;color:#1f5530}
   #hoodSize .hfamrow{margin-top:10px}
+  .szlink{width:100%;margin:5px 0 10px;padding:10px;border:2px solid #c99a2e;border-radius:9px;
+    background:#fff8e8;color:#6a4a08;font-size:12px;font-weight:800;font-family:inherit;cursor:pointer}
+  .szfamily{margin-top:16px}
+  .szfamily .sztt{table-layout:fixed}
+  .szfamily .sztt th:first-child{width:31%}
+  .szfamily .sztt td{text-align:left;overflow-wrap:anywhere;vertical-align:top}
+  .szfamily .sztt td:last-child,.szfamily .sztt th:last-child{text-align:right;white-space:nowrap;width:29%}
+  .szfamily small{display:block;font-size:10px;font-weight:600;margin-top:3px;color:var(--mut)}
+  .szmap{margin-top:12px;border:1.5px solid #b9c6d4;border-radius:9px;padding:10px}
+  .szmap summary{cursor:pointer;font-weight:900;color:var(--navy)}
+  .szmaprow{border-top:1px solid #dce5ee;padding-top:9px;margin-top:9px;font-size:11px;line-height:1.6}
+  .szmaprow .hfamrow{display:flex;gap:6px}
+  .szmaprow select{min-width:0;flex:1;font:inherit;padding:7px;border-radius:7px}
+  .szadminwrap{overflow-x:auto;margin-top:10px}
+  .szfamily #szAdminSummary{table-layout:auto;min-width:560px}
+  .szfamily #szAdminSummary th:first-child,.szfamily #szAdminSummary th:last-child{width:auto}
+  .szconfirmed{color:#267243!important;font-weight:900!important}
+  #hoodSize button:disabled{opacity:.55;cursor:wait}
 
   .dvids{display:grid;gap:10px;margin:8px 0 2px}
   .dvid{margin:0}
@@ -1473,7 +1491,7 @@
       <div class="tblock" id="hoodSize">
         <h3><span class="em">📏</span>사이즈 취합<span class="tk">흰색 집업</span></h3>
         <p class="tsub">투표로 <b>흰색 집업</b>으로 정해졌습니다. 이제 <b>가정별 사이즈</b>를 받습니다.<br>
-        아래에서 담으시면 <b>예상 비용이 바로 나옵니다.</b></p>
+        아래에서 담으시면 <b>확정 단가 기준 총액이 바로 나옵니다.</b></p>
 
         <div class="ddl"><b>⏰ 11월 11일(수) 오전까지 받습니다.</b><br>
         <span class="dim">19~20일 수령 기준이며, <b>이야짐 또는 경기장에서</b> 전달 드리겠습니다.</span></div>
@@ -1499,17 +1517,22 @@
         </div>
         <div class="szcart" id="szCart">아직 담은 사이즈가 없어요.</div>
         <div class="szcost" id="szCost"></div>
-        <button class="hcast" id="szSave" type="button">이 내용으로 저장</button>
+        <p class="tnote">수량 수정: <b>사이즈 버튼은 1벌 추가</b>, 담긴 사이즈의 <b>✕는 1벌 빼기</b>입니다.<br>
+        가정을 선택하고 수량·금액을 확인한 뒤 <b>확정</b>해주세요. 수정한 뒤 다시 확정할 수도 있어요.</p>
+        <button class="szlink" id="szLink" type="button" hidden>기존 신청의 가정 이름만 연결</button>
+        <button class="hcast" id="szSave" type="button">이 수량·금액으로 확정</button>
         <span class="hstatus" id="szStatus"></span>
 
         <b class="hqh">지금까지 들어온 것</b>
         <div id="szTally"></div>
+        <div class="szfamily" id="szFamilyTotals"></div>
         <div id="szPay"></div>
       </div>
 
       <div class="tblock" id="hoodQuote">
         <h3><span class="em">💰</span>후디 금액<span class="tk">흰색 집업</span></h3>
-        <p class="tsub">아래는 <b>옷값·인쇄비를 모두 포함</b>한 <b>부가세 포함</b> 금액입니다. <b>배송비는 없습니다.</b></p>
+        <p class="tsub"><b>최종 취합 수량이 30벌을 넘지 않아, 안내드린 사이즈별 단가로 확정합니다.</b><br>
+        아래는 <b>옷값·인쇄비·부가세를 모두 포함</b>한 확정 금액이며, <b>배송비는 없습니다.</b></p>
 
         <table class="sjtt hq"><thead><tr><th>사이즈</th><th>1인당</th></tr></thead><tbody>
           <tr class="hi"><td class="tmn">아동 120~160호</td><td><b>47,900원</b></td></tr>
@@ -1524,8 +1547,8 @@
 
         <b class="hqh">알아둘 것</b>
         <ul class="hqul">
-          <li>지금 금액은 <b>30벌 기준 예상액</b>입니다. <b>수량이 확정되면 단가가 조정됩니다.</b></li>
-          <li>인쇄비는 수량과 무관하게 <b>한 번만</b> 붙습니다. <b>인원이 늘수록 1인당은 내려갑니다.</b></li>
+          <li><b>30벌을 넘지 않아 기존 안내 단가로 확정</b>했습니다. 위 가정별 총액을 확인해 입금해주세요.</li>
+          <li>인쇄비가 이미 포함되어 있어 <b>별도로 더하실 금액은 없습니다.</b></li>
           <li>모두 <b>부가세 포함</b>이고 <b>배송비는 없습니다</b>.</li>
           <li>앞은 <b>좌측 가슴</b>, 뒤는 <b>등 중앙</b>에 1도로 들어갑니다.</li>
           <li><b>아동·성인이 같은 제품 라인</b>이라 색과 원단이 똑같습니다.</li>
@@ -3706,136 +3729,211 @@ var firebaseConfig = {
   /* ===== 후디 사이즈 취합 ===== */
   (function(){
     var box=document.getElementById('hoodSize');
-    if(!box || !document.getElementById('szFam')) return;   /* 취합 UI 를 내렸을 때는 돌지 않는다 */
-    var cart={}, LK='sky_hoodsize_v2', LKF='sky_hoodsize_fam_v2', LKK='sky_hoodsize_key_v2';
-    /* 흰색 집업 1인당 금액 (부가세·배송 포함, 30벌 기준 예상액) */
+    if(!box || !document.getElementById('szFam')) return;
+    var cart={}, LK='sky_hoodsize_v2', LKF='sky_hoodsize_fam_v2', LKK='sky_hoodsize_key_v2', LKV='sky_hoodsize_view_key_v2';
+    /* 30벌 미만으로 기존 안내 단가 확정: 옷값·인쇄비·부가세 포함, 배송비 없음. */
     var SZP={'120호':47900,'130호':47900,'140호':47900,'150호':47900,'160호':47900,
       'S(85)':47900,'M(90)':47900,'L(95)':47900,'XL(100)':47900,
       '2XL(105)':49900,'3XL(110)':49900,'4XL(115)':51400,'5XL(120)':52900,'6XL(125)':54400};
-    var SZORD=['120호','130호','140호','150호','160호','S(85)','M(90)','L(95)','XL(100)',
-      '2XL(105)','3XL(110)','4XL(115)','5XL(120)','6XL(125)'];
+    var SZORD=Object.keys(SZP);
+    var famSel=document.getElementById('szFam'), cartBox=document.getElementById('szCart');
+    var statusEl=document.getElementById('szStatus'), tallyBox=document.getElementById('szTally');
+    var familyBox=document.getElementById('szFamilyTotals'), linkBtn=document.getElementById('szLink');
+    var saveBtn=document.getElementById('szSave'), store={}, ready=false, pending=false;
+    var targetKey='', targetFamily='', dirty=false;
     function won(n){ return n.toLocaleString('ko-KR')+'원'; }
-    function costOf(map){ var t=0; Object.keys(map).forEach(function(k){ t+=(SZP[k]||47900)*map[k]; }); return t; }
-    var payOpen=false;
+    function sizesOf(map){
+      var out={}; SZORD.forEach(function(k){ var n=map&&map[k]; if(Number.isInteger(n)&&n>0) out[k]=n; }); return out;
+    }
+    function countOf(map){ return Object.keys(map).reduce(function(n,k){ return n+map[k]; },0); }
+    function costOf(map){ return Object.keys(map).reduce(function(n,k){ return n+SZP[k]*map[k]; },0); }
+    function sizeText(map){ return SZORD.filter(function(k){ return map[k]>0; }).map(function(k){ return k+' × '+map[k]; }).join(' · '); }
+    function familyOf(r){ return r&&typeof r.family==='string'?r.family:''; }
     function myKey(){
-      var k='';
-      try{ k=localStorage.getItem(LKK)||''; }catch(e){}
+      var k=''; try{ k=localStorage.getItem(LKK)||''; }catch(e){}
       if(!k){ k='f'+Date.now().toString(36)+Math.random().toString(36).slice(2,8);
         try{ localStorage.setItem(LKK,k); }catch(e){} }
       return k;
     }
-    var famSel=document.getElementById('szFam');
-    var cartBox=document.getElementById('szCart');
-    var statusEl=document.getElementById('szStatus');
-    var tallyBox=document.getElementById('szTally');
-    var store={};
-
-    function fillFam(){ if(famSel) buildFamilyOptions(); }
+    function familyKeys(fam){ return Object.keys(store).filter(function(k){ return fam&&familyOf(store[k])===fam; }); }
+    function viewedKey(){ var k=''; try{ k=localStorage.getItem(LKV)||''; }catch(e){} return store[k]?k:myKey(); }
+    function setStatus(m,bad){ if(statusEl){ statusEl.textContent=m; statusEl.style.color=bad?'var(--loss)':'var(--win)'; } }
+    function controls(){
+      if(famSel) famSel.disabled=pending||!ready;
+      if(saveBtn) saveBtn.disabled=pending||!ready;
+      if(linkBtn){ linkBtn.disabled=pending||!ready; linkBtn.hidden=!(store[myKey()]&&store[myKey()].sizes&&!familyOf(store[myKey()])); }
+    }
     function drawCart(){
-      var keys=Object.keys(cart).filter(function(k){ return cart[k]>0; });
-      if(!keys.length){ cartBox.innerHTML='아직 담은 사이즈가 없어요.'; drawCost(0); return; }
-      var n=keys.reduce(function(a,k){ return a+cart[k]; },0);
-      keys.sort(function(a,b){ return SZORD.indexOf(a)-SZORD.indexOf(b); });
-      cartBox.innerHTML='<b>'+n+'벌</b> &nbsp;'+keys.map(function(k){
+      cart=sizesOf(cart); var n=countOf(cart), keys=Object.keys(cart);
+      cartBox.innerHTML=n?'<b>'+n+'벌</b> &nbsp;'+keys.map(function(k){
         return '<span class="sx" data-sz="'+esc(k)+'">'+esc(k)+' × '+cart[k]+'<i>✕</i></span>';
+      }).join(''):'아직 담은 사이즈가 없어요.';
+      var c=document.getElementById('szCost'); if(!c) return;
+      c.classList.toggle('on',!!n);
+      c.innerHTML=n?'<span class="szcl">확정 단가 기준 총액</span><span class="szcv">'+won(costOf(cart))+'</span>'+
+        '<span class="szcn">'+n+'벌 · 옷값·인쇄비·부가세 포함 · 배송비 없음<br>'+
+        (dirty?'수량을 바꾸셨다면 아래 버튼으로 다시 확정해주세요.':store[targetKey]&&store[targetKey].confirmed?'확정된 신청입니다. 수량 수정 후 다시 확정할 수 있어요.':'수량·금액을 확인하고 아래 버튼으로 확정해주세요.')+'</span>':'';
+    }
+    function loadCart(){
+      var fam=famSel.value, keys=familyKeys(fam), own=store[myKey()];
+      targetKey=keys.length===1?keys[0]:(!keys.length&&own&&!familyOf(own)?myKey():'');
+      targetFamily=familyOf(store[targetKey]); cart=sizesOf(store[targetKey]&&store[targetKey].sizes); dirty=false;
+      drawCart(); controls();
+      setStatus(keys.length>1?'이 가정의 신청 '+keys.length+'건을 합산했습니다. 수량 수정은 관리자에게 확인해주세요.':'',keys.length>1);
+    }
+    function drawFamilies(){
+      if(!familyBox) return;
+      if(!ready){ familyBox.innerHTML='<p class="tnote">신청 내역을 불러오는 중입니다…</p>'; return; }
+      var groups=[], named=Object.create(null), total=0, amount=0;
+      var ownKey=viewedKey(), own=store[ownKey], ownFamily=familyOf(own), localFamily='';
+      try{ localFamily=localStorage.getItem(LKF)||''; }catch(e){}
+      var keys=Object.keys(store).sort();
+      keys.forEach(function(k){
+        var r=store[k]; if(!r||!r.sizes) return;
+        var sizes=sizesOf(r.sizes), n=countOf(sizes); if(!n) return;
+        var fam=familyOf(r), g=fam?named[fam]:null;
+        if(!g){ g={name:fam,sizes:{},records:0,confirmed:0}; groups.push(g); if(fam) named[fam]=g; }
+        if(!fam) g.id=k;
+        g.records++; if(r.confirmed===true) g.confirmed++;
+        Object.keys(sizes).forEach(function(sz){ g.sizes[sz]=(g.sizes[sz]||0)+sizes[sz]; });
+        total+=n; amount+=costOf(sizes);
+      });
+      var rows=groups.map(function(g){
+        var mine=g.id?g.id===ownKey:!!ownFamily&&g.name===ownFamily;
+        var label=mine?(ownFamily||localFamily||'우리 가정'):'가정 숨김';
+        return '<tr><td class="szn">'+esc(label)+(mine?'<small>우리 가정'+(g.records>1?' · '+g.records+'건 합산':'')+'</small>':'')+
+          '<small'+(g.confirmed===g.records?' class="szconfirmed"':'')+'>'+(g.confirmed===g.records?'확정':'확인 전')+'</small>'+
+          '</td><td>'+esc(sizeText(g.sizes))+'<small>'+countOf(g.sizes)+'벌</small></td><td>'+won(costOf(g.sizes))+'</td></tr>';
       }).join('');
-      drawCost(n);
-    }
-    function drawCost(n){
-      var el2=document.getElementById('szCost'); if(!el2) return;
-      if(!n){ el2.innerHTML=''; el2.classList.remove('on'); return; }
-      el2.classList.add('on');
-      el2.innerHTML='<span class="szcl">예상 비용</span><span class="szcv">'+won(costOf(cart))+'</span>'+
-        '<span class="szcn">'+n+'벌 기준입니다. <b>수량이 확정되면 단가가 조정됩니다.</b></span>';
-    }
-    function drawTally(){
-      if(!tallyBox) return;
-      var tot={}, fams=0;
-      Object.keys(store).forEach(function(k){
-        var r=store[k]; if(!r||!r.sizes) return; fams++;
-        Object.keys(r.sizes).forEach(function(sz){ tot[sz]=(tot[sz]||0)+r.sizes[sz]; });
-      });
-      var keys=Object.keys(tot);
-      if(!keys.length){ tallyBox.innerHTML='<p class="tnote"><span class="dim">첫 가정을 기다리고 있습니다.</span></p>'; drawPay(0,0); return; }
-      keys.sort(function(a,b){ return SZORD.indexOf(a)-SZORD.indexOf(b); });
-      var sum=keys.reduce(function(a,k){ return a+tot[k]; },0);
-      tallyBox.innerHTML='<table class="sztt"><thead><tr><th>사이즈</th><th>수량</th></tr></thead><tbody>'+
-        keys.map(function(k){ return '<tr><td class="szn">'+esc(k)+'</td><td>'+tot[k]+'벌</td></tr>'; }).join('')+
-        '</tbody><tfoot><tr><td>'+fams+'가정 제출 · 합계</td><td>'+sum+'벌</td></tr></tfoot></table>'+
-        '<button type="button" class="szwipe admin-only" id="szWipe">🧹 취합 마감 · 입력 내용 모두 지우기</button>';
-      drawPay(sum, costOf(tot));
-      var wb=document.getElementById('szWipe');
-      if(wb) wb.addEventListener('click',function(){
-        if(!confirm('사이즈 입력 내용을 모두 지웁니다. 되돌릴 수 없습니다. 진행할까요?')) return;
-        if(configured){ db.ref('hoodsize').remove(); }
-        else { store={}; try{ localStorage.removeItem(LK); }catch(e){} drawTally(); }
-        setStatus('취합 내용을 지웠습니다.',false);
-      });
+      familyBox.innerHTML='<b class="hqh">가정별 총액 · 확정 단가</b>'+
+        '<p class="tnote">최종 취합 수량이 <b>30벌을 넘지 않아, 안내드린 사이즈별 단가로 확정</b>합니다.<br>옷값·인쇄비·부가세 포함 · 배송비 없음</p>'+
+        (rows?'<table class="sztt"><thead><tr><th>가정</th><th>신청 내역</th><th>총액</th></tr></thead><tbody>'+rows+
+          '</tbody><tfoot><tr><td>전체 합계</td><td>'+total+'벌</td><td>'+won(amount)+'</td></tr></tfoot></table>':'<p class="tnote">아직 저장된 신청이 없습니다.</p>')+
+        '<p class="tnote">다른 가정의 이름은 <b>가정 숨김</b>으로 표시됩니다. 신청했던 기기에서는 <b>본인 가정 이름만</b> 보입니다.</p>'+
+        (own&&!own.confirmed?'<p class="tnote">기존 신청을 확인해주세요. 위에서 가정을 선택하고 수량·금액을 확인한 뒤 <b>이 수량·금액으로 확정</b>을 눌러주세요. 기존 수량은 자동으로 불러옵니다.</p>':'')+
+        '<details class="szmap admin-only block"><summary>관리자 · 신청별 가정 연결/수정</summary><p class="tnote">사이즈·수량·신청 시각을 확인해 가정을 지정하세요. <b>이름만 변경되며 수량은 유지</b>됩니다. 같은 가정을 여러 건에 지정하면 합산됩니다.</p>'+
+        '<b class="hqh">가정별 신청·확정 현황</b><div class="szadminwrap"><table class="sztt" id="szAdminSummary"><thead><tr><th>가정</th><th>사이즈별 수량</th><th>총 수량</th><th>총액</th><th>확정 여부</th></tr></thead><tbody>'+
+        groups.map(function(g){ return '<tr><td>'+esc(g.name||'가정 확인 전')+'</td><td>'+esc(sizeText(g.sizes))+'</td><td>'+countOf(g.sizes)+'벌</td><td>'+won(costOf(g.sizes))+'</td><td>'+
+          (g.confirmed===g.records?'확정':g.confirmed?'일부 확정 ('+g.confirmed+'/'+g.records+')':'확인 전')+'</td></tr>'; }).join('')+
+        '</tbody><tfoot><tr><td>전체 합계</td><td></td><td>'+total+'벌</td><td>'+won(amount)+'</td><td>확정 '+groups.filter(function(g){return g.confirmed===g.records;}).length+'가정</td></tr></tfoot></table></div>'+
+        keys.map(function(k){
+          var r=store[k]; if(!r||!r.sizes) return '';
+          var fam=familyOf(r), options=familyOptionsHtml(false);
+          if(fam&&options.indexOf('>'+esc(fam)+'</option>')<0) options+='<option>'+esc(fam)+'</option>';
+          return '<div class="szmaprow"><b>신청 '+esc(k)+'</b><br>'+esc(sizeText(sizesOf(r.sizes)))+' · '+won(costOf(sizesOf(r.sizes)))+
+            '<small>신청 시각: '+esc(r.ts?new Date(r.ts).toLocaleString('ko-KR',{timeZone:'Asia/Seoul'}):'기록 없음')+'</small>'+
+            '<div class="hfamrow"><select aria-label="신청 '+esc(k)+' 가정" data-sz-family="'+esc(k)+'">'+options+'</select>'+
+            '<button type="button" class="szclear" data-sz-link="'+esc(k)+'">이름 저장</button></div></div>';
+        }).join('')+'</details>';
+      keys.forEach(function(k){ var s=familyBox.querySelector('[data-sz-family="'+k+'"]'); if(s) s.value=familyOf(store[k]); });
     }
     function drawPay(sum,amt){
       var pb=document.getElementById('szPay'); if(!pb) return;
-      if(!payOpen){
-        pb.innerHTML='<div class="szpay wait"><b>\uD83D\uDCB3 입금 안내는 수량이 확정된 뒤에 올립니다.</b><br>'+
-          '<span class="dim">지금은 사이즈만 담아주세요. 전원 제출이 끝나면 최종 단가를 확정하고, 이 자리에 계좌와 가정별 금액을 올리겠습니다.</span></div>';
-        return;
-      }
-      pb.innerHTML='<div class="szpay open"><b>\uD83D\uDCB3 입금 계좌</b>'+
-        '<span class="szacc">카카오뱅크 <b>3333-03-1546499</b> 박찬민</span>'+
-        '<span class="dim">보내실 때 <b>아이 이름</b>을 적어주세요. 확인이 쉽습니다.</span>'+
-        (sum? '<span class="szsum">현재 '+sum+'벌 · 합계 '+won(amt)+'</span>':'')+
-        '</div>';
+      pb.innerHTML='<div class="szpay open"><b>💳 후디 입금 안내</b><br>'+
+        '위 <b>수량·금액을 확인하고 확정</b>하신 뒤, <b>가정별 총액</b>을 아래 계좌로 입금해주세요.'+
+        '<span class="szacc">카카오뱅크 <b>3333-03-1546499</b><br>예금주 <b>박찬민</b></span>'+
+        '<span class="dim">입금자명은 <b>아이 이름</b>으로 부탁드립니다.</span>'+
+        (sum?'<span class="szsum">전체 '+sum+'벌 · 합계 '+won(amt)+'</span>':'')+'</div>';
     }
-    function setStatus(m,bad){ if(!statusEl) return; statusEl.textContent=m; statusEl.style.color=bad?'var(--loss)':'var(--win)'; }
-
+    function drawTally(){
+      var tot={}, records=0;
+      Object.keys(store).forEach(function(k){ var r=store[k]; if(!r||!r.sizes) return; records++;
+        var sizes=sizesOf(r.sizes); Object.keys(sizes).forEach(function(sz){ tot[sz]=(tot[sz]||0)+sizes[sz]; }); });
+      var keys=SZORD.filter(function(k){ return tot[k]>0; }), sum=countOf(tot);
+      if(tallyBox) tallyBox.innerHTML=keys.length?'<table class="sztt"><thead><tr><th>사이즈</th><th>수량</th></tr></thead><tbody>'+
+        keys.map(function(k){ return '<tr><td class="szn">'+esc(k)+'</td><td>'+tot[k]+'벌</td></tr>'; }).join('')+
+        '</tbody><tfoot><tr><td>'+records+'건 신청 · 합계</td><td>'+sum+'벌</td></tr></tfoot></table>':'<p class="tnote">아직 저장된 신청이 없습니다.</p>';
+      drawFamilies(); drawPay(sum,costOf(tot)); controls();
+    }
+    function persist(key,change,success){
+      if(pending||!ready) return;
+      pending=true; controls(); setStatus('저장 중입니다…',false);
+      var task;
+      try{
+        if(configured){ task=db.ref('hoodsize/'+key).transaction(change,undefined,false); }
+        else{
+          var next=change(store[key]||null);
+          if(next===undefined) task=Promise.resolve({committed:false});
+          else{
+            var updated=Object.assign({},store); updated[key]=next;
+            localStorage.setItem(LK,JSON.stringify(updated)); store=updated;
+            task=Promise.resolve({committed:true});
+          }
+        }
+      }catch(e){ task=Promise.reject(e); }
+      return task.then(function(result){
+        if(!result.committed){ setStatus('신청이 삭제되었거나 가정 연결이 바뀌었습니다. 새로고침 후 다시 확인해주세요.',true); return; }
+        drawTally(); success();
+      }).catch(function(){ setStatus('저장하지 못했습니다. 연결 상태를 확인한 뒤 다시 시도해주세요.',true); })
+      .then(function(){ pending=false; controls(); });
+    }
+    function linkFamily(key,fam,isAdmin){
+      var r=store[key]; if(!r||!r.sizes){ setStatus('연결할 기존 신청이 없습니다.',true); return; }
+      var before=familyOf(r);
+      if(!isAdmin&&key!==myKey()) return;
+      if(!isAdmin&&!fam){ setStatus('먼저 가정을 선택해 주세요.',true); return; }
+      if(!isAdmin&&before){ setStatus('이미 가정 이름이 연결된 신청입니다.',true); return; }
+      if(!confirm('기존 신청 '+sizeText(sizesOf(r.sizes))+'을 '+(fam||'가정 미연결')+'로 연결할까요? 수량은 그대로 유지됩니다.'+
+        (fam&&familyKeys(fam).some(function(k){return k!==key;})?' 이 가정의 다른 신청과 합산됩니다.':''))) return;
+      return persist(key,function(current){
+        if(!current||!current.sizes||familyOf(current)!==before) return;
+        var next=Object.assign({},current); if(fam) next.family=fam; else delete next.family;
+        if(before!==fam&&(current.confirmed||current.confirmedAt)){ next.confirmed=false; delete next.confirmedAt; }
+        return next;
+      },function(){
+        if(!isAdmin) try{ localStorage.setItem(LKF,fam); localStorage.setItem(LKV,key); }catch(e){}
+        if(!dirty) loadCart(); drawFamilies(); setStatus('✓ 가정 이름 연결 완료 · 기존 수량은 유지했습니다.',false);
+      });
+    }
+    if(linkBtn) linkBtn.addEventListener('click',function(){ if(!pending&&ready) return linkFamily(myKey(),famSel.value,false); });
+    if(familyBox) familyBox.addEventListener('click',function(e){
+      var b=e.target.closest?e.target.closest('[data-sz-link]'):null; if(!b||!adminMode||pending||!ready) return;
+      var k=b.getAttribute('data-sz-link'), s=familyBox.querySelector('[data-sz-family="'+k+'"]');
+      if(s) return linkFamily(k,s.value,true);
+    });
     box.addEventListener('click',function(e){
-      var b=e.target.closest? e.target.closest('.szb') : null;
-      if(b){ var k=b.getAttribute('data-sz'); cart[k]=(cart[k]||0)+1; drawCart(); return; }
-      var x=e.target.closest? e.target.closest('.sx') : null;
-      if(x){ var k2=x.getAttribute('data-sz'); cart[k2]=(cart[k2]||0)-1; if(cart[k2]<=0) delete cart[k2]; drawCart(); }
+      if(pending||!ready) return;
+      var b=e.target.closest?e.target.closest('.szb'):null;
+      if(b){ var k=b.getAttribute('data-sz'); if(!SZP[k]) return; cart[k]=(cart[k]||0)+1; dirty=true; drawCart(); return; }
+      var x=e.target.closest?e.target.closest('.sx'):null;
+      if(x){ var k2=x.getAttribute('data-sz'); cart[k2]=(cart[k2]||0)-1; dirty=true; drawCart(); }
     });
     var clearBtn=document.getElementById('szClear');
-    if(clearBtn) clearBtn.addEventListener('click',function(){ cart={}; drawCart(); setStatus('',false); });
-
-    var saveBtn=document.getElementById('szSave');
+    if(clearBtn) clearBtn.addEventListener('click',function(){ if(pending) return; cart={}; dirty=true; drawCart(); setStatus('',false); });
     if(saveBtn) saveBtn.addEventListener('click',function(){
-      var fam=famSel? famSel.value : '';
-      if(!fam){ setStatus('먼저 가정을 선택해 주세요.',true); return; }
-      var keys=Object.keys(cart).filter(function(k){ return cart[k]>0; });
-      if(!keys.length){ setStatus('사이즈를 하나 이상 담아주세요.',true); return; }
-      var sizes={}; keys.forEach(function(k){ sizes[k]=cart[k]; });
-      var n0=keys.reduce(function(a,k){ return a+cart[k]; },0);
-      /* 서버에는 사이즈 숫자만 올라갑니다. 어느 가정인지는 이 기기에만 남습니다. */
-      var rec={ sizes:sizes, ts:new Date().toISOString() };
-      var k=myKey();
-      try{ localStorage.setItem(LKF,fam); }catch(e){}
-      if(configured){ db.ref('hoodsize/'+k).set(rec); }
-      else { store[k]=rec; try{ localStorage.setItem(LK,JSON.stringify(store)); }catch(e){} drawTally(); }
-      setStatus('✓ 「'+fam+'」 '+n0+'벌 · 예상 '+won(costOf(cart))+' 저장됨',false);
+      if(pending||!ready) return;
+      var fam=famSel.value; if(!fam){ setStatus('먼저 가정을 선택해 주세요.',true); return; }
+      var sizes=sizesOf(cart), n=countOf(sizes); if(!n){ setStatus('사이즈를 하나 이상 담아주세요.',true); return; }
+      var known=familyKeys(fam);
+      if(known.length>1){ setStatus('이 가정의 신청이 여러 건입니다. 합산 내역을 확인하고 관리자에게 수량 수정을 요청해주세요.',true); return; }
+      if(known.length===1&&known[0]!==targetKey){ loadCart(); setStatus('이 가정의 기존 신청을 불러왔습니다. 확인 후 저장해주세요.',true); return; }
+      var key=targetKey||myKey(), before=targetFamily, existed=!!store[key];
+      if(existed&&key!==targetKey){ setStatus('이 기기의 기존 신청을 먼저 확인해주세요.',true); return; }
+      return persist(key,function(current){
+        if(existed?(!current||familyOf(current)!==before):!!current) return;
+        var now=new Date().toISOString();
+        return Object.assign({},current||{},{family:fam,sizes:sizes,ts:now,confirmed:true,confirmedAt:now});
+      },function(){
+        targetKey=key; targetFamily=fam; dirty=false;
+        try{ localStorage.setItem(LKF,fam); localStorage.setItem(LKV,key); }catch(e){}
+        drawFamilies();
+        drawCart(); setStatus('✓ 「'+fam+'」 '+n+'벌 · 총액 '+won(costOf(sizes))+' 확정 완료',false);
+      });
     });
-
-    if(famSel) famSel.addEventListener('change',function(){
-      var r=store[myKey()];
-      cart={}; if(r&&r.sizes) Object.keys(r.sizes).forEach(function(k){ cart[k]=r.sizes[k]; });
-      drawCart(); setStatus('',false);
-    });
-
-    if(configured){
-      db.ref('hoodsize').on('value',function(snap){ store=snap.val()||{}; drawTally(); });
-      db.ref('hoodpay/open').on('value',function(snap){ payOpen=!!snap.val(); drawTally(); });
-    } else {
-      try{ store=JSON.parse(localStorage.getItem(LK)||'{}')||{}; }catch(e){ store={}; }
-      drawTally();
-    }
+    if(famSel) famSel.addEventListener('change',function(){ if(!pending&&ready) loadCart(); });
+    function fillFam(){ buildFamilyOptions(); drawFamilies(); }
     fillFam();
-    try{
-      var savedFam=localStorage.getItem(LKF);
-      if(savedFam && famSel){ famSel.value=savedFam;
-        var r0=store[myKey()]; if(r0&&r0.sizes) Object.keys(r0.sizes).forEach(function(k){ cart[k]=r0.sizes[k]; }); }
-    }catch(e){}
-    drawCart(); drawTally();
+    try{ var savedFam=localStorage.getItem(LKF); if(savedFam) famSel.value=savedFam; }catch(e){}
+    controls(); drawPay(0,0);
+    if(configured){
+      db.ref('hoodsize').on('value',function(snap){
+        store=snap.val()||{}; var first=!ready; ready=true; if(first) loadCart(); drawTally();
+      },function(){ ready=false; controls(); setStatus('신청 내역을 불러오지 못했습니다. 새로고침 후 다시 확인해주세요.',true); });
+    }else{
+      try{ store=JSON.parse(localStorage.getItem(LK)||'{}')||{}; }catch(e){ store={}; }
+      ready=true; loadCart(); drawTally();
+    }
     window.__szFillFam=fillFam;
-    /* 입금 안내 열기/닫기 — 평소에는 Firebase 의 hoodpay/open 이 결정합니다 */
-    window.__szPay=function(v){ payOpen=!!v; drawTally(); return payOpen; };
   })();
 
   /* ===== 단체 석식 투표 ===== */
